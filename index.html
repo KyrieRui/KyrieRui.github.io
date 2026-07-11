@@ -239,7 +239,6 @@
       const board = document.getElementById("board");
       const boxContent = document.getElementById("boxContent");
       const boxCount = document.getElementById("boxCount");
-      const status = document.getElementById("status");
       const counter = document.getElementById("counter");
       const resetButton = document.getElementById("resetButton");
 
@@ -311,7 +310,6 @@
         }
 
         boxCards.push(selectedCard);
-        status.textContent = `已记录 ${selectedCard.label}，并放进牌盒。`;
         renderBoard();
         renderBox();
       }
@@ -323,14 +321,12 @@
         }
 
         boxCards = boxCards.filter((card) => card.id !== cardId);
-        status.textContent = `已撤销 ${removedCard.label}，这张牌已从牌盒清出。`;
         renderBoard();
         renderBox();
       }
 
       function resetBox() {
         boxCards = [];
-        status.textContent = "牌盒已清空，可以重新开始。";
         renderBoard();
         renderBox();
       }
