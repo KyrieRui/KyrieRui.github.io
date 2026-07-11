@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>54张扑克牌小游戏</title>
+    <title>阿萨拉牌盒计数器</title>
     <style>
       :root {
         font-family: "Trebuchet MS", "Segoe UI", sans-serif;
@@ -141,6 +141,11 @@
         background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
         font-weight: 700;
         text-align: center;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+      }
+
+      .playing-card:hover {
+        transform: translateY(-2px);
       }
 
       .red {
@@ -189,17 +194,11 @@
     <main class="page">
       <section class="hero">
         <div>
-          <p class="eyebrow">Simple Poker Demo</p>
-          <h1>54 张扑克牌小游戏</h1>
-          <p class="intro">
-            页面展示完整 54 张牌，按四个花色分类。点击按钮后，会从剩余牌里随机摸一张，并自动放进右侧牌盒。
-          </p>
+          <h1>阿萨拉牌盒计数器</h1>
         </div>
         <div class="controls">
-          <button id="drawButton" class="primary-button">牌盒按钮：随机摸牌</button>
           <button id="resetButton" class="secondary-button">清空牌盒</button>
-          <p id="status" class="status">点击按钮，随机摸一张牌放进牌盒。</p>
-          <p id="counter" class="counter">剩余牌：54 张</p>
+          <p id="counter" class="counter">未记录：54 张</p>
         </div>
       </section>
 
@@ -242,7 +241,6 @@
       const boxCount = document.getElementById("boxCount");
       const status = document.getElementById("status");
       const counter = document.getElementById("counter");
-      const drawButton = document.getElementById("drawButton");
       const resetButton = document.getElementById("resetButton");
 
       let boxCards = [];
@@ -257,7 +255,7 @@
           const cardHtml = cards
             .map((card) => {
               const inBox = boxCards.some((boxed) => boxed.id === card.id);
-              return `<div class="playing-card ${card.color} ${inBox ? "in-box" : ""}"><span>${card.label}</span></div>`;
+              return `<button class="playing-card ${card.color} ${inBox ? "in-box" : ""}" data-card-id="${card.id}"><span>${card.label}</span></button>`;
             })
             .join("");
 
@@ -276,7 +274,7 @@
         const jokerHtml = jokers
           .map((card) => {
             const inBox = boxCards.some((boxed) => boxed.id === card.id);
-            return `<div class="playing-card gold ${inBox ? "in-box" : ""}"><span>${card.label}</span></div>`;
+            return `<button class="playing-card gold ${inBox ? "in-box" : ""}" data-card-id="${card.id}"><span>${card.label}</span></button>`;
           })
           .join("");
 
@@ -292,7 +290,7 @@
 
       function renderBox() {
         boxCount.textContent = `${boxCards.length} 张`;
-        counter.textContent = `剩余牌：${remainingCards().length} 张`;
+        counter.textContent = `未记录：${remainingCards().length} 张`;
 
         if (boxCards.length === 0) {
           boxContent.className = "empty-box";
@@ -306,16 +304,26 @@
           .join("");
       }
 
-      function drawCard() {
-        const cards = remainingCards();
-        if (cards.length === 0) {
-          status.textContent = "54 张牌已经全部放进牌盒了。";
+      function addCardToBox(cardId) {
+        const selectedCard = deck.find((card) => card.id === cardId);
+        if (!selectedCard || boxCards.some((card) => card.id === cardId)) {
           return;
         }
 
-        const drawnCard = cards[Math.floor(Math.random() * cards.length)];
-        boxCards.push(drawnCard);
-        status.textContent = `摸到了 ${drawnCard.label}，已经放进牌盒。`;
+        boxCards.push(selectedCard);
+        status.textContent = `已记录 ${selectedCard.label}，并放进牌盒。`;
+        renderBoard();
+        renderBox();
+      }
+
+      function removeCardFromBox(cardId) {
+        const removedCard = boxCards.find((card) => card.id === cardId);
+        if (!removedCard) {
+          return;
+        }
+
+        boxCards = boxCards.filter((card) => card.id !== cardId);
+        status.textContent = `已撤销 ${removedCard.label}，这张牌已从牌盒清出。`;
         renderBoard();
         renderBox();
       }
@@ -327,8 +335,23 @@
         renderBox();
       }
 
-      drawButton.addEventListener("click", drawCard);
       resetButton.addEventListener("click", resetBox);
+      board.addEventListener("click", (event) => {
+        const target = event.target.closest("[data-card-id]");
+        if (!target) {
+          return;
+        }
+
+        const cardId = target.dataset.cardId;
+        const alreadyInBox = boxCards.some((card) => card.id === cardId);
+
+        if (alreadyInBox) {
+          removeCardFromBox(cardId);
+          return;
+        }
+
+        addCardToBox(cardId);
+      });
 
       renderBoard();
       renderBox();
