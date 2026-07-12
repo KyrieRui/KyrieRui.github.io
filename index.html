@@ -241,8 +241,36 @@
       const boxCount = document.getElementById("boxCount");
       const counter = document.getElementById("counter");
       const resetButton = document.getElementById("resetButton");
+      const storageKey = "asara-card-box-state";
 
-      let boxCards = [];
+      let boxCards = loadSavedCards();
+
+      function loadSavedCards() {
+        try {
+          const saved = localStorage.getItem(storageKey);
+          if (!saved) {
+            return [];
+          }
+
+          const parsed = JSON.parse(saved);
+          if (!Array.isArray(parsed)) {
+            return [];
+          }
+
+          return parsed
+            .map((savedId) => deck.find((card) => card.id === savedId))
+            .filter(Boolean);
+        } catch {
+          return [];
+        }
+      }
+
+      function saveCards() {
+        localStorage.setItem(
+          storageKey,
+          JSON.stringify(boxCards.map((card) => card.id))
+        );
+      }
 
       function remainingCards() {
         return deck.filter((card) => !boxCards.some((boxed) => boxed.id === card.id));
@@ -310,6 +338,7 @@
         }
 
         boxCards.push(selectedCard);
+        saveCards();
         renderBoard();
         renderBox();
       }
@@ -321,12 +350,14 @@
         }
 
         boxCards = boxCards.filter((card) => card.id !== cardId);
+        saveCards();
         renderBoard();
         renderBox();
       }
 
       function resetBox() {
         boxCards = [];
+        saveCards();
         renderBoard();
         renderBox();
       }
