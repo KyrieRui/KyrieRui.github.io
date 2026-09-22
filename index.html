@@ -175,7 +175,10 @@ body[data-mode="sheet"] .panel-sheet { display: block; }
   min-height: 64px; margin-bottom: 14px;
 }
 .hero .big, .nowplaying .big { font-size: 30px; font-weight: 700; color: var(--accent); }
-.hero .combo, .nowplaying .combo { font-size: 13px; color: var(--sub); }
+.hero .combo, .nowplaying .combo {
+  font-size: 13px; color: var(--sub);
+  display: block; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
 
 .card {
   background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
@@ -271,11 +274,11 @@ body[data-mode="sheet"] .panel-sheet { display: flex; }
 
 .bottom-row { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-bottom: 8px; }
 
-.nowplaying { display: flex; align-items: baseline; gap: 12px; min-height: 36px; }
+.nowplaying { display: flex; align-items: baseline; gap: 12px; min-height: 36px; flex: 1 1 auto; min-width: 0; }
 .nowplaying .big { font-size: 22px; }
 .nowplaying .combo { font-size: 12px; }
 
-.lamps { margin-left: auto; display: flex; gap: 8px; }
+.lamps { margin-left: auto; display: flex; gap: 8px; flex-shrink: 0; }
 
 .lamp {
   display: inline-flex; align-items: center; gap: 7px;
