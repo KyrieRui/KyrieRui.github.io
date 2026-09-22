@@ -520,6 +520,10 @@ html[data-theme="dark"] .rules {background:#ffffff08;}
 @media (max-width:760px) {.welcome-art {display:none;}}
 @media (max-width:760px) {.tab {white-space:nowrap;font-size:11px;}.tab-icon {flex-shrink:0;width:16px;font-size:16px;}}
 
+#testAudioBtn,.audio-status {grid-column:1/-1;}
+.audio-status {font-size:10px;line-height:1.7;color:var(--sub);margin:0 4px 6px;}
+@media(max-width:760px){.audio-status{flex-basis:100%;}}
+
 </style>
 </head>
 <body data-mode="free">
@@ -539,6 +543,8 @@ html[data-theme="dark"] .rules {background:#ffffff08;}
     <label class="ctl" title="音量">音量
       <input type="range" id="volumeRange" min="0" max="100" value="80">
     </label>
+    <button id="testAudioBtn" class="btn primary">♫ 测试声音</button>
+    <p id="audioStatus" class="audio-status" role="status" aria-live="polite">没有声音？点击测试，播放一声 do。</p>
     <button id="muteBtn" class="btn ghost" title="静音（不静音时钟）">静音</button>
     <button id="themeBtn" class="btn ghost" title="主题：自动（跟随系统）/ 深色 / 浅色">主题：自动</button>
     <button id="panicBtn" class="btn danger" title="全部松开（紧急停止）">紧急停止</button>
@@ -678,16 +684,31 @@ html[data-theme="dark"] .rules {background:#ffffff08;}
       this._volume = 0.8;
     }
     ensure() {
-      if (!this.ctx) {
-        try {
-          this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+      try {
+        if (!this.ctx || this.ctx.state === "closed") {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (!AudioContextClass) throw new Error("\u6B64\u6D4F\u89C8\u5668\u4E0D\u652F\u6301 Web Audio");
+          this.ctx = new AudioContextClass();
           this.master = this.ctx.createGain();
           this.master.gain.value = this.muted ? 0 : this._volume;
           this.master.connect(this.ctx.destination);
-        } catch (e) {
         }
+        const ready = this.ctx.state === "running" ? Promise.resolve() : this.ctx.resume();
+        return Promise.resolve(ready).then(() => {
+          const running = this.ctx.state === "running";
+          if (!running) this.reportError("\u6D4F\u89C8\u5668\u97F3\u9891\u4ECD\u88AB\u6682\u505C\uFF0C\u8BF7\u518D\u6B21\u70B9\u51FB\u6D4B\u8BD5\u58F0\u97F3");
+          return running;
+        }).catch((e) => {
+          this.reportError(e.message);
+          return false;
+        });
+      } catch (e) {
+        this.reportError(e.message);
+        return Promise.resolve(false);
       }
-      if (this.ctx && this.ctx.state === "suspended") this.ctx.resume();
+    }
+    reportError(message) {
+      window.dispatchEvent(new CustomEvent("harmonica-audio-error", { detail: message }));
     }
     now() {
       return this.ctx ? this.ctx.currentTime : performance.now() / 1e3;
@@ -748,8 +769,12 @@ html[data-theme="dark"] .rules {background:#ffffff08;}
       if (!v || !this.ctx) return;
       const t = this.ctx.currentTime;
       try {
-        v.env.gain.cancelScheduledValues(t);
-        v.env.gain.setValueAtTime(Math.max(v.env.gain.value, 1e-4), t);
+        if (v.env.gain.cancelAndHoldAtTime) v.env.gain.cancelAndHoldAtTime(t);
+        else {
+          const currentGain = Math.max(v.env.gain.value, 1e-4);
+          v.env.gain.cancelScheduledValues(t);
+          v.env.gain.setValueAtTime(currentGain, t);
+        }
         v.env.gain.exponentialRampToValueAtTime(1e-4, t + release);
       } catch (e) {
       }
@@ -2591,6 +2616,37 @@ html[data-theme="dark"] .rules {background:#ffffff08;}
   els.hud.hidden = state.mode !== "waterfall";
   if (state.mode === "waterfall") loadSong(state.currentIdx);
   refreshNowDisplay(input.snapshot());
+  var testAudioTimer;
+  var testingAudio = false;
+  var audioStatus = $("audioStatus");
+  window.addEventListener("harmonica-audio-error", (event) => {
+    audioStatus.textContent = "\u58F0\u97F3\u672A\u542F\u52A8\uFF1A" + event.detail;
+  });
+  $("testAudioBtn").addEventListener("click", async () => {
+    if (testingAudio) return;
+    testingAudio = true;
+    clearTimeout(testAudioTimer);
+    input.releaseAll(true);
+    const ready = audio.ensure();
+    audioStatus.textContent = "\u6B63\u5728\u542F\u52A8\u58F0\u97F3\u2026";
+    try {
+      if (!await ready) return;
+      audio.setMuted(false);
+      if (+els.volumeRange.value === 0) els.volumeRange.value = 60;
+      audio.setVolume(+els.volumeRange.value / 100);
+      els.muteBtn.textContent = "\u9759\u97F3";
+      els.muteBtn.classList.remove("active");
+      audio.noteOn((state.baseOct + 1) * 12);
+      const testVoice = audio.voice;
+      audioStatus.textContent = "\u6B63\u5728\u64AD\u653E do\uFF1B\u82E5\u4ECD\u65E0\u58F0\uFF0C\u8BF7\u68C0\u67E5\u6807\u7B7E\u9875\u9759\u97F3\u4E0E\u7CFB\u7EDF\u58F0\u97F3\u8F93\u51FA\u8BBE\u5907\u3002";
+      testAudioTimer = setTimeout(() => {
+        if (audio.voice === testVoice) audio.noteOff();
+      }, 800);
+      saveSettings();
+    } finally {
+      testingAudio = false;
+    }
+  });
 })();
 
 </script>
