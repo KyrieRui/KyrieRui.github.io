@@ -725,39 +725,84 @@ html[data-theme="dark"] .rules {background:#ffffff08;}
       this.muted = m;
       if (this.master) this.master.gain.value = m ? 0 : this._volume;
     }
+    // 簧片谐波波形：基频最强，偶次谐波适中衰减，带一点“嗡”味但不过分刺耳，
+    // 比内置 triangle/sine 更接近簧片本身的音色（而非纯净的合成器波形）。
+    _reedWave() {
+      if (this._reedWaveCache) return this._reedWaveCache;
+      const amp = [0, 1, 0.55, 0.38, 0.3, 0.2, 0.16, 0.1, 0.08, 0.055, 0.035, 0.02];
+      const real = new Float32Array(amp.length);
+      const imag = new Float32Array(amp.length);
+      for (let i = 1; i < amp.length; i++) imag[i] = amp[i];
+      this._reedWaveCache = this.ctx.createPeriodicWave(real, imag, { disableNormalization: false });
+      return this._reedWaveCache;
+    }
+    // 起音气声用的白噪声缓冲区（只生成一次，重复使用）
+    _noiseBuffer() {
+      if (this._noiseBufCache) return this._noiseBufCache;
+      const len = Math.floor(this.ctx.sampleRate * 0.15);
+      const buf = this.ctx.createBuffer(1, len, this.ctx.sampleRate);
+      const data = buf.getChannelData(0);
+      for (let i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
+      this._noiseBufCache = buf;
+      return buf;
+    }
     noteOn(p) {
       if (!this.ctx) return;
       this._releasePrev(0.02);
       const t = this.ctx.currentTime;
       const f = this.freq(p);
+      // 主簧片 + 副簧片：两片轻微失谐叠加，模拟簧片对振的厚度与跳动感，
+      // 而不是数字合成器那种纯净、静止不变的单一波形。
       const o1 = this.ctx.createOscillator();
-      o1.type = "triangle";
+      o1.setPeriodicWave(this._reedWave());
       o1.frequency.value = f;
       const o2 = this.ctx.createOscillator();
-      o2.type = "sine";
-      o2.frequency.value = f * 2;
-      const g2 = this.ctx.createGain();
-      g2.gain.value = 0.15;
+      o2.setPeriodicWave(this._reedWave());
+      o2.frequency.value = f;
+      o2.detune.value = 7;
+      // 簧片腔体共鸣：低通滤波磨掉过亮的高次谐波，让音色更暖、更像木/金属腔体
+      const body = this.ctx.createBiquadFilter();
+      body.type = "lowpass";
+      body.frequency.value = Math.min(6500, Math.max(1200, f * 6));
+      body.Q.value = 0.9;
+      const mix = this.ctx.createGain();
+      mix.gain.value = 0.5;
       const env = this.ctx.createGain();
       env.gain.setValueAtTime(1e-4, t);
-      env.gain.exponentialRampToValueAtTime(0.3, t + 8e-3);
+      env.gain.exponentialRampToValueAtTime(0.3, t + 0.018);
+      // 起音气声：短促带通噪声，模拟吹/吸气瞬间的呼吸感
+      const noiseSrc = this.ctx.createBufferSource();
+      noiseSrc.buffer = this._noiseBuffer();
+      const noiseFilter = this.ctx.createBiquadFilter();
+      noiseFilter.type = "bandpass";
+      noiseFilter.frequency.value = f * 2;
+      noiseFilter.Q.value = 3;
+      const noiseGain = this.ctx.createGain();
+      noiseGain.gain.setValueAtTime(0.16, t);
+      noiseGain.gain.exponentialRampToValueAtTime(1e-4, t + 0.09);
       const lfo = this.ctx.createOscillator();
       lfo.type = "sine";
-      lfo.frequency.value = 5.5;
+      lfo.frequency.value = 5.2;
       const lfoGain = this.ctx.createGain();
       lfoGain.gain.setValueAtTime(0, t);
-      lfoGain.gain.linearRampToValueAtTime(f * 29e-4, t + 0.15);
+      lfoGain.gain.linearRampToValueAtTime(f * 22e-4, t + 0.18);
       lfo.connect(lfoGain);
       lfoGain.connect(o1.frequency);
       lfoGain.connect(o2.frequency);
-      o2.connect(g2);
-      g2.connect(env);
-      o1.connect(env);
+      o1.connect(mix);
+      o2.connect(mix);
+      mix.connect(body);
+      body.connect(env);
+      noiseSrc.connect(noiseFilter);
+      noiseFilter.connect(noiseGain);
+      noiseGain.connect(env);
       env.connect(this.master);
       o1.start(t);
       o2.start(t);
       lfo.start(t);
-      this.voice = { o1, o2, lfo, env };
+      noiseSrc.start(t);
+      noiseSrc.stop(t + 0.12);
+      this.voice = { o1, o2, lfo, env, noiseSrc };
     }
     noteOff(release = 0.08) {
       this._releasePrev(release);
@@ -789,6 +834,10 @@ html[data-theme="dark"] .rules {background:#ffffff08;}
       }
       try {
         v.lfo.stop(t + release + 0.02);
+      } catch (e) {
+      }
+      try {
+        if (v.noiseSrc) v.noiseSrc.stop(t + release + 0.02);
       } catch (e) {
       }
       this.voice = null;
