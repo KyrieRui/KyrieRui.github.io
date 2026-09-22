@@ -188,6 +188,9 @@ body[data-mode="sheet"] .panel-sheet { display: block; }
 .note-legend { font-size: 12px; color: var(--sub); margin: 0 0 8px; }
 .sub { color: var(--sub); font-size: 12.5px; line-height: 1.8; margin: 0; }
 .rules p { margin: 0; }
+.tip-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px 18px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+.tip-list li { font-size: 10.5px; line-height: 1.6; color: var(--sub); }
+.tip-list b { color: var(--ink); font-weight: 700; }
 
 /* 音高条（自由模式）：按八度分行，每行带音区标签 */
 .strip-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
@@ -401,10 +404,6 @@ html[data-theme="dark"] body {background:radial-gradient(ellipse at 90% 0%,#7138
 .header-settings .ctl {justify-content:space-between;padding:3px 7px;font-size:12px;}
 .header-settings input {width:95px;}
 .header-settings #panicBtn {grid-column:1/-1;}
-.sidebar-note {margin-top:auto;padding:28px 8px 2px;}
-.little-star {display:block;color:#f5a748;font-size:44px;line-height:1;margin-bottom:13px;}
-.sidebar-note strong {font-size:13px;}
-.sidebar-note p {font-size:11px;color:var(--sub);line-height:1.9;}
 .welcome {grid-area:welcome;display:flex;align-items:center;justify-content:space-between;min-height:115px;padding:4px 10px;}
 .eyebrow,.section-kicker {font-size:9px;letter-spacing:1.7px;font-weight:700;color:var(--sub);}
 .welcome h2 {font-size:clamp(23px,2.5vw,36px);font-weight:800;letter-spacing:-1px;margin:10px 0;}
@@ -531,13 +530,12 @@ html[data-theme="dark"] .rules {background:#ffffff08;}
 
 <header class="app-header">
   <div class="brand"><span class="brand-icon" aria-hidden="true">≋</span><div><span class="brand-kicker">HARMONICA CLUB</span><h1 class="logo">口琴练习室<span class="brand-dot">.</span></h1></div></div>
-  <p class="sidebar-label">找到你的节奏</p>
   <nav class="tabs" data-ui id="modeTabs">
-    <button data-tab="free" class="tab active"><span class="tab-icon" aria-hidden="true">✦</span>自由练习<span class="tab-number" aria-hidden="true">01</span></button>
-    <button data-tab="waterfall" class="tab"><span class="tab-icon" aria-hidden="true">▥</span>瀑布流引导<span class="tab-number" aria-hidden="true">02</span></button>
-    <button data-tab="sheet" class="tab"><span class="tab-icon" aria-hidden="true">♫</span>简谱看谱<span class="tab-number" aria-hidden="true">03</span></button>
+    <button data-tab="free" class="tab active"><span class="tab-icon" aria-hidden="true">♩</span>随手即兴<span class="tab-number" aria-hidden="true">01</span></button>
+    <button data-tab="waterfall" class="tab"><span class="tab-icon" aria-hidden="true">▽</span>音符瀑布<span class="tab-number" aria-hidden="true">02</span></button>
+    <button data-tab="sheet" class="tab"><span class="tab-icon" aria-hidden="true">◫</span>识谱跟奏<span class="tab-number" aria-hidden="true">03</span></button>
   </nav>
-  <div class="header-settings" data-ui><p class="sidebar-label">调好音，开始吧</p>
+  <div class="header-settings" data-ui>
     <label class="ctl" title="中音 do 的基准八度">中音 do
       <select id="baseSel"></select>
     </label>
@@ -550,7 +548,6 @@ html[data-theme="dark"] .rules {background:#ffffff08;}
     <button id="themeBtn" class="btn ghost" title="主题：自动（跟随系统）/ 深色 / 浅色">主题：自动</button>
     <button id="panicBtn" class="btn danger" title="全部松开（紧急停止）">紧急停止</button>
   </div>
-<div class="sidebar-note"><span class="little-star" aria-hidden="true">✳</span><strong>每一声，都是进步。</strong><p>戴上耳机，留一点时间<br>给自己的小小演奏。</p></div>
 </header>
 <section class="welcome"><div><span class="eyebrow">MAKE A LITTLE MUSIC</span><p>三角洲键位练习，让下一次演奏更从容。</p></div><div class="welcome-art" aria-hidden="true"><span class="art-note">♪</span><div class="mini-harmonica"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="art-spark">✦</span></div></section>
 
@@ -587,12 +584,16 @@ html[data-theme="dark"] .rules {background:#ffffff08;}
     <button id="importSheetBtn" class="btn">导入简谱图片…</button>
     <input type="file" id="sheetFile" accept="image/png,image/jpeg,image/webp" hidden>
     <button id="clearSheetBtn" class="btn ghost">清除图片</button>
-    <span class="hint">支持把图片拖到下方区域，或 Ctrl+V 粘贴截图</span>
+    <span class="chip">拖拽图片到下方</span>
+    <span class="chip">Ctrl+V 粘贴截图</span>
   </div>
 
   <!-- 自由模式的提示 -->
   <div class="controls controls-free">
-    <span class="hint">直接按键吹奏即可 · z~m = do~si · 逗号 = 高do · 按住左/右键变八度 · 中键升半音</span>
+    <span class="chip">Z–M 弹 do～si</span>
+    <span class="chip">, 高音 do</span>
+    <span class="chip">左/右键 变八度</span>
+    <span class="chip">中键 升半音</span>
   </div>
 
   <!-- 瀑布流 HUD -->
@@ -617,9 +618,13 @@ html[data-theme="dark"] .rules {background:#ffffff08;}
       <div class="piano" id="pianoStrip"></div>
     </div>
     <div class="card rules">
-      <div class="note-legend">✦ 演奏小贴士</div>
-      <p class="sub">z x c v b n m = do re mi fa sol la si（中音）；逗号 = 高音do；按住左键 = 整排降到低八度；
-        按住右键 = 整排升到高八度；右键+逗号 = 高高音do；再按中键 = 高高音#do；每个白键 + 中键 = 升半音。</p>
+      <div class="note-legend">✦ 上手指南</div>
+      <ul class="tip-list">
+        <li><b>Z X C V B N M</b> → do re mi fa sol la si（中音区）</li>
+        <li><b>,</b>（逗号）→ 高音 do</li>
+        <li>按住 <b>左键</b> 整排降八度 · 按住 <b>右键</b> 整排升八度</li>
+        <li><b>右键 + ,</b> → 高高音 do · 再按 <b>中键</b> → 升半音</li>
+      </ul>
     </div>
   </section>
 
@@ -725,17 +730,6 @@ html[data-theme="dark"] .rules {background:#ffffff08;}
       this.muted = m;
       if (this.master) this.master.gain.value = m ? 0 : this._volume;
     }
-    // 簧片谐波波形：基频最强，偶次谐波适中衰减，带一点“嗡”味但不过分刺耳，
-    // 比内置 triangle/sine 更接近簧片本身的音色（而非纯净的合成器波形）。
-    _reedWave() {
-      if (this._reedWaveCache) return this._reedWaveCache;
-      const amp = [0, 1, 0.55, 0.38, 0.3, 0.2, 0.16, 0.1, 0.08, 0.055, 0.035, 0.02];
-      const real = new Float32Array(amp.length);
-      const imag = new Float32Array(amp.length);
-      for (let i = 1; i < amp.length; i++) imag[i] = amp[i];
-      this._reedWaveCache = this.ctx.createPeriodicWave(real, imag, { disableNormalization: false });
-      return this._reedWaveCache;
-    }
     // 起音气声用的白噪声缓冲区（只生成一次，重复使用）
     _noiseBuffer() {
       if (this._noiseBufCache) return this._noiseBufCache;
@@ -746,30 +740,45 @@ html[data-theme="dark"] .rules {background:#ffffff08;}
       this._noiseBufCache = buf;
       return buf;
     }
+    // 簧片“毛边”软削波曲线：给锯齿波加一点粗粝的过载感，
+    // 避免像加法合成的电子琴那样每根谐波都干净平滑。
+    _driveCurve() {
+      if (this._driveCurveCache) return this._driveCurveCache;
+      const n = 256, k = 2.6;
+      const curve = new Float32Array(n);
+      const norm = Math.tanh(k);
+      for (let i = 0; i < n; i++) {
+        const x = (i / (n - 1)) * 2 - 1;
+        curve[i] = Math.tanh(k * x) / norm;
+      }
+      this._driveCurveCache = curve;
+      return curve;
+    }
     noteOn(p) {
       if (!this.ctx) return;
       this._releasePrev(0.02);
       const t = this.ctx.currentTime;
       const f = this.freq(p);
-      // 主簧片 + 副簧片：两片轻微失谐叠加，模拟簧片对振的厚度与跳动感，
-      // 而不是数字合成器那种纯净、静止不变的单一波形。
+      // 单一簧片振荡器（不再叠加失谐副声部——那是电子管风琴的合唱效果，不是簧片乐器该有的味道）
       const o1 = this.ctx.createOscillator();
-      o1.setPeriodicWave(this._reedWave());
+      o1.type = "sawtooth";
       o1.frequency.value = f;
-      const o2 = this.ctx.createOscillator();
-      o2.setPeriodicWave(this._reedWave());
-      o2.frequency.value = f;
-      o2.detune.value = 7;
-      // 簧片腔体共鸣：低通滤波磨掉过亮的高次谐波，让音色更暖、更像木/金属腔体
-      const body = this.ctx.createBiquadFilter();
-      body.type = "lowpass";
-      body.frequency.value = Math.min(6500, Math.max(1200, f * 6));
-      body.Q.value = 0.9;
-      const mix = this.ctx.createGain();
-      mix.gain.value = 0.5;
+      // 软削波让谐波边缘发毛，带出簧片振动的粗粝感
+      const drive = this.ctx.createWaveShaper();
+      drive.curve = this._driveCurve();
+      drive.oversample = "2x";
+      // 共振峰滤波：带通凸显簧片+腔体特有的“嗡鸣”中频峰，而不是用低通把音色磨得四平八稳
+      const formant = this.ctx.createBiquadFilter();
+      formant.type = "bandpass";
+      formant.frequency.value = Math.min(3200, Math.max(500, f * 2.2));
+      formant.Q.value = 1.5;
+      const tone = this.ctx.createBiquadFilter();
+      tone.type = "lowpass";
+      tone.frequency.value = Math.min(7000, Math.max(1800, f * 8));
+      tone.Q.value = 0.4;
       const env = this.ctx.createGain();
       env.gain.setValueAtTime(1e-4, t);
-      env.gain.exponentialRampToValueAtTime(0.3, t + 0.018);
+      env.gain.exponentialRampToValueAtTime(0.32, t + 6e-3);
       // 起音气声：短促带通噪声，模拟吹/吸气瞬间的呼吸感
       const noiseSrc = this.ctx.createBufferSource();
       noiseSrc.buffer = this._noiseBuffer();
@@ -780,29 +789,37 @@ html[data-theme="dark"] .rules {background:#ffffff08;}
       const noiseGain = this.ctx.createGain();
       noiseGain.gain.setValueAtTime(0.16, t);
       noiseGain.gain.exponentialRampToValueAtTime(1e-4, t + 0.09);
+      // 音高颤动（幅度很小，模拟口腔/喉咙自然的轻微抖动）
       const lfo = this.ctx.createOscillator();
       lfo.type = "sine";
-      lfo.frequency.value = 5.2;
+      lfo.frequency.value = 5;
       const lfoGain = this.ctx.createGain();
       lfoGain.gain.setValueAtTime(0, t);
-      lfoGain.gain.linearRampToValueAtTime(f * 22e-4, t + 0.18);
+      lfoGain.gain.linearRampToValueAtTime(f * 2e-3, t + 0.2);
       lfo.connect(lfoGain);
       lfoGain.connect(o1.frequency);
-      lfoGain.connect(o2.frequency);
-      o1.connect(mix);
-      o2.connect(mix);
-      mix.connect(body);
-      body.connect(env);
+      // 气息颤抖：给音量本身加一点不完全规律的起伏，避免电子琴那种纹丝不动的持续音
+      const breath = this.ctx.createOscillator();
+      breath.type = "sine";
+      breath.frequency.value = 4.3 + Math.random() * 1.4;
+      const breathGain = this.ctx.createGain();
+      breathGain.gain.value = 0.02;
+      breath.connect(breathGain);
+      breathGain.connect(env.gain);
+      o1.connect(drive);
+      drive.connect(formant);
+      formant.connect(tone);
+      tone.connect(env);
       noiseSrc.connect(noiseFilter);
       noiseFilter.connect(noiseGain);
       noiseGain.connect(env);
       env.connect(this.master);
       o1.start(t);
-      o2.start(t);
       lfo.start(t);
+      breath.start(t);
       noiseSrc.start(t);
       noiseSrc.stop(t + 0.12);
-      this.voice = { o1, o2, lfo, env, noiseSrc };
+      this.voice = { o1, lfo, breath, env, noiseSrc };
     }
     noteOff(release = 0.08) {
       this._releasePrev(release);
@@ -829,11 +846,11 @@ html[data-theme="dark"] .rules {background:#ffffff08;}
       } catch (e) {
       }
       try {
-        v.o2.stop(t + release + 0.02);
+        v.lfo.stop(t + release + 0.02);
       } catch (e) {
       }
       try {
-        v.lfo.stop(t + release + 0.02);
+        if (v.breath) v.breath.stop(t + release + 0.02);
       } catch (e) {
       }
       try {
