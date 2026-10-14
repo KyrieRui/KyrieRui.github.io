@@ -37,11 +37,11 @@
     })();
   </script>
   <script type="module">
-    import init from "./zombie-survivor.js";
+    import init from "./zombie-survivor.js?v=20261014-unlimited";
     const canvas = document.getElementById("game");
     canvas.focus();
     canvas.addEventListener("pointerdown", () => canvas.focus());
-    init().catch((e) => {
+    init({ module_or_path: new URL("./zombie-survivor_bg.wasm?v=20261014-unlimited", import.meta.url) }).catch((e) => {
       // wasm-bindgen uses an exception to hand control to winit's event loop.
       if (!String(e).includes("Using exceptions for control flow")) throw e;
     }).finally(() => document.getElementById("loading").remove());
