@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>尸潮幸存者</title>
+  <title>月蚀守望</title>
   <style>
-    html, body { margin: 0; height: 100%; background: #121412; overflow: hidden; }
+    html, body { margin: 0; height: 100%; background: #071217; overflow: hidden; }
     #game { display: block; width: 100%; height: 100%; outline: none; }
     #loading { position: fixed; inset: 0; display: grid; place-items: center; color: #e9e4da;
                font: 600 18px/1.4 system-ui, sans-serif; letter-spacing: .08em; pointer-events: none; }
   </style>
 </head>
 <body>
-  <div id="loading">正在加载尸潮，请稍候…</div>
+  <div id="loading">正在点亮星灯，请稍候…</div>
   <canvas id="game" tabindex="0"></canvas>
   <script>
     // Browsers start an AudioContext created before any user gesture in the "suspended" state,
@@ -37,11 +37,11 @@
     })();
   </script>
   <script type="module">
-    import init from "./zombie-survivor.js?v=20261014-unlimited";
+    import init from "./zombie-survivor.js?v=20261021-moonwatch-r2";
     const canvas = document.getElementById("game");
     canvas.focus();
     canvas.addEventListener("pointerdown", () => canvas.focus());
-    init({ module_or_path: new URL("./zombie-survivor_bg.wasm?v=20261014-unlimited", import.meta.url) }).catch((e) => {
+    init({ module_or_path: new URL("./zombie-survivor_bg.wasm?v=20261021-moonwatch-r2", import.meta.url) }).catch((e) => {
       // wasm-bindgen uses an exception to hand control to winit's event loop.
       if (!String(e).includes("Using exceptions for control flow")) throw e;
     }).finally(() => document.getElementById("loading").remove());

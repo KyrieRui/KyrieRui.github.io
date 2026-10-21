@@ -42,10 +42,10 @@ fn fbm(p: vec2<f32>) -> f32 {
 
 // Approximate blackbody glow for a normalized temperature in [0, 1].
 fn blackbody(t: f32) -> vec3<f32> {
-    let r = smoothstep(0.0, 0.3, t);
-    let g = smoothstep(0.2, 0.7, t) * 0.9;
-    let b = smoothstep(0.78, 1.0, t) * 0.7;
-    return vec3<f32>(r, g, b) + vec3<f32>(0.25, 0.02, 0.0) * (1.0 - r);
+    let shadow = vec3<f32>(0.05, 0.18, 0.23);
+    let jade = vec3<f32>(0.16, 0.76, 0.65);
+    let moon = vec3<f32>(0.85, 1.0, 0.92);
+    return mix(mix(shadow, jade, smoothstep(0.0, 0.6, t)), moon, smoothstep(0.55, 1.0, t));
 }
 
 const PIXELS: f32 = 22.0;
@@ -84,7 +84,7 @@ fn fragment(in: VertexOutput) -> @location(0) vec4<f32> {
         heat = sides * bottom * (tongues - h) * 1.2 - n * 0.3;
     } else {
         // Orb: a ball of fire (meteors) with a turbulent rim.
-        let d = length(vec2<f32>(x, h - 0.5)) * 2.0;
+        let d = (abs(x) + abs(h - 0.5)) * 1.7;
         heat = (1.0 - d) * 1.3 - n * 0.6;
     }
 

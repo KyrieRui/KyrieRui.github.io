@@ -14,7 +14,10 @@ fn fragment(in: VertexOutput) -> @location(0) vec4<f32> {
     let band = smoothstep(params.x - soft, params.x, d) * (1.0 - smoothstep(1.0 - soft, 1.0, d));
     let swirl = 0.55 + 0.45 * sin(angle * 7.0 + globals.time * params.z - d * 12.0);
     let fill = (1.0 - smoothstep(0.0, 1.0, d)) * params.w;
-    let alpha = clamp(band * swirl + fill, 0.0, 1.0) * color.a;
+    let ticks = pow(max(0.0, cos(angle * 12.0 - globals.time * 0.2)), 18.0);
+    let glyphs = ticks * smoothstep(0.69, 0.73, d) * (1.0 - smoothstep(0.83, 0.87, d));
+    let inner = smoothstep(0.54, 0.56, d) * (1.0 - smoothstep(0.57, 0.59, d));
+    let alpha = clamp(band * swirl + fill + glyphs * 0.8 + inner * 0.3, 0.0, 0.85) * color.a;
     let rgb = mix(color.rgb, vec3<f32>(1.0), band * swirl * 0.35);
     return vec4<f32>(rgb, alpha);
 }
