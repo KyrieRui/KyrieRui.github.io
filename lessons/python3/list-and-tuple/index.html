@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>List &amp; Tuple – Python for Beginners</title>
+<meta name="description" content="Ordered lists and unchangeable tuples – the two most-used container types.">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css?v=20261028">
+
+</head>
+<body data-page="lesson" data-lesson="python3" data-total="7">
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="/" aria-label="Python for Beginners – home"><span class="gradient-text-flow" data-text="Python for Beginners">Python for Beginners</span></a>
+    <nav class="header-nav">
+      <a class="nav-link" href="/about/">About</a>
+      <a class="nav-icon focus-ring" href="https://github.com/walter201230/Python" aria-label="Original tutorial on GitHub" title="Original tutorial on GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+      <button type="button" class="theme-toggle focus-ring" aria-label="Switch theme"><span class="knob"><svg class="ic-moon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button>
+    </nav>
+  </div>
+</header>
+<main class="site-main">
+<div class="lesson-shell bg-tech-grid">
+  <div class="mobile-bar"><div class="mb-inner"><button type="button" class="dir-btn focus-ring" aria-haspopup="dialog">Contents</button></div></div>
+  <div class="lesson-columns">
+    <aside class="lesson-sidebar left" aria-label="All lessons"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></aside>
+    <div class="lesson-main"><article class="lesson-article"><header class="lesson-head"><h1>List &amp; Tuple</h1><p class="lh-sub"><span class="accent">7</span> exercises<span class="sep">·</span>about <span class="accent">65</span> min<span class="sep">·</span>solve one to unlock the next part</p>
+<p class="lh-link"><a class="subtle-link focus-ring" href="/lessons/python3/list-and-tuple/read/">Read the whole chapter →</a></p></header><section id="step-0" class="step-card item" data-kind="step" aria-label="Teaching step 1">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 01 / 03</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>Introduction</h2>
+<p>We have learned some basic data types: strings, integers and floats. Now let's learn two new data types: <strong>lists</strong> (List) and <strong>tuples</strong> (tuple).</p>
+<h2>Contents</h2>
+<ul>
+<li>1. List<ol>
+<li>What is a List?</li>
+<li>How to create a List</li>
+<li>How to get values from a List</li>
+<li>How to update a List</li>
+<li>How to delete items from a List</li>
+<li>List operators</li>
+<li>List functions &amp; methods</li>
+<li>Example</li>
+</ol>
+</li>
+<li>2. tuple<ol>
+<li>What is a tuple?</li>
+<li>How to create a tuple</li>
+<li>How to get values from a tuple</li>
+<li>"Changing" a tuple</li>
+<li>Deleting a tuple</li>
+<li>tuple operators</li>
+<li>Built-in tuple functions</li>
+<li>Example</li>
+</ol>
+</li>
+</ul></article></section><section id="step-1" class="step-card item" data-kind="step" aria-label="Teaching step 2">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 02 / 03</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>1. List</h2>
+<h3>1. What is a List?</h3>
+<p>A <strong>List</strong> is a data type built into Python. It is an <strong>ordered collection</strong>. You can add or remove items at any time.</p>
+<p>So why do we need lists?</p>
+<p>Let's use an example.</p>
+<p>A team is going on a trip, and everyone needs to sign up first. With what we have learned so far, we would store each name in its own string variable:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">name1 = &#x27;One Drop&#x27;
+name2 = &#x27;Two Drops&#x27;
+name3 = &#x27;Three Drops&#x27;
+name4 = &#x27;Four Drops&#x27;
+name5 = &#x27;Five Drops&#x27;</code></pre></div>
+<p>But this is too much work, and it doesn't look nice.</p>
+<p>In programming, you should learn to be "lazy" and avoid <strong>repetitive work</strong>. If there were a hundred members, even copying and pasting would drive you crazy.</p>
+<p>This is when you can use a list:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">name = [&#x27;One Drop&#x27;, &#x27;Two Drops&#x27;, &#x27;Three Drops&#x27;, &#x27;Four Drops&#x27;, &#x27;Five Drops&#x27;]</code></pre></div>
+<p>Just like that, one line of code can hold lots and lots of names.</p>
+<h3>2. How to Create a List</h3>
+<p>From the example above, we can see what a list looks like:</p>
+<p><span class="tutorial-diagram"><span class="tutorial-diagram-scroll" role="region" tabindex="0" aria-label="The parts of a list, scroll sideways on small screens"><img loading="lazy" alt="The parts of a list" src="/images/diagrams/list-literal.svg"></span></span></p>
+<p>A list is data inside <strong>square brackets</strong> <code>[]</code>. Each piece of data inside is called an <strong>element</strong> (or item). Elements are separated by commas.</p>
+<p>Also, the elements in a list don't have to be the same data type.</p>
+<p>For example:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">list1=[&#x27;Two Drops&#x27;,&#x27;twowter&#x27;,&#x27;liangdianshui&#x27;,123]</code></pre></div>
+<p>Here we have strings and an integer.</p>
+<p>Let's print it and see what we get:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">list1 = [&#x27;Two Drops&#x27;, &#x27;twowter&#x27;, &#x27;liangdianshui&#x27;, 123]
+
+print(list1)</code></pre></div>
+<p>Result:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[&#x27;Two Drops&#x27;, &#x27;twowter&#x27;, &#x27;liangdianshui&#x27;, 123]</code></pre></div>
+<h3>3. How to Get Values from a List</h3>
+<p>Going back to our first example: sometimes we don't want to print everyone's name. Sometimes we want to know: who signed up 3rd? Who were the first two?</p>
+<p>How do we get them out of the list?</p>
+<p>In other words, how do we <strong>access</strong> the values in a list?</p>
+<p>We can use the list's <strong>index</strong> (position number) to get a value. We can also use square brackets to take a <strong>slice</strong> (a part) of the list.</p>
+<p>For example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">name = [&#x27;One Drop&#x27;, &#x27;Two Drops&#x27;, &#x27;Three Drops&#x27;, &#x27;Four Drops&#x27;, &#x27;Five Drops&#x27;]
+
+# Get a value using its index
+print(name[2])
+# Take a slice of the list using square brackets
+print(name[0:2])</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Three Drops
+[&#x27;One Drop&#x27;, &#x27;Two Drops&#x27;]</code></pre></div>
+<p>So, to find out who signed up third in the <code>name</code> list, we just use <code>name[2]</code>.</p>
+<p>You might ask: why 2 and not 3?</p>
+<p>Because in the programming world, counting starts from <strong>0</strong>, not from 1 like in everyday life.</p>
+<p>So to find the third person,</p>
+<p>we use <code>name[2]</code>.</p>
+<p>In the example, we also printed <code>name[0:2]</code>.</p>
+<p>Looking at the output, it only printed the first and second elements.</p>
+<p>You might be confused here.</p>
+<p>Why didn't it print the first three? Didn't we just say 2 means the 3rd one?</p>
+<p>That's because a slice <strong>includes the start but excludes the end</strong>.</p>
+<p>So <code>name[0:2]</code> means: start at position 0 and go up to position 2, but <strong>don't include</strong> position 2.</p>
+<p>As always, the best way to understand is to try things and play with code.</p>
+<p>Try all of these:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">name = [&#x27;One Drop&#x27;, &#x27;Two Drops&#x27;, &#x27;Three Drops&#x27;, &#x27;Four Drops&#x27;, &#x27;Five Drops&#x27;]
+
+print(name[0:2])
+print(name[:2])
+print(name[:])
+print(name[1:2])
+print(name[0:3])</code></pre></div>
+<p>Look at the output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[&#x27;One Drop&#x27;, &#x27;Two Drops&#x27;]
+[&#x27;One Drop&#x27;, &#x27;Two Drops&#x27;]
+[&#x27;One Drop&#x27;, &#x27;Two Drops&#x27;, &#x27;Three Drops&#x27;, &#x27;Four Drops&#x27;, &#x27;Five Drops&#x27;]
+[&#x27;Two Drops&#x27;]
+[&#x27;One Drop&#x27;, &#x27;Two Drops&#x27;, &#x27;Three Drops&#x27;]</code></pre></div>
+<p>With these results and what we just learned, these uses are easy to understand.</p>
+<h3>4. How to Update a List</h3>
+<p>Back to our example again. We stored the names of everyone who signed up. Later, new people might join, or we might find we spelled a name wrong and want to fix it.</p>
+<p>What do we do then?</p>
+<p>We can use an index to change (update) an item in the list. We can also use the <code>append()</code> method to add a new item.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">name = [&#x27;One Drop&#x27;, &#x27;Two Drops&#x27;, &#x27;Three Drops&#x27;, &#x27;Four Drops&#x27;, &#x27;Five Drops&#x27;]
+
+
+# Use an index to change or update an item
+name[1]=&#x27;2 Drops&#x27;
+print(name)
+
+# Use the append() method to add an item
+name.append(&#x27;Six Drops&#x27;)
+print(name)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[&#x27;One Drop&#x27;, &#x27;2 Drops&#x27;, &#x27;Three Drops&#x27;, &#x27;Four Drops&#x27;, &#x27;Five Drops&#x27;]
+[&#x27;One Drop&#x27;, &#x27;2 Drops&#x27;, &#x27;Three Drops&#x27;, &#x27;Four Drops&#x27;, &#x27;Five Drops&#x27;, &#x27;Six Drops&#x27;]</code></pre></div>
+<h3>5. How to Delete Items from a List</h3>
+<p>Of course, someone might drop out halfway.</p>
+<p>Then we need to remove their name from the list.</p>
+<p>We use the <code>del</code> statement to delete an item from a list:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">name = [&#x27;One Drop&#x27;, &#x27;Two Drops&#x27;, &#x27;Three Drops&#x27;, &#x27;Four Drops&#x27;, &#x27;Five Drops&#x27;]
+
+print(name)
+
+# Use the del statement to delete an item
+del name[3]
+print(name)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[&#x27;One Drop&#x27;, &#x27;Two Drops&#x27;, &#x27;Three Drops&#x27;, &#x27;Four Drops&#x27;, &#x27;Five Drops&#x27;]
+[&#x27;One Drop&#x27;, &#x27;Two Drops&#x27;, &#x27;Three Drops&#x27;, &#x27;Five Drops&#x27;]</code></pre></div>
+<p>Look at the output: <code>Four Drops</code> is no longer in the list. So it was deleted successfully.</p>
+<h3>6. List Operators</h3>
+<p>Lists work with <code>+</code> and <code>*</code> just like strings do. <code>+</code> joins lists together, and <code>*</code> repeats a list.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Python expression</th>
+<th>Result</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>len([1, 2, 3])</td>
+<td>3</td>
+<td>Counts the elements</td>
+</tr>
+<tr>
+<td>[1, 2, 3] + [4, 5, 6]</td>
+<td>[1, 2, 3, 4, 5, 6]</td>
+<td>Joins</td>
+</tr>
+<tr>
+<td>['Hi!'] * 4</td>
+<td>['Hi!', 'Hi!', 'Hi!', 'Hi!']</td>
+<td>Repeats</td>
+</tr>
+<tr>
+<td>3 in [1, 2, 3]</td>
+<td>True</td>
+<td>Checks if an element is in the list</td>
+</tr>
+<tr>
+<td>for x in [1, 2, 3]: print x,</td>
+<td>1 2 3</td>
+<td>Loops through it</td>
+</tr>
+</tbody>
+</table></div>
+<h3>7. List Functions &amp; Methods</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Function / Method</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>len(list)</td>
+<td>Number of elements in the list</td>
+</tr>
+<tr>
+<td>max(list)</td>
+<td>Returns the biggest element</td>
+</tr>
+<tr>
+<td>min(list)</td>
+<td>Returns the smallest element</td>
+</tr>
+<tr>
+<td>list(seq)</td>
+<td>Turns a tuple into a list</td>
+</tr>
+<tr>
+<td>list.append(obj)</td>
+<td>Adds a new object to the end of the list</td>
+</tr>
+<tr>
+<td>list.count(obj)</td>
+<td>Counts how many times an element appears</td>
+</tr>
+<tr>
+<td>list.extend(seq)</td>
+<td>Adds all the values from another sequence to the end (extends the list with a new list)</td>
+</tr>
+<tr>
+<td>list.index(obj)</td>
+<td>Finds the index of the first matching value</td>
+</tr>
+<tr>
+<td>list.insert(index, obj)</td>
+<td>Inserts an object into the list</td>
+</tr>
+<tr>
+<td>list.pop(obj=list[-1])</td>
+<td>Removes one element (the last one by default) and returns its value</td>
+</tr>
+<tr>
+<td>list.remove(obj)</td>
+<td>Removes one element (you give the element itself), and returns nothing</td>
+</tr>
+<tr>
+<td>list.reverse()</td>
+<td>Reverses the order of the elements</td>
+</tr>
+<tr>
+<td>list.sort([func])</td>
+<td>Sorts the list</td>
+</tr>
+</tbody>
+</table></div>
+<h3>8. Example</h3>
+<p>Finally, let's use an example to get to know List operations.</p>
+<p>Example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">#-*-coding:utf-8-*-
+#-----------------------Using a list----------------------------------
+
+# 1. A product needs to list its users. We can use a list for this
+user=[&#x27;liangdianshui&#x27;,&#x27;twowater&#x27;,&#x27;Two Drops&#x27;]
+print(&#x27;1. Product users&#x27;)
+print(user)
+
+# 2. To count how many users there are, len() gives the number of elements in a list
+len(user)
+print(&#x27;\n2. Count the users&#x27;)
+print(len(user))
+
+# 3. What if we need to know each user? Use an index to get the element at each position. Indexes start from 0
+print(&#x27;\n3. Look at each user&#x27;)
+print(user[0]+&#x27;,&#x27;+user[1]+&#x27;,&#x27;+user[2])
+
+# 4. Suddenly a new user arrives. We add them to the end of the list
+user.append(&#x27;Yinyin&#x27;)
+print(&#x27;\n4. Add a new user at the end&#x27;)
+print(user)
+
+# 5. Another user joins, but this one is a VIP student and must go first. Use insert to put them at a chosen position
+# Note: when inserting, be careful not to go out of range
+user.insert(0,&#x27;VIP user&#x27;)
+print(&#x27;\n5. Add a user at a chosen position&#x27;)
+print(user)
+
+# 6. Oops, we made a mistake: &quot;Yinyin&quot; IS the &#x27;VIP user&#x27;, so we need to delete &quot;Yinyin&quot;. pop() deletes the last element
+user.pop()
+print(&#x27;\n6. Delete the last user&#x27;)
+print(user)
+
+# 7. After a while, the user &quot;liangdianshui&quot; stopped using the product and deleted their account
+# So we need to delete the element at a certain position, using pop(i), where i is the index
+user.pop(1)
+print(&#x27;\n7. Delete the list element at a chosen position&#x27;)
+print(user)
+
+# 8. The user &quot;Two Drops&quot; wants to change their nickname
+user[2]=&#x27;Three Drops&#x27;
+print(&#x27;\n8. Replace an element with a different one&#x27;)
+print(user)
+
+# 9. Saving only nicknames isn&#x27;t great. It&#x27;s better to save the account number too
+# The account number is an integer, not a string like the nickname, but list elements can be different types
+# A list element can even be another list
+newUser=[[&#x27;VIP user&#x27;,11111],[&#x27;twowater&#x27;,22222],[&#x27;Three Drops&#x27;,33333]]
+print(&#x27;\n9. A list with different types of elements&#x27;)
+print(newUser)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">1. Product users
+[&#x27;liangdianshui&#x27;, &#x27;twowater&#x27;, &#x27;Two Drops&#x27;]
+
+2. Count the users
+3
+
+3. Look at each user
+liangdianshui,twowater,Two Drops
+
+4. Add a new user at the end
+[&#x27;liangdianshui&#x27;, &#x27;twowater&#x27;, &#x27;Two Drops&#x27;, &#x27;Yinyin&#x27;]
+
+5. Add a user at a chosen position
+[&#x27;VIP user&#x27;, &#x27;liangdianshui&#x27;, &#x27;twowater&#x27;, &#x27;Two Drops&#x27;, &#x27;Yinyin&#x27;]
+
+6. Delete the last user
+[&#x27;VIP user&#x27;, &#x27;liangdianshui&#x27;, &#x27;twowater&#x27;, &#x27;Two Drops&#x27;]
+
+7. Delete the list element at a chosen position
+[&#x27;VIP user&#x27;, &#x27;twowater&#x27;, &#x27;Two Drops&#x27;]
+
+8. Replace an element with a different one
+[&#x27;VIP user&#x27;, &#x27;twowater&#x27;, &#x27;Three Drops&#x27;]
+
+9. A list with different types of elements
+[[&#x27;VIP user&#x27;, 11111], [&#x27;twowater&#x27;, 22222], [&#x27;Three Drops&#x27;, 33333]]</code></pre></div>
+<h3>You copied the list – so why do both change?</h3>
+<p>Let's use the sign-up list again. We want to keep a copy of the original list, then add one more person to the current list. Look carefully: do the two assignments below do the same thing?</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">names = [&#x27;One Drop&#x27;, &#x27;Two Drops&#x27;]
+another_name = names
+saved_names = names.copy()
+another_name.append(&#x27;Three Drops&#x27;)
+print(names)
+print(saved_names)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[&#x27;One Drop&#x27;, &#x27;Two Drops&#x27;, &#x27;Three Drops&#x27;]
+[&#x27;One Drop&#x27;, &#x27;Two Drops&#x27;]</code></pre></div>
+<p><code>another_name = names</code> just gives the <strong>same</strong> list a second name. <code>names.copy()</code> makes a <strong>new</strong> list. Changing the original list's items won't change this new list.</p>
+<p>Now try it yourself: change <code>names</code> to an empty list, append a name, and look at both results. Then think: if the items in the list were lists themselves, would <code>copy()</code> make a new copy of each inner list too? <strong>No.</strong> A normal list copy is a <strong>shallow copy</strong>. When you have objects inside objects, you need to check whether the inner objects are shared.</p>
+<p>Lists are good for storing a group of things that can change and have an order. In a tuple, you can't reassign any position. But if a tuple holds a list, the contents of that list <strong>can</strong> still change. Keep "the outer positions can't change" and "the objects inside can't change" separate in your head, and similar-looking code won't trick you.</p></article></section><section id="exercise-01-create-list" class="ex-card item" data-kind="exercise" data-exercise="01-create-list" aria-label="Exercise 1: Create your first List">
+<script type="application/json" class="ex-data">{"id": "01-create-list", "lesson": "python3", "starter": "# Use square brackets [] to create a List, with commas between the items\n", "solution": "numbers = [1, 2, 3, 4, 5]\nprint(numbers)", "grading": {"stdoutEquals": "[1, 2, 3, 4, 5]\n", "varsEqual": {"numbers": [1, 2, 3, 4, 5]}}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 1 / 7</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Create your first List</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Create a variable <code>numbers</code> and put the integers <code>1, 2, 3, 4, 5</code> into a List assigned to it.</p>
+<p>Then use <code>print</code> to print <code>numbers</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[1, 2, 3, 4, 5]</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 2)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>A List is written as [item1, item2, ...]</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">numbers = [1, 2, 3, 4, 5]
+print(numbers)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># Use square brackets [] to create a List, with commas between the items
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="exercise-02-list-access" class="ex-card item" data-kind="exercise" data-exercise="02-list-access" aria-label="Exercise 2: Indexes and slices">
+<script type="application/json" class="ex-data">{"id": "02-list-access", "lesson": "python3", "starter": "fruits = ['apple', 'banana', 'cherry', 'date', 'fig']\n# 1. print the 3rd item (indexes start at 0)\n# 2. print the slice fruits[1:4]\n", "solution": "fruits = ['apple', 'banana', 'cherry', 'date', 'fig']\nprint(fruits[2])\nprint(fruits[1:4])", "grading": {"stdoutEquals": "cherry\n['banana', 'cherry', 'date']\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 2 / 7</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Indexes and slices</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>We've already defined <code>fruits = ['apple', 'banana', 'cherry', 'date', 'fig']</code> for you.</p>
+<p>Please:</p>
+<ol>
+<li>Use an index to <code>print</code> the 3rd item (that's <code>cherry</code>)</li>
+<li>Use a slice to <code>print</code> <code>fruits[1:4]</code></li>
+</ol>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">cherry
+[&#x27;banana&#x27;, &#x27;cherry&#x27;, &#x27;date&#x27;]</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>Indexes start at 0, so the 3rd item is fruits[2]</p></li></template><template class="hint-tpl"><li><p>The slice [1:4] includes the start but not the end: indexes 1, 2 and 3, but not 4</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">fruits = [&#x27;apple&#x27;, &#x27;banana&#x27;, &#x27;cherry&#x27;, &#x27;date&#x27;, &#x27;fig&#x27;]
+print(fruits[2])
+print(fruits[1:4])</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">fruits = [&#x27;apple&#x27;, &#x27;banana&#x27;, &#x27;cherry&#x27;, &#x27;date&#x27;, &#x27;fig&#x27;]
+# 1. print the 3rd item (indexes start at 0)
+# 2. print the slice fruits[1:4]
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="exercise-03-list-update" class="ex-card item" data-kind="exercise" data-exercise="03-list-update" aria-label="Exercise 3: Change + append">
+<script type="application/json" class="ex-data">{"id": "03-list-update", "lesson": "python3", "starter": "colors = ['red', 'green', 'blue']\n# 1. Change the item at index 1 to capital 'GREEN'\n# 2. Use append to add 'yellow' to the end\n# 3. Print colors\n", "solution": "colors = ['red', 'green', 'blue']\ncolors[1] = 'GREEN'\ncolors.append('yellow')\nprint(colors)", "grading": {"stdoutEquals": "['red', 'GREEN', 'blue', 'yellow']\n", "varsEqual": {"colors": ["red", "GREEN", "blue", "yellow"]}}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 3 / 7</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Change + append</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>We've already defined <code>colors = ['red', 'green', 'blue']</code> for you.</p>
+<p>Please:</p>
+<ol>
+<li>Change the item at index 1 (<code>green</code>) to capital <code>GREEN</code></li>
+<li>Use <code>append</code> to add <code>'yellow'</code> to the end</li>
+<li><code>print(colors)</code></li>
+</ol>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[&#x27;red&#x27;, &#x27;GREEN&#x27;, &#x27;blue&#x27;, &#x27;yellow&#x27;]</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>Change one position: colors[1] = 'GREEN'</p></li></template><template class="hint-tpl"><li><p>Add to the end: colors.append('yellow')</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">colors = [&#x27;red&#x27;, &#x27;green&#x27;, &#x27;blue&#x27;]
+colors[1] = &#x27;GREEN&#x27;
+colors.append(&#x27;yellow&#x27;)
+print(colors)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">colors = [&#x27;red&#x27;, &#x27;green&#x27;, &#x27;blue&#x27;]
+# 1. Change the item at index 1 to capital &#x27;GREEN&#x27;
+# 2. Use append to add &#x27;yellow&#x27; to the end
+# 3. Print colors
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="exercise-04-list-ops" class="ex-card item" data-kind="exercise" data-exercise="04-list-ops" aria-label="Exercise 4: Joining and length">
+<script type="application/json" class="ex-data">{"id": "04-list-ops", "lesson": "python3", "starter": "a = [1, 2, 3]\nb = [4, 5, 6]\n# 1. Use + to join a and b into a new list c\n# 2. Print c\n# 3. Use len to print how many items c has\n", "solution": "a = [1, 2, 3]\nb = [4, 5, 6]\nc = a + b\nprint(c)\nprint(len(c))", "grading": {"stdoutEquals": "[1, 2, 3, 4, 5, 6]\n6\n", "varsEqual": {"c": [1, 2, 3, 4, 5, 6]}}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 4 / 7</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Joining and length</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>We've already defined <code>a = [1, 2, 3]</code> and <code>b = [4, 5, 6]</code> for you.</p>
+<p>Please:</p>
+<ol>
+<li>Use <code>+</code> to join them into a new list <code>c</code></li>
+<li><code>print(c)</code></li>
+<li>Use <code>len()</code> to print how many items <code>c</code> has</li>
+</ol>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[1, 2, 3, 4, 5, 6]
+6</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>Lists can be joined with +: c = a + b</p></li></template><template class="hint-tpl"><li><p>len(c) returns how many items the list has</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">a = [1, 2, 3]
+b = [4, 5, 6]
+c = a + b
+print(c)
+print(len(c))</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">a = [1, 2, 3]
+b = [4, 5, 6]
+# 1. Use + to join a and b into a new list c
+# 2. Print c
+# 3. Use len to print how many items c has
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-2" class="step-card item" data-kind="step" aria-label="Teaching step 3">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 03 / 03</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>2. tuple</h2>
+<h3>1. What is a tuple?</h3>
+<p>In the last section we talked about an ordered list, the List. Now let's look at another kind of ordered list: the <strong>tuple</strong>.</p>
+<p>A tuple is very similar to a List, but once a tuple is created, it <strong>can't be changed</strong>.
+We say a tuple is <strong>immutable</strong>. So what does "immutable" mean?</p>
+<p>It means that once you create a tuple, it can't change. It has no methods like <code>append()</code> or <code>insert()</code>. You can still get the value at an index, but you can't assign a new value to it.</p>
+<p>So why do we need tuples?</p>
+<p>Because tuples can't change, your code is <strong>safer</strong>.</p>
+<p>So if you can use a tuple instead of a list, it's a good idea to use a tuple.</p>
+<h3>2. How to Create a tuple</h3>
+<p>Creating a tuple is easy. Just put the elements inside round brackets, separated by commas.</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">tuple1=(&#x27;Two Drops&#x27;,&#x27;twowter&#x27;,&#x27;liangdianshui&#x27;,123,456)
+tuple2=&#x27;Two Drops&#x27;,&#x27;twowter&#x27;,&#x27;liangdianshui&#x27;,123,456</code></pre></div>
+<p>Create an empty tuple:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">tuple3=()</code></pre></div>
+<p>If a tuple has only <strong>one</strong> element, you must add a comma after it:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">tuple4=(123,)</code></pre></div>
+<p>Without the comma, you don't get a tuple – you just get the number <code>123</code>.</p>
+<p>This is because round brackets <code>()</code> can mean a tuple, but they can also mean brackets in a maths formula. That's confusing.</p>
+<p>So with only one element and no comma, the computer can't tell if you want to do maths with an integer or float, or if you mean a tuple.</p>
+<p>So Python's rule is: in this case, treat them as maths brackets. The result is of course <code>123</code>. If you want a tuple, you need to add a comma.</p>
+<p>Look at the output of tuple4 and tuple5 below:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">#-*-coding:utf-8-*-
+tuple1 = (&#x27;Two Drops&#x27;, &#x27;twowter&#x27;, &#x27;liangdianshui&#x27;, 123, 456)
+tuple2 = &#x27;Two Drops&#x27;, &#x27;twowter&#x27;, &#x27;liangdianshui&#x27;, 123, 456
+tuple3 = ()
+tuple4 = (123,)
+tuple5 = (123)
+print(tuple1)
+print(tuple2)
+print(tuple3)
+print(tuple4)
+print(tuple5)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">(&#x27;Two Drops&#x27;, &#x27;twowter&#x27;, &#x27;liangdianshui&#x27;, 123, 456)
+(&#x27;Two Drops&#x27;, &#x27;twowter&#x27;, &#x27;liangdianshui&#x27;, 123, 456)
+()
+(123,)
+123</code></pre></div>
+<h3>3. How to Get Values from a tuple</h3>
+<p>Tuple indexes also start from 0. You can use an index to get a value from a tuple.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">#-*-coding:utf-8-*-
+
+tuple1=(&#x27;Two Drops&#x27;,&#x27;twowter&#x27;,&#x27;liangdianshui&#x27;,123,456)
+tuple2=&#x27;Two Drops&#x27;,&#x27;twowter&#x27;,&#x27;liangdianshui&#x27;,123,456
+
+print(tuple1[1])
+print(tuple2[0])</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">twowter
+Two Drops</code></pre></div>
+<h3>4. "Changing" a tuple</h3>
+<p>When you see this heading, you might be confused. Didn't we just spend a long time saying tuples can't change?</p>
+<p>So why are we changing a tuple now?</p>
+<p>Because although you can't change the element values in a tuple, you <strong>can</strong> join tuples together. You can also change a list that is inside a tuple, which affects how the tuple looks.</p>
+<p>Look at this example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">#-*-coding:utf-8-*-
+list1=[123,456]
+tuple1=(&#x27;Two Drops&#x27;,&#x27;twowater&#x27;,&#x27;liangdianshui&#x27;,list1)
+print(tuple1)
+list1[0]=789
+list1[1]=100
+print(tuple1)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">(&#x27;Two Drops&#x27;, &#x27;twowater&#x27;, &#x27;liangdianshui&#x27;, [123, 456])
+(&#x27;Two Drops&#x27;, &#x27;twowater&#x27;, &#x27;liangdianshui&#x27;, [789, 100])</code></pre></div>
+<p>We can see the tuple printed differently the two times. Let's see how tuple1 is stored.</p>
+<p><span class="tutorial-diagram"><span class="tutorial-diagram-scroll" role="region" tabindex="0" aria-label="A mutable object inside a tuple, scroll sideways on small screens"><img loading="lazy" alt="A mutable object inside a tuple" src="/images/diagrams/tuple-list.svg"></span></span></p>
+<p>tuple1 has four elements. The last element is a List, and the List has two elements.</p>
+<p>When we change the List's two elements from <code>123</code> and <code>456</code> to <code>789</code> and <code>100</code>, the printed tuple1 looks like it really changed.</p>
+<p>But actually, what changed was <strong>not</strong> the tuple's elements – it was the list's elements.</p>
+<p>The tuple still points to the same list it pointed to at the start. So when we say a tuple "doesn't change", we mean that <strong>what each element points to never changes</strong>. The fourth element of tuple1 still points to the original list. We only changed the elements <strong>inside</strong> that list.</p>
+<h3>5. Deleting a tuple</h3>
+<p>You can't delete single elements from a tuple. But you can use the <code>del</code> statement to delete the whole tuple.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">#-*-coding:utf-8-*-
+
+tuple1=(&#x27;Two Drops&#x27;,&#x27;twowter&#x27;,&#x27;liangdianshui&#x27;,[123,456])
+print(tuple1)
+del tuple1</code></pre></div>
+<h3>6. tuple Operators</h3>
+<p>Just like strings, you can use <code>+</code> and <code>*</code> with tuples. This means you can join and repeat them. The result is a new tuple.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Python expression</th>
+<th>Result</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>len((1, 2, 3))</td>
+<td>3</td>
+<td>Counts the elements</td>
+</tr>
+<tr>
+<td>(1, 2, 3) + (4, 5, 6)</td>
+<td>(1, 2, 3, 4, 5, 6)</td>
+<td>Joins</td>
+</tr>
+<tr>
+<td>('Hi!',) * 4</td>
+<td>('Hi!', 'Hi!', 'Hi!', 'Hi!')</td>
+<td>Repeats</td>
+</tr>
+<tr>
+<td>3 in (1, 2, 3)</td>
+<td>True</td>
+<td>Checks if an element is there</td>
+</tr>
+<tr>
+<td>for x in (1, 2, 3):  print(x)</td>
+<td>1 2 3</td>
+<td>Loops through it</td>
+</tr>
+</tbody>
+</table></div>
+<h3>7. Built-in tuple Functions</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Function</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>len(tuple)</td>
+<td>Counts the elements in a tuple</td>
+</tr>
+<tr>
+<td>max(tuple)</td>
+<td>Returns the biggest element</td>
+</tr>
+<tr>
+<td>min(tuple)</td>
+<td>Returns the smallest element</td>
+</tr>
+<tr>
+<td>tuple(seq)</td>
+<td>Turns a list into a tuple</td>
+</tr>
+</tbody>
+</table></div>
+<h3>8. Example</h3>
+<p>Finally, just like with lists, here's an example. Try out all the different things you can do with tuples.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">name1 = (&#x27;One Drop&#x27;, &#x27;Two Drops&#x27;, &#x27;Three Drops&#x27;, &#x27;Four Drops&#x27;, &#x27;Five Drops&#x27;)
+
+name2 = (&#x27;1 Drop&#x27;, &#x27;2 Drops&#x27;, &#x27;3 Drops&#x27;, &#x27;4 Drops&#x27;, &#x27;5 Drops&#x27;)
+
+list1 = [1, 2, 3, 4, 5]
+
+# Count the elements
+print(len(name1))
+# Join: add two tuples together
+print(name1 + name2)
+# Repeat a tuple
+print(name1 * 2)
+# Is the element there? (Does name1 contain &#x27;One Drop&#x27;?)
+print(&#x27;One Drop&#x27; in name1)
+# The biggest element
+print(max(name2))
+# The smallest element
+print(min(name2))
+# Turn a list into a tuple
+print(tuple(list1))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">5
+(&#x27;One Drop&#x27;, &#x27;Two Drops&#x27;, &#x27;Three Drops&#x27;, &#x27;Four Drops&#x27;, &#x27;Five Drops&#x27;, &#x27;1 Drop&#x27;, &#x27;2 Drops&#x27;, &#x27;3 Drops&#x27;, &#x27;4 Drops&#x27;, &#x27;5 Drops&#x27;)
+(&#x27;One Drop&#x27;, &#x27;Two Drops&#x27;, &#x27;Three Drops&#x27;, &#x27;Four Drops&#x27;, &#x27;Five Drops&#x27;, &#x27;One Drop&#x27;, &#x27;Two Drops&#x27;, &#x27;Three Drops&#x27;, &#x27;Four Drops&#x27;, &#x27;Five Drops&#x27;)
+True
+5 Drops
+1 Drop
+(1, 2, 3, 4, 5)</code></pre></div></article></section><section id="exercise-05-tuple-create" class="ex-card item" data-kind="exercise" data-exercise="05-tuple-create" aria-label="Exercise 5: The comma trap of a one-item tuple">
+<script type="application/json" class="ex-data">{"id": "05-tuple-create", "lesson": "python3", "starter": "# A one-item tuple needs a comma\n", "solution": "t = (42,)\nprint(t)", "grading": {"requiredAst": ["Assign:t", "Tuple"], "stdoutEquals": "(42,)\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 5 / 7</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">The comma trap of a one-item tuple</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Create a tuple <code>t</code> with <strong>only one item</strong>, <code>42</code>, then <code>print(t)</code>.</p>
+<p>Note: a one-item tuple <strong>must</strong> have a comma after the item – <code>(42,)</code> is a tuple, but <code>(42)</code> is just the number 42.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">(42,)</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>(42) is a number expression, not a tuple</p></li></template><template class="hint-tpl"><li><p>(42,) is a tuple – notice the comma</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">t = (42,)
+print(t)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># A one-item tuple needs a comma
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="exercise-06-tuple-access" class="ex-card item" data-kind="exercise" data-exercise="06-tuple-access" aria-label="Exercise 6: Getting values and slices from a tuple">
+<script type="application/json" class="ex-data">{"id": "06-tuple-access", "lesson": "python3", "starter": "days = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri')\n# 1. Use an index to print the 4th item\n# 2. print the slice days[2:4]\n", "solution": "days = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri')\nprint(days[3])\nprint(days[2:4])", "grading": {"stdoutEquals": "Thu\n('Wed', 'Thu')\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 6 / 7</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Getting values and slices from a tuple</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>We've already defined <code>days = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri')</code> for you.</p>
+<p>Please:</p>
+<ol>
+<li><code>print</code> the 4th item (that's <code>Thu</code>)</li>
+<li><code>print</code> the slice <code>days[2:4]</code></li>
+</ol>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Thu
+(&#x27;Wed&#x27;, &#x27;Thu&#x27;)</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>Indexes start at 0, so the 4th item is days[3]</p></li></template><template class="hint-tpl"><li><p>Slices work just like with a List: days[2:4]</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">days = (&#x27;Mon&#x27;, &#x27;Tue&#x27;, &#x27;Wed&#x27;, &#x27;Thu&#x27;, &#x27;Fri&#x27;)
+print(days[3])
+print(days[2:4])</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">days = (&#x27;Mon&#x27;, &#x27;Tue&#x27;, &#x27;Wed&#x27;, &#x27;Thu&#x27;, &#x27;Fri&#x27;)
+# 1. Use an index to print the 4th item
+# 2. print the slice days[2:4]
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="exercise-07-tuple-ops" class="ex-card item" data-kind="exercise" data-exercise="07-tuple-ops" aria-label="Exercise 7: List to tuple + max">
+<script type="application/json" class="ex-data">{"id": "07-tuple-ops", "lesson": "python3", "starter": "nums = [3, 1, 4, 1, 5, 9, 2, 6]\n# 1. Use tuple() to turn nums into a tuple and assign it to t\n# 2. Use len to print how many items it has\n# 3. Use max to print the biggest value\n", "solution": "nums = [3, 1, 4, 1, 5, 9, 2, 6]\nt = tuple(nums)\nprint(len(t))\nprint(max(t))", "grading": {"requiredAst": ["Assign:t"], "stdoutEquals": "8\n9\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 7 / 7</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">List to tuple + max</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>We've already defined <code>nums = [3, 1, 4, 1, 5, 9, 2, 6]</code> for you.</p>
+<p>Please:</p>
+<ol>
+<li>Use <code>tuple()</code> to turn it into a tuple and assign it to <code>t</code></li>
+<li><code>print</code> how many items the tuple has (<code>len</code>)</li>
+<li><code>print</code> the biggest value in the tuple (<code>max</code>)</li>
+</ol>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">8
+9</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>tuple(nums) turns a list into a tuple</p></li></template><template class="hint-tpl"><li><p>len counts the items, max finds the biggest value</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">nums = [3, 1, 4, 1, 5, 9, 2, 6]
+t = tuple(nums)
+print(len(t))
+print(max(t))</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">nums = [3, 1, 4, 1, 5, 9, 2, 6]
+# 1. Use tuple() to turn nums into a tuple and assign it to t
+# 2. Use len to print how many items it has
+# 3. Use max to print the biggest value
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><div class="lock-banner" hidden><span aria-hidden="true">🔒</span>Solve this exercise to unlock the next part ·<span class="accent lock-k">0</span><span aria-hidden="true">/</span><span>7</span></div><section id="lesson-end" aria-label="Chapter summary"><div class="done-banner" hidden><div class="done-emoji" aria-hidden="true">🎉</div><p class="done-title">Chapter complete!</p><p class="done-sub">You solved all 7 exercises in this chapter.</p></div><nav aria-label="Chapter navigation" class="chapter-nav"><div class="cn-grid"><a class="chap-nav prev focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cn-label">← Previous chapter</span><span class="cn-title">02 · Basic data types &amp; variables</span></a><div class="cn-mid"><span>List &amp; Tuple</span></div><a class="chap-nav next focus-ring" href="/lessons/python4/dict-and-set/"><span class="cn-label">Next chapter →</span><span class="cn-title">04 · Dict &amp; Set</span></a></div></nav></section></article></div>
+    <aside class="lesson-sidebar right" aria-label="This chapter"><nav aria-label="This chapter's contents"><div class="side-label up">In this chapter</div><p class="toc-chapter">List &amp; Tuple</p><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Introduction</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">1. List</span></a></li><li class="toc-li" data-target="exercise-01-create-list"><a href="#exercise-01-create-list" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">Create your first List</span></a></li><li class="toc-li" data-target="exercise-02-list-access"><a href="#exercise-02-list-access" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">Indexes and slices</span></a></li><li class="toc-li" data-target="exercise-03-list-update"><a href="#exercise-03-list-update" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">Change + append</span></a></li><li class="toc-li" data-target="exercise-04-list-ops"><a href="#exercise-04-list-ops" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">Joining and length</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">2. tuple</span></a></li><li class="toc-li" data-target="exercise-05-tuple-create"><a href="#exercise-05-tuple-create" class="toc-link focus-ring"><span class="toc-kind">Exercise 5</span><span class="toc-title">The comma trap of a one-item tuple</span></a></li><li class="toc-li" data-target="exercise-06-tuple-access"><a href="#exercise-06-tuple-access" class="toc-link focus-ring"><span class="toc-kind">Exercise 6</span><span class="toc-title">Getting values and slices from a tuple</span></a></li><li class="toc-li" data-target="exercise-07-tuple-ops"><a href="#exercise-07-tuple-ops" class="toc-link focus-ring"><span class="toc-kind">Exercise 7</span><span class="toc-title">List to tuple + max</span></a></li></ol></nav></aside>
+  </div>
+  <dialog class="dir-dialog" aria-labelledby="dir-title"><div class="dd-inner"><div class="dd-head"><h2 id="dir-title">Contents</h2><button type="button" class="dd-close focus-ring">Close</button></div>
+  <div class="dd-tabs" aria-label="Contents scope"><button type="button" class="dd-tab focus-ring" data-tab="all" aria-pressed="true">All lessons</button><button type="button" class="dd-tab focus-ring" data-tab="chapter" aria-pressed="false">This chapter</button></div>
+  <div class="dd-body"><div class="dd-pane" data-pane="all"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></div><div class="dd-pane" data-pane="chapter" hidden><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Introduction</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">1. List</span></a></li><li class="toc-li" data-target="exercise-01-create-list"><a href="#exercise-01-create-list" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">Create your first List</span></a></li><li class="toc-li" data-target="exercise-02-list-access"><a href="#exercise-02-list-access" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">Indexes and slices</span></a></li><li class="toc-li" data-target="exercise-03-list-update"><a href="#exercise-03-list-update" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">Change + append</span></a></li><li class="toc-li" data-target="exercise-04-list-ops"><a href="#exercise-04-list-ops" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">Joining and length</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">2. tuple</span></a></li><li class="toc-li" data-target="exercise-05-tuple-create"><a href="#exercise-05-tuple-create" class="toc-link focus-ring"><span class="toc-kind">Exercise 5</span><span class="toc-title">The comma trap of a one-item tuple</span></a></li><li class="toc-li" data-target="exercise-06-tuple-access"><a href="#exercise-06-tuple-access" class="toc-link focus-ring"><span class="toc-kind">Exercise 6</span><span class="toc-title">Getting values and slices from a tuple</span></a></li><li class="toc-li" data-target="exercise-07-tuple-ops"><a href="#exercise-07-tuple-ops" class="toc-link focus-ring"><span class="toc-kind">Exercise 7</span><span class="toc-title">List to tuple + max</span></a></li></ol></div></div></div></dialog>
+  <div class="py-toast" hidden><span class="spinner"></span><span class="py-toast-text">Loading Python…</span></div>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>© 2026 Python for Beginners · English edition of the <a href="https://github.com/walter201230/Python">walter201230/Python</a> tutorial (CC BY 4.0)</span>
+    <div class="footer-links"><a href="/">Course list</a><a href="/about/">About this site</a><a href="https://github.com/walter201230/Python">GitHub</a></div>
+  </div>
+</footer>
+<script src="/assets/site.js?v=20261028"></script>
+</body>
+</html>

@@ -1,0 +1,1353 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dataclass – Python for Beginners</title>
+<meta name="description" content="One decorator generates __init__/__repr__/__eq__ for you – goodbye boilerplate.">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css?v=20261028">
+
+</head>
+<body data-page="lesson" data-lesson="python20" data-total="4">
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="/" aria-label="Python for Beginners – home"><span class="gradient-text-flow" data-text="Python for Beginners">Python for Beginners</span></a>
+    <nav class="header-nav">
+      <a class="nav-link" href="/about/">About</a>
+      <a class="nav-icon focus-ring" href="https://github.com/walter201230/Python" aria-label="Original tutorial on GitHub" title="Original tutorial on GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+      <button type="button" class="theme-toggle focus-ring" aria-label="Switch theme"><span class="knob"><svg class="ic-moon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button>
+    </nav>
+  </div>
+</header>
+<main class="site-main">
+<div class="lesson-shell bg-tech-grid">
+  <div class="mobile-bar"><div class="mb-inner"><button type="button" class="dir-btn focus-ring" aria-haspopup="dialog">Contents</button></div></div>
+  <div class="lesson-columns">
+    <aside class="lesson-sidebar left" aria-label="All lessons"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></aside>
+    <div class="lesson-main"><article class="lesson-article"><header class="lesson-head"><h1>dataclass</h1><p class="lh-sub"><span class="accent">4</span> exercises<span class="sep">·</span>about <span class="accent">80</span> min<span class="sep">·</span>solve one to unlock the next part</p>
+<p class="lh-link"><a class="subtle-link focus-ring" href="/lessons/python20/dataclass/read/">Read the whole chapter →</a></p></header><section id="step-0" class="step-card item" data-kind="step" aria-label="Teaching step 1">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 01 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><p>When writing code, it's easy to get stuck in the swamp of <strong>boilerplate code</strong>. Don't argue yet – let's do a small experiment. Write an <code>Employee</code> class with these requirements: it stores an employee's name, department, employee ID, start date and monthly salary; it should print nicely (not something horrible like <code>&lt;__main__.Employee object at 0x...&gt;</code>); you should be able to check whether two employee objects are equal; and ideally it can be used as a dictionary key.</p>
+<p>Doesn't sound hard, right? If you like to think things through, you've probably already written it in your head. It looks something like this:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class Employee:
+    def __init__(self, name, dept, emp_id, hire_date, salary):
+        self.name = name
+        self.dept = dept
+        self.emp_id = emp_id
+        self.hire_date = hire_date
+        self.salary = salary
+
+    def __repr__(self):
+        return (
+            f&#x27;Employee(name={self.name!r}, dept={self.dept!r}, &#x27;
+            f&#x27;emp_id={self.emp_id!r}, hire_date={self.hire_date!r}, &#x27;
+            f&#x27;salary={self.salary!r})&#x27;
+        )
+
+    def __eq__(self, other):
+        if not isinstance(other, Employee):
+            return NotImplemented
+        return (
+            self.name == other.name
+            and self.dept == other.dept
+            and self.emp_id == other.emp_id
+            and self.hire_date == other.hire_date
+            and self.salary == other.salary
+        )
+
+    def __hash__(self):
+        return hash((self.name, self.dept, self.emp_id, self.hire_date, self.salary))
+
+
+e = Employee(&#x27;Two Drops&#x27;, &#x27;Coding Dept&#x27;, 1001, &#x27;2020-03-15&#x27;, 12000)
+print(e)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Employee(name=&#x27;Two Drops&#x27;, dept=&#x27;Coding Dept&#x27;, emp_id=1001, hire_date=&#x27;2020-03-15&#x27;, salary=12000)</code></pre></div>
+<p>Count them: this ordinary little "data class" takes over twenty lines. <code>__init__</code> lists the fields once, <code>__repr__</code> lists them again, <code>__eq__</code> lists them again, and <code>__hash__</code> lists them yet again – the same field names appear <strong>five times</strong>. Now imagine your class has 15 fields. The <code>__init__</code> parameter list would be as long as a train, and you'd copy and paste <code>self.xxx = xxx</code> again and again. By the tenth one, you'd want to scream.</p>
+<p>This is what we call <strong>boilerplate code</strong>. It doesn't add any business value – it's only there because Python's syntax makes you write it. The person writing it hates it, and so does the person reading it, because the important information – "what fields does this class have?" – is buried in the repetitive noise of <code>self.xxx = xxx</code>.</p>
+<p>Is there a way to just declare the fields, and let Python do the rest?</p>
+<p>Yes. Python 3.7 gave us <code>dataclass</code>. From 3.10, it gained more modern switches like <code>slots</code> and <code>kw_only</code>. Beyond that, there's the third-party library <code>Pydantic</code>, which focuses on "data models with runtime validation". In this article, let's go from <code>dataclass</code> all the way to <code>Pydantic</code>, so your fingers never get tied in knots writing data structures again.</p></article></section><section id="step-1" class="step-card item" data-kind="step" aria-label="Teaching step 2">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 02 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>What does your first dataclass look like?</h3>
+<p>Let's rewrite the <code>Employee</code> class above with <code>dataclass</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass
+
+
+@dataclass
+class Employee:
+    name: str
+    dept: str
+    emp_id: int
+    hire_date: str
+    salary: int
+
+
+e = Employee(&#x27;Two Drops&#x27;, &#x27;Coding Dept&#x27;, 1001, &#x27;2020-03-15&#x27;, 12000)
+print(e)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Employee(name=&#x27;Two Drops&#x27;, dept=&#x27;Coding Dept&#x27;, emp_id=1001, hire_date=&#x27;2020-03-15&#x27;, salary=12000)</code></pre></div>
+<p>Look – over twenty lines shrink to under ten. Just add the <code>@dataclass</code> decorator, and Python does all this for us:</p>
+<ul>
+<li>It sees "class variables with type hints" like <code>name: str</code> and <code>dept: str</code>, and automatically treats them as <strong>fields</strong></li>
+<li>It automatically creates an <code>__init__</code>, with the parameters in the same order as the fields</li>
+<li>It automatically creates a <code>__repr__</code> that looks exactly like the hand-written "<code>ClassName(field=value, field=value)</code>" one</li>
+<li>It automatically creates an <code>__eq__</code> that compares the fields one by one</li>
+</ul>
+<p>All you have to do is write the field names and their types. <code>dataclass</code> does all the rest.</p>
+<p>Are the type hints required? Yes. They're how <code>dataclass</code> recognises fields. If you only write <code>name = ''</code> without <code>name: str</code>, <code>dataclass</code> won't recognise it – it treats <code>name</code> as a normal class attribute, and it won't go into the <code>__init__</code> parameter list.</p>
+<p>Remember this: in a <code>dataclass</code>, <code>name: str</code> is a <strong>field declaration</strong>, and <code>name = 'default'</code> (with no hint) is a <strong>class attribute</strong>. They do completely different things.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass
+
+
+@dataclass
+class Demo:
+    a: int        # This is a field – it goes into __init__
+    b: int = 10   # This is a field with a default value – it also goes into __init__
+    c = 20        # Note: no type hint here, so it&#x27;s a normal class attribute – NOT in __init__
+
+
+d = Demo(1)
+print(d)
+print(d.c)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Demo(a=1, b=10)
+20</code></pre></div>
+<p>See? <code>c</code> doesn't appear in the <code>repr</code>, because it isn't a field at all – it's just a constant attached to the class.</p></article></section><section id="exercise-01-basic-point" class="ex-card item" data-kind="exercise" data-exercise="01-basic-point" aria-label="Exercise 1: Define Point with @dataclass">
+<script type="application/json" class="ex-data">{"id": "01-basic-point", "lesson": "python20", "starter": "# Import dataclass from dataclasses\n# Use @dataclass to define the Point class with two int fields, x and y (remember the type hints)\n# Create Point(1, 2), assign it to p, then print p\n\n", "solution": "from dataclasses import dataclass\n\n@dataclass\nclass Point:\n    x: int\n    y: int\n\np = Point(1, 2)\nprint(p)", "grading": {"requiredAst": ["ClassDef:Point"], "stdoutEquals": "Point(x=1, y=2)\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 1 / 4</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Define Point with @dataclass</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Use the <code>@dataclass</code> decorator to define a <code>Point</code> class:</p>
+<ul>
+<li>Two fields: <code>x: int</code> and <code>y: int</code></li>
+<li>Then create <code>Point(1, 2)</code>, assign it to the variable <code>p</code>, and <code>print(p)</code></li>
+</ul>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Point(x=1, y=2)</code></pre></div>
+<p>(This is exactly the <code>__repr__</code> output that <code>dataclass</code> generates for you.)</p></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>Remember from dataclasses import dataclass</p></li></template><template class="hint-tpl"><li><p>Fields must have type hints: x: int, y: int</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass
+
+@dataclass
+class Point:
+    x: int
+    y: int
+
+p = Point(1, 2)
+print(p)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># Import dataclass from dataclasses
+# Use @dataclass to define the Point class with two int fields, x and y (remember the type hints)
+# Create Point(1, 2), assign it to p, then print p
+
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-2" class="step-card item" data-kind="step" aria-label="Teaching step 3">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 03 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Comparing two dataclass objects</h3>
+<p><code>dataclass</code> creates <code>__eq__</code> by default, so two objects with exactly the same field values are considered equal:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass
+
+
+@dataclass
+class Employee:
+    name: str
+    dept: str
+    salary: int
+
+
+a = Employee(&#x27;Two Drops&#x27;, &#x27;Coding Dept&#x27;, 12000)
+b = Employee(&#x27;Two Drops&#x27;, &#x27;Coding Dept&#x27;, 12000)
+c = Employee(&#x27;Two Drops&#x27;, &#x27;Coding Dept&#x27;, 15000)
+
+print(a == b)
+print(a == c)
+print(a is b)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">True
+False
+False</code></pre></div>
+<p>Look at the third line – <code>a is b</code> is <code>False</code>. <code>==</code> compares "are the field values equal?", while <code>is</code> compares "is it the very same object?". These are two completely different things – don't mix them up.</p>
+<p>If you don't want the automatic <code>__eq__</code>, pass <code>eq=False</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass
+
+
+@dataclass(eq=False)
+class Employee:
+    name: str
+
+
+a = Employee(&#x27;Two Drops&#x27;)
+b = Employee(&#x27;Two Drops&#x27;)
+print(a == b)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">False</code></pre></div>
+<p>Now <code>==</code> goes back to "comparing object identity", the same as <code>is</code>. I don't usually recommend turning it off – without it, the <code>dataclass</code> is hardly different from a normal class.</p></article></section><section id="step-3" class="step-card item" data-kind="step" aria-label="Teaching step 4">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 04 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Default values – a lazy starting value for a field</h3>
+<p>Just like function parameters, dataclass fields can have default values:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass
+
+
+@dataclass
+class Employee:
+    name: str
+    dept: str = &#x27;Coding Dept&#x27;
+    salary: int = 8000
+
+
+e1 = Employee(&#x27;Two Drops&#x27;)
+e2 = Employee(&#x27;Xiao Ming&#x27;, &#x27;R&amp;D&#x27;, 15000)
+print(e1)
+print(e2)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Employee(name=&#x27;Two Drops&#x27;, dept=&#x27;Coding Dept&#x27;, salary=8000)
+Employee(name=&#x27;Xiao Ming&#x27;, dept=&#x27;R&amp;D&#x27;, salary=15000)</code></pre></div>
+<p>Did you notice? It works just like function parameters – fields <strong>with</strong> default values must come <strong>after</strong> fields without them. Python will flat-out reject this:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass
+
+
+@dataclass
+class BadOrder:
+    qty: int = 1
+    name: str   # Wrong! A field without a default can&#x27;t come after one with a default</code></pre></div>
+<p>Error:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">TypeError: non-default argument &#x27;name&#x27; follows default argument</code></pre></div>
+<p>What if the default value is a <strong>mutable object</strong> – like an empty list?</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass
+
+
+@dataclass
+class Team:
+    name: str
+    members: list = []   # Error straight away</code></pre></div>
+<p>Error:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">ValueError: mutable default &lt;class &#x27;list&#x27;&gt; for field members is not allowed: use default_factory</code></pre></div>
+<p>This time Python acts like a responsible parent and stops you at the door. Why doesn't it allow this? Because if it did, <strong>every</strong> <code>Team</code> instance would share the <strong>same</strong> <code>members</code> list. Append to one, and every instance's <code>members</code> would change. This is a very old Python trap – so old that when dataclass was designed, this road was simply blocked.</p>
+<p>So how do you write it? Use <code>field(default_factory=...)</code>.</p></article></section><section id="step-4" class="step-card item" data-kind="step" aria-label="Teaching step 5">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 05 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3><code>field()</code> – advanced settings for fields</h3>
+<p><code>field()</code> is another star of the <code>dataclasses</code> module. It's for configuring fields in more detail. The most common use is the "mutable default" mentioned above:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass, field
+
+
+@dataclass
+class Team:
+    name: str
+    members: list = field(default_factory=list)
+
+
+t1 = Team(&#x27;Team A&#x27;)
+t2 = Team(&#x27;Team B&#x27;)
+t1.members.append(&#x27;Two Drops&#x27;)
+print(t1)
+print(t2)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Team(name=&#x27;Team A&#x27;, members=[&#x27;Two Drops&#x27;])
+Team(name=&#x27;Team B&#x27;, members=[])</code></pre></div>
+<p><code>default_factory=list</code> means: "every time an instance is created, call <code>list()</code> to get a brand-new empty list as the default". This way, each instance has its own list, and they don't interfere with each other.</p>
+<p><code>default_factory</code> can take any <strong>callable with no arguments</strong>. For example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass, field
+
+
+@dataclass
+class Counter:
+    name: str
+    counts: dict = field(default_factory=dict)
+    tags: set = field(default_factory=set)
+    history: list = field(default_factory=lambda: [&#x27;First record&#x27;])
+
+
+c = Counter(&#x27;Click counter&#x27;)
+print(c)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Counter(name=&#x27;Click counter&#x27;, counts={}, tags=set(), history=[&#x27;First record&#x27;])</code></pre></div>
+<p>Look at the last one, <code>history</code> – <code>default_factory=lambda: ['First record']</code>. Returning a list with a starting value each time is also a common use.</p>
+<p><code>field()</code> has a few other common arguments. Let's cover them all at once:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass, field
+
+
+@dataclass
+class Product:
+    name: str
+    price: float
+    discount: float = field(default=0.0)             # Same as = 0.0, but more explicit
+    tags: list = field(default_factory=list)         # Mutable default
+    internal_id: str = field(repr=False, default=&#x27;&#x27;) # Not shown in repr
+    cache: dict = field(default_factory=dict, compare=False)  # Not used in == comparisons
+
+
+p1 = Product(&#x27;Phone&#x27;, 2999.0, internal_id=&#x27;SECRET-1&#x27;, cache={&#x27;foo&#x27;: &#x27;bar&#x27;})
+p2 = Product(&#x27;Phone&#x27;, 2999.0, internal_id=&#x27;SECRET-2&#x27;, cache={&#x27;baz&#x27;: &#x27;qux&#x27;})
+print(p1)
+print(p1 == p2)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Product(name=&#x27;Phone&#x27;, price=2999.0, discount=0.0, tags=[], cache={&#x27;foo&#x27;: &#x27;bar&#x27;})
+False</code></pre></div>
+<p>Let's look at the two most useful ones:</p>
+<ul>
+<li><code>repr=False</code>: this field won't appear in the <code>repr</code>. Good for sensitive information (passwords, tokens), or internal state you don't want cluttering your logs</li>
+<li><code>compare=False</code>: this field isn't used by <code>__eq__</code>. Good for helper fields that don't affect the object's business identity, like caches or temporary counters</li>
+</ul>
+<p>Why is <code>p1 == p2</code> <code>False</code>? Because <code>repr=False</code> only <strong>hides</strong> the field when printing – it doesn't affect equality. The two <code>internal_id</code>s are different, so the objects aren't equal. Only <code>compare=False</code> stops a field being compared – that's why the different <code>cache</code>s don't matter. To get <code>True</code>, you'd also need to give <code>internal_id</code> <code>compare=False</code>.</p></article></section><section id="exercise-02-default-factory" class="ex-card item" data-kind="exercise" data-exercise="02-default-factory" aria-label="Exercise 2: Mutable defaults: default_factory">
+<script type="application/json" class="ex-data">{"id": "02-default-factory", "lesson": "python20", "starter": "# Import dataclass and field from dataclasses\n# Define the Team class: name is a str; members is a list with the default field(default_factory=list)\n# Create t1 and t2 as above, add 'Xiao Ming' to t1.members, then print t1 and t2\n\n", "solution": "from dataclasses import dataclass, field\n\n@dataclass\nclass Team:\n    name: str\n    members: list = field(default_factory=list)\n\nt1 = Team('Team A')\nt2 = Team('Team B')\nt1.members.append('Xiao Ming')\nprint(t1)\nprint(t2)", "grading": {"requiredAst": ["ClassDef:Team"], "stdoutEquals": "Team(name='Team A', members=['Xiao Ming'])\nTeam(name='Team B', members=[])\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 2 / 4</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Mutable defaults: default_factory</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Use <code>@dataclass</code> to define a <code>Team</code> class:</p>
+<ul>
+<li>A field <code>name: str</code></li>
+<li>A field <code>members: list</code>, whose default is an empty list given by <code>field(default_factory=list)</code></li>
+</ul>
+<p>Then:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">t1 = Team(&#x27;Team A&#x27;)
+t2 = Team(&#x27;Team B&#x27;)
+t1.members.append(&#x27;Xiao Ming&#x27;)
+print(t1)
+print(t2)</code></pre></div>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Team(name=&#x27;Team A&#x27;, members=[&#x27;Xiao Ming&#x27;])
+Team(name=&#x27;Team B&#x27;, members=[])</code></pre></div>
+<p>(This checks that the two instances each have their own <code>members</code> list and don't share one.)</p></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>Note: you need from dataclasses import dataclass, field</p></li></template><template class="hint-tpl"><li><p>Use field(default_factory=list), not just = []</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass, field
+
+@dataclass
+class Team:
+    name: str
+    members: list = field(default_factory=list)
+
+t1 = Team(&#x27;Team A&#x27;)
+t2 = Team(&#x27;Team B&#x27;)
+t1.members.append(&#x27;Xiao Ming&#x27;)
+print(t1)
+print(t2)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># Import dataclass and field from dataclasses
+# Define the Team class: name is a str; members is a list with the default field(default_factory=list)
+# Create t1 and t2 as above, add &#x27;Xiao Ming&#x27; to t1.members, then print t1 and t2
+
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-5" class="step-card item" data-kind="step" aria-label="Teaching step 6">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 06 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Immutable dataclasses – <code>frozen=True</code></h3>
+<p>By default, dataclass instances are <strong>mutable</strong> – you can reassign their fields any time:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass
+
+
+@dataclass
+class Point:
+    x: int
+    y: int
+
+
+p = Point(1, 2)
+p.x = 100
+print(p)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Point(x=100, y=2)</code></pre></div>
+<p>But sometimes you want an object to never change after it's created – things that should be read-only by nature, like "a coordinate", "an enum value" or "a config setting". That's when you use <code>frozen=True</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass
+
+
+@dataclass(frozen=True)
+class Point:
+    x: int
+    y: int
+
+
+p = Point(1, 2)
+print(p)
+
+try:
+    p.x = 100
+except Exception as e:
+    print(type(e).__name__, &#x27;:&#x27;, e)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Point(x=1, y=2)
+FrozenInstanceError : cannot assign to field &#x27;x&#x27;</code></pre></div>
+<p>Assigning raises a <code>FrozenInstanceError</code>. This protection happens at <strong>runtime</strong> – so even if a static checker doesn't stop you, it will blow up when it runs.</p>
+<p><code>frozen=True</code> has another important side effect: <strong>Python also creates <code>__hash__</code> for you</strong>, so the object can go into a <code>set</code> and be used as a <code>dict</code> key.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass
+
+
+@dataclass(frozen=True)
+class Point:
+    x: int
+    y: int
+
+
+p1 = Point(1, 2)
+p2 = Point(1, 2)
+p3 = Point(3, 4)
+
+s = {p1, p2, p3}
+print(len(s))
+
+mapping = {Point(0, 0): &#x27;origin&#x27;, Point(1, 0): &#x27;one step right&#x27;}
+print(mapping[Point(0, 0)])</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">2
+origin</code></pre></div>
+<p>See? <code>p1</code> and <code>p2</code> have the same field values, so the set treats them as the same element – <code>len(s)</code> is 2, not 3. <code>Point(0, 0)</code> can also be used as a dict key, and a newly created Point with the same fields finds it exactly. That's "frozen + the hash that dataclass creates" working together.</p>
+<p>Can you hash it without frozen? By default: you can use <code>eq=True, frozen=False</code> but you'd have to explicitly add <code>unsafe_hash=True</code> – and I <strong>strongly advise against it</strong>. Once a mutable object is hashed into a set, if you change its fields, it gets "lost" in the set – the hash is still the old one, but the fields have changed, so you can never find it again. Don't step in that trap. If you need hashing, use frozen.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass
+
+
+@dataclass(frozen=True)
+class CacheKey:
+    user_id: int
+    api_path: str
+
+
+# A simple pretend cache
+cache = {}
+key = CacheKey(1001, &#x27;/api/profile&#x27;)
+cache[key] = {&#x27;name&#x27;: &#x27;Two Drops&#x27;, &#x27;avatar&#x27;: &#x27;xxx.png&#x27;}
+
+# Later, any key with the same fields will hit the cache
+print(cache[CacheKey(1001, &#x27;/api/profile&#x27;)])</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">{&#x27;name&#x27;: &#x27;Two Drops&#x27;, &#x27;avatar&#x27;: &#x27;xxx.png&#x27;}</code></pre></div>
+<p>This is a very typical use of frozen dataclasses – a <strong>compound key</strong>.</p></article></section><section id="exercise-03-frozen-hash" class="ex-card item" data-kind="exercise" data-exercise="03-frozen-hash" aria-label="Exercise 3: frozen=True: unchangeable + hashable">
+<script type="application/json" class="ex-data">{"id": "03-frozen-hash", "lesson": "python20", "starter": "# Use @dataclass(frozen=True) to define the Point class with two int fields, x and y\n# Create p1, p2 and p3 as above and put them in a set\n# Print the length of the set\n\n", "solution": "from dataclasses import dataclass\n\n@dataclass(frozen=True)\nclass Point:\n    x: int\n    y: int\n\np1 = Point(1, 2)\np2 = Point(1, 2)\np3 = Point(3, 4)\ns = {p1, p2, p3}\nprint(len(s))", "grading": {"requiredAst": ["ClassDef:Point"], "stdoutEquals": "2\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 3 / 4</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">frozen=True: unchangeable + hashable</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Use <code>@dataclass(frozen=True)</code> to define a <code>Point</code> class (fields <code>x: int</code> and <code>y: int</code>), so that it can't be changed and can go into a <code>set</code>.</p>
+<p>Then:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">p1 = Point(1, 2)
+p2 = Point(1, 2)
+p3 = Point(3, 4)
+s = {p1, p2, p3}
+print(len(s))</code></pre></div>
+<p>Because <code>p1</code> and <code>p2</code> have the same field values, the set treats them as the same item, so the output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">2</code></pre></div>
+<p>This is a side effect of <code>frozen=True</code> – it generates <code>__hash__</code> for you.</p></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>Write the decorator as @dataclass(frozen=True)</p></li></template><template class="hint-tpl"><li><p>frozen=True generates <strong>hash</strong> automatically, so the objects can go into a set</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass
+
+@dataclass(frozen=True)
+class Point:
+    x: int
+    y: int
+
+p1 = Point(1, 2)
+p2 = Point(1, 2)
+p3 = Point(3, 4)
+s = {p1, p2, p3}
+print(len(s))</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># Use @dataclass(frozen=True) to define the Point class with two int fields, x and y
+# Create p1, p2 and p3 as above and put them in a set
+# Print the length of the set
+
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="exercise-04-eq" class="ex-card item" data-kind="exercise" data-exercise="04-eq" aria-label="Exercise 4: Automatic __eq__: comparing by field values">
+<script type="application/json" class="ex-data">{"id": "04-eq", "lesson": "python20", "starter": "# Use @dataclass to define the Book class: title and author are str, pages is int\n# Create the three books b1, b2 and b3 as above\n# Print the results of b1 == b2, b1 == b3 and b1 is b2\n\n", "solution": "from dataclasses import dataclass\n\n@dataclass\nclass Book:\n    title: str\n    author: str\n    pages: int\n\nb1 = Book('Python Basics', 'Xiao Ming', 300)\nb2 = Book('Python Basics', 'Xiao Ming', 300)\nb3 = Book('Python Basics', 'Xiao Ming', 500)\nprint(b1 == b2)\nprint(b1 == b3)\nprint(b1 is b2)", "grading": {"requiredAst": ["ClassDef:Book"], "stdoutEquals": "True\nFalse\nFalse\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 4 / 4</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Automatic __eq__: comparing by field values</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Use <code>@dataclass</code> to define a <code>Book</code> class:</p>
+<ul>
+<li><code>title: str</code></li>
+<li><code>author: str</code></li>
+<li><code>pages: int</code></li>
+</ul>
+<p>Then create three books:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">b1 = Book(&#x27;Python Basics&#x27;, &#x27;Xiao Ming&#x27;, 300)
+b2 = Book(&#x27;Python Basics&#x27;, &#x27;Xiao Ming&#x27;, 300)
+b3 = Book(&#x27;Python Basics&#x27;, &#x27;Xiao Ming&#x27;, 500)
+print(b1 == b2)
+print(b1 == b3)
+print(b1 is b2)</code></pre></div>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">True
+False
+False</code></pre></div>
+<p>Explanation: <code>==</code> compares field values (<code>b1</code> and <code>b2</code> are exactly the same, so it's <code>True</code>), while <code>is</code> compares identity (<code>b1</code> and <code>b2</code> are two different objects, so it's <code>False</code>).</p></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>@dataclass generates <strong>eq</strong> by default, comparing field by field</p></li></template><template class="hint-tpl"><li><p>== compares field values, is compares identity – two different things</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass
+
+@dataclass
+class Book:
+    title: str
+    author: str
+    pages: int
+
+b1 = Book(&#x27;Python Basics&#x27;, &#x27;Xiao Ming&#x27;, 300)
+b2 = Book(&#x27;Python Basics&#x27;, &#x27;Xiao Ming&#x27;, 300)
+b3 = Book(&#x27;Python Basics&#x27;, &#x27;Xiao Ming&#x27;, 500)
+print(b1 == b2)
+print(b1 == b3)
+print(b1 is b2)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># Use @dataclass to define the Book class: title and author are str, pages is int
+# Create the three books b1, b2 and b3 as above
+# Print the results of b1 == b2, b1 == b3 and b1 is b2
+
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-6" class="step-card item" data-kind="step" aria-label="Teaching step 7">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 07 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3><code>__post_init__</code> – work something out after construction</h3>
+<p>Have you needed something like this? I have an <code>Order</code> class with fields <code>unit_price</code> and <code>qty</code>. As soon as the object is built, I want it to automatically work out a <code>total</code> field (total = unit price × quantity). <code>total</code> shouldn't be passed in by the user – it's <strong>derived</strong> from the other fields.</p>
+<p><code>dataclass</code> gives us a hook for this: <code>__post_init__</code>. It's called automatically right after <code>__init__</code> finishes – perfect for derived calculations.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass, field
+
+
+@dataclass
+class Order:
+    unit_price: float
+    qty: int
+    total: float = field(init=False)   # init=False means it&#x27;s not in the __init__ parameter list
+
+    def __post_init__(self):
+        self.total = self.unit_price * self.qty
+
+
+o = Order(unit_price=12.5, qty=8)
+print(o)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Order(unit_price=12.5, qty=8, total=100.0)</code></pre></div>
+<p>There are two details here to focus on:</p>
+<ol>
+<li><code>total: float = field(init=False)</code> – <code>init=False</code> keeps <code>total</code> out of the <code>__init__</code> parameters. When building an <code>Order</code>, the user doesn't need to, and shouldn't, pass <code>total</code></li>
+<li><code>__post_init__</code> is called automatically by <code>dataclass</code>. Its name must be exactly this – even the number of underscores must be right</li>
+</ol>
+<p>What if I want to <strong>validate</strong> fields during construction? That's also a job for <code>__post_init__</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass
+
+
+@dataclass
+class Employee:
+    name: str
+    salary: int
+
+    def __post_init__(self):
+        if self.salary &lt; 0:
+            raise ValueError(f&#x27;Salary cannot be negative, got: {self.salary}&#x27;)
+        if not self.name:
+            raise ValueError(&#x27;Name cannot be empty&#x27;)
+
+
+try:
+    bad = Employee(&#x27;Two Drops&#x27;, -100)
+except ValueError as e:
+    print(&#x27;Blew up:&#x27;, e)
+
+ok = Employee(&#x27;Two Drops&#x27;, 12000)
+print(ok)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Blew up: Salary cannot be negative, got: -100
+Employee(name=&#x27;Two Drops&#x27;, salary=12000)</code></pre></div>
+<p>But note: writing validation in <code>__post_init__</code> is only a stop-gap. Its real job is more about "derived calculations", and lots of validation logic in it starts to look awkward. When we get to Pydantic later, you'll see a tool that's truly built for validation.</p></article></section><section id="step-7" class="step-card item" data-kind="step" aria-label="Teaching step 8">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 08 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3><code>kw_only=True</code> – force keyword arguments (Python 3.10+)</h3>
+<p>First, look at this code:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass
+
+
+@dataclass
+class Employee:
+    name: str
+    dept: str
+    salary: int
+
+
+e = Employee(&#x27;Two Drops&#x27;, &#x27;Coding Dept&#x27;, 12000)</code></pre></div>
+<p>This way of calling is called <strong>passing by position</strong>. The three values go in, in field order, and they match up perfectly.</p>
+<p>But once there are lots of fields, problems start:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">e = Employee(&#x27;Two Drops&#x27;, &#x27;Coding Dept&#x27;, 12000)
+# A month later, a field is added and the order changes:
+# Employee(name, salary, dept, hire_date)
+# The old code Employee(&#x27;Two Drops&#x27;, &#x27;Coding Dept&#x27;, 12000) still runs, but the meaning is completely wrong</code></pre></div>
+<p>When the field order changes, all old code that passes by position silently passes the <strong>wrong</strong> values. Bugs like this – "the call looks right but everything's shifted" – are extremely hard to track down.</p>
+<p><code>kw_only=True</code> (Python 3.10+) cures this. Add it, and every field <strong>must</strong> be passed by keyword:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass
+
+
+@dataclass(kw_only=True)
+class Employee:
+    name: str
+    dept: str
+    salary: int
+
+
+# You must write name= dept= salary=
+e = Employee(name=&#x27;Two Drops&#x27;, dept=&#x27;Coding Dept&#x27;, salary=12000)
+print(e)
+
+# Try to be lazy and pass by position? Error straight away
+try:
+    bad = Employee(&#x27;Two Drops&#x27;, &#x27;Coding Dept&#x27;, 12000)
+except TypeError as err:
+    print(err)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Employee(name=&#x27;Two Drops&#x27;, dept=&#x27;Coding Dept&#x27;, salary=12000)
+Employee.__init__() takes 1 positional argument but 4 were given</code></pre></div>
+<p>The calling code instantly becomes much easier to read – when you see <code>name='Brother Shui'</code>, you know exactly which field each value belongs to.</p>
+<p>You can also put <code>kw_only</code> on a single field:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass, field
+
+
+@dataclass
+class Order:
+    unit_price: float
+    qty: int
+    coupon: str = field(default=&#x27;&#x27;, kw_only=True)
+
+
+o = Order(12.5, 3, coupon=&#x27;VIP10&#x27;)
+print(o)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Order(unit_price=12.5, qty=3, coupon=&#x27;VIP10&#x27;)</code></pre></div>
+<p><code>unit_price</code> and <code>qty</code> can still be passed by position, but <code>coupon</code> must be a keyword. This field-level <code>kw_only</code> is really handy for "optional extras that are easy to mix up when there are many fields".</p>
+<p>Note: the syntax above only exists in Python 3.10+. Before that, a dataclass could only allow positional arguments for the whole class or not at all. On Python 3.9, don't bother with this.</p></article></section><section id="step-8" class="step-card item" data-kind="step" aria-label="Teaching step 9">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 09 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3><code>slots=True</code> – make dataclasses use less memory (Python 3.10+)</h3>
+<p>Have you ever wondered how a normal Python object stores its attributes? Answer: in a dictionary called <code>__dict__</code>. Every object has its own <code>__dict__</code>, holding a mapping of field names to values.</p>
+<p>Dictionaries are flexible, but they have two costs:</p>
+<ul>
+<li><strong>Memory</strong> – an empty dictionary alone takes up several hundred bytes</li>
+<li><strong>Speed</strong> – looking things up in a dictionary is a tiny bit slower than direct indexing</li>
+</ul>
+<p>If your program creates millions of dataclass instances (for data processing, game development, financial calculations and so on), these two costs grow into <strong>real problems</strong>.</p>
+<p><code>slots=True</code> (3.10+) is the cure:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass
+
+
+@dataclass(slots=True)
+class Point:
+    x: float
+    y: float
+
+
+p = Point(1.0, 2.0)
+print(p)
+
+# Try to assign a field that doesn&#x27;t exist – it blows up
+try:
+    p.z = 3.0
+except AttributeError as e:
+    print(&#x27;Blew up:&#x27;, e)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Point(x=1.0, y=2.0)
+Blew up: &#x27;Point&#x27; object has no attribute &#x27;z&#x27;</code></pre></div>
+<p><code>slots=True</code> does two things:</p>
+<ol>
+<li>It uses <code>__slots__ = ('x', 'y')</code> to tell Python that instances of this class may only have the attributes <code>x</code> and <code>y</code> – no <code>__dict__</code></li>
+<li>Instances no longer store data in a dictionary, so memory use drops a lot, and attribute access gets slightly faster</li>
+</ol>
+<p>What's the cost? Flexibility. You can't add attributes to instances "on the fly" any more. But honestly, dataclasses are meant for "fixed fields" anyway, so this cost is totally acceptable.</p>
+<p>Remember this: <strong>dataclass + frozen=True + slots=True</strong> is the golden trio for value types.</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass
+
+
+@dataclass(frozen=True, slots=True)
+class Coord:
+    x: float
+    y: float
+    z: float
+
+
+c = Coord(1.0, 2.0, 3.0)
+print(c)
+print(hash(c))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Coord(x=1.0, y=2.0, z=3.0)
+1234567890   # The real value will be different</code></pre></div>
+<p>Unchangeable, hashable, memory-saving and fast to access. This is the standard way to write <strong>value objects</strong> in modern Python.</p></article></section><section id="step-9" class="step-card item" data-kind="step" aria-label="Teaching step 10">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 10 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Dataclasses and inheritance</h3>
+<p>Dataclasses can be inherited too. But there's a long-standing problem to watch out for: <strong>a field without a default can't come after a field with a default</strong> – and this rule is especially easy to trip over with inheritance.</p>
+<p>First, an example that works:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass
+
+
+@dataclass
+class Animal:
+    name: str
+    legs: int = 4
+
+
+@dataclass
+class Dog(Animal):
+    breed: str = &#x27;mixed breed&#x27;
+
+
+d = Dog(&#x27;Goldie&#x27;, 4, &#x27;Shiba Inu&#x27;)
+print(d)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Dog(name=&#x27;Goldie&#x27;, legs=4, breed=&#x27;Shiba Inu&#x27;)</code></pre></div>
+<p>The child class automatically "joins on" the parent's fields. <code>Dog.__init__</code>'s parameters are <code>name, legs, breed</code> – parent fields first, child fields after.</p>
+<p>So when does it blow up? Look at this:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass
+
+
+@dataclass
+class Animal:
+    name: str
+    legs: int = 4   # Has a default
+
+
+@dataclass
+class Dog(Animal):
+    breed: str       # No default</code></pre></div>
+<p>Error:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">TypeError: non-default argument &#x27;breed&#x27; follows default argument</code></pre></div>
+<p>Think about why. The parent's <code>legs</code> already has a default, and the child's <code>breed</code> has none. Joined together, you get <code>name, legs=4, breed</code> – which breaks the rule that "a field without a default can't come after a field with a default".</p>
+<blockquote>
+<p>Think of it in the order shown: for normal positional arguments, a field with no default can't come after a field with a default, so putting <code>breed</code> after <code>legs=4</code> gives an error. Keyword-only fields follow different rules – and the <code>kw_only=True</code> fix below uses exactly that difference.</p>
+</blockquote>
+<p>How do you fix it? Choose one of three ways:</p>
+<ol>
+<li>Give the child's field a default too: <code>breed: str = ''</code></li>
+<li>Remove the default from the parent's field (but you usually can't do this – it breaks existing calls)</li>
+<li><strong>Use <code>kw_only=True</code></strong> – the most elegant:</li>
+</ol>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass
+
+
+@dataclass(kw_only=True)
+class Animal:
+    name: str
+    legs: int = 4
+
+
+@dataclass(kw_only=True)
+class Dog(Animal):
+    breed: str
+
+
+d = Dog(name=&#x27;Goldie&#x27;, breed=&#x27;Shiba Inu&#x27;)
+print(d)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Dog(name=&#x27;Goldie&#x27;, legs=4, breed=&#x27;Shiba Inu&#x27;)</code></pre></div>
+<p><code>kw_only=True</code> makes every field keyword-only, so the "positional order" limit disappears – and with it, the annoying "defaults can't come first" problem.</p>
+<p>From now on, when you meet dataclass inheritance, your first thought should be <code>kw_only</code>.</p></article></section><section id="step-10" class="step-card item" data-kind="step" aria-label="Teaching step 11">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 11 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>More than dataclass – NamedTuple and TypedDict</h3>
+<p><code>dataclass</code> is the most common "lightweight data class" tool in Python, but it's not the only one. There are two common siblings: <code>NamedTuple</code> and <code>TypedDict</code>. They do similar jobs but have different purposes. Let's look at them briefly so you know they exist.</p>
+<h4>NamedTuple – a tuple with names</h4>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from typing import NamedTuple
+
+
+class Point(NamedTuple):
+    x: float
+    y: float
+
+
+p = Point(1.0, 2.0)
+print(p)
+print(p.x, p.y)
+print(p[0], p[1])      # You can still index it like a tuple
+print(tuple(p))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Point(x=1.0, y=2.0)
+1.0 2.0
+1.0 2.0
+(1.0, 2.0)</code></pre></div>
+<p>A <code>NamedTuple</code> is really "a tuple with field names". It's naturally immutable (tuples are immutable), has <code>__hash__</code> built in, can be unpacked and indexed. But it isn't as flexible as a dataclass – it doesn't support things like <code>default_factory</code> or <code>__post_init__</code>.</p>
+<p>When to use <code>NamedTuple</code>: when what you want is "an immutable tuple with names", and it'll often be unpacked or indexed. For example: coordinates, RGB colour values, a row of database results.</p>
+<p>When to use <code>dataclass</code>: when you want a <strong>class</strong> – it might have methods, derived calculations, or need to be changeable.</p>
+<h4>TypedDict – a dictionary with type hints</h4>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from typing import TypedDict
+
+
+class UserProfile(TypedDict):
+    name: str
+    age: int
+    email: str
+
+
+u: UserProfile = {&#x27;name&#x27;: &#x27;Two Drops&#x27;, &#x27;age&#x27;: 28, &#x27;email&#x27;: &#x27;liangdianshui@xxx.com&#x27;}
+print(u)
+print(u[&#x27;name&#x27;])</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">{&#x27;name&#x27;: &#x27;Two Drops&#x27;, &#x27;age&#x27;: 28, &#x27;email&#x27;: &#x27;liangdianshui@xxx.com&#x27;}
+Two Drops</code></pre></div>
+<p>Note: the object made by <code>TypedDict</code> <strong>is a dictionary</strong>, not a class instance. <code>u</code> is still a <code>dict</code>. You access it with <code>u['key']</code>, not <code>u.key</code>. Its job is to "tell mypy, at the static type level, which keys this dictionary must have and what type each value is". At runtime it doesn't check anything.</p>
+<p>When to use <code>TypedDict</code>: when you're working with JSON or outside interfaces, already have a dictionary, and just want mypy to check that the keys and types match – without turning the dictionary into a class object.</p></article></section><section id="step-11" class="step-card item" data-kind="step" aria-label="Teaching step 12">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 12 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>The limit of dataclass – it doesn't validate at runtime</h3>
+<p>By now, you probably think dataclass is great. It is. But it has one very important <strong>weakness</strong>: it doesn't validate anything at runtime.</p>
+<p>Look at this code:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass
+
+
+@dataclass
+class Employee:
+    name: str
+    age: int
+    salary: float
+
+
+# I&#x27;m passing the wrong types on purpose
+e = Employee(name=123, age=&#x27;twenty-eight&#x27;, salary=&#x27;eight thousand&#x27;)
+print(e)
+print(type(e.name), type(e.age), type(e.salary))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Employee(name=123, age=&#x27;twenty-eight&#x27;, salary=&#x27;eight thousand&#x27;)
+&lt;class &#x27;int&#x27;&gt; &lt;class &#x27;str&#x27;&gt; &lt;class &#x27;str&#x27;&gt;</code></pre></div>
+<p>See? I passed the number <code>123</code> for <code>name</code>, the string <code>'twenty-eight'</code> for <code>age</code> and the string <code>'eight thousand'</code> for <code>salary</code> – and the dataclass quietly accepted all of them. It doesn't look at your type hints at all. Hints like <code>name: str</code> and <code>age: int</code> are only for static checkers (mypy, pyright). At runtime, dataclass doesn't enforce them at all.</p>
+<p>For "internal code", this isn't a big deal, because you usually control the types yourself. But in situations like these, it's a big problem:</p>
+<ul>
+<li>An HTTP endpoint receives JSON from a client</li>
+<li>A YAML/TOML config file is parsed into a dictionary</li>
+<li>A message from a message queue is turned back into data</li>
+</ul>
+<p>All this data <strong>comes from outside</strong>, and you can't be sure its field types are right. Accepting it with a dataclass is like pouring dirty water straight into your bowl. When you later try <code>e.salary * 12</code> to work out a yearly salary, and find <code>salary</code> is the string <code>'eight thousand'</code>, tracking down which step caused it is so costly you'll want to smash your keyboard.</p>
+<p>So is there a tool that <strong>declares fields as elegantly as dataclass, AND checks types/rules at runtime</strong>?</p>
+<p>Yes. It's Pydantic.</p></article></section><section id="step-12" class="step-card item" data-kind="step" aria-label="Teaching step 13">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 13 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Enter Pydantic – data models with runtime validation</h3>
+<p>Pydantic is the most popular <strong>data validation</strong> library in the Python world. It's at the heart of FastAPI, LangChain's interfaces, and the config classes of all sorts of SDKs. Its core idea is simple: <strong>when data crosses into your program, strictly check it against the declared schema, converting it when needed. After that, the code inside your program can use it with confidence.</strong></p>
+<p>First, note one thing: Pydantic is a <strong>third-party library</strong>, not part of the standard library, so you need to install it:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">pip install pydantic</code></pre></div>
+<p>All the Pydantic code blocks below are marked with a skip-ci comment (so the example-checking script skips them). Install it yourself before running them. The current main version is Pydantic v2, and this article uses v2.</p>
+<h4>Your first BaseModel</h4>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pydantic import BaseModel
+
+
+class Employee(BaseModel):
+    name: str
+    age: int
+    salary: float
+
+
+e = Employee(name=&#x27;Two Drops&#x27;, age=28, salary=12000.0)
+print(e)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">name=&#x27;Two Drops&#x27; age=28 salary=12000.0</code></pre></div>
+<p>Looks almost the same as dataclass, right? That's right – inherit from <code>BaseModel</code>, write fields with type hints, and Pydantic does everything else. It automatically creates <code>__init__</code>, <code>__repr__</code> and <code>__eq__</code>, and it also does something dataclass doesn't – <strong>type validation and conversion</strong>.</p>
+<p>Look at this:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pydantic import BaseModel
+
+
+class Employee(BaseModel):
+    name: str
+    age: int
+    salary: float
+
+
+# Note: I passed age as the string &#x27;28&#x27;, and salary as the string &#x27;12000.5&#x27;
+e = Employee(name=&#x27;Two Drops&#x27;, age=&#x27;28&#x27;, salary=&#x27;12000.5&#x27;)
+print(e)
+print(type(e.age), type(e.salary))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">name=&#x27;Two Drops&#x27; age=28 salary=12000.5
+&lt;class &#x27;int&#x27;&gt; &lt;class &#x27;float&#x27;&gt;</code></pre></div>
+<p>See? I passed <code>age='28'</code> as a string, but Pydantic turned it into an <code>int</code>. <code>salary='12000.5'</code> became a <code>float</code> too. This is Pydantic's <strong>smart conversion</strong> – if a type can sensibly be converted, it converts it for you.</p>
+<p>What if what you pass really can't be converted?</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pydantic import BaseModel, ValidationError
+
+
+class Employee(BaseModel):
+    name: str
+    age: int
+    salary: float
+
+
+try:
+    e = Employee(name=&#x27;Two Drops&#x27;, age=&#x27;abc&#x27;, salary=&#x27;not a number&#x27;)
+except ValidationError as err:
+    print(err)</code></pre></div>
+<p>Output (roughly):</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">2 validation errors for Employee
+age
+  Input should be a valid integer, unable to parse string as an integer [type=int_parsing, input_value=&#x27;abc&#x27;, input_type=str]
+salary
+  Input should be a valid number, unable to parse string as a number [type=float_parsing, input_value=&#x27;not a number&#x27;, input_type=str]</code></pre></div>
+<p>Beautiful, right? It doesn't just raise a <code>ValidationError</code> – it tells you <strong>which fields</strong>, <strong>why they're wrong</strong> and <strong>what it received</strong>. Dataclass can't do any of this.</p>
+<h4>Building a model from a dict/JSON – <code>model_validate</code> and <code>model_validate_json</code></h4>
+<p>This is Pydantic's killer feature. Imagine you've written an HTTP endpoint. The front end POSTs some JSON, and you need to:</p>
+<ol>
+<li>Parse the JSON into a dictionary</li>
+<li>Check the field types / required fields inside it</li>
+<li>Turn it into your internal data type</li>
+</ol>
+<p>With dataclass, you'd have to write lots of validation code yourself. Pydantic does it in one line:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pydantic import BaseModel
+
+
+class Employee(BaseModel):
+    name: str
+    age: int
+    salary: float
+
+
+# Parse from a JSON string
+json_str = &#x27;{&quot;name&quot;: &quot;Two Drops&quot;, &quot;age&quot;: 28, &quot;salary&quot;: 12000}&#x27;
+e = Employee.model_validate_json(json_str)
+print(e)
+
+# Parse from a dictionary
+data = {&#x27;name&#x27;: &#x27;Xiao Ming&#x27;, &#x27;age&#x27;: 30, &#x27;salary&#x27;: 15000}
+e2 = Employee.model_validate(data)
+print(e2)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">name=&#x27;Two Drops&#x27; age=28 salary=12000.0
+name=&#x27;Xiao Ming&#x27; age=30 salary=15000.0</code></pre></div>
+<p><code>model_validate(d)</code> builds a model from a dictionary, and <code>model_validate_json(s)</code> builds one from a JSON string. Both go through the full validation process. Missing fields, wrong types or broken rules all raise a <code>ValidationError</code>.</p>
+<p>The other way round, turning a model back into a dictionary/JSON is easy too:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pydantic import BaseModel
+
+
+class Employee(BaseModel):
+    name: str
+    age: int
+    salary: float
+
+
+e = Employee(name=&#x27;Two Drops&#x27;, age=28, salary=12000.0)
+print(e.model_dump())          # To a dictionary
+print(e.model_dump_json())     # To a JSON string</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">{&#x27;name&#x27;: &#x27;Two Drops&#x27;, &#x27;age&#x27;: 28, &#x27;salary&#x27;: 12000.0}
+{&quot;name&quot;:&quot;Two Drops&quot;,&quot;age&quot;:28,&quot;salary&quot;:12000.0}</code></pre></div>
+<p>This "dictionary ↔ model ↔ JSON" triangle is the best part of Pydantic. Handling outside data becomes almost effortless.</p>
+<h4>Field rules – the power of <code>Field(...)</code></h4>
+<p>Type checking is just the start. The really powerful part is <strong>rule (constraint) checking</strong>. For example, you'll often need:</p>
+<ul>
+<li>A number within a range: <code>0 &lt;= age &lt;= 120</code>, <code>salary &gt;= 0</code></li>
+<li>A string with a length limit: <code>1 &lt;= len(name) &lt;= 50</code></li>
+<li>A string that matches a regular expression</li>
+<li>A valid email, URL or UUID</li>
+</ul>
+<p>Pydantic uses <code>Field(...)</code> to express these rules:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pydantic import BaseModel, Field, ValidationError
+
+
+class Employee(BaseModel):
+    name: str = Field(min_length=1, max_length=50)
+    age: int = Field(ge=18, le=65)              # ge = greater than or equal, le = less than or equal
+    salary: float = Field(gt=0)                  # gt = greater than
+    rating: int = Field(ge=0, le=100, default=60)
+
+
+# A normal one
+e = Employee(name=&#x27;Two Drops&#x27;, age=28, salary=12000.0)
+print(e)
+
+# Age out of range
+try:
+    bad = Employee(name=&#x27;Xiao Ming&#x27;, age=10, salary=5000.0)
+except ValidationError as err:
+    print(err)</code></pre></div>
+<p>Output (roughly):</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">name=&#x27;Two Drops&#x27; age=28 salary=12000.0 rating=60
+1 validation error for Employee
+age
+  Input should be greater than or equal to 18 [type=greater_than_equal, input_value=10, input_type=int]</code></pre></div>
+<p><code>Field(...)</code> supports quite a lot of rules. The ones you'll use most are:</p>
+<ul>
+<li>Numbers: <code>gt</code>, <code>ge</code>, <code>lt</code>, <code>le</code>, <code>multiple_of</code></li>
+<li>Strings: <code>min_length</code>, <code>max_length</code>, <code>pattern</code> (regex)</li>
+<li>Lists: <code>min_length</code>, <code>max_length</code></li>
+<li>Defaults: <code>default=...</code>, <code>default_factory=...</code></li>
+<li>Aliases: <code>alias='another_name'</code> (for when the key in outside JSON is different from your internal field name)</li>
+</ul>
+<p><code>alias</code> is used a lot. Here's an example:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pydantic import BaseModel, Field
+
+
+class Employee(BaseModel):
+    name: str
+    employee_id: int = Field(alias=&#x27;empId&#x27;)   # Outside JSON uses empId; inside we use employee_id
+
+
+e = Employee.model_validate({&#x27;name&#x27;: &#x27;Two Drops&#x27;, &#x27;empId&#x27;: 1001})
+print(e)
+print(e.employee_id)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">name=&#x27;Two Drops&#x27; employee_id=1001
+1001</code></pre></div>
+<p>The outside JSON uses camelCase <code>empId</code>, and the inside Python uses snake_case <code>employee_id</code>. Each side stays natural, and <code>alias</code> connects them.</p>
+<h4>Complex types like email and URL – <code>pydantic.types</code></h4>
+<p>Rules on numbers and strings aren't always enough. Pydantic also has some built-in <strong>meaningful types</strong>:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pydantic import BaseModel, EmailStr, HttpUrl, ValidationError
+
+
+class User(BaseModel):
+    name: str
+    email: EmailStr
+    homepage: HttpUrl
+
+
+u = User(name=&#x27;Two Drops&#x27;, email=&#x27;liangdianshui@example.com&#x27;, homepage=&#x27;https://example.com&#x27;)
+print(u)
+
+try:
+    bad = User(name=&#x27;X&#x27;, email=&#x27;not-an-email&#x27;, homepage=&#x27;not-a-url&#x27;)
+except ValidationError as err:
+    print(err)</code></pre></div>
+<p>Output (roughly):</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">name=&#x27;Two Drops&#x27; email=&#x27;liangdianshui@example.com&#x27; homepage=Url(&#x27;https://example.com/&#x27;)
+2 validation errors for User
+email
+  value is not a valid email address: ...
+homepage
+  Input should be a valid URL, ...</code></pre></div>
+<p><code>EmailStr</code> needs an extra install of <code>email-validator</code>: <code>pip install pydantic[email]</code>. <code>HttpUrl</code> is built in and works straight away.</p>
+<p>Dataclass can't give you meaningful types like these directly – you'd have to use <code>str</code> and write your own regex checks. Pydantic packs these common cases into the library, which saves a lot of effort.</p>
+<h4>A quick look at the Pydantic ecosystem</h4>
+<p>Pydantic isn't just a validation library. A whole ecosystem has grown around "data modelling":</p>
+<ul>
+<li><strong><code>pydantic-settings</code></strong>: made for <strong>config classes</strong>. It loads settings from environment variables, <code>.env</code> files and command-line arguments, and validates them automatically. FastAPI apps usually use it for things like <code>DATABASE_URL</code> and <code>SECRET_KEY</code>. Install: <code>pip install pydantic-settings</code></li>
+<li><strong><code>mypy</code> + the Pydantic plugin</strong>: lets <code>mypy</code> correctly work out the field types of Pydantic models – brilliant together with IDE hints</li>
+<li><strong>FastAPI</strong>: Pydantic is at its heart. Request bodies are declared with <code>BaseModel</code>, validated automatically, and used to generate OpenAPI docs automatically</li>
+<li><strong>LangChain, the Anthropic SDK, the OpenAI SDK</strong>: they're full of Pydantic models inside – it has become the de facto standard for data modelling in Python</li>
+</ul>
+<p>You don't need to learn all of these at once. Just know they exist, and follow the trail when you meet a real need.</p></article></section><section id="step-13" class="step-card item" data-kind="step" aria-label="Teaching step 14">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 14 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>dataclass vs Pydantic vs attrs – how to choose</h3>
+<p>This is the part you care about most: "With all these tools, which one should I use?" Here it is in three lines:</p>
+<ul>
+<li><strong><code>dataclass</code></strong>: comes with the standard library, no dependencies, lightweight. Use it for data structures <strong>inside your program</strong> that you write and use yourself. Fast, but no runtime validation</li>
+<li><strong><code>Pydantic</code></strong>: third-party, needs installing. Use it at the <strong>data boundary</strong> – outside JSON, HTTP request bodies, config files and so on. Type checking, rules and smart conversion</li>
+<li><strong><code>attrs</code></strong>: the spiritual ancestor of dataclass. A third-party library that came before dataclass and has more features (like validators and converters). Since dataclass arrived, there are fewer reasons to use attrs, but it's still a good choice when you "need complex validation but don't want Pydantic's runtime cost"</li>
+</ul>
+<p>A more detailed guide:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Recommendation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A "structured result" returned from a function</td>
+<td>dataclass</td>
+</tr>
+<tr>
+<td>Lots of small objects in memory (coordinates, cache keys)</td>
+<td>dataclass + frozen + slots</td>
+</tr>
+<tr>
+<td>Receiving HTTP request bodies / parsing outside JSON</td>
+<td>Pydantic</td>
+</tr>
+<tr>
+<td>App configuration (reading environment variables)</td>
+<td>pydantic-settings</td>
+</tr>
+<tr>
+<td>Writing FastAPI endpoints</td>
+<td>Pydantic (FastAPI requires it)</td>
+</tr>
+<tr>
+<td>You want complex validators but not Pydantic</td>
+<td>attrs</td>
+</tr>
+</tbody>
+</table></div>
+<p>Remember: <strong>dataclass handles the "inside", Pydantic handles the "outside"</strong>. Draw this line clearly, and choosing tools won't get confusing.</p></article></section><section id="step-14" class="step-card item" data-kind="step" aria-label="Teaching step 15">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 15 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Mini project – <code>Order</code> + <code>OrderRequest</code>, a pretend ordering endpoint</h3>
+<p>Enough theory. Let's write code close to a real situation: a pretend "place an order" endpoint.</p>
+<p>Here's the task:</p>
+<ul>
+<li>The client sends JSON with a product ID, quantity, delivery address and user email</li>
+<li>The server checks: quantity must be over 0, the email must be valid, and the address can't be empty</li>
+<li>Once it passes, turn it into an internal <code>Order</code> object, automatically work out the total price, and create an order number</li>
+</ul>
+<p>We'll let Pydantic receive and validate the outside JSON, and let dataclass represent the internal business object. Each does its own job.</p>
+<h4>1. First, define the internal <code>Order</code> (dataclass)</h4>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import uuid
+from dataclasses import dataclass, field
+
+
+@dataclass(frozen=True)
+class Order:
+    order_id: str
+    product_id: int
+    qty: int
+    unit_price: float
+    address: str
+    user_email: str
+    total: float = field(init=False)
+
+    def __post_init__(self):
+        # A frozen class can&#x27;t do self.total = ... directly, so we use object.__setattr__ to get around it
+        object.__setattr__(self, &#x27;total&#x27;, self.qty * self.unit_price)
+
+
+o = Order(
+    order_id=str(uuid.uuid4()),
+    product_id=1001,
+    qty=3,
+    unit_price=12.5,
+    address=&#x27;1 Example Road, Xihu District, Hangzhou&#x27;,
+    user_email=&#x27;liangdianshui@example.com&#x27;,
+)
+print(o)</code></pre></div>
+<p>Output (<code>order_id</code> is different every time):</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Order(order_id=&#x27;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&#x27;, product_id=1001, qty=3, unit_price=12.5, address=&#x27;1 Example Road, Xihu District, Hangzhou&#x27;, user_email=&#x27;liangdianshui@example.com&#x27;, total=37.5)</code></pre></div>
+<p>Look at the line in <code>__post_init__</code>: <code>object.__setattr__(self, 'total', ...)</code>. This is the standard way to write a derived field in a frozen dataclass. Once it's frozen, <code>self.xx = yy</code> is refused – but the derived field must be written once after construction, so we have to get around the <code>__setattr__</code> block.</p>
+<h4>2. Then define the outside <code>OrderRequest</code> (Pydantic)</h4>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pydantic import BaseModel, Field, EmailStr
+
+
+class OrderRequest(BaseModel):
+    product_id: int = Field(gt=0)
+    qty: int = Field(gt=0, le=100)
+    unit_price: float = Field(gt=0)
+    address: str = Field(min_length=1, max_length=200)
+    user_email: EmailStr
+
+
+# Pretend JSON sent from the front end
+payload = &#x27;&#x27;&#x27;
+{
+    &quot;product_id&quot;: 1001,
+    &quot;qty&quot;: 3,
+    &quot;unit_price&quot;: 12.5,
+    &quot;address&quot;: &quot;1 Example Road, Xihu District, Hangzhou&quot;,
+    &quot;user_email&quot;: &quot;liangdianshui@example.com&quot;
+}
+&#x27;&#x27;&#x27;
+
+req = OrderRequest.model_validate_json(payload)
+print(req)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">product_id=1001 qty=3 unit_price=12.5 address=&#x27;1 Example Road, Xihu District, Hangzhou&#x27; user_email=&#x27;liangdianshui@example.com&#x27;</code></pre></div>
+<p>If the front end sends a bad payload (for example, a negative quantity), Pydantic tells you straight away what's wrong:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pydantic import BaseModel, Field, EmailStr, ValidationError
+
+
+class OrderRequest(BaseModel):
+    product_id: int = Field(gt=0)
+    qty: int = Field(gt=0, le=100)
+    unit_price: float = Field(gt=0)
+    address: str = Field(min_length=1, max_length=200)
+    user_email: EmailStr
+
+
+bad_payload = &#x27;&#x27;&#x27;
+{
+    &quot;product_id&quot;: 1001,
+    &quot;qty&quot;: -1,
+    &quot;unit_price&quot;: 12.5,
+    &quot;address&quot;: &quot;&quot;,
+    &quot;user_email&quot;: &quot;not-an-email&quot;
+}
+&#x27;&#x27;&#x27;
+
+try:
+    OrderRequest.model_validate_json(bad_payload)
+except ValidationError as err:
+    print(err)</code></pre></div>
+<p>Output (roughly):</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">3 validation errors for OrderRequest
+qty
+  Input should be greater than 0 ...
+address
+  String should have at least 1 character ...
+user_email
+  value is not a valid email address: ...</code></pre></div>
+<p>Three fields report errors at the same time, and each error's location and reason is listed clearly. This is what Pydantic looks like as it stops dirty data at the boundary.</p>
+<h4>3. Turn the outside request into an internal Order</h4>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import uuid
+from dataclasses import dataclass, field
+from pydantic import BaseModel, Field, EmailStr
+
+
+@dataclass(frozen=True)
+class Order:
+    order_id: str
+    product_id: int
+    qty: int
+    unit_price: float
+    address: str
+    user_email: str
+    total: float = field(init=False)
+
+    def __post_init__(self):
+        object.__setattr__(self, &#x27;total&#x27;, self.qty * self.unit_price)
+
+
+class OrderRequest(BaseModel):
+    product_id: int = Field(gt=0)
+    qty: int = Field(gt=0, le=100)
+    unit_price: float = Field(gt=0)
+    address: str = Field(min_length=1, max_length=200)
+    user_email: EmailStr
+
+
+def create_order(payload_json: str) -&gt; Order:
+    &quot;&quot;&quot;Boundary layer: validate the JSON with Pydantic first; if it passes, turn it into an Order business object&quot;&quot;&quot;
+    req = OrderRequest.model_validate_json(payload_json)
+    return Order(
+        order_id=str(uuid.uuid4()),
+        product_id=req.product_id,
+        qty=req.qty,
+        unit_price=req.unit_price,
+        address=req.address,
+        user_email=req.user_email,
+    )
+
+
+payload = &#x27;&#x27;&#x27;
+{
+    &quot;product_id&quot;: 1001,
+    &quot;qty&quot;: 3,
+    &quot;unit_price&quot;: 12.5,
+    &quot;address&quot;: &quot;1 Example Road, Xihu District, Hangzhou&quot;,
+    &quot;user_email&quot;: &quot;liangdianshui@example.com&quot;
+}
+&#x27;&#x27;&#x27;
+
+order = create_order(payload)
+print(order)
+print(f&#x27;Order total: {order.total}&#x27;)</code></pre></div>
+<p>Look at this structure:</p>
+<ul>
+<li><strong><code>OrderRequest</code></strong> (Pydantic) guards the boundary. All dirty data coming in from outside must get past it first</li>
+<li><strong><code>Order</code></strong> (dataclass, frozen) lives inside. Once built, it can't change, so business code can safely pass it around, put it in a set, or use it as a dict key</li>
+</ul>
+<p>This is exactly how "dataclass handles the inside, Pydantic handles the outside" looks in practice. In real projects – FastAPI endpoints, message queue consumers or command-line tools – you can use this pattern: <strong>validate at the boundary with Pydantic, represent things inside with dataclass</strong>.</p></article></section><section id="step-15" class="step-card item" data-kind="step" aria-label="Teaching step 16">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 16 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>A quick reminder – common dataclass and Pydantic traps</h3>
+<p>We've covered theory and practice. Finally, here are a few traps that are really easy to fall into:</p>
+<h4>Trap 1: dataclass fields must have type hints</h4>
+<p>Remember? <code>name: str</code> is recognised as a field; <code>name = ''</code> is not.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass
+
+
+@dataclass
+class Bad:
+    a = 1     # No hint, so not a field
+    b: int = 2
+
+
+print(Bad())
+# You&#x27;ll see a isn&#x27;t in the repr, because dataclass doesn&#x27;t recognise it at all</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Bad(b=2)</code></pre></div>
+<h4>Trap 2: mutable defaults must use <code>default_factory</code></h4>
+<p>You can't write <code>tags: list = []</code>. You must write <code>tags: list = field(default_factory=list)</code>. Python flat-out rejects the first one.</p>
+<h4>Trap 3: once frozen, you can't write derived fields normally – use <code>object.__setattr__</code></h4>
+<p>As in the <code>Order</code> example above.</p>
+<h4>Trap 4: Pydantic v1 and v2 use different API names</h4>
+<p>Lots of old tutorials use v1. Common equivalents:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>v1</th>
+<th>v2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>obj.dict()</code></td>
+<td><code>obj.model_dump()</code></td>
+</tr>
+<tr>
+<td><code>obj.json()</code></td>
+<td><code>obj.model_dump_json()</code></td>
+</tr>
+<tr>
+<td><code>Model.parse_obj(d)</code></td>
+<td><code>Model.model_validate(d)</code></td>
+</tr>
+<tr>
+<td><code>Model.parse_raw(s)</code></td>
+<td><code>Model.model_validate_json(s)</code></td>
+</tr>
+<tr>
+<td><code>validator</code> decorator</td>
+<td><code>field_validator</code> decorator</td>
+</tr>
+</tbody>
+</table></div>
+<p>If you see short API names like <code>.dict()</code> and <code>.json()</code>, it's probably old v1 code. Today you should use v2's <code>model_*</code> family.</p>
+<h4>Trap 5: dataclass type hints are just "documentation"</h4>
+<p>Never use dataclass as if it were Pydantic. As we said, dataclass doesn't validate at runtime. Its type hints are only for mypy/IDEs. If you need validation, either write it yourself in <code>__post_init__</code>, or switch to Pydantic.</p></article></section><section id="step-16" class="step-card item" data-kind="step" aria-label="Teaching step 17">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 17 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Summary</h3>
+<p>Let's look back at what we covered in this article:</p>
+<ul>
+<li><strong>dataclass is Python's standard answer for writing "data classes"</strong> – one line of <code>@dataclass</code> automatically creates <code>__init__</code> / <code>__repr__</code> / <code>__eq__</code>. Goodbye, boilerplate</li>
+<li><strong><code>field()</code> is the Swiss Army knife for fields</strong> – <code>default_factory</code> solves mutable defaults, <code>init=False</code> plus <code>__post_init__</code> creates derived fields, and <code>repr=False</code> / <code>compare=False</code> control printing and comparison</li>
+<li><strong><code>frozen=True</code> makes a dataclass immutable</strong> – as a bonus, it creates <code>__hash__</code> automatically, so it can go in a set or be a dict key. Essential for "value types"</li>
+<li><strong><code>__post_init__</code> is the construction hook</strong> – used for derived calculations and validation (though validation there is only a stop-gap)</li>
+<li><strong>Python 3.10+ added <code>kw_only=True</code> and <code>slots=True</code></strong> – the first forces keyword arguments, which is especially friendly for inheritance; the second uses <code>__slots__</code> instead of <code>__dict__</code>, saving memory and improving speed</li>
+<li><strong>NamedTuple is "a tuple with names", TypedDict is "a dictionary with types"</strong> – two lightweight options besides dataclass, each with its own sweet spot</li>
+<li><strong>dataclass doesn't validate at runtime</strong> – that's its biggest limit. Dirty outside data gets accepted as-is</li>
+<li><strong>Pydantic fills that gap</strong> – inherit from <code>BaseModel</code>, and you get type checks, rule checks, smart conversion and JSON conversion</li>
+<li><strong>Pydantic uses <code>Field(...)</code> for rules</strong> – arguments like <code>gt</code>, <code>ge</code>, <code>lt</code>, <code>le</code>, <code>min_length</code>, <code>max_length</code> and <code>pattern</code> describe field rules clearly</li>
+<li><strong>Meaningful types like <code>EmailStr</code> and <code>HttpUrl</code> handle common checks in one line</strong></li>
+<li><strong>"dataclass handles the inside, Pydantic handles the outside"</strong> – the most important sentence for choosing your architecture in future</li>
+<li><strong>The mini project showed a real pattern</strong> – validate at the boundary with <code>OrderRequest</code>, represent the business object inside with <code>Order</code>. Each one shines in its own place</li>
+</ul>
+<p>This article is quite dense. You don't need to digest it all at once. Start using the dataclass part now. For the Pydantic part, come back to it when you really meet a situation where "outside data comes in and needs checking".</p>
+<p>In the next article, we'll talk about another topic that's very common and easy to get wrong – <strong>context managers (the <code>with</code> statement)</strong>. Starting from the most common form, <code>with open(...) as f</code>, we'll go through the <code>__enter__</code> / <code>__exit__</code> protocol, <code>contextlib</code> and async context managers. See you next time.</p></article></section><section id="step-17" class="step-card item" data-kind="step" aria-label="Teaching step 18">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 18 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Are the default lists in two records the same list?</h3>
+<p>Let's use a <code>dataclass</code> to save a study record, and add a list of review notes. Each record should have its <strong>own</strong> list:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass, field
+
+
+@dataclass
+class StudyRecord:
+    subject: str
+    minutes: int
+    notes: list[str] = field(default_factory=list)
+
+
+first = StudyRecord(&#x27;Python&#x27;, 15)
+second = StudyRecord(&#x27;Reading&#x27;, 10)
+first.notes.append(&#x27;Reviewed&#x27;)
+print(first.notes)
+print(second.notes)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[&#x27;Reviewed&#x27;]
+[]</code></pre></div>
+<p><code>default_factory=list</code> means "when a default is needed, call <code>list</code> to make a new list". Add a note to the second record yourself, and check that it doesn't change the first one. You can compare this with the shared default argument problem from the functions chapter – but the rules for building defaults are different in the two places, so you can't just copy the syntax from one to the other.</p>
+<p>Another thing to be clear about: having field hints and an automatically created <code>__init__</code> does <strong>not</strong> mean every input automatically goes through business validation. A normal <code>dataclass</code> won't reject a string just because you wrote <code>minutes: int</code>. When you need validation, write it explicitly. If you use Pydantic, understand its actual behaviour according to its version, model settings and conversion rules.</p>
+<p>This example only needs the standard library, so you can run it now. Do the third-party library examples after you've set up the right environment on your computer. First be clear about which boilerplate you want to get rid of and which inputs still need checking, then choose your data model.</p></article></section><div class="lock-banner" hidden><span aria-hidden="true">🔒</span>Solve this exercise to unlock the next part ·<span class="accent lock-k">0</span><span aria-hidden="true">/</span><span>4</span></div><section id="lesson-end" aria-label="Chapter summary"><div class="done-banner" hidden><div class="done-emoji" aria-hidden="true">🎉</div><p class="done-title">Chapter complete!</p><p class="done-sub">You solved all 4 exercises in this chapter.</p></div><nav aria-label="Chapter navigation" class="chapter-nav"><div class="cn-grid"><a class="chap-nav prev focus-ring" href="/lessons/python19/exception-handling/"><span class="cn-label">← Previous chapter</span><span class="cn-title">19 · Exception handling</span></a><div class="cn-mid"><span>dataclass</span></div><a class="chap-nav next focus-ring" href="/lessons/python21/context-manager/"><span class="cn-label">Next chapter →</span><span class="cn-title">21 · Context managers (with)</span></a></div></nav></section></article></div>
+    <aside class="lesson-sidebar right" aria-label="This chapter"><nav aria-label="This chapter's contents"><div class="side-label up">In this chapter</div><p class="toc-chapter">dataclass</p><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">dataclass</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">What does your first dataclass look like?</span></a></li><li class="toc-li" data-target="exercise-01-basic-point"><a href="#exercise-01-basic-point" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">Define Point with @dataclass</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">Comparing two dataclass objects</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">Default values – a lazy starting value for a field</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">field() – advanced settings for fields</span></a></li><li class="toc-li" data-target="exercise-02-default-factory"><a href="#exercise-02-default-factory" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">Mutable defaults: default_factory</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">Immutable dataclasses – frozen=True</span></a></li><li class="toc-li" data-target="exercise-03-frozen-hash"><a href="#exercise-03-frozen-hash" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">frozen=True: unchangeable + hashable</span></a></li><li class="toc-li" data-target="exercise-04-eq"><a href="#exercise-04-eq" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">Automatic __eq__: comparing by field values</span></a></li><li class="toc-li" data-target="step-6"><a href="#step-6" class="toc-link focus-ring"><span class="toc-kind">Teaching 07</span><span class="toc-title">__post_init__ – work something out after construction</span></a></li><li class="toc-li" data-target="step-7"><a href="#step-7" class="toc-link focus-ring"><span class="toc-kind">Teaching 08</span><span class="toc-title">kw_only=True – force keyword arguments (Python 3.10+)</span></a></li><li class="toc-li" data-target="step-8"><a href="#step-8" class="toc-link focus-ring"><span class="toc-kind">Teaching 09</span><span class="toc-title">slots=True – make dataclasses use less memory (Python 3.10+)</span></a></li><li class="toc-li" data-target="step-9"><a href="#step-9" class="toc-link focus-ring"><span class="toc-kind">Teaching 10</span><span class="toc-title">Dataclasses and inheritance</span></a></li><li class="toc-li" data-target="step-10"><a href="#step-10" class="toc-link focus-ring"><span class="toc-kind">Teaching 11</span><span class="toc-title">More than dataclass – NamedTuple and TypedDict</span></a></li><li class="toc-li" data-target="step-11"><a href="#step-11" class="toc-link focus-ring"><span class="toc-kind">Teaching 12</span><span class="toc-title">The limit of dataclass – it doesn&#x27;t validate at runtime</span></a></li><li class="toc-li" data-target="step-12"><a href="#step-12" class="toc-link focus-ring"><span class="toc-kind">Teaching 13</span><span class="toc-title">Enter Pydantic – data models with runtime validation</span></a></li><li class="toc-li" data-target="step-13"><a href="#step-13" class="toc-link focus-ring"><span class="toc-kind">Teaching 14</span><span class="toc-title">dataclass vs Pydantic vs attrs – how to choose</span></a></li><li class="toc-li" data-target="step-14"><a href="#step-14" class="toc-link focus-ring"><span class="toc-kind">Teaching 15</span><span class="toc-title">Mini project – Order + OrderRequest, a pretend ordering endpoint</span></a></li><li class="toc-li" data-target="step-15"><a href="#step-15" class="toc-link focus-ring"><span class="toc-kind">Teaching 16</span><span class="toc-title">A quick reminder – common dataclass and Pydantic traps</span></a></li><li class="toc-li" data-target="step-16"><a href="#step-16" class="toc-link focus-ring"><span class="toc-kind">Teaching 17</span><span class="toc-title">Summary</span></a></li><li class="toc-li" data-target="step-17"><a href="#step-17" class="toc-link focus-ring"><span class="toc-kind">Teaching 18</span><span class="toc-title">Are the default lists in two records the same list?</span></a></li></ol></nav></aside>
+  </div>
+  <dialog class="dir-dialog" aria-labelledby="dir-title"><div class="dd-inner"><div class="dd-head"><h2 id="dir-title">Contents</h2><button type="button" class="dd-close focus-ring">Close</button></div>
+  <div class="dd-tabs" aria-label="Contents scope"><button type="button" class="dd-tab focus-ring" data-tab="all" aria-pressed="true">All lessons</button><button type="button" class="dd-tab focus-ring" data-tab="chapter" aria-pressed="false">This chapter</button></div>
+  <div class="dd-body"><div class="dd-pane" data-pane="all"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></div><div class="dd-pane" data-pane="chapter" hidden><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">dataclass</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">What does your first dataclass look like?</span></a></li><li class="toc-li" data-target="exercise-01-basic-point"><a href="#exercise-01-basic-point" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">Define Point with @dataclass</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">Comparing two dataclass objects</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">Default values – a lazy starting value for a field</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">field() – advanced settings for fields</span></a></li><li class="toc-li" data-target="exercise-02-default-factory"><a href="#exercise-02-default-factory" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">Mutable defaults: default_factory</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">Immutable dataclasses – frozen=True</span></a></li><li class="toc-li" data-target="exercise-03-frozen-hash"><a href="#exercise-03-frozen-hash" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">frozen=True: unchangeable + hashable</span></a></li><li class="toc-li" data-target="exercise-04-eq"><a href="#exercise-04-eq" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">Automatic __eq__: comparing by field values</span></a></li><li class="toc-li" data-target="step-6"><a href="#step-6" class="toc-link focus-ring"><span class="toc-kind">Teaching 07</span><span class="toc-title">__post_init__ – work something out after construction</span></a></li><li class="toc-li" data-target="step-7"><a href="#step-7" class="toc-link focus-ring"><span class="toc-kind">Teaching 08</span><span class="toc-title">kw_only=True – force keyword arguments (Python 3.10+)</span></a></li><li class="toc-li" data-target="step-8"><a href="#step-8" class="toc-link focus-ring"><span class="toc-kind">Teaching 09</span><span class="toc-title">slots=True – make dataclasses use less memory (Python 3.10+)</span></a></li><li class="toc-li" data-target="step-9"><a href="#step-9" class="toc-link focus-ring"><span class="toc-kind">Teaching 10</span><span class="toc-title">Dataclasses and inheritance</span></a></li><li class="toc-li" data-target="step-10"><a href="#step-10" class="toc-link focus-ring"><span class="toc-kind">Teaching 11</span><span class="toc-title">More than dataclass – NamedTuple and TypedDict</span></a></li><li class="toc-li" data-target="step-11"><a href="#step-11" class="toc-link focus-ring"><span class="toc-kind">Teaching 12</span><span class="toc-title">The limit of dataclass – it doesn&#x27;t validate at runtime</span></a></li><li class="toc-li" data-target="step-12"><a href="#step-12" class="toc-link focus-ring"><span class="toc-kind">Teaching 13</span><span class="toc-title">Enter Pydantic – data models with runtime validation</span></a></li><li class="toc-li" data-target="step-13"><a href="#step-13" class="toc-link focus-ring"><span class="toc-kind">Teaching 14</span><span class="toc-title">dataclass vs Pydantic vs attrs – how to choose</span></a></li><li class="toc-li" data-target="step-14"><a href="#step-14" class="toc-link focus-ring"><span class="toc-kind">Teaching 15</span><span class="toc-title">Mini project – Order + OrderRequest, a pretend ordering endpoint</span></a></li><li class="toc-li" data-target="step-15"><a href="#step-15" class="toc-link focus-ring"><span class="toc-kind">Teaching 16</span><span class="toc-title">A quick reminder – common dataclass and Pydantic traps</span></a></li><li class="toc-li" data-target="step-16"><a href="#step-16" class="toc-link focus-ring"><span class="toc-kind">Teaching 17</span><span class="toc-title">Summary</span></a></li><li class="toc-li" data-target="step-17"><a href="#step-17" class="toc-link focus-ring"><span class="toc-kind">Teaching 18</span><span class="toc-title">Are the default lists in two records the same list?</span></a></li></ol></div></div></div></dialog>
+  <div class="py-toast" hidden><span class="spinner"></span><span class="py-toast-text">Loading Python…</span></div>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>© 2026 Python for Beginners · English edition of the <a href="https://github.com/walter201230/Python">walter201230/Python</a> tutorial (CC BY 4.0)</span>
+    <div class="footer-links"><a href="/">Course list</a><a href="/about/">About this site</a><a href="https://github.com/walter201230/Python">GitHub</a></div>
+  </div>
+</footer>
+<script src="/assets/site.js?v=20261028"></script>
+</body>
+</html>

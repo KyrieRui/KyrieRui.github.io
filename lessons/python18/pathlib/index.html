@@ -1,0 +1,1060 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>pathlib: modern path handling – Python for Beginners</title>
+<meta name="description" content="Use Path objects instead of gluing os.path strings – clearer and harder to get wrong.">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css?v=20261028">
+
+</head>
+<body data-page="lesson" data-lesson="python18" data-total="4">
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="/" aria-label="Python for Beginners – home"><span class="gradient-text-flow" data-text="Python for Beginners">Python for Beginners</span></a>
+    <nav class="header-nav">
+      <a class="nav-link" href="/about/">About</a>
+      <a class="nav-icon focus-ring" href="https://github.com/walter201230/Python" aria-label="Original tutorial on GitHub" title="Original tutorial on GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+      <button type="button" class="theme-toggle focus-ring" aria-label="Switch theme"><span class="knob"><svg class="ic-moon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button>
+    </nav>
+  </div>
+</header>
+<main class="site-main">
+<div class="lesson-shell bg-tech-grid">
+  <div class="mobile-bar"><div class="mb-inner"><button type="button" class="dir-btn focus-ring" aria-haspopup="dialog">Contents</button></div></div>
+  <div class="lesson-columns">
+    <aside class="lesson-sidebar left" aria-label="All lessons"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></aside>
+    <div class="lesson-main"><article class="lesson-article"><header class="lesson-head"><h1>pathlib: modern path handling</h1><p class="lh-sub"><span class="accent">4</span> exercises<span class="sep">·</span>about <span class="accent">95</span> min<span class="sep">·</span>solve one to unlock the next part</p>
+<p class="lh-link"><a class="subtle-link focus-ring" href="/lessons/python18/pathlib/read/">Read the whole chapter →</a></p></header><section id="step-0" class="step-card item" data-kind="step" aria-label="Teaching step 1">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 01 / 23</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><p>Have you ever written code like this?</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import os
+
+base_dir = os.path.dirname(os.path.abspath(__file__))
+data_path = os.path.join(base_dir, &#x27;data&#x27;, &#x27;sub&#x27;, &#x27;foo.txt&#x27;)
+
+if os.path.exists(data_path) and os.path.isfile(data_path):
+    with open(data_path, &#x27;r&#x27;, encoding=&#x27;utf-8&#x27;) as f:
+        content = f.read()
+    print(content)</code></pre></div>
+<p>Does it make your head hurt? An <code>os.path.dirname</code> wrapped around an <code>os.path.abspath</code>, plus an <code>os.path.join</code> – the path gets built layer by layer. To open it, you need <code>with open(...) as f:</code>. To check it, you need <code>os.path.exists</code> plus <code>os.path.isfile</code>. The functions are spread across two modules, <code>os</code> and <code>os.path</code>, plus the built-in <code>open</code> function. Just counting the function names makes Brother Shui dizzy.</p>
+<p>Even worse, in this style a path is just a normal <strong>string</strong>. A string is just a string – it doesn't know whether it's a file or a folder, and it certainly can't check "do I exist?" or "what's my extension?" by itself. For every operation, you have to feed the string into a function, the function spits out a string, and that string goes to the next function… The whole thing is like a factory line passing bricks along.</p>
+<p>Is there a way to make paths "come alive"? So that something like <code>Path('data/foo.txt')</code> itself knows whether it's a file, whether it can be read, and what its extension is?</p>
+<p>Yes – that's <code>pathlib</code>, today's topic. It's a standard library module added in Python 3.4, made specifically to clean up messy path code like the above. Since Python 3.6, most standard library functions that accept path strings can also take <code>Path</code> objects directly, so switching over is almost painless.</p>
+<p>Python is up to 3.13 now. If you're still using <code>os.path.join</code> for everything, you're really missing out. In this article, follow Brother Shui as we go through the modern <code>pathlib</code> API from start to finish.</p></article></section><section id="step-1" class="step-card item" data-kind="step" aria-label="Teaching step 2">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 02 / 23</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>1. Your first Path</h3>
+<p>First, let's meet the star of the show:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;data/foo.txt&#x27;)
+print(p)
+print(type(p))</code></pre></div>
+<p>The output might look like this (on macOS / Linux):</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">data/foo.txt
+&lt;class &#x27;pathlib.PosixPath&#x27;&gt;</code></pre></div>
+<p>Notice something odd? We wrote <code>Path('data/foo.txt')</code>, so why is the type <code>PosixPath</code>?</p>
+<p>Because <code>Path</code> is clever. It looks at your operating system and automatically gives you the right subclass for that platform:</p>
+<ul>
+<li>On macOS / Linux, it returns a <code>PosixPath</code></li>
+<li>On Windows, it returns a <code>WindowsPath</code></li>
+</ul>
+<p>You usually don't need to care about this. Just use <code>Path</code>, and worry about cross-platform details when you need to.</p>
+<p>Besides the basic <code>Path('string')</code>, there are two very common "shortcuts":</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+print(Path.home())
+print(Path.cwd())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">/Users/two_water
+/Users/two_water/projects/demo</code></pre></div>
+<p><code>Path.home()</code> is the current user's <strong>home folder</strong>, and <code>Path.cwd()</code> is the <strong>current working directory</strong>. These are the same as the old <code>os.path.expanduser('~')</code> and <code>os.getcwd()</code>, but the new way is clearly neater, isn't it?</p></article></section><section id="step-2" class="step-card item" data-kind="step" aria-label="Teaching step 3">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 03 / 23</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>2. Joining paths with <code>/</code></h3>
+<p>Joining paths is the most common operation of all. Here's the old way:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import os
+
+base = &#x27;/tmp&#x27;
+data_path = os.path.join(base, &#x27;demo&#x27;, &#x27;sub&#x27;, &#x27;foo.txt&#x27;)
+print(data_path)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">/tmp/demo/sub/foo.txt</code></pre></div>
+<p><code>os.path.join</code> works fine, but you have to say "os path join" again and again – your fingers get tired.</p>
+<p>Now see how <code>pathlib</code> does it:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+base = Path(&#x27;/tmp&#x27;)
+data_path = base / &#x27;demo&#x27; / &#x27;sub&#x27; / &#x27;foo.txt&#x27;
+print(data_path)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">/tmp/demo/sub/foo.txt</code></pre></div>
+<p>Look: we join paths with the <code>/</code> operator. A bit magical, isn't it?</p>
+<p>Why does this work? Because <code>Path</code> overrides <code>__truediv__</code> (the division operator), so <code>Path('/tmp') / 'demo'</code> is turned into joining paths. This design is genius, because URLs and Linux file systems already use <code>/</code> for paths – it matches exactly what we have in our heads.</p>
+<p>Here's a comparison table – see how much cleaner it is:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Old way</th>
+<th>New way</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>os.path.join(a, b, c)</code></td>
+<td><code>Path(a) / b / c</code></td>
+</tr>
+<tr>
+<td><code>os.path.join(os.path.dirname(__file__), 'data')</code></td>
+<td><code>Path(__file__).parent / 'data'</code></td>
+</tr>
+<tr>
+<td><code>os.path.expanduser('~/Documents')</code></td>
+<td><code>Path.home() / 'Documents'</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>You can also mix <code>Path</code> objects and strings with <code>/</code>. The result is always a <code>Path</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p1 = Path(&#x27;/tmp&#x27;) / &#x27;foo&#x27;
+p2 = Path(&#x27;/tmp&#x27;) / Path(&#x27;foo&#x27;)
+p3 = &#x27;foo&#x27; / Path(&#x27;tmp&#x27;)
+
+print(p1)
+print(p2)
+print(p3)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">/tmp/foo
+/tmp/foo
+foo/tmp</code></pre></div>
+<p>Whether the string is on the left or the right of <code>/</code>, as long as one side is a <code>Path</code>, the result is a <code>Path</code>.</p></article></section><section id="step-3" class="step-card item" data-kind="step" aria-label="Teaching step 4">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 04 / 23</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>3. Common attributes, all in one go</h3>
+<p>If you've written web scrapers or file-handling code, you'll know tasks like "I've got a path, I want its file name" or "I want its extension". The old way spreads these across functions like <code>os.path.basename</code> and <code>os.path.splitext</code>, which are hard to remember.</p>
+<p><code>Path</code> turns them all into <strong>attributes</strong>. Let's look at them one by one.</p></article></section><section id="step-4" class="step-card item" data-kind="step" aria-label="Teaching step 5">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 05 / 23</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h4>3.1 <code>.name</code>: the full file name (with extension)</h4>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/tmp/demo/foo.txt&#x27;)
+print(p.name)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">foo.txt</code></pre></div>
+<p>Same as the old <code>os.path.basename(...)</code>.</p></article></section><section id="step-5" class="step-card item" data-kind="step" aria-label="Teaching step 6">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 06 / 23</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h4>3.2 <code>.stem</code>: the "stem" without the extension</h4>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/tmp/demo/foo.txt&#x27;)
+print(p.stem)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">foo</code></pre></div>
+<p>This is the file name without its extension. It's perfect for making a new file with the same name but a different extension, like turning <code>foo.txt</code> into <code>foo.json</code>.</p></article></section><section id="step-6" class="step-card item" data-kind="step" aria-label="Teaching step 7">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 07 / 23</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h4>3.3 <code>.suffix</code>: the extension (with the dot)</h4>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/tmp/demo/foo.txt&#x27;)
+print(p.suffix)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">.txt</code></pre></div>
+<p>Note that it includes the dot. If you want it without the dot, just slice it with <code>[1:]</code>.</p>
+<p>What about a file with several extensions, like <code>foo.tar.gz</code>?</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;archive.tar.gz&#x27;)
+print(p.suffix)
+print(p.suffixes)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">.gz
+[&#x27;.tar&#x27;, &#x27;.gz&#x27;]</code></pre></div>
+<p>See? <code>.suffix</code> gives only the last one, and <code>.suffixes</code> gives a list.</p></article></section><section id="exercise-01-name-suffix-stem" class="ex-card item" data-kind="exercise" data-exercise="01-name-suffix-stem" aria-label="Exercise 1: Get a path&#x27;s name / suffix / stem">
+<script type="application/json" class="ex-data">{"id": "01-name-suffix-stem", "lesson": "python18", "starter": "# Import Path from pathlib and create a path object pointing to /tmp/data/foo.txt\n# Print its .name, .suffix and .stem in turn\n\n", "solution": "from pathlib import Path\n\np = Path('/tmp/data/foo.txt')\nprint(p.name)\nprint(p.suffix)\nprint(p.stem)", "grading": {"requiredAst": ["ImportFrom"], "stdoutEquals": "foo.txt\n.txt\nfoo\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 1 / 4</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Get a path&#x27;s name / suffix / stem</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Please:</p>
+<ol>
+<li>Import <code>Path</code> from <code>pathlib</code></li>
+<li>Create a path object <code>p = Path('/tmp/data/foo.txt')</code></li>
+<li>Print its <code>.name</code>, <code>.suffix</code> and <code>.stem</code> in turn</li>
+</ol>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">foo.txt
+.txt
+foo</code></pre></div>
+<p>Note: <code>print(p.name)</code> prints <code>foo.txt</code>, <strong>not</strong> <code>'foo.txt'</code> – printing directly shows no quotes.</p></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>Import the Path class with from pathlib import Path</p></li></template><template class="hint-tpl"><li><p>.name is the full file name with its extension, .suffix is the extension with its dot, .stem is the name without the extension</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+p = Path(&#x27;/tmp/data/foo.txt&#x27;)
+print(p.name)
+print(p.suffix)
+print(p.stem)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># Import Path from pathlib and create a path object pointing to /tmp/data/foo.txt
+# Print its .name, .suffix and .stem in turn
+
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="exercise-02-joining" class="ex-card item" data-kind="exercise" data-exercise="02-joining" aria-label="Exercise 2: Join paths with the / operator">
+<script type="application/json" class="ex-data">{"id": "02-joining", "lesson": "python18", "starter": "# Import Path from pathlib\n# Use the / operator to join /home/user, docs and report.pdf into the path p, then print it\n\n", "solution": "from pathlib import Path\n\np = Path('/home/user') / 'docs' / 'report.pdf'\nprint(str(p))", "grading": {"requiredAst": ["ImportFrom"], "stdoutEquals": "/home/user/docs/report.pdf\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 2 / 4</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Join paths with the / operator</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Use the <code>/</code> operator to join three parts into one full path:</p>
+<ol>
+<li>Import <code>Path</code> from <code>pathlib</code></li>
+<li>Build the path with <code>Path('/home/user') / 'docs' / 'report.pdf'</code> and assign it to <code>p</code></li>
+<li><code>print(str(p))</code></li>
+</ol>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">/home/user/docs/report.pdf</code></pre></div>
+<p>Goodbye <code>os.path.join</code>!</p></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>Path gives the / operator a new meaning, so you can write Path('/home/user') / 'docs' / 'report.pdf' directly</p></li></template><template class="hint-tpl"><li><p>str(p) turns a Path object into a string – print(p) directly works the same way</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+p = Path(&#x27;/home/user&#x27;) / &#x27;docs&#x27; / &#x27;report.pdf&#x27;
+print(str(p))</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># Import Path from pathlib
+# Use the / operator to join /home/user, docs and report.pdf into the path p, then print it
+
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-7" class="step-card item" data-kind="step" aria-label="Teaching step 8">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 08 / 23</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h4>3.4 <code>.parent</code>: the parent folder</h4>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/tmp/demo/sub/foo.txt&#x27;)
+print(p.parent)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">/tmp/demo/sub</code></pre></div>
+<p>Same as <code>os.path.dirname(...)</code>, but much more natural to read.</p></article></section><section id="step-8" class="step-card item" data-kind="step" aria-label="Teaching step 9">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 09 / 23</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h4>3.5 <code>.parents</code>: all the ancestor folders</h4>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/tmp/demo/sub/foo.txt&#x27;)
+for ancestor in p.parents:
+    print(ancestor)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">/tmp/demo/sub
+/tmp/demo
+/tmp
+/</code></pre></div>
+<p><code>.parents</code> returns a sequence, starting with the nearest parent folder and going up through all the ancestors. You can use indexes like <code>p.parents[0]</code> and <code>p.parents[1]</code>, or loop through it with <code>for</code>.</p></article></section><section id="exercise-03-parents" class="ex-card item" data-kind="exercise" data-exercise="03-parents" aria-label="Exercise 3: Get the parent and ancestor folders">
+<script type="application/json" class="ex-data">{"id": "03-parents", "lesson": "python18", "starter": "from pathlib import Path\n\np = Path('/a/b/c/d.txt')\n\n# Use .parent and .parents[1] to print the parent folder and the ancestor two levels up\n\n", "solution": "from pathlib import Path\n\np = Path('/a/b/c/d.txt')\nprint(p.parent)\nprint(p.parents[1])", "grading": {"requiredAst": ["ImportFrom"], "stdoutEquals": "/a/b/c\n/a/b\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 3 / 4</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Get the parent and ancestor folders</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Here's <code>p = Path('/a/b/c/d.txt')</code> for you.</p>
+<p>Please:</p>
+<ol>
+<li><code>print(p.parent)</code> – the parent folder, one level up</li>
+<li><code>print(p.parents[1])</code> – the ancestor two levels up</li>
+</ol>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">/a/b/c
+/a/b</code></pre></div>
+<p>Note: <code>.parent</code> is an attribute (no brackets), and <code>.parents[i]</code> is an index into a sequence – <code>[0]</code> is the direct parent, <code>[1]</code> is one level higher.</p></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>.parent is the same as .parents[0] – both are the direct parent folder</p></li></template><template class="hint-tpl"><li><p>.parents[1] is .parent.parent, one more level up</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+p = Path(&#x27;/a/b/c/d.txt&#x27;)
+print(p.parent)
+print(p.parents[1])</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">from pathlib import Path
+
+p = Path(&#x27;/a/b/c/d.txt&#x27;)
+
+# Use .parent and .parents[1] to print the parent folder and the ancestor two levels up
+
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="exercise-04-suffixes" class="ex-card item" data-kind="exercise" data-exercise="04-suffixes" aria-label="Exercise 4: Files with several extensions: .suffixes">
+<script type="application/json" class="ex-data">{"id": "04-suffixes", "lesson": "python18", "starter": "# Import Path from pathlib and create a path object pointing to test.tar.gz\n# Use .suffixes to print all its extensions\n\n", "solution": "from pathlib import Path\n\np = Path('test.tar.gz')\nprint(p.suffixes)", "grading": {"requiredAst": ["ImportFrom"], "stdoutEquals": "['.tar', '.gz']\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 4 / 4</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Files with several extensions: .suffixes</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>For a file name with 'several extensions', like <code>foo.tar.gz</code>:</p>
+<ul>
+<li><code>.suffix</code> only gives the <strong>last</strong> extension (<code>.gz</code>)</li>
+<li><code>.suffixes</code> gives a <strong>list</strong> with all of them</li>
+</ul>
+<p>Please:</p>
+<ol>
+<li>Import <code>Path</code> from <code>pathlib</code></li>
+<li>Create <code>p = Path('test.tar.gz')</code></li>
+<li><code>print(p.suffixes)</code></li>
+</ol>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[&#x27;.tar&#x27;, &#x27;.gz&#x27;]</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>.suffix (singular) gives only the last one; .suffixes (plural) gives them all</p></li></template><template class="hint-tpl"><li><p>They're in order from left to right – ['.tar', '.gz']</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+p = Path(&#x27;test.tar.gz&#x27;)
+print(p.suffixes)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># Import Path from pathlib and create a path object pointing to test.tar.gz
+# Use .suffixes to print all its extensions
+
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-9" class="step-card item" data-kind="step" aria-label="Teaching step 10">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 10 / 23</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h4>3.6 <code>.anchor</code>: the anchor</h4>
+<p>The anchor is the "root" part of a path.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/tmp/demo/foo.txt&#x27;)
+print(p.anchor)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">/</code></pre></div>
+<p>On Linux / macOS it's usually <code>/</code>. On Windows it might be a drive letter like <code>C:\</code>. You won't use this often, but it's occasionally handy in cross-platform code.</p></article></section><section id="step-10" class="step-card item" data-kind="step" aria-label="Teaching step 11">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 11 / 23</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h4>3.7 Putting it all together</h4>
+<p>Here's an example that uses all these attributes together:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/Users/two_water/projects/demo/main.py&#x27;)
+
+print(&#x27;name    :&#x27;, p.name)
+print(&#x27;stem    :&#x27;, p.stem)
+print(&#x27;suffix  :&#x27;, p.suffix)
+print(&#x27;parent  :&#x27;, p.parent)
+print(&#x27;anchor  :&#x27;, p.anchor)
+print(&#x27;parts   :&#x27;, p.parts)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">name    : main.py
+stem    : main
+suffix  : .py
+parent  : /Users/two_water/projects/demo
+anchor  : /
+parts   : (&#x27;/&#x27;, &#x27;Users&#x27;, &#x27;two_water&#x27;, &#x27;projects&#x27;, &#x27;demo&#x27;, &#x27;main.py&#x27;)</code></pre></div>
+<p>The bonus <code>.parts</code> at the end splits the whole path into a tuple, so you can handle it piece by piece. Notice how, in <code>pathlib</code>, a path isn't a string any more – it's an <strong>object</strong> with attributes and methods?</p></article></section><section id="step-11" class="step-card item" data-kind="step" aria-label="Teaching step 12">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 12 / 23</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>4. Checks and information</h3>
+<p>Joining paths isn't enough. We often need to check "does this file exist?" or "is it a file or a folder?".</p>
+<p>The old way:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import os
+
+p = &#x27;/tmp&#x27;
+if os.path.exists(p):
+    if os.path.isdir(p):
+        print(&#x27;It is a folder&#x27;)
+    elif os.path.isfile(p):
+        print(&#x27;It is a file&#x27;)</code></pre></div>
+<p>The new way:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/tmp&#x27;)
+if p.exists():
+    if p.is_dir():
+        print(&#x27;It is a folder&#x27;)
+    elif p.is_file():
+        print(&#x27;It is a file&#x27;)</code></pre></div>
+<p>These two are about the same length, but they mean something quite different. In the new way, <code>p</code> itself knows "do I exist?" and "am I a file or a folder?" – the methods are attached to the object. In the old way, <code>p</code> is just a string, and every check has to go through the <code>os.path</code> module.</p>
+<p>Here are the common check methods:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.exists()</code></td>
+<td>Does the path exist?</td>
+</tr>
+<tr>
+<td><code>.is_file()</code></td>
+<td>Is it a normal file?</td>
+</tr>
+<tr>
+<td><code>.is_dir()</code></td>
+<td>Is it a folder?</td>
+</tr>
+<tr>
+<td><code>.is_symlink()</code></td>
+<td>Is it a symbolic link (shortcut)?</td>
+</tr>
+<tr>
+<td><code>.is_absolute()</code></td>
+<td>Is it an absolute path?</td>
+</tr>
+</tbody>
+</table></div>
+<p>Note: <code>.is_file()</code> and <code>.is_dir()</code> already include "it exists", so you usually don't need to call <code>.exists()</code> first – unless you want to tell apart "doesn't exist" from "exists but isn't a file".</p>
+<p>Here's a real example:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/tmp&#x27;)
+print(&#x27;exists  :&#x27;, p.exists())
+print(&#x27;is_dir  :&#x27;, p.is_dir())
+print(&#x27;is_file :&#x27;, p.is_file())</code></pre></div>
+<p>On macOS / Linux, <code>/tmp</code> is always a folder that exists, so the output is:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">exists  : True
+is_dir  : True
+is_file : False</code></pre></div>
+<h4>4.1 Getting detailed info: <code>.stat()</code></h4>
+<p>If you want more details, like file size or modification time, use <code>.stat()</code>:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+import datetime
+
+p = Path(&#x27;/tmp&#x27;)
+info = p.stat()
+print(&#x27;size      :&#x27;, info.st_size, &#x27;bytes&#x27;)
+print(&#x27;mtime ts  :&#x27;, info.st_mtime)
+print(&#x27;mtime str :&#x27;, datetime.datetime.fromtimestamp(info.st_mtime))</code></pre></div>
+<p><code>.stat()</code> returns an <code>os.stat_result</code> object. Its common fields are:</p>
+<ul>
+<li><code>.st_size</code>: file size (in bytes)</li>
+<li><code>.st_mtime</code>: last modified time (a Unix timestamp)</li>
+<li><code>.st_ctime</code>: creation time (the exact meaning depends on the system)</li>
+<li><code>.st_mode</code>: permission bits</li>
+</ul>
+<p>The timestamp is a float. To turn it into a readable time, use <code>datetime.datetime.fromtimestamp(...)</code>.</p></article></section><section id="step-12" class="step-card item" data-kind="step" aria-label="Teaching step 13">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 13 / 23</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>5. Looping through folders</h3>
+<p>Have you ever written code like "find all the <code>.py</code> files in some folder"? The old way usually needs <code>os.walk</code>, which is a bit of a pain. <code>pathlib</code> gives you three great tools.</p>
+<h4>5.1 <code>.iterdir()</code>: list only one level of the current folder</h4>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+root = Path(&#x27;/tmp&#x27;)
+for child in root.iterdir():
+    print(child)</code></pre></div>
+<p>Everything one level down inside <code>/tmp</code> (files and folders) is listed. Note that <code>.iterdir()</code> is <strong>not recursive</strong> – it only looks at this one folder level.</p>
+<p>If you only want files, add a check:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+root = Path(&#x27;/tmp&#x27;)
+files = [c for c in root.iterdir() if c.is_file()]
+print(f&#x27;There are {len(files)} files&#x27;)</code></pre></div>
+<h4>5.2 <code>.glob(pattern)</code>: match a pattern (current folder only)</h4>
+<p><code>.glob</code> uses shell-style <strong>wildcards</strong>. A star <code>*</code> means any characters (but not the path separator), and a question mark <code>?</code> means one single character.</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+root = Path(&#x27;/tmp&#x27;)
+for txt in root.glob(&#x27;*.txt&#x27;):
+    print(txt)</code></pre></div>
+<p>This lists all files ending in <code>.txt</code> directly inside <code>/tmp</code>. But <code>.txt</code> files in sub-folders won't be found.</p>
+<h4>5.3 <code>.rglob(pattern)</code>: recursive matching</h4>
+<p><code>.rglob</code> is short for <code>.glob('**/' + pattern)</code>, meaning "search recursively through all sub-folders".</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+root = Path(&#x27;/tmp&#x27;)
+md_files = list(root.rglob(&#x27;*.md&#x27;))
+print(f&#x27;Found {len(md_files)} markdown files&#x27;)</code></pre></div>
+<p>This finds every <code>.md</code> file inside <code>/tmp</code> and all its sub-folders (and their sub-folders…).</p>
+<h4>5.4 In practice: find all the Python files in a folder</h4>
+<p>Here's a combined example: find all <code>.py</code> files in a folder and count them:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+root = Path.cwd()
+py_files = list(root.rglob(&#x27;*.py&#x27;))
+
+print(f&#x27;Found {len(py_files)} .py files under {root}&#x27;)
+for f in py_files[:5]:
+    print(&#x27; -&#x27;, f.relative_to(root))</code></pre></div>
+<p><code>Path.cwd()</code> is the current working directory, and <code>.rglob('*.py')</code> finds all <code>.py</code> files recursively. <code>.relative_to(root)</code> turns an absolute path into a relative one, which looks tidier.</p>
+<p>Run it yourself – you should see a list of the <code>.py</code> files in your current project. Isn't this much, much neater than <code>os.walk</code> plus <code>endswith('.py')</code>?</p></article></section><section id="step-13" class="step-card item" data-kind="step" aria-label="Teaching step 14">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 14 / 23</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>6. Reading and writing files</h3>
+<p>This is one of my favourite things about <code>pathlib</code>.</p>
+<p>The old way to read a file:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">with open(&#x27;/tmp/foo.txt&#x27;, &#x27;r&#x27;, encoding=&#x27;utf-8&#x27;) as f:
+    content = f.read()
+print(content)</code></pre></div>
+<p>The old way to write a file:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">with open(&#x27;/tmp/foo.txt&#x27;, &#x27;w&#x27;, encoding=&#x27;utf-8&#x27;) as f:
+    f.write(&#x27;hello two_water&#x27;)</code></pre></div>
+<p><code>with open(...) as f:</code> has become Python "muscle memory". But honestly, needing that line plus an indented line just to read a whole file is a bit… wordy, isn't it?</p>
+<h4>6.1 <code>.read_text()</code> – read it in one line</h4>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/tmp/two_water_demo.txt&#x27;)
+p.write_text(&#x27;hello two_water&#x27;, encoding=&#x27;utf-8&#x27;)
+
+content = p.read_text(encoding=&#x27;utf-8&#x27;)
+print(content)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">hello two_water</code></pre></div>
+<p>Neat, right? <code>.read_text()</code> reads the whole file into a string directly – no <code>with</code>, no <code>open</code>, no <code>f.read()</code>.</p>
+<h4>6.2 <code>.write_text()</code> – write it in one line</h4>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/tmp/two_water_demo.txt&#x27;)
+p.write_text(&quot;Two Drops&#x27; clock-in records\n&quot;, encoding=&#x27;utf-8&#x27;)
+print(p.read_text(encoding=&#x27;utf-8&#x27;))</code></pre></div>
+<p><code>.write_text(s)</code> writes the string <code>s</code> into the file. If the file already exists, it's <strong>overwritten</strong> (careful – overwritten, not added to). It returns the number of characters written.</p>
+<h4>6.3 Reading and writing binary: <code>.read_bytes()</code> and <code>.write_bytes()</code></h4>
+<p>Besides text, there are matching methods for binary data:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/tmp/two_water_bin.dat&#x27;)
+p.write_bytes(b&#x27;\x00\x01\x02two_water&#x27;)
+
+data = p.read_bytes()
+print(data)
+print(len(data), &#x27;bytes&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">b&#x27;\x00\x01\x02two_water&#x27;
+12 bytes</code></pre></div>
+<p><code>.read_bytes()</code> and <code>.write_bytes()</code> work with <code>bytes</code> objects. You don't need to (and can't) pass <code>encoding</code>.</p>
+<h4>6.4 When do you still need <code>open()</code>?</h4>
+<p>So now that we have <code>read_text</code> / <code>write_text</code>, is <code>open</code> useless?</p>
+<p>Not quite. For these jobs, you still need the traditional <code>with open(...) as f:</code>:</p>
+<ul>
+<li>Reading a huge file line by line, so you don't load it all into memory at once</li>
+<li>Append mode (<code>'a'</code>)</li>
+<li>Doing complicated logic while writing (like reading, calculating and writing at the same time)</li>
+</ul>
+<p>The good news is that <code>Path</code> objects have an <code>.open()</code> method you can use directly:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/tmp/two_water_lines.txt&#x27;)
+p.write_text(&#x27;line1\nline2\nline3\n&#x27;, encoding=&#x27;utf-8&#x27;)
+
+with p.open(&#x27;r&#x27;, encoding=&#x27;utf-8&#x27;) as f:
+    for line in f:
+        print(line.rstrip())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">line1
+line2
+line3</code></pre></div>
+<p><code>p.open(...)</code> is exactly the same as the built-in <code>open(p, ...)</code>, but it feels more natural – every file operation starts from the object <code>p</code>.</p></article></section><section id="step-14" class="step-card item" data-kind="step" aria-label="Teaching step 15">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 15 / 23</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>7. Creating and deleting</h3>
+<p>Creating folders, creating empty files, deleting files, deleting folders – you'll do these all the time. <code>pathlib</code> has them all ready.</p>
+<h4>7.1 <code>.mkdir()</code> – create a folder</h4>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/tmp/two_water_demo_dir&#x27;)
+p.mkdir(exist_ok=True)
+print(p.exists(), p.is_dir())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">True True</code></pre></div>
+<p>The <code>exist_ok=True</code> argument is really useful: if the folder already exists, there's no error. If it's <code>False</code> (the default), you get a <code>FileExistsError</code> when the folder already exists.</p>
+<p>What if the parent folders don't exist either? For example, you want to create <code>/tmp/a/b/c</code>, but <code>a</code> and <code>b</code> don't exist yet:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/tmp/two_water_a/b/c&#x27;)
+p.mkdir(parents=True, exist_ok=True)
+print(p.exists())</code></pre></div>
+<p><code>parents=True</code> means "if the parent folders don't exist, create them all the way down". It's the same as <code>mkdir -p</code> in the shell.</p>
+<p>Remember this combo – <code>mkdir(parents=True, exist_ok=True)</code>. When writing scripts, you'll use it almost with your eyes closed.</p>
+<h4>7.2 <code>.touch()</code> – create an empty file</h4>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/tmp/two_water_demo.empty&#x27;)
+p.touch(exist_ok=True)
+print(p.exists(), p.is_file(), p.stat().st_size)</code></pre></div>
+<p>The output is roughly:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">True True 0</code></pre></div>
+<p><code>.touch()</code> is like the <code>touch</code> command in the shell: if the file doesn't exist, it creates an empty file; if it does, it updates its modification time.</p>
+<h4>7.3 <code>.unlink()</code> – delete a file</h4>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/tmp/two_water_demo.empty&#x27;)
+if p.exists():
+    p.unlink()
+print(&#x27;after unlink:&#x27;, p.exists())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">after unlink: False</code></pre></div>
+<p><code>.unlink()</code> deletes a <strong>single file or symbolic link</strong>. If the file doesn't exist, you get a <code>FileNotFoundError</code>. You can avoid that with <code>missing_ok=True</code> (Python 3.8+):</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/tmp/two_water_does_not_exist.x&#x27;)
+p.unlink(missing_ok=True)
+print(&#x27;done&#x27;)</code></pre></div>
+<h4>7.4 <code>.rmdir()</code> – delete an empty folder</h4>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/tmp/two_water_demo_dir&#x27;)
+p.mkdir(exist_ok=True)
+p.rmdir()
+print(&#x27;after rmdir:&#x27;, p.exists())</code></pre></div>
+<p>Note: <code>.rmdir()</code> can only delete <strong>empty</strong> folders. If the folder still has something in it, you get an <code>OSError</code>.</p>
+<p>So how do you delete a folder that isn't empty? <code>pathlib</code> doesn't do this itself – you need the standard library's <code>shutil</code>:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import shutil
+from pathlib import Path
+
+p = Path(&#x27;/tmp/two_water_demo_full&#x27;)
+p.mkdir(exist_ok=True)
+(p / &#x27;child.txt&#x27;).write_text(&#x27;hi&#x27;, encoding=&#x27;utf-8&#x27;)
+
+shutil.rmtree(p)
+print(&#x27;after rmtree:&#x27;, p.exists())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">after rmtree: False</code></pre></div>
+<p><code>shutil.rmtree</code> deletes the folder <strong>and everything in it</strong> – like <code>rm -rf</code>. When you use it, check the path very carefully, so you don't accidentally <code>rmtree('/')</code> and wipe out everything!</p></article></section><section id="step-15" class="step-card item" data-kind="step" aria-label="Teaching step 16">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 16 / 23</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>8. Converting paths</h3>
+<p>In real projects, paths come in two forms – <strong>relative</strong> and <strong>absolute</strong> – and you often need to convert between them.</p>
+<h4>8.1 <code>.absolute()</code>: make it absolute (without following symbolic links)</h4>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;foo.txt&#x27;)
+print(p)
+print(p.absolute())</code></pre></div>
+<p>The output looks something like this (depending on where you are):</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">foo.txt
+/Users/two_water/projects/demo/foo.txt</code></pre></div>
+<p>Note: <code>.absolute()</code> doesn't need the file to really exist. It just sticks the relative path onto the current working directory to get an absolute form.</p>
+<h4>8.2 <code>.resolve()</code>: make it absolute (and resolve symbolic links, <code>..</code> and so on)</h4>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;foo/../bar/./baz.txt&#x27;)
+print(p)
+print(p.resolve())</code></pre></div>
+<p>Output (run from <code>/tmp</code>):</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">foo/../bar/./baz.txt
+/tmp/bar/baz.txt</code></pre></div>
+<p>See? <code>.resolve()</code> simplifies all the relative bits like <code>..</code> and <code>.</code>, giving you a clean absolute path. It also follows symbolic links to the real location.</p>
+<p>So when do you use <code>.absolute()</code> and when <code>.resolve()</code>? Here's a rough but good-enough rule: <strong>use <code>.resolve()</code> by default.</strong> It's more thorough and gives a cleaner result. Only use <code>.absolute()</code> when you specifically don't want to follow symbolic links or simplify <code>..</code>.</p>
+<h4>8.3 <code>.relative_to(other)</code>: work out a relative path</h4>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+base = Path(&#x27;/tmp&#x27;)
+file = Path(&#x27;/tmp/demo/sub/foo.txt&#x27;)
+
+print(file.relative_to(base))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">demo/sub/foo.txt</code></pre></div>
+<p>This is perfect for logging and displaying things. For example, printing the relative paths of all files in a project looks a million times nicer than absolute paths.</p>
+<p>Note: <code>.relative_to(other)</code> requires the current path to be <strong>inside</strong> <code>other</code>. Otherwise you get a <code>ValueError</code>.</p>
+<h4>8.4 <code>.expanduser()</code>: turn <code>~</code> into your home folder</h4>
+<p>When writing scripts, you'll often get a path from the user. For example, a config file might say <code>~/.config/myapp/conf.toml</code>. The <code>~</code> is the shell's shortcut for "home folder", but Python doesn't expand it automatically – you have to do it yourself:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;~/Documents/foo.txt&#x27;)
+print(p)
+print(p.expanduser())</code></pre></div>
+<p>Output (your home folder will be different):</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">~/Documents/foo.txt
+/Users/two_water/Documents/foo.txt</code></pre></div>
+<p><code>.expanduser()</code> is the same as the old <code>os.path.expanduser(...)</code>. You'll almost always need it for paths typed in by users.</p>
+<h4>8.5 A common combo: <code>expanduser().resolve()</code></h4>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+raw = &#x27;~/Desktop/../Desktop/foo.txt&#x27;
+p = Path(raw).expanduser().resolve()
+print(p)</code></pre></div>
+<p>First expand <code>~</code>, then <code>resolve</code> to simplify it and make it absolute. You end up with a clean, tidy absolute path. This is very handy for things like reading user config.</p></article></section><section id="step-16" class="step-card item" data-kind="step" aria-label="Teaching step 17">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 17 / 23</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>9. Renaming: <code>with_name</code> / <code>with_stem</code> / <code>with_suffix</code></h3>
+<p>Have you needed this? You've got <code>foo.txt</code> and want to make <code>foo.json</code> in the same folder, or change <code>report_v1.md</code> to <code>report_v2.md</code>.</p>
+<p>The old way needs string slicing plus <code>os.path.join</code>, which is really ugly. <code>pathlib</code> gives you three very thoughtful methods.</p>
+<h4>9.1 <code>.with_suffix(new_suffix)</code> – change the extension</h4>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/tmp/foo.txt&#x27;)
+print(p.with_suffix(&#x27;.json&#x27;))
+print(p.with_suffix(&#x27;&#x27;))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">/tmp/foo.json
+/tmp/foo</code></pre></div>
+<p>Note: <code>new_suffix</code> must start with <code>.</code> (or be an empty string, which means "remove the extension"). This method is great for "same name, different format" jobs, like turning lots of <code>.md</code> files into <code>.html</code>:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+src = Path(&#x27;/tmp/two_water_doc.md&#x27;)
+src.write_text(&#x27;# Title&#x27;, encoding=&#x27;utf-8&#x27;)
+
+dst = src.with_suffix(&#x27;.html&#x27;)
+print(&#x27;Source:&#x27;, src)
+print(&#x27;Target:&#x27;, dst)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Source: /tmp/two_water_doc.md
+Target: /tmp/two_water_doc.html</code></pre></div>
+<h4>9.2 <code>.with_name(new_name)</code> – change the whole file name</h4>
+<p><code>.with_name(...)</code> replaces the whole last part (including the extension):</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/tmp/demo/foo.txt&#x27;)
+print(p.with_name(&#x27;bar.md&#x27;))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">/tmp/demo/bar.md</code></pre></div>
+<h4>9.3 <code>.with_stem(new_stem)</code> – change the stem (keep the extension)</h4>
+<p>This was added in Python 3.9, specifically for "keep the extension, change only the stem":</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/tmp/demo/foo.txt&#x27;)
+print(p.with_stem(&#x27;bar&#x27;))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">/tmp/demo/bar.txt</code></pre></div>
+<p>The extension <code>.txt</code> stays the same, and the stem <code>foo</code> becomes <code>bar</code>.</p>
+<p>Think about it: without <code>.with_stem</code>, you'd have to write <code>p.with_name(new_stem + p.suffix)</code> – an extra joining step. The people who designed Python's standard library thought of everything, didn't they?</p>
+<h4>9.4 Putting it together</h4>
+<p>Here's an example that turns <code>report_v1.md</code> into <code>report_v2.json</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/tmp/report_v1.md&#x27;)
+new = p.with_stem(&#x27;report_v2&#x27;).with_suffix(&#x27;.json&#x27;)
+print(new)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">/tmp/report_v2.json</code></pre></div>
+<p>Chained calls – all in one smooth line.</p></article></section><section id="step-17" class="step-card item" data-kind="step" aria-label="Teaching step 18">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 18 / 23</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>10. Cross-platform: the <code>PurePath</code> family</h3>
+<p>Have you ever had this happen? A script you wrote on macOS crashes when a teammate runs it on Windows. Very often, it's because of the path separator – macOS / Linux use <code>/</code>, and Windows uses <code>\</code>.</p>
+<p><code>pathlib</code> handles this quite elegantly. It has two "family lines":</p>
+<ul>
+<li><strong>Concrete paths</strong>: <code>Path</code> (picked automatically), <code>PosixPath</code>, <code>WindowsPath</code> – these can really access the file system</li>
+<li><strong>Pure paths</strong>: <code>PurePath</code>, <code>PurePosixPath</code>, <code>PureWindowsPath</code> – these only work with paths as text, and never touch the file system</li>
+</ul>
+<p>99% of the time, <code>Path</code> is all you need. But occasionally – say, you're on Linux and need to read a Windows-style path string – you'll need <code>PureWindowsPath</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import PureWindowsPath, PurePosixPath
+
+p = PureWindowsPath(r&#x27;C:\Users\two_water\foo.txt&#x27;)
+print(p.name)
+print(p.parent)
+
+q = PurePosixPath(&#x27;/home/two_water/foo.txt&#x27;)
+print(q.name)
+print(q.parent)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">foo.txt
+C:\Users\two_water
+foo.txt
+/home/two_water</code></pre></div>
+<p>You can see that <code>PureWindowsPath</code> reads the path the Windows way, even when running on macOS, and <code>PurePosixPath</code> does the opposite. These can't call methods like <code>.exists()</code> or <code>.read_text()</code> that need real file system access, but they're more than enough for <strong>reading path strings</strong>.</p>
+<p>That's enough on cross-platform code for now. For everyday use, <code>Path</code> is all most people need.</p></article></section><section id="step-18" class="step-card item" data-kind="step" aria-label="Teaching step 19">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 19 / 23</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>11. Old vs new cheat sheet + common traps</h3>
+<h4>11.1 A cheat sheet to keep</h4>
+<p>To help you switch from the old APIs to <code>pathlib</code>, here's a table of the most common changes:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Old way (<code>os</code> / <code>os.path</code> / <code>open</code>)</th>
+<th>New way (<code>pathlib</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Current working directory</td>
+<td><code>os.getcwd()</code></td>
+<td><code>Path.cwd()</code></td>
+</tr>
+<tr>
+<td>User's home folder</td>
+<td><code>os.path.expanduser('~')</code></td>
+<td><code>Path.home()</code></td>
+</tr>
+<tr>
+<td>Join paths</td>
+<td><code>os.path.join(a, b, c)</code></td>
+<td><code>Path(a) / b / c</code></td>
+</tr>
+<tr>
+<td>File name</td>
+<td><code>os.path.basename(p)</code></td>
+<td><code>Path(p).name</code></td>
+</tr>
+<tr>
+<td>Stem (no extension)</td>
+<td><code>os.path.splitext(name)[0]</code></td>
+<td><code>Path(p).stem</code></td>
+</tr>
+<tr>
+<td>Extension</td>
+<td><code>os.path.splitext(name)[1]</code></td>
+<td><code>Path(p).suffix</code></td>
+</tr>
+<tr>
+<td>Parent folder</td>
+<td><code>os.path.dirname(p)</code></td>
+<td><code>Path(p).parent</code></td>
+</tr>
+<tr>
+<td>Does it exist?</td>
+<td><code>os.path.exists(p)</code></td>
+<td><code>Path(p).exists()</code></td>
+</tr>
+<tr>
+<td>Is it a file?</td>
+<td><code>os.path.isfile(p)</code></td>
+<td><code>Path(p).is_file()</code></td>
+</tr>
+<tr>
+<td>Is it a folder?</td>
+<td><code>os.path.isdir(p)</code></td>
+<td><code>Path(p).is_dir()</code></td>
+</tr>
+<tr>
+<td>Absolute path</td>
+<td><code>os.path.abspath(p)</code></td>
+<td><code>Path(p).resolve()</code></td>
+</tr>
+<tr>
+<td>Relative path</td>
+<td><code>os.path.relpath(p, base)</code></td>
+<td><code>Path(p).relative_to(base)</code></td>
+</tr>
+<tr>
+<td>Create a folder</td>
+<td><code>os.makedirs(p, exist_ok=True)</code></td>
+<td><code>Path(p).mkdir(parents=True, exist_ok=True)</code></td>
+</tr>
+<tr>
+<td>Delete a file</td>
+<td><code>os.remove(p)</code></td>
+<td><code>Path(p).unlink()</code></td>
+</tr>
+<tr>
+<td>Delete an empty folder</td>
+<td><code>os.rmdir(p)</code></td>
+<td><code>Path(p).rmdir()</code></td>
+</tr>
+<tr>
+<td>List a folder</td>
+<td><code>os.listdir(p)</code></td>
+<td><code>list(Path(p).iterdir())</code></td>
+</tr>
+<tr>
+<td>Wildcard match</td>
+<td><code>glob.glob(pattern)</code></td>
+<td><code>Path(...).glob(pattern)</code></td>
+</tr>
+<tr>
+<td>Recursive wildcard</td>
+<td><code>glob.glob(pattern, recursive=True)</code></td>
+<td><code>Path(...).rglob(pattern)</code></td>
+</tr>
+<tr>
+<td>Read text</td>
+<td><code>with open(p) as f: content = f.read()</code></td>
+<td><code>Path(p).read_text(encoding='utf-8')</code></td>
+</tr>
+<tr>
+<td>Write text</td>
+<td><code>with open(p, 'w') as f: f.write(s)</code></td>
+<td><code>Path(p).write_text(s, encoding='utf-8')</code></td>
+</tr>
+<tr>
+<td>File size</td>
+<td><code>os.path.getsize(p)</code></td>
+<td><code>Path(p).stat().st_size</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>If you forget something while coding, just come back and check.</p>
+<h4>11.2 Common traps</h4>
+<h5>Trap 1: forgetting that <code>Path</code> doesn't create a file by itself</h5>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/tmp/two_water_not_exist.txt&#x27;)
+print(p)
+print(p.exists())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">/tmp/two_water_not_exist.txt
+False</code></pre></div>
+<p>Notice something? Just writing <code>Path('xxx')</code> doesn't actually create a file on disk. It only creates a <strong>path object</strong>. The file it represents might exist, or might not. To actually make the file, you need methods that "do something", like <code>.touch()</code>, <code>.write_text()</code> or <code>.mkdir()</code>.</p>
+<h5>Trap 2: Is <code>Path('foo') == Path('./foo')</code>?</h5>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+a = Path(&#x27;foo&#x27;)
+b = Path(&#x27;./foo&#x27;)
+print(a == b)
+print(a.resolve() == b.resolve())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">True
+True</code></pre></div>
+<p><code>pathlib</code> tidies up a leading <code>./</code> when it builds the path, so these two are equal even before resolving. But that tidying only goes so far – <code>Path('foo')</code> and <code>Path('bar/../foo')</code> are <strong>not</strong> equal until you <code>.resolve()</code> them. If you want to check whether two paths "point to the same thing", it's best to <code>.resolve()</code> both first, or use the more specialised <code>.samefile(other)</code> method (which needs both to really exist).</p>
+<h5>Trap 3: <code>.suffix</code> returns an empty string for files with no extension</h5>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/tmp/Makefile&#x27;)
+print(repr(p.suffix))
+print(repr(p.stem))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">&#x27;&#x27;
+&#x27;Makefile&#x27;</code></pre></div>
+<p>Be careful when writing code that filters by extension: <code>.suffix == ''</code> is true for files with no extension, like <code>Makefile</code> and <code>README</code>. Don't catch them by mistake.</p>
+<h5>Trap 4: <code>mkdir</code> without <code>exist_ok</code> will blow up</h5>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/tmp/two_water_collide&#x27;)
+p.mkdir(exist_ok=True)
+p.mkdir(exist_ok=True)
+print(&#x27;Neither call blew up:&#x27;, p.exists())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Neither call blew up: True</code></pre></div>
+<p>Without <code>exist_ok=True</code>, the second <code>mkdir</code> raises a <code>FileExistsError</code>. When writing scripts, I recommend adding this argument to almost every <code>mkdir</code>.</p>
+<h5>Trap 5: <code>relative_to</code> can't jump across to a different branch</h5>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+a = Path(&#x27;/tmp/foo&#x27;)
+b = Path(&#x27;/var/log&#x27;)
+
+try:
+    print(a.relative_to(b))
+except ValueError as e:
+    print(&#x27;Blew up:&#x27;, e)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Blew up: &#x27;/tmp/foo&#x27; is not in the subpath of &#x27;/var/log&#x27; OR one path is relative and the other is absolute.</code></pre></div>
+<p>In this case you can't use <code>relative_to</code>. You have to use <code>os.path.relpath</code>, or the <code>walk_up=True</code> argument in Python 3.12+:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+a = Path(&#x27;/tmp/foo&#x27;)
+b = Path(&#x27;/var/log&#x27;)
+
+print(a.relative_to(b, walk_up=True))</code></pre></div>
+<p>The output is roughly:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">../../tmp/foo</code></pre></div>
+<p><code>walk_up=True</code> was only added in 3.12. It allows the result to contain <code>..</code>.</p></article></section><section id="step-19" class="step-card item" data-kind="step" aria-label="Teaching step 20">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 20 / 23</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>12. Mini project: count the total lines in all <code>.py</code> files in a folder</h3>
+<p>We've covered a lot. Let's tie it together with a small function. Here's the task:</p>
+<blockquote>
+<p>Given a folder, recursively count the total number of lines in all the <code>.py</code> files inside it.</p>
+</blockquote>
+<p>The old way might look like this:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import os
+
+def count_py_lines_old(root):
+    total = 0
+    for dirpath, dirnames, filenames in os.walk(root):
+        for name in filenames:
+            if name.endswith(&#x27;.py&#x27;):
+                full = os.path.join(dirpath, name)
+                with open(full, &#x27;r&#x27;, encoding=&#x27;utf-8&#x27;) as f:
+                    total += sum(1 for _ in f)
+    return total</code></pre></div>
+<p><code>os.walk</code> with two nested <code>for</code> loops, then <code>os.path.join</code>, then <code>with open</code> – it takes seven or eight lines just to write the core logic.</p>
+<p>What does it look like with <code>pathlib</code>?</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+
+def count_py_lines(root: Path) -&gt; int:
+    &quot;&quot;&quot;Recursively count the total lines in all .py files under root.&quot;&quot;&quot;
+    total = 0
+    for py in root.rglob(&#x27;*.py&#x27;):
+        if not py.is_file():
+            continue
+        text = py.read_text(encoding=&#x27;utf-8&#x27;, errors=&#x27;ignore&#x27;)
+        total += text.count(&#x27;\n&#x27;) + (0 if text.endswith(&#x27;\n&#x27;) or not text else 1)
+    return total
+
+
+if __name__ == &#x27;__main__&#x27;:
+    n = count_py_lines(Path.cwd())
+    print(f&#x27;Total lines in .py files in the current folder: {n}&#x27;)</code></pre></div>
+<p>Let's walk through it:</p>
+<ol>
+<li><code>root.rglob('*.py')</code> finds all <code>.py</code> files recursively – no more <code>os.walk</code> mess</li>
+<li><code>py.is_file()</code> is attached to the object – nice to read</li>
+<li><code>py.read_text(...)</code> reads the whole file in one line – no <code>with open</code></li>
+<li>Count lines with <code>text.count('\n')</code>, plus handle the case where the last line has no newline</li>
+</ol>
+<p>The whole core loop is just 5 lines. Compared with the old way, isn't it much cleaner?</p>
+<p>Another question: what if some <code>.py</code> files aren't UTF-8? <code>read_text</code> would raise a <code>UnicodeDecodeError</code>. Here we added <code>errors='ignore'</code>, so bytes that can't be decoded are skipped, and the count doesn't stop. Little tricks like this are really handy when writing tool scripts.</p>
+<p>Curious readers can improve it further:</p>
+<ul>
+<li>Skip folders like <code>.venv</code> and <code>__pycache__</code></li>
+<li>Count blank lines and non-blank lines separately</li>
+<li>Add an <code>--ext</code> option so it works with any extension</li>
+</ul>
+<p>Treat these as homework, and have fun with them.</p></article></section><section id="step-20" class="step-card item" data-kind="step" aria-label="Teaching step 21">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 21 / 23</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>13. Bonus: working with the old APIs</h3>
+<p>You might be worried: what if some "inherited" code in your project uses string paths, or a third-party library needs a string instead of a <code>Path</code>?</p>
+<p>Don't worry at all. Converting between <code>Path</code> and strings is very easy.</p>
+<h4>13.1 <code>Path</code> → string: just use <code>str()</code></h4>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/tmp/foo.txt&#x27;)
+s = str(p)
+print(s)
+print(type(s))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">/tmp/foo.txt
+&lt;class &#x27;str&#x27;&gt;</code></pre></div>
+<p><code>str(p)</code> turns a <code>Path</code> object back into a plain string. You can pass this to any old API that wants a string path.</p>
+<h4>13.2 String → <code>Path</code>: <code>Path(s)</code></h4>
+<p>The other way is even easier – we've done it countless times already:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+s = &#x27;/tmp/foo.txt&#x27;
+p = Path(s)
+print(p)</code></pre></div>
+<h4>13.3 <code>os.PathLike</code>: the standard library's compatibility protocol</h4>
+<p>Since Python 3.6, the <code>os.PathLike</code> protocol lets almost every standard library function that takes a path (including <code>open</code>, <code>os.listdir</code>, <code>shutil.copy</code> and so on) accept <code>Path</code> objects directly. That means:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+p = Path(&#x27;/tmp/two_water_compat.txt&#x27;)
+p.write_text(&#x27;hi&#x27;, encoding=&#x27;utf-8&#x27;)
+
+with open(p, &#x27;r&#x27;, encoding=&#x27;utf-8&#x27;) as f:
+    print(f.read())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">hi</code></pre></div>
+<p>Notice anything? We passed a <code>Path</code> object straight into <code>open</code> without <code>str()</code> first, and it still works. That's thanks to the <code>os.PathLike</code> protocol.</p>
+<p>So you can use <code>pathlib</code> with confidence – it works smoothly with your "old friends" in the standard library.</p></article></section><section id="step-21" class="step-card item" data-kind="step" aria-label="Teaching step 22">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 22 / 23</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>14. Summary</h3>
+<p>We've covered a lot. Here are the key points about <code>pathlib</code>:</p>
+<p>First, in <code>pathlib</code>, a path isn't a string any more – it's an <strong>object</strong>. It knows its own name, where it is, whether it's a file, and whether it can be read. This "the object looks after itself" design makes code read more like natural language.</p>
+<p>Second, the <code>/</code> operator makes joining paths look just like a path. <code>Path('/tmp') / 'foo' / 'bar.txt'</code> is so much better than a long <code>os.path.join</code>.</p>
+<p>Third, <code>pathlib</code> brings together features from several old modules (<code>os.path</code>, <code>os</code>, <code>open</code>, part of <code>shutil</code>) into one object. <code>p.exists()</code>, <code>p.read_text()</code>, <code>p.mkdir(parents=True, exist_ok=True)</code> – everything starts from <code>p</code>, with no need to import things all over the place.</p>
+<p>From now on, when you write new code, stop using <code>os.path.join</code> for everything. Just <code>from pathlib import Path</code> – you'll love it.</p></article></section><section id="step-22" class="step-card item" data-kind="step" aria-label="Teaching step 23">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 23 / 23</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Where did the file get written?</h3>
+<p>We've covered lots of path operations. This time, let's do a small job where you can check the result. Save two lines of text in a special practice folder, then read them back:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from pathlib import Path
+
+folder = Path(&#x27;study-demo-records&#x27;)
+folder.mkdir(exist_ok=True)
+path = folder / &#x27;lesson.txt&#x27;
+path.write_text(&#x27;Python:15\nReading:10\n&#x27;, encoding=&#x27;utf-8&#x27;)
+text = path.read_text(encoding=&#x27;utf-8&#x27;)
+print(path.name)
+print(len(text.splitlines()))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">lesson.txt
+2</code></pre></div>
+<p>The relative path here starts from the program's <strong>current working directory</strong> – it's not automatically relative to the folder the script is in, wherever you run it from. On your own computer, first check <code>Path.cwd()</code>, then find the file that was created. Running it again updates this practice file. Use a special practice folder – don't experiment on your own notes files.</p>
+<p>If you run the same code in the browser, it writes to the runtime's <strong>virtual file system</strong>, not a folder on your computer that's kept long-term. It's not guaranteed to survive a refresh or a restart of the environment. For a full project that needs to save things between runs, do it on your own computer.</p>
+<p>Add a third line to the content yourself, then check the line count. Then create a <code>Path</code> object only, without calling any write method, and see that it doesn't magically create a file. When you need complete data, don't just ignore decoding errors to avoid an error message – first check the file's encoding and whether any data might be lost.</p></article></section><div class="lock-banner" hidden><span aria-hidden="true">🔒</span>Solve this exercise to unlock the next part ·<span class="accent lock-k">0</span><span aria-hidden="true">/</span><span>4</span></div><section id="lesson-end" aria-label="Chapter summary"><div class="done-banner" hidden><div class="done-emoji" aria-hidden="true">🎉</div><p class="done-title">Chapter complete!</p><p class="done-sub">You solved all 4 exercises in this chapter.</p></div><nav aria-label="Chapter navigation" class="chapter-nav"><div class="cn-grid"><a class="chap-nav prev focus-ring" href="/lessons/python17/readable-code/"><span class="cn-label">← Previous chapter</span><span class="cn-title">17 · Readable code</span></a><div class="cn-mid"><span>pathlib: modern path handling</span></div><a class="chap-nav next focus-ring" href="/lessons/python19/exception-handling/"><span class="cn-label">Next chapter →</span><span class="cn-title">19 · Exception handling</span></a></div></nav></section></article></div>
+    <aside class="lesson-sidebar right" aria-label="This chapter"><nav aria-label="This chapter's contents"><div class="side-label up">In this chapter</div><p class="toc-chapter">pathlib: modern path handling</p><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">pathlib: modern path handling</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">1. Your first Path</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">2. Joining paths with /</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">3. Common attributes, all in one go</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">3.1 .name: the full file name (with extension)</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">3.2 .stem: the &quot;stem&quot; without the extension</span></a></li><li class="toc-li" data-target="step-6"><a href="#step-6" class="toc-link focus-ring"><span class="toc-kind">Teaching 07</span><span class="toc-title">3.3 .suffix: the extension (with the dot)</span></a></li><li class="toc-li" data-target="exercise-01-name-suffix-stem"><a href="#exercise-01-name-suffix-stem" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">Get a path&#x27;s name / suffix / stem</span></a></li><li class="toc-li" data-target="exercise-02-joining"><a href="#exercise-02-joining" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">Join paths with the / operator</span></a></li><li class="toc-li" data-target="step-7"><a href="#step-7" class="toc-link focus-ring"><span class="toc-kind">Teaching 08</span><span class="toc-title">3.4 .parent: the parent folder</span></a></li><li class="toc-li" data-target="step-8"><a href="#step-8" class="toc-link focus-ring"><span class="toc-kind">Teaching 09</span><span class="toc-title">3.5 .parents: all the ancestor folders</span></a></li><li class="toc-li" data-target="exercise-03-parents"><a href="#exercise-03-parents" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">Get the parent and ancestor folders</span></a></li><li class="toc-li" data-target="exercise-04-suffixes"><a href="#exercise-04-suffixes" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">Files with several extensions: .suffixes</span></a></li><li class="toc-li" data-target="step-9"><a href="#step-9" class="toc-link focus-ring"><span class="toc-kind">Teaching 10</span><span class="toc-title">3.6 .anchor: the anchor</span></a></li><li class="toc-li" data-target="step-10"><a href="#step-10" class="toc-link focus-ring"><span class="toc-kind">Teaching 11</span><span class="toc-title">3.7 Putting it all together</span></a></li><li class="toc-li" data-target="step-11"><a href="#step-11" class="toc-link focus-ring"><span class="toc-kind">Teaching 12</span><span class="toc-title">4. Checks and information</span></a></li><li class="toc-li" data-target="step-12"><a href="#step-12" class="toc-link focus-ring"><span class="toc-kind">Teaching 13</span><span class="toc-title">5. Looping through folders</span></a></li><li class="toc-li" data-target="step-13"><a href="#step-13" class="toc-link focus-ring"><span class="toc-kind">Teaching 14</span><span class="toc-title">6. Reading and writing files</span></a></li><li class="toc-li" data-target="step-14"><a href="#step-14" class="toc-link focus-ring"><span class="toc-kind">Teaching 15</span><span class="toc-title">7. Creating and deleting</span></a></li><li class="toc-li" data-target="step-15"><a href="#step-15" class="toc-link focus-ring"><span class="toc-kind">Teaching 16</span><span class="toc-title">8. Converting paths</span></a></li><li class="toc-li" data-target="step-16"><a href="#step-16" class="toc-link focus-ring"><span class="toc-kind">Teaching 17</span><span class="toc-title">9. Renaming: with_name / with_stem / with_suffix</span></a></li><li class="toc-li" data-target="step-17"><a href="#step-17" class="toc-link focus-ring"><span class="toc-kind">Teaching 18</span><span class="toc-title">10. Cross-platform: the PurePath family</span></a></li><li class="toc-li" data-target="step-18"><a href="#step-18" class="toc-link focus-ring"><span class="toc-kind">Teaching 19</span><span class="toc-title">11. Old vs new cheat sheet + common traps</span></a></li><li class="toc-li" data-target="step-19"><a href="#step-19" class="toc-link focus-ring"><span class="toc-kind">Teaching 20</span><span class="toc-title">12. Mini project: count the total lines in all .py files in a folder</span></a></li><li class="toc-li" data-target="step-20"><a href="#step-20" class="toc-link focus-ring"><span class="toc-kind">Teaching 21</span><span class="toc-title">13. Bonus: working with the old APIs</span></a></li><li class="toc-li" data-target="step-21"><a href="#step-21" class="toc-link focus-ring"><span class="toc-kind">Teaching 22</span><span class="toc-title">14. Summary</span></a></li><li class="toc-li" data-target="step-22"><a href="#step-22" class="toc-link focus-ring"><span class="toc-kind">Teaching 23</span><span class="toc-title">Where did the file get written?</span></a></li></ol></nav></aside>
+  </div>
+  <dialog class="dir-dialog" aria-labelledby="dir-title"><div class="dd-inner"><div class="dd-head"><h2 id="dir-title">Contents</h2><button type="button" class="dd-close focus-ring">Close</button></div>
+  <div class="dd-tabs" aria-label="Contents scope"><button type="button" class="dd-tab focus-ring" data-tab="all" aria-pressed="true">All lessons</button><button type="button" class="dd-tab focus-ring" data-tab="chapter" aria-pressed="false">This chapter</button></div>
+  <div class="dd-body"><div class="dd-pane" data-pane="all"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></div><div class="dd-pane" data-pane="chapter" hidden><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">pathlib: modern path handling</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">1. Your first Path</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">2. Joining paths with /</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">3. Common attributes, all in one go</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">3.1 .name: the full file name (with extension)</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">3.2 .stem: the &quot;stem&quot; without the extension</span></a></li><li class="toc-li" data-target="step-6"><a href="#step-6" class="toc-link focus-ring"><span class="toc-kind">Teaching 07</span><span class="toc-title">3.3 .suffix: the extension (with the dot)</span></a></li><li class="toc-li" data-target="exercise-01-name-suffix-stem"><a href="#exercise-01-name-suffix-stem" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">Get a path&#x27;s name / suffix / stem</span></a></li><li class="toc-li" data-target="exercise-02-joining"><a href="#exercise-02-joining" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">Join paths with the / operator</span></a></li><li class="toc-li" data-target="step-7"><a href="#step-7" class="toc-link focus-ring"><span class="toc-kind">Teaching 08</span><span class="toc-title">3.4 .parent: the parent folder</span></a></li><li class="toc-li" data-target="step-8"><a href="#step-8" class="toc-link focus-ring"><span class="toc-kind">Teaching 09</span><span class="toc-title">3.5 .parents: all the ancestor folders</span></a></li><li class="toc-li" data-target="exercise-03-parents"><a href="#exercise-03-parents" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">Get the parent and ancestor folders</span></a></li><li class="toc-li" data-target="exercise-04-suffixes"><a href="#exercise-04-suffixes" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">Files with several extensions: .suffixes</span></a></li><li class="toc-li" data-target="step-9"><a href="#step-9" class="toc-link focus-ring"><span class="toc-kind">Teaching 10</span><span class="toc-title">3.6 .anchor: the anchor</span></a></li><li class="toc-li" data-target="step-10"><a href="#step-10" class="toc-link focus-ring"><span class="toc-kind">Teaching 11</span><span class="toc-title">3.7 Putting it all together</span></a></li><li class="toc-li" data-target="step-11"><a href="#step-11" class="toc-link focus-ring"><span class="toc-kind">Teaching 12</span><span class="toc-title">4. Checks and information</span></a></li><li class="toc-li" data-target="step-12"><a href="#step-12" class="toc-link focus-ring"><span class="toc-kind">Teaching 13</span><span class="toc-title">5. Looping through folders</span></a></li><li class="toc-li" data-target="step-13"><a href="#step-13" class="toc-link focus-ring"><span class="toc-kind">Teaching 14</span><span class="toc-title">6. Reading and writing files</span></a></li><li class="toc-li" data-target="step-14"><a href="#step-14" class="toc-link focus-ring"><span class="toc-kind">Teaching 15</span><span class="toc-title">7. Creating and deleting</span></a></li><li class="toc-li" data-target="step-15"><a href="#step-15" class="toc-link focus-ring"><span class="toc-kind">Teaching 16</span><span class="toc-title">8. Converting paths</span></a></li><li class="toc-li" data-target="step-16"><a href="#step-16" class="toc-link focus-ring"><span class="toc-kind">Teaching 17</span><span class="toc-title">9. Renaming: with_name / with_stem / with_suffix</span></a></li><li class="toc-li" data-target="step-17"><a href="#step-17" class="toc-link focus-ring"><span class="toc-kind">Teaching 18</span><span class="toc-title">10. Cross-platform: the PurePath family</span></a></li><li class="toc-li" data-target="step-18"><a href="#step-18" class="toc-link focus-ring"><span class="toc-kind">Teaching 19</span><span class="toc-title">11. Old vs new cheat sheet + common traps</span></a></li><li class="toc-li" data-target="step-19"><a href="#step-19" class="toc-link focus-ring"><span class="toc-kind">Teaching 20</span><span class="toc-title">12. Mini project: count the total lines in all .py files in a folder</span></a></li><li class="toc-li" data-target="step-20"><a href="#step-20" class="toc-link focus-ring"><span class="toc-kind">Teaching 21</span><span class="toc-title">13. Bonus: working with the old APIs</span></a></li><li class="toc-li" data-target="step-21"><a href="#step-21" class="toc-link focus-ring"><span class="toc-kind">Teaching 22</span><span class="toc-title">14. Summary</span></a></li><li class="toc-li" data-target="step-22"><a href="#step-22" class="toc-link focus-ring"><span class="toc-kind">Teaching 23</span><span class="toc-title">Where did the file get written?</span></a></li></ol></div></div></div></dialog>
+  <div class="py-toast" hidden><span class="spinner"></span><span class="py-toast-text">Loading Python…</span></div>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>© 2026 Python for Beginners · English edition of the <a href="https://github.com/walter201230/Python">walter201230/Python</a> tutorial (CC BY 4.0)</span>
+    <div class="footer-links"><a href="/">Course list</a><a href="/about/">About this site</a><a href="https://github.com/walter201230/Python">GitHub</a></div>
+  </div>
+</footer>
+<script src="/assets/site.js?v=20261028"></script>
+</body>
+</html>

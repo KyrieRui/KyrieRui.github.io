@@ -1,0 +1,38 @@
+{
+ "groups": [
+  {"title": "Basic syntax", "range": "00 → 09", "desc": "From zero to writing small scripts – variables, containers, control flow, functions and objects.", "from": 0, "to": 9},
+  {"title": "Advanced features", "range": "10 → 22", "desc": "Magic methods, decorators, closures, async – understand Python's deeper machinery.", "from": 10, "to": 22},
+  {"title": "Engineering & publishing", "range": "23 → 28", "desc": "A modern project toolchain: pyproject + uv + ruff + pytest + publishing to PyPI.", "from": 23, "to": 28}
+ ],
+ "lessons": {
+  "python0": ["Why learn Python", "A starter before class begins – why Python is popular, what it can do, and whether it's worth learning."],
+  "python1": ["Installing Python & your first program", "Meet Python and write your first line of code – this lesson runs in the browser, nothing to install."],
+  "python2": ["Basic data types & variables", "Start with print, then strings, numbers and variables – get Python talking."],
+  "python3": ["List & Tuple", "Ordered lists and unchangeable tuples – the two most-used container types."],
+  "python4": ["Dict & Set", "Key-value dictionaries plus duplicate-free sets – with List/Tuple they cover the whole data world."],
+  "python5": ["Conditions & loops", "if / for / while, plus match/case, new in Python 3.10."],
+  "python6": ["Functions", "Wrap up a piece of logic and reuse it – the foundation of every Python project."],
+  "python7": ["Iteration", "How for...in works, custom iterators, and generator functions with yield."],
+  "python8": ["Object-oriented programming", "Classes, inheritance, polymorphism – packaging data and behaviour together."],
+  "python9": ["Modules", "import / from-import / a quick tour of the standard library – get your code organised."],
+  "python10": ["Magic methods", "__str__ / __eq__ / __len__ / __add__ – make your own classes behave like built-in types."],
+  "python11": ["Enum classes", "Replace magic constants with Enum, so constants explain themselves."],
+  "python12": ["Metaclasses", "Classes are objects too – make classes with three-argument type(), and control class creation with a metaclass."],
+  "python13": ["Threads & processes", "A quick tour of threading / multiprocessing: GIL, Lock, Queue, Pool."],
+  "python14": ["Regular expressions", "The re module: match, extract and replace complex patterns in text with one rule."],
+  "python15": ["Closures", "A function inside a function that captures outer variables – understand closures and you understand decorators."],
+  "python16": ["Decorators", "One @decorator line adds logging, caching or permissions to a function – Python's most elegant syntax sugar."],
+  "python17": ["Readable code", "Good names + early returns + comprehensions + type hints – code others (and you, six months later) can read."],
+  "python18": ["pathlib: modern path handling", "Use Path objects instead of gluing os.path strings – clearer and harder to get wrong."],
+  "python19": ["Exception handling", "try / except / finally / raise + custom exceptions – don't let one error crash the whole program."],
+  "python20": ["dataclass", "One decorator generates __init__/__repr__/__eq__ for you – goodbye boilerplate."],
+  "python21": ["Context managers (with)", "What does with really do? __enter__/__exit__ + @contextmanager explained in one go."],
+  "python22": ["async / await", "Coroutine basics: async def + await + asyncio.run + gather for concurrency."],
+  "python23": ["pyproject.toml + uv", "Modern Python project structure: standard pyproject.toml config + uv, the super-fast package manager."],
+  "python24": ["ruff: all-in-one code checking", "One tool replaces black + flake8 + isort + pyupgrade, 10–100× faster than the old combination."],
+  "python25": ["pytest: the testing framework", "The industry standard: fixtures, parametrize, markers, coverage – tests can be elegant too."],
+  "python26": ["Logging", "Upgrade print debugging to proper logs: 5 levels, format, getLogger, exception()."],
+  "python27": ["Publishing to PyPI", "From zero to pip install – src layout, uv build, uv publish: release a CLI tool of your own."],
+  "python28": ["After you finish", "All 29 chapters done – what next? Three paths: data/AI, web back end, automation."]
+ }
+}

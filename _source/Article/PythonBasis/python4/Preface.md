@@ -18,7 +18,7 @@ The last article had an obvious mistake, but thanks to a reader who pointed it o
 # Contents #
 
 
-- 1. Dictionary (dict)
+- 1\. Dictionary (dict)
     1. What is a dict?
     2. Creating a dict
     3. Getting values from a dict
@@ -26,7 +26,7 @@ The last article had an obvious mistake, but thanks to a reader who pointed it o
     5. Deleting from a dict
     6. Things to watch out for with dicts
     7. dict functions and methods
-- 2. set
+- 2\. set
     1. Creating a set
     2. Adding elements to a set
     3. Removing elements from a set

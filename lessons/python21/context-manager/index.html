@@ -1,0 +1,990 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Context managers (with) – Python for Beginners</title>
+<meta name="description" content="What does with really do? __enter__/__exit__ + @contextmanager explained in one go.">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css?v=20261028">
+
+</head>
+<body data-page="lesson" data-lesson="python21" data-total="4">
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="/" aria-label="Python for Beginners – home"><span class="gradient-text-flow" data-text="Python for Beginners">Python for Beginners</span></a>
+    <nav class="header-nav">
+      <a class="nav-link" href="/about/">About</a>
+      <a class="nav-icon focus-ring" href="https://github.com/walter201230/Python" aria-label="Original tutorial on GitHub" title="Original tutorial on GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+      <button type="button" class="theme-toggle focus-ring" aria-label="Switch theme"><span class="knob"><svg class="ic-moon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button>
+    </nav>
+  </div>
+</header>
+<main class="site-main">
+<div class="lesson-shell bg-tech-grid">
+  <div class="mobile-bar"><div class="mb-inner"><button type="button" class="dir-btn focus-ring" aria-haspopup="dialog">Contents</button></div></div>
+  <div class="lesson-columns">
+    <aside class="lesson-sidebar left" aria-label="All lessons"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></aside>
+    <div class="lesson-main"><article class="lesson-article"><header class="lesson-head"><h1>Context managers (with)</h1><p class="lh-sub"><span class="accent">4</span> exercises<span class="sep">·</span>about <span class="accent">75</span> min<span class="sep">·</span>solve one to unlock the next part</p>
+<p class="lh-link"><a class="subtle-link focus-ring" href="/lessons/python21/context-manager/read/">Read the whole chapter →</a></p></header><section id="step-0" class="step-card item" data-kind="step" aria-label="Teaching step 1">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 01 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>Context Managers: what does <code>with</code> really do?</h2>
+<p>First, look at this code and guess where the trap is:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">f = open(&#x27;/tmp/two_drops_of_water.txt&#x27;, &#x27;w&#x27;)
+f.write(&quot;Two Drops&#x27; diary: I clocked in three minutes late today.&quot;)
+f.close()</code></pre></div>
+<p>"What's wrong with that? Open the file, write to it, close it – done in one go." That's what you might say if you like to think things through.</p>
+<p>But what if the <code>f.write</code> line raises an exception?</p>
+<p>Then <code>close</code> never runs, and the file handle is just left hanging there. Once or twice is fine. But if it's a web service running all day, and a few dozen out of thousands of requests fail to write a file, the operating system's file handles slowly get used up. Eventually you get a "Too many open files" error that seems to have nothing to do with anything. Bugs like this are really painful to track down.</p>
+<p>So what do you do? The old way is of course <code>try/finally</code>:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">f = open(&#x27;/tmp/two_drops_of_water.txt&#x27;, &#x27;w&#x27;)
+try:
+    f.write(&quot;Two Drops&#x27; diary: I clocked in three minutes late today.&quot;)
+finally:
+    f.close()</code></pre></div>
+<p>This is safe, but ugly. A simple file write gets wrapped in <code>try/finally</code>, adding an extra level of indentation. If you then need to open a second file, and a third, the indentation keeps stacking up, and you soon end up with "pyramid code".</p>
+<p>You've surely seen Python's other way of writing this:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">with open(&#x27;/tmp/two_drops_of_water.txt&#x27;, &#x27;w&#x27;) as f:
+    f.write(&quot;Two Drops&#x27; diary: I clocked in three minutes late today.&quot;)</code></pre></div>
+<p>Just two lines – no <code>try</code>, no <code>finally</code>, no manual <code>close</code>. And yet, whether or not <code>write</code> raises an exception, the file is always closed properly.</p>
+<p>So what exactly is this <code>with</code>? How can it do something so magical? In this chapter, we'll explain it inside and out.</p></article></section><section id="step-1" class="step-card item" data-kind="step" aria-label="Teaching step 2">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 02 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>The essence of <code>with</code>: the context manager protocol</h3>
+<p>What comes after <code>with</code> isn't a "file", a "connection" or a "lock" – it's a <strong>kind</strong> of thing. Python calls it a <strong>context manager</strong>.</p>
+<p>What kind of object counts as a context manager? Any object with these two methods:</p>
+<ul>
+<li><code>__enter__(self)</code>: called when you <strong>enter</strong> the <code>with</code> block. Its return value is assigned to the variable after <code>as</code></li>
+<li><code>__exit__(self, exc_type, exc_val, tb)</code>: called when you <strong>leave</strong> the <code>with</code> block – whether you leave normally or because of an exception</li>
+</ul>
+<p>This is the <strong>context manager protocol</strong>. Those are all its rules – just these two, no third one.</p>
+<p>Let's use our old friend, clocking in, to write the simplest context manager by hand, so you get a feel for it:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class Punch:
+    def __enter__(self):
+        print(&#x27;Two Drops enters the clock-in area&#x27;)
+        return self
+
+    def __exit__(self, exc_type, exc_val, tb):
+        print(&#x27;Two Drops leaves the clock-in area&#x27;)
+
+
+with Punch() as p:
+    print(&#x27;Two Drops is goofing off at the desk&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Two Drops enters the clock-in area
+Two Drops is goofing off at the desk
+Two Drops leaves the clock-in area</code></pre></div>
+<p>What do you see? The line <code>with Punch() as p</code> does three things:</p>
+<ol>
+<li>Creates a <code>Punch()</code> instance</li>
+<li>Calls that instance's <code>__enter__()</code> method</li>
+<li>Assigns the return value of <code>__enter__()</code> to <code>p</code></li>
+</ol>
+<p>Only then does it run the code inside the <code>with</code> block. When the <code>with</code> block ends (normally or because of an exception), it calls <code>__exit__()</code>.</p>
+<p>Does this look familiar? Yes – it's really hiding this chunk of boilerplate:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">p_obj = Punch()
+p = p_obj.__enter__()
+try:
+    print(&#x27;Two Drops is goofing off at the desk&#x27;)
+finally:
+    p_obj.__exit__(None, None, None)</code></pre></div>
+<p>behind the <code>with</code> syntactic sugar. That's how one line of <code>with</code> does the job of six.</p></article></section><section id="exercise-01-with-stringio" class="ex-card item" data-kind="exercise" data-exercise="01-with-stringio" aria-label="Exercise 1: Use with on a StringIO">
+<script type="application/json" class="ex-data">{"id": "01-with-stringio", "lesson": "python21", "starter": "import io\n# Open io.StringIO() with with, and write two strings inside the block\n# Inside the block, assign the result of getvalue() to text, then print text at the end\n\n", "solution": "import io\nwith io.StringIO() as buf:\n    buf.write('Hello')\n    buf.write(' World')\n    text = buf.getvalue()\nprint(text)", "grading": {"requiredAst": ["With"], "stdoutEquals": "Hello World\n", "varsEqual": {"text": "Hello World"}}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 1 / 4</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Use with on a StringIO</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p><code>io.StringIO</code> is a 'file in memory', and it also supports the context manager protocol.</p>
+<p>Use <code>with</code> together with <code>io.StringIO()</code>:</p>
+<ol>
+<li>Inside the <code>with</code> block, <code>write</code> the string <code>'Hello'</code></li>
+<li>Inside the <code>with</code> block, <code>write</code> the string <code>' World'</code></li>
+<li>Assign the result of <code>getvalue()</code> (<code>Hello World</code>) to the variable <code>text</code></li>
+<li><code>print(text)</code></li>
+</ol>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Hello World</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>io.StringIO supports the with syntax too</p></li></template><template class="hint-tpl"><li><p>Assign text <strong>inside</strong> the with block – after with exits, buf is closed, but text is still there</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import io
+with io.StringIO() as buf:
+    buf.write(&#x27;Hello&#x27;)
+    buf.write(&#x27; World&#x27;)
+    text = buf.getvalue()
+print(text)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">import io
+# Open io.StringIO() with with, and write two strings inside the block
+# Inside the block, assign the result of getvalue() to text, then print text at the end
+
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-2" class="step-card item" data-kind="step" aria-label="Teaching step 3">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 03 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Let's look back at <code>open</code></h3>
+<p>Now that we understand the protocol, let's look at <code>open()</code> again:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">with open(&#x27;/tmp/two_drops_of_water.txt&#x27;, &#x27;w&#x27;) as f:
+    f.write(&#x27;One line of text.&#x27;)</code></pre></div>
+<p>The file object returned by <code>open()</code> implements <code>__enter__</code> and <code>__exit__</code> itself. Its <code>__enter__</code> just does <code>return self</code>, so <code>f</code> gets the file object itself. Its <code>__exit__</code> calls <code>close()</code>. Simple – but it covers every exception path.</p>
+<p>You can check it yourself:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">f = open(&#x27;/tmp/two_drops_of_water.txt&#x27;, &#x27;w&#x27;)
+print(hasattr(f, &#x27;__enter__&#x27;))
+print(hasattr(f, &#x27;__exit__&#x27;))
+f.close()</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">True
+True</code></pre></div>
+<p>It's not just files. In the standard library, <code>socket</code>, <code>threading.Lock</code>, <code>sqlite3.Connection</code>, and in third-party libraries, <code>requests.Session</code> and so on – almost every resource that needs <strong>paired operations</strong> implements the context manager protocol. Open/close, acquire/release, connect/disconnect – whenever you "borrow something and must give it back", let <code>with</code> look after it.</p>
+<p>Let's look at one more example to see how a context manager hides the details of "paired operations". <code>threading.Lock</code> should be familiar – you can hardly do multithreaded programming without it:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import threading
+
+
+lock = threading.Lock()
+
+# Without with, you have to acquire and release by hand
+lock.acquire()
+try:
+    print(&#x27;Two Drops is hard at work inside the critical section&#x27;)
+finally:
+    lock.release()
+
+# With with, Python arranges acquire and release for us
+with lock:
+    print(&#x27;Two Drops enters the critical section again&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Two Drops is hard at work inside the critical section
+Two Drops enters the critical section again</code></pre></div>
+<p>Note that <code>with lock:</code> has no <code>as ...</code>. That's because the lock's <code>__enter__</code> returns the lock itself, which isn't useful in most cases – what we care about is the <strong>state</strong> "it's locked", not the return value. So <code>as</code> can be left out. This is the usual way to write most locks, semaphores, events and similar context managers.</p></article></section><section id="step-3" class="step-card item" data-kind="step" aria-label="Teaching step 4">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 04 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>A slightly more useful example: a clock-in context</h3>
+<p>Printing a few lines is a bit thin. Let's make <code>Punch</code> do something real – record when an employee enters and leaves, and write it to a "log":</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import time
+
+
+class PunchLog:
+    def __init__(self, name):
+        self.name = name
+        self.records = []
+
+    def __enter__(self):
+        self.start = time.time()
+        self.records.append(f&#x27;{self.name} arrives at the desk&#x27;)
+        return self
+
+    def __exit__(self, exc_type, exc_val, tb):
+        cost = time.time() - self.start
+        self.records.append(f&#x27;{self.name} leaves the desk after {cost:.4f} seconds&#x27;)
+
+
+log = PunchLog(&#x27;Two Drops&#x27;)
+with log:
+    time.sleep(0.05)
+    print(&#x27;Goofing off...&#x27;)
+
+for line in log.records:
+    print(line)</code></pre></div>
+<p>The output is roughly:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Goofing off...
+Two Drops arrives at the desk
+Two Drops leaves the desk after 0.0507 seconds</code></pre></div>
+<p>This time it wouldn't even matter if <code>__enter__</code> didn't <code>return self</code>, because we wrote <code>with log:</code> – no <code>as</code> to receive a return value, and the variable <code>log</code> is the context manager itself. But if you change it to <code>with log as l:</code>, <code>l</code> would be <code>None</code> if <code>__enter__</code> returned nothing, because <code>__enter__</code> returns <code>None</code> by default. This is the trap beginners fall into most: "Why is my <code>as x</code> <code>None</code>?" Nine times out of ten, <code>__enter__</code> forgot to <code>return</code>.</p></article></section><section id="exercise-02-custom-class" class="ex-card item" data-kind="exercise" data-exercise="02-custom-class" aria-label="Exercise 2: A custom context manager class">
+<script type="application/json" class="ex-data">{"id": "02-custom-class", "lesson": "python21", "starter": "# Define the Section class with __enter__ and __exit__\n# __enter__ prints the start message and returns self; __exit__ prints the end message\n# Then use with on a Section instance, printing 'Working' inside the block\n\n", "solution": "class Section:\n    def __enter__(self):\n        print('>>> Start')\n        return self\n\n    def __exit__(self, exc_type, exc_val, tb):\n        print('<<< End')\n\nwith Section():\n    print('Working')", "grading": {"requiredAst": ["ClassDef:Section", "With"], "stdoutEquals": ">>> Start\nWorking\n<<< End\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 2 / 4</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">A custom context manager class</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Define a class <code>Section</code> that follows the context manager protocol:</p>
+<ul>
+<li><code>__enter__</code> prints <code>'&gt;&gt;&gt; Start'</code> and does <code>return self</code></li>
+<li><code>__exit__</code> prints <code>'&lt;&lt;&lt; End'</code></li>
+</ul>
+<p>Then use <code>with Section():</code> around one line, <code>print('Working')</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">&gt;&gt;&gt; Start
+Working
+&lt;&lt;&lt; End</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>Both <strong>enter</strong> and <strong>exit</strong> must be defined in the class</p></li></template><template class="hint-tpl"><li><p><strong>exit</strong> must take 4 parameters: self, exc_type, exc_val, tb</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class Section:
+    def __enter__(self):
+        print(&#x27;&gt;&gt;&gt; Start&#x27;)
+        return self
+
+    def __exit__(self, exc_type, exc_val, tb):
+        print(&#x27;&lt;&lt;&lt; End&#x27;)
+
+with Section():
+    print(&#x27;Working&#x27;)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># Define the Section class with __enter__ and __exit__
+# __enter__ prints the start message and returns self; __exit__ prints the end message
+# Then use with on a Section instance, printing &#x27;Working&#x27; inside the block
+
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-4" class="step-card item" data-kind="step" aria-label="Teaching step 5">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 05 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Managing several contexts at once</h3>
+<p>In real projects, you often need to open two or even three files at once – read one, write one, and write an error log. Early Python could only do this:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">with open(&#x27;/tmp/in.txt&#x27;, &#x27;w&#x27;) as fin:
+    pass
+
+with open(&#x27;/tmp/in.txt&#x27;) as fin:
+    with open(&#x27;/tmp/out.txt&#x27;, &#x27;w&#x27;) as fout:
+        fout.write(fin.read())</code></pre></div>
+<p>Two levels of indentation. Add an <code>err.log</code>, and it's three.</p>
+<p>Later, Python allowed several contexts in one <code>with</code>, separated by commas:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">with open(&#x27;/tmp/in.txt&#x27;) as fin, open(&#x27;/tmp/out.txt&#x27;, &#x27;w&#x27;) as fout:
+    fout.write(fin.read())</code></pre></div>
+<p>Much neater than nesting. But a new problem appears – with many contexts, the line gets really long, and you can't break it.</p>
+<p>Python 3.10 added new syntax, PEP 617 "parenthesised context managers", which lets you wrap several contexts in brackets:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">with (
+    open(&#x27;/tmp/in.txt&#x27;) as fin,
+    open(&#x27;/tmp/out.txt&#x27;, &#x27;w&#x27;) as fout,
+):
+    fout.write(fin.read())</code></pre></div>
+<p>Note three things:</p>
+<ol>
+<li>Each line inside the brackets can end with a comma, including the last one – PEP 617 allows a trailing comma</li>
+<li>This syntax only exists in Python 3.10+</li>
+<li>For code style, this is the recommended way to manage three or more contexts at once</li>
+</ol>
+<p>If you're still on 3.9 or older, either use the one-line comma version, or <code>ExitStack</code>, which we'll cover later.</p>
+<p>One more detail: several context managers <code>__enter__</code> in order from <strong>left to right</strong>, and <code>__exit__</code> in order from <strong>right to left</strong>. This is a really important guarantee – for example, code that "takes a lock, then opens a file" will always "close the file, then release the lock" when it exits. Let's test it with a small demo:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from contextlib import contextmanager
+
+
+@contextmanager
+def stage(name):
+    print(f&#x27;{name} __enter__&#x27;)
+    try:
+        yield name
+    finally:
+        print(f&#x27;{name} __exit__&#x27;)
+
+
+with stage(&#x27;A&#x27;) as a, stage(&#x27;B&#x27;) as b, stage(&#x27;C&#x27;) as c:
+    print(f&#x27;Inside the with block: {a} {b} {c}&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">A __enter__
+B __enter__
+C __enter__
+Inside the with block: A B C
+C __exit__
+B __exit__
+A __exit__</code></pre></div>
+<p>See? C was the last to enter and the first to exit. It works exactly like the function call stack and nested <code>try/finally</code>.</p></article></section><section id="step-5" class="step-card item" data-kind="step" aria-label="Teaching step 6">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 06 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>The three parameters of <code>__exit__</code>: handling exceptions</h3>
+<p>We said <code>__exit__</code>'s signature is <code>__exit__(self, exc_type, exc_val, tb)</code>, but haven't explained what these three parameters are for.</p>
+<p>Normally, if nothing in the <code>with</code> block raises an exception, all three are <code>None</code>. If there's an exception, they are:</p>
+<ul>
+<li><code>exc_type</code>: the type of the exception (e.g. <code>ZeroDivisionError</code>)</li>
+<li><code>exc_val</code>: the exception instance</li>
+<li><code>tb</code>: the traceback object</li>
+</ul>
+<p>Even more important is the <strong>return value</strong> of <code>__exit__</code>:</p>
+<ul>
+<li>Return <code>True</code> (or anything "truthy"): the exception is <strong>swallowed</strong> and doesn't go any further</li>
+<li>Return <code>False</code>, <code>None</code>, or no <code>return</code> at all: the exception <strong>keeps going</strong> outwards</li>
+</ul>
+<p>Let's write a context manager that swallows <code>ZeroDivisionError</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class IgnoreZeroDivision:
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, tb):
+        if exc_type is ZeroDivisionError:
+            print(f&#x27;Swallowed a division-by-zero exception: {exc_val}&#x27;)
+            return True
+        return False
+
+
+with IgnoreZeroDivision():
+    x = 1 / 0
+    print(&#x27;This will not print, because the line above raised an exception&#x27;)
+
+print(&#x27;But this will print, because __exit__ swallowed the exception&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Swallowed a division-by-zero exception: division by zero
+But this will print, because __exit__ swallowed the exception</code></pre></div>
+<p>If the <code>with</code> block raises anything other than <code>ZeroDivisionError</code> – say, <code>ValueError</code> – <code>__exit__</code> returns <code>False</code>, and the exception bubbles out as normal.</p>
+<p>I must stress this: swallowing exceptions is a very powerful ability, so please use it carefully. Generally, a context manager's job is to "clean up the resource no matter what", not to "pretend the exception never happened". Blindly writing <code>return True</code> can hide real bugs. Very few context managers in the standard library swallow exceptions – the most common one is <code>contextlib.suppress</code>, which we'll see later.</p>
+<p>Another common question: "Can I swap the exception for a different one in <code>__exit__</code>?" Yes, but with care. Raising a new exception directly in <code>__exit__</code> <strong>replaces</strong> the exception currently being passed along, and the original becomes the new one's <code>__context__</code>. Here's an example to make it clear:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class TranslateException:
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, tb):
+        if exc_type is not None:
+            raise RuntimeError(f&#x27;I translated {exc_type.__name__} into RuntimeError&#x27;) from exc_val
+
+
+try:
+    with TranslateException():
+        1 / 0
+except RuntimeError as e:
+    print(f&#x27;What we got outside: {e}&#x27;)
+    print(f&#x27;The cause: {e.__cause__}&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">What we got outside: I translated ZeroDivisionError into RuntimeError
+The cause: division by zero</code></pre></div>
+<p>This "translate the exception" pattern is really useful when writing libraries. For example, a database driver can translate all sorts of low-level network errors into one <code>DatabaseError</code>, so the outer code doesn't need to care whether a socket disconnected, the SSL handshake failed, or the protocol couldn't be read. We covered <code>raise X from Y</code> in the exceptions chapter – this is just a quick review.</p></article></section><section id="step-6" class="step-card item" data-kind="step" aria-label="Teaching step 7">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 07 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>contextlib: the standard library's good friend</h3>
+<p>Writing a whole class with two dunder methods just to manage a few lines of code – isn't that a bit heavy?</p>
+<p>The standard library has a module called <code>contextlib</code> with lots of tools to make this easier. The most important is the <code>@contextmanager</code> decorator.</p>
+<p>Remember generators? <code>@contextmanager</code> turns a <strong>generator function</strong> into a context manager. The rules are very simple:</p>
+<ul>
+<li>Code <strong>before</strong> <code>yield</code> = <code>__enter__</code></li>
+<li>The value that's <code>yield</code>ed = the return value of <code>__enter__</code></li>
+<li>Code <strong>after</strong> <code>yield</code> = <code>__exit__</code></li>
+</ul>
+<p>Let's rewrite <code>PunchLog</code> from above with <code>@contextmanager</code> and compare:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import time
+from contextlib import contextmanager
+
+
+@contextmanager
+def punch_log(name):
+    records = []
+    start = time.time()
+    records.append(f&#x27;{name} arrives at the desk&#x27;)
+    try:
+        yield records
+    finally:
+        cost = time.time() - start
+        records.append(f&#x27;{name} leaves the desk after {cost:.4f} seconds&#x27;)
+
+
+with punch_log(&#x27;Two Drops&#x27;) as records:
+    time.sleep(0.05)
+    print(&#x27;Still goofing off...&#x27;)
+
+for line in records:
+    print(line)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Still goofing off...
+Two Drops arrives at the desk
+Two Drops leaves the desk after 0.0506 seconds</code></pre></div>
+<p>Much cleaner, right? The class turned into a function, and the two dunder methods turned into one <code>yield</code>.</p>
+<p>Notice the <code>try/finally</code> inside. Why do we need it?</p>
+<p>Because the <code>with</code> block might raise an exception, and that exception "drills" back into the generator function at the <code>yield</code> line. Without <code>try/finally</code>, the exception would skip right past the clean-up code, and the resource would leak. Only <code>try/finally</code> guarantees "whether or not <code>yield</code> raises an exception, the clean-up code in <code>finally</code> always runs".</p>
+<p>This is the most important rule when writing context managers with <code>@contextmanager</code>: <strong>put the clean-up code inside <code>finally</code>.</strong> The most common beginner bug is leaving out <code>try/finally</code>, so resources aren't released when there's an exception.</p></article></section><section id="exercise-03-contextmanager" class="ex-card item" data-kind="exercise" data-exercise="03-contextmanager" aria-label="Exercise 3: Write a banner with @contextmanager">
+<script type="application/json" class="ex-data">{"id": "03-contextmanager", "lesson": "python21", "starter": "from contextlib import contextmanager\n\n# Decorate the generator function banner(title) with @contextmanager\n# Print the opening banner before yield, and the closing line after yield (wrap yield in try/finally)\n# Then use with on banner('Start task'), printing 'Working' inside the block\n\n", "solution": "from contextlib import contextmanager\n\n@contextmanager\ndef banner(title):\n    print(f'==== {title} ====')\n    try:\n        yield\n    finally:\n        print('================')\n\nwith banner('Start task'):\n    print('Working')", "grading": {"requiredAst": ["FunctionDef:banner", "With", "ImportFrom:contextmanager"], "stdoutEquals": "==== Start task ====\nWorking\n================\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 3 / 4</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Write a banner with @contextmanager</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Use <code>@contextmanager</code> to write a <strong>generator-function</strong> context manager <code>banner(title)</code>:</p>
+<ul>
+<li>On entering (before yield): print <code>f'==== {title} ===='</code></li>
+<li>yield (no value)</li>
+<li>On exiting (after yield): print <code>'================'</code></li>
+</ul>
+<p>Then use <code>with banner('Start task'):</code> around one line, <code>print('Working')</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">==== Start task ====
+Working
+================</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>@contextmanager only decorates generator functions, so you need yield</p></li></template><template class="hint-tpl"><li><p>What's before yield runs on entering; what's after yield runs on exiting</p></li></template><template class="hint-tpl"><li><p>Remember to wrap yield in try/finally so the clean-up always runs</p></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">from contextlib import contextmanager
+
+# Decorate the generator function banner(title) with @contextmanager
+# Print the opening banner before yield, and the closing line after yield (wrap yield in try/finally)
+# Then use with on banner(&#x27;Start task&#x27;), printing &#x27;Working&#x27; inside the block
+
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-7" class="step-card item" data-kind="step" aria-label="Teaching step 8">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 08 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>@contextmanager + handling exceptions</h3>
+<p>What if I want to swallow an exception? How do I write that with <code>@contextmanager</code>?</p>
+<p>Easy – wrap <code>yield</code> in <code>try/except</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from contextlib import contextmanager
+
+
+@contextmanager
+def ignore_zero_division():
+    try:
+        yield
+    except ZeroDivisionError as e:
+        print(f&#x27;Swallowed with @contextmanager: {e}&#x27;)
+
+
+with ignore_zero_division():
+    x = 1 / 0
+    print(&#x27;This line will not run&#x27;)
+
+print(&#x27;But this line will&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Swallowed with @contextmanager: division by zero
+But this line will</code></pre></div>
+<p>After <code>except</code> catches the exception, the function returns normally – that's the same as <code>__exit__</code> returning <code>True</code>. If the exception isn't caught and the generator raises it again unchanged, that's the same as <code>__exit__</code> letting the exception carry on outwards. <code>@contextmanager</code> connects both paths for you, so you just write normal Python exception handling.</p></article></section><section id="step-8" class="step-card item" data-kind="step" aria-label="Teaching step 9">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 09 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Some regulars in contextlib</h3>
+<p><code>contextlib</code> doesn't just have <code>@contextmanager</code>. It also has a few ready-to-use tools that you'll find you can't do without once you've used them:</p>
+<h4>closing: wrap an object that doesn't support <code>with</code></h4>
+<p>Not every object that needs closing implements the context manager protocol. Typical examples are objects returned by <code>urllib.request.urlopen</code> in some old versions, and some custom resource objects. <code>closing</code> adds this layer for us:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from contextlib import closing
+
+
+class Connection:
+    def __init__(self, name):
+        self.name = name
+
+    def close(self):
+        print(f&#x27;{self.name} closed&#x27;)
+
+
+with closing(Connection(&#x27;Database connection&#x27;)) as conn:
+    print(f&#x27;Using {conn.name}&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Using Database connection
+Database connection closed</code></pre></div>
+<p><code>closing(obj)</code> acts as a context manager: its <code>__enter__</code> returns <code>obj</code>, and its <code>__exit__</code> calls <code>obj.close()</code>. Simple and direct.</p></article></section><section id="step-9" class="step-card item" data-kind="step" aria-label="Teaching step 10">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 10 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h4>suppress: ignore exceptions neatly</h4>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from contextlib import suppress
+
+
+with suppress(FileNotFoundError):
+    open(&#x27;/tmp/this_file_definitely_does_not_exist_12345.txt&#x27;).read()
+
+print(&#x27;Even if the file does not exist, I can carry on&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Even if the file does not exist, I can carry on</code></pre></div>
+<p><code>suppress</code> is the general standard-library version of <code>IgnoreZeroDivision</code> above. It takes any number of exception types – if one matches, it's swallowed; if not, it's raised as normal.</p>
+<p><code>suppress</code> is shorter than <code>try: ... except SomeError: pass</code>, and it shows the intention "I really mean to ignore this exception" more clearly. But again, use it carefully – don't use it to hide real bugs.</p>
+<h4>redirect_stdout / redirect_stderr: temporarily redirect standard output</h4>
+<p>Sometimes we want to capture the <code>print</code> output of some code into a string, or write it to a file, without changing its source code:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import io
+from contextlib import redirect_stdout
+
+
+buf = io.StringIO()
+with redirect_stdout(buf):
+    print(&#x27;This will not appear in the terminal&#x27;)
+    print(&#x27;Instead it gets captured in buf&#x27;)
+
+captured = buf.getvalue()
+print(&#x27;I captured:&#x27;)
+print(captured)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">I captured:
+This will not appear in the terminal
+Instead it gets captured in buf</code></pre></div>
+<p>These two tools are really handy for test code, or for redirecting a third-party library's output to your own logger.</p>
+<h4>nullcontext: a placeholder context that does nothing</h4>
+<p>Think about this: sometimes your function needs to run inside a lock, and sometimes it doesn't. How can you write that neatly?</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from contextlib import nullcontext
+import threading
+
+
+def do_stuff(lock=None):
+    cm = lock if lock is not None else nullcontext()
+    with cm:
+        print(&#x27;Doing stuff&#x27;)
+
+
+lock = threading.Lock()
+do_stuff(lock)
+do_stuff()</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Doing stuff
+Doing stuff</code></pre></div>
+<p><code>nullcontext()</code>'s <code>__enter__</code> and <code>__exit__</code> do nothing at all – it exists purely so the <code>with</code> line can be written the same way every time. No more long, messy branches like <code>if lock: with lock: ... else: ...</code>.</p>
+<p><code>nullcontext</code> can also carry a value and pretend it's what <code>__enter__</code> returned. This is really handy when "sometimes you already have an open object, and sometimes you need to open a new one":</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from contextlib import nullcontext
+
+
+def read_text(source):
+    cm = nullcontext(source) if hasattr(source, &#x27;read&#x27;) else open(source)
+    with cm as f:
+        return f.read()
+
+
+import io
+text1 = read_text(io.StringIO(&#x27;I am an object that is already open&#x27;))
+print(text1)
+
+with open(&#x27;/tmp/two_drops_e.txt&#x27;, &#x27;w&#x27;) as f:
+    f.write(&#x27;I am content written on disk&#x27;)
+
+text2 = read_text(&#x27;/tmp/two_drops_e.txt&#x27;)
+print(text2)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">I am an object that is already open
+I am content written on disk</code></pre></div>
+<p>One function that can take either a string path or a file object that's already open – written in one smooth go. This little "accept two kinds of input" trick is used all the time in real projects.</p></article></section><section id="exercise-04-suppress" class="ex-card item" data-kind="exercise" data-exercise="04-suppress" aria-label="Exercise 4: Ignore an exception with contextlib.suppress">
+<script type="application/json" class="ex-data">{"id": "04-suppress", "lesson": "python21", "starter": "from contextlib import suppress\n# Use with + suppress to ignore ZeroDivisionError, dividing by zero inside the block\n# After with ends, print done\n\n", "solution": "from contextlib import suppress\nwith suppress(ZeroDivisionError):\n    x = 1 / 0\nprint('done')", "grading": {"requiredAst": ["With", "ImportFrom:suppress"], "stdoutEquals": "done\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 4 / 4</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Ignore an exception with contextlib.suppress</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Use <code>contextlib.suppress</code> to ignore <code>ZeroDivisionError</code>:</p>
+<ol>
+<li>Use <code>with suppress(ZeroDivisionError):</code> around <code>x = 1 / 0</code> (this line raises an exception, but it's swallowed)</li>
+<li>After the <code>with</code>, <code>print('done')</code></li>
+</ol>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">done</code></pre></div>
+<p>(The key point: the program doesn't crash because of the divide-by-zero error.)</p></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 2)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>suppress(exception type) quietly swallows that kind of exception; other exceptions are still raised as usual</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from contextlib import suppress
+with suppress(ZeroDivisionError):
+    x = 1 / 0
+print(&#x27;done&#x27;)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">from contextlib import suppress
+# Use with + suppress to ignore ZeroDivisionError, dividing by zero inside the block
+# After with ends, print done
+
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-10" class="step-card item" data-kind="step" aria-label="Teaching step 11">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 11 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>In practice: temporarily changing environment variables</h3>
+<p>Here's a very common need: test how some code behaves when a certain environment variable is set, without messing up the current process's environment.</p>
+<p>How would you write it?</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import os
+from contextlib import contextmanager
+
+
+@contextmanager
+def set_env(**kwargs):
+    old = {}
+    for k, v in kwargs.items():
+        old[k] = os.environ.get(k)
+        os.environ[k] = v
+    try:
+        yield
+    finally:
+        for k, v in old.items():
+            if v is None:
+                os.environ.pop(k, None)
+            else:
+                os.environ[k] = v
+
+
+os.environ.pop(&#x27;TWO_DROPS_OF_WATER&#x27;, None)
+print(&#x27;Before:&#x27;, os.environ.get(&#x27;TWO_DROPS_OF_WATER&#x27;))
+
+with set_env(TWO_DROPS_OF_WATER=&#x27;hello&#x27;):
+    print(&#x27;Inside with:&#x27;, os.environ.get(&#x27;TWO_DROPS_OF_WATER&#x27;))
+
+print(&#x27;After:&#x27;, os.environ.get(&#x27;TWO_DROPS_OF_WATER&#x27;))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Before: None
+Inside with: hello
+After: None</code></pre></div>
+<p>Look carefully: before entering <code>with</code>, note down the <strong>original values</strong> of the environment variables we'll change. Inside the <code>with</code> block, change them to the new values. When leaving – normally or not – put the original values back. This is the most classic use of a context manager: <strong>"change it temporarily, and restore it when you leave"</strong>.</p>
+<p>You can use the same pattern for "temporarily switch the working directory", "temporarily change sys.path", "temporarily raise the log level" and so on. Once you've got the hang of it, it feels very natural to write.</p></article></section><section id="step-11" class="step-card item" data-kind="step" aria-label="Teaching step 12">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 12 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Temporarily switching the working directory</h3>
+<p>Here's one more demo while we're at it:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import os
+from contextlib import contextmanager
+
+
+@contextmanager
+def chdir(path):
+    old = os.getcwd()
+    os.chdir(path)
+    try:
+        yield
+    finally:
+        os.chdir(old)
+
+
+before = os.getcwd()
+with chdir(&#x27;/tmp&#x27;):
+    print(&#x27;Inside with:&#x27;, os.getcwd())
+
+print(&#x27;Back where we started after leaving:&#x27;, os.getcwd() == before)</code></pre></div>
+<p>Output (your paths may differ):</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Inside with: /tmp
+Back where we started after leaving: True</code></pre></div>
+<p>One more note: Python 3.11 added <code>contextlib.chdir</code> to the standard library. It does the same thing as the one we wrote, so you can just <code>from contextlib import chdir</code>. If you're on 3.11+, no need to reinvent the wheel.</p></article></section><section id="step-12" class="step-card item" data-kind="step" aria-label="Teaching step 13">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 13 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>ExitStack: a variable number of contexts</h3>
+<p>So far, we've assumed "I have N contexts, and I know N when I write the code". But sometimes N is only known at <strong>runtime</strong> – for example, "open a list of files the user gave me, and close them all when I'm done".</p>
+<p>You can't write it in one <code>with</code> line, because you don't know how many names there will be. You can't use nested <code>with</code>s either, because you don't know how many levels to nest. That's when <code>ExitStack</code> comes in.</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from contextlib import ExitStack
+
+
+def make_files(paths):
+    with ExitStack() as stack:
+        files = [stack.enter_context(open(p)) for p in paths]
+        total = sum(len(f.read()) for f in files)
+        print(f&#x27;Read {len(files)} files, {total} bytes in total&#x27;)
+
+
+with open(&#x27;/tmp/two_drops_a.txt&#x27;, &#x27;w&#x27;) as f:
+    f.write(&#x27;a&#x27; * 100)
+with open(&#x27;/tmp/two_drops_b.txt&#x27;, &#x27;w&#x27;) as f:
+    f.write(&#x27;bb&#x27; * 50)
+with open(&#x27;/tmp/two_drops_c.txt&#x27;, &#x27;w&#x27;) as f:
+    f.write(&#x27;ccc&#x27; * 30)
+
+make_files([&#x27;/tmp/two_drops_a.txt&#x27;, &#x27;/tmp/two_drops_b.txt&#x27;, &#x27;/tmp/two_drops_c.txt&#x27;])</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Read 3 files, 290 bytes in total</code></pre></div>
+<p><code>stack.enter_context(cm)</code> "pushes" a context manager onto the stack – the same as putting it in the outermost <code>with</code>. When <code>with ExitStack()</code> exits, every context on the stack is exited one by one in "last in, first out" order – exactly the same as normal nested <code>with</code>s.</p>
+<p><code>ExitStack</code> also has a really handy method called <code>callback</code>, which registers an ordinary clean-up function – it doesn't need to be a context manager:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from contextlib import ExitStack
+
+
+def cleanup(name):
+    print(f&#x27;Cleaning up {name}&#x27;)
+
+
+with ExitStack() as stack:
+    stack.callback(cleanup, &#x27;A&#x27;)
+    stack.callback(cleanup, &#x27;B&#x27;)
+    stack.callback(cleanup, &#x27;C&#x27;)
+    print(&#x27;Inside the with block&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Inside the with block
+Cleaning up C
+Cleaning up B
+Cleaning up A</code></pre></div>
+<p>The clean-up order is C → B → A – backwards. That matches the natural feeling of "opened first, closed last".</p>
+<p><code>ExitStack</code> has some more advanced uses too, like <code>pop_all</code>, which moves the stack into another <code>ExitStack</code> to make "transaction-style clean-up". But that's an advanced topic – look it up in the docs when you actually need it.</p>
+<p>Here's a really practical pattern: open a variable number of files, and if one of them fails partway, close all the ones already opened. <code>ExitStack</code> does this for us automatically:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from contextlib import ExitStack
+
+
+def open_safely(paths):
+    with ExitStack() as stack:
+        files = []
+        for p in paths:
+            files.append(stack.enter_context(open(p)))
+        return [f.name for f in files]
+
+
+# Prepare three files that really exist
+for name in [&#x27;/tmp/two_drops_x.txt&#x27;, &#x27;/tmp/two_drops_y.txt&#x27;, &#x27;/tmp/two_drops_z.txt&#x27;]:
+    with open(name, &#x27;w&#x27;) as f:
+        f.write(&#x27;hi&#x27;)
+
+names = open_safely([&#x27;/tmp/two_drops_x.txt&#x27;, &#x27;/tmp/two_drops_y.txt&#x27;, &#x27;/tmp/two_drops_z.txt&#x27;])
+print(f&#x27;Safely handled {len(names)} files&#x27;)
+
+try:
+    open_safely([&#x27;/tmp/two_drops_x.txt&#x27;, &#x27;/tmp/this_does_not_exist_99999.txt&#x27;])
+except FileNotFoundError as e:
+    print(f&#x27;The second file failed, but the first one was closed automatically: {e.filename}&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Safely handled 3 files
+The second file failed, but the first one was closed automatically: /tmp/this_does_not_exist_99999.txt</code></pre></div>
+<p>This is where <code>ExitStack</code> is worth the most in real projects: <strong>"open in bulk, and roll everything back together if anything fails"</strong>. Writing that by hand with <code>try/finally</code> would be very wordy, and it would be easy to miss an exception path.</p></article></section><section id="step-13" class="step-card item" data-kind="step" aria-label="Teaching step 14">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 14 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>async with: <code>with</code> in the async world</h3>
+<p>Finally, a quick word about the async version. Python 3.5 added the <code>async/await</code> syntax, and from 3.7 it gradually became mainstream. Inside an <code>async def</code> function, if you want to use a context manager, you write <code>async with</code>:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># This is just an illustration; it needs to run inside an async function
+# async with httpx.AsyncClient() as client:
+#     resp = await client.get(&#x27;https://example.com&#x27;)</code></pre></div>
+<p>The matching protocol methods are <code>__aenter__</code> and <code>__aexit__</code>, and <code>contextlib</code> also has an <code>@asynccontextmanager</code> decorator. We'll go deeper in the <code>async/await</code> chapter. For now, just know it exists, so you're not confused when you see <code>async with</code> in async code.</p></article></section><section id="step-14" class="step-card item" data-kind="step" aria-label="Teaching step 15">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 15 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Mini project: writing a timer context</h3>
+<p>Let's tie together what we've learned in this chapter with a little tool: record the time when entering <code>with</code>, and print "this code took X milliseconds" when leaving.</p>
+<p>First, the class version:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import time
+
+
+class Timer:
+    def __init__(self, name=&#x27;Unnamed block&#x27;):
+        self.name = name
+
+    def __enter__(self):
+        self.start = time.perf_counter()
+        return self
+
+    def __exit__(self, exc_type, exc_val, tb):
+        cost_ms = (time.perf_counter() - self.start) * 1000
+        print(f&#x27;{self.name} took {cost_ms:.2f} ms&#x27;)
+
+
+with Timer(&quot;Two Drops&#x27; nap time&quot;):
+    time.sleep(0.05)
+    s = sum(range(10000))</code></pre></div>
+<p>The output is roughly:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Two Drops&#x27; nap time took 50.46 ms</code></pre></div>
+<p>Now rewrite it with <code>@contextmanager</code> and compare:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import time
+from contextlib import contextmanager
+
+
+@contextmanager
+def timer(name=&#x27;Unnamed block&#x27;):
+    start = time.perf_counter()
+    try:
+        yield
+    finally:
+        cost_ms = (time.perf_counter() - start) * 1000
+        print(f&#x27;{name} took {cost_ms:.2f} ms&#x27;)
+
+
+with timer(&#x27;Clocking in&#x27;):
+    time.sleep(0.03)
+    sum(range(5000))</code></pre></div>
+<p>The output is roughly:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Clocking in took 30.21 ms</code></pre></div>
+<p>Which version would you pick? I personally prefer the <code>@contextmanager</code> version – it's more compact. But when a context manager needs to keep complicated state, be reused, or be inherited from, the class version fits better. Both have the same abilities – choose based on the situation.</p>
+<p>One more bonus: what if you want <code>Timer</code> to work both as a context manager <strong>and</strong> as a decorator? These two needs often come together. <code>contextlib</code> already thought of this – the base class <code>ContextDecorator</code> does it in one line:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import time
+from contextlib import ContextDecorator
+
+
+class Timer(ContextDecorator):
+    def __init__(self, name=&#x27;Unnamed block&#x27;):
+        self.name = name
+
+    def __enter__(self):
+        self.start = time.perf_counter()
+        return self
+
+    def __exit__(self, exc_type, exc_val, tb):
+        cost_ms = (time.perf_counter() - self.start) * 1000
+        print(f&#x27;{self.name} took {cost_ms:.2f} ms&#x27;)
+
+
+@Timer(&quot;Two Drops&#x27; function&quot;)
+def work():
+    time.sleep(0.02)
+
+
+work()</code></pre></div>
+<p>The output is roughly:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Two Drops&#x27; function took 20.34 ms</code></pre></div>
+<p>And functions written with <code>@contextmanager</code> can be used as decorators too, with no extra work:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import time
+from contextlib import contextmanager
+
+
+@contextmanager
+def timer(name=&#x27;Unnamed block&#x27;):
+    start = time.perf_counter()
+    try:
+        yield
+    finally:
+        cost_ms = (time.perf_counter() - start) * 1000
+        print(f&#x27;{name} took {cost_ms:.2f} ms&#x27;)
+
+
+@timer(&#x27;Clock-in function&#x27;)
+def punch():
+    time.sleep(0.01)
+
+
+punch()</code></pre></div>
+<p>The output is roughly:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Clock-in function took 10.32 ms</code></pre></div>
+<p>Notice that <code>@contextmanager</code> comes with <code>ContextDecorator</code>'s abilities built in? So one function being both a decorator and a context manager feels perfectly natural. That's why lots of logging, performance-monitoring and tracing libraries like writing their core APIs with <code>@contextmanager</code>: one implementation, two ways to use it.</p></article></section><section id="step-15" class="step-card item" data-kind="step" aria-label="Teaching step 16">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 16 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Common anti-patterns</h3>
+<p>Finally, a few words about the traps beginners fall into most:</p>
+<h4>Anti-pattern 1: using a <code>with</code> variable outside the <code>with</code></h4>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">with open(&#x27;/tmp/two_drops_d.txt&#x27;, &#x27;w&#x27;) as f:
+    f.write(&#x27;hi&#x27;)
+
+print(f.closed)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">True</code></pre></div>
+<p>The variable <code>f</code> <strong>still exists</strong> after <code>with</code> exits, but the file object it points to has been closed. This isn't an error, but it's very misleading – many beginners think <code>f</code> becomes <code>None</code> or gives a <code>NameError</code> after <code>with</code>, but it doesn't. You can still get the variable, but it's "dead". That's a design choice in Python's context managers.</p>
+<p>Remember: after a <code>with</code> block exits, the variable after <code>as</code> still exists in the current scope, but its resource has been released. Touching it will probably cause an error.</p>
+<h4>Anti-pattern 2: forgetting try/finally</h4>
+<p>If you leave out <code>try/finally</code> when writing <code>@contextmanager</code>, it looks fine on the normal path, but as soon as there's an exception, the resource leaks:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from contextlib import contextmanager
+
+
+@contextmanager
+def bad():
+    print(&#x27;Opening the resource&#x27;)
+    yield
+    print(&#x27;Closing the resource&#x27;)
+
+
+try:
+    with bad():
+        raise ValueError(&#x27;Raising an exception on purpose&#x27;)
+except ValueError:
+    print(&#x27;The outer code caught the exception&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Opening the resource
+The outer code caught the exception</code></pre></div>
+<p>"Closing the resource" was <strong>never printed</strong>, because the exception skipped all the code after <code>yield</code>. That's why we stressed it earlier: clean-up logic must go in <code>finally</code>.</p>
+<h4>Anti-pattern 3: yielding more than once in a @contextmanager function</h4>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from contextlib import contextmanager
+
+
+@contextmanager
+def double_yield():
+    print(&#x27;Getting ready&#x27;)
+    yield 1
+    yield 2
+    print(&#x27;Done&#x27;)
+
+
+try:
+    with double_yield() as v:
+        print(f&#x27;Got {v}&#x27;)
+except RuntimeError as e:
+    print(f&#x27;Error: {e}&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Getting ready
+Got 1
+Error: generator didn&#x27;t stop</code></pre></div>
+<p>A generator decorated with <code>@contextmanager</code> can <strong>only <code>yield</code> once</strong>. Before the yield is <code>__enter__</code>; after the yield is <code>__exit__</code>. If it yields twice, Python notices at the second yield that "this generator didn't end straight after the yield as expected", and raises a <code>RuntimeError</code>. This is an easy bug for beginners to write, because normal generator functions <strong>are</strong> allowed to yield many times – but inside <code>@contextmanager</code>, only once.</p>
+<h4>Anti-pattern 4: abusing <code>return True</code> to swallow exceptions</h4>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class SwallowEverything:
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, tb):
+        return True
+
+
+with SwallowEverything():
+    1 / 0
+    raise RuntimeError(&#x27;what?&#x27;)
+
+print(&#x27;Somehow I am still running&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Somehow I am still running</code></pre></div>
+<p>A "swallow everything" context manager like this is a huge anti-pattern. It eats real bugs too, letting the program keep running in a broken state, and making debugging impossible. <code>return True</code> should be a very narrow, very deliberate "I mean to ignore exactly this one exception" action – not a lazy way to "make the world a bit quieter".</p></article></section><section id="step-16" class="step-card item" data-kind="step" aria-label="Teaching step 17">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 17 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>A combined example: a reusable "Brother Shui clock-in auditor"</h3>
+<p>To tie everything together, let's finish with a slightly more complicated example. The task: every time an employee arrives at their desk, record the start time; when they leave, record the end time; if the code raises an exception in between, record the exception type too. Finally, add a summary report.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import time
+from contextlib import contextmanager
+
+
+class Auditor:
+    def __init__(self):
+        self.events = []
+
+    @contextmanager
+    def shift(self, name):
+        start = time.perf_counter()
+        self.events.append({&#x27;name&#x27;: name, &#x27;phase&#x27;: &#x27;enter&#x27;})
+        try:
+            yield
+        except Exception as e:
+            self.events.append({
+                &#x27;name&#x27;: name,
+                &#x27;phase&#x27;: &#x27;error&#x27;,
+                &#x27;exception&#x27;: type(e).__name__,
+            })
+            raise
+        finally:
+            cost_ms = (time.perf_counter() - start) * 1000
+            self.events.append({
+                &#x27;name&#x27;: name,
+                &#x27;phase&#x27;: &#x27;leave&#x27;,
+                &#x27;cost_ms&#x27;: round(cost_ms, 2),
+            })
+
+    def report(self):
+        print(f&#x27;Recorded {len(self.events)} events in total:&#x27;)
+        for e in self.events:
+            print(f&#x27;  - {e}&#x27;)
+
+
+auditor = Auditor()
+
+with auditor.shift(&#x27;Two Drops&#x27;):
+    time.sleep(0.01)
+
+try:
+    with auditor.shift(&#x27;Student A&#x27;):
+        raise ValueError(&#x27;The code blew up&#x27;)
+except ValueError:
+    pass
+
+with auditor.shift(&#x27;Student B&#x27;):
+    time.sleep(0.005)
+
+auditor.report()</code></pre></div>
+<p>The output is roughly:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Recorded 7 events in total:
+  - {&#x27;name&#x27;: &#x27;Two Drops&#x27;, &#x27;phase&#x27;: &#x27;enter&#x27;}
+  - {&#x27;name&#x27;: &#x27;Two Drops&#x27;, &#x27;phase&#x27;: &#x27;leave&#x27;, &#x27;cost_ms&#x27;: 10.42}
+  - {&#x27;name&#x27;: &#x27;Student A&#x27;, &#x27;phase&#x27;: &#x27;enter&#x27;}
+  - {&#x27;name&#x27;: &#x27;Student A&#x27;, &#x27;phase&#x27;: &#x27;error&#x27;, &#x27;exception&#x27;: &#x27;ValueError&#x27;}
+  - {&#x27;name&#x27;: &#x27;Student A&#x27;, &#x27;phase&#x27;: &#x27;leave&#x27;, &#x27;cost_ms&#x27;: 0.16}
+  - {&#x27;name&#x27;: &#x27;Student B&#x27;, &#x27;phase&#x27;: &#x27;enter&#x27;}
+  - {&#x27;name&#x27;: &#x27;Student B&#x27;, &#x27;phase&#x27;: &#x27;leave&#x27;, &#x27;cost_ms&#x27;: 5.21}</code></pre></div>
+<p>This code gets several important things right. Check them one by one:</p>
+<ol>
+<li><code>@contextmanager</code> decorates a <strong>method of a class</strong> – that's completely allowed, and the method's <code>self</code> is still available inside the generator</li>
+<li>It has the full <code>try/except/finally</code> trio: the exception path goes through <code>except</code>, and <strong>every</strong> path goes through <code>finally</code></li>
+<li><code>except Exception as e: ...; raise</code>: record it first, then re-raise it unchanged – no swallowing</li>
+<li>The report shows the full life cycle of an error event: enter → error → leave</li>
+</ol>
+<p>This is how context managers are typically used in real projects – one object and a few lines of code wrap up "timing, recording exceptions and cleaning up resources" together. In performance monitoring, APM tools and tracing, almost every library's core API looks like this.</p></article></section><section id="step-17" class="step-card item" data-kind="step" aria-label="Teaching step 18">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 18 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Summary</h3>
+<p><code>with</code> isn't an isolated bit of syntactic sugar – behind it is the <strong>context manager protocol</strong>:</p>
+<ul>
+<li><code>__enter__</code> to go in, <code>__exit__</code> to leave</li>
+<li><code>__exit__</code> receives three exception-related parameters; returning <code>True</code> swallows the exception (use carefully)</li>
+<li>Several contexts can be separated by commas; in 3.10+ you can wrap them in brackets over several lines</li>
+<li><code>contextlib.contextmanager</code> lets one <code>yield</code> replace two dunder methods – but you must use <code>try/finally</code> to make sure clean-up code runs</li>
+<li>Little tools like <code>closing</code>, <code>suppress</code>, <code>redirect_stdout</code> and <code>nullcontext</code> save a lot of boilerplate</li>
+<li><code>ExitStack</code> handles "a variable number of contexts"</li>
+<li><code>async with</code> is the async version – same idea; we'll look closer in the <code>async/await</code> chapter</li>
+</ul>
+<p>Anywhere you have "paired operations", "borrow and return a resource", "temporary switches" or "enter/leave", you can wrap it in a context manager. Once you build this habit, your code will not only be shorter, it'll also handle exception paths naturally – that's what makes <code>with</code> really valuable.</p>
+<p>In the next chapter, we'll dive into the world of <code>async/await</code>, and see how Python uses one <code>async</code> keyword to unlock the whole async ecosystem. Get comfortable with <code>with</code> first, and <code>async with</code> will feel like the obvious next step.</p></article></section><section id="step-18" class="step-card item" data-kind="step" aria-label="Teaching step 19">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 19 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Keep the result, close the resource</h3>
+<p><code>with</code> isn't just about saving one line of <code>close()</code>. Let's use some in-memory text to see what's still usable before and after leaving the block:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from io import StringIO
+
+with StringIO(&#x27;Python:15&#x27;) as stream:
+    content = stream.read()
+print(content)
+print(stream.closed)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Python:15
+True</code></pre></div>
+<p>The text has already been read into <code>content</code>, and that string is still usable. But <code>stream</code> has been closed. Don't assume the resource is still readable or writable just because the variable name still exists.</p>
+<p>Try moving <code>stream.read()</code> to after the <code>with</code> yourself, and look at the error from reading after it's closed. Then raise an exception on purpose inside the block, catch it outside, and check <code>stream.closed</code>. For this object, the resource is still closed on the way out.</p>
+<p>Also remember: what <code>with</code> does depends on the specific context manager. It does <strong>not</strong> promise to automatically undo everything that already happened. For example, if you open a file, write some content, and then an exception happens, using <code>with</code> doesn't automatically restore the old file. Cleaning up resources, whether an exception is passed on, and data transactions are different problems.</p></article></section><div class="lock-banner" hidden><span aria-hidden="true">🔒</span>Solve this exercise to unlock the next part ·<span class="accent lock-k">0</span><span aria-hidden="true">/</span><span>4</span></div><section id="lesson-end" aria-label="Chapter summary"><div class="done-banner" hidden><div class="done-emoji" aria-hidden="true">🎉</div><p class="done-title">Chapter complete!</p><p class="done-sub">You solved all 4 exercises in this chapter.</p></div><nav aria-label="Chapter navigation" class="chapter-nav"><div class="cn-grid"><a class="chap-nav prev focus-ring" href="/lessons/python20/dataclass/"><span class="cn-label">← Previous chapter</span><span class="cn-title">20 · dataclass</span></a><div class="cn-mid"><span>Context managers (with)</span></div><a class="chap-nav next focus-ring" href="/lessons/python22/async/"><span class="cn-label">Next chapter →</span><span class="cn-title">22 · async / await</span></a></div></nav></section></article></div>
+    <aside class="lesson-sidebar right" aria-label="This chapter"><nav aria-label="This chapter's contents"><div class="side-label up">In this chapter</div><p class="toc-chapter">Context managers (with)</p><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Context Managers: what does with really do?</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">The essence of with: the context manager protocol</span></a></li><li class="toc-li" data-target="exercise-01-with-stringio"><a href="#exercise-01-with-stringio" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">Use with on a StringIO</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">Let&#x27;s look back at open</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">A slightly more useful example: a clock-in context</span></a></li><li class="toc-li" data-target="exercise-02-custom-class"><a href="#exercise-02-custom-class" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">A custom context manager class</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">Managing several contexts at once</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">The three parameters of __exit__: handling exceptions</span></a></li><li class="toc-li" data-target="step-6"><a href="#step-6" class="toc-link focus-ring"><span class="toc-kind">Teaching 07</span><span class="toc-title">contextlib: the standard library&#x27;s good friend</span></a></li><li class="toc-li" data-target="exercise-03-contextmanager"><a href="#exercise-03-contextmanager" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">Write a banner with @contextmanager</span></a></li><li class="toc-li" data-target="step-7"><a href="#step-7" class="toc-link focus-ring"><span class="toc-kind">Teaching 08</span><span class="toc-title">@contextmanager + handling exceptions</span></a></li><li class="toc-li" data-target="step-8"><a href="#step-8" class="toc-link focus-ring"><span class="toc-kind">Teaching 09</span><span class="toc-title">Some regulars in contextlib</span></a></li><li class="toc-li" data-target="step-9"><a href="#step-9" class="toc-link focus-ring"><span class="toc-kind">Teaching 10</span><span class="toc-title">suppress: ignore exceptions neatly</span></a></li><li class="toc-li" data-target="exercise-04-suppress"><a href="#exercise-04-suppress" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">Ignore an exception with contextlib.suppress</span></a></li><li class="toc-li" data-target="step-10"><a href="#step-10" class="toc-link focus-ring"><span class="toc-kind">Teaching 11</span><span class="toc-title">In practice: temporarily changing environment variables</span></a></li><li class="toc-li" data-target="step-11"><a href="#step-11" class="toc-link focus-ring"><span class="toc-kind">Teaching 12</span><span class="toc-title">Temporarily switching the working directory</span></a></li><li class="toc-li" data-target="step-12"><a href="#step-12" class="toc-link focus-ring"><span class="toc-kind">Teaching 13</span><span class="toc-title">ExitStack: a variable number of contexts</span></a></li><li class="toc-li" data-target="step-13"><a href="#step-13" class="toc-link focus-ring"><span class="toc-kind">Teaching 14</span><span class="toc-title">async with: with in the async world</span></a></li><li class="toc-li" data-target="step-14"><a href="#step-14" class="toc-link focus-ring"><span class="toc-kind">Teaching 15</span><span class="toc-title">Mini project: writing a timer context</span></a></li><li class="toc-li" data-target="step-15"><a href="#step-15" class="toc-link focus-ring"><span class="toc-kind">Teaching 16</span><span class="toc-title">Common anti-patterns</span></a></li><li class="toc-li" data-target="step-16"><a href="#step-16" class="toc-link focus-ring"><span class="toc-kind">Teaching 17</span><span class="toc-title">A combined example: a reusable &quot;Brother Shui clock-in auditor&quot;</span></a></li><li class="toc-li" data-target="step-17"><a href="#step-17" class="toc-link focus-ring"><span class="toc-kind">Teaching 18</span><span class="toc-title">Summary</span></a></li><li class="toc-li" data-target="step-18"><a href="#step-18" class="toc-link focus-ring"><span class="toc-kind">Teaching 19</span><span class="toc-title">Keep the result, close the resource</span></a></li></ol></nav></aside>
+  </div>
+  <dialog class="dir-dialog" aria-labelledby="dir-title"><div class="dd-inner"><div class="dd-head"><h2 id="dir-title">Contents</h2><button type="button" class="dd-close focus-ring">Close</button></div>
+  <div class="dd-tabs" aria-label="Contents scope"><button type="button" class="dd-tab focus-ring" data-tab="all" aria-pressed="true">All lessons</button><button type="button" class="dd-tab focus-ring" data-tab="chapter" aria-pressed="false">This chapter</button></div>
+  <div class="dd-body"><div class="dd-pane" data-pane="all"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></div><div class="dd-pane" data-pane="chapter" hidden><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Context Managers: what does with really do?</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">The essence of with: the context manager protocol</span></a></li><li class="toc-li" data-target="exercise-01-with-stringio"><a href="#exercise-01-with-stringio" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">Use with on a StringIO</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">Let&#x27;s look back at open</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">A slightly more useful example: a clock-in context</span></a></li><li class="toc-li" data-target="exercise-02-custom-class"><a href="#exercise-02-custom-class" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">A custom context manager class</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">Managing several contexts at once</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">The three parameters of __exit__: handling exceptions</span></a></li><li class="toc-li" data-target="step-6"><a href="#step-6" class="toc-link focus-ring"><span class="toc-kind">Teaching 07</span><span class="toc-title">contextlib: the standard library&#x27;s good friend</span></a></li><li class="toc-li" data-target="exercise-03-contextmanager"><a href="#exercise-03-contextmanager" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">Write a banner with @contextmanager</span></a></li><li class="toc-li" data-target="step-7"><a href="#step-7" class="toc-link focus-ring"><span class="toc-kind">Teaching 08</span><span class="toc-title">@contextmanager + handling exceptions</span></a></li><li class="toc-li" data-target="step-8"><a href="#step-8" class="toc-link focus-ring"><span class="toc-kind">Teaching 09</span><span class="toc-title">Some regulars in contextlib</span></a></li><li class="toc-li" data-target="step-9"><a href="#step-9" class="toc-link focus-ring"><span class="toc-kind">Teaching 10</span><span class="toc-title">suppress: ignore exceptions neatly</span></a></li><li class="toc-li" data-target="exercise-04-suppress"><a href="#exercise-04-suppress" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">Ignore an exception with contextlib.suppress</span></a></li><li class="toc-li" data-target="step-10"><a href="#step-10" class="toc-link focus-ring"><span class="toc-kind">Teaching 11</span><span class="toc-title">In practice: temporarily changing environment variables</span></a></li><li class="toc-li" data-target="step-11"><a href="#step-11" class="toc-link focus-ring"><span class="toc-kind">Teaching 12</span><span class="toc-title">Temporarily switching the working directory</span></a></li><li class="toc-li" data-target="step-12"><a href="#step-12" class="toc-link focus-ring"><span class="toc-kind">Teaching 13</span><span class="toc-title">ExitStack: a variable number of contexts</span></a></li><li class="toc-li" data-target="step-13"><a href="#step-13" class="toc-link focus-ring"><span class="toc-kind">Teaching 14</span><span class="toc-title">async with: with in the async world</span></a></li><li class="toc-li" data-target="step-14"><a href="#step-14" class="toc-link focus-ring"><span class="toc-kind">Teaching 15</span><span class="toc-title">Mini project: writing a timer context</span></a></li><li class="toc-li" data-target="step-15"><a href="#step-15" class="toc-link focus-ring"><span class="toc-kind">Teaching 16</span><span class="toc-title">Common anti-patterns</span></a></li><li class="toc-li" data-target="step-16"><a href="#step-16" class="toc-link focus-ring"><span class="toc-kind">Teaching 17</span><span class="toc-title">A combined example: a reusable &quot;Brother Shui clock-in auditor&quot;</span></a></li><li class="toc-li" data-target="step-17"><a href="#step-17" class="toc-link focus-ring"><span class="toc-kind">Teaching 18</span><span class="toc-title">Summary</span></a></li><li class="toc-li" data-target="step-18"><a href="#step-18" class="toc-link focus-ring"><span class="toc-kind">Teaching 19</span><span class="toc-title">Keep the result, close the resource</span></a></li></ol></div></div></div></dialog>
+  <div class="py-toast" hidden><span class="spinner"></span><span class="py-toast-text">Loading Python…</span></div>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>© 2026 Python for Beginners · English edition of the <a href="https://github.com/walter201230/Python">walter201230/Python</a> tutorial (CC BY 4.0)</span>
+    <div class="footer-links"><a href="/">Course list</a><a href="/about/">About this site</a><a href="https://github.com/walter201230/Python">GitHub</a></div>
+  </div>
+</footer>
+<script src="/assets/site.js?v=20261028"></script>
+</body>
+</html>

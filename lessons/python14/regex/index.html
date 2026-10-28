@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Regular expressions – Python for Beginners</title>
+<meta name="description" content="The re module: match, extract and replace complex patterns in text with one rule.">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css?v=20261028">
+
+</head>
+<body data-page="lesson" data-lesson="python14" data-total="4">
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="/" aria-label="Python for Beginners – home"><span class="gradient-text-flow" data-text="Python for Beginners">Python for Beginners</span></a>
+    <nav class="header-nav">
+      <a class="nav-link" href="/about/">About</a>
+      <a class="nav-icon focus-ring" href="https://github.com/walter201230/Python" aria-label="Original tutorial on GitHub" title="Original tutorial on GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+      <button type="button" class="theme-toggle focus-ring" aria-label="Switch theme"><span class="knob"><svg class="ic-moon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button>
+    </nav>
+  </div>
+</header>
+<main class="site-main">
+<div class="lesson-shell bg-tech-grid">
+  <div class="mobile-bar"><div class="mb-inner"><button type="button" class="dir-btn focus-ring" aria-haspopup="dialog">Contents</button></div></div>
+  <div class="lesson-columns">
+    <aside class="lesson-sidebar left" aria-label="All lessons"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></aside>
+    <div class="lesson-main"><article class="lesson-article"><header class="lesson-head"><h1>Regular expressions</h1><p class="lh-sub"><span class="accent">4</span> exercises<span class="sep">·</span>about <span class="accent">45</span> min<span class="sep">·</span>solve one to unlock the next part</p>
+<p class="lh-link"><a class="subtle-link focus-ring" href="/lessons/python14/regex/read/">Read the whole chapter →</a></p></header><section id="step-0" class="step-card item" data-kind="step" aria-label="Teaching step 1">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 01 / 08</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>Contents</h2>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Getting to Know Regular Expressions Step by Step
+        │
+        ├── A First Look at Python Regular Expressions
+        ├── Character Sets
+        ├── Quantifiers
+        ├── Boundaries and Groups
+        ├── re.sub
+        └── re.match and re.search</code></pre></div></article></section><section id="step-1" class="step-card item" data-kind="step" aria-label="Teaching step 2">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 02 / 08</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>A First Look at Python Regular Expressions</h2>
+<p>A <strong>regular expression</strong> (regex) is a special sequence of characters used to check whether a string matches a pattern that we set.</p>
+<p>Python added the <code>re</code> module in version 1.5. It provides Perl-style regular expression patterns, and gives Python the full power of regular expressions.</p>
+<p>Let's get to know regular expressions step by step, with examples.</p>
+<p>Say we want to check whether a string contains some character or characters. Usually we use built-in functions, like this:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Set a constant
+a = &#x27;TwoDrops|twowater|liangdianshui|GrassRootsCoder|ReadingWithU&#x27;
+
+# Check whether it contains the string &quot;TwoDrops&quot;, using Python&#x27;s built-in functions
+
+print(f&#x27;Does it contain &quot;TwoDrops&quot;? {a.index(&quot;TwoDrops&quot;) &gt; -1}&#x27;)
+print(f&#x27;Does it contain &quot;TwoDrops&quot;? {&quot;TwoDrops&quot; in a}&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Does it contain &quot;TwoDrops&quot;? True
+Does it contain &quot;TwoDrops&quot;? True</code></pre></div>
+<p>So what if we use a regular expression?</p>
+<p>As we said, Python gives us the <code>re</code> module for all regular expression features. Let's use one of its functions first:</p>
+<div class="cb not-prose" data-mode="syntax"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Syntax only</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">re.findall(pattern, string[, flags])</code></pre></div>
+<p>This function finds <strong>all</strong> the parts of the string that match the regular expression, and returns them as a list. Like this:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">
+import re
+
+# Set a constant
+a = &#x27;TwoDrops|twowater|liangdianshui|GrassRootsCoder|ReadingWithU&#x27;
+
+# Regular expression
+
+findall = re.findall(&#x27;TwoDrops&#x27;, a)
+print(findall)
+
+if len(findall) &gt; 0:
+    print(&#x27;a contains the string &quot;TwoDrops&quot;&#x27;)
+else:
+    print(&#x27;a does not contain the string &quot;TwoDrops&quot;&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[&#x27;TwoDrops&#x27;]
+a contains the string &quot;TwoDrops&quot;</code></pre></div>
+<p>From the output, it does the same job as the built-in functions. But I must stress: this example is only to help us understand regular expressions. Writing a regex like this is pointless. Why?</p>
+<p>Because if a problem can be solved with Python's built-in functions, there's no need for a regular expression – it's just extra work. Also, the "regular expression" in this example is just a fixed string, not a <strong>rule</strong>. The soul of a regular expression is its <strong>rules</strong>, so this doesn't mean much.</p>
+<p>So how do you write a regex rule? Don't rush – let's go step by step. Let's start simple: find all the <strong>lowercase letters</strong> in the string. The first argument of <code>findall</code> is the regex rule. <code>[a-z]</code> matches any lowercase letter. The second argument is just the string to search. Like this:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">
+import re
+
+# Set a constant
+a = &#x27;TwoDrops|twowater|liangdianshui|GrassRootsCoder|ReadingWithU&#x27;
+
+# Pick out all the lowercase English letters in a
+
+re_findall = re.findall(&#x27;[a-z]&#x27;, a)
+
+print(re_findall)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[&#x27;w&#x27;, &#x27;o&#x27;, &#x27;r&#x27;, &#x27;o&#x27;, &#x27;p&#x27;, &#x27;s&#x27;, &#x27;t&#x27;, &#x27;w&#x27;, &#x27;o&#x27;, &#x27;w&#x27;, &#x27;a&#x27;, &#x27;t&#x27;, &#x27;e&#x27;, &#x27;r&#x27;, &#x27;l&#x27;, &#x27;i&#x27;, &#x27;a&#x27;, &#x27;n&#x27;, &#x27;g&#x27;, &#x27;d&#x27;, &#x27;i&#x27;, &#x27;a&#x27;, &#x27;n&#x27;, &#x27;s&#x27;, &#x27;h&#x27;, &#x27;u&#x27;, &#x27;i&#x27;, &#x27;r&#x27;, &#x27;a&#x27;, &#x27;s&#x27;, &#x27;s&#x27;, &#x27;o&#x27;, &#x27;o&#x27;, &#x27;t&#x27;, &#x27;s&#x27;, &#x27;o&#x27;, &#x27;d&#x27;, &#x27;e&#x27;, &#x27;r&#x27;, &#x27;e&#x27;, &#x27;a&#x27;, &#x27;d&#x27;, &#x27;i&#x27;, &#x27;n&#x27;, &#x27;g&#x27;, &#x27;i&#x27;, &#x27;t&#x27;, &#x27;h&#x27;]</code></pre></div>
+<p>Now we've got all the lowercase letters in the string.</p>
+<h3>Prepare examples that should match AND examples that shouldn't</h3>
+<p>We've built up the rules step by step. Now let's make the requirement a bit narrower: a name must be made of one or more English letters. First prepare three inputs for it, then look at the results:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import re
+
+pattern = r&#x27;[A-Za-z]+&#x27;
+for name in [&#x27;Python&#x27;, &#x27;Python20&#x27;, &#x27;&#x27;]:
+    print(bool(re.fullmatch(pattern, name)))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">True
+False
+False</code></pre></div>
+<p><code>fullmatch</code> requires the <strong>whole</strong> text to match the rule. If you used <code>search</code> instead, the <code>'Python'</code> inside <code>'Python20'</code> would be found – but that doesn't mean the whole name meets the requirement. First be clear whether you mean "contains a part that matches" or "the whole thing matches", then choose your function.</p>
+<p>Now add <code>'python'</code>, <code>'Python!'</code> and <code>'Two Drops'</code> yourself. You should get <code>True</code>, <code>False</code>, <code>False</code>. The last one is <code>False</code> because of the space – our rule only allows English letters.</p>
+<p>When you use <code>index()</code> to find a substring and it isn't there, it raises a <code>ValueError</code> – it does <strong>not</strong> return <code>-1</code> for you to compare. If you only want to check whether some plain text is there, <code>'target' in text</code> is more direct. The more complicated your rule, the more you need to keep some examples that should match, some that shouldn't, and some edge cases.</p></article></section><section id="step-2" class="step-card item" data-kind="step" aria-label="Teaching step 3">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 03 / 08</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>Character Sets</h2>
+<p>OK, with the examples above we've had a first look at Python regular expressions. You might ask: what other rules are there? What does each letter mean?</p>
+<p>Don't rush. Later in this chapter there's a list of regex rules, and you can easily find these on the internet too. So for now, let's go deeper into understanding regular expressions, and talk about <strong>character sets</strong>.</p>
+<p>A character set is a group of characters inside a pair of square brackets <code>[]</code>. With a character set, you can match <strong>one</strong> of several characters.</p>
+<p>For example, <code>C[ET]O</code> matches <strong>CEO</strong> or <strong>CTO</strong>. So <code>[ET]</code> means one E <strong>or</strong> one T. <code>[a-z]</code>, which we saw above, means any one lowercase letter. Here the hyphen <code>-</code> defines a <strong>range</strong> of characters in a row. You can put several ranges inside, like <code>[0-9a-fA-F]</code>, which matches a single hexadecimal digit, upper or lower case. Note: the order of characters and ranges inside doesn't affect the result at all.</p>
+<p>All of this is to show that the characters inside a character set <code>[]</code> have an <strong>"OR"</strong> relationship. Let's look at an example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">
+import re
+a = &#x27;uav,ubv,ucv,uwv,uzv,ucv,uov&#x27;
+
+# Character sets
+
+# Find strings where the character between u and v is a or b or c
+findall = re.findall(&#x27;u[abc]v&#x27;, a)
+print(findall)
+# For letters or digits in a row, you can use -
+l = re.findall(&#x27;u[a-c]v&#x27;, a)
+print(l)
+
+# Find strings where the character between u and v is NOT a or b or c
+re_findall = re.findall(&#x27;u[^abc]v&#x27;, a)
+print(re_findall)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[&#x27;uav&#x27;, &#x27;ubv&#x27;, &#x27;ucv&#x27;, &#x27;ucv&#x27;]
+[&#x27;uav&#x27;, &#x27;ubv&#x27;, &#x27;ucv&#x27;, &#x27;ucv&#x27;]
+[&#x27;uwv&#x27;, &#x27;uzv&#x27;, &#x27;uov&#x27;]</code></pre></div>
+<p>The example uses a <strong>negated character set</strong>: if you put a caret <code>^</code> right after the opening bracket <code>[</code>, the set is flipped ("not these"). Remember: a negated character set must still match <strong>one character</strong>. For example, <code>q[^u]</code> does <strong>not</strong> mean "match a q that isn't followed by a u". It means "match a q followed by a character that isn't u". Compare with the output of the example above to understand.</p>
+<p>Regular expressions also have some built-in rules. For example, <code>\d</code> matches any digit character – it's the same as <code>[0-9]</code>. Here's an example that explains these special characters using character sets.</p>
+<blockquote>
+<p>For Python string regexes, Unicode rules are used by default, so <code>\d</code> can also match things like full-width digits, and <code>\w</code> isn't limited to English letters, digits and underscores. Only when you limit it to ASCII rules can you think of them as the ASCII ranges below. When writing regex patterns, prefer raw strings like <code>r"\d"</code>, so the backslash isn't handled by normal string rules.</p>
+</blockquote>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import re
+
+a = &#x27;uav_ubv_ucv_uwv_uzv_ucv_uov&amp;123-456-789&#x27;
+
+# Shorthand character sets
+
+# \d is like [0-9] – matches all digit characters
+# \D is like [^0-9] – matches all non-digit characters
+findall1 = re.findall(&#x27;\d&#x27;, a)
+findall2 = re.findall(&#x27;[0-9]&#x27;, a)
+findall3 = re.findall(&#x27;\D&#x27;, a)
+findall4 = re.findall(&#x27;[^0-9]&#x27;, a)
+print(findall1)
+print(findall2)
+print(findall3)
+print(findall4)
+
+# \w matches any &quot;word&quot; character, including underscore – like [A-Za-z0-9_]
+findall5 = re.findall(&#x27;\w&#x27;, a)
+findall6 = re.findall(&#x27;[A-Za-z0-9_]&#x27;, a)
+print(findall5)
+print(findall6)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[&#x27;1&#x27;, &#x27;2&#x27;, &#x27;3&#x27;, &#x27;4&#x27;, &#x27;5&#x27;, &#x27;6&#x27;, &#x27;7&#x27;, &#x27;8&#x27;, &#x27;9&#x27;]
+[&#x27;1&#x27;, &#x27;2&#x27;, &#x27;3&#x27;, &#x27;4&#x27;, &#x27;5&#x27;, &#x27;6&#x27;, &#x27;7&#x27;, &#x27;8&#x27;, &#x27;9&#x27;]
+[&#x27;u&#x27;, &#x27;a&#x27;, &#x27;v&#x27;, &#x27;_&#x27;, &#x27;u&#x27;, &#x27;b&#x27;, &#x27;v&#x27;, &#x27;_&#x27;, &#x27;u&#x27;, &#x27;c&#x27;, &#x27;v&#x27;, &#x27;_&#x27;, &#x27;u&#x27;, &#x27;w&#x27;, &#x27;v&#x27;, &#x27;_&#x27;, &#x27;u&#x27;, &#x27;z&#x27;, &#x27;v&#x27;, &#x27;_&#x27;, &#x27;u&#x27;, &#x27;c&#x27;, &#x27;v&#x27;, &#x27;_&#x27;, &#x27;u&#x27;, &#x27;o&#x27;, &#x27;v&#x27;, &#x27;&amp;&#x27;, &#x27;-&#x27;, &#x27;-&#x27;]
+[&#x27;u&#x27;, &#x27;a&#x27;, &#x27;v&#x27;, &#x27;_&#x27;, &#x27;u&#x27;, &#x27;b&#x27;, &#x27;v&#x27;, &#x27;_&#x27;, &#x27;u&#x27;, &#x27;c&#x27;, &#x27;v&#x27;, &#x27;_&#x27;, &#x27;u&#x27;, &#x27;w&#x27;, &#x27;v&#x27;, &#x27;_&#x27;, &#x27;u&#x27;, &#x27;z&#x27;, &#x27;v&#x27;, &#x27;_&#x27;, &#x27;u&#x27;, &#x27;c&#x27;, &#x27;v&#x27;, &#x27;_&#x27;, &#x27;u&#x27;, &#x27;o&#x27;, &#x27;v&#x27;, &#x27;&amp;&#x27;, &#x27;-&#x27;, &#x27;-&#x27;]
+[&#x27;u&#x27;, &#x27;a&#x27;, &#x27;v&#x27;, &#x27;_&#x27;, &#x27;u&#x27;, &#x27;b&#x27;, &#x27;v&#x27;, &#x27;_&#x27;, &#x27;u&#x27;, &#x27;c&#x27;, &#x27;v&#x27;, &#x27;_&#x27;, &#x27;u&#x27;, &#x27;w&#x27;, &#x27;v&#x27;, &#x27;_&#x27;, &#x27;u&#x27;, &#x27;z&#x27;, &#x27;v&#x27;, &#x27;_&#x27;, &#x27;u&#x27;, &#x27;c&#x27;, &#x27;v&#x27;, &#x27;_&#x27;, &#x27;u&#x27;, &#x27;o&#x27;, &#x27;v&#x27;, &#x27;1&#x27;, &#x27;2&#x27;, &#x27;3&#x27;, &#x27;4&#x27;, &#x27;5&#x27;, &#x27;6&#x27;, &#x27;7&#x27;, &#x27;8&#x27;, &#x27;9&#x27;]
+[&#x27;u&#x27;, &#x27;a&#x27;, &#x27;v&#x27;, &#x27;_&#x27;, &#x27;u&#x27;, &#x27;b&#x27;, &#x27;v&#x27;, &#x27;_&#x27;, &#x27;u&#x27;, &#x27;c&#x27;, &#x27;v&#x27;, &#x27;_&#x27;, &#x27;u&#x27;, &#x27;w&#x27;, &#x27;v&#x27;, &#x27;_&#x27;, &#x27;u&#x27;, &#x27;z&#x27;, &#x27;v&#x27;, &#x27;_&#x27;, &#x27;u&#x27;, &#x27;c&#x27;, &#x27;v&#x27;, &#x27;_&#x27;, &#x27;u&#x27;, &#x27;o&#x27;, &#x27;v&#x27;, &#x27;1&#x27;, &#x27;2&#x27;, &#x27;3&#x27;, &#x27;4&#x27;, &#x27;5&#x27;, &#x27;6&#x27;, &#x27;7&#x27;, &#x27;8&#x27;, &#x27;9&#x27;]</code></pre></div></article></section><section id="step-3" class="step-card item" data-kind="step" aria-label="Teaching step 4">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 04 / 08</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>Quantifiers</h2>
+<p>Let's keep going deeper into regular expressions. This part is about <strong>quantifiers</strong> (how many times). Why do we need them? Think about it: if you want to match dozens or hundreds of characters, do you really want to write them one by one? That's why quantifiers exist.</p>
+<p>The syntax of a quantifier is <code>{min,max}</code>. <code>min</code> and <code>max</code> are non-negative integers. If there's a comma but no <code>max</code>, there's no upper limit. If there's no comma and no <code>max</code>, it repeats exactly <code>min</code> times. For example, <code>\b[1-9][0-9]{3}\b</code> matches a number from 1000 to 9999 (<code>\b</code> means a word boundary), and <code>\b[1-9][0-9]{2,4}\b</code> matches a number from 100 to 99999.</p>
+<p>Here's an example that matches English words of 4 to 7 letters in a string:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import re
+
+a = &#x27;java*&amp;39android##@@python&#x27;
+
+# Quantifiers
+
+findall = re.findall(&#x27;[a-z]{4,7}&#x27;, a)
+print(findall)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[&#x27;java&#x27;, &#x27;android&#x27;, &#x27;python&#x27;]</code></pre></div>
+<p>Note: there's a difference between <strong>greedy</strong> and <strong>non-greedy</strong> matching. Let's look at what they mean:</p>
+<p><strong>Greedy mode</strong>: it reads in the whole string at once. If it doesn't match, it spits out the rightmost character and tries again, until it finds a match or the string is empty. Its aim is to read <strong>as many characters as possible</strong>, so it returns as soon as it finds its first match.</p>
+<p><strong>Lazy mode</strong>: it starts from the left of the string and tries to match while reading as few characters as possible. If that fails, it reads one more character and tries again, and so on. When it finds a match, it returns it, then carries on matching until the end of the string.</p>
+<p>The example above is greedy. How do we use non-greedy (lazy) mode instead?</p>
+<p>To use non-greedy mode, add a <code>?</code>. Let's change the example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import re
+
+a = &#x27;java*&amp;39android##@@python&#x27;
+
+# Greedy vs non-greedy
+
+re_findall = re.findall(&#x27;[a-z]{4,7}?&#x27;, a)
+print(re_findall)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[&#x27;java&#x27;, &#x27;andr&#x27;, &#x27;pyth&#x27;]</code></pre></div>
+<p>From the output, <code>android</code> only gave <code>andr</code>, and <code>python</code> only gave <code>pyth</code>, because we're using lazy mode here.</p>
+<p>There are also some special characters that mean "how many", like:</p>
+<blockquote>
+<p><code>?</code>: tells the engine to match the character before it 0 or 1 times</p>
+<p><code>+</code>: tells the engine to match the character before it 1 or more times</p>
+<p><code>*</code>: tells the engine to match the character before it 0 or more times</p>
+</blockquote>
+<p>Putting it all together gives this table:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Greedy</th>
+<th>Lazy</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>?</td>
+<td>??</td>
+<td>Zero or one time, same as {0,1}</td>
+</tr>
+<tr>
+<td>+</td>
+<td>+?</td>
+<td>One or more times, same as {1,}</td>
+</tr>
+<tr>
+<td>*</td>
+<td>*?</td>
+<td>Zero or more times, same as {0,}</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>{n}?</td>
+<td>Exactly n times</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>{n,m}?</td>
+<td>At least n and at most m times</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>{n,}?</td>
+<td>At least n times</td>
+</tr>
+</tbody>
+</table></div></article></section><section id="step-4" class="step-card item" data-kind="step" aria-label="Teaching step 5">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 05 / 08</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>Boundaries and Groups</h2>
+<p>We've already spent a lot of space on the points above. Now let's introduce <strong>boundary matchers</strong> and <strong>groups</strong>.</p>
+<p>The common boundary matchers are:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Syntax</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>^</td>
+<td>Matches the start of the string (with multiple lines, the start of each line)</td>
+</tr>
+<tr>
+<td>$</td>
+<td>Matches the end of the string (with multiple lines, the end of each line)</td>
+</tr>
+<tr>
+<td>\A</td>
+<td>Matches only the start of the string</td>
+</tr>
+<tr>
+<td>\Z</td>
+<td>Matches only the end of the string</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>Matches the boundary between \w and \W</td>
+</tr>
+<tr>
+<td>\B</td>
+<td>[^\b] (not a word boundary)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Groups</strong>: an expression inside round brackets is a group. A group <code>(...)</code> treats those characters as one unit. You can have several groups – each new group gets the next number (1, 2, 3…). You can also put a quantifier after a group.</p>
+<p>There should be an example here, but to save space, I've left it out.</p></article></section><section id="step-5" class="step-card item" data-kind="step" aria-label="Teaching step 6">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 06 / 08</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>re.sub</h2>
+<p>In real work, we often need to <strong>replace</strong> characters in a string. That's when we use the function <code>def sub(pattern, repl, string, count=0, flags=0)</code>. <code>re.sub</code> has five parameters: three required ones – <code>pattern</code>, <code>repl</code>, <code>string</code> – and two optional ones – <code>count</code>, <code>flags</code>.</p>
+<p>Here's what each parameter means:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pattern</td>
+<td>The regex pattern string</td>
+</tr>
+<tr>
+<td>repl</td>
+<td>Short for "replacement" – what to replace matches with</td>
+</tr>
+<tr>
+<td>string</td>
+<td>The string to process, where replacements will happen</td>
+</tr>
+<tr>
+<td>count</td>
+<td>Of the matches found by <code>pattern</code>, how many to replace (from the start)</td>
+</tr>
+<tr>
+<td>flags</td>
+<td>Regex modifiers (flags)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Look at the example below – the comments explain it clearly. The main thing to notice is that the <strong>second argument can be a function</strong>. This is what makes <code>sub</code> so powerful. For example, the function <code>convert</code> in the example checks each matched character and replaces it with something different.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
+
+import re
+
+a = &#x27;Python*Android*Java-888&#x27;
+
+# Replace every * in the string with &amp;
+sub1 = re.sub(&#x27;\*&#x27;, &#x27;&amp;&#x27;, a)
+print(sub1)
+
+# Replace only the first * in the string with &amp;
+sub2 = re.sub(&#x27;\*&#x27;, &#x27;&amp;&#x27;, a, 1)
+print(sub2)
+
+
+# Replace every * with &amp;, and every - with |
+
+# 1. First, define a function
+def convert(value):
+    group = value.group()
+    if (group == &#x27;*&#x27;):
+        return &#x27;&amp;&#x27;
+    elif (group == &#x27;-&#x27;):
+        return &#x27;|&#x27;
+
+
+# The second argument (what to replace with) can be a function
+sub3 = re.sub(&#x27;[\*-]&#x27;, convert, a)
+print(sub3)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Python&amp;Android&amp;Java-888
+Python&amp;Android*Java-888
+Python&amp;Android&amp;Java|888</code></pre></div></article></section><section id="step-6" class="step-card item" data-kind="step" aria-label="Teaching step 7">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 07 / 08</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>re.match and re.search</h2>
+<p><strong>The re.match function</strong></p>
+<p>Syntax:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">re.match(pattern, string, flags=0)</code></pre></div>
+<p><code>re.match</code> tries to match a pattern <strong>at the start</strong> of the string. If it doesn't match at the start, <code>match()</code> returns <code>None</code>.</p>
+<p><strong>The re.search function</strong></p>
+<p>Syntax:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">re.search(pattern, string, flags=0)</code></pre></div>
+<p><code>re.search</code> scans <strong>the whole string</strong> and returns the first match it finds.</p>
+<p><code>re.match</code> and <code>re.search</code> take basically the same parameters:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pattern</td>
+<td>The regular expression to match</td>
+</tr>
+<tr>
+<td>string</td>
+<td>The string to search</td>
+</tr>
+<tr>
+<td>flags</td>
+<td>Flags that control how matching works, e.g. whether it's case-sensitive</td>
+</tr>
+</tbody>
+</table></div>
+<p>So what's the difference?</p>
+<p><code>re.match</code> only matches at the <strong>start</strong> of the string. If the start doesn't match the regex, matching fails and it returns <code>None</code>. <code>re.search</code> searches the <strong>whole</strong> string until it finds a match. That's the difference.</p>
+<p>There are lots of detailed explanations of <code>re.match</code> and <code>re.search</code> online, but personally, I prefer to use <code>re.findall</code>.</p>
+<p>Look at the example below to compare <code>re.search</code> and <code>re.findall</code>, and to see how multiple groups work. Read the comments and compare with the output:</p>
+<p>Example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
+
+# Extract an image address
+
+import re
+
+a = &#x27;&lt;img src=&quot;https://s-media-cache-ak0.pinimg.com/originals/a8/c4/9e/a8c49ef606e0e1f3ee39a7b219b5c05e.jpg&quot;&gt;&#x27;
+
+# Using re.search
+search = re.search(&#x27;&lt;img src=&quot;(.*)&quot;&gt;&#x27;, a)
+# group(0) is the whole match
+print(search.group(0))
+print(search.group(1))
+
+# Using re.findall
+findall = re.findall(&#x27;&lt;img src=&quot;(.*)&quot;&gt;&#x27;, a)
+print(findall)
+
+# Using several groups (e.g. we want both the img tag name and the image address)
+re_search = re.search(&#x27;&lt;(.*) src=&quot;(.*)&quot;&gt;&#x27;, a)
+# Print img
+print(re_search.group(1))
+# Print the image address
+print(re_search.group(2))
+# Print img and the image address together, as a tuple
+print(re_search.group(1, 2))
+# Or use groups()
+print(re_search.groups())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">&lt;img src=&quot;https://s-media-cache-ak0.pinimg.com/originals/a8/c4/9e/a8c49ef606e0e1f3ee39a7b219b5c05e.jpg&quot;&gt;
+https://s-media-cache-ak0.pinimg.com/originals/a8/c4/9e/a8c49ef606e0e1f3ee39a7b219b5c05e.jpg
+[&#x27;https://s-media-cache-ak0.pinimg.com/originals/a8/c4/9e/a8c49ef606e0e1f3ee39a7b219b5c05e.jpg&#x27;]
+img
+https://s-media-cache-ak0.pinimg.com/originals/a8/c4/9e/a8c49ef606e0e1f3ee39a7b219b5c05e.jpg
+(&#x27;img&#x27;, &#x27;https://s-media-cache-ak0.pinimg.com/originals/a8/c4/9e/a8c49ef606e0e1f3ee39a7b219b5c05e.jpg&#x27;)
+(&#x27;img&#x27;, &#x27;https://s-media-cache-ak0.pinimg.com/originals/a8/c4/9e/a8c49ef606e0e1f3ee39a7b219b5c05e.jpg&#x27;)</code></pre></div>
+<p>Finally: regular expressions are a very powerful tool. They can usually solve problems that the built-in string functions can't, and most programming languages have them. Python is used for lots of things, but web scraping and data analysis especially can't do without regular expressions. So regular expressions are really important for learning Python.</p></article></section><section id="exercise-01-findall-digits" class="ex-card item" data-kind="exercise" data-exercise="01-findall-digits" aria-label="Exercise 1: Grab all the numbers with re.findall">
+<script type="application/json" class="ex-data">{"id": "01-findall-digits", "lesson": "python14", "starter": "import re\n\ns = 'abc123def456ghi789'\n# nums = re.findall(...)\n# print(nums)\n", "solution": "import re\n\ns = 'abc123def456ghi789'\nnums = re.findall(r'\\d+', s)\nprint(nums)", "grading": {"requiredAst": ["Import:re"], "stdoutEquals": "['123', '456', '789']\n", "varsEqual": {"nums": ["123", "456", "789"]}}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 1 / 4</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Grab all the numbers with re.findall</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>The string <code>'abc123def456ghi789'</code> has some <strong>runs of digits</strong> mixed in.</p>
+<p>Use <code>re.findall</code> to grab every run of digits, assign the result to the variable <code>nums</code>, then <code>print(nums)</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[&#x27;123&#x27;, &#x27;456&#x27;, &#x27;789&#x27;]</code></pre></div>
+<p>Tip: a run of digits can be matched with <code>\d+</code>.</p></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>Remember to import re</p></li></template><template class="hint-tpl"><li><p>Write the regex as a raw string r'...' so backslashes don't need escaping</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import re
+s = &#x27;abc123def456ghi789&#x27;
+nums = re.findall(r&#x27;\d+&#x27;, s)
+print(nums)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">import re
+
+s = &#x27;abc123def456ghi789&#x27;
+# nums = re.findall(...)
+# print(nums)
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="exercise-02-match-phone" class="ex-card item" data-kind="exercise" data-exercise="02-match-phone" aria-label="Exercise 2: Check a phone number with re.match">
+<script type="application/json" class="ex-data">{"id": "02-match-phone", "lesson": "python14", "starter": "import re\n\n# Define is_phone(s): use re.match with the regex above, returning True or False\n# Then call is_phone with each of the three numbers above and print the results\n\n", "solution": "import re\n\ndef is_phone(s):\n    return bool(re.match(r'^1[3-9]\\d{9}$', s))\n\nprint(is_phone('13812345678'))\nprint(is_phone('12345'))\nprint(is_phone('1381234567a'))", "grading": {"requiredAst": ["FunctionDef:is_phone", "Import:re"], "stdoutEquals": "True\nFalse\nFalse\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 2 / 4</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Check a phone number with re.match</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Write a function <code>is_phone(s)</code> that checks whether the string <code>s</code> is a valid mobile phone number in mainland China's format.</p>
+<p>Rules:
+- 11 digits in total
+- The 1st digit must be <code>1</code>
+- The 2nd digit is <code>3</code> to <code>9</code>
+- The other 9 are all digits</p>
+<p>Use <code>re.match</code>. Return <code>True</code> if it matches, otherwise <code>False</code>.</p>
+<p>Then call:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">print(is_phone(&#x27;13812345678&#x27;))
+print(is_phone(&#x27;12345&#x27;))
+print(is_phone(&#x27;1381234567a&#x27;))</code></pre></div>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">True
+False
+False</code></pre></div>
+<p>Tip: use the regex <code>^1[3-9]\d{9}$</code>. Taking it apart: <code>^</code> pins the start of the string and <code>$</code> pins the end (without them, half a string could match too); <code>[3-9]</code> means any one digit from 3 to 9; <code>\d{9}</code> means 9 digits in a row.</p></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>re.match returns a Match object or None; bool(...) turns it into True/False</p></li></template><template class="hint-tpl"><li><p>In the regex, <code>^</code> and <code>$</code> pin the start and the end, so half a string can't pass</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import re
+def is_phone(s):
+    return bool(re.match(r&#x27;^1[3-9]\d{9}$&#x27;, s))
+print(is_phone(&#x27;13812345678&#x27;))
+print(is_phone(&#x27;12345&#x27;))
+print(is_phone(&#x27;1381234567a&#x27;))</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">import re
+
+# Define is_phone(s): use re.match with the regex above, returning True or False
+# Then call is_phone with each of the three numbers above and print the results
+
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="exercise-03-groups-email" class="ex-card item" data-kind="exercise" data-exercise="03-groups-email" aria-label="Exercise 3: Pull out an email&#x27;s username and domain with groups">
+<script type="application/json" class="ex-data">{"id": "03-groups-email", "lesson": "python14", "starter": "import re\n\nemail = 'alice@example.com'\n# m = re.match(...)\n# print(m.group(1))\n# print(m.group(2))\n", "solution": "import re\n\nemail = 'alice@example.com'\nm = re.match(r'(\\w+)@(\\w+\\.\\w+)', email)\nprint(m.group(1))\nprint(m.group(2))", "grading": {"requiredAst": ["Import:re"], "stdoutEquals": "alice\nexample.com\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 3 / 4</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Pull out an email&#x27;s username and domain with groups</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>We have the string <code>email = 'alice@example.com'</code>.</p>
+<p>Use <code>re.match</code> + groups <code>(...)</code> to pull out the <strong>username</strong> and the <strong>domain</strong>, and <code>print</code> them one after the other.</p>
+<p>Requirements:
+- Group 1 matches the username (the part before <code>@</code>)
+- Group 2 matches the domain (the part after <code>@</code>)
+- Use <code>m.group(1)</code> for the username and <code>m.group(2)</code> for the domain</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">alice
+example.com</code></pre></div>
+<p>Tip: you can use the regex <code>(\w+)@(\w+\.\w+)</code>.</p></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>A group is just the part you want to pull out, wrapped in ()</p></li></template><template class="hint-tpl"><li><p><code>\.</code> matches an actual dot; <code>.</code> without the backslash means any character</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import re
+email = &#x27;alice@example.com&#x27;
+m = re.match(r&#x27;(\w+)@(\w+\.\w+)&#x27;, email)
+print(m.group(1))
+print(m.group(2))</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">import re
+
+email = &#x27;alice@example.com&#x27;
+# m = re.match(...)
+# print(m.group(1))
+# print(m.group(2))
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="exercise-04-sub-spaces" class="ex-card item" data-kind="exercise" data-exercise="04-sub-spaces" aria-label="Exercise 4: Squash several spaces into one with re.sub">
+<script type="application/json" class="ex-data">{"id": "04-sub-spaces", "lesson": "python14", "starter": "import re\n\ns = 'hello   world  python  is   cool'\n# cleaned = re.sub(...)\n# print(cleaned)\n", "solution": "import re\n\ns = 'hello   world  python  is   cool'\ncleaned = re.sub(r'\\s+', ' ', s)\nprint(cleaned)", "grading": {"requiredAst": ["Import:re"], "stdoutEquals": "hello world python is cool\n", "varsEqual": {"cleaned": "hello world python is cool"}}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 4 / 4</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Squash several spaces into one with re.sub</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Here's some text messed up with extra spaces:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">s = &#x27;hello   world  python  is   cool&#x27;</code></pre></div>
+<p>Use <code>re.sub</code> to replace <strong>each run of one or more spaces</strong> with <strong>one space</strong>, assign the result to the variable <code>cleaned</code>, then <code>print(cleaned)</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">hello world python is cool</code></pre></div>
+<p>Tip: <code>\s+</code> matches 'one or more whitespace characters'.</p></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>re.sub(pattern, repl, string): the second argument is what to replace with</p></li></template><template class="hint-tpl"><li><p>Use <code>\s+</code> to match 'one or more spaces' – the + means once or more</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import re
+s = &#x27;hello   world  python  is   cool&#x27;
+cleaned = re.sub(r&#x27;\s+&#x27;, &#x27; &#x27;, s)
+print(cleaned)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">import re
+
+s = &#x27;hello   world  python  is   cool&#x27;
+# cleaned = re.sub(...)
+# print(cleaned)
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-7" class="step-card item" data-kind="step" aria-label="Teaching step 8">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 08 / 08</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2># Common Regular Expressions</h2>
+<h3>Expressions for checking numbers</h3>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">1.  Digits: ^[0-9]*$
+2.  Exactly n digits: ^\d{n}$
+3.  At least n digits: ^\d{n,}$
+4.  m to n digits: ^\d{m,n}$
+5.  Zero, or a number not starting with zero: ^(0|[1-9][0-9]*)$
+6.  A number not starting with zero, with up to two decimal places: ^([1-9][0-9]*)+(.[0-9]{1,2})?$
+7.  A positive or negative number with 1–2 decimal places: ^(\-)?\d+(\.\d{1,2})?$
+8.  Positive numbers, negative numbers and decimals: ^(\-|\+)?\d+(\.\d+)?$
+9.  A positive real number with two decimal places: ^[0-9]+(.[0-9]{2})?$
+10. A positive real number with 1–3 decimal places: ^[0-9]+(.[0-9]{1,3})?$
+11. A non-zero positive integer: ^[1-9]\d*$ or ^([1-9][0-9]*){1,3}$ or ^\+?[1-9][0-9]*$
+12. A non-zero negative integer: ^\-[1-9][]0-9&quot;*$ or ^-[1-9]\d*$
+13. A non-negative integer: ^\d+$ or ^[1-9]\d*|0$
+14. A non-positive integer: ^-[1-9]\d*|0$ or ^((-\d+)|(0+))$
+15. A non-negative float: ^\d+(\.\d+)?$ or ^[1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0$
+16. A non-positive float: ^((-\d+(\.\d+)?)|(0+(\.0+)?))$ or ^(-([1-9]\d*\.\d*|0\.\d*[1-9]\d*))|0?\.0+|0$
+17. A positive float: ^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$ or ^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$
+18. A negative float: ^-([1-9]\d*\.\d*|0\.\d*[1-9]\d*)$ or ^(-(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*)))$
+19. A float: ^(-?\d+)(\.\d+)?$ or ^-?([1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0)$</code></pre></div>
+<h3>Expressions for checking characters</h3>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">1.  Chinese characters: ^[一-龥]{0,}$
+2.  English letters and digits: ^[A-Za-z0-9]+$ or ^[A-Za-z0-9]{4,40}$
+3.  Any characters, length 3–20: ^.{3,20}$
+4.  A string of the 26 English letters: ^[A-Za-z]+$
+5.  A string of the 26 capital English letters: ^[A-Z]+$
+6.  A string of the 26 lowercase English letters: ^[a-z]+$
+7.  A string of digits and the 26 English letters: ^[A-Za-z0-9]+$
+8.  A string of digits, the 26 English letters or underscores: ^\w+$ or ^\w{3,20}$
+9.  Chinese, English, digits and underscores: ^[一-龥A-Za-z0-9_]+$
+10. Chinese, English and digits, but no underscores or other symbols: ^[一-龥A-Za-z0-9]+$ or ^[一-龥A-Za-z0-9]{2,20}$
+11. Input that does not contain ^%&amp;&#x27;,;=?$\&quot; and similar characters: [^%&amp;&#x27;,;=?$\x22]+
+12. Input that does not contain ~: [^~\x22]+</code></pre></div>
+<h3>Expressions for special needs</h3>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">1.  Email address: ^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$
+2.  Domain name: [a-zA-Z0-9][-a-zA-Z0-9]{0,62}(/.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+/.?
+3.  Internet URL: [a-zA-z]+://[^\s]* or ^http://([\w-]+\.)+[\w-]+(/[\w-./?%&amp;=]*)?$
+4.  Mobile number (mainland China): ^(13[0-9]|14[0-9]|15[0-9]|166|17[0-9]|18[0-9]|19[8|9])\d{8}$
+5.  Phone number (&quot;XXX-XXXXXXX&quot;, &quot;XXXX-XXXXXXXX&quot;, &quot;XXX-XXXXXXX&quot;, &quot;XXX-XXXXXXXX&quot;, &quot;XXXXXXX&quot; and &quot;XXXXXXXX&quot;): ^(\(\d{3,4}-)|\d{3.4}-)?\d{7,8}$
+6.  Landline number in China (0511-4405222, 021-87888822): \d{3}-\d{8}|\d{4}-\d{7}
+7.  18-digit Chinese ID number (digits, may end in x): ^((\d{18})|([0-9x]{18})|([0-9X]{18}))$
+8.  Valid username (starts with a letter, 5–16 characters, letters, digits and underscores allowed): ^[a-zA-Z][a-zA-Z0-9_]{4,15}$
+9.  Password (starts with a letter, 6–18 long, only letters, digits and underscores): ^[a-zA-Z]\w{5,17}$
+10. Strong password (must mix capital letters, lowercase letters and digits, no special characters, 8–10 long): ^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}$  
+11. Date format: ^\d{4}-\d{1,2}-\d{1,2}
+12. The 12 months of a year (01–09 and 1–12): ^(0?[1-9]|1[0-2])$
+13. The 31 days of a month (01–09 and 1–31): ^((0?[1-9])|((1|2)[0-9])|30|31)$
+14. Money input formats:
+      a. We accept four ways of writing money: &quot;10000.00&quot;, &quot;10,000.00&quot;, and without cents, &quot;10000&quot; and &quot;10,000&quot;: ^[1-9][0-9]*$
+      b. That means any number not starting with 0. But it also means the single character &quot;0&quot; fails, so we use this instead: ^(0|[1-9][0-9]*)$
+      c. Either a 0, or a number not starting with 0. We could also allow a minus sign at the start: ^(0|-?[1-9][0-9]*)$
+      d. That means a 0, or a possibly negative number not starting with 0. Let&#x27;s allow users to start with 0, and remove the minus sign, since money can&#x27;t be negative. Next, let&#x27;s allow an optional decimal part: ^[0-9]+(.[0-9]+)?$
+      e. Note that there must be at least 1 digit after the decimal point, so &quot;10.&quot; fails, but &quot;10&quot; and &quot;10.2&quot; pass: ^[0-9]+(.[0-9]{2})?$
+      f. This requires exactly two digits after the decimal point. If you think that&#x27;s too strict, use this: ^[0-9]+(.[0-9]{1,2})?$
+      g. This lets users write just one decimal place. Next, let&#x27;s think about commas in the number: ^[0-9]{1,3}(,[0-9]{3})*(.[0-9]{1,2})?$
+      h. 1 to 3 digits, followed by any number of (comma + 3 digits), with commas optional instead of required: ^([0-9]+|[0-9]{1,3}(,[0-9]{3})*)(.[0-9]{1,2})?$
+15. XML file: ^([a-zA-Z]+-?)+[a-zA-Z0-9]+\\.[x|X][m|M][l|L]$
+16. Regex for Chinese characters: [一-龥]
+17. Double-byte characters: [^\x00-\xff]    (includes Chinese characters; can be used to work out string length, counting a double-byte character as 2 and an ASCII character as 1)
+18. Regex for blank lines: \n\s*\r    (can be used to delete blank lines)
+19. Regex for HTML tags: &lt;(\S*?)[^&gt;]*&gt;.*?&lt;/\1&gt;|&lt;.*? /&gt;    (the versions shared online are terrible; this one only partly works and still can&#x27;t handle complex nested tags)
+20. Regex for whitespace at the start and end: ^\s*|\s*$ or (^\s*)|(\s*$)    (can be used to remove whitespace – spaces, tabs, form feeds and so on – at the start and end of a line; very useful)
+21. Tencent QQ number: [1-9][0-9]{4,}    (QQ numbers start from 10000)
+22. Chinese postcode: [1-9]\d{5}(?!\d)    (Chinese postcodes are 6 digits)
+23. IP address: \d+\.\d+\.\d+\.\d+    (useful for extracting IP addresses)
+24. IP address: ((?:(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d))  
+25. IPv6 address: (([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))
+26. URL link: ((http|ftp|https)://)(([a-zA-Z0-9\._-]+\.[a-zA-Z]{2,6})|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,4})*(/[a-zA-Z0-9\&amp;%_\./-~-]*)?</code></pre></div></article></section><div class="lock-banner" hidden><span aria-hidden="true">🔒</span>Solve this exercise to unlock the next part ·<span class="accent lock-k">0</span><span aria-hidden="true">/</span><span>4</span></div><section id="lesson-end" aria-label="Chapter summary"><div class="done-banner" hidden><div class="done-emoji" aria-hidden="true">🎉</div><p class="done-title">Chapter complete!</p><p class="done-sub">You solved all 4 exercises in this chapter.</p></div><nav aria-label="Chapter navigation" class="chapter-nav"><div class="cn-grid"><a class="chap-nav prev focus-ring" href="/lessons/python13/threading/"><span class="cn-label">← Previous chapter</span><span class="cn-title">13 · Threads &amp; processes</span></a><div class="cn-mid"><span>Regular expressions</span></div><a class="chap-nav next focus-ring" href="/lessons/python15/closure/"><span class="cn-label">Next chapter →</span><span class="cn-title">15 · Closures</span></a></div></nav></section></article></div>
+    <aside class="lesson-sidebar right" aria-label="This chapter"><nav aria-label="This chapter's contents"><div class="side-label up">In this chapter</div><p class="toc-chapter">Regular expressions</p><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Contents</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">A First Look at Python Regular Expressions</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">Character Sets</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">Quantifiers</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">Boundaries and Groups</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">re.sub</span></a></li><li class="toc-li" data-target="step-6"><a href="#step-6" class="toc-link focus-ring"><span class="toc-kind">Teaching 07</span><span class="toc-title">re.match and re.search</span></a></li><li class="toc-li" data-target="exercise-01-findall-digits"><a href="#exercise-01-findall-digits" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">Grab all the numbers with re.findall</span></a></li><li class="toc-li" data-target="exercise-02-match-phone"><a href="#exercise-02-match-phone" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">Check a phone number with re.match</span></a></li><li class="toc-li" data-target="exercise-03-groups-email"><a href="#exercise-03-groups-email" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">Pull out an email&#x27;s username and domain with groups</span></a></li><li class="toc-li" data-target="exercise-04-sub-spaces"><a href="#exercise-04-sub-spaces" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">Squash several spaces into one with re.sub</span></a></li><li class="toc-li" data-target="step-7"><a href="#step-7" class="toc-link focus-ring"><span class="toc-kind">Teaching 08</span><span class="toc-title">Common Regular Expressions</span></a></li></ol></nav></aside>
+  </div>
+  <dialog class="dir-dialog" aria-labelledby="dir-title"><div class="dd-inner"><div class="dd-head"><h2 id="dir-title">Contents</h2><button type="button" class="dd-close focus-ring">Close</button></div>
+  <div class="dd-tabs" aria-label="Contents scope"><button type="button" class="dd-tab focus-ring" data-tab="all" aria-pressed="true">All lessons</button><button type="button" class="dd-tab focus-ring" data-tab="chapter" aria-pressed="false">This chapter</button></div>
+  <div class="dd-body"><div class="dd-pane" data-pane="all"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></div><div class="dd-pane" data-pane="chapter" hidden><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Contents</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">A First Look at Python Regular Expressions</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">Character Sets</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">Quantifiers</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">Boundaries and Groups</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">re.sub</span></a></li><li class="toc-li" data-target="step-6"><a href="#step-6" class="toc-link focus-ring"><span class="toc-kind">Teaching 07</span><span class="toc-title">re.match and re.search</span></a></li><li class="toc-li" data-target="exercise-01-findall-digits"><a href="#exercise-01-findall-digits" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">Grab all the numbers with re.findall</span></a></li><li class="toc-li" data-target="exercise-02-match-phone"><a href="#exercise-02-match-phone" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">Check a phone number with re.match</span></a></li><li class="toc-li" data-target="exercise-03-groups-email"><a href="#exercise-03-groups-email" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">Pull out an email&#x27;s username and domain with groups</span></a></li><li class="toc-li" data-target="exercise-04-sub-spaces"><a href="#exercise-04-sub-spaces" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">Squash several spaces into one with re.sub</span></a></li><li class="toc-li" data-target="step-7"><a href="#step-7" class="toc-link focus-ring"><span class="toc-kind">Teaching 08</span><span class="toc-title">Common Regular Expressions</span></a></li></ol></div></div></div></dialog>
+  <div class="py-toast" hidden><span class="spinner"></span><span class="py-toast-text">Loading Python…</span></div>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>© 2026 Python for Beginners · English edition of the <a href="https://github.com/walter201230/Python">walter201230/Python</a> tutorial (CC BY 4.0)</span>
+    <div class="footer-links"><a href="/">Course list</a><a href="/about/">About this site</a><a href="https://github.com/walter201230/Python">GitHub</a></div>
+  </div>
+</footer>
+<script src="/assets/site.js?v=20261028"></script>
+</body>
+</html>

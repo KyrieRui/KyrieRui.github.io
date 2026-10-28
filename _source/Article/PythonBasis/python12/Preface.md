@@ -12,9 +12,9 @@ So for this article, just read it through carefully once – that's enough.
 
 Here's what this part covers:
 
-- 1. In Python, Classes Are Objects Too
-- 2. Using type() to Create Classes on the Fly
-- 3. What is a Metaclass?
-- 4. Writing Your Own Metaclass
-- 5. Using Metaclasses
+- 1\. In Python, Classes Are Objects Too
+- 2\. Using type() to Create Classes on the Fly
+- 3\. What is a Metaclass?
+- 4\. Writing Your Own Metaclass
+- 5\. Using Metaclasses
 

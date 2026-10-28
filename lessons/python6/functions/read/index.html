@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Functions (full read) – Python for Beginners</title>
+<meta name="description" content="Wrap up a piece of logic and reuse it – the foundation of every Python project.">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css?v=20261028">
+
+</head>
+<body data-page="read" data-lesson="python6" data-total="5">
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="/" aria-label="Python for Beginners – home"><span class="gradient-text-flow" data-text="Python for Beginners">Python for Beginners</span></a>
+    <nav class="header-nav">
+      <a class="nav-link" href="/about/">About</a>
+      <a class="nav-icon focus-ring" href="https://github.com/walter201230/Python" aria-label="Original tutorial on GitHub" title="Original tutorial on GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+      <button type="button" class="theme-toggle focus-ring" aria-label="Switch theme"><span class="knob"><svg class="ic-moon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button>
+    </nav>
+  </div>
+</header>
+<main class="site-main">
+<div class="lesson-shell bg-tech-grid">
+  <div class="mobile-bar"><div class="mb-inner"><button type="button" class="dir-btn focus-ring" aria-haspopup="dialog">Contents</button></div></div>
+  <div class="lesson-columns">
+    <aside class="lesson-sidebar left" aria-label="All lessons"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/read/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/read/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/read/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/read/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/read/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/read/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python6/functions/read/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/read/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/read/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/read/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/read/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/read/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/read/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/read/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/read/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/read/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/read/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/read/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/read/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/read/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/read/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/read/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/read/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/read/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/read/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/read/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/read/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/read/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/read/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></aside>
+    <div class="lesson-main"><article class="lesson-article"><header class="lesson-head"><h1>Functions</h1><p class="lh-sub">Full read · <span class="accent">6</span> teaching parts<span class="sep">·</span><span class="accent">5</span> exercises<span class="sep">·</span>about <span class="accent">75</span> min</p>
+<p class="lh-note">This page is the read-through version of the chapter, with every explanation in one place. To write code and get it checked, go to <a class="accent-link focus-ring" href="/lessons/python6/functions/">challenge mode</a>.</p></header><section id="step-0" class="step-card read" data-kind="step" aria-label="Teaching step 1">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 01 / 06</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>Introduction</h2>
+<p>The functions chapter has quite a lot in it, and some parts are hard for beginners. I suggest you read it a few times and type out the code yourself several times.</p>
+<h2>Contents</h2>
+<p>Functions</p>
+<ul>
+<li>1. The Basic Steps for Writing Your Own Function in Python<ul>
+<li>1. What is a function?</li>
+<li>2. How to define your own function</li>
+</ul>
+</li>
+<li>2. Return Values</li>
+<li>3. Function Parameters<ul>
+<li>1. Kinds of parameters</li>
+<li>2. Default parameters</li>
+<li>3. Keyword arguments</li>
+<li>4. Variable-length parameters</li>
+<li>5. Keyword-only parameters</li>
+</ul>
+</li>
+<li>4. How Values Are Passed to Functions</li>
+<li>5. Anonymous Functions</li>
+</ul></article></section><section id="step-1" class="step-card read" data-kind="step" aria-label="Teaching step 2">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 02 / 06</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>1. The Basic Steps for Writing Your Own Function in Python</h2>
+<h3>1. What is a Function?</h3>
+<p>We have actually been using functions since we started learning Python.</p>
+<p>But most of the ones we used are Python's <strong>built-in</strong> functions.</p>
+<p>For example, <code>print()</code>, which shows up in almost every chapter.</p>
+<p>Now we will mainly learn how to write <strong>our own</strong> functions.</p>
+<p><strong>Have you ever wondered why we need functions?</strong></p>
+<p>To answer that, we first need to know what a function is.</p>
+<p>A function is a block of organised, reusable code that does one job (or a few related jobs).</p>
+<p>That's right – a function is just a piece of code we've pulled out and given a name.</p>
+<p>So why pull it out?</p>
+<p><strong>To make it easy to use, and easy to use again and again.</strong></p>
+<p><strong>At heart, a function works like this: we feed some data into it, it "digests" it inside, and then it gives back what we want. How it digests the data – we don't need to know. It handles that inside.</strong></p>
+<p>What does this mean?</p>
+<p>Take the <code>print</code> function we use all the time. We know its job is to show our data in the console so we can see it. So with <code>print('Brother Shui')</code>, we want to show <code>Brother Shui</code>. We feed the data <code>Brother Shui</code> into the <code>print</code> function, and it prints the result in the console for us.</p>
+<h3>2. How to Define Your Own Function</h3>
+<p>How do you define your own function?</p>
+<p>To know how to define one, you need to know what parts a function has:</p>
+<div class="cb not-prose" data-mode="syntax"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Syntax only</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def function_name(parameter1, parameter2....parameterN):
+    function body
+    return statement</code></pre></div>
+<p>These are the parts of a Python function.</p>
+<p>So to define your own function, follow these rules:</p>
+<ul>
+<li>A function starts with the keyword <code>def</code>, then the function's name and round brackets <code>()</code>.</li>
+<li>Any parameters (inputs) go inside the brackets. The brackets are where you define parameters.</li>
+<li>The first line of the function can be a <strong>docstring</strong> (a description of the function). This is optional.</li>
+<li>The function's body starts after a colon, and is indented.</li>
+<li><code>return [expression]</code> ends the function and can send a value back to the caller. A <code>return</code> with no expression gives back <code>None</code>.</li>
+</ul>
+<p>Syntax:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def functionname( parameters ):
+   &quot;function_docstring&quot;
+   function_suite
+   return [expression]</code></pre></div>
+<p>Example:</p>
+<ol>
+<li>Use <code>def</code> to define a function called <code>sum</code></li>
+<li>Give it two parameters, <code>num1</code> and <code>num2</code></li>
+<li>The first line of the function describes it: the sum of two numbers</li>
+<li>Finally, the <code>return</code> statement ends the function and gives back the sum of the two numbers</li>
+</ol>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python6/functions/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def sum(num1,num2):
+	&quot;Sum of two numbers&quot;
+	return num1+num2
+
+# Call the function
+print(sum(5,6))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">11</code></pre></div></article></section><section id="read-exercise-01-define-add" class="rex-card" aria-label="Exercise 1">
+<header class="rex-head"><div class="rex-top"><span class="rex-badge">Exercise 1 / 5</span><span class="rex-title">Define an add function</span></div>
+<div class="prose prose-sm ex-prompt"><p>Define a function <code>add(a, b)</code> that returns <code>a + b</code>.</p>
+<p>Then call <code>add(3, 5)</code>, assign the result to <code>result</code>, and <code>print(result)</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">8</code></pre></div></div></header>
+<a class="rex-go focus-ring" href="/lessons/python6/functions/#exercise-01-define-add"><span class="rex-go-sub">Write it in the editor, get it checked, see the answer</span><span class="rex-go-main">Do this one on the challenge page →</span></a>
+</section><section id="step-2" class="step-card read" data-kind="step" aria-label="Teaching step 3">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 03 / 06</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>2. Return Values</h2>
+<p>From what we've learned, the <code>return [expression]</code> statement exits a function and can send a value back to the caller.</p>
+<p><strong>A <code>return</code> statement with no value returns <code>None</code>.</strong></p>
+<p>Here's an example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python6/functions/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+
+def sum(num1,num2):
+	# Sum of two numbers
+	if not (isinstance (num1,(int ,float)) and isinstance (num2,(int ,float))):
+		raise TypeError(&#x27;Wrong argument type&#x27;)
+	return num1+num2
+
+print(sum(1,2))</code></pre></div>
+<p>Result:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">3</code></pre></div>
+<p>This example also uses the built-in function <code>isinstance()</code> to check data types. It checks whether the arguments are integers or floats. If not, it raises an error with the message <code>Wrong argument type</code>, like this:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+
+def sum(num1,num2):
+	# Sum of two numbers
+	if not (isinstance (num1,(int ,float)) and isinstance (num2,(int ,float))):
+		raise TypeError(&#x27;Wrong argument type&#x27;)
+	return num1+num2
+
+print(sum(&#x27;11&#x27;,2))</code></pre></div>
+<p>Error message:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Traceback (most recent call last):
+  File &quot;C:\Users\Administrator\Desktop\Python\test.py&quot;, line 9, in &lt;module&gt;
+    print(sum(&#x27;11&#x27;,2))
+  File &quot;C:\Users\Administrator\Desktop\Python\test.py&quot;, line 6, in sum
+    raise TypeError(&#x27;Wrong argument type&#x27;)
+TypeError: Wrong argument type</code></pre></div>
+<p>A function can also return <strong>several</strong> values. Here's an example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python6/functions/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+
+def  division ( num1, num2 ):
+	# Find the quotient and the remainder
+         a = num1 % num2
+         b = (num1-a) / num2
+         return b , a
+
+num1 , num2 = division(9,4)
+tuple1 = division(9,4)
+
+print (num1,num2)
+print (tuple1)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">2.0 1
+(2.0, 1)</code></pre></div>
+<p>Look closely. The first output makes it look like several values were returned. But actually, Python first made a <strong>tuple</strong>, and then returned that.</p>
+<p>Remember: you can make a tuple just by using commas. Look at the <code>return</code> in the example – we're really using commas to make a tuple.</p>
+<p>In Python, a function can return several values, which many other languages can't do. This is one way Python is simpler and more flexible than other languages.</p>
+<p><strong>When Python returns several values at once, the data type is a tuple.</strong></p>
+<p>Do you still remember tuples? If not, I suggest you write a few examples right now to remind yourself – for example, how to get the first element out of a tuple.</p></article></section><section id="read-exercise-02-multi-return" class="rex-card" aria-label="Exercise 2">
+<header class="rex-head"><div class="rex-top"><span class="rex-badge">Exercise 2 / 5</span><span class="rex-title">Returning several values</span></div>
+<div class="prose prose-sm ex-prompt"><p>Define a function <code>min_max(nums)</code> that takes a list and returns <strong>the smallest and the biggest value</strong> – two numbers (return them with a comma).</p>
+<p>Then call <code>min_max([3, 1, 4, 1, 5, 9, 2, 6])</code>, <strong>unpack</strong> the result into two variables <code>lo</code> and <code>hi</code>, and <code>print(lo)</code> and <code>print(hi)</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">1
+9</code></pre></div></div></header>
+<a class="rex-go focus-ring" href="/lessons/python6/functions/#exercise-02-multi-return"><span class="rex-go-sub">Write it in the editor, get it checked, see the answer</span><span class="rex-go-main">Do this one on the challenge page →</span></a>
+</section><section id="step-3" class="step-card read" data-kind="step" aria-label="Teaching step 4">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 04 / 06</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>3. Function Parameters</h2>
+<h3>1. Kinds of Parameters</h3>
+<p>Setting up and passing parameters is the key part of functions, and Python is very flexible about parameters.</p>
+<p>The main kinds are: <strong>default parameters</strong>, <strong>keyword arguments</strong>, and <strong>variable-length parameters</strong>.</p>
+<p>Let's look at them one by one.</p>
+<h3>2. Default Parameters</h3>
+<p>Sometimes, when someone calls our function without giving a certain argument, we want to use a default value. That's what <strong>default parameters</strong> are for.</p>
+<p>To make a default parameter, just give the parameter a value when you define the function.</p>
+<p>For example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python6/functions/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+
+def print_user_info( name , age , sex = &#x27;Male&#x27; ):
+    # Print the user&#x27;s info
+    print(f&#x27;Nickname: {name}&#x27; , end = &#x27; &#x27;)
+    print(f&#x27;Age: {age}&#x27; , end = &#x27; &#x27;)
+    print(f&#x27;Sex: {sex}&#x27;)
+    return;
+
+# Call the print_user_info function
+
+print_user_info( &#x27;Two Drops&#x27; , 18 , &#x27;Female&#x27;)
+print_user_info( &#x27;Three Drops&#x27; , 25 )</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Nickname: Two Drops Age: 18 Sex: Female
+Nickname: Three Drops Age: 25 Sex: Male</code></pre></div>
+<p>From the output, you can see that when a parameter has a default value, and you don't pass that argument, the default is used.</p>
+<p>But be careful: <strong>only the parameters at the end of the list can have default values</strong>. You can't put a parameter with a default value before one without a default.</p>
+<p>This is because values are given to parameters by <strong>position</strong>. For example, <code>def func(a, b=1)</code> is valid, but <code>def func(a=1, b)</code> is <strong>not</strong>. </p>
+<p>Is that everything about default parameters?</p>
+<p>Not yet! Think about it: if the parameter is a changeable container, like a list or a dict, what should we use as the default?</p>
+<p>We can use <code>None</code> as the default, like this:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># If b is a list, you can use None as the default
+def print_info( a , b = None ):
+    if b is None :
+        b=[]
+    return;</code></pre></div>
+<p>Looking at this, you might wonder: why not just write <code>b=[]</code> in the parameters?</p>
+<p>Like this:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def print_info( a , b = [] ):
+    return;</code></pre></div>
+<p>Is that OK?</p>
+<p>It runs without errors. So can we write it like this?</p>
+<p>Pay special attention here: <strong>default values should be immutable objects, like None, True, False, numbers or strings</strong>. If you do what's shown above, you'll run into all kinds of trouble when the default value gets changed somewhere else.</p>
+<p>Those changes will affect the default value the <strong>next</strong> time you call the function.</p>
+<p>Here's an example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python6/functions/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+
+def print_info( a , b = [] ):
+    print(b)
+    return b ;
+
+result = print_info(1)
+
+result.append(&#x27;error&#x27;)
+
+print_info(2)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[]
+[&#x27;error&#x27;]</code></pre></div>
+<p>Look carefully: the second output is not what you wanted at all. So <strong>never</strong> do this.</p>
+<p>One more thing: sometimes I don't want a default value at all. I just want to check whether the caller passed something or not. How do I do that?</p>
+<p>We can do this:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">_no_value =object()
+
+def print_info( a , b = _no_value ):
+    if b is _no_value :
+        print(&#x27;b was not given a value&#x27;)
+    return;</code></pre></div>
+<p><code>object</code> is the base class of all classes in Python. You can make an instance of <code>object</code>, but it's not really useful for anything – it has no useful methods and no instance data (it has no instance dictionary, so you can't even set attributes on it). The only thing you can do with it is test whether something <strong>is</strong> that exact object. We use exactly this feature to check whether a value was passed in.</p>
+<h3>3. Keyword Arguments</h3>
+<p>Usually when we pass arguments to a function, we have to pass them <strong>in order</strong>. If the order is wrong, the wrong values go to the wrong parameters.</p>
+<p>But in Python, you can pass arguments <strong>by name</strong>, without worrying about the order in the definition. These are called <strong>keyword arguments</strong>.</p>
+<p>Keyword arguments have two advantages:</p>
+<ul>
+<li>
+<p>We don't have to worry about the order, so functions are easier to use.</p>
+</li>
+<li>
+<p>If the other parameters have default values, we only need to give values for the ones we want.</p>
+</li>
+</ul>
+<p>Here's an example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python6/functions/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+
+def print_user_info( name ,  age  , sex = &#x27;Male&#x27; ):
+    # Print the user&#x27;s info
+    print(f&#x27;Nickname: {name}&#x27; , end = &#x27; &#x27;)
+    print(f&#x27;Age: {age}&#x27; , end = &#x27; &#x27;)
+    print(f&#x27;Sex: {sex}&#x27;)
+    return;
+
+# Call the print_user_info function
+
+print_user_info( name = &#x27;Two Drops&#x27; ,age = 18 , sex = &#x27;Female&#x27;)
+print_user_info( name = &#x27;Two Drops&#x27; ,sex = &#x27;Female&#x27;, age = 18 )</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Nickname: Two Drops Age: 18 Sex: Female
+Nickname: Two Drops Age: 18 Sex: Female</code></pre></div>
+<h3>4. Variable-Length Parameters</h3>
+<p>Sometimes when we design a function, we don't know how many arguments will be passed in.</p>
+<p>Then we can use <strong>variable-length parameters</strong>.</p>
+<p>Python lets you collect extra arguments into a <strong>tuple</strong>. You do this by putting a star <code>*</code> before the parameter.</p>
+<p>If no extra arguments are given when calling, it's just an empty tuple. So you don't have to pass any extra unnamed values.</p>
+<p>For example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python6/functions/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+
+def print_user_info( name ,  age  , sex = &#x27;Male&#x27; , * hobby):
+    # Print the user&#x27;s info
+    print(f&#x27;Nickname: {name}&#x27; , end = &#x27; &#x27;)
+    print(f&#x27;Age: {age}&#x27; , end = &#x27; &#x27;)
+    print(f&#x27;Sex: {sex}&#x27; ,end = &#x27; &#x27; )
+    print(f&#x27;Hobbies: {hobby}&#x27;)
+    return;
+
+# Call the print_user_info function
+print_user_info( &#x27;Two Drops&#x27; ,18 , &#x27;Female&#x27;, &#x27;basketball&#x27;,&#x27;badminton&#x27;,&#x27;running&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="output"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Output</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">Nickname: Two Drops Age: 18 Sex: Female Hobbies: (&#x27;basketball&#x27;, &#x27;badminton&#x27;, &#x27;running&#x27;)</code></pre></div>
+<p>From the output, you can see that <code>*hobby</code> is a variable-length parameter, and <code>hobby</code> is actually a <strong>tuple</strong>.</p>
+<p>Variable-length parameters also work with keyword arguments. Extra keyword arguments that weren't defined are put into a <strong>dictionary</strong>.</p>
+<p>You do this by putting <code>**</code> before the parameter. Let's change the example above:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+
+def print_user_info( name ,  age  , sex = &#x27;Male&#x27; , ** hobby ):
+    # Print the user&#x27;s info
+    print(f&#x27;Nickname: {name}&#x27; , end = &#x27; &#x27;)
+    print(f&#x27;Age: {age}&#x27; , end = &#x27; &#x27;)
+    print(f&#x27;Sex: {sex}&#x27; ,end = &#x27; &#x27; )
+    print(f&#x27;Hobbies: {hobby}&#x27;)
+    return;
+
+# Call the print_user_info function
+print_user_info( name = &#x27;Two Drops&#x27; , age = 18 , sex = &#x27;Female&#x27;, hobby = (&#x27;basketball&#x27;,&#x27;badminton&#x27;,&#x27;running&#x27;))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Nickname: Two Drops Age: 18 Sex: Female Hobbies: {&#x27;hobby&#x27;: (&#x27;basketball&#x27;, &#x27;badminton&#x27;, &#x27;running&#x27;)}	</code></pre></div>
+<p>Comparing the two examples: <code>*hobby</code> is a variable-length parameter, and <code>hobby</code> is a <strong>tuple</strong>. <code>**hobby</code> collects keyword arguments, and <code>hobby</code> is a <strong>dict</strong>.</p>
+<h3>5. Keyword-Only Parameters</h3>
+<p>Keyword arguments are easy to use and help prevent mistakes. So sometimes, we want our function to <strong>force</strong> some arguments to be passed by keyword. How do we do that?</p>
+<p>Put those parameters after a <code>*</code> parameter, or after a single <code>*</code> on its own. For example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python6/functions/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+
+def print_user_info( name , *, age  , sex = &#x27;Male&#x27; ):
+    # Print the user&#x27;s info
+    print(f&#x27;Nickname: {name}&#x27; , end = &#x27; &#x27;)
+    print(f&#x27;Age: {age}&#x27; , end = &#x27; &#x27;)
+    print(f&#x27;Sex: {sex}&#x27;)
+    return;
+
+# Call the print_user_info function
+print_user_info( name = &#x27;Two Drops&#x27; ,age = 18 , sex = &#x27;Female&#x27; )
+
+# This would give an error, because age and sex must be passed as keyword arguments
+#print_user_info( &#x27;Two Drops&#x27; , 18 , &#x27;Female&#x27; )
+print_user_info(&#x27;Two Drops&#x27;,age=&#x27;22&#x27;,sex=&#x27;Male&#x27;)</code></pre></div>
+<p>From the example, if <code>age</code> and <code>sex</code> are not passed as keyword arguments, you get an error.</p>
+<p>In many cases, keyword-only arguments make the meaning clearer than positional ones, and the program is easier to read. They are also better than using <code>**kw</code>, and they're useful in more advanced situations too.</p>
+<h3>6. Python 3.10+ Type Hints</h3>
+<p>Hey everyone! After seeing all these kinds of parameters, have you noticed a problem? Just by looking at a function's name and parameter list, we don't actually know what <strong>type</strong> each parameter should be.</p>
+<p>For example, in the function below, can you tell at a glance that <code>name</code> is a string and <code>age</code> is an integer?</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def print_user_info(name, age, sex=&#x27;Male&#x27;):
+    print(f&#x27;Nickname: {name} Age: {age} Sex: {sex}&#x27;)</code></pre></div>
+<p>Someone calling it could easily pass the wrong type – even passing a list won't give an error straight away. The problem only shows up halfway through running. This is when <strong>type hints</strong> are useful.</p>
+<p>Let's look at the basic form first:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python6/functions/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def print_user_info(name: str, age: int, sex: str = &#x27;Male&#x27;) -&gt; None:
+    print(f&#x27;Nickname: {name} Age: {age} Sex: {sex}&#x27;)
+
+
+print_user_info(&#x27;Two Drops&#x27;, 18, &#x27;Female&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Nickname: Two Drops Age: 18 Sex: Female</code></pre></div>
+<p>The <code>: str</code> and <code>: int</code> after the parameters, and the arrow <code>-&gt; None</code>, are type hints. Note: when Python runs, it does <strong>not</strong> force these hints – if you pass a list anyway, you won't get an error right away. Type hints are really for <strong>people</strong>: you, your teammates, and tools like IDEs, mypy and pyright (static checkers). They make code easier to read and maintain.</p>
+<p>What if a value might be <code>None</code>?</p>
+<p>Before Python 3.10, you wrote <code>Optional[str]</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python6/functions/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from typing import Optional
+
+
+def find_user(name: str) -&gt; Optional[str]:
+    # Return None if not found
+    if name == &#x27;Two Drops&#x27;:
+        return &#x27;131456780002&#x27;
+    return None
+
+
+print(find_user(&#x27;Two Drops&#x27;))
+print(find_user(&#x27;Six Drops&#x27;))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">131456780002
+None</code></pre></div>
+<p>Nothing wrong with that, but you have to <code>import</code> something extra, which is a bit wordy. From Python 3.10, you can just use <code>|</code> to mean "or" (PEP 604):</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python6/functions/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def find_user(name: str) -&gt; str | None:
+    if name == &#x27;Two Drops&#x27;:
+        return &#x27;131456780002&#x27;
+    return None
+
+
+print(find_user(&#x27;Two Drops&#x27;))
+print(find_user(&#x27;Six Drops&#x27;))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">131456780002
+None</code></pre></div>
+<p>Much cleaner, right? <code>str | None</code> reads as "a string or None". No need for the name <code>Optional</code>.</p>
+<p>What about container types like list and dict?</p>
+<p>Before Python 3.9, you had to import capitalised <code>List</code> and <code>Dict</code> from <code>typing</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python6/functions/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from typing import List, Dict
+
+
+def get_users() -&gt; List[str]:
+    return [&#x27;One Drop&#x27;, &#x27;Two Drops&#x27;, &#x27;Three Drops&#x27;]
+
+
+def get_phones() -&gt; Dict[str, str]:
+    return {&#x27;Two Drops&#x27;: &#x27;131456780002&#x27;}
+
+
+print(get_users())
+print(get_phones())</code></pre></div>
+<p>From Python 3.9 (PEP 585), you can use the built-in lowercase <code>list</code> and <code>dict</code> directly as type hints:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python6/functions/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def get_users() -&gt; list[str]:
+    return [&#x27;One Drop&#x27;, &#x27;Two Drops&#x27;, &#x27;Three Drops&#x27;]
+
+
+def get_phones() -&gt; dict[str, str]:
+    return {&#x27;Two Drops&#x27;: &#x27;131456780002&#x27;}
+
+
+print(get_users())
+print(get_phones())</code></pre></div>
+<p>Both give the same output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[&#x27;One Drop&#x27;, &#x27;Two Drops&#x27;, &#x27;Three Drops&#x27;]
+{&#x27;Two Drops&#x27;: &#x27;131456780002&#x27;}</code></pre></div>
+<p>Now you don't even need <code>from typing import ...</code>. Even simpler.</p>
+<p>Type hints can also be used in <strong>classes</strong>. A common case is with <code>dataclass</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python6/functions/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass
+
+
+@dataclass
+class User:
+    name: str
+    age: int
+    sex: str = &#x27;Male&#x27;
+
+
+u = User(&#x27;Two Drops&#x27;, 18, &#x27;Female&#x27;)
+print(u)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">User(name=&#x27;Two Drops&#x27;, age=18, sex=&#x27;Female&#x27;)</code></pre></div>
+<p><code>dataclass</code> is really handy. We'll talk about it more when we cover object-oriented programming later.</p>
+<blockquote>
+<p>Python 3.12+: the <code>type</code> keyword for type aliases</p>
+</blockquote>
+<p>Finally, one more new thing from Python 3.12 (PEP 695). If you have a really long type that you keep writing again and again, you can use the <code>type</code> keyword to give it a short name (an <strong>alias</strong>):</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">type UserId = int | str
+type PhoneBook = dict[str, str]
+
+
+def find_phone(book: PhoneBook, name: str) -&gt; str | None:
+    return book.get(name)
+
+
+book: PhoneBook = {&#x27;Two Drops&#x27;: &#x27;131456780002&#x27;}
+print(find_phone(book, &#x27;Two Drops&#x27;))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">131456780002</code></pre></div>
+<p>Here <code>UserId</code> and <code>PhoneBook</code> are <strong>type aliases</strong>. They look like variable assignments, but they mean "this is a type".</p>
+<p>There's a lot more to type hints – generics, Protocols, <code>TypeVar</code> and other advanced things. We'll have a whole chapter on them later in this book. For now, the most common ones above are enough for everyday coding.</p></article></section><section id="read-exercise-03-default-arg" class="rex-card" aria-label="Exercise 3">
+<header class="rex-head"><div class="rex-top"><span class="rex-badge">Exercise 3 / 5</span><span class="rex-title">Default parameters</span></div>
+<div class="prose prose-sm ex-prompt"><p>Define a function <code>greet(name, greeting='Hello')</code>: the first parameter <code>name</code> must be given, and the second parameter <code>greeting</code> defaults to <code>'Hello'</code>. The function prints <code>f'{greeting}, {name}!'</code>.</p>
+<p>Then:
+1. Call <code>greet('Alice')</code> (using the default greeting)
+2. Call <code>greet('Bob', 'Good morning')</code> (replacing the default)</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Hello, Alice!
+Good morning, Bob!</code></pre></div></div></header>
+<a class="rex-go focus-ring" href="/lessons/python6/functions/#exercise-03-default-arg"><span class="rex-go-sub">Write it in the editor, get it checked, see the answer</span><span class="rex-go-main">Do this one on the challenge page →</span></a>
+</section><section id="read-exercise-04-args" class="rex-card" aria-label="Exercise 4">
+<header class="rex-head"><div class="rex-top"><span class="rex-badge">Exercise 4 / 5</span><span class="rex-title">*args: any number of arguments</span></div>
+<div class="prose prose-sm ex-prompt"><p>Define a function <code>total(*nums)</code> that adds up all the numbers passed in and returns the result.</p>
+<p>Then:
+1. Call <code>total(1, 2, 3)</code> and assign it to <code>a</code>
+2. Call <code>total(1, 2, 3, 4, 5, 6)</code> and assign it to <code>b</code>
+3. <code>print(a)</code> <code>print(b)</code></p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">6
+21</code></pre></div></div></header>
+<a class="rex-go focus-ring" href="/lessons/python6/functions/#exercise-04-args"><span class="rex-go-sub">Write it in the editor, get it checked, see the answer</span><span class="rex-go-main">Do this one on the challenge page →</span></a>
+</section><section id="step-4" class="step-card read" data-kind="step" aria-label="Teaching step 5">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 05 / 06</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>4. How Values Are Passed to Functions</h2>
+<p>Let's start with an example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python6/functions/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+def chagne_number( b ):
+    b = 1000
+
+b = 1
+chagne_number(b)
+print( b )</code></pre></div>
+<p>The output is:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">1</code></pre></div>
+<p>Did you see the result?</p>
+<p>Think about it: why does it print 1 and not 1000?</p>
+<p>The real question is: why didn't the function <code>chagne_number</code> change the value of <code>b</code>?</p>
+<p>Lots of programming languages talk about this, and the explanation is similar.</p>
+<p>When you pass arguments to a function, you pass <strong>objects</strong>. We learned about Python's basic data types before. These objects can be split into <strong>changeable (mutable)</strong> types and <strong>unchangeable (immutable)</strong> types.</p>
+<p><strong>In Python, strings, integers, floats and tuples are immutable. Lists, dicts and so on are mutable.</strong></p>
+<p>For example:</p>
+<p><strong>Immutable types</strong>: when you write <code>a = 1</code>, Python makes an integer object <code>1</code>, and variable <code>a</code> points to it. When you then write <code>a = 1000</code>, Python makes a new integer object <code>1000</code> and changes where <code>a</code> points. <code>a</code> no longer points to <code>1</code>, it points to <code>1000</code>, and the <code>1</code> is thrown away.</p>
+<p><strong>Mutable types</strong>: when you write <code>a = [1,2,3,4,5,6]</code>, Python makes a list object with 6 elements, and <code>a</code> points to the list. <code>a[2] = 5</code> changes the third element <strong>inside</strong> list <code>a</code>. This is different from above: <code>a</code> doesn't point somewhere new – the element inside the list is changed directly.</p>
+<p>Immutable type (the variable points somewhere new):</p>
+<p><span class="tutorial-diagram"><span class="tutorial-diagram-scroll" role="region" tabindex="0" aria-label="The variable is pointed somewhere new, scroll sideways on small screens"><img loading="lazy" alt="The variable is pointed somewhere new" src="/images/diagrams/variable-rebinding.svg"></span></span></p>
+<p>Mutable type (the elements inside the object are changed directly):</p>
+<p><span class="tutorial-diagram"><span class="tutorial-diagram-scroll" role="region" tabindex="0" aria-label="The list is changed in place, scroll sideways on small screens"><img loading="lazy" alt="The list is changed in place" src="/images/diagrams/list-mutation.svg"></span></span></p>
+<p>This also affects how arguments are passed to functions:</p>
+<p><strong>Immutable types</strong>: similar to "pass by value" in C++. Examples: integers, strings, tuples. With <code>fun(a)</code>, only the value of <code>a</code> is passed, and object <code>a</code> itself isn't affected. If you change <code>a</code> inside <code>fun(a)</code>, you're working on another object, and the original <code>a</code> doesn't change.</p>
+<p><strong>Mutable types</strong>: similar to "pass by reference" in C++. Examples: lists, dictionaries. With <code>fun(a)</code>, the real <code>a</code> is passed in, so if it's changed inside, the <code>a</code> outside <code>fun</code> is changed too.</p>
+<p>So in the first example, <code>b = 1</code> creates an integer object <code>1</code>, and <code>b</code> points to it. When it's passed to <code>chagne_number</code>, only the value of <code>b</code> is passed, and <code>b</code> itself isn't affected. Look at this changed version – the printed results make it easier to understand:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python6/functions/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+def chagne_number( b ):
+    print(f&#x27;b at the start of the function: {b}&#x27;)
+    b = 1000
+    print(f&#x27;b after assigning in the function: {b}&#x27;)
+
+
+b = 1
+chagne_number( b )
+print(f&#x27;b at the end: {b}&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">b at the start of the function: 1
+b after assigning in the function: 1000
+b at the end: 1</code></pre></div>
+<p>Of course, if the argument is a mutable type, then after calling the function, the original value will be changed. Here's an example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python6/functions/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+
+def chagne_list( b ):
+    print(f&#x27;b at the start of the function: {b}&#x27;)
+    b.append(1000)
+    print(f&#x27;b after changing in the function: {b}&#x27;)
+
+
+b = [1,2,3,4,5]
+chagne_list( b )
+print(f&#x27;b at the end: {b}&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">b at the start of the function: [1, 2, 3, 4, 5]
+b after changing in the function: [1, 2, 3, 4, 5, 1000]
+b at the end: [1, 2, 3, 4, 5, 1000]</code></pre></div>
+<h3>Both are lists – why does one change and the other not?</h3>
+<p>Don't read ahead yet! Let's try another question: if you pass in a list, and then <strong>reassign</strong> the parameter inside the function, will the list outside definitely change?</p>
+<p>First guess what the two prints show, then run the code:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python6/functions/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def replace_items(items):
+    items = [1000]
+
+
+def append_item(items):
+    items.append(1000)
+
+
+numbers = [1, 2]
+replace_items(numbers)
+print(numbers)
+append_item(numbers)
+print(numbers)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[1, 2]
+[1, 2, 1000]</code></pre></div>
+<p>See? We passed in the same list both times, but the results are different.</p>
+<p>The reason goes back to what variables point to. When the function is called, the parameter name <code>items</code> and the outside name <code>numbers</code> point to the <strong>same</strong> list. <code>items = [1000]</code> makes the <code>items</code> inside the function point to a <strong>different</strong> list – the outside <code>numbers</code> doesn't change. <code>items.append(1000)</code> doesn't change where anything points. It adds an element <strong>into</strong> the original list, so the outside sees the change too.</p>
+<p>When you think about the "pass by value / pass by reference" comparison above, keep one limit in mind: Python doesn't switch to a different passing method depending on whether an object can change, and it doesn't copy an integer when you pass it in. The parameter name is simply <strong>bound to the object passed in</strong>. What makes the difference here is whether the code <strong>rebinds the name</strong> or <strong>changes the object</strong>. You can read the <a href="https://docs.python.org/3.13/faq/programming.html#how-do-i-write-a-function-with-output-parameters-call-by-reference">official Python FAQ</a> to understand it better.</p>
+<p>Now change it yourself: if <code>numbers</code> starts as an empty list, what should the two prints show? Write your answer first, then run it. You should get <code>[]</code> and then <code>[1000]</code>, for the same reason.</p>
+<h3>Why does a default list remember the last call?</h3>
+<p>In the parameters section, we said to be careful using a list as a default value. This isn't because Python's syntax forbids it. It's because the default value is <strong>created once, when the function is defined</strong>, and every later call that leaves out that argument shares it.</p>
+<p>Let's try it with our little "record study time" task:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python6/functions/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def record_minutes(minutes, records=[]):
+    records.append(minutes)
+    return records
+
+
+print(record_minutes(5))
+print(record_minutes(10))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[5]
+[5, 10]</code></pre></div>
+<p>If we want a <strong>new</strong> record list for every call, then seeing <code>5</code> again in the second result isn't what we expected. We can write it like this instead:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python6/functions/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def record_minutes(minutes, records=None):
+    if records is None:
+        records = []
+    records.append(minutes)
+    return records
+
+
+print(record_minutes(5))
+print(record_minutes(10))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[5]
+[10]</code></pre></div>
+<p>Here <code>None</code> means "the caller didn't give a record list", so the function makes a new one itself. If the caller <strong>does</strong> pass in the same list each time, the records will still add up. Try it yourself: create <code>records = []</code>, call <code>record_minutes(5, records)</code> and <code>record_minutes(10, records)</code>, then print <code>records</code>. You should get <code>[5, 10]</code>. This time, sharing is something we chose on purpose.</p>
+<p>When you read the <a href="https://docs.python.org/3.13/tutorial/controlflow.html#default-argument-values">official tutorial on default argument values</a>, look for the answer to one question: <strong>when exactly is the default value created?</strong> Find that first, then come back and explain the two outputs above.</p>
+<h3>It printed something – so why did I get None?</h3>
+<p>Finally, let's separate two things that often get mixed up. A function <strong>printing</strong> a result on the screen and a function <strong>returning</strong> a result to the caller are two different things.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python6/functions/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def show_minutes(minutes):
+    print(minutes)
+
+
+def get_minutes(minutes):
+    return minutes
+
+
+shown = show_minutes(15)
+saved = get_minutes(15)
+print(shown)
+print(saved)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">15
+None
+15</code></pre></div>
+<p>The first line is printed by <code>show_minutes</code> itself. It has no <code>return</code>, so <code>shown</code> gets <code>None</code>. <code>get_minutes</code> <strong>returns</strong> <code>15</code> to the caller, and the outside <code>print(saved)</code> prints it.</p>
+<p>Now write your own <code>total_minutes(first, second)</code>: it should return the total of two study times, and not print anything inside the function. Test it with <code>total_minutes(5, 10)</code>, <code>total_minutes(0, 0)</code> and <code>total_minutes(12, 3)</code>. The results should be <code>15</code>, <code>0</code> and <code>15</code>. If you can explain the difference between printing and returning, and complete these three calls on your own, then you've really got this part.</p></article></section><section id="step-5" class="step-card read" data-kind="step" aria-label="Teaching step 6">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 06 / 06</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>5. Anonymous Functions</h2>
+<p>Have you ever wanted to define a very short callback function, without writing a whole function using <code>def</code>? Is there a shortcut?</p>
+<p>Yes, there is!</p>
+<p>Python uses <code>lambda</code> to create <strong>anonymous functions</strong> – functions defined without the normal <code>def</code> statement.</p>
+<p>Anonymous functions have these features:</p>
+<ul>
+<li>A <code>lambda</code> is just an expression. Its body is much simpler than a <code>def</code> function.</li>
+<li>The body of a <code>lambda</code> is one <strong>expression</strong>, not a block of code. You can only put a little bit of logic inside it.</li>
+<li>A <code>lambda</code> has its own namespace, and can't access variables outside its own parameter list or the global namespace.</li>
+</ul>
+<p><strong>Basic syntax</strong></p>
+<div class="cb not-prose" data-mode="syntax"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Syntax only</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">lambda [arg1 [,arg2,.....argn]]:expression</code></pre></div>
+<p>Example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python6/functions/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+
+sum = lambda num1 , num2 : num1 + num2;
+
+print( sum( 1 , 2 ) )</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">3</code></pre></div>
+<p>Note: <strong>although a lambda lets you define a simple function, there are limits. You can only write a single expression, and its value is what gets returned. That means you can't use other language features, like multiple statements, loops or exception handling.</strong></p>
+<p>There's one thing you must watch out for with anonymous functions. Let's change the example above:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python6/functions/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+
+num2 = 100
+sum1 = lambda num1 : num1 + num2 ;
+
+num2 = 10000
+sum2 = lambda num1 : num1 + num2 ;
+
+print( sum1( 1 ) )
+print( sum2( 1 ) )</code></pre></div>
+<p>What do you think it prints? You might expect 101 first and 10001 second. But no – the output is:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">10001
+10001</code></pre></div>
+<p><strong>This is because <code>num2</code> in the lambda is a free variable. Its value is looked up when the lambda RUNS, not when it's DEFINED. This is different from how default parameter values work. So in a case like this, it's better to use the first way (default parameters).</strong></p></article></section><section id="read-exercise-05-lambda" class="rex-card" aria-label="Exercise 5">
+<header class="rex-head"><div class="rex-top"><span class="rex-badge">Exercise 5 / 5</span><span class="rex-title">lambda: sorting with an anonymous function</span></div>
+<div class="prose prose-sm ex-prompt"><p>We've already defined this for you:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">users = [
+    {&#x27;name&#x27;: &#x27;Alice&#x27;, &#x27;age&#x27;: 30},
+    {&#x27;name&#x27;: &#x27;Bob&#x27;, &#x27;age&#x27;: 25},
+    {&#x27;name&#x27;: &#x27;Carol&#x27;, &#x27;age&#x27;: 28},
+]</code></pre></div>
+<p>Use <code>sorted</code> with a <strong>lambda</strong> to sort <code>users</code> by <code>age</code> from youngest to oldest, assign it to <code>sorted_users</code>, then use a <code>for</code> loop to <code>print</code> each person's <code>name</code> and <code>age</code> (separated by a space).</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Bob 25
+Carol 28
+Alice 30</code></pre></div></div></header>
+<a class="rex-go focus-ring" href="/lessons/python6/functions/#exercise-05-lambda"><span class="rex-go-sub">Write it in the editor, get it checked, see the answer</span><span class="rex-go-main">Do this one on the challenge page →</span></a>
+</section><section id="lesson-end" aria-label="Chapter summary"><div class="read-cta"><p>Finished reading? Practising once is how you really learn it.</p><a class="read-cta-btn focus-ring" href="/lessons/python6/functions/">Practise in challenge mode →</a></div><nav aria-label="Chapter navigation" class="chapter-nav"><div class="cn-grid"><a class="chap-nav prev focus-ring" href="/lessons/python5/conditions-and-loops/read/"><span class="cn-label">← Previous chapter</span><span class="cn-title">05 · Conditions &amp; loops</span></a><div class="cn-mid"><span>Functions</span></div><a class="chap-nav next focus-ring" href="/lessons/python7/iteration/read/"><span class="cn-label">Next chapter →</span><span class="cn-title">07 · Iteration</span></a></div></nav></section></article></div>
+    <aside class="lesson-sidebar right" aria-label="This chapter"><nav aria-label="This chapter's contents"><div class="side-label up">In this chapter</div><p class="toc-chapter">Functions</p><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Introduction</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">1. The Basic Steps for Writing Your Own Function in Python</span></a></li><li class="toc-li" data-target="read-exercise-01-define-add"><a href="#read-exercise-01-define-add" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">Define an add function</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">2. Return Values</span></a></li><li class="toc-li" data-target="read-exercise-02-multi-return"><a href="#read-exercise-02-multi-return" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">Returning several values</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">3. Function Parameters</span></a></li><li class="toc-li" data-target="read-exercise-03-default-arg"><a href="#read-exercise-03-default-arg" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">Default parameters</span></a></li><li class="toc-li" data-target="read-exercise-04-args"><a href="#read-exercise-04-args" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">*args: any number of arguments</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">4. How Values Are Passed to Functions</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">5. Anonymous Functions</span></a></li><li class="toc-li" data-target="read-exercise-05-lambda"><a href="#read-exercise-05-lambda" class="toc-link focus-ring"><span class="toc-kind">Exercise 5</span><span class="toc-title">lambda: sorting with an anonymous function</span></a></li></ol></nav></aside>
+  </div>
+  <dialog class="dir-dialog" aria-labelledby="dir-title"><div class="dd-inner"><div class="dd-head"><h2 id="dir-title">Contents</h2><button type="button" class="dd-close focus-ring">Close</button></div>
+  <div class="dd-tabs" aria-label="Contents scope"><button type="button" class="dd-tab focus-ring" data-tab="all" aria-pressed="true">All lessons</button><button type="button" class="dd-tab focus-ring" data-tab="chapter" aria-pressed="false">This chapter</button></div>
+  <div class="dd-body"><div class="dd-pane" data-pane="all"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/read/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/read/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/read/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/read/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/read/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/read/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python6/functions/read/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/read/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/read/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/read/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/read/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/read/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/read/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/read/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/read/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/read/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/read/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/read/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/read/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/read/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/read/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/read/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/read/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/read/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/read/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/read/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/read/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/read/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/read/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></div><div class="dd-pane" data-pane="chapter" hidden><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Introduction</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">1. The Basic Steps for Writing Your Own Function in Python</span></a></li><li class="toc-li" data-target="read-exercise-01-define-add"><a href="#read-exercise-01-define-add" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">Define an add function</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">2. Return Values</span></a></li><li class="toc-li" data-target="read-exercise-02-multi-return"><a href="#read-exercise-02-multi-return" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">Returning several values</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">3. Function Parameters</span></a></li><li class="toc-li" data-target="read-exercise-03-default-arg"><a href="#read-exercise-03-default-arg" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">Default parameters</span></a></li><li class="toc-li" data-target="read-exercise-04-args"><a href="#read-exercise-04-args" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">*args: any number of arguments</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">4. How Values Are Passed to Functions</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">5. Anonymous Functions</span></a></li><li class="toc-li" data-target="read-exercise-05-lambda"><a href="#read-exercise-05-lambda" class="toc-link focus-ring"><span class="toc-kind">Exercise 5</span><span class="toc-title">lambda: sorting with an anonymous function</span></a></li></ol></div></div></div></dialog>
+  <div class="py-toast" hidden><span class="spinner"></span><span class="py-toast-text">Loading Python…</span></div>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>© 2026 Python for Beginners · English edition of the <a href="https://github.com/walter201230/Python">walter201230/Python</a> tutorial (CC BY 4.0)</span>
+    <div class="footer-links"><a href="/">Course list</a><a href="/about/">About this site</a><a href="https://github.com/walter201230/Python">GitHub</a></div>
+  </div>
+</footer>
+<script src="/assets/site.js?v=20261028"></script>
+</body>
+</html>

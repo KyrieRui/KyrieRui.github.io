@@ -1,0 +1,1136 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Object-oriented programming – Python for Beginners</title>
+<meta name="description" content="Classes, inheritance, polymorphism – packaging data and behaviour together.">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css?v=20261028">
+
+</head>
+<body data-page="lesson" data-lesson="python8" data-total="4">
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="/" aria-label="Python for Beginners – home"><span class="gradient-text-flow" data-text="Python for Beginners">Python for Beginners</span></a>
+    <nav class="header-nav">
+      <a class="nav-link" href="/about/">About</a>
+      <a class="nav-icon focus-ring" href="https://github.com/walter201230/Python" aria-label="Original tutorial on GitHub" title="Original tutorial on GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+      <button type="button" class="theme-toggle focus-ring" aria-label="Switch theme"><span class="knob"><svg class="ic-moon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button>
+    </nav>
+  </div>
+</header>
+<main class="site-main">
+<div class="lesson-shell bg-tech-grid">
+  <div class="mobile-bar"><div class="mb-inner"><button type="button" class="dir-btn focus-ring" aria-haspopup="dialog">Contents</button></div></div>
+  <div class="lesson-columns">
+    <aside class="lesson-sidebar left" aria-label="All lessons"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></aside>
+    <div class="lesson-main"><article class="lesson-article"><header class="lesson-head"><h1>Object-oriented programming</h1><p class="lh-sub"><span class="accent">4</span> exercises<span class="sep">·</span>about <span class="accent">70</span> min<span class="sep">·</span>solve one to unlock the next part</p>
+<p class="lh-link"><a class="subtle-link focus-ring" href="/lessons/python8/oop/read/">Read the whole chapter →</a></p></header><section id="step-0" class="step-card item" data-kind="step" aria-label="Teaching step 1">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 01 / 10</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>Introduction</h2>
+<p>In earlier articles, I used <a href="http://www.sublimetext.com/">Sublime Text</a> to write Python, mainly so we could get familiar with how Python works. From this chapter on, I switch to PyCharm. The earlier section <a href="/lessons/python1/intro-and-hello-world/">Integrated Development Environment (IDE): PyCharm</a> explains how to install and use PyCharm – look back if you need to.</p>
+<p>This chapter is very important, and I spent a lot of time on it. I rewrote almost everything I had written before. I typed every piece of code myself, and made every picture myself.</p>
+<h2>Contents</h2>
+<ul>
+<li>The ideas behind object-oriented programming</li>
+<li>Defining and using a class</li>
+<li>Class methods</li>
+<li>Changing and adding class attributes</li>
+<li>Classes and objects</li>
+<li>The initialisation function</li>
+<li>Inheritance</li>
+<li>Polymorphism</li>
+<li>Access control in classes</li>
+</ul></article></section><section id="step-1" class="step-card item" data-kind="step" aria-label="Teaching step 2">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 02 / 10</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>1. The Ideas Behind Object-Oriented Programming</h2>
+<h3>1. Two Basic Ideas of Object-Oriented Programming</h3>
+<p>In programming, there are usually two ways of thinking: <strong>procedure-oriented</strong> and <strong>object-oriented</strong>.</p>
+<p>Procedure-oriented programming focuses on the <strong>steps</strong> to solve a problem.</p>
+<p>It's like how we solve everyday problems: work out the steps, then do them one by one.</p>
+<p>Object-oriented programming is a kind of <strong>abstraction</strong>. Abstraction means looking at the world by sorting things into groups.</p>
+<p>Python is an object-oriented language.</p>
+<p>If you've learned Java, you know Java's big idea is: <strong>everything is an object</strong>. Python is the same. When solving a real problem, you can break the problem down into separate objects.</p>
+<p>Object-oriented programming has two basic ideas: <strong>classes</strong> and <strong>objects</strong>.</p>
+<ul>
+<li><strong>Class</strong></li>
+</ul>
+<p>A class describes a group of objects that have the same <strong>attributes</strong> (data) and <strong>methods</strong> (actions). It defines the attributes and methods that every object in the group shares. An object is an <strong>instance</strong> of a class.</p>
+<ul>
+<li><strong>Object</strong></li>
+</ul>
+<p>An instance of the data structure defined by a class.</p>
+<h3>2. The Three Main Features of Object-Oriented Programming</h3>
+<p>Object-oriented languages have three main features: <strong>inheritance</strong>, <strong>polymorphism</strong> and <strong>encapsulation</strong>.</p>
+<ul>
+<li><strong>Inheritance</strong></li>
+</ul>
+<p>A <strong>derived class</strong> (child class) inherits the fields and methods of a <strong>base class</strong> (parent class). Inheritance also lets you treat an object of the derived class as an object of the base class.</p>
+<p>For example, a Dog object comes from the Animal class. This models an <strong>"is-a"</strong> relationship (a Dog <strong>is an</strong> Animal).</p>
+<ul>
+<li><strong>Polymorphism</strong></li>
+</ul>
+<p>It means doing the same action on different types of things, and they behave differently depending on their type (or class).</p>
+<ul>
+<li><strong>Encapsulation</strong></li>
+</ul>
+<p>"Encapsulation" means wrapping data and behaviour (actions) together into one whole thing – a class. Its purpose is to make things safer and programming simpler. People using the class don't need to know the details of how it works inside; they just use its members through its outside interface, with certain access permissions.</p>
+<p><strong>If this is your first time seeing an object-oriented language and you're totally confused right now, don't worry – that's normal. Below, we'll use lots of examples to learn Python's object-oriented features step by step.</strong></p></article></section><section id="step-2" class="step-card item" data-kind="step" aria-label="Teaching step 3">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 03 / 10</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>2. Defining and Using a Class</h2>
+<h3>1. How to Think About a Class</h3>
+<p>What is a class?</p>
+<p>I think the simplest way to understand a class is this: <strong>a class is a bundle of variables and functions.</strong></p>
+<p>Look at this picture:</p>
+<p><span class="tutorial-diagram"><span class="tutorial-diagram-scroll" role="region" tabindex="0" aria-label="The structure of a class, scroll sideways on small screens"><img loading="lazy" alt="The structure of a class" src="/images/diagrams/class-structure.svg"></span></span></p>
+<p>This picture explains a class nicely: it wraps variables and functions together.</p>
+<p>Of course, we don't wrap things together for no reason. We put things that belong together into one class, so we can reuse them easily.</p>
+<p>So by now, you've probably noticed that lots of programming ideas exist so we can be "lazy" and reuse things.</p>
+<h3>2. How to Define a Class</h3>
+<p>Now that we know what a class looks like, let's learn how to define one.</p>
+<p>The syntax for defining a class:</p>
+<div class="cb not-prose" data-mode="syntax"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Syntax only</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class ClassName():
+    &lt;statement-1&gt;
+    .
+    .
+    .
+    &lt;statement-N&gt;</code></pre></div>
+<p>You can see we use the <code>class</code> statement to define our own class, just like we use the <code>def</code> statement to define a function.</p>
+<p>Since a class is a bundle of variables and methods, let's create one:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class ClassA():
+    var1 = 100
+    var2 = 0.01
+    var3 = &#x27;Two Drops&#x27;
+
+    def fun1():
+        print(&#x27;I am fun1&#x27;)
+
+    def fun2():
+        print(&#x27;I am fun1&#x27;)
+
+    def fun3():
+        print(&#x27;I am fun1&#x27;)</code></pre></div>
+<p>See? We've defined a class called <code>ClassA</code>. The variables inside a class are called <strong>attributes</strong>, so this class has 3 attributes: <code>var1</code>, <code>var2</code> and <code>var3</code>. It also has 3 class methods: <code>fun1()</code>, <code>fun2()</code> and <code>fun3()</code>.</p>
+<h3>3. How to Use Class Attributes and Class Methods</h3>
+<p>Once we've defined a class, how do we use the attributes and methods inside it?</p>
+<p>Here's how:</p>
+<p><strong>Using class attributes and methods</strong></p>
+<ul>
+<li>A variable inside a class is called an [attribute] – use it like this: <code>Class.variable</code></li>
+<li>A function inside a class is called a [method] – use it like this: <code>Class.function()</code></li>
+</ul>
+<p>I won't explain further in words. (Note: making these pictures isn't easy! Only people who've written tech articles know how much time this series takes.)</p>
+<p>OK, now that we know how to use them, let's try it:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class ClassA():
+    var1 = 100
+    var2 = 0.01
+    var3 = &#x27;Two Drops&#x27;
+
+    def fun1():
+        print(&#x27;I am fun1&#x27;)
+
+    def fun2():
+        print(&#x27;I am fun1&#x27;)
+
+    def fun3():
+        print(&#x27;I am fun1&#x27;)
+
+
+print(ClassA.var1)
+print(ClassA.var2)
+print(ClassA.var3)
+ClassA.fun1()
+ClassA.fun2()
+ClassA.fun3()</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">100
+0.01
+Two Drops
+I am fun1
+I am fun1
+I am fun1</code></pre></div></article></section><section id="step-3" class="step-card item" data-kind="step" aria-label="Teaching step 4">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 04 / 10</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>3. Class Methods</h2>
+<h3>1. How a Class Method Uses Class Attributes</h3>
+<p>We now know how to define a class. Here we'll see how a class method uses the class attributes in the same class.</p>
+<p>Let's go straight to an example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class ClassA():
+    var1 = &#x27;Two Drops&#x27;
+
+    @classmethod
+    def fun1(cls):
+        print(&#x27;I am fun1 &#x27; + cls.var1)
+
+
+ClassA.fun1()</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">I am fun1 Two Drops</code></pre></div>
+<p>Notice there's an extra <code>@classmethod</code> above the method. What's that for?</p>
+<p>It says the function below it is a <strong>class method</strong>. The name makes it easy to understand:</p>
+<p>"class" is class, and "method" is method.</p>
+<p>Do we really have to write this?</p>
+<p>Yes, we do.</p>
+<p>If you leave it out, you'll get an error.</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class ClassA():
+    var1 = &#x27;Two Drops&#x27;
+
+    def fun1(cls):
+        print(&#x27;I am fun1 &#x27; + cls.var1)
+
+
+ClassA.fun1()</code></pre></div>
+<p>The error:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Traceback (most recent call last):
+  File &quot;/Users/twowater/dev/python/test/com/twowater/test.py&quot;, line 10, in &lt;module&gt;
+    ClassA.fun1()
+TypeError: fun1() missing 1 required positional argument: &#x27;cls&#x27;</code></pre></div>
+<p>If you don't declare it as a class method, <code>cls</code> isn't passed in, and you can't use <code>cls</code> to get the class attributes.</p>
+<p>So for a class method to use class attributes, you need to:</p>
+<ul>
+<li>Put <code>@classmethod</code> above the method to declare it as a class method. Only then can it use class attributes.</li>
+<li>Write <code>cls</code> as the first parameter. <code>cls</code> is short for "class". It means the class itself is passed in as an argument, so the method can use the class attributes.</li>
+<li>Use class attributes like this: <code>cls.variable_name</code></li>
+</ul>
+<p>Remember: you can't leave out <code>@classmethod</code> <strong>or</strong> <code>cls</code>.</p>
+<p>Leave either one out and you'll get an error.</p>
+<h3>2. Passing Arguments to Class Methods</h3>
+<p>We've learned how a class method uses class attributes. How do we pass arguments to a class method?</p>
+<p>It's simple – just like a normal function, add more parameters.</p>
+<p>Here's an example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class ClassA():
+    var1 = &#x27;Two Drops&#x27;
+
+    @classmethod
+    def fun1(cls, age):  # Added an age parameter
+        print(&#x27;I am fun1 &#x27; + cls.var1)
+        print(&#x27;Age: &#x27; + str(age))
+
+
+ClassA.fun1(18)  # Passing an extra argument</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">I am fun1 Two Drops
+Age: 18</code></pre></div></article></section><section id="step-4" class="step-card item" data-kind="step" aria-label="Teaching step 5">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 05 / 10</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>4. Changing and Adding Class Attributes</h2>
+<h3>1. Adding and Changing Class Attributes from Inside</h3>
+<p>Let's review the structure of a class:</p>
+<p><span class="tutorial-diagram"><span class="tutorial-diagram-scroll" role="region" tabindex="0" aria-label="The structure of a class, scroll sideways on small screens"><img loading="lazy" alt="The structure of a class" src="/images/diagrams/class-structure.svg"></span></span></p>
+<p>Looking at this, here's a question: how do we change a class attribute – a variable inside the class?</p>
+<p>From the structure, we can guess: through a class method. That is, change and add class attributes from <strong>inside</strong> the class.</p>
+<p>Here's an example:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class ClassA():
+    var1 = &#x27;Two Drops&#x27;
+
+    @classmethod
+    def fun1(cls):
+        print(&#x27;The old value of var1 is: &#x27; + cls.var1)
+        cls.var1 = input(&#x27;Enter a new value for var1: &#x27;)
+        print(&#x27;var1 is now: &#x27; + cls.var1)
+        cls.var2 = input(&#x27;New class attribute var2 – give it a value: &#x27;)
+        print(&#x27;var2 is now: &#x27; + cls.var2)
+
+
+ClassA.fun1()</code></pre></div>
+<p>Output (the values after the colons are what I typed):</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">The old value of var1 is: Two Drops
+Enter a new value for var1: Three Drops
+var1 is now: Three Drops
+New class attribute var2 – give it a value: Four Drops
+var2 is now: Four Drops</code></pre></div>
+<p>I'll say it again: write the examples yourself. Don't just read them. Run them, see what happens, and think.</p>
+<h3>2. Adding and Changing Class Attributes from Outside</h3>
+<p>We've just seen how to change class attributes with a class method. Now let's see how to change and add class attributes from <strong>outside</strong>.</p>
+<p>Example:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class ClassA():
+    var1 = &#x27;Two Drops&#x27;
+
+    @classmethod
+    def fun1(cls):
+        print(&#x27;var1 is: &#x27; + cls.var1)
+
+
+ClassA.fun1()
+ClassA.var1 = input(&#x27;Enter a new value for var1: &#x27;)
+ClassA.fun1()
+
+ClassA.var2 = input(&#x27;Enter a value for the new attribute var2: &#x27;)
+print(ClassA.var2)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">var1 is: Two Drops
+Enter a new value for var1: Three Drops
+var1 is: Three Drops
+Enter a value for the new attribute var2: Four Drops
+Four Drops</code></pre></div></article></section><section id="step-5" class="step-card item" data-kind="step" aria-label="Teaching step 6">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 06 / 10</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>5. Classes and Objects</h2>
+<h3>1. How Classes and Objects Are Related</h3>
+<p>This part is about classes and objects. Let's start with how they're related.</p>
+<p><strong>A class is a template for objects.</strong></p>
+<p>We must have a class first before we can make objects.</p>
+<p>A class is like a <strong>mould</strong> in a factory, and objects are the <strong>products</strong> made from the mould.</p>
+<p><strong>Going from mould to product is called instantiating the class.</strong></p>
+<p><strong>After a class is instantiated, it becomes an object – like the product in our example.</strong></p>
+<h3>2. Instantiating a Class</h3>
+<p>Note: instantiating a class looks different from using a class directly.</p>
+<p>We learned before that using a class directly looks like this:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class ClassA():
+    var1 = &#x27;Two Drops&#x27;
+
+    @classmethod
+    def fun1(cls):
+        print(&#x27;var1 is: &#x27; + cls.var1)
+
+
+ClassA.fun1()</code></pre></div>
+<p>So what does instantiating a class look like?</p>
+<p>Like this. Compare carefully – what's different between instantiating a class and using the class directly?</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class ClassA(object):  # Don&#x27;t worry about this for now; it&#x27;s about inheritance, which comes later
+    var1 = &#x27;Two Drops&#x27;
+
+    def fun1(self):  # No more @classmethod, and cls has become self
+        print(&#x27;var1 is: &#x27; + self.var1)
+
+
+# Instantiate it and use it
+a = ClassA()
+# After instantiating, use its method
+a.fun1()
+# Or use its attribute
+print(a.var1)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">var1 is: Two Drops
+Two Drops</code></pre></div>
+<p>The main differences are:</p>
+<ul>
+<li>The method no longer has <code>@classmethod</code> – we don't declare it as a class method</li>
+<li>The method's parameter <code>cls</code> has changed to <code>self</code></li>
+<li>To use the class, we first create an object with <code>instance_name = Class()</code> – this makes an <strong>instance</strong> of the class. Then we call methods with <code>instance_name.function()</code>, and use attributes with <code>instance_name.variable_name</code>.</li>
+</ul>
+<p>Why did the parameter change from <code>cls</code> to <code>self</code>?</p>
+<p>Actually, you don't <strong>have</strong> to write <code>self</code>. You can use any letter or name.</p>
+<p>Let's try it:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class ClassA(object):
+    var1 = &#x27;Two Drops&#x27;
+
+    def fun1(aaaaaaaa):  # self changed to aaaaaaaa
+        print(&#x27;var1 is: &#x27; + aaaaaaaa.var1)
+
+
+# Instantiate
+a = ClassA()
+# After instantiating, use its method
+a.fun1()
+# Or use its attribute
+print(a.var1)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">var1 is: Two Drops
+Two Drops</code></pre></div>
+<p>See? Changing <code>self</code> to <code>aaaaaaaa</code> still works the same.</p>
+<p>Using <code>cls</code> and <code>self</code> is just our programming habit – it's the agreed style.</p>
+<p><code>cls</code> is short for "class" and means the class, while <code>self</code> means the object itself.</p>
+<p>So when we instantiate an object, we use <code>self</code>.</p>
+<p><strong>And <code>self</code> is the special first parameter of every instance method.</strong></p>
+<p>One more idea to stress here: once you instantiate a class, the attributes and methods inside are no longer called class attributes and class methods. They're called <strong>instance attributes</strong> and <strong>instance methods</strong> (or object attributes and object methods).</p>
+<p>Why stress this?</p>
+<p><strong>Because one class can make many instance objects.</strong></p>
+<p>Look at this example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class ClassA(object):
+    var1 = &#x27;Two Drops&#x27;
+
+    def fun1(self):
+        print(&#x27;var1 is: &#x27; + self.var1)
+
+
+# Instantiate
+a = ClassA()
+# After instantiating, use its method
+a.fun1()
+# Or use its attribute
+print(a.var1)
+
+
+# Instantiate
+b = ClassA()
+# After instantiating, use its method
+b.fun1()
+# Or use its attribute
+print(b.var1)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">var1 is: Two Drops
+Two Drops
+var1 is: Two Drops
+Two Drops</code></pre></div>
+<p>I can use this one class to create object <code>a</code> <strong>and</strong> object <code>b</code>.</p>
+<h3>3. Instance Attributes and Class Attributes</h3>
+<p>One class can make many objects.</p>
+<p><span class="tutorial-diagram"><span class="tutorial-diagram-scroll" role="region" tabindex="0" aria-label="From class to instances, scroll sideways on small screens"><img loading="lazy" alt="From class to instances" src="/images/diagrams/class-instances.svg"></span></span></p>
+<p>Using this picture, let's explore: how are instance attributes and class attributes related?</p>
+<p><strong>First question: if a class attribute changes, does the instance attribute change too?</strong></p>
+<p>As always, when we have a question, we test it with code.</p>
+<p>Look at this program:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class ClassA(object):
+    var1 = &#x27;Two Drops&#x27;
+
+    def fun1(self):
+        print(&#x27;var1 is: &#x27; + self.var1)
+
+
+# Instantiate
+a = ClassA()
+# Use its attribute
+print(a.var1)
+
+# Change the class attribute
+ClassA.var1 = &#x27;Three Drops&#x27;
+# Print object a&#x27;s attribute again
+print(a.var1)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Two Drops
+Three Drops</code></pre></div>
+<p>From the result, <strong>when the class attribute changes, the instance attribute changes too.</strong></p>
+<p>That makes sense: the instance object is made from the class, so when the class attribute changes, the object's attribute changes too.</p>
+<p><strong>The other way round: if an instance attribute changes, does the class attribute change?</strong></p>
+<p>Of course not! Each instance is its own separate thing, and can't affect the class.</p>
+<p>Let's test it:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class ClassA(object):
+    var1 = &#x27;Two Drops&#x27;
+
+    def fun1(self):
+        print(&#x27;var1 is: &#x27; + self.var1)
+
+
+# Instantiate
+a = ClassA()
+# Use its attribute
+print(a.var1)
+
+# Change the instance&#x27;s attribute
+a.var1 = &#x27;Three Drops&#x27;
+# Print the instance&#x27;s changed attribute
+print(a.var1)
+
+# Print the class&#x27;s attribute
+print(ClassA.var1)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Two Drops
+Three Drops
+Two Drops</code></pre></div>
+<p>You can see that <strong>no matter how an instance changes its attribute, the class attribute isn't affected.</strong></p>
+<h3>4. Instance Methods and Class Methods</h3>
+<p>Now let's ask the same question as above.</p>
+<p><strong>If a class method changes, does the instance method change too?</strong></p>
+<p>Look at this example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class ClassA(object):
+    var1 = &#x27;Two Drops&#x27;
+
+    def fun1(self):
+        print(&#x27;This is the original method&#x27;)
+
+
+# Instantiate
+a = ClassA()
+# Use its method
+a.fun1()
+
+
+# Change the class method
+# 1. First, define a new function
+def newFun1(self):
+    print(&#x27;This is the new method that replaced it&#x27;)
+
+
+# 2. Replace the old function with the new one – this is &quot;overriding the class method&quot;
+ClassA.fun1 = newFun1
+
+# Call the instance&#x27;s method again
+a.fun1()</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">This is the original method
+This is the new method that replaced it</code></pre></div>
+<p>I suggest you look at my examples carefully and type them out again yourself. Think about why we're doing this and what it proves.</p>
+<p>Again: think a lot, type a lot.</p>
+<p>Back to the point: from the result, when a class method changes, the instance method changes too.</p>
+<p>In this example, to change the class method, we <strong>overrode</strong> it.</p>
+<p>We used <code>Class.original_function = new_function</code> to override it.</p>
+<p>Note: this assignment <strong>replaces</strong> the method; it doesn't <strong>call</strong> the function. So you can't add brackets. <code>Class.original_function() = new_function()</code> is wrong.</p>
+<p><strong>So if an instance method changes, does the class method change?</strong></p>
+<p>To test this, we'd need to override the instance method, then check whether the class method changed.</p>
+<p>But we can't override an instance method this way.</p>
+<p>See – it gives an error straight away.</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class ClassA(object):
+    var1 = &#x27;Two Drops&#x27;
+
+    def fun1(self):
+        print(&#x27;This is the original method&#x27;)
+
+
+# Instantiate
+a = ClassA()
+# Use its method
+a.fun1()
+
+
+# 1. First, define a new function
+def newFun1(self):
+    print(&#x27;This is the new method that replaced it&#x27;)
+
+
+# 2. Replace the instance method with the new function
+a.fun1 = newFun1
+
+# Call the instance&#x27;s method again
+a.fun1()</code></pre></div>
+<p>The error:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">This is the original method
+Traceback (most recent call last):
+  File &quot;/Users/twowater/dev/python/test/com/twowater/test.py&quot;, line 24, in &lt;module&gt;
+    a.fun1()
+TypeError: newFun1() missing 1 required positional argument: &#x27;self&#x27;</code></pre></div>
+<h3>Where is each record stored?</h3>
+<p>We've covered classes and objects. Now let's turn study time into a very small class. First, find which data belongs to <strong>each</strong> record, and which description can be <strong>shared</strong> by the whole class.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class StudyRecord:
+    category = &#x27;Study record&#x27;
+
+    def __init__(self, subject):
+        self.subject = subject
+        self.minutes = 0
+
+    def add(self, minutes):
+        self.minutes = self.minutes + minutes
+
+    @classmethod
+    def get_category(cls):
+        return cls.category
+
+
+python_record = StudyRecord(&#x27;Python&#x27;)
+reading_record = StudyRecord(&#x27;Reading&#x27;)
+python_record.add(15)
+print(python_record.minutes)
+print(reading_record.minutes)
+print(StudyRecord.get_category())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">15
+0
+Study record</code></pre></div>
+<p><code>self.minutes</code> is an attribute that belongs to each instance, so adding to the Python record doesn't change the Reading record. <code>category</code> is an attribute defined on the class, and here all the instances read it together.</p>
+<p>You also need to tell apart the kinds of methods defined in a class: <code>add(self, ...)</code> here is an <strong>instance method</strong>, which receives the instance. <code>get_category(cls)</code> with <code>@classmethod</code> is a <strong>class method</strong>, which receives the class. <code>self</code> and <code>cls</code> are just agreed names, and not every method (instance, class and static methods) starts with <code>self</code>.</p>
+<p>Try it yourself: add <code>5</code> minutes to each record. You should get <code>20</code> and <code>5</code>. Then add a list of notes. Try writing <code>self.notes = []</code> in <code>__init__</code>, and also try writing <code>notes = []</code> on the class. Use <code>append()</code> and watch how shared data behaves differently. Names with double underscores mainly involve <strong>name mangling</strong>. They're not a permission system that blocks all outside access, so don't treat them as a safe way to keep secrets.</p></article></section><section id="exercise-01-class-basic" class="ex-card item" data-kind="exercise" data-exercise="01-class-basic" aria-label="Exercise 1: Define your first class">
+<script type="application/json" class="ex-data">{"id": "01-class-basic", "lesson": "python8", "starter": "# Define the class Animal, with a sound method that prints the text asked for\n# Then create an instance, assign it to a, and call a.sound()\n\n", "solution": "class Animal:\n    def sound(self):\n        print('Some sound')\n\na = Animal()\na.sound()", "grading": {"requiredAst": ["ClassDef:Animal", "FunctionDef:sound"], "stdoutEquals": "Some sound\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 1 / 4</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Define your first class</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Define a class <code>Animal</code> with one method, <code>sound</code>, which prints <code>'Some sound'</code>.</p>
+<p>Then:
+1. Create an instance <code>Animal()</code> and assign it to <code>a</code>
+2. Call <code>a.sound()</code></p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Some sound</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>Define a class with class. A method is like a function, but its first parameter must be self</p></li></template><template class="hint-tpl"><li><p>Create an instance: a = Animal(); call the method: a.sound()</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class Animal:
+    def sound(self):
+        print(&#x27;Some sound&#x27;)
+
+a = Animal()
+a.sound()</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># Define the class Animal, with a sound method that prints the text asked for
+# Then create an instance, assign it to a, and call a.sound()
+
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-6" class="step-card item" data-kind="step" aria-label="Teaching step 7">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 07 / 10</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>6. The Initialisation Function</h2>
+<h3>1. What is the Initialisation Function?</h3>
+<p>The initialisation function is a function that is called <strong>automatically</strong> when you create an instance.</p>
+<p>For example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class ClassA(object):
+
+    def __init__(self):
+        print(&#x27;Instance created&#x27;)
+
+
+# Instantiate
+a = ClassA()</code></pre></div>
+<p>Output (we didn't call the <code>init</code> method ourselves – it printed as soon as we created the instance):</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Instance created</code></pre></div>
+<p>When the code runs <code>a = ClassA()</code>, it automatically calls the <code>__init__(self)</code> function.</p>
+<p><strong>This <code>__init__(self)</code> function is the initialisation function, also called the constructor.</strong></p>
+<p>The initialisation function always has the same form: <code>init</code> in the middle, meaning "initialise", with <strong>two underscores</strong> before and after. Inside the brackets of <code>__init__()</code>, the first parameter must be <code>self</code>, or you'll get an error.</p>
+<p>The constructor (initialisation function) looks like this:</p>
+<div class="cb not-prose" data-mode="syntax"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Syntax only</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def __init__(self,[...):</code></pre></div>
+<p>The initialisation function can take arguments too. For example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class ClassA(object):
+
+    def __init__(self, str):
+        print(&#x27;Instance created&#x27;)
+        print(str)
+
+
+# Instantiate
+a = ClassA(&#x27;Hello, I am a new object!&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Instance created
+Hello, I am a new object!</code></pre></div>
+<h3>2. The Destructor</h3>
+<p>Since the constructor is called when an object is created, it makes sense that when an object is destroyed, the <strong>destructor</strong> is called.</p>
+<p>The destructor's syntax:</p>
+<div class="cb not-prose" data-mode="syntax"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Syntax only</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def __del__(self,[...):</code></pre></div>
+<p>Here's an example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class ClassA(object):
+
+    def __init__(self):
+        print(&#x27;Instance created&#x27;)
+
+    def __del__(self):
+        print(&#x27;Instance destroyed&#x27;)
+
+
+a = ClassA()
+del a  # This destroys the object</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Instance created
+Instance destroyed</code></pre></div>
+<h3>3. An Old Leftover Problem with Defining Classes in Python</h3>
+<p>As Python changed over its versions, it left behind an old problem with classes: <strong>new-style classes</strong> and <strong>old-style classes</strong>. Look at this code first:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+
+# Old-style class
+class OldClass:
+    pass
+
+# New-style class
+class NewClass(object):
+    pass</code></pre></div>
+<p>These define classes in two different ways. The biggest difference is that the new-style class inherits from the <code>object</code> class. In Python 2, it was best to always define new-style classes. In Python 3 this problem doesn't exist any more, because <strong>all classes in Python 3 are new-style</strong>.</p>
+<p>So what's the difference between new-style and old-style classes?</p>
+<p>Run this code:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+
+# Old-style class
+class OldClass:
+    def __init__(self, account, name):
+        self.account = account
+        self.name = name
+
+
+# New-style class
+class NewClass(object):
+    def __init__(self, account, name):
+        self.account = account
+        self.name = name
+
+
+if __name__ == &#x27;__main__&#x27;:
+    old_class = OldClass(111111, &#x27;OldClass&#x27;)
+    print(old_class)
+    print(type(old_class))
+    print(dir(old_class))
+    print(&#x27;\n&#x27;)
+    new_class = NewClass(222222, &#x27;NewClass&#x27;)
+    print(new_class)
+    print(type(new_class))
+    print(dir(new_class))</code></pre></div>
+<p>Here's the result in Python 2.7:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">/Users/twowater/dev/python/test/venv/bin/python /Users/twowater/dev/python/test/com/twowater/test.py
+&lt;__main__.OldClass instance at 0x109a50560&gt;
+&lt;type &#x27;instance&#x27;&gt;
+[&#x27;__doc__&#x27;, &#x27;__init__&#x27;, &#x27;__module__&#x27;, &#x27;account&#x27;, &#x27;name&#x27;]
+
+
+&lt;__main__.NewClass object at 0x109a4b150&gt;
+&lt;class &#x27;__main__.NewClass&#x27;&gt;
+[&#x27;__class__&#x27;, &#x27;__delattr__&#x27;, &#x27;__dict__&#x27;, &#x27;__doc__&#x27;, &#x27;__format__&#x27;, &#x27;__getattribute__&#x27;, &#x27;__hash__&#x27;, &#x27;__init__&#x27;, &#x27;__module__&#x27;, &#x27;__new__&#x27;, &#x27;__reduce__&#x27;, &#x27;__reduce_ex__&#x27;, &#x27;__repr__&#x27;, &#x27;__setattr__&#x27;, &#x27;__sizeof__&#x27;, &#x27;__str__&#x27;, &#x27;__subclasshook__&#x27;, &#x27;__weakref__&#x27;, &#x27;account&#x27;, &#x27;name&#x27;]
+
+Process finished with exit code 0</code></pre></div>
+<p>Here's the result in Python 3.6:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">/usr/local/bin/python3.6 /Users/twowater/dev/python/test/com/twowater/test.py
+&lt;__main__.OldClass object at 0x1038ba630&gt;
+&lt;class &#x27;__main__.OldClass&#x27;&gt;
+[&#x27;__class__&#x27;, &#x27;__delattr__&#x27;, &#x27;__dict__&#x27;, &#x27;__dir__&#x27;, &#x27;__doc__&#x27;, &#x27;__eq__&#x27;, &#x27;__format__&#x27;, &#x27;__ge__&#x27;, &#x27;__getattribute__&#x27;, &#x27;__gt__&#x27;, &#x27;__hash__&#x27;, &#x27;__init__&#x27;, &#x27;__init_subclass__&#x27;, &#x27;__le__&#x27;, &#x27;__lt__&#x27;, &#x27;__module__&#x27;, &#x27;__ne__&#x27;, &#x27;__new__&#x27;, &#x27;__reduce__&#x27;, &#x27;__reduce_ex__&#x27;, &#x27;__repr__&#x27;, &#x27;__setattr__&#x27;, &#x27;__sizeof__&#x27;, &#x27;__str__&#x27;, &#x27;__subclasshook__&#x27;, &#x27;__weakref__&#x27;, &#x27;account&#x27;, &#x27;name&#x27;]
+
+
+&lt;__main__.NewClass object at 0x103e3c9e8&gt;
+&lt;class &#x27;__main__.NewClass&#x27;&gt;
+[&#x27;__class__&#x27;, &#x27;__delattr__&#x27;, &#x27;__dict__&#x27;, &#x27;__dir__&#x27;, &#x27;__doc__&#x27;, &#x27;__eq__&#x27;, &#x27;__format__&#x27;, &#x27;__ge__&#x27;, &#x27;__getattribute__&#x27;, &#x27;__gt__&#x27;, &#x27;__hash__&#x27;, &#x27;__init__&#x27;, &#x27;__init_subclass__&#x27;, &#x27;__le__&#x27;, &#x27;__lt__&#x27;, &#x27;__module__&#x27;, &#x27;__ne__&#x27;, &#x27;__new__&#x27;, &#x27;__reduce__&#x27;, &#x27;__reduce_ex__&#x27;, &#x27;__repr__&#x27;, &#x27;__setattr__&#x27;, &#x27;__sizeof__&#x27;, &#x27;__str__&#x27;, &#x27;__subclasshook__&#x27;, &#x27;__weakref__&#x27;, &#x27;account&#x27;, &#x27;name&#x27;]
+
+Process finished with exit code 0</code></pre></div>
+<p>Look carefully at the output and compare. Notice that in Python 3 the two results are <strong>exactly the same</strong>, because Python 3 doesn't have the new-style vs old-style problem.</p></article></section><section id="exercise-02-init" class="ex-card item" data-kind="exercise" data-exercise="02-init" aria-label="Exercise 2: Pass values to an object with __init__">
+<script type="application/json" class="ex-data">{"id": "02-init", "lesson": "python8", "starter": "# Define the class Person: __init__ takes name and age and saves them as instance attributes\n# Write a greet method that prints the introduction in the format asked for\n# Finally create p and call p.greet()\n\n", "solution": "class Person:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\n    def greet(self):\n        print(f'My name is {self.name} and I am {self.age} years old')\n\np = Person('Sam', 18)\np.greet()", "grading": {"requiredAst": ["ClassDef:Person", "FunctionDef:__init__", "FunctionDef:greet"], "stdoutEquals": "My name is Sam and I am 18 years old\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 2 / 4</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Pass values to an object with __init__</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Define a class <code>Person</code>:</p>
+<ul>
+<li><code>__init__</code> takes <code>name</code> and <code>age</code> and saves them to <code>self.name</code> and <code>self.age</code></li>
+<li>A method <code>greet</code> prints <code>f'My name is {self.name} and I am {self.age} years old'</code></li>
+</ul>
+<p>Then create <code>Person('Sam', 18)</code>, assign it to <code>p</code>, and call <code>p.greet()</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">My name is Sam and I am 18 years old</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p><strong>init</strong> has two underscores on each side</p></li></template><template class="hint-tpl"><li><p>Inside <strong>init</strong>, set instance attributes with self.xxx = ...</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def greet(self):
+        print(f&#x27;My name is {self.name} and I am {self.age} years old&#x27;)
+
+p = Person(&#x27;Sam&#x27;, 18)
+p.greet()</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># Define the class Person: __init__ takes name and age and saves them as instance attributes
+# Write a greet method that prints the introduction in the format asked for
+# Finally create p and call p.greet()
+
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-7" class="step-card item" data-kind="step" aria-label="Teaching step 8">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 08 / 10</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>7. Inheritance</h2>
+<h3>1. Defining Inheritance</h3>
+<p>When you hear "inheritance", you probably think of inheriting money or a house from your parents.</p>
+<p>Class inheritance is similar.</p>
+<p>Say there's an old class that can work out averages. Now there's a new class that also needs to work out averages. We can use <strong>inheritance</strong>: the new class inherits from the old class, and then the new class has that ability too.</p>
+<p>Usually, we call the old class the <strong>parent class</strong> and the new class the <strong>child class</strong>.</p>
+<p>First, let's look at the basic syntax of inheritance:</p>
+<div class="cb not-prose" data-mode="syntax"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Syntax only</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class ClassName(BaseClassName):
+    &lt;statement-1&gt;
+    .
+    .
+    .
+    &lt;statement-N&gt;</code></pre></div>
+<p>When you define a class, you put the class it inherits from in the brackets. If you're not inheriting from anything, you can still write <code>object</code>, because in Python <code>object</code> is the parent of every class.</p>
+<p>The example above is <strong>single inheritance</strong>. Python also supports <strong>multiple inheritance</strong>. The syntax is:</p>
+<div class="cb not-prose" data-mode="syntax"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Syntax only</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class ClassName(Base1,Base2,Base3):
+    &lt;statement-1&gt;
+    .
+    .
+    .
+    &lt;statement-N&gt;</code></pre></div>
+<p>One thing to note with multiple inheritance: if the parent classes have methods with the same name, and the child class doesn't say which one to use, Python searches the parent classes <strong>from left to right</strong>, in the order they're written in the brackets. That is, if a method isn't found in the child class, Python looks for it in the parent classes from left to right.</p>
+<p>So what can a child class do?</p>
+<p>Benefits of a child class:
+* It inherits the parent class's attributes and methods
+* It can define its own, and override the parent's attributes and methods</p>
+<h3>2. Calling the Parent Class's Methods</h3>
+<p>Once a class inherits from a parent, it can call the parent's methods directly. In the example below, <code>UserInfo2</code> inherits from the parent class <code>UserInfo</code>, and can call the parent's <code>get_account</code> method directly.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+
+class UserInfo(object):
+    lv = 5
+
+    def __init__(self, name, age, account):
+        self.name = name
+        self._age = age
+        self.__account = account
+
+    def get_account(self):
+        return self.__account
+
+
+class UserInfo2(UserInfo):
+    pass
+
+
+if __name__ == &#x27;__main__&#x27;:
+    userInfo2 = UserInfo2(&#x27;Two Drops&#x27;, 23, 347073565);
+    print(userInfo2.get_account())</code></pre></div>
+<h3>3. Overriding a Parent Class's Method</h3>
+<p>Of course, a child class can also <strong>override</strong> (rewrite) a parent class's method.</p>
+<p>Example:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
+
+class UserInfo(object):
+    lv = 5
+
+    def __init__(self, name, age, account):
+        self.name = name
+        self._age = age
+        self.__account = account
+
+    def get_account(self):
+        return self.__account
+
+    @classmethod
+    def get_name(cls):
+        return cls.lv
+
+    @property
+    def get_age(self):
+        return self._age
+
+
+class UserInfo2(UserInfo):
+    def __init__(self, name, age, account, sex):
+        super(UserInfo2, self).__init__(name, age, account)
+        self.sex = sex;
+
+
+if __name__ == &#x27;__main__&#x27;:
+    userInfo2 = UserInfo2(&#x27;Two Drops&#x27;, 23, 347073565, &#x27;Male&#x27;);
+    # Print all attributes
+    print(dir(userInfo2))
+    # Print the attributes set in the constructor
+    print(userInfo2.__dict__)
+    print(UserInfo2.get_name())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[&#x27;_UserInfo__account&#x27;, &#x27;__class__&#x27;, &#x27;__delattr__&#x27;, &#x27;__dict__&#x27;, &#x27;__dir__&#x27;, &#x27;__doc__&#x27;, &#x27;__eq__&#x27;, &#x27;__format__&#x27;, &#x27;__ge__&#x27;, &#x27;__getattribute__&#x27;, &#x27;__gt__&#x27;, &#x27;__hash__&#x27;, &#x27;__init__&#x27;, &#x27;__init_subclass__&#x27;, ...]
+{&#x27;name&#x27;: &#x27;Two Drops&#x27;, &#x27;_age&#x27;: 23, &#x27;_UserInfo__account&#x27;: 347073565, &#x27;sex&#x27;: &#x27;Male&#x27;}
+5</code></pre></div>
+<p>Here we've overridden the parent class's constructor.</p>
+<h3>4. Checking the Type of a Child Class</h3>
+<p>With class inheritance, sometimes we need to check what type a class is. How do we do that?</p>
+<p>We can use the <code>isinstance()</code> function.</p>
+<p>One example is enough to show how <code>isinstance()</code> works:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
+
+class User1(object):
+    pass
+
+
+class User2(User1):
+    pass
+
+
+class User3(User2):
+    pass
+
+
+if __name__ == &#x27;__main__&#x27;:
+    user1 = User1()
+    user2 = User2()
+    user3 = User3()
+    # isinstance() tells us whether an object is a certain type
+    print(isinstance(user3, User2))
+    print(isinstance(user3, User1))
+    print(isinstance(user3, User3))
+    # isinstance() works on basic types too
+    print(isinstance(&#x27;Two Drops&#x27;, str))
+    print(isinstance(347073565, int))
+    print(isinstance(347073565, str))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">True
+True
+True
+True
+True
+False</code></pre></div>
+<p>You can see <code>isinstance()</code> not only tells us whether an object is a certain type – it also works on basic types.</p></article></section><section id="exercise-03-inheritance" class="ex-card item" data-kind="exercise" data-exercise="03-inheritance" aria-label="Exercise 3: Inheritance: Student inherits from Person">
+<script type="application/json" class="ex-data">{"id": "03-inheritance", "lesson": "python8", "starter": "class Person:\n    def __init__(self, name):\n        self.name = name\n    def greet(self):\n        print(f'My name is {self.name}')\n\n# Define a class Student that inherits from Person, with a study method\n# Create s, then call greet and study\n\n", "solution": "class Person:\n    def __init__(self, name):\n        self.name = name\n    def greet(self):\n        print(f'My name is {self.name}')\n\nclass Student(Person):\n    def study(self):\n        print(f'{self.name} is studying')\n\ns = Student('Xiao Ming')\ns.greet()\ns.study()", "grading": {"requiredAst": ["ClassDef:Student", "FunctionDef:study"], "stdoutEquals": "My name is Xiao Ming\nXiao Ming is studying\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 3 / 4</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Inheritance: Student inherits from Person</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>We've already defined this for you:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class Person:
+    def __init__(self, name):
+        self.name = name
+    def greet(self):
+        print(f&#x27;My name is {self.name}&#x27;)</code></pre></div>
+<p>Define a class <code>Student</code> that <strong>inherits from <code>Person</code></strong>, and give it a method <code>study</code> that prints <code>f'{self.name} is studying'</code>.</p>
+<p>Then create <code>Student('Xiao Ming')</code>, assign it to <code>s</code>, and call <code>s.greet()</code> then <code>s.study()</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">My name is Xiao Ming
+Xiao Ming is studying</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>How to inherit: class Student(Person):</p></li></template><template class="hint-tpl"><li><p>It's fine that Student has no <strong>init</strong> – it uses the parent class's one automatically</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class Person:
+    def __init__(self, name):
+        self.name = name
+    def greet(self):
+        print(f&#x27;My name is {self.name}&#x27;)
+
+class Student(Person):
+    def study(self):
+        print(f&#x27;{self.name} is studying&#x27;)
+
+s = Student(&#x27;Xiao Ming&#x27;)
+s.greet()
+s.study()</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">class Person:
+    def __init__(self, name):
+        self.name = name
+    def greet(self):
+        print(f&#x27;My name is {self.name}&#x27;)
+
+# Define a class Student that inherits from Person, with a study method
+# Create s, then call greet and study
+
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-8" class="step-card item" data-kind="step" aria-label="Teaching step 9">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 09 / 10</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>8. Polymorphism</h2>
+<p><strong>Polymorphism</strong> isn't hard to understand. It means doing the same action on different types of things, and they behave differently depending on their type (or class).</p>
+<p>In fact, we use polymorphism all the time. For example:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">&gt;&gt;&gt; 1 + 2
+3
+&gt;&gt;&gt; &#x27;a&#x27; + &#x27;b&#x27;
+&#x27;ab&#x27;</code></pre></div>
+<p>When we use <code>+</code> on two integers, we get their sum. When we use the same <code>+</code> on two strings, we get the strings joined together.</p>
+<p>In other words, <strong>different types of objects respond differently to the same message.</strong></p>
+<p>Let's look at an example to understand polymorphism:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
+
+class User(object):
+    def __init__(self, name):
+        self.name = name
+
+    def printUser(self):
+        print(&#x27;Hello !&#x27; + self.name)
+
+
+class UserVip(User):
+    def printUser(self):
+        print(&#x27;Hello ! Dear VIP user: &#x27; + self.name)
+
+
+class UserGeneral(User):
+    def printUser(self):
+        print(&#x27;Hello ! Dear user: &#x27; + self.name)
+
+
+def printUserInfo(user):
+    user.printUser()
+
+
+if __name__ == &#x27;__main__&#x27;:
+    userVip = UserVip(&#x27;Two Drops&#x27;)
+    printUserInfo(userVip)
+    userGeneral = UserGeneral(&#x27;Shui Shui Shui&#x27;)
+    printUserInfo(userGeneral)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Hello ! Dear VIP user: Two Drops
+Hello ! Dear user: Shui Shui Shui</code></pre></div>
+<p>You can see <code>userVip</code> and <code>userGeneral</code> are two different objects. When we call <code>printUserInfo</code> on them, each one automatically uses the <code>printUser</code> method of its <strong>real</strong> type, and they respond differently. That's the magic of polymorphism.</p>
+<p>Remember: polymorphism comes <strong>from</strong> inheritance. Because of inheritance, objects of different classes can respond differently to the same message.</p></article></section><section id="exercise-04-polymorphism" class="ex-card item" data-kind="exercise" data-exercise="04-polymorphism" aria-label="Exercise 4: Polymorphism: overriding a parent&#x27;s method">
+<script type="application/json" class="ex-data">{"id": "04-polymorphism", "lesson": "python8", "starter": "class Animal:\n    def sound(self):\n        print('Some sounds')\n\n# Define Dog and Cat inheriting from Animal, each overriding sound\n# Use a for loop over the two instances and call sound on each\n\n", "solution": "class Animal:\n    def sound(self):\n        print('Some sounds')\n\nclass Dog(Animal):\n    def sound(self):\n        print('Woof woof')\n\nclass Cat(Animal):\n    def sound(self):\n        print('Meow meow')\n\nfor a in [Dog(), Cat()]:\n    a.sound()", "grading": {"requiredAst": ["ClassDef:Dog", "ClassDef:Cat", "FunctionDef:sound", "For"], "stdoutEquals": "Woof woof\nMeow meow\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 4 / 4</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Polymorphism: overriding a parent&#x27;s method</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>We've already defined this for you:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class Animal:
+    def sound(self):
+        print(&#x27;Some sounds&#x27;)</code></pre></div>
+<p>Define two classes <code>Dog</code> and <code>Cat</code> that inherit from <code>Animal</code>, and <strong>override</strong> the <code>sound</code> method in each:</p>
+<ul>
+<li><code>Dog.sound</code> prints <code>'Woof woof'</code></li>
+<li><code>Cat.sound</code> prints <code>'Meow meow'</code></li>
+</ul>
+<p>Then use a <code>for</code> loop to call <code>Dog().sound()</code> and <code>Cat().sound()</code> in turn.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Woof woof
+Meow meow</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>Defining a method with the same name in a child class replaces the parent's one</p></li></template><template class="hint-tpl"><li><p>for a in [Dog(), Cat()]: goes through the two objects</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class Animal:
+    def sound(self):
+        print(&#x27;Some sounds&#x27;)
+
+class Dog(Animal):
+    def sound(self):
+        print(&#x27;Woof woof&#x27;)
+
+class Cat(Animal):
+    def sound(self):
+        print(&#x27;Meow meow&#x27;)
+
+for a in [Dog(), Cat()]:
+    a.sound()</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">class Animal:
+    def sound(self):
+        print(&#x27;Some sounds&#x27;)
+
+# Define Dog and Cat inheriting from Animal, each overriding sound
+# Use a for loop over the two instances and call sound on each
+
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-9" class="step-card item" data-kind="step" aria-label="Teaching step 10">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 10 / 10</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>9. Access Control in Classes</h2>
+<h3>1. Access Control for Class Attributes</h3>
+<p>In Java, there are <strong>public</strong> attributes and <strong>private</strong> attributes, which control who can access them.</p>
+<p>So does Python have access control for attributes?</p>
+<p>Usually, we start an attribute name with <strong>two underscores</strong>, like <code>__private_attrs</code>, to say it's private and shouldn't be used or accessed directly from outside the class. Inside the class's methods, you use it as <code>self.__private_attrs</code>.</p>
+<p>Why do we say "usually"?</p>
+<p>Because Python doesn't actually have real private attributes.</p>
+<p>In Python, access control depends on programmers <strong>choosing to follow the rules</strong>. Why do we say that?</p>
+<p>Look at this example:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class UserInfo(object):
+    def __init__(self, name, age, account):
+        self.name = name        # Anyone can access this
+        self._age = age         # &quot;Private&quot; by convention, but we can still access it if we want. This isn&#x27;t a Python syntax rule – it&#x27;s just a coding convention
+        self.__account = account  # With two underscores, you can&#x27;t access it directly by this name from outside. But it&#x27;s still not truly private – there&#x27;s still a way to get at it</code></pre></div>
+<p>Look carefully – why isn't the double-underscore attribute truly private? Let's test it with this example:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+
+class UserInfo(object):
+    def __init__(self, name, age, account):
+        self.name = name
+        self._age = age
+        self.__account = account
+
+    def get_account(self):
+        return self.__account
+
+
+if __name__ == &#x27;__main__&#x27;:
+    userInfo = UserInfo(&#x27;Two Drops&#x27;, 23, 347073565);
+    # Print all attributes
+    print(dir(userInfo))
+    # Print the attributes set in the constructor
+    print(userInfo.__dict__)
+    print(userInfo.get_account())
+    # Test whether the double-underscore attribute is really private
+    print(userInfo._UserInfo__account)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[&#x27;_UserInfo__account&#x27;, &#x27;__class__&#x27;, &#x27;__delattr__&#x27;, &#x27;__dict__&#x27;, &#x27;__dir__&#x27;, &#x27;__doc__&#x27;, &#x27;__eq__&#x27;, &#x27;__format__&#x27;, &#x27;__ge__&#x27;, &#x27;__getattribute__&#x27;, &#x27;__gt__&#x27;, &#x27;__hash__&#x27;, &#x27;__init__&#x27;, &#x27;__init_subclass__&#x27;, &#x27;__le__&#x27;, &#x27;__lt__&#x27;, ...]
+{&#x27;name&#x27;: &#x27;Two Drops&#x27;, &#x27;_age&#x27;: 23, &#x27;_UserInfo__account&#x27;: 347073565}
+347073565
+347073565</code></pre></div>
+<p>Looking at all the attributes and the ones set in the constructor, we defined an attribute called <code>__account</code>, but in the printout its name has been changed to <code>_UserInfo__account</code>. And the last line prints the double-underscore attribute directly, which proves it's <strong>not</strong> really private.</p>
+<h3>2. Special Class Methods</h3>
+<p>When a class is created, it comes with some special methods. The main ones are:</p>
+<p>Special class methods:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Method</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>__init__</code></td>
+<td>Constructor, called when an object is created</td>
+</tr>
+<tr>
+<td><code>__del__</code></td>
+<td>Destructor, used when an object is released</td>
+</tr>
+<tr>
+<td><code>__repr__</code></td>
+<td>Printing, converting to a string</td>
+</tr>
+<tr>
+<td><code>__setitem__</code></td>
+<td>Set a value by index</td>
+</tr>
+<tr>
+<td><code>__getitem__</code></td>
+<td>Get a value by index</td>
+</tr>
+<tr>
+<td><code>__len__</code></td>
+<td>Get the length</td>
+</tr>
+<tr>
+<td><code>__cmp__</code></td>
+<td>Comparison</td>
+</tr>
+<tr>
+<td><code>__call__</code></td>
+<td>Calling like a function</td>
+</tr>
+<tr>
+<td><code>__add__</code></td>
+<td>Addition</td>
+</tr>
+<tr>
+<td><code>__sub__</code></td>
+<td>Subtraction</td>
+</tr>
+<tr>
+<td><code>__mul__</code></td>
+<td>Multiplication</td>
+</tr>
+<tr>
+<td><code>__div__</code></td>
+<td>Division</td>
+</tr>
+<tr>
+<td><code>__mod__</code></td>
+<td>Remainder (modulo)</td>
+</tr>
+<tr>
+<td><code>__pow__</code></td>
+<td>Power</td>
+</tr>
+</tbody>
+</table></div>
+<p>Sometimes we want to get information about a class. We can use these functions:</p>
+<ul>
+<li><code>type(obj)</code>: gets the object's type</li>
+<li><code>isinstance(obj, type)</code>: checks whether the object is an instance of the given type</li>
+<li><code>hasattr(obj, attr)</code>: checks whether the object has the given attribute/method</li>
+<li><code>getattr(obj, attr[, default])</code>: gets the value of an attribute/method. If it doesn't exist, returns <code>default</code> (if you gave one); otherwise raises an <code>AttributeError</code></li>
+<li><code>setattr(obj, attr, value)</code>: sets the value of an attribute/method, like <code>obj.attr = value</code></li>
+<li><code>dir(obj)</code>: gets a list of all the attribute and method names of an object</li>
+</ul>
+<h3>3. Access Control for Methods</h3>
+<p>We can think of methods as attributes of a class too. So access control for methods works the same as for attributes – there are no truly private methods. It all depends on programmers following Python's coding conventions.</p>
+<p>Here's an example. The rules are the same as for attributes:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+
+class User(object):
+    def upgrade(self):
+        pass
+
+    def _buy_equipment(self):
+        pass
+
+    def __pk(self):
+        pass</code></pre></div></article></section><div class="lock-banner" hidden><span aria-hidden="true">🔒</span>Solve this exercise to unlock the next part ·<span class="accent lock-k">0</span><span aria-hidden="true">/</span><span>4</span></div><section id="lesson-end" aria-label="Chapter summary"><div class="done-banner" hidden><div class="done-emoji" aria-hidden="true">🎉</div><p class="done-title">Chapter complete!</p><p class="done-sub">You solved all 4 exercises in this chapter.</p></div><nav aria-label="Chapter navigation" class="chapter-nav"><div class="cn-grid"><a class="chap-nav prev focus-ring" href="/lessons/python7/iteration/"><span class="cn-label">← Previous chapter</span><span class="cn-title">07 · Iteration</span></a><div class="cn-mid"><span>Object-oriented programming</span></div><a class="chap-nav next focus-ring" href="/lessons/python9/modules/"><span class="cn-label">Next chapter →</span><span class="cn-title">09 · Modules</span></a></div></nav></section></article></div>
+    <aside class="lesson-sidebar right" aria-label="This chapter"><nav aria-label="This chapter's contents"><div class="side-label up">In this chapter</div><p class="toc-chapter">Object-oriented programming</p><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Introduction</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">1. The Ideas Behind Object-Oriented Programming</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">2. Defining and Using a Class</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">3. Class Methods</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">4. Changing and Adding Class Attributes</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">5. Classes and Objects</span></a></li><li class="toc-li" data-target="exercise-01-class-basic"><a href="#exercise-01-class-basic" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">Define your first class</span></a></li><li class="toc-li" data-target="step-6"><a href="#step-6" class="toc-link focus-ring"><span class="toc-kind">Teaching 07</span><span class="toc-title">6. The Initialisation Function</span></a></li><li class="toc-li" data-target="exercise-02-init"><a href="#exercise-02-init" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">Pass values to an object with __init__</span></a></li><li class="toc-li" data-target="step-7"><a href="#step-7" class="toc-link focus-ring"><span class="toc-kind">Teaching 08</span><span class="toc-title">7. Inheritance</span></a></li><li class="toc-li" data-target="exercise-03-inheritance"><a href="#exercise-03-inheritance" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">Inheritance: Student inherits from Person</span></a></li><li class="toc-li" data-target="step-8"><a href="#step-8" class="toc-link focus-ring"><span class="toc-kind">Teaching 09</span><span class="toc-title">8. Polymorphism</span></a></li><li class="toc-li" data-target="exercise-04-polymorphism"><a href="#exercise-04-polymorphism" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">Polymorphism: overriding a parent&#x27;s method</span></a></li><li class="toc-li" data-target="step-9"><a href="#step-9" class="toc-link focus-ring"><span class="toc-kind">Teaching 10</span><span class="toc-title">9. Access Control in Classes</span></a></li></ol></nav></aside>
+  </div>
+  <dialog class="dir-dialog" aria-labelledby="dir-title"><div class="dd-inner"><div class="dd-head"><h2 id="dir-title">Contents</h2><button type="button" class="dd-close focus-ring">Close</button></div>
+  <div class="dd-tabs" aria-label="Contents scope"><button type="button" class="dd-tab focus-ring" data-tab="all" aria-pressed="true">All lessons</button><button type="button" class="dd-tab focus-ring" data-tab="chapter" aria-pressed="false">This chapter</button></div>
+  <div class="dd-body"><div class="dd-pane" data-pane="all"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></div><div class="dd-pane" data-pane="chapter" hidden><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Introduction</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">1. The Ideas Behind Object-Oriented Programming</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">2. Defining and Using a Class</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">3. Class Methods</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">4. Changing and Adding Class Attributes</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">5. Classes and Objects</span></a></li><li class="toc-li" data-target="exercise-01-class-basic"><a href="#exercise-01-class-basic" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">Define your first class</span></a></li><li class="toc-li" data-target="step-6"><a href="#step-6" class="toc-link focus-ring"><span class="toc-kind">Teaching 07</span><span class="toc-title">6. The Initialisation Function</span></a></li><li class="toc-li" data-target="exercise-02-init"><a href="#exercise-02-init" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">Pass values to an object with __init__</span></a></li><li class="toc-li" data-target="step-7"><a href="#step-7" class="toc-link focus-ring"><span class="toc-kind">Teaching 08</span><span class="toc-title">7. Inheritance</span></a></li><li class="toc-li" data-target="exercise-03-inheritance"><a href="#exercise-03-inheritance" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">Inheritance: Student inherits from Person</span></a></li><li class="toc-li" data-target="step-8"><a href="#step-8" class="toc-link focus-ring"><span class="toc-kind">Teaching 09</span><span class="toc-title">8. Polymorphism</span></a></li><li class="toc-li" data-target="exercise-04-polymorphism"><a href="#exercise-04-polymorphism" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">Polymorphism: overriding a parent&#x27;s method</span></a></li><li class="toc-li" data-target="step-9"><a href="#step-9" class="toc-link focus-ring"><span class="toc-kind">Teaching 10</span><span class="toc-title">9. Access Control in Classes</span></a></li></ol></div></div></div></dialog>
+  <div class="py-toast" hidden><span class="spinner"></span><span class="py-toast-text">Loading Python…</span></div>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>© 2026 Python for Beginners · English edition of the <a href="https://github.com/walter201230/Python">walter201230/Python</a> tutorial (CC BY 4.0)</span>
+    <div class="footer-links"><a href="/">Course list</a><a href="/about/">About this site</a><a href="https://github.com/walter201230/Python">GitHub</a></div>
+  </div>
+</footer>
+<script src="/assets/site.js?v=20261028"></script>
+</body>
+</html>

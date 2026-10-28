@@ -1,0 +1,2017 @@
+{
+ "python1/01-hello-python": {
+  "id": "01-hello-python",
+  "lesson": "python1",
+  "title": "Say hello to Python",
+  "prompt": "Write one line of code that makes the program print:\n\n```\nHello, Python!\n```\n\nCopy it exactly – a capital **H** and **P**, a comma, a space and an exclamation mark.",
+  "starterCode": "# Use print() to print one sentence\n",
+  "solution": "print('Hello, Python!')",
+  "grading": {
+   "stdoutEquals": "Hello, Python!\n"
+  },
+  "hints": [
+   "Call the print() function and put the text inside single or double quotes",
+   "Check the punctuation: a comma after Hello, then a space, and ! at the end",
+   "Full code:\nprint('Hello, Python!')"
+  ]
+ },
+ "python2/01-hello-world": {
+  "id": "01-hello-world",
+  "lesson": "python2",
+  "title": "Print Hello, World!",
+  "prompt": "Use the `print` function to print `Hello, World!` (note the capital letters; there's a comma and an exclamation mark, and one space after the comma).",
+  "starterCode": "# Write your code here\n",
+  "solution": "print('Hello, World!')",
+  "grading": {
+   "stdoutEquals": "Hello, World!\n"
+  },
+  "hints": [
+   "Use the print function",
+   "Strings need quotes (single ' or double \" both work)",
+   "The full code is roughly: print('Hello, World!')"
+  ]
+ },
+ "python2/09-string-basics": {
+  "id": "09-string-basics",
+  "lesson": "python2",
+  "title": "Strings: writing a string that contains double quotes",
+  "prompt": "Define a variable `quote` that stores this string:\n\n```\nHe said: \"Python is so much fun!\"\n```\n\nNotice the pair of **double quotes** `\"` inside it.\n\nTip: when a string contains double quotes, the easiest way is to use single quotes `'...'` or triple quotes `'''...'''` on the outside (you can still use double quotes outside, but then every double quote inside needs a backslash to escape it – a hassle).\n\nThen print it with `print(quote)`.",
+  "starterCode": "# The string contains double quotes, so use single or triple quotes outside\n",
+  "solution": "quote = 'He said: \"Python is so much fun!\"'\nprint(quote)",
+  "grading": {
+   "stdoutEquals": "He said: \"Python is so much fun!\"\n",
+   "varsEqual": {
+    "quote": "He said: \"Python is so much fun!\""
+   }
+  },
+  "hints": [
+   "Use single quotes '...' outside, then you can put double quotes straight inside",
+   "Triple quotes '''...''' work too",
+   "Full code:\nquote = 'He said: \"Python is so much fun!\"'\nprint(quote)"
+  ]
+ },
+ "python2/03-arithmetic": {
+  "id": "03-arithmetic",
+  "lesson": "python2",
+  "title": "Basic arithmetic",
+  "prompt": "Use `print` to print the result of `48 + 56`.\n\nJust write `48 + 56` inside the brackets of `print()` – Python works it out first, then prints it.\n\nThe output should be:\n```\n104\n```",
+  "starterCode": "# Use print to print the result of 48 + 56\n",
+  "solution": "print(48 + 56)",
+  "grading": {
+   "stdoutEquals": "104\n"
+  },
+  "hints": [
+   "Numbers don't need quotes – just write 48 + 56",
+   "Put the whole thing inside print(): print(48 + 56)"
+  ]
+ },
+ "python2/10-bool-logic": {
+  "id": "10-bool-logic",
+  "lesson": "python2",
+  "title": "Booleans: and / or / not",
+  "prompt": "Use `print` to print the results of these three boolean operations, one per line:\n\n1. `True and False`\n2. `True or False`\n3. `not True`\n\nThe output should be:\n```\nFalse\nTrue\nFalse\n```",
+  "starterCode": "# Three print lines, one for each boolean expression\n",
+  "solution": "print(True and False)\nprint(True or False)\nprint(not True)",
+  "grading": {
+   "stdoutEquals": "False\nTrue\nFalse\n"
+  },
+  "hints": [
+   "True and False both start with a capital letter",
+   "Just print(expression) – Python works out True/False first, then prints it",
+   "Full code:\nprint(True and False)\nprint(True or False)\nprint(not True)"
+  ]
+ },
+ "python2/04-string-concat": {
+  "id": "04-string-concat",
+  "lesson": "python2",
+  "title": "Build a sentence with an f-string",
+  "prompt": "We've already defined `name = 'Brother Shui'` and `age = 28` for you.\n\nUse an **f-string** to build `My name is Brother Shui and I am 28 years old.`, assign it to the variable `intro`, then print it.\n\nNote:\n- You must use an f-string (not `+` to join pieces by hand)\n- `Brother Shui` and `28` must be put in with `{name}` and `{age}` – don't type them straight into the string\n- There's a full stop `.` at the end\n\nThe output should be:\n```\nMy name is Brother Shui and I am 28 years old.\n```",
+  "starterCode": "name = 'Brother Shui'\nage = 28\n# Use an f-string to build the sentence, assign it to intro and print it\n",
+  "solution": "name = 'Brother Shui'\nage = 28\nintro = f'My name is {name} and I am {age} years old.'\nprint(intro)",
+  "grading": {
+   "requiredAst": [
+    "JoinedStr",
+    "FormattedValue"
+   ],
+   "stdoutEquals": "My name is Brother Shui and I am 28 years old.\n",
+   "varsEqual": {
+    "intro": "My name is Brother Shui and I am 28 years old."
+   }
+  },
+  "hints": [
+   "How to write an f-string: put f in front of the string, like f'My name is {name}'",
+   "Write the variable name inside {} and it gets replaced by the variable's value",
+   "Full code:\nname = 'Brother Shui'\nage = 28\nintro = f'My name is {name} and I am {age} years old.'\nprint(intro)"
+  ]
+ },
+ "python2/07-ascii-code": {
+  "id": "07-ascii-code",
+  "lesson": "python2",
+  "title": "See the ASCII codes",
+  "prompt": "Above, we saw that the capital letter `A` has ASCII code **65**, and the small letter `z` has ASCII code **122**.\n\nIn Python, `ord('A')` gives you a character's ASCII code.\n\nUse one `print` to print the ASCII codes of `A` and `z` together, separated by a space.\n\nTip: `print` can take several values at once, separated by commas, like `print(a, b)` – it joins them with spaces automatically.\n\nThe output should be:\n```\n65 122\n```",
+  "starterCode": "# Use print to print ord('A') and ord('z') together\n",
+  "solution": "print(ord('A'), ord('z'))",
+  "grading": {
+   "stdoutEquals": "65 122\n"
+  },
+  "hints": [
+   "ord('A') returns 65, ord('z') returns 122",
+   "print takes several arguments separated by commas and joins them with spaces: print(a, b)",
+   "Full code: print(ord('A'), ord('z'))"
+  ]
+ },
+ "python2/08-type-conversion": {
+  "id": "08-type-conversion",
+  "lesson": "python2",
+  "title": "Turn a string into an integer",
+  "prompt": "We've already defined `age_str = '28'` for you – it's a **string**, not an integer.\n\nAdding a number to a string directly gives an error, so first turn it into an integer with `int()`. Please:\n\n1. Use `int(age_str)` to turn it into an integer and assign it to the variable `age`\n2. Print `age + 2`\n\nThe output should be:\n```\n30\n```",
+  "starterCode": "age_str = '28'\n# 1. Use int(age_str) to make an integer and assign it to age\n# 2. Print age + 2\n",
+  "solution": "age_str = '28'\nage = int(age_str)\nprint(age + 2)",
+  "grading": {
+   "stdoutEquals": "30\n",
+   "varsEqual": {
+    "age": 28
+   }
+  },
+  "hints": [
+   "int('28') returns the integer 28",
+   "Assign it to a variable: age = int(age_str)",
+   "Full code:\nage_str = '28'\nage = int(age_str)\nprint(age + 2)"
+  ]
+ },
+ "python2/02-variable-assign": {
+  "id": "02-variable-assign",
+  "lesson": "python2",
+  "title": "Assign a variable and print it",
+  "prompt": "Create a variable `name`, assign the string `'Brother Shui'` to it, then use `print` to print `name`.\n\nThe output should be:\n```\nBrother Shui\n```",
+  "starterCode": "# Write your code here\n",
+  "solution": "name = 'Brother Shui'\nprint(name)",
+  "grading": {
+   "stdoutEquals": "Brother Shui\n",
+   "varsEqual": {
+    "name": "Brother Shui"
+   }
+  },
+  "hints": [
+   "Use = to assign the string 'Brother Shui' to the variable name",
+   "Then print it with print(name) (note: print(name), not print('name'))",
+   "Full code:\nname = 'Brother Shui'\nprint(name)"
+  ]
+ },
+ "python2/05-combined": {
+  "id": "05-combined",
+  "lesson": "python2",
+  "title": "Put it together: variables + maths + f-string",
+  "prompt": "We've already defined `apples = 12` and `oranges = 8` for you.\n\nPlease do two things:\n\n1. Add `apples` and `oranges` together and assign the result to the variable `total`\n2. Use an **f-string** to print `There are 20 pieces of fruit.` (the `20` must come from the `total` variable – don't type the number in)\n\nThe output should be:\n```\nThere are 20 pieces of fruit.\n```",
+  "starterCode": "apples = 12\noranges = 8\n# 1. Assign apples + oranges to total\n# 2. Use an f-string to print \"There are X pieces of fruit.\", with X from total\n",
+  "solution": "apples = 12\noranges = 8\ntotal = apples + oranges\nprint(f'There are {total} pieces of fruit.')",
+  "grading": {
+   "requiredAst": [
+    "Assign:total",
+    "JoinedStr",
+    "FormattedValue"
+   ],
+   "stdoutEquals": "There are 20 pieces of fruit.\n",
+   "varsEqual": {
+    "total": 20
+   }
+  },
+  "hints": [
+   "Step 1: add apples and oranges and store the result in a new variable, total",
+   "Step 2: print(f'There are {total} pieces of fruit.')",
+   "Check the spaces and the full stop: one space on each side of the number, and . at the end"
+  ]
+ },
+ "python3/01-create-list": {
+  "id": "01-create-list",
+  "lesson": "python3",
+  "title": "Create your first List",
+  "prompt": "Create a variable `numbers` and put the integers `1, 2, 3, 4, 5` into a List assigned to it.\n\nThen use `print` to print `numbers`.\n\nThe output should be:\n```\n[1, 2, 3, 4, 5]\n```",
+  "starterCode": "# Use square brackets [] to create a List, with commas between the items\n",
+  "solution": "numbers = [1, 2, 3, 4, 5]\nprint(numbers)",
+  "grading": {
+   "stdoutEquals": "[1, 2, 3, 4, 5]\n",
+   "varsEqual": {
+    "numbers": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   }
+  },
+  "hints": [
+   "A List is written as [item1, item2, ...]",
+   "Full code:\nnumbers = [1, 2, 3, 4, 5]\nprint(numbers)"
+  ]
+ },
+ "python3/02-list-access": {
+  "id": "02-list-access",
+  "lesson": "python3",
+  "title": "Indexes and slices",
+  "prompt": "We've already defined `fruits = ['apple', 'banana', 'cherry', 'date', 'fig']` for you.\n\nPlease:\n\n1. Use an index to `print` the 3rd item (that's `cherry`)\n2. Use a slice to `print` `fruits[1:4]`\n\nThe output should be:\n```\ncherry\n['banana', 'cherry', 'date']\n```",
+  "starterCode": "fruits = ['apple', 'banana', 'cherry', 'date', 'fig']\n# 1. print the 3rd item (indexes start at 0)\n# 2. print the slice fruits[1:4]\n",
+  "solution": "fruits = ['apple', 'banana', 'cherry', 'date', 'fig']\nprint(fruits[2])\nprint(fruits[1:4])",
+  "grading": {
+   "stdoutEquals": "cherry\n['banana', 'cherry', 'date']\n"
+  },
+  "hints": [
+   "Indexes start at 0, so the 3rd item is fruits[2]",
+   "The slice [1:4] includes the start but not the end: indexes 1, 2 and 3, but not 4",
+   "Full code:\nfruits = ['apple', 'banana', 'cherry', 'date', 'fig']\nprint(fruits[2])\nprint(fruits[1:4])"
+  ]
+ },
+ "python3/03-list-update": {
+  "id": "03-list-update",
+  "lesson": "python3",
+  "title": "Change + append",
+  "prompt": "We've already defined `colors = ['red', 'green', 'blue']` for you.\n\nPlease:\n\n1. Change the item at index 1 (`green`) to capital `GREEN`\n2. Use `append` to add `'yellow'` to the end\n3. `print(colors)`\n\nThe output should be:\n```\n['red', 'GREEN', 'blue', 'yellow']\n```",
+  "starterCode": "colors = ['red', 'green', 'blue']\n# 1. Change the item at index 1 to capital 'GREEN'\n# 2. Use append to add 'yellow' to the end\n# 3. Print colors\n",
+  "solution": "colors = ['red', 'green', 'blue']\ncolors[1] = 'GREEN'\ncolors.append('yellow')\nprint(colors)",
+  "grading": {
+   "stdoutEquals": "['red', 'GREEN', 'blue', 'yellow']\n",
+   "varsEqual": {
+    "colors": [
+     "red",
+     "GREEN",
+     "blue",
+     "yellow"
+    ]
+   }
+  },
+  "hints": [
+   "Change one position: colors[1] = 'GREEN'",
+   "Add to the end: colors.append('yellow')",
+   "Full code:\ncolors = ['red', 'green', 'blue']\ncolors[1] = 'GREEN'\ncolors.append('yellow')\nprint(colors)"
+  ]
+ },
+ "python3/04-list-ops": {
+  "id": "04-list-ops",
+  "lesson": "python3",
+  "title": "Joining and length",
+  "prompt": "We've already defined `a = [1, 2, 3]` and `b = [4, 5, 6]` for you.\n\nPlease:\n\n1. Use `+` to join them into a new list `c`\n2. `print(c)`\n3. Use `len()` to print how many items `c` has\n\nThe output should be:\n```\n[1, 2, 3, 4, 5, 6]\n6\n```",
+  "starterCode": "a = [1, 2, 3]\nb = [4, 5, 6]\n# 1. Use + to join a and b into a new list c\n# 2. Print c\n# 3. Use len to print how many items c has\n",
+  "solution": "a = [1, 2, 3]\nb = [4, 5, 6]\nc = a + b\nprint(c)\nprint(len(c))",
+  "grading": {
+   "stdoutEquals": "[1, 2, 3, 4, 5, 6]\n6\n",
+   "varsEqual": {
+    "c": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   }
+  },
+  "hints": [
+   "Lists can be joined with +: c = a + b",
+   "len(c) returns how many items the list has",
+   "Full code:\na = [1, 2, 3]\nb = [4, 5, 6]\nc = a + b\nprint(c)\nprint(len(c))"
+  ]
+ },
+ "python3/05-tuple-create": {
+  "id": "05-tuple-create",
+  "lesson": "python3",
+  "title": "The comma trap of a one-item tuple",
+  "prompt": "Create a tuple `t` with **only one item**, `42`, then `print(t)`.\n\nNote: a one-item tuple **must** have a comma after the item – `(42,)` is a tuple, but `(42)` is just the number 42.\n\nThe output should be:\n```\n(42,)\n```",
+  "starterCode": "# A one-item tuple needs a comma\n",
+  "solution": "t = (42,)\nprint(t)",
+  "grading": {
+   "requiredAst": [
+    "Assign:t",
+    "Tuple"
+   ],
+   "stdoutEquals": "(42,)\n"
+  },
+  "hints": [
+   "(42) is a number expression, not a tuple",
+   "(42,) is a tuple – notice the comma",
+   "Full code:\nt = (42,)\nprint(t)"
+  ]
+ },
+ "python3/06-tuple-access": {
+  "id": "06-tuple-access",
+  "lesson": "python3",
+  "title": "Getting values and slices from a tuple",
+  "prompt": "We've already defined `days = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri')` for you.\n\nPlease:\n\n1. `print` the 4th item (that's `Thu`)\n2. `print` the slice `days[2:4]`\n\nThe output should be:\n```\nThu\n('Wed', 'Thu')\n```",
+  "starterCode": "days = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri')\n# 1. Use an index to print the 4th item\n# 2. print the slice days[2:4]\n",
+  "solution": "days = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri')\nprint(days[3])\nprint(days[2:4])",
+  "grading": {
+   "stdoutEquals": "Thu\n('Wed', 'Thu')\n"
+  },
+  "hints": [
+   "Indexes start at 0, so the 4th item is days[3]",
+   "Slices work just like with a List: days[2:4]",
+   "Full code:\ndays = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri')\nprint(days[3])\nprint(days[2:4])"
+  ]
+ },
+ "python3/07-tuple-ops": {
+  "id": "07-tuple-ops",
+  "lesson": "python3",
+  "title": "List to tuple + max",
+  "prompt": "We've already defined `nums = [3, 1, 4, 1, 5, 9, 2, 6]` for you.\n\nPlease:\n\n1. Use `tuple()` to turn it into a tuple and assign it to `t`\n2. `print` how many items the tuple has (`len`)\n3. `print` the biggest value in the tuple (`max`)\n\nThe output should be:\n```\n8\n9\n```",
+  "starterCode": "nums = [3, 1, 4, 1, 5, 9, 2, 6]\n# 1. Use tuple() to turn nums into a tuple and assign it to t\n# 2. Use len to print how many items it has\n# 3. Use max to print the biggest value\n",
+  "solution": "nums = [3, 1, 4, 1, 5, 9, 2, 6]\nt = tuple(nums)\nprint(len(t))\nprint(max(t))",
+  "grading": {
+   "requiredAst": [
+    "Assign:t"
+   ],
+   "stdoutEquals": "8\n9\n"
+  },
+  "hints": [
+   "tuple(nums) turns a list into a tuple",
+   "len counts the items, max finds the biggest value",
+   "Full code:\nnums = [3, 1, 4, 1, 5, 9, 2, 6]\nt = tuple(nums)\nprint(len(t))\nprint(max(t))"
+  ]
+ },
+ "python4/01-dict-create": {
+  "id": "01-dict-create",
+  "lesson": "python4",
+  "title": "Create a dict",
+  "prompt": "Create a dictionary `phone_book` that stores these three contacts:\n\n- `'Alice'` → `'13800001111'`\n- `'Bob'` → `'13800002222'`\n- `'Carol'` → `'13800003333'`\n\nThen `print(phone_book)`.\n\nThe output should be:\n```\n{'Alice': '13800001111', 'Bob': '13800002222', 'Carol': '13800003333'}\n```",
+  "starterCode": "# Use curly brackets {} to create a dict, written as {key: value, ...}\n",
+  "solution": "phone_book = {'Alice': '13800001111', 'Bob': '13800002222', 'Carol': '13800003333'}\nprint(phone_book)",
+  "grading": {
+   "stdoutEquals": "{'Alice': '13800001111', 'Bob': '13800002222', 'Carol': '13800003333'}\n",
+   "varsEqual": {
+    "phone_book": {
+     "Alice": "13800001111",
+     "Bob": "13800002222",
+     "Carol": "13800003333"
+    }
+   }
+  },
+  "hints": [
+   "How to write a dict: {'key1': 'value1', 'key2': 'value2'}",
+   "Full code:\nphone_book = {'Alice': '13800001111', 'Bob': '13800002222', 'Carol': '13800003333'}\nprint(phone_book)"
+  ]
+ },
+ "python4/02-dict-access": {
+  "id": "02-dict-access",
+  "lesson": "python4",
+  "title": "Get a value by its key",
+  "prompt": "We've already defined this for you:\n```python\nscores = {'English': 90, 'Maths': 85, 'Science': 78}\n```\n\nUse `print` to print the score for `Maths` (use `scores['Maths']`).\n\nThe output should be:\n```\n85\n```",
+  "starterCode": "scores = {'English': 90, 'Maths': 85, 'Science': 78}\n# Use scores['Maths'] to get the score and print it\n",
+  "solution": "scores = {'English': 90, 'Maths': 85, 'Science': 78}\nprint(scores['Maths'])",
+  "grading": {
+   "stdoutEquals": "85\n"
+  },
+  "hints": [
+   "Get a value with dict[key]",
+   "Full code:\nscores = {'English': 90, 'Maths': 85, 'Science': 78}\nprint(scores['Maths'])"
+  ]
+ },
+ "python4/03-dict-modify": {
+  "id": "03-dict-modify",
+  "lesson": "python4",
+  "title": "Add + change",
+  "prompt": "We've already defined this for you:\n```python\nscores = {'English': 90, 'Maths': 85}\n```\n\nPlease:\n\n1. Add a new item `'Science': 78`\n2. Change the `'Maths'` score to `92`\n3. `print(scores)`\n\nThe output should be:\n```\n{'English': 90, 'Maths': 92, 'Science': 78}\n```",
+  "starterCode": "scores = {'English': 90, 'Maths': 85}\n# First add the Science score, then change the Maths score, then print scores\n",
+  "solution": "scores = {'English': 90, 'Maths': 85}\nscores['Science'] = 78\nscores['Maths'] = 92\nprint(scores)",
+  "grading": {
+   "stdoutEquals": "{'English': 90, 'Maths': 92, 'Science': 78}\n",
+   "varsEqual": {
+    "scores": {
+     "English": 90,
+     "Maths": 92,
+     "Science": 78
+    }
+   }
+  },
+  "hints": [
+   "Adding and changing are both dict[key] = value – if the key doesn't exist it's added, if it does it's overwritten",
+   "Full code:\nscores = {'English': 90, 'Maths': 85}\nscores['Science'] = 78\nscores['Maths'] = 92\nprint(scores)"
+  ]
+ },
+ "python4/04-dict-merge": {
+  "id": "04-dict-merge",
+  "lesson": "python4",
+  "title": "Merge two dicts with |",
+  "prompt": "We've already defined this for you:\n```python\nold = {'a': 1, 'b': 2}\nnew = {'b': 99, 'c': 3}\n```\n\nUse `|` to merge them into `merged` (note: the right side wins, so `'b'` should be 99), then `print(merged)`.\n\nThe output should be:\n```\n{'a': 1, 'b': 99, 'c': 3}\n```",
+  "starterCode": "old = {'a': 1, 'b': 2}\nnew = {'b': 99, 'c': 3}\n# Use | to merge the two dicts, assign the result to merged and print it\n",
+  "solution": "old = {'a': 1, 'b': 2}\nnew = {'b': 99, 'c': 3}\nmerged = old | new\nprint(merged)",
+  "grading": {
+   "stdoutEquals": "{'a': 1, 'b': 99, 'c': 3}\n",
+   "varsEqual": {
+    "merged": {
+     "a": 1,
+     "b": 99,
+     "c": 3
+    }
+   }
+  },
+  "hints": [
+   "The | merge only exists in Python 3.9+",
+   "'b': 99 on the right overwrites 'b': 2 on the left",
+   "Full code:\nold = {'a': 1, 'b': 2}\nnew = {'b': 99, 'c': 3}\nmerged = old | new\nprint(merged)"
+  ]
+ },
+ "python4/05-set-dedup": {
+  "id": "05-set-dedup",
+  "lesson": "python4",
+  "title": "Remove duplicates with a set",
+  "prompt": "We've already defined this for you:\n```python\nnums = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3]\n```\n\nPlease:\n\n1. Turn `nums` into a `set` to remove duplicates\n2. Then use `sorted()` to sort the set into a list and assign it to `unique` (so the output order is always the same)\n3. `print(unique)`\n\nThe output should be:\n```\n[1, 2, 3, 4, 5, 6, 9]\n```",
+  "starterCode": "nums = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3]\n# First remove duplicates with set, then sort with sorted, assign to unique and print\n",
+  "solution": "nums = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3]\nunique = sorted(set(nums))\nprint(unique)",
+  "grading": {
+   "stdoutEquals": "[1, 2, 3, 4, 5, 6, 9]\n",
+   "varsEqual": {
+    "unique": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     9
+    ]
+   }
+  },
+  "hints": [
+   "set(nums) removes duplicates automatically – each value is kept only once",
+   "sorted(set) turns a set into a sorted list",
+   "Full code:\nnums = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3]\nunique = sorted(set(nums))\nprint(unique)"
+  ]
+ },
+ "python4/06-set-add": {
+  "id": "06-set-add",
+  "lesson": "python4",
+  "title": "A set's add",
+  "prompt": "We've already defined this for you:\n```python\ntags = {'python', 'web'}\n```\n\nPlease:\n\n1. Use `add` to add `'ai'`\n2. Use `add` to add `'python'` again (it's already there, so nothing changes)\n3. Use `print(sorted(tags))` to print the items **sorted** (so the output is always the same)\n\nThe output should be:\n```\n['ai', 'python', 'web']\n```",
+  "starterCode": "tags = {'python', 'web'}\n# Use add to add 'ai' and then 'python', then print the sorted tags\n",
+  "solution": "tags = {'python', 'web'}\ntags.add('ai')\ntags.add('python')\nprint(sorted(tags))",
+  "grading": {
+   "stdoutEquals": "['ai', 'python', 'web']\n"
+  },
+  "hints": [
+   "tags.add(x) adds an item; adding the same value again does nothing",
+   "A set has no order, so print's order isn't fixed – that's why we sort before printing",
+   "Full code:\ntags = {'python', 'web'}\ntags.add('ai')\ntags.add('python')\nprint(sorted(tags))"
+  ]
+ },
+ "python4/07-set-ops": {
+  "id": "07-set-ops",
+  "lesson": "python4",
+  "title": "Find the intersection",
+  "prompt": "We've already defined this for you:\n```python\na = {1, 2, 3, 4, 5}\nb = {3, 4, 5, 6, 7}\n```\n\nUse `&` to find the **intersection** of `a` and `b` (the items both have), then use `sorted()` to turn it into a sorted list, assign it to `common`, and `print(common)`.\n\nThe output should be:\n```\n[3, 4, 5]\n```",
+  "starterCode": "a = {1, 2, 3, 4, 5}\nb = {3, 4, 5, 6, 7}\n# Use & for the intersection, sort it with sorted, assign to common and print\n",
+  "solution": "a = {1, 2, 3, 4, 5}\nb = {3, 4, 5, 6, 7}\ncommon = sorted(a & b)\nprint(common)",
+  "grading": {
+   "stdoutEquals": "[3, 4, 5]\n",
+   "varsEqual": {
+    "common": [
+     3,
+     4,
+     5
+    ]
+   }
+  },
+  "hints": [
+   "a & b gives the intersection of two sets",
+   "sorted() turns it into a sorted list so the output is stable",
+   "Full code:\na = {1, 2, 3, 4, 5}\nb = {3, 4, 5, 6, 7}\ncommon = sorted(a & b)\nprint(common)"
+  ]
+ },
+ "python5/01-if-basic": {
+  "id": "01-if-basic",
+  "lesson": "python5",
+  "title": "if / else: pass or fail",
+  "prompt": "We've already defined `score = 75` for you.\n\nUse `if / else` to decide:\n\n- If `score >= 60`: `print('Pass')`\n- Otherwise: `print('Fail')`\n\nThe output should be:\n```\nPass\n```",
+  "starterCode": "score = 75\n# Use if / else to decide\n",
+  "solution": "score = 75\nif score >= 60:\n    print('Pass')\nelse:\n    print('Fail')",
+  "grading": {
+   "requiredAst": [
+    "If"
+   ],
+   "stdoutEquals": "Pass\n"
+  },
+  "hints": [
+   "if needs a colon at the end, and the next line is indented by 4 spaces",
+   "Full code:\nscore = 75\nif score >= 60:\n    print('Pass')\nelse:\n    print('Fail')"
+  ]
+ },
+ "python5/02-if-elif": {
+  "id": "02-if-elif",
+  "lesson": "python5",
+  "title": "elif: grade levels",
+  "prompt": "We've already defined `score = 85` for you.\n\nUse `if / elif / else` to print a grade with these rules:\n\n- `>= 90`: `'Excellent'`\n- `>= 80`: `'Good'`\n- `>= 60`: `'Pass'`\n- anything else: `'Fail'`\n\nThe output should be:\n```\nGood\n```",
+  "starterCode": "score = 85\n# Use if / elif / else to decide\n",
+  "solution": "score = 85\nif score >= 90:\n    print('Excellent')\nelif score >= 80:\n    print('Good')\nelif score >= 60:\n    print('Pass')\nelse:\n    print('Fail')",
+  "grading": {
+   "requiredAst": [
+    "If"
+   ],
+   "stdoutEquals": "Good\n"
+  },
+  "hints": [
+   "elif is short for else if",
+   "Check from strictest to loosest: >= 90 → >= 80 → >= 60 → else",
+   "Full code:\nscore = 85\nif score >= 90:\n    print('Excellent')\nelif score >= 80:\n    print('Good')\nelif score >= 60:\n    print('Pass')\nelse:\n    print('Fail')"
+  ]
+ },
+ "python5/03-if-and-or": {
+  "id": "03-if-and-or",
+  "lesson": "python5",
+  "title": "and / or: combined conditions",
+  "prompt": "We've already defined this for you:\n```python\nage = 22\nhas_id = True\n```\n\nUse `and` to decide: **when `age >= 18` and `has_id` is True**, print `'Come in'`, otherwise print `'Sorry, no entry'`.\n\nThe output should be:\n```\nCome in\n```",
+  "starterCode": "age = 22\nhas_id = True\n# Use if + and to decide\n",
+  "solution": "age = 22\nhas_id = True\nif age >= 18 and has_id:\n    print('Come in')\nelse:\n    print('Sorry, no entry')",
+  "grading": {
+   "requiredAst": [
+    "If",
+    "BoolOp"
+   ],
+   "stdoutEquals": "Come in\n"
+  },
+  "hints": [
+   "Both conditions must be true: join them with and",
+   "has_id is already a bool, so just write has_id – no need for has_id == True",
+   "Full code:\nage = 22\nhas_id = True\nif age >= 18 and has_id:\n    print('Come in')\nelse:\n    print('Sorry, no entry')"
+  ]
+ },
+ "python5/04-match-case": {
+  "id": "04-match-case",
+  "lesson": "python5",
+  "title": "match / case: handling commands",
+  "prompt": "We've already defined `command = 'pause'` for you.\n\nUse `match / case` to `print` with these rules:\n\n- `'start'` → `'Starting'`\n- `'stop'` → `'Stopping'`\n- `'pause'` → `'Paused'`\n- anything else → `'Unknown command'`\n\nThe output should be:\n```\nPaused\n```",
+  "starterCode": "command = 'pause'\n# Use match / case to match command and print the right text for each of the four cases\n# Don't forget case _ as a catch-all that prints 'Unknown command'\n",
+  "solution": "command = 'pause'\nmatch command:\n    case 'start':\n        print('Starting')\n    case 'stop':\n        print('Stopping')\n    case 'pause':\n        print('Paused')\n    case _:\n        print('Unknown command')",
+  "grading": {
+   "requiredAst": [
+    "Match"
+   ],
+   "stdoutEquals": "Paused\n"
+  },
+  "hints": [
+   "After match comes the variable to match; after each case comes a value to match (match needs Python 3.10+, and this page runs 3.12, so it's fine)",
+   "case _ is the catch-all, like else",
+   "Full code:\ncommand = 'pause'\nmatch command:\n    case 'start':\n        print('Starting')\n    case 'stop':\n        print('Stopping')\n    case 'pause':\n        print('Paused')\n    case _:\n        print('Unknown command')"
+  ]
+ },
+ "python5/05-for-range": {
+  "id": "05-for-range",
+  "lesson": "python5",
+  "title": "for + range: adding up",
+  "prompt": "Use a `for` loop with `range` to work out **the sum of 1 to 10** (including 10), assign it to the variable `total`, then `print(total)`.\n\nThe output should be:\n```\n55\n```",
+  "starterCode": "# First set total to 0\n# Use for + range to go through 1 to 10, adding each one to total\n# Print total after the loop\n",
+  "solution": "total = 0\nfor n in range(1, 11):\n    total = total + n\nprint(total)",
+  "grading": {
+   "requiredAst": [
+    "For"
+   ],
+   "stdoutEquals": "55\n",
+   "varsEqual": {
+    "total": 55
+   }
+  },
+  "hints": [
+   "range(1, 11) gives 1 to 10 (the end isn't included, so write 11 to include 10)",
+   "Add up inside the loop: total = total + n",
+   "Full code:\ntotal = 0\nfor n in range(1, 11):\n    total = total + n\nprint(total)"
+  ]
+ },
+ "python5/06-while": {
+  "id": "06-while",
+  "lesson": "python5",
+  "title": "while: countdown",
+  "prompt": "Use a `while` loop to count down from 5 to 1 (including 1), printing each number on its own line.\n\nThe output should be:\n```\n5\n4\n3\n2\n1\n```",
+  "starterCode": "# First make a countdown variable n, starting at 5\n# Use a while loop: each time, print n, then take 1 away from n, until 1 has been printed\n",
+  "solution": "n = 5\nwhile n >= 1:\n    print(n)\n    n = n - 1",
+  "grading": {
+   "requiredAst": [
+    "While"
+   ],
+   "stdoutEquals": "5\n4\n3\n2\n1\n"
+  },
+  "hints": [
+   "Condition: while n >= 1",
+   "Inside the loop you need n = n - 1, or the loop never ends",
+   "Full code:\nn = 5\nwhile n >= 1:\n    print(n)\n    n = n - 1"
+  ]
+ },
+ "python5/07-break-continue": {
+  "id": "07-break-continue",
+  "lesson": "python5",
+  "title": "continue: sum of the odd numbers from 1 to 10",
+  "prompt": "Use `for + range` to go through 1 to 10. **Skip even numbers with `continue`**, add up the odd numbers into `total`, and finally `print(total)`.\n\nThe output should be:\n```\n25\n```\n\n(1 + 3 + 5 + 7 + 9 = 25)",
+  "starterCode": "# First set total to 0, then use for + range to go through 1 to 10\n# Skip even numbers with continue, add odd numbers to total\n# Finally print total\n",
+  "solution": "total = 0\nfor n in range(1, 11):\n    if n % 2 == 0:\n        continue\n    total = total + n\nprint(total)",
+  "grading": {
+   "requiredAst": [
+    "For",
+    "Continue"
+   ],
+   "stdoutEquals": "25\n",
+   "varsEqual": {
+    "total": 25
+   }
+  },
+  "hints": [
+   "n % 2 == 0 means n is even (the remainder after dividing by 2 is 0)",
+   "continue stops this round of the loop and moves on to the next one",
+   "Full code:\ntotal = 0\nfor n in range(1, 11):\n    if n % 2 == 0:\n        continue\n    total = total + n\nprint(total)"
+  ]
+ },
+ "python6/01-define-add": {
+  "id": "01-define-add",
+  "lesson": "python6",
+  "title": "Define an add function",
+  "prompt": "Define a function `add(a, b)` that returns `a + b`.\n\nThen call `add(3, 5)`, assign the result to `result`, and `print(result)`.\n\nThe output should be:\n```\n8\n```",
+  "starterCode": "# Use def to define the add function, returning the sum of its two parameters\n# Call it, assign the result to result, then print it\n",
+  "solution": "def add(a, b):\n    return a + b\n\nresult = add(3, 5)\nprint(result)",
+  "grading": {
+   "requiredAst": [
+    "FunctionDef:add"
+   ],
+   "stdoutEquals": "8\n",
+   "varsEqual": {
+    "result": 8
+   }
+  },
+  "hints": [
+   "Define a function with the def keyword",
+   "Inside the function: return a + b",
+   "Full code:\ndef add(a, b):\n    return a + b\n\nresult = add(3, 5)\nprint(result)"
+  ]
+ },
+ "python6/02-multi-return": {
+  "id": "02-multi-return",
+  "lesson": "python6",
+  "title": "Returning several values",
+  "prompt": "Define a function `min_max(nums)` that takes a list and returns **the smallest and the biggest value** – two numbers (return them with a comma).\n\nThen call `min_max([3, 1, 4, 1, 5, 9, 2, 6])`, **unpack** the result into two variables `lo` and `hi`, and `print(lo)` and `print(hi)`.\n\nThe output should be:\n```\n1\n9\n```",
+  "starterCode": "# Define min_max and return the smallest and biggest values together, separated by a comma\n# Call it, unpack the result into lo and hi, and print each one\n",
+  "solution": "def min_max(nums):\n    return min(nums), max(nums)\n\nlo, hi = min_max([3, 1, 4, 1, 5, 9, 2, 6])\nprint(lo)\nprint(hi)",
+  "grading": {
+   "requiredAst": [
+    "FunctionDef:min_max"
+   ],
+   "stdoutEquals": "1\n9\n",
+   "varsEqual": {
+    "lo": 1,
+    "hi": 9
+   }
+  },
+  "hints": [
+   "return min(nums), max(nums) returns two values at once (really a tuple)",
+   "Unpack: lo, hi = min_max(...)",
+   "Full code:\ndef min_max(nums):\n    return min(nums), max(nums)\n\nlo, hi = min_max([3, 1, 4, 1, 5, 9, 2, 6])\nprint(lo)\nprint(hi)"
+  ]
+ },
+ "python6/03-default-arg": {
+  "id": "03-default-arg",
+  "lesson": "python6",
+  "title": "Default parameters",
+  "prompt": "Define a function `greet(name, greeting='Hello')`: the first parameter `name` must be given, and the second parameter `greeting` defaults to `'Hello'`. The function prints `f'{greeting}, {name}!'`.\n\nThen:\n1. Call `greet('Alice')` (using the default greeting)\n2. Call `greet('Bob', 'Good morning')` (replacing the default)\n\nThe output should be:\n```\nHello, Alice!\nGood morning, Bob!\n```",
+  "starterCode": "# Define greet: name must be given, greeting defaults to 'Hello'\n# Inside the function, use an f-string to print the greeting\n# Call it twice as asked: once with the default, once replacing it\n",
+  "solution": "def greet(name, greeting='Hello'):\n    print(f'{greeting}, {name}!')\n\ngreet('Alice')\ngreet('Bob', 'Good morning')",
+  "grading": {
+   "requiredAst": [
+    "FunctionDef:greet"
+   ],
+   "stdoutEquals": "Hello, Alice!\nGood morning, Bob!\n"
+  },
+  "hints": [
+   "How to write a default parameter: def greet(name, greeting='Hello'):",
+   "If you don't pass the second argument, the default is used",
+   "Full code:\ndef greet(name, greeting='Hello'):\n    print(f'{greeting}, {name}!')\n\ngreet('Alice')\ngreet('Bob', 'Good morning')"
+  ]
+ },
+ "python6/04-args": {
+  "id": "04-args",
+  "lesson": "python6",
+  "title": "*args: any number of arguments",
+  "prompt": "Define a function `total(*nums)` that adds up all the numbers passed in and returns the result.\n\nThen:\n1. Call `total(1, 2, 3)` and assign it to `a`\n2. Call `total(1, 2, 3, 4, 5, 6)` and assign it to `b`\n3. `print(a)` `print(b)`\n\nThe output should be:\n```\n6\n21\n```",
+  "starterCode": "# Use *nums to define total, adding up all the numbers passed in and returning the sum\n# Call it twice as asked, assign to a and b, and print each one\n",
+  "solution": "def total(*nums):\n    s = 0\n    for n in nums:\n        s = s + n\n    return s\n\na = total(1, 2, 3)\nb = total(1, 2, 3, 4, 5, 6)\nprint(a)\nprint(b)",
+  "grading": {
+   "requiredAst": [
+    "FunctionDef:total"
+   ],
+   "stdoutEquals": "6\n21\n",
+   "varsEqual": {
+    "a": 6,
+    "b": 21
+   }
+  },
+  "hints": [
+   "*nums collects any number of arguments into a tuple",
+   "Inside the function, add them up with for n in nums, or just return sum(nums)",
+   "Full code:\ndef total(*nums):\n    s = 0\n    for n in nums:\n        s = s + n\n    return s\n\na = total(1, 2, 3)\nb = total(1, 2, 3, 4, 5, 6)\nprint(a)\nprint(b)"
+  ]
+ },
+ "python6/05-lambda": {
+  "id": "05-lambda",
+  "lesson": "python6",
+  "title": "lambda: sorting with an anonymous function",
+  "prompt": "We've already defined this for you:\n```python\nusers = [\n    {'name': 'Alice', 'age': 30},\n    {'name': 'Bob', 'age': 25},\n    {'name': 'Carol', 'age': 28},\n]\n```\n\nUse `sorted` with a **lambda** to sort `users` by `age` from youngest to oldest, assign it to `sorted_users`, then use a `for` loop to `print` each person's `name` and `age` (separated by a space).\n\nThe output should be:\n```\nBob 25\nCarol 28\nAlice 30\n```",
+  "starterCode": "users = [\n    {'name': 'Alice', 'age': 30},\n    {'name': 'Bob', 'age': 25},\n    {'name': 'Carol', 'age': 28},\n]\n# Use sorted with a lambda to sort by age (smallest first), assign to sorted_users\n# Then use a for loop to print each person's name and age\n",
+  "solution": "users = [\n    {'name': 'Alice', 'age': 30},\n    {'name': 'Bob', 'age': 25},\n    {'name': 'Carol', 'age': 28},\n]\nsorted_users = sorted(users, key=lambda u: u['age'])\nfor u in sorted_users:\n    print(u['name'], u['age'])",
+  "grading": {
+   "requiredAst": [
+    "Lambda"
+   ],
+   "stdoutEquals": "Bob 25\nCarol 28\nAlice 30\n",
+   "varsEqual": {
+    "sorted_users": [
+     {
+      "name": "Bob",
+      "age": 25
+     },
+     {
+      "name": "Carol",
+      "age": 28
+     },
+     {
+      "name": "Alice",
+      "age": 30
+     }
+    ]
+   }
+  },
+  "hints": [
+   "sorted's key parameter takes a function: it's used on each item to make the 'thing to sort by'",
+   "lambda u: u['age'] is the same as def f(u): return u['age']",
+   "Full code:\nusers = [\n    {'name': 'Alice', 'age': 30},\n    {'name': 'Bob', 'age': 25},\n    {'name': 'Carol', 'age': 28},\n]\nsorted_users = sorted(users, key=lambda u: u['age'])\nfor u in sorted_users:\n    print(u['name'], u['age'])"
+  ]
+ },
+ "python7/01-for-iterate": {
+  "id": "01-for-iterate",
+  "lesson": "python7",
+  "title": "Add up a list with for",
+  "prompt": "Here's a list for you:\n\n```python\nnumbers = [1, 2, 3, 4, 5]\n```\n\nUse a `for` loop to add up all the items in `numbers`, put the result in the variable `total`, then `print(total)`.\n\nThe output should be:\n```\n15\n```",
+  "starterCode": "numbers = [1, 2, 3, 4, 5]\n# First set total to 0, then use a for loop to add each item to it\n# Print total after the loop\n",
+  "solution": "numbers = [1, 2, 3, 4, 5]\ntotal = 0\nfor n in numbers:\n    total = total + n\nprint(total)",
+  "grading": {
+   "requiredAst": [
+    "For"
+   ],
+   "stdoutEquals": "15\n",
+   "varsEqual": {
+    "total": 15
+   }
+  },
+  "hints": [
+   "Inside the for loop, add each n to total",
+   "Remember to print(total) after the loop, not inside it",
+   "Full code:\nnumbers = [1, 2, 3, 4, 5]\ntotal = 0\nfor n in numbers:\n    total = total + n\nprint(total)"
+  ]
+ },
+ "python7/02-iter-next": {
+  "id": "02-iter-next",
+  "lesson": "python7",
+  "title": "Take items one by one with iter and next",
+  "prompt": "Here's a list for you:\n\n```python\nnums = [10, 20, 30]\n```\n\nPlease:\n\n1. Use `iter()` to turn `nums` into an iterator and assign it to the variable `it`.\n2. Use `next(it)` three times in a row, printing each one.\n\nThe output should be:\n```\n10\n20\n30\n```",
+  "starterCode": "nums = [10, 20, 30]\n# Use iter() to turn nums into an iterator, assign it to it\n# Then use next(it) three times, printing each one\n",
+  "solution": "nums = [10, 20, 30]\nit = iter(nums)\nprint(next(it))\nprint(next(it))\nprint(next(it))",
+  "grading": {
+   "requiredAst": [
+    "Assign:it"
+   ],
+   "stdoutEquals": "10\n20\n30\n"
+  },
+  "hints": [
+   "iter(nums) turns a list into an iterator object",
+   "Each call to next(it) gives you the next item",
+   "Full code:\nnums = [10, 20, 30]\nit = iter(nums)\nprint(next(it))\nprint(next(it))\nprint(next(it))"
+  ]
+ },
+ "python7/03-list-comp": {
+  "id": "03-list-comp",
+  "lesson": "python7",
+  "title": "List comprehension: squares of even numbers",
+  "prompt": "Use **one line** of list comprehension to make the **squares of all the even numbers** from 1 to 10 (including 10), assign it to the variable `result`, then `print(result)`.\n\nThe output should be:\n```\n[4, 16, 36, 64, 100]\n```",
+  "starterCode": "# result = [... for ... in range(...) if ...]\n# print(result)\n",
+  "solution": "result = [x * x for x in range(1, 11) if x % 2 == 0]\nprint(result)",
+  "grading": {
+   "requiredAst": [
+    "ListComp"
+   ],
+   "stdoutEquals": "[4, 16, 36, 64, 100]\n",
+   "varsEqual": {
+    "result": [
+     4,
+     16,
+     36,
+     64,
+     100
+    ]
+   }
+  },
+  "hints": [
+   "1 to 10 (including 10) is range(1, 11)",
+   "Checking for even: x % 2 == 0",
+   "Full code:\nresult = [x * x for x in range(1, 11) if x % 2 == 0]\nprint(result)"
+  ]
+ },
+ "python7/04-generator": {
+  "id": "04-generator",
+  "lesson": "python7",
+  "title": "Write a generator function",
+  "prompt": "Define a **generator function** `count_up(n)` that `yield`s `1, 2, ..., n` in turn.\n\nThen use a `for` loop to go through `count_up(5)`, printing each value (one number per line).\n\nThe output should be:\n```\n1\n2\n3\n4\n5\n```",
+  "starterCode": "# Define a generator function count_up(n) that yields 1 to n in turn\n# Then use a for loop over count_up(5), printing each one\n",
+  "solution": "def count_up(n):\n    for i in range(1, n + 1):\n        yield i\n\nfor x in count_up(5):\n    print(x)",
+  "grading": {
+   "requiredAst": [
+    "FunctionDef:count_up",
+    "Yield"
+   ],
+   "stdoutEquals": "1\n2\n3\n4\n5\n"
+  },
+  "hints": [
+   "Change print(i) in a normal function to yield i, and it becomes a generator function",
+   "Use range(1, n + 1) so that n itself is included",
+   "Full code:\ndef count_up(n):\n    for i in range(1, n + 1):\n        yield i\n\nfor x in count_up(5):\n    print(x)"
+  ]
+ },
+ "python7/05-zip-pair": {
+  "id": "05-zip-pair",
+  "lesson": "python7",
+  "title": "Pair up two lists with zip",
+  "prompt": "Here are two lists for you:\n\n```python\nnames = ['Alice', 'Bob', 'Cathy']\nages = [18, 19, 20]\n```\n\nUse `zip()` to pair them up, then use a `for` loop to print each pair in the format `name age` (with **one space** between).\n\nThe output should be:\n```\nAlice 18\nBob 19\nCathy 20\n```",
+  "starterCode": "names = ['Alice', 'Bob', 'Cathy']\nages = [18, 19, 20]\n# Use zip to pair the two lists; in the for loop, unpack into name and age and print each pair\n",
+  "solution": "names = ['Alice', 'Bob', 'Cathy']\nages = [18, 19, 20]\nfor name, age in zip(names, ages):\n    print(name, age)",
+  "grading": {
+   "requiredAst": [
+    "For"
+   ],
+   "stdoutEquals": "Alice 18\nBob 19\nCathy 20\n"
+  },
+  "hints": [
+   "zip(names, ages) takes one item from each list at the same time, making (name, age)",
+   "Unpack straight in the for: for name, age in zip(...)",
+   "print(name, age) separates them with a space by default",
+   "Full code:\nnames = ['Alice', 'Bob', 'Cathy']\nages = [18, 19, 20]\nfor name, age in zip(names, ages):\n    print(name, age)"
+  ]
+ },
+ "python8/01-class-basic": {
+  "id": "01-class-basic",
+  "lesson": "python8",
+  "title": "Define your first class",
+  "prompt": "Define a class `Animal` with one method, `sound`, which prints `'Some sound'`.\n\nThen:\n1. Create an instance `Animal()` and assign it to `a`\n2. Call `a.sound()`\n\nThe output should be:\n```\nSome sound\n```",
+  "starterCode": "# Define the class Animal, with a sound method that prints the text asked for\n# Then create an instance, assign it to a, and call a.sound()\n\n",
+  "solution": "class Animal:\n    def sound(self):\n        print('Some sound')\n\na = Animal()\na.sound()",
+  "grading": {
+   "requiredAst": [
+    "ClassDef:Animal",
+    "FunctionDef:sound"
+   ],
+   "stdoutEquals": "Some sound\n"
+  },
+  "hints": [
+   "Define a class with class. A method is like a function, but its first parameter must be self",
+   "Create an instance: a = Animal(); call the method: a.sound()",
+   "Full code:\nclass Animal:\n    def sound(self):\n        print('Some sound')\n\na = Animal()\na.sound()"
+  ]
+ },
+ "python8/02-init": {
+  "id": "02-init",
+  "lesson": "python8",
+  "title": "Pass values to an object with __init__",
+  "prompt": "Define a class `Person`:\n\n- `__init__` takes `name` and `age` and saves them to `self.name` and `self.age`\n- A method `greet` prints `f'My name is {self.name} and I am {self.age} years old'`\n\nThen create `Person('Sam', 18)`, assign it to `p`, and call `p.greet()`.\n\nThe output should be:\n```\nMy name is Sam and I am 18 years old\n```",
+  "starterCode": "# Define the class Person: __init__ takes name and age and saves them as instance attributes\n# Write a greet method that prints the introduction in the format asked for\n# Finally create p and call p.greet()\n\n",
+  "solution": "class Person:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\n    def greet(self):\n        print(f'My name is {self.name} and I am {self.age} years old')\n\np = Person('Sam', 18)\np.greet()",
+  "grading": {
+   "requiredAst": [
+    "ClassDef:Person",
+    "FunctionDef:__init__",
+    "FunctionDef:greet"
+   ],
+   "stdoutEquals": "My name is Sam and I am 18 years old\n"
+  },
+  "hints": [
+   "__init__ has two underscores on each side",
+   "Inside __init__, set instance attributes with self.xxx = ...",
+   "Full code:\nclass Person:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\n    def greet(self):\n        print(f'My name is {self.name} and I am {self.age} years old')\n\np = Person('Sam', 18)\np.greet()"
+  ]
+ },
+ "python8/03-inheritance": {
+  "id": "03-inheritance",
+  "lesson": "python8",
+  "title": "Inheritance: Student inherits from Person",
+  "prompt": "We've already defined this for you:\n```python\nclass Person:\n    def __init__(self, name):\n        self.name = name\n    def greet(self):\n        print(f'My name is {self.name}')\n```\n\nDefine a class `Student` that **inherits from `Person`**, and give it a method `study` that prints `f'{self.name} is studying'`.\n\nThen create `Student('Xiao Ming')`, assign it to `s`, and call `s.greet()` then `s.study()`.\n\nThe output should be:\n```\nMy name is Xiao Ming\nXiao Ming is studying\n```",
+  "starterCode": "class Person:\n    def __init__(self, name):\n        self.name = name\n    def greet(self):\n        print(f'My name is {self.name}')\n\n# Define a class Student that inherits from Person, with a study method\n# Create s, then call greet and study\n\n",
+  "solution": "class Person:\n    def __init__(self, name):\n        self.name = name\n    def greet(self):\n        print(f'My name is {self.name}')\n\nclass Student(Person):\n    def study(self):\n        print(f'{self.name} is studying')\n\ns = Student('Xiao Ming')\ns.greet()\ns.study()",
+  "grading": {
+   "requiredAst": [
+    "ClassDef:Student",
+    "FunctionDef:study"
+   ],
+   "stdoutEquals": "My name is Xiao Ming\nXiao Ming is studying\n"
+  },
+  "hints": [
+   "How to inherit: class Student(Person):",
+   "It's fine that Student has no __init__ – it uses the parent class's one automatically",
+   "Full code:\nclass Person:\n    def __init__(self, name):\n        self.name = name\n    def greet(self):\n        print(f'My name is {self.name}')\n\nclass Student(Person):\n    def study(self):\n        print(f'{self.name} is studying')\n\ns = Student('Xiao Ming')\ns.greet()\ns.study()"
+  ]
+ },
+ "python8/04-polymorphism": {
+  "id": "04-polymorphism",
+  "lesson": "python8",
+  "title": "Polymorphism: overriding a parent's method",
+  "prompt": "We've already defined this for you:\n```python\nclass Animal:\n    def sound(self):\n        print('Some sounds')\n```\n\nDefine two classes `Dog` and `Cat` that inherit from `Animal`, and **override** the `sound` method in each:\n\n- `Dog.sound` prints `'Woof woof'`\n- `Cat.sound` prints `'Meow meow'`\n\nThen use a `for` loop to call `Dog().sound()` and `Cat().sound()` in turn.\n\nThe output should be:\n```\nWoof woof\nMeow meow\n```",
+  "starterCode": "class Animal:\n    def sound(self):\n        print('Some sounds')\n\n# Define Dog and Cat inheriting from Animal, each overriding sound\n# Use a for loop over the two instances and call sound on each\n\n",
+  "solution": "class Animal:\n    def sound(self):\n        print('Some sounds')\n\nclass Dog(Animal):\n    def sound(self):\n        print('Woof woof')\n\nclass Cat(Animal):\n    def sound(self):\n        print('Meow meow')\n\nfor a in [Dog(), Cat()]:\n    a.sound()",
+  "grading": {
+   "requiredAst": [
+    "ClassDef:Dog",
+    "ClassDef:Cat",
+    "FunctionDef:sound",
+    "For"
+   ],
+   "stdoutEquals": "Woof woof\nMeow meow\n"
+  },
+  "hints": [
+   "Defining a method with the same name in a child class replaces the parent's one",
+   "for a in [Dog(), Cat()]: goes through the two objects",
+   "Full code:\nclass Animal:\n    def sound(self):\n        print('Some sounds')\n\nclass Dog(Animal):\n    def sound(self):\n        print('Woof woof')\n\nclass Cat(Animal):\n    def sound(self):\n        print('Meow meow')\n\nfor a in [Dog(), Cat()]:\n    a.sound()"
+  ]
+ },
+ "python9/01-import-math": {
+  "id": "01-import-math",
+  "lesson": "python9",
+  "title": "Work out a circle's circumference with the math module",
+  "prompt": "Use `import` to bring in the `math` module, then use `math.pi` to:\n\n1. Work out the circumference of a circle with radius `r = 5`, using the formula `2 * math.pi * r`\n2. Round the result to **4 decimal places** (with the built-in function `round(..., 4)`) and assign it to the variable `c`\n3. `print(c)`\n\nThe output should be:\n```\n31.4159\n```",
+  "starterCode": "# Import the math module and use math.pi in the formula for a circle of radius 5\n# Round to 4 decimal places with round, assign to c and print it\n\n",
+  "solution": "import math\n\nr = 5\nc = round(2 * math.pi * r, 4)\nprint(c)",
+  "grading": {
+   "requiredAst": [
+    "Import"
+   ],
+   "stdoutEquals": "31.4159\n",
+   "varsEqual": {
+    "c": 31.4159
+   }
+  },
+  "hints": [
+   "Bring the math module in with import math",
+   "math.pi is the number π",
+   "Full code:\nimport math\n\nr = 5\nc = round(2 * math.pi * r, 4)\nprint(c)"
+  ]
+ },
+ "python9/02-from-import": {
+  "id": "02-from-import",
+  "lesson": "python9",
+  "title": "from...import: take out sqrt directly",
+  "prompt": "Use the `from...import` syntax to import the `sqrt` function **directly** from the `math` module (don't use `import math`), then:\n\n1. Work out `sqrt(16)`\n2. Assign the result to the variable `result`\n3. `print(result)`\n\nThe output should be:\n```\n4.0\n```",
+  "starterCode": "# Use from...import to import sqrt straight from the math module\n# Work out the square root of 16, assign it to result and print it\n\n",
+  "solution": "from math import sqrt\n\nresult = sqrt(16)\nprint(result)",
+  "grading": {
+   "requiredAst": [
+    "ImportFrom"
+   ],
+   "stdoutEquals": "4.0\n",
+   "varsEqual": {
+    "result": 4.0
+   }
+  },
+  "hints": [
+   "The syntax is from module_name import name",
+   "After from math import sqrt you can write sqrt(16) directly, with no prefix",
+   "Full code:\nfrom math import sqrt\n\nresult = sqrt(16)\nprint(result)"
+  ]
+ },
+ "python9/03-datetime": {
+  "id": "03-datetime",
+  "lesson": "python9",
+  "title": "Make a date with the datetime module",
+  "prompt": "Use `from...import` to import the `date` class from the `datetime` module, then:\n\n1. Create the date `1 January 2026` and assign it to the variable `d`: `d = date(2026, 1, 1)`\n2. `print` its three attributes `year`, `month` and `day`, one per line\n\nThe output should be:\n```\n2026\n1\n1\n```",
+  "starterCode": "# Import the date class from the datetime module\n# Make a date object for 1 January 2026 and assign it to d\n# Print its year, month and day attributes\n\n",
+  "solution": "from datetime import date\n\nd = date(2026, 1, 1)\nprint(d.year)\nprint(d.month)\nprint(d.day)",
+  "grading": {
+   "requiredAst": [
+    "ImportFrom"
+   ],
+   "stdoutEquals": "2026\n1\n1\n"
+  },
+  "hints": [
+   "from datetime import date",
+   "date(year, month, day) makes a date object; then get attributes with .year / .month / .day",
+   "Full code:\nfrom datetime import date\n\nd = date(2026, 1, 1)\nprint(d.year)\nprint(d.month)\nprint(d.day)"
+  ]
+ },
+ "python9/04-json": {
+  "id": "04-json",
+  "lesson": "python9",
+  "title": "Turn a dictionary into JSON with the json module",
+  "prompt": "Use `import` to bring in the `json` module, then:\n\n1. Define the dictionary `data = {'name': 'Alice', 'age': 18}`\n2. Use `json.dumps(data)` to turn it into a JSON string and assign it to the variable `s`\n3. `print(s)`\n\nThe output should be:\n```\n{\"name\": \"Alice\", \"age\": 18}\n```\n\n> Tip: `json.dumps` puts spaces after `,` and `:` by default – don't type the string by hand.",
+  "starterCode": "# Import the json module and define the dictionary data as asked\n# Use json.dumps to turn it into a JSON string, assign it to s and print it\n\n",
+  "solution": "import json\n\ndata = {'name': 'Alice', 'age': 18}\ns = json.dumps(data)\nprint(s)",
+  "grading": {
+   "requiredAst": [
+    "Import"
+   ],
+   "stdoutEquals": "{\"name\": \"Alice\", \"age\": 18}\n",
+   "varsEqual": {
+    "s": "{\"name\": \"Alice\", \"age\": 18}"
+   }
+  },
+  "hints": [
+   "import json",
+   "json.dumps(dictionary) returns a JSON string",
+   "Full code:\nimport json\n\ndata = {'name': 'Alice', 'age': 18}\ns = json.dumps(data)\nprint(s)"
+  ]
+ },
+ "python10/01-str": {
+  "id": "01-str",
+  "lesson": "python10",
+  "title": "Make print friendly with __str__",
+  "prompt": "Define a class `Book`:\n\n- `__init__` takes `title` and saves it to `self.title`\n- `__str__` returns the string `f'Book: {self.title}'`\n\nThen create `Book('Python Basics')`, assign it to `b`, and `print(b)`.\n\nThe output should be:\n```\nBook: Python Basics\n```",
+  "starterCode": "# Define the Book class: save title in __init__, and make __str__ return a string like Book: title\n# Then create the book 'Python Basics', assign it to b, and print b\n\n",
+  "solution": "class Book:\n    def __init__(self, title):\n        self.title = title\n\n    def __str__(self):\n        return f'Book: {self.title}'\n\nb = Book('Python Basics')\nprint(b)",
+  "grading": {
+   "requiredAst": [
+    "ClassDef:Book",
+    "FunctionDef:__str__"
+   ],
+   "stdoutEquals": "Book: Python Basics\n"
+  },
+  "hints": [
+   "__str__ must return a string – don't use print inside it",
+   "f'Book: {self.title}' uses an f-string to put the title in",
+   "Full code:\nclass Book:\n    def __init__(self, title):\n        self.title = title\n    def __str__(self):\n        return f'Book: {self.title}'\nb = Book('Python Basics')\nprint(b)"
+  ]
+ },
+ "python10/02-eq": {
+  "id": "02-eq",
+  "lesson": "python10",
+  "title": "Custom equality with __eq__",
+  "prompt": "Define a class `Money`:\n\n- `__init__` takes `amount` and saves it to `self.amount`\n- `__eq__` checks whether two `Money` objects have the same `amount`; if the other thing isn't `Money` (for example `Money(100) == 100`), it should return `False` instead of giving an error\n\nThen create:\n\n```python\na = Money(100)\nb = Money(100)\nc = Money(50)\n```\n\nand run:\n\n```python\nprint(a == b)\nprint(a == c)\n```\n\nThe output should be:\n```\nTrue\nFalse\n```",
+  "starterCode": "# Define the Money class: save amount in __init__\n# In __eq__, first use isinstance to check the other one is also Money, then compare the amounts\n# Create a, b and c, then print a == b and a == c\n\n",
+  "solution": "class Money:\n    def __init__(self, amount):\n        self.amount = amount\n\n    def __eq__(self, other):\n        return isinstance(other, Money) and self.amount == other.amount\n\na = Money(100)\nb = Money(100)\nc = Money(50)\nprint(a == b)\nprint(a == c)",
+  "grading": {
+   "requiredAst": [
+    "ClassDef:Money",
+    "FunctionDef:__eq__"
+   ],
+   "stdoutEquals": "True\nFalse\n"
+  },
+  "hints": [
+   "__eq__(self, other) takes a second parameter, other",
+   "First check isinstance(other, Money), then compare amount – otherwise Money(100) == 100 would give an error",
+   "Full code:\nclass Money:\n    def __init__(self, amount):\n        self.amount = amount\n    def __eq__(self, other):\n        return isinstance(other, Money) and self.amount == other.amount\na = Money(100)\nb = Money(100)\nc = Money(50)\nprint(a == b)\nprint(a == c)"
+  ]
+ },
+ "python10/03-len": {
+  "id": "03-len",
+  "lesson": "python10",
+  "title": "Make len() work with __len__",
+  "prompt": "Define a class `Playlist`:\n\n- `__init__` takes `songs` (a list) and saves it to `self.songs`\n- `__len__` returns the length of `self.songs`\n\nThen create `p = Playlist(['Song 1', 'Song 2', 'Song 3'])` and call `print(len(p))`.\n\nThe output should be:\n```\n3\n```",
+  "starterCode": "# Define the Playlist class: save the songs list in __init__\n# __len__ returns the number of songs\n# After creating p, print len(p)\n\n",
+  "solution": "class Playlist:\n    def __init__(self, songs):\n        self.songs = songs\n\n    def __len__(self):\n        return len(self.songs)\n\np = Playlist(['Song 1', 'Song 2', 'Song 3'])\nprint(len(p))",
+  "grading": {
+   "requiredAst": [
+    "ClassDef:Playlist",
+    "FunctionDef:__len__"
+   ],
+   "stdoutEquals": "3\n"
+  },
+  "hints": [
+   "__len__ must return a whole number that isn't negative",
+   "Just return the length of the list inside: return len(self.songs)",
+   "Full code:\nclass Playlist:\n    def __init__(self, songs):\n        self.songs = songs\n    def __len__(self):\n        return len(self.songs)\np = Playlist(['Song 1', 'Song 2', 'Song 3'])\nprint(len(p))"
+  ]
+ },
+ "python10/05-getitem": {
+  "id": "05-getitem",
+  "lesson": "python10",
+  "title": "Let an object use [index] with __getitem__",
+  "prompt": "Define a class `Stack`:\n\n- `__init__` takes `items` (a list) and saves it to `self.items`\n- `__getitem__(self, i)` returns `self.items[i]`\n\nThen run:\n\n```python\ns = Stack(['a', 'b', 'c'])\nprint(s[0])\nprint(s[-1])\n```\n\nThe output should be:\n```\na\nc\n```",
+  "starterCode": "# Define the Stack class: save the items list in __init__\n# __getitem__ passes the index on to the list inside\n# After creating s, print s[0] and s[-1]\n\n",
+  "solution": "class Stack:\n    def __init__(self, items):\n        self.items = items\n\n    def __getitem__(self, i):\n        return self.items[i]\n\ns = Stack(['a', 'b', 'c'])\nprint(s[0])\nprint(s[-1])",
+  "grading": {
+   "requiredAst": [
+    "ClassDef:Stack",
+    "FunctionDef:__getitem__"
+   ],
+   "stdoutEquals": "a\nc\n"
+  },
+  "hints": [
+   "In __getitem__(self, i), i is the value inside the square brackets",
+   "Just pass it on to the list inside: return self.items[i]",
+   "Full code:\nclass Stack:\n    def __init__(self, items):\n        self.items = items\n    def __getitem__(self, i):\n        return self.items[i]\ns = Stack(['a', 'b', 'c'])\nprint(s[0])\nprint(s[-1])"
+  ]
+ },
+ "python10/04-add": {
+  "id": "04-add",
+  "lesson": "python10",
+  "title": "Let objects use + with __add__",
+  "prompt": "Define a 2D vector class `Vec2`:\n\n- `__init__` takes `x` and `y` and saves them to `self.x` / `self.y`\n- `__add__(self, other)` returns a new `Vec2(self.x + other.x, self.y + other.y)`\n- `__repr__` returns the string `f'Vec2({self.x}, {self.y})'`\n\nThen run:\n\n```python\nv1 = Vec2(1, 2)\nv2 = Vec2(3, 4)\nv3 = v1 + v2\nprint(v3)\n```\n\nThe output should be:\n```\nVec2(4, 6)\n```",
+  "starterCode": "# Define the Vec2 class: save x and y in __init__\n# __add__ returns a new Vec2 with the coordinates added; __repr__ returns a string like Vec2(x, y)\n# Create v1 and v2, add them to get v3, and print it\n\n",
+  "solution": "class Vec2:\n    def __init__(self, x, y):\n        self.x = x\n        self.y = y\n\n    def __add__(self, other):\n        return Vec2(self.x + other.x, self.y + other.y)\n\n    def __repr__(self):\n        return f'Vec2({self.x}, {self.y})'\n\nv1 = Vec2(1, 2)\nv2 = Vec2(3, 4)\nv3 = v1 + v2\nprint(v3)",
+  "grading": {
+   "requiredAst": [
+    "ClassDef:Vec2",
+    "FunctionDef:__add__",
+    "FunctionDef:__repr__"
+   ],
+   "stdoutEquals": "Vec2(4, 6)\n"
+  },
+  "hints": [
+   "__add__ usually returns a new object – don't change self",
+   "Add x and y separately, then wrap them in a new Vec2",
+   "Full code:\nclass Vec2:\n    def __init__(self, x, y):\n        self.x = x\n        self.y = y\n    def __add__(self, other):\n        return Vec2(self.x + other.x, self.y + other.y)\n    def __repr__(self):\n        return f'Vec2({self.x}, {self.y})'\nv1 = Vec2(1, 2)\nv2 = Vec2(3, 4)\nv3 = v1 + v2\nprint(v3)"
+  ]
+ },
+ "python11/01-define-color": {
+  "id": "01-define-color",
+  "lesson": "python11",
+  "title": "Define a Color enum class",
+  "prompt": "Use `from ... import` to import `Enum` from the `enum` module, then:\n\n1. Define a class `Color` that inherits from `Enum`, with three members:\n   - `RED = 1`\n   - `GREEN = 2`\n   - `BLUE = 3`\n2. `print(Color.RED)`\n\nThe output should be:\n```\nColor.RED\n```\n\n> Tip: printing an Enum member directly shows it as `ClassName.MemberName` by default.",
+  "starterCode": "# Import Enum from the enum module\n# Define the Color enum class with three members: RED, GREEN and BLUE\n# Print Color.RED\n\n",
+  "solution": "from enum import Enum\n\nclass Color(Enum):\n    RED = 1\n    GREEN = 2\n    BLUE = 3\n\nprint(Color.RED)",
+  "grading": {
+   "requiredAst": [
+    "ImportFrom",
+    "ClassDef:Color"
+   ],
+   "stdoutEquals": "Color.RED\n"
+  },
+  "hints": [
+   "from enum import Enum",
+   "class Color(Enum): then write members like RED = 1 inside the class",
+   "Full code:\nfrom enum import Enum\n\nclass Color(Enum):\n    RED = 1\n    GREEN = 2\n    BLUE = 3\n\nprint(Color.RED)"
+  ]
+ },
+ "python11/02-name-value": {
+  "id": "02-name-value",
+  "lesson": "python11",
+  "title": "Get .name and .value",
+  "prompt": "Carry on with the `Color` enum from the last exercise (with `RED=1` / `GREEN=2` / `BLUE=3`). This time:\n\n1. `print(Color.GREEN.name)` – print the member's name\n2. `print(Color.GREEN.value)` – print the member's value\n\nThe output should be:\n```\nGREEN\n2\n```",
+  "starterCode": "# Define the Color enum with three members: RED, GREEN and BLUE\n# Print the name and the value of Color.GREEN\n\n",
+  "solution": "from enum import Enum\n\nclass Color(Enum):\n    RED = 1\n    GREEN = 2\n    BLUE = 3\n\nprint(Color.GREEN.name)\nprint(Color.GREEN.value)",
+  "grading": {
+   "requiredAst": [
+    "ClassDef:Color"
+   ],
+   "stdoutEquals": "GREEN\n2\n"
+  },
+  "hints": [
+   ".name is the member's name as a string",
+   ".value is the value you gave it when defining it",
+   "Full code:\nfrom enum import Enum\n\nclass Color(Enum):\n    RED = 1\n    GREEN = 2\n    BLUE = 3\n\nprint(Color.GREEN.name)\nprint(Color.GREEN.value)"
+  ]
+ },
+ "python11/03-iterate": {
+  "id": "03-iterate",
+  "lesson": "python11",
+  "title": "Go through all the members of an Enum",
+  "prompt": "Define the same `Color` enum (`RED=1` / `GREEN=2` / `BLUE=3`), then use a `for` loop to go through it and print each member's `.name` **in the order they were defined**.\n\nThe output should be:\n```\nRED\nGREEN\nBLUE\n```\n\n> Tip: `for c in Color:` gives you each member, then `c.name` gets its name.",
+  "starterCode": "# Define the same Color enum\n# Use a for loop over Color and print each member's name in the order they were defined\n\n",
+  "solution": "from enum import Enum\n\nclass Color(Enum):\n    RED = 1\n    GREEN = 2\n    BLUE = 3\n\nfor c in Color:\n    print(c.name)",
+  "grading": {
+   "requiredAst": [
+    "ClassDef:Color",
+    "For"
+   ],
+   "stdoutEquals": "RED\nGREEN\nBLUE\n"
+  },
+  "hints": [
+   "An Enum class can be looped over itself: for member in Color",
+   "Use c.name to get the member's name as a string",
+   "Full code:\nfrom enum import Enum\n\nclass Color(Enum):\n    RED = 1\n    GREEN = 2\n    BLUE = 3\n\nfor c in Color:\n    print(c.name)"
+  ]
+ },
+ "python11/04-auto": {
+  "id": "04-auto",
+  "lesson": "python11",
+  "title": "Assign values automatically with auto()",
+  "prompt": "Use `from ... import` to import both `Enum` and `auto` from the `enum` module, then:\n\n1. Define a class `Weekday` that inherits from `Enum`, with three members all given values by `auto()`:\n   - `MON = auto()`\n   - `TUE = auto()`\n   - `WED = auto()`\n2. `print(Weekday.MON.value)`\n3. `print(Weekday.WED.value)`\n\nThe output should be:\n```\n1\n3\n```\n\n> Tip: `auto()` starts at 1 by default and counts up in the order members are defined.",
+  "starterCode": "# Import both Enum and auto from the enum module\n# Define the Weekday enum, with MON, TUE and WED all given values by auto()\n# Print the value of MON and of WED\n\n",
+  "solution": "from enum import Enum, auto\n\nclass Weekday(Enum):\n    MON = auto()\n    TUE = auto()\n    WED = auto()\n\nprint(Weekday.MON.value)\nprint(Weekday.WED.value)",
+  "grading": {
+   "requiredAst": [
+    "ImportFrom:auto",
+    "ClassDef:Weekday"
+   ],
+   "stdoutEquals": "1\n3\n"
+  },
+  "hints": [
+   "from enum import Enum, auto imports two names at once",
+   "Inside the class, just write MON = auto()",
+   "Full code:\nfrom enum import Enum, auto\n\nclass Weekday(Enum):\n    MON = auto()\n    TUE = auto()\n    WED = auto()\n\nprint(Weekday.MON.value)\nprint(Weekday.WED.value)"
+  ]
+ },
+ "python12/01-detect-meta": {
+  "id": "01-detect-meta",
+  "lesson": "python12",
+  "title": "What is the class of a class?",
+  "prompt": "Define the simplest possible class, `Foo` (just write `pass` inside).\n\nThen use `type()` to check the type of `Foo`, and use `is` to check whether it is `type`. Print two lines in this format:\n\n```\n<class 'type'>\nTrue\n```\n\nTip: the first line is `print(type(Foo))`, the second is `print(type(Foo) is type)`.",
+  "starterCode": "# Define the simplest class Foo (write pass inside)\n# Use type() to print the type of Foo\n# Then print the result of type(Foo) is type\n\n",
+  "solution": "class Foo:\n    pass\n\nprint(type(Foo))\nprint(type(Foo) is type)",
+  "grading": {
+   "requiredAst": [
+    "ClassDef:Foo"
+   ],
+   "stdoutEquals": "<class 'type'>\nTrue\n"
+  },
+  "hints": [
+   "Define the simplest class with class Foo: pass",
+   "type(Foo) returns <class 'type'>",
+   "Full code:\nclass Foo:\n    pass\n\nprint(type(Foo))\nprint(type(Foo) is type)"
+  ]
+ },
+ "python12/02-build-greeter": {
+  "id": "02-build-greeter",
+  "lesson": "python12",
+  "title": "Make a class on the fly with three-argument type()",
+  "prompt": "**Without using the `class` keyword**, use the three-argument `type()` syntax to create a class `Greeter`:\n\n- Parent classes: `(object,)`\n- One method, `greet(self)`, which prints `'hi'` – first define an ordinary function `greet(self)` with `def`, then put it in the attribute dictionary `{'greet': greet}`\n\nAfter creating it, make an instance and call `g.greet()`, then `print(type(Greeter))` to show it's an instance of `type`.\n\nThe output should be:\n```\nhi\n<class 'type'>\n```",
+  "starterCode": "# First use def to define an ordinary function greet(self) that prints 'hi'\n# Use three-argument type() to create Greeter, putting greet in the attribute dictionary\n# Create an instance and call greet, then print type(Greeter)\n\n",
+  "solution": "def greet(self):\n    print('hi')\n\nGreeter = type('Greeter', (object,), {'greet': greet})\n\ng = Greeter()\ng.greet()\nprint(type(Greeter))",
+  "grading": {
+   "requiredAst": [
+    "Assign:Greeter",
+    "FunctionDef:greet"
+   ],
+   "stdoutEquals": "hi\n<class 'type'>\n"
+  },
+  "hints": [
+   "Three-argument type(): type(class name string, tuple of parent classes, attribute dictionary)",
+   "First def an ordinary function greet(self), then put it in the dictionary {'greet': greet}",
+   "Full code:\ndef greet(self):\n    print('hi')\n\nGreeter = type('Greeter', (object,), {'greet': greet})\ng = Greeter()\ng.greet()\nprint(type(Greeter))"
+  ]
+ },
+ "python12/03-custom-meta": {
+  "id": "03-custom-meta",
+  "lesson": "python12",
+  "title": "A custom metaclass that adds an attribute automatically",
+  "prompt": "Define a metaclass `AnimalMeta` that **inherits from `type`**:\n\n- Override `__new__(mcs, name, bases, attrs)`\n- Put `species = 'animal'` into `attrs`\n- Return the class with `super().__new__(mcs, name, bases, attrs)`\n\nThen define an empty class `Dog(metaclass=AnimalMeta)` with `pass` inside.\n\nFinally print `Dog.species`.\n\nThe output should be:\n```\nanimal\n```",
+  "starterCode": "# Define a metaclass AnimalMeta that inherits from type and overrides __new__\n# Put species into attrs, then return the class with super().__new__\n# Define an empty class Dog with the metaclass set, then print Dog.species\n\n",
+  "solution": "class AnimalMeta(type):\n    def __new__(mcs, name, bases, attrs):\n        attrs['species'] = 'animal'\n        return super().__new__(mcs, name, bases, attrs)\n\nclass Dog(metaclass=AnimalMeta):\n    pass\n\nprint(Dog.species)",
+  "grading": {
+   "requiredAst": [
+    "ClassDef:AnimalMeta",
+    "ClassDef:Dog",
+    "FunctionDef:__new__"
+   ],
+   "stdoutEquals": "animal\n"
+  },
+  "hints": [
+   "A metaclass must inherit from type: class AnimalMeta(type):",
+   "In __new__, add a key-value pair to the attrs dictionary, then return super().__new__",
+   "To use a metaclass, write class Dog(metaclass=AnimalMeta):"
+  ]
+ },
+ "python14/01-findall-digits": {
+  "id": "01-findall-digits",
+  "lesson": "python14",
+  "title": "Grab all the numbers with re.findall",
+  "prompt": "The string `'abc123def456ghi789'` has some **runs of digits** mixed in.\n\nUse `re.findall` to grab every run of digits, assign the result to the variable `nums`, then `print(nums)`.\n\nThe output should be:\n```\n['123', '456', '789']\n```\n\nTip: a run of digits can be matched with `\\d+`.",
+  "starterCode": "import re\n\ns = 'abc123def456ghi789'\n# nums = re.findall(...)\n# print(nums)\n",
+  "solution": "import re\n\ns = 'abc123def456ghi789'\nnums = re.findall(r'\\d+', s)\nprint(nums)",
+  "grading": {
+   "requiredAst": [
+    "Import:re"
+   ],
+   "stdoutEquals": "['123', '456', '789']\n",
+   "varsEqual": {
+    "nums": [
+     "123",
+     "456",
+     "789"
+    ]
+   }
+  },
+  "hints": [
+   "Remember to import re",
+   "Write the regex as a raw string r'...' so backslashes don't need escaping",
+   "Full code:\nimport re\ns = 'abc123def456ghi789'\nnums = re.findall(r'\\d+', s)\nprint(nums)"
+  ]
+ },
+ "python14/02-match-phone": {
+  "id": "02-match-phone",
+  "lesson": "python14",
+  "title": "Check a phone number with re.match",
+  "prompt": "Write a function `is_phone(s)` that checks whether the string `s` is a valid mobile phone number in mainland China's format.\n\nRules:\n- 11 digits in total\n- The 1st digit must be `1`\n- The 2nd digit is `3` to `9`\n- The other 9 are all digits\n\nUse `re.match`. Return `True` if it matches, otherwise `False`.\n\nThen call:\n\n```python\nprint(is_phone('13812345678'))\nprint(is_phone('12345'))\nprint(is_phone('1381234567a'))\n```\n\nThe output should be:\n```\nTrue\nFalse\nFalse\n```\n\nTip: use the regex `^1[3-9]\\d{9}$`. Taking it apart: `^` pins the start of the string and `$` pins the end (without them, half a string could match too); `[3-9]` means any one digit from 3 to 9; `\\d{9}` means 9 digits in a row.",
+  "starterCode": "import re\n\n# Define is_phone(s): use re.match with the regex above, returning True or False\n# Then call is_phone with each of the three numbers above and print the results\n\n",
+  "solution": "import re\n\ndef is_phone(s):\n    return bool(re.match(r'^1[3-9]\\d{9}$', s))\n\nprint(is_phone('13812345678'))\nprint(is_phone('12345'))\nprint(is_phone('1381234567a'))",
+  "grading": {
+   "requiredAst": [
+    "FunctionDef:is_phone",
+    "Import:re"
+   ],
+   "stdoutEquals": "True\nFalse\nFalse\n"
+  },
+  "hints": [
+   "re.match returns a Match object or None; bool(...) turns it into True/False",
+   "In the regex, `^` and `$` pin the start and the end, so half a string can't pass",
+   "Full code:\nimport re\ndef is_phone(s):\n    return bool(re.match(r'^1[3-9]\\d{9}$', s))\nprint(is_phone('13812345678'))\nprint(is_phone('12345'))\nprint(is_phone('1381234567a'))"
+  ]
+ },
+ "python14/03-groups-email": {
+  "id": "03-groups-email",
+  "lesson": "python14",
+  "title": "Pull out an email's username and domain with groups",
+  "prompt": "We have the string `email = 'alice@example.com'`.\n\nUse `re.match` + groups `(...)` to pull out the **username** and the **domain**, and `print` them one after the other.\n\nRequirements:\n- Group 1 matches the username (the part before `@`)\n- Group 2 matches the domain (the part after `@`)\n- Use `m.group(1)` for the username and `m.group(2)` for the domain\n\nThe output should be:\n```\nalice\nexample.com\n```\n\nTip: you can use the regex `(\\w+)@(\\w+\\.\\w+)`.",
+  "starterCode": "import re\n\nemail = 'alice@example.com'\n# m = re.match(...)\n# print(m.group(1))\n# print(m.group(2))\n",
+  "solution": "import re\n\nemail = 'alice@example.com'\nm = re.match(r'(\\w+)@(\\w+\\.\\w+)', email)\nprint(m.group(1))\nprint(m.group(2))",
+  "grading": {
+   "requiredAst": [
+    "Import:re"
+   ],
+   "stdoutEquals": "alice\nexample.com\n"
+  },
+  "hints": [
+   "A group is just the part you want to pull out, wrapped in ()",
+   "`\\.` matches an actual dot; `.` without the backslash means any character",
+   "Full code:\nimport re\nemail = 'alice@example.com'\nm = re.match(r'(\\w+)@(\\w+\\.\\w+)', email)\nprint(m.group(1))\nprint(m.group(2))"
+  ]
+ },
+ "python14/04-sub-spaces": {
+  "id": "04-sub-spaces",
+  "lesson": "python14",
+  "title": "Squash several spaces into one with re.sub",
+  "prompt": "Here's some text messed up with extra spaces:\n\n```python\ns = 'hello   world  python  is   cool'\n```\n\nUse `re.sub` to replace **each run of one or more spaces** with **one space**, assign the result to the variable `cleaned`, then `print(cleaned)`.\n\nThe output should be:\n```\nhello world python is cool\n```\n\nTip: `\\s+` matches 'one or more whitespace characters'.",
+  "starterCode": "import re\n\ns = 'hello   world  python  is   cool'\n# cleaned = re.sub(...)\n# print(cleaned)\n",
+  "solution": "import re\n\ns = 'hello   world  python  is   cool'\ncleaned = re.sub(r'\\s+', ' ', s)\nprint(cleaned)",
+  "grading": {
+   "requiredAst": [
+    "Import:re"
+   ],
+   "stdoutEquals": "hello world python is cool\n",
+   "varsEqual": {
+    "cleaned": "hello world python is cool"
+   }
+  },
+  "hints": [
+   "re.sub(pattern, repl, string): the second argument is what to replace with",
+   "Use `\\s+` to match 'one or more spaces' – the + means once or more",
+   "Full code:\nimport re\ns = 'hello   world  python  is   cool'\ncleaned = re.sub(r'\\s+', ' ', s)\nprint(cleaned)"
+  ]
+ },
+ "python15/02-make-adder": {
+  "id": "02-make-adder",
+  "lesson": "python15",
+  "title": "An adder factory",
+  "prompt": "Define a function `make_adder(n)`:\n\n- It takes a number `n`\n- It returns an inner function `adder(x)`, which returns `x + n`\n\nThen:\n\n1. Use `make_adder(10)` to make `add10`\n2. `print(add10(5))` – should print `15`\n3. Use `make_adder(100)` to make `add100`\n4. `print(add100(5))` – should print `105`\n\nThe output should be:\n```\n15\n105\n```",
+  "starterCode": "# Define make_adder(n), returning an inner function adder(x) that returns the sum of x and n\n# Use make_adder to make add10 and add100\n# Call each one once (with 5) and print the result\n\n",
+  "solution": "def make_adder(n):\n    def adder(x):\n        return x + n\n    return adder\n\nadd10 = make_adder(10)\nprint(add10(5))\nadd100 = make_adder(100)\nprint(add100(5))",
+  "grading": {
+   "requiredAst": [
+    "FunctionDef:make_adder"
+   ],
+   "stdoutEquals": "15\n105\n"
+  },
+  "hints": [
+   "The inner function only reads n and doesn't change it, so nonlocal isn't needed",
+   "make_adder(10) and make_adder(100) are two different closures, each carrying its own n",
+   "Full code:\ndef make_adder(n):\n    def adder(x):\n        return x + n\n    return adder\n\nadd10 = make_adder(10)\nprint(add10(5))\nadd100 = make_adder(100)\nprint(add100(5))"
+  ]
+ },
+ "python15/01-make-counter": {
+  "id": "01-make-counter",
+  "lesson": "python15",
+  "title": "A counter made with a closure",
+  "prompt": "Define a function `make_counter()`:\n\n- Inside, it keeps `count = 0`\n- It returns an inner function `counter()`; each time `counter()` is called, it adds 1 to `count` and returns the new value (remember to use `nonlocal`)\n\nThen:\n\n1. `c = make_counter()`\n2. Call `c()` 3 times in a row, `print`ing the return value each time\n\nThe output should be:\n```\n1\n2\n3\n```",
+  "starterCode": "# Define make_counter(): count = 0 inside, return the inner function counter\n# Each call to counter adds 1 to count and returns the new value (remember nonlocal)\n# Then use make_counter() to make c, call it 3 times and print each return value\n\n",
+  "solution": "def make_counter():\n    count = 0\n    def counter():\n        nonlocal count\n        count = count + 1\n        return count\n    return counter\n\nc = make_counter()\nprint(c())\nprint(c())\nprint(c())",
+  "grading": {
+   "requiredAst": [
+    "FunctionDef:make_counter",
+    "Nonlocal"
+   ],
+   "stdoutEquals": "1\n2\n3\n"
+  },
+  "hints": [
+   "The outer function sets count = 0; the inner function needs nonlocal count to change it",
+   "The outer function returns the inner function object (note: return counter, not return counter())",
+   "Full code:\ndef make_counter():\n    count = 0\n    def counter():\n        nonlocal count\n        count = count + 1\n        return count\n    return counter\n\nc = make_counter()\nprint(c())\nprint(c())\nprint(c())"
+  ]
+ },
+ "python15/03-study-time": {
+  "id": "03-study-time",
+  "lesson": "python15",
+  "title": "Add up study time with a closure",
+  "prompt": "Back to the task from the start of this chapter – adding up study time with a closure.\n\nDefine a function `study_time(time)`:\n\n- It takes a starting `time`\n- It returns an inner function `insert_time(min)`; each call adds `min` to `time` and returns the current total (remember to use `nonlocal`)\n\nThen:\n\n1. `f = study_time(0)`\n2. `print(f(2))` – studied for 2 minutes\n3. `print(f(10))` – studied another 10 minutes\n4. `print(f(5))` – studied another 5 minutes\n\nThe output should be:\n```\n2\n12\n17\n```",
+  "starterCode": "# Define study_time(time), returning an inner function insert_time(min)\n# Each call to insert_time adds min to time and returns the current total (remember nonlocal)\n# Use study_time(0) to make f, call it three times in the order above and print each result\n\n",
+  "solution": "def study_time(time):\n    def insert_time(min):\n        nonlocal time\n        time = time + min\n        return time\n    return insert_time\n\nf = study_time(0)\nprint(f(2))\nprint(f(10))\nprint(f(5))",
+  "grading": {
+   "requiredAst": [
+    "FunctionDef:study_time",
+    "Nonlocal"
+   ],
+   "stdoutEquals": "2\n12\n17\n"
+  },
+  "hints": [
+   "The outer study_time takes time as a parameter; the inner insert_time changes it with nonlocal time (the parameter name min comes from the original tutorial – it temporarily hides the built-in min() function; in real projects, a name like minutes that doesn't clash is better)",
+   "The outer function returns the inner function object insert_time (no brackets)",
+   "Full code:\ndef study_time(time):\n    def insert_time(min):\n        nonlocal time\n        time = time + min\n        return time\n    return insert_time\n\nf = study_time(0)\nprint(f(2))\nprint(f(10))\nprint(f(5))"
+  ]
+ },
+ "python16/01-log": {
+  "id": "01-log",
+  "lesson": "python16",
+  "title": "Write a @log decorator",
+  "prompt": "Write a decorator `log`:\n\n- It takes a function as its argument\n- Before calling the original function, it does `print('Starting')`\n- After calling the original function, it does `print('Finished')`\n\nThen decorate a function `hello()` with `@log` (inside it: `print('hello world')`), and call `hello()`.\n\nThe output should be:\n```\nStarting\nhello world\nFinished\n```",
+  "starterCode": "# Define the decorator log: take func, print a line before and after calling it inside wrapper, then return wrapper\n# Decorate hello() (which prints hello world) with @log, then call hello()\n\n",
+  "solution": "def log(func):\n    def wrapper():\n        print('Starting')\n        func()\n        print('Finished')\n    return wrapper\n\n@log\ndef hello():\n    print('hello world')\n\nhello()",
+  "grading": {
+   "requiredAst": [
+    "FunctionDef:log"
+   ],
+   "stdoutEquals": "Starting\nhello world\nFinished\n"
+  },
+  "hints": [
+   "The three parts of a decorator: take func, define wrapper, return wrapper (note: wrapper, not wrapper())",
+   "Inside wrapper: print('Starting') first → call func() → then print('Finished')",
+   "Full code:\ndef log(func):\n    def wrapper():\n        print('Starting')\n        func()\n        print('Finished')\n    return wrapper\n\n@log\ndef hello():\n    print('hello world')\n\nhello()"
+  ]
+ },
+ "python16/02-uppercase": {
+  "id": "02-uppercase",
+  "lesson": "python16",
+  "title": "@uppercase: changing the return value",
+  "prompt": "Write a decorator `uppercase`:\n\n- It takes a function `func`\n- It calls the original function to get its result, `result`\n- It returns `result.upper()` (in capitals) from the wrapper\n\nThen decorate a function `greet(name)` with `@uppercase`; inside it: `return 'hello ' + name`.\n\nFinally:\n```python\nprint(greet('alice'))\nprint(greet('bob'))\n```\n\nThe output should be:\n```\nHELLO ALICE\nHELLO BOB\n```",
+  "starterCode": "# Define the decorator uppercase: in wrapper, catch the original function's return value, make it capitals and return it\n# Decorate greet(name) with @uppercase, then print the two calls as shown above\n\n",
+  "solution": "def uppercase(func):\n    def wrapper(*args, **kwargs):\n        result = func(*args, **kwargs)\n        return result.upper()\n    return wrapper\n\n@uppercase\ndef greet(name):\n    return 'hello ' + name\n\nprint(greet('alice'))\nprint(greet('bob'))",
+  "grading": {
+   "requiredAst": [
+    "FunctionDef:uppercase"
+   ],
+   "stdoutEquals": "HELLO ALICE\nHELLO BOB\n"
+  },
+  "hints": [
+   "Inside wrapper, catch the original function's return value: result = func(*args, **kwargs)",
+   "Then return result.upper() – so print(greet(...)) gets the capital-letter result",
+   "Full code:\ndef uppercase(func):\n    def wrapper(*args, **kwargs):\n        result = func(*args, **kwargs)\n        return result.upper()\n    return wrapper\n\n@uppercase\ndef greet(name):\n    return 'hello ' + name\n\nprint(greet('alice'))\nprint(greet('bob'))"
+  ]
+ },
+ "python16/03-count-calls": {
+  "id": "03-count-calls",
+  "lesson": "python16",
+  "title": "@count_calls: counting calls",
+  "prompt": "Write a decorator `count_calls`:\n\n- Keep a counter `count = 0` in the closure\n- Each time the decorated function is called, add 1 to `count`, then `print(f'Call number {count}')`, then call the original function\n- Add `@functools.wraps(func)` to `wrapper` – the good habit from the last section, don't forget it\n\nThen decorate a function `say_hi()` with `@count_calls` (inside it: `print('hi')`), and call `say_hi()` 3 times in a row.\n\nThe output should be:\n```\nCall number 1\nhi\nCall number 2\nhi\nCall number 3\nhi\n```",
+  "starterCode": "# Define the decorator count_calls: keep count in the closure; in wrapper, change it with nonlocal and print the message\n# Don't forget to import functools and add @functools.wraps(func) to wrapper\n# Decorate say_hi() with @count_calls and call it 3 times\n\n",
+  "solution": "import functools\n\ndef count_calls(func):\n    count = 0\n    @functools.wraps(func)\n    def wrapper(*args, **kwargs):\n        nonlocal count\n        count = count + 1\n        print(f'Call number {count}')\n        return func(*args, **kwargs)\n    return wrapper\n\n@count_calls\ndef say_hi():\n    print('hi')\n\nsay_hi()\nsay_hi()\nsay_hi()",
+  "grading": {
+   "requiredAst": [
+    "FunctionDef:count_calls"
+   ],
+   "stdoutEquals": "Call number 1\nhi\nCall number 2\nhi\nCall number 3\nhi\n"
+  },
+  "hints": [
+   "Set count = 0 in the outer part of the decorator; wrapper needs nonlocal count to change it (this is closures + decorators together)",
+   "Each time wrapper runs: add 1 to count → print the message → then func(*args, **kwargs); don't forget to import functools and add @functools.wraps(func) to wrapper",
+   "Full code:\nimport functools\n\ndef count_calls(func):\n    count = 0\n    @functools.wraps(func)\n    def wrapper(*args, **kwargs):\n        nonlocal count\n        count = count + 1\n        print(f'Call number {count}')\n        return func(*args, **kwargs)\n    return wrapper\n\n@count_calls\ndef say_hi():\n    print('hi')\n\nsay_hi()\nsay_hi()\nsay_hi()"
+  ]
+ },
+ "python17/01-early-return": {
+  "id": "01-early-return",
+  "lesson": "python17",
+  "title": "Rewrite nested ifs with early returns",
+  "prompt": "The old version of the function `check(score)` used three levels of nesting. Rewrite `check(score)` using **early returns**, keeping the same logic:\n\n- `score < 0` or `score > 100`: return `'Invalid score'`\n- `score >= 90`: return `'Excellent'`\n- `score >= 60`: return `'Pass'`\n- anything else: return `'Fail'`\n\nThen call `print(check(95))`, `print(check(72))`, `print(check(40))` and `print(check(150))` in turn.\n\nThe output should be:\n```\nExcellent\nPass\nFail\nInvalid score\n```\n\nTip: an 'early return' means you return the unusual cases first, leaving the main path at the outer level – no else, no nesting.",
+  "starterCode": "# The old nested version looked like this (three levels of nesting, structure only – don't hand this in):\n# def check(score):\n#     if 0 <= score <= 100:\n#         if score >= 90:\n#             ... (left out: two more levels of if/else nested here)\n#     else:\n#         return 'Invalid score'\n\n# Rewrite check with early returns here: return the invalid-score case first, then check each level from high to low\n# Finally print the four calls asked for above\n\n",
+  "solution": "def check(score):\n    if score < 0 or score > 100:\n        return 'Invalid score'\n    if score >= 90:\n        return 'Excellent'\n    if score >= 60:\n        return 'Pass'\n    return 'Fail'\n\nprint(check(95))\nprint(check(72))\nprint(check(40))\nprint(check(150))",
+  "grading": {
+   "requiredAst": [
+    "FunctionDef:check"
+   ],
+   "stdoutEquals": "Excellent\nPass\nFail\nInvalid score\n"
+  },
+  "hints": [
+   "First return the 'Invalid score' case – after that, every score left is valid",
+   "Then if score >= 90: return 'Excellent', if score >= 60: return 'Pass', and finally return 'Fail'",
+   "Full code:\ndef check(score):\n    if score < 0 or score > 100:\n        return 'Invalid score'\n    if score >= 90:\n        return 'Excellent'\n    if score >= 60:\n        return 'Pass'\n    return 'Fail'\n\nprint(check(95))\nprint(check(72))\nprint(check(40))\nprint(check(150))"
+  ]
+ },
+ "python17/02-list-comp": {
+  "id": "02-list-comp",
+  "lesson": "python17",
+  "title": "List comprehension: pick the positive numbers and square them",
+  "prompt": "Here's a list for you: `nums = [-2, 1, -3, 4, 0, -5, 6]`.\n\nUse a **list comprehension** to make a new list `result` containing 'the square of every positive number' in `nums` (note: `0` isn't positive).\n\nThen `print(result)`.\n\nThe output should be:\n```\n[1, 16, 36]\n```",
+  "starterCode": "nums = [-2, 1, -3, 4, 0, -5, 6]\n\n# Make result with one line of list comprehension\n# result = [...]\n\n# print(result)\n",
+  "solution": "nums = [-2, 1, -3, 4, 0, -5, 6]\nresult = [x * x for x in nums if x > 0]\nprint(result)",
+  "grading": {
+   "requiredAst": [
+    "ListComp"
+   ],
+   "stdoutEquals": "[1, 16, 36]\n"
+  },
+  "hints": [
+   "The shape is: [expression for variable in sequence if condition]",
+   "The expression is x * x, and the filter is x > 0",
+   "Full code:\nnums = [-2, 1, -3, 4, 0, -5, 6]\nresult = [x * x for x in nums if x > 0]\nprint(result)"
+  ]
+ },
+ "python17/03-dict-comp": {
+  "id": "03-dict-comp",
+  "lesson": "python17",
+  "title": "Dict comprehension: double every price",
+  "prompt": "Here's a price list for you: `prices = {'apple': 5, 'banana': 3, 'cherry': 10}`.\n\nUse a **dict comprehension** to make a new dictionary `doubled` – same keys, but every value doubled.\n\nThen `print(doubled)`.\n\nThe output should be:\n```\n{'apple': 10, 'banana': 6, 'cherry': 20}\n```",
+  "starterCode": "prices = {'apple': 5, 'banana': 3, 'cherry': 10}\n\n# Make doubled with a dict comprehension\n# doubled = {...}\n\n# print(doubled)\n",
+  "solution": "prices = {'apple': 5, 'banana': 3, 'cherry': 10}\ndoubled = {k: v * 2 for k, v in prices.items()}\nprint(doubled)",
+  "grading": {
+   "requiredAst": [
+    "DictComp"
+   ],
+   "stdoutEquals": "{'apple': 10, 'banana': 6, 'cherry': 20}\n"
+  },
+  "hints": [
+   "The shape is: {key: value for variable in iterable}",
+   "Use prices.items() to get the key k and the value v together",
+   "Full code:\nprices = {'apple': 5, 'banana': 3, 'cherry': 10}\ndoubled = {k: v * 2 for k, v in prices.items()}\nprint(doubled)"
+  ]
+ },
+ "python17/04-type-hints": {
+  "id": "04-type-hints",
+  "lesson": "python17",
+  "title": "Write a function with type hints",
+  "prompt": "Define a function `greet` **with full type hints**:\n\n- Parameter `name`, of type `str`\n- Return type `str`\n- Body: return `f'Hello, {name}'`\n\nThen call `print(greet('World'))`.\n\nThe output should be:\n```\nHello, World\n```\n\nNote: a colon after the parameter, an arrow for the return type.\n\n(The checker only looks at the output – it can't tell whether you wrote the hints. But the hints are the point of this exercise, so please add them.)",
+  "starterCode": "# Define greet with type hints here\n# def greet(name: ...) -> ...:\n#     return ...\n\n# print(greet('World'))\n",
+  "solution": "def greet(name: str) -> str:\n    return f'Hello, {name}'\n\nprint(greet('World'))",
+  "grading": {
+   "requiredAst": [
+    "FunctionDef:greet"
+   ],
+   "stdoutEquals": "Hello, World\n"
+  },
+  "hints": [
+   "The parameter hint goes after the parameter: name: str",
+   "The return hint goes after ): -> str",
+   "Full code:\ndef greet(name: str) -> str:\n    return f'Hello, {name}'\n\nprint(greet('World'))"
+  ]
+ },
+ "python18/01-name-suffix-stem": {
+  "id": "01-name-suffix-stem",
+  "lesson": "python18",
+  "title": "Get a path's name / suffix / stem",
+  "prompt": "Please:\n\n1. Import `Path` from `pathlib`\n2. Create a path object `p = Path('/tmp/data/foo.txt')`\n3. Print its `.name`, `.suffix` and `.stem` in turn\n\nThe output should be:\n```\nfoo.txt\n.txt\nfoo\n```\n\nNote: `print(p.name)` prints `foo.txt`, **not** `'foo.txt'` – printing directly shows no quotes.",
+  "starterCode": "# Import Path from pathlib and create a path object pointing to /tmp/data/foo.txt\n# Print its .name, .suffix and .stem in turn\n\n",
+  "solution": "from pathlib import Path\n\np = Path('/tmp/data/foo.txt')\nprint(p.name)\nprint(p.suffix)\nprint(p.stem)",
+  "grading": {
+   "requiredAst": [
+    "ImportFrom"
+   ],
+   "stdoutEquals": "foo.txt\n.txt\nfoo\n"
+  },
+  "hints": [
+   "Import the Path class with from pathlib import Path",
+   ".name is the full file name with its extension, .suffix is the extension with its dot, .stem is the name without the extension",
+   "Full code:\nfrom pathlib import Path\np = Path('/tmp/data/foo.txt')\nprint(p.name)\nprint(p.suffix)\nprint(p.stem)"
+  ]
+ },
+ "python18/02-joining": {
+  "id": "02-joining",
+  "lesson": "python18",
+  "title": "Join paths with the / operator",
+  "prompt": "Use the `/` operator to join three parts into one full path:\n\n1. Import `Path` from `pathlib`\n2. Build the path with `Path('/home/user') / 'docs' / 'report.pdf'` and assign it to `p`\n3. `print(str(p))`\n\nThe output should be:\n```\n/home/user/docs/report.pdf\n```\n\nGoodbye `os.path.join`!",
+  "starterCode": "# Import Path from pathlib\n# Use the / operator to join /home/user, docs and report.pdf into the path p, then print it\n\n",
+  "solution": "from pathlib import Path\n\np = Path('/home/user') / 'docs' / 'report.pdf'\nprint(str(p))",
+  "grading": {
+   "requiredAst": [
+    "ImportFrom"
+   ],
+   "stdoutEquals": "/home/user/docs/report.pdf\n"
+  },
+  "hints": [
+   "Path gives the / operator a new meaning, so you can write Path('/home/user') / 'docs' / 'report.pdf' directly",
+   "str(p) turns a Path object into a string – print(p) directly works the same way",
+   "Full code:\nfrom pathlib import Path\np = Path('/home/user') / 'docs' / 'report.pdf'\nprint(str(p))"
+  ]
+ },
+ "python18/03-parents": {
+  "id": "03-parents",
+  "lesson": "python18",
+  "title": "Get the parent and ancestor folders",
+  "prompt": "Here's `p = Path('/a/b/c/d.txt')` for you.\n\nPlease:\n\n1. `print(p.parent)` – the parent folder, one level up\n2. `print(p.parents[1])` – the ancestor two levels up\n\nThe output should be:\n```\n/a/b/c\n/a/b\n```\n\nNote: `.parent` is an attribute (no brackets), and `.parents[i]` is an index into a sequence – `[0]` is the direct parent, `[1]` is one level higher.",
+  "starterCode": "from pathlib import Path\n\np = Path('/a/b/c/d.txt')\n\n# Use .parent and .parents[1] to print the parent folder and the ancestor two levels up\n\n",
+  "solution": "from pathlib import Path\n\np = Path('/a/b/c/d.txt')\nprint(p.parent)\nprint(p.parents[1])",
+  "grading": {
+   "requiredAst": [
+    "ImportFrom"
+   ],
+   "stdoutEquals": "/a/b/c\n/a/b\n"
+  },
+  "hints": [
+   ".parent is the same as .parents[0] – both are the direct parent folder",
+   ".parents[1] is .parent.parent, one more level up",
+   "Full code:\nfrom pathlib import Path\np = Path('/a/b/c/d.txt')\nprint(p.parent)\nprint(p.parents[1])"
+  ]
+ },
+ "python18/04-suffixes": {
+  "id": "04-suffixes",
+  "lesson": "python18",
+  "title": "Files with several extensions: .suffixes",
+  "prompt": "For a file name with 'several extensions', like `foo.tar.gz`:\n\n- `.suffix` only gives the **last** extension (`.gz`)\n- `.suffixes` gives a **list** with all of them\n\nPlease:\n\n1. Import `Path` from `pathlib`\n2. Create `p = Path('test.tar.gz')`\n3. `print(p.suffixes)`\n\nThe output should be:\n```\n['.tar', '.gz']\n```",
+  "starterCode": "# Import Path from pathlib and create a path object pointing to test.tar.gz\n# Use .suffixes to print all its extensions\n\n",
+  "solution": "from pathlib import Path\n\np = Path('test.tar.gz')\nprint(p.suffixes)",
+  "grading": {
+   "requiredAst": [
+    "ImportFrom"
+   ],
+   "stdoutEquals": "['.tar', '.gz']\n"
+  },
+  "hints": [
+   ".suffix (singular) gives only the last one; .suffixes (plural) gives them all",
+   "They're in order from left to right – ['.tar', '.gz']",
+   "Full code:\nfrom pathlib import Path\np = Path('test.tar.gz')\nprint(p.suffixes)"
+  ]
+ },
+ "python19/01-safe-divide": {
+  "id": "01-safe-divide",
+  "lesson": "python19",
+  "title": "safe_divide: handle dividing by zero with try/except",
+  "prompt": "Write a function `safe_divide(a, b)`:\n\n- Normally it returns `a / b`\n- If `b` is 0, it catches `ZeroDivisionError`, prints `'You cannot divide by zero'`, and returns `None`\n\nThen call:\n\n```python\nprint(safe_divide(10, 2))\nprint(safe_divide(10, 0))\n```\n\nThe output should be:\n```\n5.0\nYou cannot divide by zero\nNone\n```\n\nNote: because `safe_divide(10, 0)` returns `None`, the outer `print` prints `None`.",
+  "starterCode": "# Define safe_divide(a, b), catching ZeroDivisionError with try/except\n# When dividing by zero, print the message first, then return None\n# Finally call it twice as asked and print the results\n\n",
+  "solution": "def safe_divide(a, b):\n    try:\n        return a / b\n    except ZeroDivisionError:\n        print('You cannot divide by zero')\n        return None\n\nprint(safe_divide(10, 2))\nprint(safe_divide(10, 0))",
+  "grading": {
+   "requiredAst": [
+    "FunctionDef:safe_divide",
+    "Try"
+   ],
+   "stdoutEquals": "5.0\nYou cannot divide by zero\nNone\n"
+  },
+  "hints": [
+   "Wrap a / b in try / except ZeroDivisionError",
+   "In the except branch, print first, then return None",
+   "Full code:\ndef safe_divide(a, b):\n    try:\n        return a / b\n    except ZeroDivisionError:\n        print('You cannot divide by zero')\n        return None\n\nprint(safe_divide(10, 2))\nprint(safe_divide(10, 0))"
+  ]
+ },
+ "python19/02-parse-int": {
+  "id": "02-parse-int",
+  "lesson": "python19",
+  "title": "Catch ValueError",
+  "prompt": "Write a function `parse_int(s)`:\n\n- Try to turn `s` into an `int` and return it\n- If `int(s)` raises `ValueError`, catch it, print `f'Cannot convert: {s}'`, and return `0`\n\nThen call:\n\n```python\nprint(parse_int('42'))\nprint(parse_int('abc'))\nprint(parse_int('100'))\n```\n\nThe output should be:\n```\n42\nCannot convert: abc\n0\n100\n```",
+  "starterCode": "# Define parse_int(s), catching ValueError with try/except\n# If converting fails, print the message first, then return 0\n# Finally call it three times as asked and print the results\n\n",
+  "solution": "def parse_int(s):\n    try:\n        return int(s)\n    except ValueError:\n        print(f'Cannot convert: {s}')\n        return 0\n\nprint(parse_int('42'))\nprint(parse_int('abc'))\nprint(parse_int('100'))",
+  "grading": {
+   "requiredAst": [
+    "FunctionDef:parse_int",
+    "Try"
+   ],
+   "stdoutEquals": "42\nCannot convert: abc\n0\n100\n"
+  },
+  "hints": [
+   "Wrap int(s) in try / except ValueError",
+   "In the except branch, print first, then return 0",
+   "Full code:\ndef parse_int(s):\n    try:\n        return int(s)\n    except ValueError:\n        print(f'Cannot convert: {s}')\n        return 0\n\nprint(parse_int('42'))\nprint(parse_int('abc'))\nprint(parse_int('100'))"
+  ]
+ },
+ "python19/03-finally": {
+  "id": "03-finally",
+  "lesson": "python19",
+  "title": "finally: clean-up always runs",
+  "prompt": "Write a function `do_work(x)`:\n\n- In `try`, print `'Starting work'`, then run `10 / x`\n- Use `except ZeroDivisionError` to catch dividing by zero, printing `'Divided by zero'`\n- Use `finally` to print `'Clean-up done'`\n\nThen call, in order:\n\n```python\ndo_work(2)\nprint('---')\ndo_work(0)\n```\n\nThe output should be:\n```\nStarting work\nClean-up done\n---\nStarting work\nDivided by zero\nClean-up done\n```\n\nNote: `do_work(2)` doesn't trigger `except`, but `finally` always runs.",
+  "starterCode": "# Define do_work(x), using try/except/finally for the three prints\n# The print in finally runs whether it worked or not\n# Finally call do_work(2), print the divider line, then do_work(0), as asked\n\n",
+  "solution": "def do_work(x):\n    try:\n        print('Starting work')\n        10 / x\n    except ZeroDivisionError:\n        print('Divided by zero')\n    finally:\n        print('Clean-up done')\n\ndo_work(2)\nprint('---')\ndo_work(0)",
+  "grading": {
+   "requiredAst": [
+    "FunctionDef:do_work",
+    "Try"
+   ],
+   "stdoutEquals": "Starting work\nClean-up done\n---\nStarting work\nDivided by zero\nClean-up done\n"
+  },
+  "hints": [
+   "The order is: try → except → finally",
+   "finally runs whether it worked or failed",
+   "Full code:\ndef do_work(x):\n    try:\n        print('Starting work')\n        10 / x\n    except ZeroDivisionError:\n        print('Divided by zero')\n    finally:\n        print('Clean-up done')\n\ndo_work(2)\nprint('---')\ndo_work(0)"
+  ]
+ },
+ "python19/04-raise-age": {
+  "id": "04-raise-age",
+  "lesson": "python19",
+  "title": "raise: raising an exception yourself",
+  "prompt": "Write a function `set_age(age)`:\n\n- If `age < 0`, `raise ValueError(f'Age cannot be negative: {age}')` yourself\n- Otherwise return `age`\n\nThen call `set_age(-5)` inside `try / except ValueError`, and when the exception is caught, print `f'Bad argument: {e}'`.\n\nThe output should be:\n```\nBad argument: Age cannot be negative: -5\n```",
+  "starterCode": "# Define set_age(age); when age is negative, use raise to throw a ValueError\n# Then wrap the call set_age(-5) in try/except ValueError as e and print the error message\n\n",
+  "solution": "def set_age(age):\n    if age < 0:\n        raise ValueError(f'Age cannot be negative: {age}')\n    return age\n\ntry:\n    set_age(-5)\nexcept ValueError as e:\n    print(f'Bad argument: {e}')",
+  "grading": {
+   "requiredAst": [
+    "FunctionDef:set_age",
+    "Raise"
+   ],
+   "stdoutEquals": "Bad argument: Age cannot be negative: -5\n"
+  },
+  "hints": [
+   "raise ValueError('error message') – note the brackets",
+   "Use except ValueError as e to get the exception object",
+   "Full code:\ndef set_age(age):\n    if age < 0:\n        raise ValueError(f'Age cannot be negative: {age}')\n    return age\n\ntry:\n    set_age(-5)\nexcept ValueError as e:\n    print(f'Bad argument: {e}')"
+  ]
+ },
+ "python19/05-custom-exception": {
+  "id": "05-custom-exception",
+  "lesson": "python19",
+  "title": "A custom exception: InvalidScoreError",
+  "prompt": "Define a custom exception class `InvalidScoreError` that inherits from `Exception`.\n\nThen write a function `check_score(score)`:\n\n- If `score < 0` or `score > 100`, raise `InvalidScoreError(f'Score {score} is not valid')`\n- Otherwise print `f'Score is valid: {score}'`\n\nThen run, in order:\n\n```python\ncheck_score(85)\ntry:\n    check_score(120)\nexcept InvalidScoreError as e:\n    print(f'Caught an exception: {e}')\n```\n\nThe output should be:\n```\nScore is valid: 85\nCaught an exception: Score 120 is not valid\n```",
+  "starterCode": "# Define an exception class InvalidScoreError that inherits from Exception\n# Write check_score(score): raise when the score is out of range, otherwise print the valid message\n# Call check_score(85) directly first, then call check_score(120) inside try/except\n\n",
+  "solution": "class InvalidScoreError(Exception):\n    pass\n\ndef check_score(score):\n    if score < 0 or score > 100:\n        raise InvalidScoreError(f'Score {score} is not valid')\n    print(f'Score is valid: {score}')\n\ncheck_score(85)\ntry:\n    check_score(120)\nexcept InvalidScoreError as e:\n    print(f'Caught an exception: {e}')",
+  "grading": {
+   "requiredAst": [
+    "ClassDef:InvalidScoreError",
+    "FunctionDef:check_score",
+    "Raise",
+    "Try"
+   ],
+   "stdoutEquals": "Score is valid: 85\nCaught an exception: Score 120 is not valid\n"
+  },
+  "hints": [
+   "class InvalidScoreError(Exception): pass is all you need",
+   "In check_score, raise it with raise InvalidScoreError(...)",
+   "Full code:\nclass InvalidScoreError(Exception):\n    pass\n\ndef check_score(score):\n    if score < 0 or score > 100:\n        raise InvalidScoreError(f'Score {score} is not valid')\n    print(f'Score is valid: {score}')\n\ncheck_score(85)\ntry:\n    check_score(120)\nexcept InvalidScoreError as e:\n    print(f'Caught an exception: {e}')"
+  ]
+ },
+ "python20/01-basic-point": {
+  "id": "01-basic-point",
+  "lesson": "python20",
+  "title": "Define Point with @dataclass",
+  "prompt": "Use the `@dataclass` decorator to define a `Point` class:\n\n- Two fields: `x: int` and `y: int`\n- Then create `Point(1, 2)`, assign it to the variable `p`, and `print(p)`\n\nThe output should be:\n```\nPoint(x=1, y=2)\n```\n\n(This is exactly the `__repr__` output that `dataclass` generates for you.)",
+  "starterCode": "# Import dataclass from dataclasses\n# Use @dataclass to define the Point class with two int fields, x and y (remember the type hints)\n# Create Point(1, 2), assign it to p, then print p\n\n",
+  "solution": "from dataclasses import dataclass\n\n@dataclass\nclass Point:\n    x: int\n    y: int\n\np = Point(1, 2)\nprint(p)",
+  "grading": {
+   "requiredAst": [
+    "ClassDef:Point"
+   ],
+   "stdoutEquals": "Point(x=1, y=2)\n"
+  },
+  "hints": [
+   "Remember from dataclasses import dataclass",
+   "Fields must have type hints: x: int, y: int",
+   "Full code:\nfrom dataclasses import dataclass\n\n@dataclass\nclass Point:\n    x: int\n    y: int\n\np = Point(1, 2)\nprint(p)"
+  ]
+ },
+ "python20/02-default-factory": {
+  "id": "02-default-factory",
+  "lesson": "python20",
+  "title": "Mutable defaults: default_factory",
+  "prompt": "Use `@dataclass` to define a `Team` class:\n\n- A field `name: str`\n- A field `members: list`, whose default is an empty list given by `field(default_factory=list)`\n\nThen:\n\n```python\nt1 = Team('Team A')\nt2 = Team('Team B')\nt1.members.append('Xiao Ming')\nprint(t1)\nprint(t2)\n```\n\nThe output should be:\n```\nTeam(name='Team A', members=['Xiao Ming'])\nTeam(name='Team B', members=[])\n```\n\n(This checks that the two instances each have their own `members` list and don't share one.)",
+  "starterCode": "# Import dataclass and field from dataclasses\n# Define the Team class: name is a str; members is a list with the default field(default_factory=list)\n# Create t1 and t2 as above, add 'Xiao Ming' to t1.members, then print t1 and t2\n\n",
+  "solution": "from dataclasses import dataclass, field\n\n@dataclass\nclass Team:\n    name: str\n    members: list = field(default_factory=list)\n\nt1 = Team('Team A')\nt2 = Team('Team B')\nt1.members.append('Xiao Ming')\nprint(t1)\nprint(t2)",
+  "grading": {
+   "requiredAst": [
+    "ClassDef:Team"
+   ],
+   "stdoutEquals": "Team(name='Team A', members=['Xiao Ming'])\nTeam(name='Team B', members=[])\n"
+  },
+  "hints": [
+   "Note: you need from dataclasses import dataclass, field",
+   "Use field(default_factory=list), not just = []",
+   "Full code:\nfrom dataclasses import dataclass, field\n\n@dataclass\nclass Team:\n    name: str\n    members: list = field(default_factory=list)\n\nt1 = Team('Team A')\nt2 = Team('Team B')\nt1.members.append('Xiao Ming')\nprint(t1)\nprint(t2)"
+  ]
+ },
+ "python20/03-frozen-hash": {
+  "id": "03-frozen-hash",
+  "lesson": "python20",
+  "title": "frozen=True: unchangeable + hashable",
+  "prompt": "Use `@dataclass(frozen=True)` to define a `Point` class (fields `x: int` and `y: int`), so that it can't be changed and can go into a `set`.\n\nThen:\n\n```python\np1 = Point(1, 2)\np2 = Point(1, 2)\np3 = Point(3, 4)\ns = {p1, p2, p3}\nprint(len(s))\n```\n\nBecause `p1` and `p2` have the same field values, the set treats them as the same item, so the output should be:\n```\n2\n```\n\nThis is a side effect of `frozen=True` – it generates `__hash__` for you.",
+  "starterCode": "# Use @dataclass(frozen=True) to define the Point class with two int fields, x and y\n# Create p1, p2 and p3 as above and put them in a set\n# Print the length of the set\n\n",
+  "solution": "from dataclasses import dataclass\n\n@dataclass(frozen=True)\nclass Point:\n    x: int\n    y: int\n\np1 = Point(1, 2)\np2 = Point(1, 2)\np3 = Point(3, 4)\ns = {p1, p2, p3}\nprint(len(s))",
+  "grading": {
+   "requiredAst": [
+    "ClassDef:Point"
+   ],
+   "stdoutEquals": "2\n"
+  },
+  "hints": [
+   "Write the decorator as @dataclass(frozen=True)",
+   "frozen=True generates __hash__ automatically, so the objects can go into a set",
+   "Full code:\nfrom dataclasses import dataclass\n\n@dataclass(frozen=True)\nclass Point:\n    x: int\n    y: int\n\np1 = Point(1, 2)\np2 = Point(1, 2)\np3 = Point(3, 4)\ns = {p1, p2, p3}\nprint(len(s))"
+  ]
+ },
+ "python20/04-eq": {
+  "id": "04-eq",
+  "lesson": "python20",
+  "title": "Automatic __eq__: comparing by field values",
+  "prompt": "Use `@dataclass` to define a `Book` class:\n\n- `title: str`\n- `author: str`\n- `pages: int`\n\nThen create three books:\n\n```python\nb1 = Book('Python Basics', 'Xiao Ming', 300)\nb2 = Book('Python Basics', 'Xiao Ming', 300)\nb3 = Book('Python Basics', 'Xiao Ming', 500)\nprint(b1 == b2)\nprint(b1 == b3)\nprint(b1 is b2)\n```\n\nThe output should be:\n```\nTrue\nFalse\nFalse\n```\n\nExplanation: `==` compares field values (`b1` and `b2` are exactly the same, so it's `True`), while `is` compares identity (`b1` and `b2` are two different objects, so it's `False`).",
+  "starterCode": "# Use @dataclass to define the Book class: title and author are str, pages is int\n# Create the three books b1, b2 and b3 as above\n# Print the results of b1 == b2, b1 == b3 and b1 is b2\n\n",
+  "solution": "from dataclasses import dataclass\n\n@dataclass\nclass Book:\n    title: str\n    author: str\n    pages: int\n\nb1 = Book('Python Basics', 'Xiao Ming', 300)\nb2 = Book('Python Basics', 'Xiao Ming', 300)\nb3 = Book('Python Basics', 'Xiao Ming', 500)\nprint(b1 == b2)\nprint(b1 == b3)\nprint(b1 is b2)",
+  "grading": {
+   "requiredAst": [
+    "ClassDef:Book"
+   ],
+   "stdoutEquals": "True\nFalse\nFalse\n"
+  },
+  "hints": [
+   "@dataclass generates __eq__ by default, comparing field by field",
+   "== compares field values, is compares identity – two different things",
+   "Full code:\nfrom dataclasses import dataclass\n\n@dataclass\nclass Book:\n    title: str\n    author: str\n    pages: int\n\nb1 = Book('Python Basics', 'Xiao Ming', 300)\nb2 = Book('Python Basics', 'Xiao Ming', 300)\nb3 = Book('Python Basics', 'Xiao Ming', 500)\nprint(b1 == b2)\nprint(b1 == b3)\nprint(b1 is b2)"
+  ]
+ },
+ "python21/01-with-stringio": {
+  "id": "01-with-stringio",
+  "lesson": "python21",
+  "title": "Use with on a StringIO",
+  "prompt": "`io.StringIO` is a 'file in memory', and it also supports the context manager protocol.\n\nUse `with` together with `io.StringIO()`:\n\n1. Inside the `with` block, `write` the string `'Hello'`\n2. Inside the `with` block, `write` the string `' World'`\n3. Assign the result of `getvalue()` (`Hello World`) to the variable `text`\n4. `print(text)`\n\nThe output should be:\n```\nHello World\n```",
+  "starterCode": "import io\n# Open io.StringIO() with with, and write two strings inside the block\n# Inside the block, assign the result of getvalue() to text, then print text at the end\n\n",
+  "solution": "import io\nwith io.StringIO() as buf:\n    buf.write('Hello')\n    buf.write(' World')\n    text = buf.getvalue()\nprint(text)",
+  "grading": {
+   "requiredAst": [
+    "With"
+   ],
+   "stdoutEquals": "Hello World\n",
+   "varsEqual": {
+    "text": "Hello World"
+   }
+  },
+  "hints": [
+   "io.StringIO supports the with syntax too",
+   "Assign text **inside** the with block – after with exits, buf is closed, but text is still there",
+   "Full code:\nimport io\nwith io.StringIO() as buf:\n    buf.write('Hello')\n    buf.write(' World')\n    text = buf.getvalue()\nprint(text)"
+  ]
+ },
+ "python21/02-custom-class": {
+  "id": "02-custom-class",
+  "lesson": "python21",
+  "title": "A custom context manager class",
+  "prompt": "Define a class `Section` that follows the context manager protocol:\n\n- `__enter__` prints `'>>> Start'` and does `return self`\n- `__exit__` prints `'<<< End'`\n\nThen use `with Section():` around one line, `print('Working')`.\n\nThe output should be:\n```\n>>> Start\nWorking\n<<< End\n```",
+  "starterCode": "# Define the Section class with __enter__ and __exit__\n# __enter__ prints the start message and returns self; __exit__ prints the end message\n# Then use with on a Section instance, printing 'Working' inside the block\n\n",
+  "solution": "class Section:\n    def __enter__(self):\n        print('>>> Start')\n        return self\n\n    def __exit__(self, exc_type, exc_val, tb):\n        print('<<< End')\n\nwith Section():\n    print('Working')",
+  "grading": {
+   "requiredAst": [
+    "ClassDef:Section",
+    "With"
+   ],
+   "stdoutEquals": ">>> Start\nWorking\n<<< End\n"
+  },
+  "hints": [
+   "Both __enter__ and __exit__ must be defined in the class",
+   "__exit__ must take 4 parameters: self, exc_type, exc_val, tb",
+   "Full code:\nclass Section:\n    def __enter__(self):\n        print('>>> Start')\n        return self\n\n    def __exit__(self, exc_type, exc_val, tb):\n        print('<<< End')\n\nwith Section():\n    print('Working')"
+  ]
+ },
+ "python21/03-contextmanager": {
+  "id": "03-contextmanager",
+  "lesson": "python21",
+  "title": "Write a banner with @contextmanager",
+  "prompt": "Use `@contextmanager` to write a **generator-function** context manager `banner(title)`:\n\n- On entering (before yield): print `f'==== {title} ===='`\n- yield (no value)\n- On exiting (after yield): print `'================'`\n\nThen use `with banner('Start task'):` around one line, `print('Working')`.\n\nThe output should be:\n```\n==== Start task ====\nWorking\n================\n```",
+  "starterCode": "from contextlib import contextmanager\n\n# Decorate the generator function banner(title) with @contextmanager\n# Print the opening banner before yield, and the closing line after yield (wrap yield in try/finally)\n# Then use with on banner('Start task'), printing 'Working' inside the block\n\n",
+  "solution": "from contextlib import contextmanager\n\n@contextmanager\ndef banner(title):\n    print(f'==== {title} ====')\n    try:\n        yield\n    finally:\n        print('================')\n\nwith banner('Start task'):\n    print('Working')",
+  "grading": {
+   "requiredAst": [
+    "FunctionDef:banner",
+    "With",
+    "ImportFrom:contextmanager"
+   ],
+   "stdoutEquals": "==== Start task ====\nWorking\n================\n"
+  },
+  "hints": [
+   "@contextmanager only decorates generator functions, so you need yield",
+   "What's before yield runs on entering; what's after yield runs on exiting",
+   "Remember to wrap yield in try/finally so the clean-up always runs"
+  ]
+ },
+ "python21/04-suppress": {
+  "id": "04-suppress",
+  "lesson": "python21",
+  "title": "Ignore an exception with contextlib.suppress",
+  "prompt": "Use `contextlib.suppress` to ignore `ZeroDivisionError`:\n\n1. Use `with suppress(ZeroDivisionError):` around `x = 1 / 0` (this line raises an exception, but it's swallowed)\n2. After the `with`, `print('done')`\n\nThe output should be:\n```\ndone\n```\n\n(The key point: the program doesn't crash because of the divide-by-zero error.)",
+  "starterCode": "from contextlib import suppress\n# Use with + suppress to ignore ZeroDivisionError, dividing by zero inside the block\n# After with ends, print done\n\n",
+  "solution": "from contextlib import suppress\nwith suppress(ZeroDivisionError):\n    x = 1 / 0\nprint('done')",
+  "grading": {
+   "requiredAst": [
+    "With",
+    "ImportFrom:suppress"
+   ],
+   "stdoutEquals": "done\n"
+  },
+  "hints": [
+   "suppress(exception type) quietly swallows that kind of exception; other exceptions are still raised as usual",
+   "Full code:\nfrom contextlib import suppress\nwith suppress(ZeroDivisionError):\n    x = 1 / 0\nprint('done')"
+  ]
+ },
+ "python22/01-hello": {
+  "id": "01-hello",
+  "lesson": "python22",
+  "title": "Your first async function",
+  "prompt": "Use `async def` to define a coroutine function `hello` that prints `'hi'`.\n\nThen start it with `asyncio.run(hello())`.\n\nThe output should be:\n```\nhi\n```",
+  "starterCode": "import asyncio\n\n# Use async def to define the coroutine function hello, which prints 'hi'\n# Then start it with asyncio.run\n\n",
+  "solution": "import asyncio\n\nasync def hello():\n    print('hi')\n\nasyncio.run(hello())",
+  "grading": {
+   "requiredAst": [
+    "AsyncFunctionDef:hello",
+    "Import:asyncio"
+   ],
+   "stdoutEquals": "hi\n"
+  },
+  "hints": [
+   "async def is almost the same as def – it just has the extra async keyword",
+   "In asyncio.run(hello()), note the brackets after hello() – you pass in a coroutine object",
+   "Full code:\nimport asyncio\n\nasync def hello():\n    print('hi')\n\nasyncio.run(hello())"
+  ]
+ },
+ "python22/02-sleep-order": {
+  "id": "02-sleep-order",
+  "lesson": "python22",
+  "title": "The order of awaits one after another",
+  "prompt": "Define a coroutine function `step(name)`:\n\n- First `print(f'{name} start')`\n- Then `await asyncio.sleep(0)`\n- Finally `print(f'{name} end')`\n\nThen define `main`: `await step('A')`, then `await step('B')`.\n\nStart it with `asyncio.run(main())`.\n\nThe output should be:\n```\nA start\nA end\nB start\nB end\n```\n\n(Explanation: because the `await`s run one after another, B always comes after A.)",
+  "starterCode": "import asyncio\n\n# Define the coroutine function step(name): print 'start', await asyncio.sleep(0), then print 'end'\n# Then define main: await step('A'), then await step('B')\n# Finally start main with asyncio.run\n\n",
+  "solution": "import asyncio\n\nasync def step(name):\n    print(f'{name} start')\n    await asyncio.sleep(0)\n    print(f'{name} end')\n\nasync def main():\n    await step('A')\n    await step('B')\n\nasyncio.run(main())",
+  "grading": {
+   "requiredAst": [
+    "AsyncFunctionDef:step",
+    "AsyncFunctionDef:main"
+   ],
+   "stdoutEquals": "A start\nA end\nB start\nB end\n"
+  },
+  "hints": [
+   "Inside step: print → await asyncio.sleep(0) → print",
+   "In main, write two awaits one after the other: await step('A') then await step('B')",
+   "Full code:\nimport asyncio\n\nasync def step(name):\n    print(f'{name} start')\n    await asyncio.sleep(0)\n    print(f'{name} end')\n\nasync def main():\n    await step('A')\n    await step('B')\n\nasyncio.run(main())"
+  ]
+ },
+ "python22/03-gather-two": {
+  "id": "03-gather-two",
+  "lesson": "python22",
+  "title": "Run two coroutines at the same time with gather",
+  "prompt": "Define a coroutine function `task(name)`:\n\n- `await asyncio.sleep(0.01)`\n- Return `f'{name} done'`\n\nIn `main`, use `asyncio.gather(task('A'), task('B'))` to run both at the same time, assign the results to `r1, r2`, then **in order**:\n\n```python\nprint(r1)\nprint(r2)\n```\n\nStart it with `asyncio.run(main())`.\n\nThe output should be:\n```\nA done\nB done\n```\n\n(Note: `gather` returns results in the same order you passed them in, so the result here is always the same.)",
+  "starterCode": "import asyncio\n\n# Define the coroutine function task(name): sleep for 0.01 seconds, then return the name plus ' done'\n# In main, use asyncio.gather to run task('A') and task('B') at the same time, unpacking the results into r1 and r2\n# Print r1 and r2 in order, then start main with asyncio.run\n\n",
+  "solution": "import asyncio\n\nasync def task(name):\n    await asyncio.sleep(0.01)\n    return f'{name} done'\n\nasync def main():\n    r1, r2 = await asyncio.gather(task('A'), task('B'))\n    print(r1)\n    print(r2)\n\nasyncio.run(main())",
+  "grading": {
+   "requiredAst": [
+    "AsyncFunctionDef:task",
+    "AsyncFunctionDef:main"
+   ],
+   "stdoutEquals": "A done\nB done\n"
+  },
+  "hints": [
+   "In task, first await asyncio.sleep(0.01), then return",
+   "gather takes several coroutine objects: asyncio.gather(task('A'), task('B'))",
+   "gather returns a list of results, which you can unpack into r1, r2"
+  ]
+ },
+ "python22/04-gather-fetch": {
+  "id": "04-gather-fetch",
+  "lesson": "python22",
+  "title": "Fetching at the same time (simulated)",
+  "prompt": "The browser sandbox can't go online, so we'll use `asyncio.sleep` to pretend to fetch something.\n\nDefine a coroutine function `fetch(url)`:\n\n- `await asyncio.sleep(0.01)` (pretending to wait for the network)\n- Return `f'fetched {url}'`\n\nIn `main`, use `asyncio.gather` to fetch three URLs at the same time: `'a'`, `'b'` and `'c'`, and assign the returned list to `results`. Then use a `for` loop to `print` each result in order.\n\nStart it with `asyncio.run(main())`.\n\nThe output should be:\n```\nfetched a\nfetched b\nfetched c\n```",
+  "starterCode": "import asyncio\n\n# Define the coroutine function fetch(url): pretend to wait 0.01 seconds, then return the fetched-result string\n# In main, use asyncio.gather to fetch 'a', 'b' and 'c' at the same time, assigning the results to results\n# Use a for loop to print each result in order, then start main with asyncio.run\n\n",
+  "solution": "import asyncio\n\nasync def fetch(url):\n    await asyncio.sleep(0.01)\n    return f'fetched {url}'\n\nasync def main():\n    results = await asyncio.gather(fetch('a'), fetch('b'), fetch('c'))\n    for r in results:\n        print(r)\n\nasyncio.run(main())",
+  "grading": {
+   "requiredAst": [
+    "AsyncFunctionDef:fetch",
+    "AsyncFunctionDef:main",
+    "For"
+   ],
+   "stdoutEquals": "fetched a\nfetched b\nfetched c\n"
+  },
+  "hints": [
+   "The fetch function: after await asyncio.sleep(0.01), return f'fetched {url}'",
+   "Gather the three coroutines: asyncio.gather(fetch('a'), fetch('b'), fetch('c'))",
+   "The list from gather is in the same order you passed things in, so for r in results: print(r) is all you need"
+  ]
+ },
+ "python26/01-first-log": {
+  "id": "01-first-log",
+  "lesson": "python26",
+  "title": "Your first log",
+  "prompt": "Use `logging.basicConfig` to set the log level to `INFO`, then use `logging.info` to log `'My first log'`.\n\nNote: the starter code already sets up logging to print to stdout with the simplified format `format='%(levelname)s:%(message)s'` – you only need to write the last line, `logging.info(...)`.\n\nThe output should be:\n```\nINFO:My first log\n```",
+  "starterCode": "import logging\nimport sys\n\nlogging.basicConfig(\n    stream=sys.stdout,\n    level=logging.INFO,\n    format='%(levelname)s:%(message)s',\n    force=True,\n)\n\n# TODO: use logging.info to log 'My first log'\n",
+  "solution": "import logging\nimport sys\n\nlogging.basicConfig(\n    stream=sys.stdout,\n    level=logging.INFO,\n    format='%(levelname)s:%(message)s',\n    force=True,\n)\n\nlogging.info('My first log')",
+  "grading": {
+   "stdoutEquals": "INFO:My first log\n"
+  },
+  "hints": [
+   "logging.info('text') uses the root logger to log at INFO level",
+   "The format is controlled by basicConfig's format – we've already set it to 'LEVEL:text'",
+   "Full code:\nimport logging\nimport sys\n\nlogging.basicConfig(\n    stream=sys.stdout,\n    level=logging.INFO,\n    format='%(levelname)s:%(message)s',\n    force=True,\n)\n\nlogging.info('My first log')"
+  ]
+ },
+ "python26/02-five-levels": {
+  "id": "02-five-levels",
+  "lesson": "python26",
+  "title": "The 5 log levels",
+  "prompt": "The starter code already sets the log level to `DEBUG` (the lowest level, so every log is shown).\n\nCall the 5 levels in this order:\n\n1. `logging.debug('Debug')`\n2. `logging.info('Info')`\n3. `logging.warning('Warning')`\n4. `logging.error('Error')`\n5. `logging.critical('Critical')`\n\nThe output should be:\n```\nDEBUG:Debug\nINFO:Info\nWARNING:Warning\nERROR:Error\nCRITICAL:Critical\n```",
+  "starterCode": "import logging\nimport sys\n\nlogging.basicConfig(\n    stream=sys.stdout,\n    level=logging.DEBUG,\n    format='%(levelname)s:%(message)s',\n    force=True,\n)\n\n# TODO: log in the order debug → info → warning → error → critical\n",
+  "solution": "import logging\nimport sys\n\nlogging.basicConfig(\n    stream=sys.stdout,\n    level=logging.DEBUG,\n    format='%(levelname)s:%(message)s',\n    force=True,\n)\n\nlogging.debug('Debug')\nlogging.info('Info')\nlogging.warning('Warning')\nlogging.error('Error')\nlogging.critical('Critical')",
+  "grading": {
+   "stdoutEquals": "DEBUG:Debug\nINFO:Info\nWARNING:Warning\nERROR:Error\nCRITICAL:Critical\n"
+  },
+  "hints": [
+   "level=logging.DEBUG makes every level show up",
+   "The order: debug → info → warning → error → critical",
+   "Full code:\nimport logging\nimport sys\n\nlogging.basicConfig(\n    stream=sys.stdout,\n    level=logging.DEBUG,\n    format='%(levelname)s:%(message)s',\n    force=True,\n)\n\nlogging.debug('Debug')\nlogging.info('Info')\nlogging.warning('Warning')\nlogging.error('Error')\nlogging.critical('Critical')"
+  ]
+ },
+ "python26/04-warning-only": {
+  "id": "04-warning-only",
+  "lesson": "python26",
+  "title": "Only WARNING and above",
+  "prompt": "The starter code already sets the log level to `logging.WARNING`. You only need to call, in order:\n\n```python\nlogging.info('info you cannot see')\nlogging.warning('warning you can see')\nlogging.error('error you can see')\n```\n\nBecause the level = WARNING, **INFO is filtered out**, leaving only WARNING / ERROR / CRITICAL.\n\nThe output should be:\n```\nWARNING:warning you can see\nERROR:error you can see\n```",
+  "starterCode": "import logging\nimport sys\n\nlogging.basicConfig(\n    stream=sys.stdout,\n    level=logging.WARNING,\n    format='%(levelname)s:%(message)s',\n    force=True,\n)\n\n# TODO: three logging calls: info / warning / error\n",
+  "solution": "import logging\nimport sys\n\nlogging.basicConfig(\n    stream=sys.stdout,\n    level=logging.WARNING,\n    format='%(levelname)s:%(message)s',\n    force=True,\n)\n\nlogging.info('info you cannot see')\nlogging.warning('warning you can see')\nlogging.error('error you can see')",
+  "grading": {
+   "stdoutEquals": "WARNING:warning you can see\nERROR:error you can see\n"
+  },
+  "hints": [
+   "level=logging.WARNING filters out INFO and DEBUG",
+   "The three calls in order: info → warning → error",
+   "Full code:\nimport logging\nimport sys\n\nlogging.basicConfig(\n    stream=sys.stdout,\n    level=logging.WARNING,\n    format='%(levelname)s:%(message)s',\n    force=True,\n)\n\nlogging.info('info you cannot see')\nlogging.warning('warning you can see')\nlogging.error('error you can see')"
+  ]
+ },
+ "python26/03-named-logger": {
+  "id": "03-named-logger",
+  "lesson": "python26",
+  "title": "Name a logger with getLogger",
+  "prompt": "Use `logging.getLogger('app.punch')` to create a named logger, assign it to the variable `logger`, then use it to log `'User started check-in'`.\n\nThe starter code already changes the format to `'%(name)s:%(levelname)s:%(message)s'` – `%(name)s` prints the logger's name.\n\nThe output should be:\n```\napp.punch:INFO:User started check-in\n```",
+  "starterCode": "import logging\nimport sys\n\nlogging.basicConfig(\n    stream=sys.stdout,\n    level=logging.INFO,\n    format='%(name)s:%(levelname)s:%(message)s',\n    force=True,\n)\n\n# Use logging.getLogger to create a logger named 'app.punch' and assign it to the variable logger\n# Then use this logger to log 'User started check-in' at INFO level\n",
+  "solution": "import logging\nimport sys\n\nlogging.basicConfig(\n    stream=sys.stdout,\n    level=logging.INFO,\n    format='%(name)s:%(levelname)s:%(message)s',\n    force=True,\n)\n\nlogger = logging.getLogger('app.punch')\nlogger.info('User started check-in')",
+  "grading": {
+   "stdoutEquals": "app.punch:INFO:User started check-in\n"
+  },
+  "hints": [
+   "logging.getLogger('name') gets a named logger",
+   "Log with that logger: logger.info(...)",
+   "Full code:\nimport logging\nimport sys\n\nlogging.basicConfig(\n    stream=sys.stdout,\n    level=logging.INFO,\n    format='%(name)s:%(levelname)s:%(message)s',\n    force=True,\n)\n\nlogger = logging.getLogger('app.punch')\nlogger.info('User started check-in')"
+  ]
+ }
+}

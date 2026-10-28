@@ -6,7 +6,7 @@ We have learned some basic data types: strings, integers and floats. Now let's l
 # Contents #
 
 
-- 1. List
+- 1\. List
     1. What is a List?
     2. How to create a List
     3. How to get values from a List
@@ -15,7 +15,7 @@ We have learned some basic data types: strings, integers and floats. Now let's l
     6. List operators
     7. List functions & methods
     8. Example
-- 2. tuple
+- 2\. tuple
     1. What is a tuple?
     2. How to create a tuple
     3. How to get values from a tuple

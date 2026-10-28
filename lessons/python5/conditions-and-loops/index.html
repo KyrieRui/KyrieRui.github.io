@@ -1,0 +1,784 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conditions &amp; loops – Python for Beginners</title>
+<meta name="description" content="if / for / while, plus match/case, new in Python 3.10.">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css?v=20261028">
+
+</head>
+<body data-page="lesson" data-lesson="python5" data-total="7">
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="/" aria-label="Python for Beginners – home"><span class="gradient-text-flow" data-text="Python for Beginners">Python for Beginners</span></a>
+    <nav class="header-nav">
+      <a class="nav-link" href="/about/">About</a>
+      <a class="nav-icon focus-ring" href="https://github.com/walter201230/Python" aria-label="Original tutorial on GitHub" title="Original tutorial on GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+      <button type="button" class="theme-toggle focus-ring" aria-label="Switch theme"><span class="knob"><svg class="ic-moon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button>
+    </nav>
+  </div>
+</header>
+<main class="site-main">
+<div class="lesson-shell bg-tech-grid">
+  <div class="mobile-bar"><div class="mb-inner"><button type="button" class="dir-btn focus-ring" aria-haspopup="dialog">Contents</button></div></div>
+  <div class="lesson-columns">
+    <aside class="lesson-sidebar left" aria-label="All lessons"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></aside>
+    <div class="lesson-main"><article class="lesson-article"><header class="lesson-head"><h1>Conditions &amp; loops</h1><p class="lh-sub"><span class="accent">7</span> exercises<span class="sep">·</span>about <span class="accent">80</span> min<span class="sep">·</span>solve one to unlock the next part</p>
+<p class="lh-link"><a class="subtle-link focus-ring" href="/lessons/python5/conditions-and-loops/read/">Read the whole chapter →</a></p></header><section id="step-0" class="step-card item" data-kind="step" aria-label="Teaching step 1">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 01 / 04</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>Introduction</h2>
+<p>People often say computers are amazing and super smart. Actually, computers aren't smart at all. Just trying to talk to one can drive you crazy! The smart one is <strong>you</strong>, the person writing the program.</p>
+<p>Writing a program means talking to the computer and telling it what to do.</p>
+<p>So of course, we need some logic when we talk to it. For example, you need to tell the computer <strong>what to do in which situation</strong>, or <strong>what to do at what time</strong>.</p>
+<p>All of this needs logical decisions. That's what this chapter is about.</p>
+<h2>Contents</h2>
+<p>Conditional Statements and Loops</p>
+<ul>
+<li>1. Conditional Statements<ul>
+<li>1. What is a conditional statement?</li>
+<li>2. The basic form of an <code>if</code> statement</li>
+<li>3. <code>if</code> with several conditions in turn</li>
+<li>4. <code>if</code> checking several conditions at once</li>
+<li>5. Nested <code>if</code></li>
+</ul>
+</li>
+<li>2. Loops<ul>
+<li>1. What is a loop?</li>
+<li>2. The <code>for</code> loop</li>
+<li>3. The <code>range()</code> function</li>
+<li>4. The <code>while</code> loop</li>
+<li>5. The difference between <code>for</code> and <code>while</code> loops</li>
+<li>6. Nested loops</li>
+</ul>
+</li>
+<li>3. Examples Using Conditions and Loops Together<ul>
+<li>1. Print the times tables</li>
+<li>2. Check for a leap year</li>
+</ul>
+</li>
+</ul></article></section><section id="step-1" class="step-card item" data-kind="step" aria-label="Teaching step 2">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 02 / 04</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>1. Conditional Statements</h2>
+<h3>1. What is a Conditional Statement?</h3>
+<p>Conditional statements in Python work basically the same as in other languages. The result of one or more checks (<strong>True</strong> or <strong>False</strong>) decides which block of code runs.</p>
+<p>In Python, any value that is not 0 and not empty counts as <strong>True</strong>. 0 or empty (null) counts as <strong>False</strong>.</p>
+<p>Here is the flow chart:</p>
+<p><span class="tutorial-diagram"><span class="tutorial-diagram-scroll" role="region" tabindex="0" aria-label="if condition check, scroll sideways on small screens"><img loading="lazy" alt="if condition check" src="/images/diagrams/if-flow.svg"></span></span></p>
+<h3>2. The Basic Form of an if Statement</h3>
+<p>In Python, the basic form of an <code>if</code> statement looks like this:</p>
+<div class="cb not-prose" data-mode="syntax"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Syntax only</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">if condition:
+    do something……
+else:
+    do something else……</code></pre></div>
+<p>As we said in earlier chapters, Python is very strict about <strong>indentation</strong>, so be careful with it here. And don't forget the colon <code>:</code>.</p>
+<p>In the condition of an <code>if</code> statement, you can use <code>&gt;</code> (greater than), <code>&lt;</code> (less than), <code>==</code> (equal to), <code>&gt;=</code> (greater than or equal to) and <code>&lt;=</code> (less than or equal to) to compare things.</p>
+<p>For example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*-coding:utf-8-*-
+
+results=59
+
+if results&gt;=60:
+    print (&#x27;Pass&#x27;)
+else :
+    print (&#x27;Fail&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Fail</code></pre></div>
+<p>As we said above, non-zero numbers, non-empty strings, non-empty lists and so on count as True. Everything else is False. So you can also write:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">num = 6
+if num :
+    print(&#x27;Hello Python&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Hello Python</code></pre></div>
+<p>So the message was printed.</p>
+<p>What if we change <code>num</code> to an empty string?</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">num = &#x27;&#x27;
+if num :
+    print(&#x27;Hello Python&#x27;)</code></pre></div>
+<p>Nothing is printed (the program ends normally, without printing <code>Hello Python</code>).</p>
+<p>Clearly, an empty string is False. It doesn't meet the condition, so <code>print('Hello Python')</code> never runs.</p>
+<p>One more reminder: after the colon <code>:</code> in a condition, the next line <strong>must</strong> be indented. If it's not indented, you get an error.</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">num = &#x27;&#x27;
+if num :
+print(&#x27;Hello Python&#x27;)</code></pre></div>
+<p>Running it gives an error:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">  File &quot;/Users/twowater/dev/python/test/com/twowater/test.py&quot;, line 4
+    print(&#x27;Hello Python&#x27;)
+        ^
+IndentationError: expected an indented block</code></pre></div>
+<p>The colon and indentation are part of the syntax. They help Python see which code belongs where, and understand the logic and order of what runs.</p>
+<h3>3. if with Several Conditions in Turn</h3>
+<p>Sometimes we need more than two choices. In the example above, 60 or more is a pass. What if we also want 90+ to be "Excellent", and 80 – 90 to be "Good"?</p>
+<p>Then we use an <code>if</code> statement with several conditions.</p>
+<p>In pseudocode (plain-language code):</p>
+<div class="cb not-prose" data-mode="syntax"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Syntax only</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">if condition1:
+    do thing 1……
+elif condition2:
+    do thing 2……
+elif condition3:
+    do thing 3……
+else:
+    do thing 4……</code></pre></div>
+<p>Example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*-coding:utf-8-*-
+
+results = 89
+
+if results &gt; 90:
+    print(&#x27;Excellent&#x27;)
+elif results &gt; 80:
+    print(&#x27;Good&#x27;)
+elif results &gt; 60:
+    print (&#x27;Pass&#x27;)
+else :
+    print (&#x27;Fail&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Good</code></pre></div>
+<h3>4. if Checking Several Conditions at Once</h3>
+<p>What do we do when there are several conditions at the same time?</p>
+<p>For example, a student is "Excellent" only if <strong>both</strong> their Java and Python test scores are over 80. How do we do that?</p>
+<p>We can use <code>or</code> and <code>and</code>.</p>
+<p><code>or</code> means the check succeeds if <strong>at least one</strong> of the two conditions is true.</p>
+<p><code>and</code> means the check succeeds only if <strong>both</strong> conditions are true.</p>
+<p>For example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*-coding:utf-8-*-
+
+java = 86
+python = 68
+
+if java &gt; 80 and  python &gt; 80:
+    print(&#x27;Excellent&#x27;)
+else :
+    print(&#x27;Not excellent&#x27;)
+
+if ( java &gt;= 80  and java &lt; 90 )  or ( python &gt;= 80 and python &lt; 90):
+    print(&#x27;Good&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Not excellent
+Good</code></pre></div>
+<p>Note: when an <code>if</code> has several conditions, you can use brackets to show which to check first. Checks inside brackets happen first. Also, <code>and</code> and <code>or</code> have <strong>lower priority</strong> than <code>&gt;</code>, <code>&lt;</code> and other comparison symbols. So without brackets, greater-than and less-than are checked before and/or.</p>
+<h3>5. Nested if</h3>
+<p>What is a nested <code>if</code>?</p>
+<p>It's just what it sounds like: an <code>if</code> statement inside another <code>if</code> statement.</p>
+<p>The example above can also be written with a nested <code>if</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">java = 86
+python = 68
+
+if java &gt; 80:
+    if python &gt; 80:
+        print(&#x27;Excellent&#x27;)
+    else:
+        print(&#x27;Not excellent&#x27;)
+else:
+    print(&#x27;Not excellent&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Not excellent</code></pre></div>
+<p>Of course, this is just to show that <code>if</code> statements can be nested. For this task, I don't really recommend nesting like this. It makes the code longer, and too much nesting makes code hard to read.</p>
+<h3>6. New in Python 3.10+: match / case</h3>
+<p>Hey everyone! If you're using Python 3.10 or newer, there's another, clearer tool besides <code>if / elif / else</code>: <code>match / case</code>. It's called <strong>structural pattern matching</strong>.</p>
+<p>Why talk about it specially?</p>
+<p>Let's look at a task first. Say Brother Shui wants to do different things depending on a <strong>command string</strong> from the server:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">command = &#x27;start&#x27;
+
+if command == &#x27;start&#x27;:
+    print(&#x27;Starting&#x27;)
+elif command == &#x27;stop&#x27;:
+    print(&#x27;Stopping&#x27;)
+elif command == &#x27;pause&#x27;:
+    print(&#x27;Pausing&#x27;)
+else:
+    print(&#x27;Unknown command&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Starting</code></pre></div>
+<p>Nothing wrong with this. But when there are lots of choices, a long chain of <code>elif</code> gets wordy. Let's rewrite it with <code>match / case</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">command = &#x27;start&#x27;
+
+match command:
+    case &#x27;start&#x27;:
+        print(&#x27;Starting&#x27;)
+    case &#x27;stop&#x27;:
+        print(&#x27;Stopping&#x27;)
+    case &#x27;pause&#x27;:
+        print(&#x27;Pausing&#x27;)
+    case _:
+        print(&#x27;Unknown command&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Starting</code></pre></div>
+<p><code>case _</code> is the "catch-all" branch, like <code>else</code>. The underscore <code>_</code> is a <strong>wildcard</strong>. It matches anything that none of the earlier cases matched.</p>
+<p>If you like to think, you might ask: isn't this just <code>switch / case</code> from other languages, with different syntax?</p>
+<p>Not quite! The real power of <code>match / case</code> is that it can match <strong>structure</strong>, not just <strong>values</strong>.</p>
+<p>Here's an example matching a sequence. Say the product team sends us a coordinate:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">point = [10, 20]
+
+match point:
+    case [0, 0]:
+        print(&#x27;Origin&#x27;)
+    case [x, 0]:
+        print(f&#x27;On the x-axis, x = {x}&#x27;)
+    case [0, y]:
+        print(f&#x27;On the y-axis, y = {y}&#x27;)
+    case [x, y]:
+        print(f&#x27;Normal point, x = {x}, y = {y}&#x27;)
+    case _:
+        print(&#x27;Not a 2D coordinate&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Normal point, x = 10, y = 20</code></pre></div>
+<p>See? It didn't just match "this is a list of length 2" – it also <strong>unpacked</strong> <code>x</code> and <code>y</code> for you, ready to use in that branch.</p>
+<p>In a sequence, you can also use <code>*rest</code> to collect the remaining elements:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">nums = [1, 2, 3, 4, 5]
+
+match nums:
+    case [first, *rest]:
+        print(f&#x27;First: {first}, the rest: {rest}&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">First: 1, the rest: [2, 3, 4, 5]</code></pre></div>
+<p>What about dictionaries?</p>
+<p><code>match / case</code> can also match the <strong>shape</strong> of a dictionary:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">response = {&#x27;status&#x27;: &#x27;ok&#x27;, &#x27;data&#x27;: [1, 2, 3]}
+
+match response:
+    case {&#x27;status&#x27;: &#x27;ok&#x27;, &#x27;data&#x27;: data}:
+        print(f&#x27;Success, got data {data}&#x27;)
+    case {&#x27;status&#x27;: &#x27;error&#x27;, &#x27;message&#x27;: msg}:
+        print(f&#x27;Failed: {msg}&#x27;)
+    case _:
+        print(&#x27;Unknown response&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Success, got data [1, 2, 3]</code></pre></div>
+<p>Even cooler, <code>match / case</code> works with <strong>classes</strong> too. It's even better with <code>dataclass</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from dataclasses import dataclass
+
+
+@dataclass
+class Point:
+    x: int
+    y: int
+
+
+p = Point(0, 5)
+
+match p:
+    case Point(x=0, y=0):
+        print(&#x27;Origin&#x27;)
+    case Point(x=0, y=y):
+        print(f&#x27;On the y-axis, y = {y}&#x27;)
+    case Point(x=x, y=0):
+        print(f&#x27;On the x-axis, x = {x}&#x27;)
+    case Point(x=x, y=y):
+        print(f&#x27;Normal point ({x}, {y})&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">On the y-axis, y = 5</code></pre></div>
+<p>Finally, one small feature called a <strong>guard</strong>: you add an <code>if</code> after the <code>case</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">score = 75
+
+match score:
+    case x if x &gt;= 90:
+        print(&#x27;Excellent&#x27;)
+    case x if x &gt;= 80:
+        print(&#x27;Good&#x27;)
+    case x if x &gt;= 60:
+        print(&#x27;Pass&#x27;)
+    case _:
+        print(&#x27;Fail&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Pass</code></pre></div>
+<p>See how <code>match / case</code> makes code more structured and easier to read?</p>
+<p>One more note: <code>match / case</code> is <strong>not</strong> meant to replace <code>if / elif</code>. For simple value comparisons and true/false checks, a plain <code>if</code> is actually clearer. <code>match / case</code> really shines when you choose what to do based on the <strong>structure of data</strong> – for example, reading JSON, working with syntax trees, or writing an interpreter.</p></article></section><section id="exercise-01-if-basic" class="ex-card item" data-kind="exercise" data-exercise="01-if-basic" aria-label="Exercise 1: if / else: pass or fail">
+<script type="application/json" class="ex-data">{"id": "01-if-basic", "lesson": "python5", "starter": "score = 75\n# Use if / else to decide\n", "solution": "score = 75\nif score >= 60:\n    print('Pass')\nelse:\n    print('Fail')", "grading": {"requiredAst": ["If"], "stdoutEquals": "Pass\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 1 / 7</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">if / else: pass or fail</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>We've already defined <code>score = 75</code> for you.</p>
+<p>Use <code>if / else</code> to decide:</p>
+<ul>
+<li>If <code>score &gt;= 60</code>: <code>print('Pass')</code></li>
+<li>Otherwise: <code>print('Fail')</code></li>
+</ul>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Pass</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 2)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>if needs a colon at the end, and the next line is indented by 4 spaces</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">score = 75
+if score &gt;= 60:
+    print(&#x27;Pass&#x27;)
+else:
+    print(&#x27;Fail&#x27;)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">score = 75
+# Use if / else to decide
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="exercise-02-if-elif" class="ex-card item" data-kind="exercise" data-exercise="02-if-elif" aria-label="Exercise 2: elif: grade levels">
+<script type="application/json" class="ex-data">{"id": "02-if-elif", "lesson": "python5", "starter": "score = 85\n# Use if / elif / else to decide\n", "solution": "score = 85\nif score >= 90:\n    print('Excellent')\nelif score >= 80:\n    print('Good')\nelif score >= 60:\n    print('Pass')\nelse:\n    print('Fail')", "grading": {"requiredAst": ["If"], "stdoutEquals": "Good\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 2 / 7</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">elif: grade levels</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>We've already defined <code>score = 85</code> for you.</p>
+<p>Use <code>if / elif / else</code> to print a grade with these rules:</p>
+<ul>
+<li><code>&gt;= 90</code>: <code>'Excellent'</code></li>
+<li><code>&gt;= 80</code>: <code>'Good'</code></li>
+<li><code>&gt;= 60</code>: <code>'Pass'</code></li>
+<li>anything else: <code>'Fail'</code></li>
+</ul>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Good</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>elif is short for else if</p></li></template><template class="hint-tpl"><li><p>Check from strictest to loosest: &gt;= 90 → &gt;= 80 → &gt;= 60 → else</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">score = 85
+if score &gt;= 90:
+    print(&#x27;Excellent&#x27;)
+elif score &gt;= 80:
+    print(&#x27;Good&#x27;)
+elif score &gt;= 60:
+    print(&#x27;Pass&#x27;)
+else:
+    print(&#x27;Fail&#x27;)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">score = 85
+# Use if / elif / else to decide
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="exercise-03-if-and-or" class="ex-card item" data-kind="exercise" data-exercise="03-if-and-or" aria-label="Exercise 3: and / or: combined conditions">
+<script type="application/json" class="ex-data">{"id": "03-if-and-or", "lesson": "python5", "starter": "age = 22\nhas_id = True\n# Use if + and to decide\n", "solution": "age = 22\nhas_id = True\nif age >= 18 and has_id:\n    print('Come in')\nelse:\n    print('Sorry, no entry')", "grading": {"requiredAst": ["If", "BoolOp"], "stdoutEquals": "Come in\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 3 / 7</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">and / or: combined conditions</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>We've already defined this for you:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">age = 22
+has_id = True</code></pre></div>
+<p>Use <code>and</code> to decide: <strong>when <code>age &gt;= 18</code> and <code>has_id</code> is True</strong>, print <code>'Come in'</code>, otherwise print <code>'Sorry, no entry'</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Come in</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>Both conditions must be true: join them with and</p></li></template><template class="hint-tpl"><li><p>has_id is already a bool, so just write has_id – no need for has_id == True</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">age = 22
+has_id = True
+if age &gt;= 18 and has_id:
+    print(&#x27;Come in&#x27;)
+else:
+    print(&#x27;Sorry, no entry&#x27;)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">age = 22
+has_id = True
+# Use if + and to decide
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="exercise-04-match-case" class="ex-card item" data-kind="exercise" data-exercise="04-match-case" aria-label="Exercise 4: match / case: handling commands">
+<script type="application/json" class="ex-data">{"id": "04-match-case", "lesson": "python5", "starter": "command = 'pause'\n# Use match / case to match command and print the right text for each of the four cases\n# Don't forget case _ as a catch-all that prints 'Unknown command'\n", "solution": "command = 'pause'\nmatch command:\n    case 'start':\n        print('Starting')\n    case 'stop':\n        print('Stopping')\n    case 'pause':\n        print('Paused')\n    case _:\n        print('Unknown command')", "grading": {"requiredAst": ["Match"], "stdoutEquals": "Paused\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 4 / 7</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">match / case: handling commands</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>We've already defined <code>command = 'pause'</code> for you.</p>
+<p>Use <code>match / case</code> to <code>print</code> with these rules:</p>
+<ul>
+<li><code>'start'</code> → <code>'Starting'</code></li>
+<li><code>'stop'</code> → <code>'Stopping'</code></li>
+<li><code>'pause'</code> → <code>'Paused'</code></li>
+<li>anything else → <code>'Unknown command'</code></li>
+</ul>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Paused</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>After match comes the variable to match; after each case comes a value to match (match needs Python 3.10+, and this page runs 3.12, so it's fine)</p></li></template><template class="hint-tpl"><li><p>case _ is the catch-all, like else</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">command = &#x27;pause&#x27;
+match command:
+    case &#x27;start&#x27;:
+        print(&#x27;Starting&#x27;)
+    case &#x27;stop&#x27;:
+        print(&#x27;Stopping&#x27;)
+    case &#x27;pause&#x27;:
+        print(&#x27;Paused&#x27;)
+    case _:
+        print(&#x27;Unknown command&#x27;)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">command = &#x27;pause&#x27;
+# Use match / case to match command and print the right text for each of the four cases
+# Don&#x27;t forget case _ as a catch-all that prints &#x27;Unknown command&#x27;
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-2" class="step-card item" data-kind="step" aria-label="Teaching step 3">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 03 / 04</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>2. Loops</h2>
+<h3>1. What is a Loop?</h3>
+<p>Almost every programming language has loops. Why?</p>
+<p>Ask yourself: why do we write programs?</p>
+<p>To make our work easier and help us work more efficiently, of course!</p>
+<p>Computers are different from humans. Computers don't get tired, don't complain, and don't need a rest. They can keep going forever.</p>
+<p>And remember: what computers are <strong>best</strong> at is doing the same thing again and again.</p>
+<p>That's why we need loops. A loop lets us run a statement, or a group of statements, many times.</p>
+<p>Here's the general shape of a loop:</p>
+<p><span class="tutorial-diagram"><span class="tutorial-diagram-scroll" role="region" tabindex="0" aria-label="The basic flow of a loop, scroll sideways on small screens"><img loading="lazy" alt="The basic flow of a loop" src="/images/diagrams/while-flow.svg"></span></span></p>
+<p>Python has <code>for</code> loops and <code>while</code> loops.</p>
+<p>Now here's another question: what if I want the loop to stop after 100 times? How do I do that?</p>
+<p>We use some <strong>loop control statements</strong>:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Loop control statement</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>break</td>
+<td>Stops the loop while it's running, and jumps out of the whole loop</td>
+</tr>
+<tr>
+<td>continue</td>
+<td>Stops the current round of the loop, skips the rest of it, and goes to the next round</td>
+</tr>
+<tr>
+<td>pass</td>
+<td><code>pass</code> is an empty statement. It's there to keep the program's structure complete</td>
+</tr>
+</tbody>
+</table></div>
+<p>These control statements let us tell the program <strong>when to stop</strong>, and <strong>when to skip this round</strong>.</p>
+<h3>2. The for Loop</h3>
+<p>Let's look at the <code>for</code> loop first.</p>
+<p>Its flow chart looks like this:</p>
+<p><span class="tutorial-diagram"><span class="tutorial-diagram-scroll" role="region" tabindex="0" aria-label="A for loop going through a sequence, scroll sideways on small screens"><img loading="lazy" alt="A for loop going through a sequence" src="/images/diagrams/for-flow.svg"></span></span></p>
+<p>The basic syntax:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">for iterating_var in sequence:
+   statements(s)</code></pre></div>
+<p>Using this basic syntax, let's write a quick test:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">for letter in &#x27;Hello Shui&#x27;:
+    print(letter)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">H
+e
+l
+l
+o
+ 
+S
+h
+u
+i</code></pre></div>
+<p>From the output, we can see it prints the string <code>Hello Shui</code> one character at a time.</p>
+<p>What if we use a dictionary instead of a string?</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">dict = {&#x27;One Drop&#x27;: &#x27;Primary student&#x27;, &#x27;Two Drops&#x27;: &#x27;Middle school student&#x27;, &#x27;Three Drops&#x27;: &#x27;High school student&#x27;}
+
+for i in dict:
+    print(i)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">One Drop
+Two Drops
+Three Drops</code></pre></div>
+<p>You'll see it only prints each <strong>key</strong> in the dictionary.</p>
+<p>I often tell everyone: whenever you learn something new, try it out lots of ways.</p>
+<p>A conclusion you find yourself by trying once is better than hearing someone else say it ten times.</p>
+<p>Don't know what to try?</p>
+<p>Use our examples to think of new ones. For the <code>for</code> loop above, we tried a string and a dictionary. What other basic data types have we learned?</p>
+<p>If you don't remember, go back and look. Try all the basic types.</p>
+<p>For example, if you try, you'll find that integers and floats <strong>can't</strong> be put directly into a <code>for</code> loop:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">a = 100
+
+b = 0.01
+
+for i in a:
+    print(i)
+
+for i in b:
+    print(i)</code></pre></div>
+<p>Running it gives an error:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Traceback (most recent call last):
+  File &quot;/Users/twowater/dev/python/test/com/twowater/test.py&quot;, line 5, in &lt;module&gt;
+    for i in a:
+TypeError: &#x27;int&#x27; object is not iterable</code></pre></div>
+<h3>3. The range() Function</h3>
+<p><code>for</code> loops are often used together with the <code>range()</code> function.</p>
+<p>If you don't know <code>range()</code>, let's understand it with some code:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">for i in range(3):
+    print(i)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">0
+1
+2</code></pre></div>
+<p>So it prints 0 up to (but not including) 3.</p>
+<p><code>range(x)</code> makes a sequence of whole numbers from 0 to x-1.</p>
+<p><code>range(a,b)</code> makes a sequence of whole numbers that <strong>includes a but not b</strong>.</p>
+<p>In fact, <code>range(3)</code> in the example can be written as <code>range(0,3)</code> – the result is the same.</p>
+<p>Most of the time, we use <code>range()</code> to run some code <strong>n times</strong>.</p>
+<p>Here's a question: look closely at <code>range()</code>. Whether it has 1 argument or 2, what do they have in common?</p>
+<p>Did you notice? They always go up by <strong>1</strong> each time.</p>
+<p><code>range(3)</code> is 0, 1, 2 – going up by 1 each time.</p>
+<p><code>range(3,6)</code> is 3, 4, 5 – also going up by 1 each time.</p>
+<p>Can we go up by something other than 1?</p>
+<p>What if I want to go up by 2?</p>
+<p>When you write programs, you'll definitely need this. And of course Python's <code>range</code> can do it.</p>
+<p>So <code>range</code> can also take <strong>three</strong> arguments.</p>
+<p>For example, <code>range(0,10,2)</code> means: count from 0 to 10 (not including 10), going up by 2 each time.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">for i in range(0, 10, 2):
+    print(i)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">0
+2
+4
+6
+8</code></pre></div>
+<h3>4. The while Loop</h3>
+<p>A <code>while</code> loop does the same job as a <code>for</code> loop.</p>
+<p>Let's see what a <code>while</code> loop looks like:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">count = 1
+sum1 = 0
+
+while count &lt;= 100:    # The condition
+    sum1 = sum1 + count    # The body of the while loop
+    count = count + 1
+
+print(sum1)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">5050</code></pre></div>
+<p>This example adds up all the whole numbers from 1 to 100.</p>
+<h3>5. The Difference Between for and while Loops</h3>
+<p>As we said before, if one piece of syntax can do a job, there's no need for two.</p>
+<p>Since both are loops, <code>for</code> and <code>while</code> must be different in some way.</p>
+<p>So when should you use a <code>for</code> loop, and when a <code>while</code> loop?</p>
+<ul>
+<li>
+<p>A <code>for</code> loop is mainly for going through an <strong>iterable</strong> (something you can loop over).</p>
+</li>
+<li>
+<p>A <code>while</code> loop is mainly for repeating something <strong>as long as a condition is true</strong>.
+(For example, an endless loop that exits with <code>break</code>.)</p>
+</li>
+<li>
+<p>In some cases, <code>for</code> and <code>while</code> can be swapped.</p>
+</li>
+</ul>
+<p>For example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">for i in range(0, 10):
+    print(i)
+
+
+i = 0
+while i &lt; 10:
+    print(i)
+    i = i + 1</code></pre></div>
+<p>The output is the same, but if you think carefully, you'll see they run in a different way and need different information.</p>
+<h3>6. Nested Loops</h3>
+<p>Like conditional statements, loops can be <strong>nested</strong>.</p>
+<p>Here's the syntax:</p>
+<p><strong>Nested for loop syntax</strong></p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">for iterating_var in sequence:
+   for iterating_var in sequence:
+      statements(s)
+   statements(s)</code></pre></div>
+<p><strong>Nested while loop syntax</strong></p>
+<div class="cb not-prose" data-mode="syntax"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Syntax only</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">while expression:
+   while expression:
+      statement(s)
+   statement(s)</code></pre></div>
+<p>You can also put a different kind of loop inside: a <code>for</code> loop inside a <code>while</code> loop, or a <code>while</code> loop inside a <code>for</code> loop.</p>
+<p>For example:</p>
+<p>If we want to stop adding once <code>sum</code> is over 1000, we can use <code>break</code> to exit the whole loop.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">count = 1
+sum = 0
+while (count &lt;= 100):
+    sum = sum + count
+    if ( sum &gt; 1000):  # Exit the loop when sum is over 1000
+        break
+    count = count + 1
+print(sum)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">1035</code></pre></div>
+<p>Sometimes we only want to add up the <strong>odd</strong> numbers between 1 and 100. That means when <code>count</code> is even, we want to skip this round and not add it. We can use <code>continue</code> for this:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">count = 1
+sum = 0
+while (count &lt;= 100):
+    if ( count % 2 == 0):  # Skip even numbers
+        count = count + 1
+        continue
+    sum = sum + count
+    count = count + 1
+print(sum)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">2500</code></pre></div>
+<p>And another one:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">for num in range(10,20):  # Go through the numbers from 10 to 20
+   for i in range(2,num): # Go through possible factors
+      if num%i == 0:      # Found the first factor
+         j=num/i          # Work out the second factor
+         print (f&#x27;{num} is a composite number&#x27;)
+         break            # Jump out of the current loop
+   else:                  # The else part of the loop
+      print (f&#x27;{num} is a prime number&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">10 is a composite number
+11 is a prime number
+12 is a composite number
+13 is a prime number
+14 is a composite number
+15 is a composite number
+16 is a composite number
+17 is a prime number
+18 is a composite number
+19 is a prime number</code></pre></div>
+<p>This example also uses a <code>for … else</code> statement.</p>
+<p>The statements in the <code>for</code> loop work as normal. The statements in <code>else</code> run only if the loop <strong>finishes normally</strong> – that is, if the <code>for</code> loop was <strong>not</strong> stopped by <code>break</code>.</p>
+<p>And just like <code>for … else</code>, there is also <code>while … else</code>. They mean the same thing.</p></article></section><section id="exercise-05-for-range" class="ex-card item" data-kind="exercise" data-exercise="05-for-range" aria-label="Exercise 5: for + range: adding up">
+<script type="application/json" class="ex-data">{"id": "05-for-range", "lesson": "python5", "starter": "# First set total to 0\n# Use for + range to go through 1 to 10, adding each one to total\n# Print total after the loop\n", "solution": "total = 0\nfor n in range(1, 11):\n    total = total + n\nprint(total)", "grading": {"requiredAst": ["For"], "stdoutEquals": "55\n", "varsEqual": {"total": 55}}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 5 / 7</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">for + range: adding up</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Use a <code>for</code> loop with <code>range</code> to work out <strong>the sum of 1 to 10</strong> (including 10), assign it to the variable <code>total</code>, then <code>print(total)</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">55</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>range(1, 11) gives 1 to 10 (the end isn't included, so write 11 to include 10)</p></li></template><template class="hint-tpl"><li><p>Add up inside the loop: total = total + n</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">total = 0
+for n in range(1, 11):
+    total = total + n
+print(total)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># First set total to 0
+# Use for + range to go through 1 to 10, adding each one to total
+# Print total after the loop
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="exercise-06-while" class="ex-card item" data-kind="exercise" data-exercise="06-while" aria-label="Exercise 6: while: countdown">
+<script type="application/json" class="ex-data">{"id": "06-while", "lesson": "python5", "starter": "# First make a countdown variable n, starting at 5\n# Use a while loop: each time, print n, then take 1 away from n, until 1 has been printed\n", "solution": "n = 5\nwhile n >= 1:\n    print(n)\n    n = n - 1", "grading": {"requiredAst": ["While"], "stdoutEquals": "5\n4\n3\n2\n1\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 6 / 7</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">while: countdown</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Use a <code>while</code> loop to count down from 5 to 1 (including 1), printing each number on its own line.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">5
+4
+3
+2
+1</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>Condition: while n &gt;= 1</p></li></template><template class="hint-tpl"><li><p>Inside the loop you need n = n - 1, or the loop never ends</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">n = 5
+while n &gt;= 1:
+    print(n)
+    n = n - 1</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># First make a countdown variable n, starting at 5
+# Use a while loop: each time, print n, then take 1 away from n, until 1 has been printed
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="exercise-07-break-continue" class="ex-card item" data-kind="exercise" data-exercise="07-break-continue" aria-label="Exercise 7: continue: sum of the odd numbers from 1 to 10">
+<script type="application/json" class="ex-data">{"id": "07-break-continue", "lesson": "python5", "starter": "# First set total to 0, then use for + range to go through 1 to 10\n# Skip even numbers with continue, add odd numbers to total\n# Finally print total\n", "solution": "total = 0\nfor n in range(1, 11):\n    if n % 2 == 0:\n        continue\n    total = total + n\nprint(total)", "grading": {"requiredAst": ["For", "Continue"], "stdoutEquals": "25\n", "varsEqual": {"total": 25}}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 7 / 7</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">continue: sum of the odd numbers from 1 to 10</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Use <code>for + range</code> to go through 1 to 10. <strong>Skip even numbers with <code>continue</code></strong>, add up the odd numbers into <code>total</code>, and finally <code>print(total)</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">25</code></pre></div>
+<p>(1 + 3 + 5 + 7 + 9 = 25)</p></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>n % 2 == 0 means n is even (the remainder after dividing by 2 is 0)</p></li></template><template class="hint-tpl"><li><p>continue stops this round of the loop and moves on to the next one</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">total = 0
+for n in range(1, 11):
+    if n % 2 == 0:
+        continue
+    total = total + n
+print(total)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># First set total to 0, then use for + range to go through 1 to 10
+# Skip even numbers with continue, add odd numbers to total
+# Finally print total
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-3" class="step-card item" data-kind="step" aria-label="Teaching step 4">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 04 / 04</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>3. Examples Using Conditions and Loops Together</h2>
+<h3>1. Print the Times Tables</h3>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+
+# Print the 1–9 times tables
+for i in range(1, 10):
+        for j in range(1, i+1):
+            # f-string: put f before the string, and any expression inside {} is worked out and put into the string
+            print(f&#x27;{i}x{j}={i*j}\t&#x27;, end=&#x27;&#x27;)
+        print()</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">1x1=1   
+2x1=2   2x2=4   
+3x1=3   3x2=6   3x3=9   
+4x1=4   4x2=8   4x3=12  4x4=16  
+5x1=5   5x2=10  5x3=15  5x4=20  5x5=25  
+6x1=6   6x2=12  6x3=18  6x4=24  6x5=30  6x6=36  
+7x1=7   7x2=14  7x3=21  7x4=28  7x5=35  7x6=42  7x7=49  
+8x1=8   8x2=16  8x3=24  8x4=32  8x5=40  8x6=48  8x7=56  8x8=64  
+9x1=9   9x2=18  9x3=27  9x4=36  9x5=45  9x6=54  9x7=63  9x8=72  9x9=81 </code></pre></div>
+<h3>2. Check for a Leap Year</h3>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">
+# Check whether a year is a leap year
+
+year = int(input(&quot;Enter a year: &quot;))
+if (year % 4) == 0 and (year % 100) != 0 or (year % 400) == 0:
+    print(f&#x27;{year} is a leap year&#x27;)
+else:
+     print(f&#x27;{year} is not a leap year&#x27;)</code></pre></div>
+<h3>First, write down how you'd count by hand</h3>
+<p>We're going to add up study time. The records might include <code>0</code>, and might include negative numbers typed by mistake. Let's agree on a rule first: zero minutes is allowed and kept, but negative numbers are skipped for now. How would you do this by hand? Start from zero, look at each record one by one, and only add the ones that follow the rule.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">records = [15, 0, 10, -3]
+total = 0
+valid_count = 0
+for minutes in records:
+    if minutes &lt; 0:
+        continue
+    total = total + minutes
+    valid_count = valid_count + 1
+print(total)
+print(valid_count)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">25
+3</code></pre></div>
+<p>Don't just look at the total. Follow the loop step by step and write down <code>minutes</code>, <code>total</code> and <code>valid_count</code> each time. Zero minutes doesn't add to the total, but it's still a valid record, so the count of valid records is <code>3</code>.</p>
+<p>Try two edge cases yourself: an empty list should give <code>0</code> and <code>0</code>. A list of only negative numbers should too. If you change the check to <code>minutes &lt;= 0</code>, the total might stay the same, but the count changes. This shows that <strong>one</strong> correct number in the output doesn't mean the whole program does what it should.</p>
+<p>Skipping negative numbers is just the rule for this exercise. Not every program should quietly skip mistakes. When we learn about exception handling, we'll change it to tell the caller what was wrong.</p></article></section><div class="lock-banner" hidden><span aria-hidden="true">🔒</span>Solve this exercise to unlock the next part ·<span class="accent lock-k">0</span><span aria-hidden="true">/</span><span>7</span></div><section id="lesson-end" aria-label="Chapter summary"><div class="done-banner" hidden><div class="done-emoji" aria-hidden="true">🎉</div><p class="done-title">Chapter complete!</p><p class="done-sub">You solved all 7 exercises in this chapter.</p></div><nav aria-label="Chapter navigation" class="chapter-nav"><div class="cn-grid"><a class="chap-nav prev focus-ring" href="/lessons/python4/dict-and-set/"><span class="cn-label">← Previous chapter</span><span class="cn-title">04 · Dict &amp; Set</span></a><div class="cn-mid"><span>Conditions &amp; loops</span></div><a class="chap-nav next focus-ring" href="/lessons/python6/functions/"><span class="cn-label">Next chapter →</span><span class="cn-title">06 · Functions</span></a></div></nav></section></article></div>
+    <aside class="lesson-sidebar right" aria-label="This chapter"><nav aria-label="This chapter's contents"><div class="side-label up">In this chapter</div><p class="toc-chapter">Conditions &amp; loops</p><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Introduction</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">1. Conditional Statements</span></a></li><li class="toc-li" data-target="exercise-01-if-basic"><a href="#exercise-01-if-basic" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">if / else: pass or fail</span></a></li><li class="toc-li" data-target="exercise-02-if-elif"><a href="#exercise-02-if-elif" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">elif: grade levels</span></a></li><li class="toc-li" data-target="exercise-03-if-and-or"><a href="#exercise-03-if-and-or" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">and / or: combined conditions</span></a></li><li class="toc-li" data-target="exercise-04-match-case"><a href="#exercise-04-match-case" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">match / case: handling commands</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">2. Loops</span></a></li><li class="toc-li" data-target="exercise-05-for-range"><a href="#exercise-05-for-range" class="toc-link focus-ring"><span class="toc-kind">Exercise 5</span><span class="toc-title">for + range: adding up</span></a></li><li class="toc-li" data-target="exercise-06-while"><a href="#exercise-06-while" class="toc-link focus-ring"><span class="toc-kind">Exercise 6</span><span class="toc-title">while: countdown</span></a></li><li class="toc-li" data-target="exercise-07-break-continue"><a href="#exercise-07-break-continue" class="toc-link focus-ring"><span class="toc-kind">Exercise 7</span><span class="toc-title">continue: sum of the odd numbers from 1 to 10</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">3. Examples Using Conditions and Loops Together</span></a></li></ol></nav></aside>
+  </div>
+  <dialog class="dir-dialog" aria-labelledby="dir-title"><div class="dd-inner"><div class="dd-head"><h2 id="dir-title">Contents</h2><button type="button" class="dd-close focus-ring">Close</button></div>
+  <div class="dd-tabs" aria-label="Contents scope"><button type="button" class="dd-tab focus-ring" data-tab="all" aria-pressed="true">All lessons</button><button type="button" class="dd-tab focus-ring" data-tab="chapter" aria-pressed="false">This chapter</button></div>
+  <div class="dd-body"><div class="dd-pane" data-pane="all"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></div><div class="dd-pane" data-pane="chapter" hidden><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Introduction</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">1. Conditional Statements</span></a></li><li class="toc-li" data-target="exercise-01-if-basic"><a href="#exercise-01-if-basic" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">if / else: pass or fail</span></a></li><li class="toc-li" data-target="exercise-02-if-elif"><a href="#exercise-02-if-elif" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">elif: grade levels</span></a></li><li class="toc-li" data-target="exercise-03-if-and-or"><a href="#exercise-03-if-and-or" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">and / or: combined conditions</span></a></li><li class="toc-li" data-target="exercise-04-match-case"><a href="#exercise-04-match-case" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">match / case: handling commands</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">2. Loops</span></a></li><li class="toc-li" data-target="exercise-05-for-range"><a href="#exercise-05-for-range" class="toc-link focus-ring"><span class="toc-kind">Exercise 5</span><span class="toc-title">for + range: adding up</span></a></li><li class="toc-li" data-target="exercise-06-while"><a href="#exercise-06-while" class="toc-link focus-ring"><span class="toc-kind">Exercise 6</span><span class="toc-title">while: countdown</span></a></li><li class="toc-li" data-target="exercise-07-break-continue"><a href="#exercise-07-break-continue" class="toc-link focus-ring"><span class="toc-kind">Exercise 7</span><span class="toc-title">continue: sum of the odd numbers from 1 to 10</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">3. Examples Using Conditions and Loops Together</span></a></li></ol></div></div></div></dialog>
+  <div class="py-toast" hidden><span class="spinner"></span><span class="py-toast-text">Loading Python…</span></div>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>© 2026 Python for Beginners · English edition of the <a href="https://github.com/walter201230/Python">walter201230/Python</a> tutorial (CC BY 4.0)</span>
+    <div class="footer-links"><a href="/">Course list</a><a href="/about/">About this site</a><a href="https://github.com/walter201230/Python">GitHub</a></div>
+  </div>
+</footer>
+<script src="/assets/site.js?v=20261028"></script>
+</body>
+</html>

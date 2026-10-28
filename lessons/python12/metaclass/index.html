@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Metaclasses – Python for Beginners</title>
+<meta name="description" content="Classes are objects too – make classes with three-argument type(), and control class creation with a metaclass.">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css?v=20261028">
+
+</head>
+<body data-page="lesson" data-lesson="python12" data-total="3">
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="/" aria-label="Python for Beginners – home"><span class="gradient-text-flow" data-text="Python for Beginners">Python for Beginners</span></a>
+    <nav class="header-nav">
+      <a class="nav-link" href="/about/">About</a>
+      <a class="nav-icon focus-ring" href="https://github.com/walter201230/Python" aria-label="Original tutorial on GitHub" title="Original tutorial on GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+      <button type="button" class="theme-toggle focus-ring" aria-label="Switch theme"><span class="knob"><svg class="ic-moon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button>
+    </nav>
+  </div>
+</header>
+<main class="site-main">
+<div class="lesson-shell bg-tech-grid">
+  <div class="mobile-bar"><div class="mb-inner"><button type="button" class="dir-btn focus-ring" aria-haspopup="dialog">Contents</button></div></div>
+  <div class="lesson-columns">
+    <aside class="lesson-sidebar left" aria-label="All lessons"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></aside>
+    <div class="lesson-main"><article class="lesson-article"><header class="lesson-head"><h1>Metaclasses</h1><p class="lh-sub"><span class="accent">3</span> exercises<span class="sep">·</span>about <span class="accent">50</span> min<span class="sep">·</span>solve one to unlock the next part</p>
+<p class="lh-link"><a class="subtle-link focus-ring" href="/lessons/python12/metaclass/read/">Read the whole chapter →</a></p></header><section id="step-0" class="step-card item" data-kind="step" aria-label="Teaching step 1">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 01 / 06</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>Introduction</h2>
+<p>Tim Peters, a leader in the Python world, once said (roughly):</p>
+<blockquote>
+<p>Metaclasses are deep magic that 99% of users should never worry about. If you're wondering whether you need them, you don't. The people who actually need them know for sure that they do, and don't need an explanation of why.</p>
+</blockquote>
+<p>So for this article, just read it through carefully once – that's enough.</p>
+<h2>Contents</h2>
+<p>Here's what this part covers:</p>
+<ul>
+<li>1. In Python, Classes Are Objects Too</li>
+<li>2. Using type() to Create Classes on the Fly</li>
+<li>3. What is a Metaclass?</li>
+<li>4. Writing Your Own Metaclass</li>
+<li>5. Using Metaclasses</li>
+</ul></article></section><section id="step-1" class="step-card item" data-kind="step" aria-label="Teaching step 2">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 02 / 06</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>1. In Python, Classes Are Objects Too</h2>
+<p>Before we learn about metaclasses, let's understand Python classes a bit more deeply. In most programming languages, a class is a piece of code that describes how to make an object. That's true in Python too.</p>
+<p>We stressed this in the chapter on classes. Let's remind ourselves with an example:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class ObjectCreator(object):
+    pass
+
+
+mObject = ObjectCreator()
+print(mObject)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">&lt;__main__.ObjectCreator object at 0x00000000023EE048&gt;</code></pre></div>
+<p>But Python classes are different from most languages in one way: in Python, <strong>a class is also an object</strong>. Yes, that's not a typo – it's an object.</p>
+<p>Why?</p>
+<p>Because whenever you use the keyword <code>class</code>, the Python interpreter creates an object when it runs.</p>
+<p>For example:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class ObjectCreator(object):
+    pass</code></pre></div>
+<p>When the program runs this code, it creates an object in memory called <code>ObjectCreator</code>. This object (the class) itself has the ability to create objects (instances of the class) – and that's what makes it a class.</p>
+<p>But underneath, it's still an object. So we can do these things with it:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class ObjectCreator(object):
+    pass
+
+
+def echo(ob):
+    print(ob)
+
+
+mObject = ObjectCreator()
+print(mObject)
+
+# You can print a class directly, because it&#x27;s actually an object too
+print(ObjectCreator)
+# You can pass a class to a function as an argument (note: the class itself, not an instance)
+echo(ObjectCreator)
+# You can also assign a class to a variable
+objectCreator = ObjectCreator
+print(objectCreator)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">&lt;__main__.ObjectCreator object at 0x000000000240E358&gt;
+&lt;class &#x27;__main__.ObjectCreator&#x27;&gt;
+&lt;class &#x27;__main__.ObjectCreator&#x27;&gt;
+&lt;class &#x27;__main__.ObjectCreator&#x27;&gt;</code></pre></div></article></section><section id="exercise-01-detect-meta" class="ex-card item" data-kind="exercise" data-exercise="01-detect-meta" aria-label="Exercise 1: What is the class of a class?">
+<script type="application/json" class="ex-data">{"id": "01-detect-meta", "lesson": "python12", "starter": "# Define the simplest class Foo (write pass inside)\n# Use type() to print the type of Foo\n# Then print the result of type(Foo) is type\n\n", "solution": "class Foo:\n    pass\n\nprint(type(Foo))\nprint(type(Foo) is type)", "grading": {"requiredAst": ["ClassDef:Foo"], "stdoutEquals": "<class 'type'>\nTrue\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 1 / 3</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">What is the class of a class?</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Define the simplest possible class, <code>Foo</code> (just write <code>pass</code> inside).</p>
+<p>Then use <code>type()</code> to check the type of <code>Foo</code>, and use <code>is</code> to check whether it is <code>type</code>. Print two lines in this format:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">&lt;class &#x27;type&#x27;&gt;
+True</code></pre></div>
+<p>Tip: the first line is <code>print(type(Foo))</code>, the second is <code>print(type(Foo) is type)</code>.</p></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>Define the simplest class with class Foo: pass</p></li></template><template class="hint-tpl"><li><p>type(Foo) returns <class 'type'></p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class Foo:
+    pass
+
+print(type(Foo))
+print(type(Foo) is type)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># Define the simplest class Foo (write pass inside)
+# Use type() to print the type of Foo
+# Then print the result of type(Foo) is type
+
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-2" class="step-card item" data-kind="step" aria-label="Teaching step 3">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 03 / 06</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>2. Using <code>type()</code> to Create Classes on the Fly</h2>
+<p>Because classes are objects, we can create classes <strong>while the program is running</strong>.</p>
+<p>Python is a dynamic language.</p>
+<p><strong>The biggest difference between dynamic and static languages is that functions and classes aren't defined when the code is compiled – they're created dynamically while the program runs.</strong></p>
+<p>First, let's get to know the <code>type()</code> function.</p>
+<p>Create a module called <code>hello.py</code>, and define a class called <code>Hello</code>:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class Hello(object):
+    def hello(self, name=&#x27;Py&#x27;):
+        print(&#x27;Hello,&#x27;, name)</code></pre></div>
+<p>Then, in another module, import the <code>hello</code> module and print some information.</p>
+<p>The <code>type()</code> function lets you see the type of a class or a variable.</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
+
+from com.twowater.hello import Hello
+
+h = Hello()
+h.hello()
+
+print(type(Hello))
+print(type(h))</code></pre></div>
+<p>What will the output be?</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Hello, Py
+&lt;class &#x27;type&#x27;&gt;
+&lt;class &#x27;com.twowater.hello.Hello&#x27;&gt;</code></pre></div>
+<p>As we said, <code>type()</code> shows the type of a class or variable. <code>Hello</code> is a class, and its type is <code>type</code>. <code>h</code> is an instance, and its type is <code>com.twowater.hello.Hello</code>.</p>
+<p>The <code>com.twowater</code> part at the front is my package name; the <code>hello</code> module lives in that package.</p>
+<p>Let's think about this a bit more. In the example above, we used <code>type()</code> to see the type of something.</p>
+<p>When we looked at the type of the <code>Hello</code> class, it printed <code>&lt;class 'type'&gt;</code>.</p>
+<p><strong>In fact, <code>type()</code> can not only return the type of an object – it can also create new types.</strong></p>
+<p>Classes are created dynamically at runtime, and the way to create a class is with the <code>type()</code> function.</p>
+<p>For example, we can use <code>type()</code> to create the <code>Hello</code> class from above. Look at this code:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+
+def printHello(self, name=&#x27;Py&#x27;):
+    # A function that prints Hello
+    print(&#x27;Hello,&#x27;, name)
+
+
+# Create a Hello class
+Hello = type(&#x27;Hello&#x27;, (object,), dict(hello=printHello))
+
+# Create an instance of Hello
+h = Hello()
+# Call the Hello class&#x27;s method
+h.hello()
+# Look at the type of the Hello class
+print(type(Hello))
+# Look at the type of instance h
+print(type(h))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Hello, Py
+&lt;class &#x27;type&#x27;&gt;
+&lt;class &#x27;__main__.Hello&#x27;&gt;</code></pre></div>
+<p>Here's what the arguments mean when you create a class with <code>type()</code>:</p>
+<ol>
+<li>
+<p>The name of the class – in the example, <code>Hello</code></p>
+</li>
+<li>
+<p>A tuple of parent classes. Python supports multiple inheritance. If there's only one parent, use the one-element tuple form. In the example, it inherits from <code>object</code>, so it's written <code>(object,)</code></p>
+</li>
+<li>
+<p>A dictionary linking method names to functions. In the example, the function <code>printHello</code> is linked to the method name <code>hello</code></p>
+</li>
+</ol>
+<p>The general pattern is:</p>
+<div class="cb not-prose" data-mode="syntax"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Syntax only</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">type(class_name, tuple_of_parent_classes (can be empty), dict_of_attributes (names and values))</code></pre></div>
+<p>Now that we understand the arguments, look at the output: a class made with <code>type()</code> is exactly the same as one written with <code>class</code>.</p>
+<p>This is because when the Python interpreter sees a <code>class</code> definition, it just reads the syntax, and then calls <code>type()</code> to create the class.</p>
+<p>Normally, we define classes with <code>class ***...</code>, but <code>type()</code> can create classes too.</p>
+<p>This means a dynamic language can create classes while running. This is very different from static languages. To create a class while a static language program is running, you'd have to build a string of source code and call the compiler, or use tools to generate bytecode. That's basically dynamic compiling, and it's very complicated.</p>
+<p><strong>So you can see: in Python, classes are objects too, and you can create classes dynamically.</strong></p>
+<p>This is actually what Python does behind the scenes when you use the <code>class</code> keyword – and it does it using <strong>metaclasses</strong>.</p></article></section><section id="exercise-02-build-greeter" class="ex-card item" data-kind="exercise" data-exercise="02-build-greeter" aria-label="Exercise 2: Make a class on the fly with three-argument type()">
+<script type="application/json" class="ex-data">{"id": "02-build-greeter", "lesson": "python12", "starter": "# First use def to define an ordinary function greet(self) that prints 'hi'\n# Use three-argument type() to create Greeter, putting greet in the attribute dictionary\n# Create an instance and call greet, then print type(Greeter)\n\n", "solution": "def greet(self):\n    print('hi')\n\nGreeter = type('Greeter', (object,), {'greet': greet})\n\ng = Greeter()\ng.greet()\nprint(type(Greeter))", "grading": {"requiredAst": ["Assign:Greeter", "FunctionDef:greet"], "stdoutEquals": "hi\n<class 'type'>\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 2 / 3</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Make a class on the fly with three-argument type()</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p><strong>Without using the <code>class</code> keyword</strong>, use the three-argument <code>type()</code> syntax to create a class <code>Greeter</code>:</p>
+<ul>
+<li>Parent classes: <code>(object,)</code></li>
+<li>One method, <code>greet(self)</code>, which prints <code>'hi'</code> – first define an ordinary function <code>greet(self)</code> with <code>def</code>, then put it in the attribute dictionary <code>{'greet': greet}</code></li>
+</ul>
+<p>After creating it, make an instance and call <code>g.greet()</code>, then <code>print(type(Greeter))</code> to show it's an instance of <code>type</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">hi
+&lt;class &#x27;type&#x27;&gt;</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>Three-argument type(): type(class name string, tuple of parent classes, attribute dictionary)</p></li></template><template class="hint-tpl"><li><p>First def an ordinary function greet(self), then put it in the dictionary {'greet': greet}</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def greet(self):
+    print(&#x27;hi&#x27;)
+
+Greeter = type(&#x27;Greeter&#x27;, (object,), {&#x27;greet&#x27;: greet})
+g = Greeter()
+g.greet()
+print(type(Greeter))</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># First use def to define an ordinary function greet(self) that prints &#x27;hi&#x27;
+# Use three-argument type() to create Greeter, putting greet in the attribute dictionary
+# Create an instance and call greet, then print type(Greeter)
+
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-3" class="step-card item" data-kind="step" aria-label="Teaching step 4">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 04 / 06</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>3. What is a Metaclass?</h2>
+<p>After all that, we've finally (sort of) arrived at metaclasses. But we still don't know what on earth a metaclass is.</p>
+<p>When we create a class, it's usually so we can create instances (objects) of it.</p>
+<p>So what's a metaclass for?</p>
+<p><strong>A metaclass is used to create classes. Another way to think about it: a metaclass is the class of a class.</strong></p>
+<p>From the <code>type()</code> introduction above, we know we can create a class with <code>type()</code>:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">MyClass = type(&#x27;MyClass&#x27;, (), {})</code></pre></div>
+<p><strong>In fact, <code>type</code> is a metaclass.</strong></p>
+<p><code>type</code> is the metaclass Python uses behind the scenes to create <strong>all</strong> classes.</p>
+<p>Now we can guess why it's <code>type</code> and not <code>Type</code>.</p>
+<p>Probably to match <code>str</code> – <code>str</code> is the class that creates string objects, and <code>int</code> is the class that creates integer objects.</p>
+<p><code>type</code> is the class that creates class objects.</p>
+<p>You can see this by checking the <code>__class__</code> attribute.</p>
+<p><strong>Everything</strong> in Python – yes, everything – is an object.</p>
+<p>That includes integers, strings, functions and classes. They're all objects, and they're all created from a class.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Integer
+age = 23
+print(age.__class__)
+# String
+name = &#x27;Two Drops&#x27;
+print(name.__class__)
+
+
+# Function
+def fu():
+    pass
+
+
+print(fu.__class__)
+
+
+# Instance
+class eat(object):
+    pass
+
+
+mEat = eat()
+
+print(mEat.__class__)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">&lt;class &#x27;int&#x27;&gt;
+&lt;class &#x27;str&#x27;&gt;
+&lt;class &#x27;function&#x27;&gt;
+&lt;class &#x27;__main__.eat&#x27;&gt;</code></pre></div>
+<p>You can see that all of these – all objects – were created by a class. So you might wonder: what's the <code>__class__</code> of the <code>__class__</code>?</p>
+<p><strong>In other words, what's the class that creates these classes?</strong></p>
+<p>Let's add this code to the code above:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">print(age.__class__.__class__)
+print(name.__class__.__class__)
+print(fu.__class__.__class__)
+print(mEat.__class__.__class__)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">&lt;class &#x27;type&#x27;&gt;
+&lt;class &#x27;type&#x27;&gt;
+&lt;class &#x27;type&#x27;&gt;
+&lt;class &#x27;type&#x27;&gt;</code></pre></div>
+<p>Look carefully and think it through. The output above is the <code>__class__</code> of the <code>__class__</code> of the integer <code>age</code>, the string <code>name</code>, the function <code>fu</code> and the instance <code>mEat</code>.</p>
+<p>You could also say it's the class of their class. And every one printed <code>type</code>.</p>
+<p>As we said at the start, a metaclass is the class of a class.</p>
+<p>So a metaclass is something that creates classes.</p>
+<p>You can also think of it as: a metaclass is what <strong>makes</strong> classes.</p>
+<p><strong>And <code>type</code> is the built-in metaclass – the metaclass that comes with Python.</strong></p>
+<h3>First tell objects and classes apart, then look at the tool that makes classes</h3>
+<p>This chapter can get confusing, because we're not just creating instances – we're talking about classes themselves. Let's use three checks to lay out the relationships:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">StudyRecord = type(&#x27;StudyRecord&#x27;, (), {&#x27;category&#x27;: &#x27;Study record&#x27;})
+record = StudyRecord()
+print(type(record) is StudyRecord)
+print(type(StudyRecord) is type)
+print(record.category)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">True
+True
+Study record</code></pre></div>
+<p>The first line creates a class, and the second line uses that class to create an instance. <code>type(record)</code> checks what class the instance belongs to, and <code>type(StudyRecord)</code> goes one step further and checks the type of the class itself. In this normal example, the class was created by <code>type</code>.</p>
+<p>Now write the matching version yourself using <code>class StudyRecord:</code>, give it the same <code>category</code>, and compare these three results. First understand how the two ways of creating a class line up, then come back and look at what a custom metaclass does during creation.</p>
+<p>Metaclasses are an advanced topic. If you don't need them yet the first time through, finish the comparison above and carry on with the later lessons. Come back with the question "what else can happen when a class is created?" They are <strong>not</strong> needed for normal functions, scripts or the final project.</p></article></section><section id="step-4" class="step-card item" data-kind="step" aria-label="Teaching step 5">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 05 / 06</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>4. Writing Your Own Metaclass</h2>
+<p>By now, we know what on earth a metaclass is.</p>
+<p>But we still don't know what a metaclass is actually <strong>for</strong>.</p>
+<p>We've only got to know it a little.</p>
+<p>Before we learn what it's for, let's learn how to write our own metaclass.</p>
+<p>Because only once you know how to write one can you really understand what it does.</p>
+<p>First, let's look at the <code>__metaclass__</code> attribute.</p>
+<p>"Metaclass" literally means "class beyond a class". Simply put:</p>
+<p>Once we define a class, we can create instances from it. So: <strong>first define a class, then create instances.</strong></p>
+<p>But what if we want to create <strong>classes</strong>?</p>
+<p>Then we must create the class from a metaclass. So: <strong>first define a metaclass, then create classes.</strong></p>
+<p>Putting it together: <strong>first define a metaclass, then you can create classes, and finally create instances.</strong></p>
+<p>So a metaclass lets you create classes or change classes.</p>
+<p>In other words, you can think of a class as an "instance" created by a metaclass.</p>
+<div class="cb not-prose" data-mode="syntax"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Syntax only</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class MyObject(object):
+    __metaclass__ = something…
+[…]</code></pre></div>
+<p>If you write this, Python will use the metaclass to create the class <code>MyObject</code>.</p>
+<p>When you write <code>class MyObject(object)</code>, the class object <code>MyObject</code> hasn't been created in memory yet.</p>
+<p>Python looks for a <code>__metaclass__</code> attribute in the class definition. If it finds one, it uses it to create the class <code>MyObject</code>. If not, it uses the built-in <code>type</code> to create the class. If that's still unclear, look at this flow chart:</p>
+<p><span class="tutorial-diagram"><span class="tutorial-diagram-scroll" role="region" tabindex="0" aria-label="How Python 3 chooses a metaclass, scroll sideways on small screens"><img loading="lazy" alt="How Python 3 chooses a metaclass" src="/images/diagrams/metaclass-selection.svg"></span></span></p>
+<p>Another example:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class Foo(Bar):
+    pass</code></pre></div>
+<p>How does Python decide here?</p>
+<p>First, does <code>Foo</code> have a <code>__metaclass__</code> attribute? If yes, Python uses <code>__metaclass__</code> to create a class object called <code>Foo</code> in memory (note: a <strong>class</strong> object). If Python doesn't find <code>__metaclass__</code>, it looks for a <code>__metaclass__</code> attribute in <code>Bar</code> (the parent class) and tries the same thing. If Python can't find <code>__metaclass__</code> in any parent class, it looks for <code>__metaclass__</code> at the module level and tries the same thing. If it still can't find <code>__metaclass__</code>, Python uses the built-in <code>type</code> to create the class object.</p>
+<p>So <code>__metaclass__</code> defines how a <strong>class</strong> behaves. Just like a class defines how an <strong>instance</strong> behaves, a metaclass defines how a <strong>class</strong> behaves. You could say a class is an instance of a metaclass.</p>
+<p>Now we basically understand the <code>__metaclass__</code> attribute. But we haven't talked about how to use it, or what you can put in it.</p>
+<p>The answer: anything that can create a class. So what can create a class? <code>type</code>, or anything that uses <code>type</code> or subclasses <code>type</code>.</p>
+<p><strong>The main purpose of a metaclass is to automatically change a class when it's created.</strong></p>
+<p>You'd usually do this for an API, when you want to create classes that fit the current situation. Imagine a silly example: you decide all the attributes of all the classes in your module should be in UPPERCASE. There are several ways to do this, but one is to set <code>__metaclass__</code> at the module level. That way, every class in the module is created through this metaclass, and we just need to tell the metaclass to change all attributes to uppercase.</p>
+<p>Luckily, <code>__metaclass__</code> can actually be anything you can call – it doesn't need to be a real class. So let's start with a simple function as an example.</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># The metaclass automatically receives the arguments you&#x27;d normally pass to &#x27;type&#x27;
+def upper_attr(future_class_name, future_class_parents, future_class_attr):
+    &#x27;&#x27;&#x27;Return a class object with all attributes changed to uppercase&#x27;&#x27;&#x27;
+    #  Pick all attributes that don&#x27;t start with &#x27;__&#x27;
+    attrs = ((name, value) for name, value in future_class_attr.items() if not name.startswith(&#x27;__&#x27;))</code></pre></div>
+<div class="cb not-prose" data-mode="syntax"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Syntax only</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Change them to uppercase
+uppercase_attr = dict((name.upper(), value) for name, value in attrs)
+ 
+# Use &#x27;type&#x27; to create the class object
+return type(future_class_name, future_class_parents, uppercase_attr)
+ 
+__metaclass__ = upper_attr  
+#  This affects every class in this module
+ 
+class Foo(object):
+    # We could also define __metaclass__ only here, so it only affects this class
+    bar = &#x27;bip&#x27;</code></pre></div>
+<div class="cb not-prose" data-mode="syntax"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Syntax only</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">print hasattr(Foo, &#x27;bar&#x27;)
+# Output: False
+print hasattr(Foo, &#x27;BAR&#x27;)
+# Output: True
+ 
+f = Foo()
+print f.BAR
+# Output: &#x27;bip&#x27;</code></pre></div>
+<p>Using a class as the metaclass:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Remember, &#x27;type&#x27; is actually a class, just like &#x27;str&#x27; and &#x27;int&#x27;
+# So you can inherit from type
+class UpperAttrMetaClass(type):
+    # __new__ is a special method called before __init__
+    # __new__ creates the object and returns it
+    # while __init__ just sets up the object with the arguments passed in
+    # You rarely use __new__, unless you want to control how the object is created
+    # Here, the object being created is a class, and we want to customise it, so we override __new__
+    # You could also do things in __init__ if you want
+    # Some advanced uses override the special __call__ method, but we won&#x27;t here
+    def __new__(upperattr_metaclass, future_class_name, future_class_parents, future_class_attr):
+        attrs = ((name, value) for name, value in future_class_attr.items() if not name.startswith(&#x27;__&#x27;))
+        uppercase_attr = dict((name.upper(), value) for name, value in attrs)
+        return type(future_class_name, future_class_parents, uppercase_attr)</code></pre></div>
+<p>But this isn't really OOP (object-oriented programming). We called <code>type</code> directly, and didn't override the parent's <code>__new__</code> method. Let's do it this way instead:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">
+class UpperAttrMetaclass(type):
+    def __new__(upperattr_metaclass, future_class_name, future_class_parents, future_class_attr):
+        attrs = ((name, value) for name, value in future_class_attr.items() if not name.startswith(&#x27;__&#x27;))
+        uppercase_attr = dict((name.upper(), value) for name, value in attrs)
+ 
+        # Reuse the type.__new__ method
+        # This is basic OOP – no magic
+        return type.__new__(upperattr_metaclass, future_class_name, future_class_parents, uppercase_attr)</code></pre></div>
+<p>You may have noticed the extra parameter <code>upperattr_metaclass</code>. It's nothing special. The first parameter of a method always means the current instance, just like <code>self</code> in normal methods. I gave it a long name here to make it clear. But like <code>self</code>, all these parameters have their usual names. So in real code, a metaclass would look like this:</p>
+<div class="cb not-prose" data-mode="syntax"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Syntax only</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class UpperAttrMetaclass(type):
+    def __new__(cls, name, bases, dct):
+        attrs = ((name, value) for name, value in dct.items() if not name.startswith(&#x27;__&#x27;)
+        uppercase_attr  = dict((name.upper(), value) for name, value in attrs)
+        return type.__new__(cls, name, bases, uppercase_attr)</code></pre></div>
+<p>If we use <code>super</code>, we can make it even clearer, and it helps with inheritance (yes, you can have metaclasses that inherit from metaclasses, that inherit from <code>type</code>):</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class UpperAttrMetaclass(type):
+    def __new__(cls, name, bases, dct):
+        attrs = ((name, value) for name, value in dct.items() if not name.startswith(&#x27;__&#x27;))
+        uppercase_attr = dict((name.upper(), value) for name, value in attrs)
+        return super(UpperAttrMetaclass, cls).__new__(cls, name, bases, uppercase_attr)</code></pre></div>
+<p>People usually use metaclasses for tricky things, like introspection (code looking at itself) and controlling inheritance. It's true that metaclasses are great for "dark magic", which leads to complicated code. But metaclasses themselves are actually very simple:</p>
+<ul>
+<li>Intercept (catch) the creation of a class</li>
+<li>Change the class</li>
+<li>Return the changed class</li>
+</ul></article></section><section id="exercise-03-custom-meta" class="ex-card item" data-kind="exercise" data-exercise="03-custom-meta" aria-label="Exercise 3: A custom metaclass that adds an attribute automatically">
+<script type="application/json" class="ex-data">{"id": "03-custom-meta", "lesson": "python12", "starter": "# Define a metaclass AnimalMeta that inherits from type and overrides __new__\n# Put species into attrs, then return the class with super().__new__\n# Define an empty class Dog with the metaclass set, then print Dog.species\n\n", "solution": "class AnimalMeta(type):\n    def __new__(mcs, name, bases, attrs):\n        attrs['species'] = 'animal'\n        return super().__new__(mcs, name, bases, attrs)\n\nclass Dog(metaclass=AnimalMeta):\n    pass\n\nprint(Dog.species)", "grading": {"requiredAst": ["ClassDef:AnimalMeta", "ClassDef:Dog", "FunctionDef:__new__"], "stdoutEquals": "animal\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 3 / 3</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">A custom metaclass that adds an attribute automatically</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Define a metaclass <code>AnimalMeta</code> that <strong>inherits from <code>type</code></strong>:</p>
+<ul>
+<li>Override <code>__new__(mcs, name, bases, attrs)</code></li>
+<li>Put <code>species = 'animal'</code> into <code>attrs</code></li>
+<li>Return the class with <code>super().__new__(mcs, name, bases, attrs)</code></li>
+</ul>
+<p>Then define an empty class <code>Dog(metaclass=AnimalMeta)</code> with <code>pass</code> inside.</p>
+<p>Finally print <code>Dog.species</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">animal</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>A metaclass must inherit from type: class AnimalMeta(type):</p></li></template><template class="hint-tpl"><li><p>In <strong>new</strong>, add a key-value pair to the attrs dictionary, then return super().<strong>new</strong></p></li></template><template class="hint-tpl"><li><p>To use a metaclass, write class Dog(metaclass=AnimalMeta):</p></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># Define a metaclass AnimalMeta that inherits from type and overrides __new__
+# Put species into attrs, then return the class with super().__new__
+# Define an empty class Dog with the metaclass set, then print Dog.species
+
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-5" class="step-card item" data-kind="step" aria-label="Teaching step 6">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 06 / 06</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>5. Using Metaclasses</h2>
+<p>We've finally reached using metaclasses. But generally speaking, we never need them. As Tim Peters, a leader in the Python world, said (roughly):</p>
+<blockquote>
+<p>Metaclasses are deep magic that 99% of users should never worry about. If you're wondering whether you need them, you don't. The people who actually need them know for sure that they do, and don't need an explanation of why.</p>
+</blockquote>
+<p>The main use of metaclasses is to create <strong>APIs</strong>. A typical example is the Django ORM. It lets you write something like this:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class Person(models.Model):
+    name = models.CharField(max_length=30)
+    age = models.IntegerField()</code></pre></div>
+<p>But if you then do this:</p>
+<div class="cb not-prose" data-mode="syntax"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Syntax only</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">guy  = Person(name=&#x27;bob&#x27;, age=&#x27;35&#x27;)
+print guy.age</code></pre></div>
+<p>It doesn't return an <code>IntegerField</code> object – it returns an <code>int</code>, and can even get the data straight from the database.</p>
+<p>This is possible because <code>models.Model</code> defines <code>__metaclass__</code>, and uses some magic to turn the simple <code>Person</code> class you just defined into a complex hook into the database.</p>
+<p>The Django framework makes these complicated-looking things simple by giving you a simple API that uses metaclasses. Behind the scenes, it uses this API to rebuild the code and do the real work.</p>
+<p>Everything in Python is an object. Each one is either an instance of a class or an instance of a metaclass – except <code>type</code>. <code>type</code> is actually its own metaclass. You can't do that in pure Python; it's done with some tricks at the implementation level.</p>
+<p>Reference:</p>
+<p><a href="https://stackoverflow.com/questions/100003/what-is-a-metaclass-in-python">https://stackoverflow.com/questions/100003/what-is-a-metaclass-in-python</a></p></article></section><div class="lock-banner" hidden><span aria-hidden="true">🔒</span>Solve this exercise to unlock the next part ·<span class="accent lock-k">0</span><span aria-hidden="true">/</span><span>3</span></div><section id="lesson-end" aria-label="Chapter summary"><div class="done-banner" hidden><div class="done-emoji" aria-hidden="true">🎉</div><p class="done-title">Chapter complete!</p><p class="done-sub">You solved all 3 exercises in this chapter.</p></div><nav aria-label="Chapter navigation" class="chapter-nav"><div class="cn-grid"><a class="chap-nav prev focus-ring" href="/lessons/python11/enum/"><span class="cn-label">← Previous chapter</span><span class="cn-title">11 · Enum classes</span></a><div class="cn-mid"><span>Metaclasses</span></div><a class="chap-nav next focus-ring" href="/lessons/python13/threading/"><span class="cn-label">Next chapter →</span><span class="cn-title">13 · Threads &amp; processes</span></a></div></nav></section></article></div>
+    <aside class="lesson-sidebar right" aria-label="This chapter"><nav aria-label="This chapter's contents"><div class="side-label up">In this chapter</div><p class="toc-chapter">Metaclasses</p><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Introduction</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">1. In Python, Classes Are Objects Too</span></a></li><li class="toc-li" data-target="exercise-01-detect-meta"><a href="#exercise-01-detect-meta" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">What is the class of a class?</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">2. Using type() to Create Classes on the Fly</span></a></li><li class="toc-li" data-target="exercise-02-build-greeter"><a href="#exercise-02-build-greeter" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">Make a class on the fly with three-argument type()</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">3. What is a Metaclass?</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">4. Writing Your Own Metaclass</span></a></li><li class="toc-li" data-target="exercise-03-custom-meta"><a href="#exercise-03-custom-meta" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">A custom metaclass that adds an attribute automatically</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">5. Using Metaclasses</span></a></li></ol></nav></aside>
+  </div>
+  <dialog class="dir-dialog" aria-labelledby="dir-title"><div class="dd-inner"><div class="dd-head"><h2 id="dir-title">Contents</h2><button type="button" class="dd-close focus-ring">Close</button></div>
+  <div class="dd-tabs" aria-label="Contents scope"><button type="button" class="dd-tab focus-ring" data-tab="all" aria-pressed="true">All lessons</button><button type="button" class="dd-tab focus-ring" data-tab="chapter" aria-pressed="false">This chapter</button></div>
+  <div class="dd-body"><div class="dd-pane" data-pane="all"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></div><div class="dd-pane" data-pane="chapter" hidden><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Introduction</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">1. In Python, Classes Are Objects Too</span></a></li><li class="toc-li" data-target="exercise-01-detect-meta"><a href="#exercise-01-detect-meta" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">What is the class of a class?</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">2. Using type() to Create Classes on the Fly</span></a></li><li class="toc-li" data-target="exercise-02-build-greeter"><a href="#exercise-02-build-greeter" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">Make a class on the fly with three-argument type()</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">3. What is a Metaclass?</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">4. Writing Your Own Metaclass</span></a></li><li class="toc-li" data-target="exercise-03-custom-meta"><a href="#exercise-03-custom-meta" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">A custom metaclass that adds an attribute automatically</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">5. Using Metaclasses</span></a></li></ol></div></div></div></dialog>
+  <div class="py-toast" hidden><span class="spinner"></span><span class="py-toast-text">Loading Python…</span></div>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>© 2026 Python for Beginners · English edition of the <a href="https://github.com/walter201230/Python">walter201230/Python</a> tutorial (CC BY 4.0)</span>
+    <div class="footer-links"><a href="/">Course list</a><a href="/about/">About this site</a><a href="https://github.com/walter201230/Python">GitHub</a></div>
+  </div>
+</footer>
+<script src="/assets/site.js?v=20261028"></script>
+</body>
+</html>

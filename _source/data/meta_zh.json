@@ -1,0 +1,263 @@
+[
+ {
+  "href": "/lessons/python0/why-python/",
+  "num": "00",
+  "title": "为什么学 Python",
+  "desc": "正式开课前的开胃菜——Python 为什么火、能干啥、值不值得学。",
+  "minutes": 10,
+  "exercises": 0,
+  "tag": "概念阅读"
+ },
+ {
+  "href": "/lessons/python1/intro-and-hello-world/",
+  "num": "01",
+  "title": "Python 安装与第一个程序",
+  "desc": "认识 Python，写下第一行代码——本课在浏览器里跑，不用装环境。",
+  "minutes": 15,
+  "exercises": 1,
+  "tag": null
+ },
+ {
+  "href": "/lessons/python2/data-types-and-variables/",
+  "num": "02",
+  "title": "基本数据类型与变量",
+  "desc": "从 print 开始，掌握字符串、数字、变量赋值——能让 Python 开口说话。",
+  "minutes": 95,
+  "exercises": 9,
+  "tag": null
+ },
+ {
+  "href": "/lessons/python3/list-and-tuple/",
+  "num": "03",
+  "title": "List 与 Tuple",
+  "desc": "有序列表与不可变元组，最常用的两种容器类型。",
+  "minutes": 65,
+  "exercises": 7,
+  "tag": null
+ },
+ {
+  "href": "/lessons/python4/dict-and-set/",
+  "num": "04",
+  "title": "Dict 与 Set",
+  "desc": "键值字典 + 去重集合，配合 List/Tuple 走遍数据世界。",
+  "minutes": 70,
+  "exercises": 7,
+  "tag": null
+ },
+ {
+  "href": "/lessons/python5/conditions-and-loops/",
+  "num": "05",
+  "title": "条件与循环",
+  "desc": "if / for / while + Python 3.10 新写法 match/case。",
+  "minutes": 80,
+  "exercises": 7,
+  "tag": null
+ },
+ {
+  "href": "/lessons/python6/functions/",
+  "num": "06",
+  "title": "函数",
+  "desc": "把一段逻辑包起来反复用——Python 工程的基石。",
+  "minutes": 75,
+  "exercises": 5,
+  "tag": null
+ },
+ {
+  "href": "/lessons/python7/iteration/",
+  "num": "07",
+  "title": "迭代",
+  "desc": "for...in 怎么工作、自定义迭代器、生成器函数 yield。",
+  "minutes": 60,
+  "exercises": 5,
+  "tag": null
+ },
+ {
+  "href": "/lessons/python8/oop/",
+  "num": "08",
+  "title": "面向对象",
+  "desc": "类、继承、多态——把数据和行为打包在一起。",
+  "minutes": 70,
+  "exercises": 4,
+  "tag": null
+ },
+ {
+  "href": "/lessons/python9/modules/",
+  "num": "09",
+  "title": "模块",
+  "desc": "import / from-import / 标准库速览，让代码组织起来。",
+  "minutes": 45,
+  "exercises": 4,
+  "tag": null
+ },
+ {
+  "href": "/lessons/python10/magic-methods/",
+  "num": "10",
+  "title": "魔法方法",
+  "desc": "__str__ / __eq__ / __len__ / __add__——让自定义类用起来像内置类型。",
+  "minutes": 50,
+  "exercises": 5,
+  "tag": null
+ },
+ {
+  "href": "/lessons/python11/enum/",
+  "num": "11",
+  "title": "枚举类",
+  "desc": "用 Enum 取代魔法常量，让常量自己说话。",
+  "minutes": 40,
+  "exercises": 4,
+  "tag": null
+ },
+ {
+  "href": "/lessons/python12/metaclass/",
+  "num": "12",
+  "title": "元类 metaclass",
+  "desc": "类也是对象——type() 三参数动态造类，metaclass 控制类的生成。",
+  "minutes": 50,
+  "exercises": 3,
+  "tag": null
+ },
+ {
+  "href": "/lessons/python13/threading/",
+  "num": "13",
+  "title": "线程与进程",
+  "desc": "threading / multiprocessing 概念速览：GIL、Lock、Queue、Pool。",
+  "minutes": 30,
+  "exercises": 0,
+  "tag": "概念阅读"
+ },
+ {
+  "href": "/lessons/python14/regex/",
+  "num": "14",
+  "title": "正则表达式",
+  "desc": "re 模块：用一行规则匹配/抽取/替换字符串里的复杂模式。",
+  "minutes": 45,
+  "exercises": 4,
+  "tag": null
+ },
+ {
+  "href": "/lessons/python15/closure/",
+  "num": "15",
+  "title": "闭包",
+  "desc": "函数里嵌函数 + 捕获外层变量——理解闭包就理解了装饰器。",
+  "minutes": 30,
+  "exercises": 3,
+  "tag": null
+ },
+ {
+  "href": "/lessons/python16/decorator/",
+  "num": "16",
+  "title": "装饰器",
+  "desc": "@decorator 一行给函数加日志/缓存/权限——Python 最优雅的语法糖。",
+  "minutes": 30,
+  "exercises": 3,
+  "tag": null
+ },
+ {
+  "href": "/lessons/python17/readable-code/",
+  "num": "17",
+  "title": "代码可读性",
+  "desc": "好命名 + 早返回 + 推导式 + 类型注解——让别人(和半年后的自己)看得懂。",
+  "minutes": 145,
+  "exercises": 4,
+  "tag": null
+ },
+ {
+  "href": "/lessons/python18/pathlib/",
+  "num": "18",
+  "title": "pathlib：现代化路径处理",
+  "desc": "用 Path 对象代替 os.path 字符串拼接——更直观、更不容易出错。",
+  "minutes": 95,
+  "exercises": 4,
+  "tag": null
+ },
+ {
+  "href": "/lessons/python19/exception-handling/",
+  "num": "19",
+  "title": "异常处理",
+  "desc": "try / except / finally / raise + 自定义异常——别让一个错误搞挂整个程序。",
+  "minutes": 100,
+  "exercises": 5,
+  "tag": null
+ },
+ {
+  "href": "/lessons/python20/dataclass/",
+  "num": "20",
+  "title": "dataclass",
+  "desc": "一个装饰器自动生成 __init__/__repr__/__eq__——告别样板代码。",
+  "minutes": 80,
+  "exercises": 4,
+  "tag": null
+ },
+ {
+  "href": "/lessons/python21/context-manager/",
+  "num": "21",
+  "title": "上下文管理器（with）",
+  "desc": "with 到底在做什么？__enter__/__exit__ + @contextmanager 一次讲清。",
+  "minutes": 75,
+  "exercises": 4,
+  "tag": null
+ },
+ {
+  "href": "/lessons/python22/async/",
+  "num": "22",
+  "title": "async / await",
+  "desc": "协程基础：async def + await + asyncio.run + gather 并发。",
+  "minutes": 60,
+  "exercises": 4,
+  "tag": null
+ },
+ {
+  "href": "/lessons/python23/pyproject-uv/",
+  "num": "23",
+  "title": "pyproject.toml + uv",
+  "desc": "现代 Python 项目结构：pyproject.toml 标准配置 + uv 极速包管理。",
+  "minutes": 25,
+  "exercises": 0,
+  "tag": "概念阅读"
+ },
+ {
+  "href": "/lessons/python24/ruff/",
+  "num": "24",
+  "title": "ruff：一站式代码检查",
+  "desc": "一个工具搞定 black + flake8 + isort + pyupgrade，比传统组合快 10-100 倍。",
+  "minutes": 40,
+  "exercises": 0,
+  "tag": "概念阅读"
+ },
+ {
+  "href": "/lessons/python25/pytest/",
+  "num": "25",
+  "title": "pytest：测试框架",
+  "desc": "业界事实标准：fixture、参数化、marker、覆盖率——写测试也能很优雅。",
+  "minutes": 55,
+  "exercises": 0,
+  "tag": "概念阅读"
+ },
+ {
+  "href": "/lessons/python26/logging/",
+  "num": "26",
+  "title": "日志 logging",
+  "desc": "把 print 调试升级成正经日志：5 个级别、format、getLogger、exception()。",
+  "minutes": 70,
+  "exercises": 4,
+  "tag": null
+ },
+ {
+  "href": "/lessons/python27/pypi/",
+  "num": "27",
+  "title": "打包发布到 PyPI",
+  "desc": "从零到能 pip install——src layout、uv build、uv publish，发个属于自己的 CLI 工具。",
+  "minutes": 35,
+  "exercises": 0,
+  "tag": "概念阅读"
+ },
+ {
+  "href": "/lessons/python28/whats-next/",
+  "num": "28",
+  "title": "学完之后",
+  "desc": "29 章学完了，下一步该做啥？数据/AI、Web 后端、自动化运维三条出路。",
+  "minutes": 20,
+  "exercises": 0,
+  "tag": "概念阅读"
+ }
+]

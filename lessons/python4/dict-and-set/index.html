@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dict &amp; Set – Python for Beginners</title>
+<meta name="description" content="Key-value dictionaries plus duplicate-free sets – with List/Tuple they cover the whole data world.">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css?v=20261028">
+
+</head>
+<body data-page="lesson" data-lesson="python4" data-total="7">
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="/" aria-label="Python for Beginners – home"><span class="gradient-text-flow" data-text="Python for Beginners">Python for Beginners</span></a>
+    <nav class="header-nav">
+      <a class="nav-link" href="/about/">About</a>
+      <a class="nav-icon focus-ring" href="https://github.com/walter201230/Python" aria-label="Original tutorial on GitHub" title="Original tutorial on GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+      <button type="button" class="theme-toggle focus-ring" aria-label="Switch theme"><span class="knob"><svg class="ic-moon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button>
+    </nav>
+  </div>
+</header>
+<main class="site-main">
+<div class="lesson-shell bg-tech-grid">
+  <div class="mobile-bar"><div class="mb-inner"><button type="button" class="dir-btn focus-ring" aria-haspopup="dialog">Contents</button></div></div>
+  <div class="lesson-columns">
+    <aside class="lesson-sidebar left" aria-label="All lessons"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></aside>
+    <div class="lesson-main"><article class="lesson-article"><header class="lesson-head"><h1>Dict &amp; Set</h1><p class="lh-sub"><span class="accent">7</span> exercises<span class="sep">·</span>about <span class="accent">70</span> min<span class="sep">·</span>solve one to unlock the next part</p>
+<p class="lh-link"><a class="subtle-link focus-ring" href="/lessons/python4/dict-and-set/read/">Read the whole chapter →</a></p></header><section id="step-0" class="step-card item" data-kind="step" aria-label="Teaching step 1">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 01 / 03</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>Introduction</h2>
+<p>The last article had an obvious mistake, but thanks to a reader who pointed it out, I fixed it quickly. I hope you can forgive me.</p>
+<blockquote>
+<p>Note: (1 September 2019, 15:28) While editing my articles, I found that what I wrote two years ago was terrible. I couldn't help complaining about it in our chat group.</p>
+<p>Group member: @Brother Shui, are you writing a Python tutorial?</p>
+<p>Brother Shui: I'm fixing it</p>
+<p>Brother Shui: I finished the basic tutorial two years ago</p>
+<p>Brother Shui: Now I'm rewriting all of it</p>
+<p>Brother Shui: Turns out what I wrote before was rubbish</p>
+</blockquote>
+<h2>Contents</h2>
+<ul>
+<li>1. Dictionary (dict)<ol>
+<li>What is a dict?</li>
+<li>Creating a dict</li>
+<li>Getting values from a dict</li>
+<li>Changing a dict</li>
+<li>Deleting from a dict</li>
+<li>Things to watch out for with dicts</li>
+<li>dict functions and methods</li>
+</ol>
+</li>
+<li>2. set<ol>
+<li>Creating a set</li>
+<li>Adding elements to a set</li>
+<li>Removing elements from a set</li>
+<li>Using sets</li>
+</ol>
+</li>
+</ul></article></section><section id="step-1" class="step-card item" data-kind="step" aria-label="Teaching step 2">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 02 / 03</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>1. Dictionary (dict)</h2>
+<h3>1. What is a dict?</h3>
+<p>In the last chapter, we learned to use lists and tuples for ordered collections.</p>
+<p>When we talked about lists, we used a list to store people's names:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">name = [&#x27;One Drop&#x27;, &#x27;Two Drops&#x27;, &#x27;Three Drops&#x27;, &#x27;Four Drops&#x27;, &#x27;Five Drops&#x27;]</code></pre></div>
+<p>Now, what if we want to contact these friends easily, and we need to add their phone numbers too?</p>
+<p>With a list, we could do this:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">name = [[&#x27;One Drop&#x27;, &#x27;131456780001&#x27;], [&#x27;Two Drops&#x27;, &#x27;131456780002&#x27;], [&#x27;Three Drops&#x27;, &#x27;131456780003&#x27;], [&#x27;Four Drops&#x27;, &#x27;131456780004&#x27;], [&#x27;Five Drops&#x27;, &#x27;131456780005&#x27;]]</code></pre></div>
+<p>But this isn't very handy. We saved the phone numbers so we can quickly contact someone when we need to.</p>
+<p>If we store them in a list, the longer the list gets, the longer it takes to find someone.</p>
+<p>This is when we can use a <strong>dict</strong> (dictionary). Python has dicts built in. If you know Java, a dict is like a <code>map</code> in Java. It stores data as <strong>key-value</strong> pairs, and it can find things extremely fast.</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">name = {&#x27;One Drop&#x27;: &#x27;131456780001&#x27;, &#x27;Two Drops&#x27;: &#x27;131456780002&#x27;, &#x27;Three Drops&#x27;: &#x27;131456780003&#x27;, &#x27;Four Drops&#x27;: &#x27;131456780004&#x27;, &#x27;Five Drops&#x27;: &#x27;131456780005&#x27;}</code></pre></div>
+<h3>2. Creating a dict</h3>
+<p>A dictionary is another kind of changeable container, and it can store any type of object.</p>
+<p>Each <strong>key: value</strong> pair is split by a colon (<code>:</code>). Pairs are separated by commas (<code>,</code>). The whole dictionary goes inside <strong>curly braces</strong> (<code>{}</code>), like this:</p>
+<div class="cb not-prose" data-mode="syntax"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Syntax only</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">dict = {key1 : value1, key2 : value2 }</code></pre></div>
+<p>Note: keys must be <strong>unique</strong>, but values don't have to be. Values can be any data type, but keys must be <strong>immutable</strong> (unchangeable).</p>
+<blockquote>
+<p>To be more exact, dictionary keys must be <strong>hashable</strong>. A tuple that contains a list is itself immutable, but it still can't be a dictionary key. So you can't decide only by "changeable or unchangeable".</p>
+</blockquote>
+<p>Examples of creating dicts:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">dict1={&#x27;liangdianshui&#x27;:&#x27;111111&#x27; ,&#x27;twowater&#x27;:&#x27;222222&#x27; ,&#x27;Two Drops&#x27;:&#x27;333333&#x27;}
+dict2={&#x27;abc&#x27;:1234,1234:&#x27;abc&#x27;}</code></pre></div>
+<h3>3. Getting Values from a dict</h3>
+<p>Now we know how to create a dict. Back to our first question: why does a dictionary help us find someone's phone number so quickly?</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">name = {&#x27;One Drop&#x27;: &#x27;131456780001&#x27;, &#x27;Two Drops&#x27;: &#x27;131456780002&#x27;, &#x27;Three Drops&#x27;: &#x27;131456780003&#x27;, &#x27;Four Drops&#x27;: &#x27;131456780004&#x27;, &#x27;Five Drops&#x27;: &#x27;131456780005&#x27;}
+
+print(name[&#x27;Two Drops&#x27;])</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">131456780002</code></pre></div>
+<p>As you can see, if you know someone's name (the <strong>key</strong>), you can very quickly find their phone number (the <strong>value</strong>).</p>
+<p>One thing to note: if the key is <strong>not</strong> in the dictionary, you will get an error.</p>
+<h3>4. Changing a dict</h3>
+<p>To add new content to a dictionary, add a new key/value pair. You can also change or delete existing pairs.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">#-*-coding:utf-8-*-
+dict1={&#x27;liangdianshui&#x27;:&#x27;111111&#x27; ,&#x27;twowater&#x27;:&#x27;222222&#x27; ,&#x27;Two Drops&#x27;:&#x27;333333&#x27;}
+print(dict1)
+# Add a new key-value pair
+dict1[&#x27;jack&#x27;]=&#x27;444444&#x27;
+print(dict1)
+# Change a key-value pair
+dict1[&#x27;liangdianshui&#x27;]=&#x27;555555&#x27;
+print(dict1)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">{&#x27;liangdianshui&#x27;: &#x27;111111&#x27;, &#x27;twowater&#x27;: &#x27;222222&#x27;, &#x27;Two Drops&#x27;: &#x27;333333&#x27;}
+{&#x27;liangdianshui&#x27;: &#x27;111111&#x27;, &#x27;twowater&#x27;: &#x27;222222&#x27;, &#x27;Two Drops&#x27;: &#x27;333333&#x27;, &#x27;jack&#x27;: &#x27;444444&#x27;}
+{&#x27;liangdianshui&#x27;: &#x27;555555&#x27;, &#x27;twowater&#x27;: &#x27;222222&#x27;, &#x27;Two Drops&#x27;: &#x27;333333&#x27;, &#x27;jack&#x27;: &#x27;444444&#x27;}</code></pre></div>
+<h3>5. Deleting from a dict</h3>
+<p>You can use <code>del</code> to delete one item from a dict, or to delete the whole dict.</p>
+<p>You can call the <code>clear()</code> method to remove all items from a dict.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">#-*-coding:utf-8-*-
+dict1={&#x27;liangdianshui&#x27;:&#x27;111111&#x27; ,&#x27;twowater&#x27;:&#x27;222222&#x27; ,&#x27;Two Drops&#x27;:&#x27;333333&#x27;}
+print(dict1)
+# Delete an item using its key
+del dict1[&#x27;twowater&#x27;]
+print(dict1)
+# Remove all items from the dict
+dict1.clear()
+print(dict1)
+# Delete the dict
+del dict1</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">{&#x27;liangdianshui&#x27;: &#x27;111111&#x27;, &#x27;twowater&#x27;: &#x27;222222&#x27;, &#x27;Two Drops&#x27;: &#x27;333333&#x27;}
+{&#x27;liangdianshui&#x27;: &#x27;111111&#x27;, &#x27;Two Drops&#x27;: &#x27;333333&#x27;}
+{}</code></pre></div>
+<h3>6. Things to Watch Out For with dicts</h3>
+<p>(1) A dict can't have the same key twice. If you give the same key a value twice when creating a dict, the <strong>last</strong> value wins.</p>
+<p>For example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">#-*-coding:utf-8-*-
+dict1={&#x27;liangdianshui&#x27;:&#x27;111111&#x27; ,&#x27;twowater&#x27;:&#x27;222222&#x27; ,&#x27;Two Drops&#x27;:&#x27;333333&#x27;,&#x27;twowater&#x27;:&#x27;444444&#x27;}
+print(dict1)
+print(dict1[&#x27;twowater&#x27;])</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">{&#x27;liangdianshui&#x27;: &#x27;111111&#x27;, &#x27;twowater&#x27;: &#x27;444444&#x27;, &#x27;Two Drops&#x27;: &#x27;333333&#x27;}
+444444</code></pre></div>
+<p>(2) dict keys must be immutable. Keys can be numbers, strings or tuples, but <strong>not</strong> lists.</p>
+<p>For example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">#-*-coding:utf-8-*-
+dict1={&#x27;liangdianshui&#x27;:&#x27;111111&#x27; ,123:&#x27;222222&#x27; ,(123,&#x27;tom&#x27;):&#x27;333333&#x27;,&#x27;twowater&#x27;:&#x27;444444&#x27;}
+print(dict1)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">{&#x27;liangdianshui&#x27;: &#x27;111111&#x27;, 123: &#x27;222222&#x27;, (123, &#x27;tom&#x27;): &#x27;333333&#x27;, &#x27;twowater&#x27;: &#x27;444444&#x27;}</code></pre></div>
+<p>(3) The order things are stored inside a dict has nothing to do with the order you added the keys. <em>(This changed in Python 3.7 – see section 8 below.)</em></p>
+<p>Compared with a list, a dict:</p>
+<ul>
+<li>
+<p>Finds and adds items extremely fast, and doesn't get slower as you add more keys</p>
+</li>
+<li>
+<p>Uses a lot of memory, and wastes quite a bit</p>
+</li>
+</ul>
+<p>A list is the opposite:</p>
+<ul>
+<li>
+<p>Finding and adding items takes longer as the list grows</p>
+</li>
+<li>
+<p>Uses little space and wastes very little memory</p>
+</li>
+</ul>
+<h3>7. dict Functions and Methods</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Method / Function</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>len(dict)</td>
+<td>Counts the items in the dict</td>
+</tr>
+<tr>
+<td>str(dict)</td>
+<td>Gives a printable string version of the dict</td>
+</tr>
+<tr>
+<td>type(variable)</td>
+<td>Returns the variable's type. If it's a dict, it returns the dict type</td>
+</tr>
+<tr>
+<td>dict.clear()</td>
+<td>Removes all items from the dict</td>
+</tr>
+<tr>
+<td>dict.copy()</td>
+<td>Returns a shallow copy of the dict</td>
+</tr>
+<tr>
+<td>dict.values()</td>
+<td>Returns all the values in the dict as a list</td>
+</tr>
+<tr>
+<td>popitem()</td>
+<td>Removes and returns a key-value pair from the dict</td>
+</tr>
+<tr>
+<td>dict.items()</td>
+<td>Returns a list of (key, value) tuples you can loop through</td>
+</tr>
+</tbody>
+</table></div>
+<h3>8. New in Python 3.9+: the dict merge operator</h3>
+<p>Hey everyone! We have covered adding, deleting, changing and finding things in a dict. Now here's a nice extra that came in Python 3.9: the dict <strong>merge operators</strong> <code>|</code> and <code>|=</code>.</p>
+<p>Why talk about this specially?</p>
+<p>Let's look at a task first. Say Brother Shui has two contact dictionaries, and needs to merge them into one:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">old_contacts = {&#x27;One Drop&#x27;: &#x27;131456780001&#x27;, &#x27;Two Drops&#x27;: &#x27;131456780002&#x27;}
+new_contacts = {&#x27;Three Drops&#x27;: &#x27;131456780003&#x27;, &#x27;Two Drops&#x27;: &#x27;131456780099&#x27;}</code></pre></div>
+<p>Look carefully: the key <code>'Two Drops'</code> is in both. We want the <strong>new</strong> one to win.</p>
+<p>Before Python 3.9, people usually wrote it like this:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">old_contacts = {&#x27;One Drop&#x27;: &#x27;131456780001&#x27;, &#x27;Two Drops&#x27;: &#x27;131456780002&#x27;}
+new_contacts = {&#x27;Three Drops&#x27;: &#x27;131456780003&#x27;, &#x27;Two Drops&#x27;: &#x27;131456780099&#x27;}
+
+merged = {**old_contacts, **new_contacts}
+print(merged)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">{&#x27;One Drop&#x27;: &#x27;131456780001&#x27;, &#x27;Two Drops&#x27;: &#x27;131456780099&#x27;, &#x27;Three Drops&#x27;: &#x27;131456780003&#x27;}</code></pre></div>
+<p>This <code>**</code> unpacking works fine, but it's not very easy to read. From Python 3.9, you can just use <code>|</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">old_contacts = {&#x27;One Drop&#x27;: &#x27;131456780001&#x27;, &#x27;Two Drops&#x27;: &#x27;131456780002&#x27;}
+new_contacts = {&#x27;Three Drops&#x27;: &#x27;131456780003&#x27;, &#x27;Two Drops&#x27;: &#x27;131456780099&#x27;}
+
+merged = old_contacts | new_contacts
+print(merged)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">{&#x27;One Drop&#x27;: &#x27;131456780001&#x27;, &#x27;Two Drops&#x27;: &#x27;131456780099&#x27;, &#x27;Three Drops&#x27;: &#x27;131456780003&#x27;}</code></pre></div>
+<p>Notice anything? It looks exactly like the set union <code>|</code>. That's on purpose – it means "join the two dicts together".</p>
+<p>If you don't want a new dictionary, and instead want to merge the new content <strong>into the original</strong> dictionary, use <code>|=</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">old_contacts = {&#x27;One Drop&#x27;: &#x27;131456780001&#x27;, &#x27;Two Drops&#x27;: &#x27;131456780002&#x27;}
+new_contacts = {&#x27;Three Drops&#x27;: &#x27;131456780003&#x27;, &#x27;Two Drops&#x27;: &#x27;131456780099&#x27;}
+
+old_contacts |= new_contacts
+print(old_contacts)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">{&#x27;One Drop&#x27;: &#x27;131456780001&#x27;, &#x27;Two Drops&#x27;: &#x27;131456780099&#x27;, &#x27;Three Drops&#x27;: &#x27;131456780003&#x27;}</code></pre></div>
+<p>Note: with <code>|</code>, the <strong>right side overwrites the left side</strong>, the same as <code>{**a, **b}</code>. Keep this in mind so you don't mix up which side is new and which is old.</p>
+<p>Finally, one more point I didn't stress before: since Python 3.7, dicts <strong>keep insertion order</strong>. This means the earlier rule, "the order inside a dict has nothing to do with the order you added keys", is no longer true in modern Python. Look at this example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">d = {}
+d[&#x27;c&#x27;] = 3
+d[&#x27;a&#x27;] = 1
+d[&#x27;b&#x27;] = 2
+
+for key in d:
+    print(key)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">c
+a
+b</code></pre></div>
+<p>See? The loop goes in the same order the keys were added. This is guaranteed by the language in Python 3.7+ (in 3.6 it already worked this way in CPython, but it wasn't an official rule). So in most cases now, you don't need <code>import collections.OrderedDict</code> any more – a normal <code>dict</code> is enough.</p>
+<h3>Studying the same subject again: how to update the record</h3>
+<p>We've recorded 15 minutes of Python and 10 minutes of reading. If we study Python for another 5 minutes, do we add the same key again, or change the old value?</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">totals = {&#x27;Python&#x27;: 15, &#x27;Reading&#x27;: 10}
+totals[&#x27;Python&#x27;] = totals[&#x27;Python&#x27;] + 5
+print(totals)
+print(totals.get(&#x27;Maths&#x27;, 0))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">{&#x27;Python&#x27;: 20, &#x27;Reading&#x27;: 10}
+0</code></pre></div>
+<p>In one dictionary, each key can only have one value. Before assigning, we take out the old <code>15</code>, add <code>5</code>, and store it back. So the Python total becomes <code>20</code>. <code>get('Maths', 0)</code> means: if this subject isn't there, give back the default value <code>0</code> that we provided. It does <strong>not</strong> add a new key.</p>
+<p>Try it yourself: change the right side to just <code>5</code>. What's different? Then add a new subject to the dictionary and check whether the old records are still there. After we learn loops, we'll handle lots of study records.</p></article></section><section id="exercise-01-dict-create" class="ex-card item" data-kind="exercise" data-exercise="01-dict-create" aria-label="Exercise 1: Create a dict">
+<script type="application/json" class="ex-data">{"id": "01-dict-create", "lesson": "python4", "starter": "# Use curly brackets {} to create a dict, written as {key: value, ...}\n", "solution": "phone_book = {'Alice': '13800001111', 'Bob': '13800002222', 'Carol': '13800003333'}\nprint(phone_book)", "grading": {"stdoutEquals": "{'Alice': '13800001111', 'Bob': '13800002222', 'Carol': '13800003333'}\n", "varsEqual": {"phone_book": {"Alice": "13800001111", "Bob": "13800002222", "Carol": "13800003333"}}}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 1 / 7</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Create a dict</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Create a dictionary <code>phone_book</code> that stores these three contacts:</p>
+<ul>
+<li><code>'Alice'</code> → <code>'13800001111'</code></li>
+<li><code>'Bob'</code> → <code>'13800002222'</code></li>
+<li><code>'Carol'</code> → <code>'13800003333'</code></li>
+</ul>
+<p>Then <code>print(phone_book)</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">{&#x27;Alice&#x27;: &#x27;13800001111&#x27;, &#x27;Bob&#x27;: &#x27;13800002222&#x27;, &#x27;Carol&#x27;: &#x27;13800003333&#x27;}</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 2)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>How to write a dict: {'key1': 'value1', 'key2': 'value2'}</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">phone_book = {&#x27;Alice&#x27;: &#x27;13800001111&#x27;, &#x27;Bob&#x27;: &#x27;13800002222&#x27;, &#x27;Carol&#x27;: &#x27;13800003333&#x27;}
+print(phone_book)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># Use curly brackets {} to create a dict, written as {key: value, ...}
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="exercise-02-dict-access" class="ex-card item" data-kind="exercise" data-exercise="02-dict-access" aria-label="Exercise 2: Get a value by its key">
+<script type="application/json" class="ex-data">{"id": "02-dict-access", "lesson": "python4", "starter": "scores = {'English': 90, 'Maths': 85, 'Science': 78}\n# Use scores['Maths'] to get the score and print it\n", "solution": "scores = {'English': 90, 'Maths': 85, 'Science': 78}\nprint(scores['Maths'])", "grading": {"stdoutEquals": "85\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 2 / 7</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Get a value by its key</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>We've already defined this for you:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">scores = {&#x27;English&#x27;: 90, &#x27;Maths&#x27;: 85, &#x27;Science&#x27;: 78}</code></pre></div>
+<p>Use <code>print</code> to print the score for <code>Maths</code> (use <code>scores['Maths']</code>).</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">85</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 2)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>Get a value with dict[key]</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">scores = {&#x27;English&#x27;: 90, &#x27;Maths&#x27;: 85, &#x27;Science&#x27;: 78}
+print(scores[&#x27;Maths&#x27;])</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">scores = {&#x27;English&#x27;: 90, &#x27;Maths&#x27;: 85, &#x27;Science&#x27;: 78}
+# Use scores[&#x27;Maths&#x27;] to get the score and print it
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="exercise-03-dict-modify" class="ex-card item" data-kind="exercise" data-exercise="03-dict-modify" aria-label="Exercise 3: Add + change">
+<script type="application/json" class="ex-data">{"id": "03-dict-modify", "lesson": "python4", "starter": "scores = {'English': 90, 'Maths': 85}\n# First add the Science score, then change the Maths score, then print scores\n", "solution": "scores = {'English': 90, 'Maths': 85}\nscores['Science'] = 78\nscores['Maths'] = 92\nprint(scores)", "grading": {"stdoutEquals": "{'English': 90, 'Maths': 92, 'Science': 78}\n", "varsEqual": {"scores": {"English": 90, "Maths": 92, "Science": 78}}}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 3 / 7</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Add + change</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>We've already defined this for you:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">scores = {&#x27;English&#x27;: 90, &#x27;Maths&#x27;: 85}</code></pre></div>
+<p>Please:</p>
+<ol>
+<li>Add a new item <code>'Science': 78</code></li>
+<li>Change the <code>'Maths'</code> score to <code>92</code></li>
+<li><code>print(scores)</code></li>
+</ol>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">{&#x27;English&#x27;: 90, &#x27;Maths&#x27;: 92, &#x27;Science&#x27;: 78}</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 2)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>Adding and changing are both dict[key] = value – if the key doesn't exist it's added, if it does it's overwritten</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">scores = {&#x27;English&#x27;: 90, &#x27;Maths&#x27;: 85}
+scores[&#x27;Science&#x27;] = 78
+scores[&#x27;Maths&#x27;] = 92
+print(scores)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">scores = {&#x27;English&#x27;: 90, &#x27;Maths&#x27;: 85}
+# First add the Science score, then change the Maths score, then print scores
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="exercise-04-dict-merge" class="ex-card item" data-kind="exercise" data-exercise="04-dict-merge" aria-label="Exercise 4: Merge two dicts with |">
+<script type="application/json" class="ex-data">{"id": "04-dict-merge", "lesson": "python4", "starter": "old = {'a': 1, 'b': 2}\nnew = {'b': 99, 'c': 3}\n# Use | to merge the two dicts, assign the result to merged and print it\n", "solution": "old = {'a': 1, 'b': 2}\nnew = {'b': 99, 'c': 3}\nmerged = old | new\nprint(merged)", "grading": {"stdoutEquals": "{'a': 1, 'b': 99, 'c': 3}\n", "varsEqual": {"merged": {"a": 1, "b": 99, "c": 3}}}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 4 / 7</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Merge two dicts with |</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>We've already defined this for you:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">old = {&#x27;a&#x27;: 1, &#x27;b&#x27;: 2}
+new = {&#x27;b&#x27;: 99, &#x27;c&#x27;: 3}</code></pre></div>
+<p>Use <code>|</code> to merge them into <code>merged</code> (note: the right side wins, so <code>'b'</code> should be 99), then <code>print(merged)</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">{&#x27;a&#x27;: 1, &#x27;b&#x27;: 99, &#x27;c&#x27;: 3}</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>The | merge only exists in Python 3.9+</p></li></template><template class="hint-tpl"><li><p>'b': 99 on the right overwrites 'b': 2 on the left</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">old = {&#x27;a&#x27;: 1, &#x27;b&#x27;: 2}
+new = {&#x27;b&#x27;: 99, &#x27;c&#x27;: 3}
+merged = old | new
+print(merged)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">old = {&#x27;a&#x27;: 1, &#x27;b&#x27;: 2}
+new = {&#x27;b&#x27;: 99, &#x27;c&#x27;: 3}
+# Use | to merge the two dicts, assign the result to merged and print it
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-2" class="step-card item" data-kind="step" aria-label="Teaching step 3">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 03 / 03</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>2. set</h2>
+<p>A Python <strong>set</strong> is like sets in other languages: an <strong>unordered</strong> collection with <strong>no duplicate</strong> elements. Its main jobs are testing relationships between groups and removing duplicates.</p>
+<p>A set is like a dict, but a set doesn't store values – only keys.</p>
+<h3>1. Creating a set</h3>
+<p>To create a set, you can give it a list:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">set1=set([123,456,789])
+print(set1)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">{456, 123, 789}</code></pre></div>
+<p>The argument <code>[123,456,789]</code> is a list. The output <code>{456, 123, 789}</code> just tells you the set holds the 3 elements 456, 123 and 789. The order shown is different from the order in your list. This shows that a set has <strong>no order</strong>.</p>
+<p>Also, notice the output is inside curly braces. From what we've learned: a tuple uses round brackets, a list uses square brackets, and a dict uses curly braces. A dict stores key-value pairs, while you can think of a set as storing only keys.</p>
+<blockquote>
+<p>Note the version difference here: since Python 3.7, a normal dict keeps the order keys were added. A set still does <strong>not</strong> keep insertion order. And a dict keeping order is not the same as sorting the keys.</p>
+</blockquote>
+<p>Remember: when creating a dict, a repeated key gets overwritten by the later key-value pair. In a set, repeated elements are <strong>automatically filtered out</strong>.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">set1=set([123,456,789,123,123])
+print(set1)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">{456, 123, 789}</code></pre></div>
+<h3>2. Adding Elements to a set</h3>
+<p>Use the <code>add(key)</code> method to add an element to a set. You can add the same thing again, but it has no effect.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">set1=set([123,456,789])
+print(set1)
+set1.add(100)
+print(set1)
+set1.add(100)
+print(set1)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">{456, 123, 789}
+{456, 123, 100, 789}
+{456, 123, 100, 789}</code></pre></div>
+<h3>3. Removing Elements from a set</h3>
+<p>Use the <code>remove(key)</code> method to remove an element from a set.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">set1=set([123,456,789])
+print(set1)
+set1.remove(456)
+print(set1)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">{456, 123, 789}
+{123, 789}</code></pre></div>
+<h3>4. Using sets</h3>
+<p>Because a set is an unordered collection with no duplicates, two sets can do maths operations like <strong>union</strong>, <strong>intersection</strong> and <strong>difference</strong>.</p>
+<p>Think of them with a Venn diagram:</p>
+<ul>
+<li><strong>Union</strong>: both circles are fully coloured in – all the elements from both sets together</li>
+<li><strong>Intersection</strong>: only the middle part where the circles overlap is coloured – elements that are in <strong>both</strong> sets</li>
+<li><strong>Difference</strong>: only the first circle, minus the part that overlaps the second – elements in the first set but <strong>not</strong> in the second</li>
+</ul>
+<p>Example:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">set1=set(&#x27;hello&#x27;)
+set2=set([&#x27;p&#x27;,&#x27;y&#x27;,&#x27;y&#x27;,&#x27;h&#x27;,&#x27;o&#x27;,&#x27;n&#x27;])
+print(set1)
+print(set2)
+
+# Intersection (the elements both sets have)
+set3=set1 &amp; set2
+print(&#x27;\nIntersection set3:&#x27;)
+print(set3)
+# Union (join both sets and remove duplicates)
+set4=set1 | set2
+print(&#x27;\nUnion set4:&#x27;)
+print(set4)
+# Difference
+set5=set1 - set2
+set6=set2 - set1
+print(&#x27;\nDifference set5:&#x27;)
+print(set5)
+print(&#x27;\nDifference set6:&#x27;)
+print( set6)
+
+
+# To remove duplicates from a huge list, you could use hashing, but it&#x27;s not very fast. A set does this nicely
+list1 = [111,222,333,444,111,222,333,444,555,666]  
+set7=set(list1)
+print(&#x27;\nRemove duplicates from a list, set7:&#x27;)
+print(set7)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">{&#x27;h&#x27;, &#x27;l&#x27;, &#x27;e&#x27;, &#x27;o&#x27;}
+{&#x27;h&#x27;, &#x27;n&#x27;, &#x27;o&#x27;, &#x27;y&#x27;, &#x27;p&#x27;}
+
+Intersection set3:
+{&#x27;h&#x27;, &#x27;o&#x27;}
+
+Union set4:
+{&#x27;h&#x27;, &#x27;p&#x27;, &#x27;n&#x27;, &#x27;e&#x27;, &#x27;o&#x27;, &#x27;y&#x27;, &#x27;l&#x27;}
+
+Difference set5:
+{&#x27;l&#x27;, &#x27;e&#x27;}
+
+Difference set6:
+{&#x27;p&#x27;, &#x27;y&#x27;, &#x27;n&#x27;}
+
+Remove duplicates from a list, set7:
+{555, 333, 111, 666, 444, 222}</code></pre></div>
+<h3>5. A Few Extras about Modern sets</h3>
+<p>Hey everyone! Everything above works in all versions of Python. Here are three more things that are common in modern code, to make your coding smoother.</p>
+<h4>(1) Set comprehensions</h4>
+<p>When we learn about lists, we use list comprehensions like <code>[x * x for x in range(5)]</code>. Sets have their own <strong>set comprehensions</strong>. They look almost the same – just swap the square brackets for curly braces:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># The squares of all even numbers from 1 to 10
+squares = {x * x for x in range(1, 11) if x % 2 == 0}
+print(squares)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">{64, 4, 36, 100, 16}</code></pre></div>
+<p>Notice the result is automatically unordered with no duplicates. You don't need to call <code>set()</code> yourself.</p>
+<p>Here's a more real-world example. Say Brother Shui wants to get the <strong>unique</strong> customers from a pile of orders:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">orders = [
+    {&#x27;user&#x27;: &#x27;One Drop&#x27;, &#x27;amount&#x27;: 100},
+    {&#x27;user&#x27;: &#x27;Two Drops&#x27;, &#x27;amount&#x27;: 200},
+    {&#x27;user&#x27;: &#x27;One Drop&#x27;, &#x27;amount&#x27;: 50},
+    {&#x27;user&#x27;: &#x27;Three Drops&#x27;, &#x27;amount&#x27;: 300},
+]
+
+users = {order[&#x27;user&#x27;] for order in orders}
+print(users)</code></pre></div>
+<p>Output (the order may be different):</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">{&#x27;Two Drops&#x27;, &#x27;One Drop&#x27;, &#x27;Three Drops&#x27;}</code></pre></div>
+<p>Done in one line – much cleaner than making an empty set and using <code>add</code>.</p>
+<h4>(2) frozenset: a set that can't change</h4>
+<p>A normal set can change: you can <code>add</code> and <code>remove</code>. But sometimes we want a set that <strong>can't</strong> be changed – for example, to use it as a dict key, or to put it inside another set.</p>
+<p>That's when you use <code>frozenset</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">fs = frozenset([1, 2, 3])
+print(fs)
+
+# You can do set operations with it
+print(fs &amp; frozenset([2, 3, 4]))
+
+# You can use it as a dict key
+config = {frozenset([&#x27;admin&#x27;, &#x27;editor&#x27;]): &#x27;Admin panel access&#x27;}
+print(config[frozenset([&#x27;editor&#x27;, &#x27;admin&#x27;])])</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">frozenset({1, 2, 3})
+frozenset({2, 3})
+Admin panel access</code></pre></div>
+<p>Look at the last part: <code>frozenset(['admin', 'editor'])</code> and <code>frozenset(['editor', 'admin'])</code> are <strong>equal</strong> – because sets have no order – so both lookups find the same key.</p>
+<h4>(3) When to use a set instead of a list</h4>
+<p>This last point isn't new syntax, but it's very important. When we check if something is <strong>in</strong> a group, like <code>x in collection</code>:</p>
+<ul>
+<li>If <code>collection</code> is a list, the time is O(n). The more elements, the slower it is.</li>
+<li>If <code>collection</code> is a set (or dict), the time is close to O(1). It hardly depends on how many elements there are.</li>
+</ul>
+<p>So if your code checks "is this thing in that pile?" a lot, changing the pile from a list to a set can make it much, much faster:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># We have 100,000 usernames and want to check if a name is there
+names_list = [f&#x27;user_{i}&#x27; for i in range(100000)]
+names_set = set(names_list)
+
+# Both give the same answer, but the second one is much faster
+print(&#x27;user_99999&#x27; in names_list)
+print(&#x27;user_99999&#x27; in names_set)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">True
+True</code></pre></div>
+<p>So a set isn't only useful for removing duplicates – even more important, it's great for <strong>fast lookups</strong>. When your code does lots of <code>in</code> checks, think about switching to a set.</p></article></section><section id="exercise-05-set-dedup" class="ex-card item" data-kind="exercise" data-exercise="05-set-dedup" aria-label="Exercise 5: Remove duplicates with a set">
+<script type="application/json" class="ex-data">{"id": "05-set-dedup", "lesson": "python4", "starter": "nums = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3]\n# First remove duplicates with set, then sort with sorted, assign to unique and print\n", "solution": "nums = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3]\nunique = sorted(set(nums))\nprint(unique)", "grading": {"stdoutEquals": "[1, 2, 3, 4, 5, 6, 9]\n", "varsEqual": {"unique": [1, 2, 3, 4, 5, 6, 9]}}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 5 / 7</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Remove duplicates with a set</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>We've already defined this for you:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">nums = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3]</code></pre></div>
+<p>Please:</p>
+<ol>
+<li>Turn <code>nums</code> into a <code>set</code> to remove duplicates</li>
+<li>Then use <code>sorted()</code> to sort the set into a list and assign it to <code>unique</code> (so the output order is always the same)</li>
+<li><code>print(unique)</code></li>
+</ol>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[1, 2, 3, 4, 5, 6, 9]</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>set(nums) removes duplicates automatically – each value is kept only once</p></li></template><template class="hint-tpl"><li><p>sorted(set) turns a set into a sorted list</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">nums = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3]
+unique = sorted(set(nums))
+print(unique)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">nums = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3]
+# First remove duplicates with set, then sort with sorted, assign to unique and print
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="exercise-06-set-add" class="ex-card item" data-kind="exercise" data-exercise="06-set-add" aria-label="Exercise 6: A set&#x27;s add">
+<script type="application/json" class="ex-data">{"id": "06-set-add", "lesson": "python4", "starter": "tags = {'python', 'web'}\n# Use add to add 'ai' and then 'python', then print the sorted tags\n", "solution": "tags = {'python', 'web'}\ntags.add('ai')\ntags.add('python')\nprint(sorted(tags))", "grading": {"stdoutEquals": "['ai', 'python', 'web']\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 6 / 7</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">A set&#x27;s add</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>We've already defined this for you:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">tags = {&#x27;python&#x27;, &#x27;web&#x27;}</code></pre></div>
+<p>Please:</p>
+<ol>
+<li>Use <code>add</code> to add <code>'ai'</code></li>
+<li>Use <code>add</code> to add <code>'python'</code> again (it's already there, so nothing changes)</li>
+<li>Use <code>print(sorted(tags))</code> to print the items <strong>sorted</strong> (so the output is always the same)</li>
+</ol>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[&#x27;ai&#x27;, &#x27;python&#x27;, &#x27;web&#x27;]</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>tags.add(x) adds an item; adding the same value again does nothing</p></li></template><template class="hint-tpl"><li><p>A set has no order, so print's order isn't fixed – that's why we sort before printing</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">tags = {&#x27;python&#x27;, &#x27;web&#x27;}
+tags.add(&#x27;ai&#x27;)
+tags.add(&#x27;python&#x27;)
+print(sorted(tags))</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">tags = {&#x27;python&#x27;, &#x27;web&#x27;}
+# Use add to add &#x27;ai&#x27; and then &#x27;python&#x27;, then print the sorted tags
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="exercise-07-set-ops" class="ex-card item" data-kind="exercise" data-exercise="07-set-ops" aria-label="Exercise 7: Find the intersection">
+<script type="application/json" class="ex-data">{"id": "07-set-ops", "lesson": "python4", "starter": "a = {1, 2, 3, 4, 5}\nb = {3, 4, 5, 6, 7}\n# Use & for the intersection, sort it with sorted, assign to common and print\n", "solution": "a = {1, 2, 3, 4, 5}\nb = {3, 4, 5, 6, 7}\ncommon = sorted(a & b)\nprint(common)", "grading": {"stdoutEquals": "[3, 4, 5]\n", "varsEqual": {"common": [3, 4, 5]}}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 7 / 7</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Find the intersection</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>We've already defined this for you:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">a = {1, 2, 3, 4, 5}
+b = {3, 4, 5, 6, 7}</code></pre></div>
+<p>Use <code>&amp;</code> to find the <strong>intersection</strong> of <code>a</code> and <code>b</code> (the items both have), then use <code>sorted()</code> to turn it into a sorted list, assign it to <code>common</code>, and <code>print(common)</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[3, 4, 5]</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>a &amp; b gives the intersection of two sets</p></li></template><template class="hint-tpl"><li><p>sorted() turns it into a sorted list so the output is stable</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">a = {1, 2, 3, 4, 5}
+b = {3, 4, 5, 6, 7}
+common = sorted(a &amp; b)
+print(common)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">a = {1, 2, 3, 4, 5}
+b = {3, 4, 5, 6, 7}
+# Use &amp; for the intersection, sort it with sorted, assign to common and print
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><div class="lock-banner" hidden><span aria-hidden="true">🔒</span>Solve this exercise to unlock the next part ·<span class="accent lock-k">0</span><span aria-hidden="true">/</span><span>7</span></div><section id="lesson-end" aria-label="Chapter summary"><div class="done-banner" hidden><div class="done-emoji" aria-hidden="true">🎉</div><p class="done-title">Chapter complete!</p><p class="done-sub">You solved all 7 exercises in this chapter.</p></div><nav aria-label="Chapter navigation" class="chapter-nav"><div class="cn-grid"><a class="chap-nav prev focus-ring" href="/lessons/python3/list-and-tuple/"><span class="cn-label">← Previous chapter</span><span class="cn-title">03 · List &amp; Tuple</span></a><div class="cn-mid"><span>Dict &amp; Set</span></div><a class="chap-nav next focus-ring" href="/lessons/python5/conditions-and-loops/"><span class="cn-label">Next chapter →</span><span class="cn-title">05 · Conditions &amp; loops</span></a></div></nav></section></article></div>
+    <aside class="lesson-sidebar right" aria-label="This chapter"><nav aria-label="This chapter's contents"><div class="side-label up">In this chapter</div><p class="toc-chapter">Dict &amp; Set</p><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Introduction</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">1. Dictionary (dict)</span></a></li><li class="toc-li" data-target="exercise-01-dict-create"><a href="#exercise-01-dict-create" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">Create a dict</span></a></li><li class="toc-li" data-target="exercise-02-dict-access"><a href="#exercise-02-dict-access" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">Get a value by its key</span></a></li><li class="toc-li" data-target="exercise-03-dict-modify"><a href="#exercise-03-dict-modify" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">Add + change</span></a></li><li class="toc-li" data-target="exercise-04-dict-merge"><a href="#exercise-04-dict-merge" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">Merge two dicts with |</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">2. set</span></a></li><li class="toc-li" data-target="exercise-05-set-dedup"><a href="#exercise-05-set-dedup" class="toc-link focus-ring"><span class="toc-kind">Exercise 5</span><span class="toc-title">Remove duplicates with a set</span></a></li><li class="toc-li" data-target="exercise-06-set-add"><a href="#exercise-06-set-add" class="toc-link focus-ring"><span class="toc-kind">Exercise 6</span><span class="toc-title">A set&#x27;s add</span></a></li><li class="toc-li" data-target="exercise-07-set-ops"><a href="#exercise-07-set-ops" class="toc-link focus-ring"><span class="toc-kind">Exercise 7</span><span class="toc-title">Find the intersection</span></a></li></ol></nav></aside>
+  </div>
+  <dialog class="dir-dialog" aria-labelledby="dir-title"><div class="dd-inner"><div class="dd-head"><h2 id="dir-title">Contents</h2><button type="button" class="dd-close focus-ring">Close</button></div>
+  <div class="dd-tabs" aria-label="Contents scope"><button type="button" class="dd-tab focus-ring" data-tab="all" aria-pressed="true">All lessons</button><button type="button" class="dd-tab focus-ring" data-tab="chapter" aria-pressed="false">This chapter</button></div>
+  <div class="dd-body"><div class="dd-pane" data-pane="all"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></div><div class="dd-pane" data-pane="chapter" hidden><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Introduction</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">1. Dictionary (dict)</span></a></li><li class="toc-li" data-target="exercise-01-dict-create"><a href="#exercise-01-dict-create" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">Create a dict</span></a></li><li class="toc-li" data-target="exercise-02-dict-access"><a href="#exercise-02-dict-access" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">Get a value by its key</span></a></li><li class="toc-li" data-target="exercise-03-dict-modify"><a href="#exercise-03-dict-modify" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">Add + change</span></a></li><li class="toc-li" data-target="exercise-04-dict-merge"><a href="#exercise-04-dict-merge" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">Merge two dicts with |</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">2. set</span></a></li><li class="toc-li" data-target="exercise-05-set-dedup"><a href="#exercise-05-set-dedup" class="toc-link focus-ring"><span class="toc-kind">Exercise 5</span><span class="toc-title">Remove duplicates with a set</span></a></li><li class="toc-li" data-target="exercise-06-set-add"><a href="#exercise-06-set-add" class="toc-link focus-ring"><span class="toc-kind">Exercise 6</span><span class="toc-title">A set&#x27;s add</span></a></li><li class="toc-li" data-target="exercise-07-set-ops"><a href="#exercise-07-set-ops" class="toc-link focus-ring"><span class="toc-kind">Exercise 7</span><span class="toc-title">Find the intersection</span></a></li></ol></div></div></div></dialog>
+  <div class="py-toast" hidden><span class="spinner"></span><span class="py-toast-text">Loading Python…</span></div>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>© 2026 Python for Beginners · English edition of the <a href="https://github.com/walter201230/Python">walter201230/Python</a> tutorial (CC BY 4.0)</span>
+    <div class="footer-links"><a href="/">Course list</a><a href="/about/">About this site</a><a href="https://github.com/walter201230/Python">GitHub</a></div>
+  </div>
+</footer>
+<script src="/assets/site.js?v=20261028"></script>
+</body>
+</html>

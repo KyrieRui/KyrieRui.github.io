@@ -1,0 +1,1183 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exception handling (full read) – Python for Beginners</title>
+<meta name="description" content="try / except / finally / raise + custom exceptions – don&#x27;t let one error crash the whole program.">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css?v=20261028">
+
+</head>
+<body data-page="read" data-lesson="python19" data-total="5">
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="/" aria-label="Python for Beginners – home"><span class="gradient-text-flow" data-text="Python for Beginners">Python for Beginners</span></a>
+    <nav class="header-nav">
+      <a class="nav-link" href="/about/">About</a>
+      <a class="nav-icon focus-ring" href="https://github.com/walter201230/Python" aria-label="Original tutorial on GitHub" title="Original tutorial on GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+      <button type="button" class="theme-toggle focus-ring" aria-label="Switch theme"><span class="knob"><svg class="ic-moon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button>
+    </nav>
+  </div>
+</header>
+<main class="site-main">
+<div class="lesson-shell bg-tech-grid">
+  <div class="mobile-bar"><div class="mb-inner"><button type="button" class="dir-btn focus-ring" aria-haspopup="dialog">Contents</button></div></div>
+  <div class="lesson-columns">
+    <aside class="lesson-sidebar left" aria-label="All lessons"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/read/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/read/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/read/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/read/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/read/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/read/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/read/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/read/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/read/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/read/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/read/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/read/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/read/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/read/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/read/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/read/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/read/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/read/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/read/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python19/exception-handling/read/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/read/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/read/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/read/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/read/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/read/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/read/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/read/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/read/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/read/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></aside>
+    <div class="lesson-main"><article class="lesson-article"><header class="lesson-head"><h1>Exception handling</h1><p class="lh-sub">Full read · <span class="accent">28</span> teaching parts<span class="sep">·</span><span class="accent">5</span> exercises<span class="sep">·</span>about <span class="accent">100</span> min</p>
+<p class="lh-note">This page is the read-through version of the chapter, with every explanation in one place. To write code and get it checked, go to <a class="accent-link focus-ring" href="/lessons/python19/exception-handling/">challenge mode</a>.</p></header><section id="step-0" class="step-card read" data-kind="step" aria-label="Teaching step 1">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 01 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><p>When you write code, what's the moment that makes beginners panic the most? Don't answer yet – let me describe a scene. You've just learned the syntax, you excitedly write a few dozen lines of code, press Enter, and the terminal spits out a pile of red text:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Traceback (most recent call last):
+  File &quot;main.py&quot;, line 5, in &lt;module&gt;
+    print(10 / 0)
+ZeroDivisionError: division by zero</code></pre></div>
+<p>Totally confused. What is this? What did I do wrong? Why did the program crash?</p>
+<p>Actually, this is Python's <strong>exception mechanism</strong> at work. The program met a situation it couldn't handle – like dividing by zero, reading a file that doesn't exist, or adding a string to a number – so it <strong>raises</strong> an exception. Then the whole program stops and tells you: "I quit – you clean this up."</p>
+<p>But think about it: in the real world, how could programs stop working because of one small problem? If you type the wrong PIN three times at a bank ATM, it shows a message – it doesn't freeze. If a web page can't load an image, it shows a placeholder – the whole page doesn't go blank. If a chat app can't reach the network, it retries – it doesn't crash. Behind all of these, <strong>exception handling</strong> is doing the work.</p>
+<p>Python has a whole set of tools ready for you: <code>try</code> / <code>except</code> / <code>else</code> / <code>finally</code> / <code>raise</code> / custom exception classes, plus <strong>exception groups</strong> (<code>ExceptionGroup</code>) and <code>except*</code>, added in 3.11. The whole system is very complete. In this article, let's go from the simplest form all the way to the latest PEP 654, so that after reading it, you'll never be scared of a red traceback again.</p></article></section><section id="step-1" class="step-card read" data-kind="step" aria-label="Teaching step 2">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 02 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Why do programs "blow up"?</h3>
+<p>Let's start with the simplest example. Open the Python interpreter and type one line:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">print(10 / 0)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+ZeroDivisionError: division by zero</code></pre></div>
+<p>This is called an <strong>exception</strong>. When Python runs <code>10 / 0</code>, it finds the divisor is zero, which is impossible in maths. So it creates a <code>ZeroDivisionError</code> object and <strong>raises</strong> (throws) it. If nobody catches it, the exception "bubbles up" all the way to the top, where the Python interpreter catches it, prints the traceback, and exits the program.</p>
+<p>Here's another one:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">nums = [1, 2, 3]
+print(nums[10])</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 2, in &lt;module&gt;
+IndexError: list index out of range</code></pre></div>
+<p><code>IndexError</code> – the index is out of range. One more:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">d = {&#x27;name&#x27;: &#x27;Two Drops&#x27;}
+print(d[&#x27;age&#x27;])</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 2, in &lt;module&gt;
+KeyError: &#x27;age&#x27;</code></pre></div>
+<p><code>KeyError</code> – that key isn't in the dictionary.</p>
+<p>Notice? Each kind of "error" has its own name. These names are the <strong>types</strong> of exceptions – a set of classes built into Python. They're not just for show – they're for you to <strong>catch precisely</strong>, handling different types in different ways.</p></article></section><section id="step-2" class="step-card read" data-kind="step" aria-label="Teaching step 3">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 03 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>The simplest try / except</h3>
+<p>Let's fix the first example. We don't want dividing by zero to crash the whole program. Instead, we want a friendly message before it crashes, and then carry on:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python19/exception-handling/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">try:
+    result = 10 / 0
+    print(result)
+except ZeroDivisionError:
+    print(&#x27;Oops, you cannot divide by zero&#x27;)
+
+print(&#x27;The program keeps running&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Oops, you cannot divide by zero
+The program keeps running</code></pre></div>
+<p>See? The red traceback is gone, the program didn't crash, and the last line "The program keeps running" printed as normal.</p>
+<p>The <code>try</code> / <code>except</code> syntax is that simple. Remember three things:</p>
+<ul>
+<li>Put code that <strong>might go wrong</strong> in the <code>try:</code> block</li>
+<li>Put <strong>what to do if it goes wrong</strong> in the <code>except XxxError:</code> block</li>
+<li>If the <code>try</code> block has no error, the <code>except</code> block is skipped completely, as if it wasn't there</li>
+</ul>
+<p>Now think: if the <code>try</code> block has ten lines, and line three blows up, will the other seven lines still run?</p>
+<p>Answer: <strong>No.</strong> As soon as Python finds an exception in <code>try</code>, it jumps straight to the matching <code>except</code>, and skips the rest of the <code>try</code> block. Let's test it:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python19/exception-handling/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">try:
+    print(&#x27;Line one&#x27;)
+    print(10 / 0)
+    print(&#x27;Line three – this line will not run&#x27;)
+except ZeroDivisionError:
+    print(&#x27;Caught it&#x27;)
+
+print(&#x27;Program continues&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Line one
+Caught it
+Program continues</code></pre></div>
+<p>Sure enough, "Line three" wasn't printed. This detail is really important. Lots of beginners spend ages debugging because they think the code after an exception in <code>try</code> still runs – it doesn't, it's skipped.</p></article></section><section id="read-exercise-01-safe-divide" class="rex-card" aria-label="Exercise 1">
+<header class="rex-head"><div class="rex-top"><span class="rex-badge">Exercise 1 / 5</span><span class="rex-title">safe_divide: handle dividing by zero with try/except</span></div>
+<div class="prose prose-sm ex-prompt"><p>Write a function <code>safe_divide(a, b)</code>:</p>
+<ul>
+<li>Normally it returns <code>a / b</code></li>
+<li>If <code>b</code> is 0, it catches <code>ZeroDivisionError</code>, prints <code>'You cannot divide by zero'</code>, and returns <code>None</code></li>
+</ul>
+<p>Then call:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">print(safe_divide(10, 2))
+print(safe_divide(10, 0))</code></pre></div>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">5.0
+You cannot divide by zero
+None</code></pre></div>
+<p>Note: because <code>safe_divide(10, 0)</code> returns <code>None</code>, the outer <code>print</code> prints <code>None</code>.</p></div></header>
+<a class="rex-go focus-ring" href="/lessons/python19/exception-handling/#exercise-01-safe-divide"><span class="rex-go-sub">Write it in the editor, get it checked, see the answer</span><span class="rex-go-main">Do this one on the challenge page →</span></a>
+</section><section id="step-3" class="step-card read" data-kind="step" aria-label="Teaching step 4">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 04 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Catching several kinds of exceptions</h3>
+<p>The example above only caught <code>ZeroDivisionError</code>. But in real code, one piece of code can often raise several kinds of exceptions. For example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python19/exception-handling/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def parse_age(s):
+    try:
+        age = int(s)
+        return 100 / age
+    except ZeroDivisionError:
+        return &#x27;Age cannot be 0&#x27;
+    except ValueError:
+        return &#x27;That is not a number&#x27;
+
+
+print(parse_age(&#x27;25&#x27;))
+print(parse_age(&#x27;0&#x27;))
+print(parse_age(&#x27;abc&#x27;))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">4.0
+Age cannot be 0
+That is not a number</code></pre></div>
+<p>See? Two <code>except</code> branches, each handling a different type of exception. Python checks them in order, runs the first one that matches, and skips the rest.</p>
+<p>What if you want to handle two exceptions with the same code? Writing it twice is wordy. There's a shortcut:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python19/exception-handling/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def parse_age(s):
+    try:
+        age = int(s)
+        return 100 / age
+    except (ZeroDivisionError, ValueError):
+        return &#x27;Something is wrong with the input&#x27;
+
+
+print(parse_age(&#x27;25&#x27;))
+print(parse_age(&#x27;0&#x27;))
+print(parse_age(&#x27;abc&#x27;))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">4.0
+Something is wrong with the input
+Something is wrong with the input</code></pre></div>
+<p>Put several exception types inside round brackets, separated by commas, and you catch them all at once. Note the <strong>brackets</strong> – without them, the syntax is wrong.</p></article></section><section id="read-exercise-02-parse-int" class="rex-card" aria-label="Exercise 2">
+<header class="rex-head"><div class="rex-top"><span class="rex-badge">Exercise 2 / 5</span><span class="rex-title">Catch ValueError</span></div>
+<div class="prose prose-sm ex-prompt"><p>Write a function <code>parse_int(s)</code>:</p>
+<ul>
+<li>Try to turn <code>s</code> into an <code>int</code> and return it</li>
+<li>If <code>int(s)</code> raises <code>ValueError</code>, catch it, print <code>f'Cannot convert: {s}'</code>, and return <code>0</code></li>
+</ul>
+<p>Then call:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">print(parse_int(&#x27;42&#x27;))
+print(parse_int(&#x27;abc&#x27;))
+print(parse_int(&#x27;100&#x27;))</code></pre></div>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">42
+Cannot convert: abc
+0
+100</code></pre></div></div></header>
+<a class="rex-go focus-ring" href="/lessons/python19/exception-handling/#exercise-02-parse-int"><span class="rex-go-sub">Write it in the editor, get it checked, see the answer</span><span class="rex-go-main">Do this one on the challenge page →</span></a>
+</section><section id="step-4" class="step-card read" data-kind="step" aria-label="Teaching step 5">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 05 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Getting the exception object – <code>as e</code></h3>
+<p>Knowing "something went wrong" isn't always enough. Sometimes you need to know <strong>exactly</strong> what went wrong. Python lets you use <code>as</code> to grab the exception object:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python19/exception-handling/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def parse_age(s):
+    try:
+        age = int(s)
+        return 100 / age
+    except (ZeroDivisionError, ValueError) as e:
+        return f&#x27;Error: {type(e).__name__} - {e}&#x27;
+
+
+print(parse_age(&#x27;0&#x27;))
+print(parse_age(&#x27;abc&#x27;))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Error: ZeroDivisionError - division by zero
+Error: ValueError - invalid literal for int() with base 10: &#x27;abc&#x27;</code></pre></div>
+<p><code>e</code> is the exception object itself. <code>type(e).__name__</code> is its class name, and <code>str(e)</code> is its error message. For logging and debugging, this is much more useful than just printing "Error!".</p></article></section><section id="step-5" class="step-card read" data-kind="step" aria-label="Teaching step 6">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 06 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>The catch-all – <code>except Exception</code></h3>
+<p>Sometimes you don't know exactly what exceptions your code might raise, and you don't want to write a long list of <code>except</code>s. Then you can use a <strong>parent class</strong> as a catch-all:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python19/exception-handling/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">try:
+    risky_operation()
+except Exception as e:
+    print(f&#x27;Unknown error: {e}&#x27;)</code></pre></div>
+<p><code>Exception</code> is the "ancestor" of almost all exceptions, so writing it means "catch almost every exception".</p>
+<p>But! There's a <strong>trap</strong> here. Lots of beginners like to write <code>except:</code> with no type at all, or <code>except BaseException:</code>. Both of these go too far – they also catch <code>KeyboardInterrupt</code> (when you press Ctrl+C to stop the program) and <code>SystemExit</code> (when the program calls <code>sys.exit()</code> itself). Then your program can't even be stopped with Ctrl+C.</p>
+<p>Remember: <strong>for a catch-all, use <code>Exception</code> – not <code>BaseException</code>, and never a bare <code>except:</code>.</strong> That's the golden rule.</p></article></section><section id="step-6" class="step-card read" data-kind="step" aria-label="Teaching step 7">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 07 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>The exception family – the inheritance tree</h3>
+<p>You might ask: "If <code>Exception</code> is the ancestor of almost all exceptions, what's above it? And what's below it?"</p>
+<p>Let's look at the exception family tree:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">BaseException
+ ├── SystemExit
+ ├── KeyboardInterrupt
+ ├── GeneratorExit
+ └── Exception
+      ├── ArithmeticError
+      │    ├── ZeroDivisionError
+      │    └── OverflowError
+      ├── LookupError
+      │    ├── IndexError
+      │    └── KeyError
+      ├── ValueError
+      ├── TypeError
+      ├── AttributeError
+      ├── NameError
+      ├── OSError
+      │    └── FileNotFoundError
+      └── ...</code></pre></div>
+<p>Key points about this tree:</p>
+<ul>
+<li>At the very top is <code>BaseException</code>. Every exception inherits from it</li>
+<li><code>SystemExit</code> / <code>KeyboardInterrupt</code> / <code>GeneratorExit</code> are about <strong>controlling the program's flow</strong>, and shouldn't be caught by an ordinary <code>try/except</code></li>
+<li>All the other, <strong>business-related</strong> exceptions are under <code>Exception</code></li>
+<li><code>Exception</code> is split into several big families: arithmetic errors, lookup errors, value errors, type errors and so on</li>
+</ul>
+<p>Once you understand this tree, you can use a little trick: <strong>catching a parent class catches all its child classes</strong>. For example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python19/exception-handling/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">try:
+    nums = [1, 2, 3]
+    print(nums[10])
+except LookupError as e:
+    print(f&#x27;Lookup error: {e}&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Lookup error: list index out of range</code></pre></div>
+<p><code>IndexError</code> is a child of <code>LookupError</code>, so catching it with the parent works fine.</p>
+<p>Now think: if you write several <code>except</code>s, should the <strong>parent</strong> go first or the <strong>child</strong>?</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python19/exception-handling/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Bad example
+try:
+    nums = [1, 2, 3]
+    print(nums[10])
+except LookupError:
+    print(&#x27;Lookup error&#x27;)
+except IndexError:  # This line can never run
+    print(&#x27;Index error&#x27;)</code></pre></div>
+<p><code>LookupError</code> already catches <code>IndexError</code>, so the <code>except IndexError</code> after it is useless. So the rule is: <strong>children first, parents last.</strong> Write the specific exceptions first, and put the broad catch-all at the end.</p></article></section><section id="step-7" class="step-card read" data-kind="step" aria-label="Teaching step 8">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 08 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>else – runs only when nothing went wrong</h3>
+<p><code>try / except</code> has two good partners: <code>else</code> and <code>finally</code>. Let's look at <code>else</code> first.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python19/exception-handling/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def divide(a, b):
+    try:
+        result = a / b
+    except ZeroDivisionError:
+        print(&#x27;You cannot divide by zero&#x27;)
+    else:
+        print(f&#x27;Success, the result is {result}&#x27;)
+
+
+divide(10, 2)
+divide(10, 0)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Success, the result is 5.0
+You cannot divide by zero</code></pre></div>
+<p>The <code>else</code> block only runs when the <code>try</code> block raised <strong>no</strong> exception. You might ask: "Isn't it the same if I just put the <code>print(f'...')</code> inside <code>try</code>?"</p>
+<p>No, it's not. The difference is <strong>what gets caught</strong>. Look:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def divide(a, b):
+    try:
+        result = a / b
+        print(f&#x27;Success, the result is {result}&#x27;)   # Pretend this could raise an exception too
+    except ZeroDivisionError:
+        print(&#x27;You cannot divide by zero&#x27;)</code></pre></div>
+<p>If the <code>print</code> line also raised a <code>ZeroDivisionError</code> (just as an example), it would be caught by the same <code>except</code> – that's a <strong>mistake</strong>, because you only meant to catch errors in the "calculation" step.</p>
+<p><code>else</code> separates "things to do only after success", so the <code>try</code> block only contains <strong>the line that might really go wrong</strong>. The logic is cleaner. That's its main value.</p></article></section><section id="step-8" class="step-card read" data-kind="step" aria-label="Teaching step 9">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 09 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>finally – runs no matter what</h3>
+<p><code>finally</code> goes even further: <strong>whether the <code>try</code> block succeeds or fails, and whether the exception is caught or not, <code>finally</code> always runs.</strong></p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def read_first_line(path):
+    f = open(path, &#x27;r&#x27;)
+    try:
+        return f.readline()
+    finally:
+        f.close()
+        print(f&#x27;Closed {path}&#x27;)</code></pre></div>
+<p>Why do we need <code>finally</code>? Think about what you do in code: open files, connect to databases, ask for resources… When you're done, these all need to be <strong>closed</strong> or <strong>released</strong>. If something goes wrong in the middle and the code jumps away, the resource <strong>leaks</strong>. <code>finally</code> makes sure that "<strong>this clean-up code runs no matter what</strong>".</p>
+<p><code>finally</code> can also be used together with <code>except</code>:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def safe_read(path):
+    try:
+        f = open(path, &#x27;r&#x27;)
+        return f.readline()
+    except FileNotFoundError:
+        print(f&#x27;File {path} does not exist&#x27;)
+        return None
+    finally:
+        print(&#x27;Clean-up done&#x27;)
+
+
+print(safe_read(&#x27;not_exist.txt&#x27;))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">File not_exist.txt does not exist
+Clean-up done
+None</code></pre></div>
+<p>Notice? "Clean-up done" printed whether or not <code>try</code> had an error.</p>
+<p>But for opening files, modern Python recommends the <code>with</code> statement. It uses the <code>finally</code> mechanism inside, and is simpler to write:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def safe_read(path):
+    try:
+        with open(path, &#x27;r&#x27;) as f:
+            return f.readline()
+    except FileNotFoundError:
+        print(f&#x27;File {path} does not exist&#x27;)
+        return None</code></pre></div>
+<p><code>with</code> already knows how to "close the file no matter what" – underneath, it's the same thing as <code>finally</code>.</p></article></section><section id="read-exercise-03-finally" class="rex-card" aria-label="Exercise 3">
+<header class="rex-head"><div class="rex-top"><span class="rex-badge">Exercise 3 / 5</span><span class="rex-title">finally: clean-up always runs</span></div>
+<div class="prose prose-sm ex-prompt"><p>Write a function <code>do_work(x)</code>:</p>
+<ul>
+<li>In <code>try</code>, print <code>'Starting work'</code>, then run <code>10 / x</code></li>
+<li>Use <code>except ZeroDivisionError</code> to catch dividing by zero, printing <code>'Divided by zero'</code></li>
+<li>Use <code>finally</code> to print <code>'Clean-up done'</code></li>
+</ul>
+<p>Then call, in order:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">do_work(2)
+print(&#x27;---&#x27;)
+do_work(0)</code></pre></div>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Starting work
+Clean-up done
+---
+Starting work
+Divided by zero
+Clean-up done</code></pre></div>
+<p>Note: <code>do_work(2)</code> doesn't trigger <code>except</code>, but <code>finally</code> always runs.</p></div></header>
+<a class="rex-go focus-ring" href="/lessons/python19/exception-handling/#exercise-03-finally"><span class="rex-go-sub">Write it in the editor, get it checked, see the answer</span><span class="rex-go-main">Do this one on the challenge page →</span></a>
+</section><section id="step-9" class="step-card read" data-kind="step" aria-label="Teaching step 10">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 10 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Raising exceptions yourself – <code>raise</code></h3>
+<p>So far, we've only been <strong>catching</strong> exceptions. Can we <strong>raise</strong> one? Of course. That's what the <code>raise</code> keyword does.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python19/exception-handling/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def set_age(age):
+    if age &lt; 0:
+        raise ValueError(f&#x27;Age cannot be negative, you passed {age}&#x27;)
+    if age &gt; 200:
+        raise ValueError(f&#x27;Age cannot be over 200, you passed {age}&#x27;)
+    return age
+
+
+try:
+    set_age(-5)
+except ValueError as e:
+    print(f&#x27;Bad argument: {e}&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Bad argument: Age cannot be negative, you passed -5</code></pre></div>
+<p><code>raise XxxError('msg')</code> means "raise an <code>XxxError</code> right now, carrying this message". When you write functions, and the caller passes an unreasonable argument or a business rule isn't met, you should <strong>raise</strong> an exception, so the caller knows "I won't accept this data" – instead of quietly returning some strange value.</p>
+<p>Why? Think about it:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def set_age(age):
+    if age &lt; 0:
+        return None      # Bad style
+    return age</code></pre></div>
+<p>When the caller gets <code>None</code>, they have no idea whether it means "no data this time" or "I passed something wrong". But with <code>raise ValueError('Age cannot be negative')</code>, the caller understands straight away: "Ah, my argument broke the rules."</p>
+<p>Exceptions are <strong>Python's standard way of passing error information</strong>. They say much more than <code>return None</code>, <code>return -1</code> or <code>return False</code>.</p></article></section><section id="read-exercise-04-raise-age" class="rex-card" aria-label="Exercise 4">
+<header class="rex-head"><div class="rex-top"><span class="rex-badge">Exercise 4 / 5</span><span class="rex-title">raise: raising an exception yourself</span></div>
+<div class="prose prose-sm ex-prompt"><p>Write a function <code>set_age(age)</code>:</p>
+<ul>
+<li>If <code>age &lt; 0</code>, <code>raise ValueError(f'Age cannot be negative: {age}')</code> yourself</li>
+<li>Otherwise return <code>age</code></li>
+</ul>
+<p>Then call <code>set_age(-5)</code> inside <code>try / except ValueError</code>, and when the exception is caught, print <code>f'Bad argument: {e}'</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Bad argument: Age cannot be negative: -5</code></pre></div></div></header>
+<a class="rex-go focus-ring" href="/lessons/python19/exception-handling/#exercise-04-raise-age"><span class="rex-go-sub">Write it in the editor, get it checked, see the answer</span><span class="rex-go-main">Do this one on the challenge page →</span></a>
+</section><section id="step-10" class="step-card read" data-kind="step" aria-label="Teaching step 11">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 11 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Exception chaining – <code>raise ... from e</code></h3>
+<p>Let's look at a slightly more advanced situation. Say we have this function:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def load_config(path):
+    with open(path, &#x27;r&#x27;) as f:
+        return f.read()</code></pre></div>
+<p>If <code>path</code> doesn't exist, it raises <code>FileNotFoundError</code>. But from the point of view of "using the config", "file not found" is too low-level. I'd like to raise a more business-like error, like <code>ConfigError('Failed to load config')</code>, but without losing the information about what really went wrong underneath. What do I do?</p>
+<p>PEP 3134 gives the answer – <strong>exception chaining</strong>:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class ConfigError(Exception):
+    pass
+
+
+def load_config(path):
+    try:
+        with open(path, &#x27;r&#x27;) as f:
+            return f.read()
+    except FileNotFoundError as e:
+        raise ConfigError(f&#x27;Failed to load config: {path}&#x27;) from e
+
+
+try:
+    load_config(&#x27;not_exist.json&#x27;)
+except ConfigError as e:
+    print(f&#x27;Business error: {e}&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Business error: Failed to load config: not_exist.json</code></pre></div>
+<p>Look at <code>raise ConfigError(...) from e</code>. <code>from e</code> attaches the <strong>original exception</strong> to the new exception's <code>__cause__</code>. If nothing outside catches it, the traceback prints <strong>both</strong> errors, like this:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Traceback (most recent call last):
+  File &quot;...&quot;, line X, in load_config
+    with open(path, &#x27;r&#x27;) as f:
+FileNotFoundError: [Errno 2] No such file or directory: &#x27;not_exist.json&#x27;
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File &quot;...&quot;, line Y, in &lt;module&gt;
+    load_config(&#x27;not_exist.json&#x27;)
+  File &quot;...&quot;, line Z, in load_config
+    raise ConfigError(...) from e
+ConfigError: Failed to load config: not_exist.json</code></pre></div>
+<p>"The above exception was the direct cause of the following exception" – this sentence is the sign of an exception chain. When you see a traceback like this, know that <strong>the error at the top is the root cause, and the one below it was wrapped around it</strong>.</p>
+<p>What if you leave out <code>from e</code> and just <code>raise ConfigError(...)</code>? Python automatically adds a <code>__context__</code> for you, and the traceback says "During handling of the above exception, another exception occurred". This is called an <strong>implicit chain</strong>.</p>
+<p>An explicit <code>from e</code> says "I <strong>deliberately</strong> wrapped a low-level exception in a business exception". Leaving out <code>from e</code> says "while I was handling the last exception, something else went wrong by accident". They mean different things, so <strong>when you deliberately wrap an exception, always add <code>from e</code></strong>.</p></article></section><section id="step-11" class="step-card read" data-kind="step" aria-label="Teaching step 12">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 12 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Custom exception classes</h3>
+<p>Did you see that <code>ConfigError</code> just now? A custom exception class really is just one line:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class ConfigError(Exception):
+    pass</code></pre></div>
+<p>Just inherit from <code>Exception</code>. But why make your own? Can't you just use built-in ones like <code>ValueError</code> or <code>RuntimeError</code>?</p>
+<p>Let's explain with a "clock-in" example. "Brother Shui" built a clock-in system for the "Coding Dept", with these business rules:</p>
+<ul>
+<li>You can't clock in before work starts</li>
+<li>You can't clock in twice in one day</li>
+<li>You can't clock in if you're not on the office network</li>
+</ul>
+<p>With built-in exceptions:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def punch(user, time, ip):
+    if time &lt; 9:
+        raise ValueError(&#x27;Work has not started yet&#x27;)
+    if user.already_punched_today:
+        raise ValueError(&#x27;You already clocked in today&#x27;)
+    if not ip.startswith(&#x27;192.168.&#x27;):
+        raise ValueError(&#x27;Not on the office network&#x27;)</code></pre></div>
+<p>When the caller catches a <code>ValueError</code>, they can't tell which situation it is. If they want to handle each one differently, they'd have to compare message strings – which is very fragile.</p>
+<p>With a custom exception family:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python19/exception-handling/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class PunchError(Exception):
+    &quot;&quot;&quot;Base class for clock-in errors.&quot;&quot;&quot;
+    pass
+
+
+class PunchTimeError(PunchError):
+    pass
+
+
+class PunchDuplicateError(PunchError):
+    pass
+
+
+class PunchLocationError(PunchError):
+    pass
+
+
+def punch(user_already_punched, hour, ip):
+    if hour &lt; 9:
+        raise PunchTimeError(&#x27;Work has not started yet&#x27;)
+    if user_already_punched:
+        raise PunchDuplicateError(&#x27;You already clocked in today&#x27;)
+    if not ip.startswith(&#x27;192.168.&#x27;):
+        raise PunchLocationError(&#x27;Not on the office network&#x27;)
+    return &#x27;Clocked in&#x27;
+
+
+# The caller
+try:
+    punch(False, 8, &#x27;192.168.1.1&#x27;)
+except PunchTimeError as e:
+    print(f&#x27;Time problem: {e}, please wait until 9&#x27;)
+except PunchDuplicateError as e:
+    print(f&#x27;Already clocked in: {e}&#x27;)
+except PunchLocationError as e:
+    print(f&#x27;Location problem: {e}, please connect to the office wifi&#x27;)
+except PunchError as e:
+    print(f&#x27;Clock-in failed: {e}&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Time problem: Work has not started yet, please wait until 9</code></pre></div>
+<p>See?</p>
+<ul>
+<li>Each kind of error has its own class, so the caller can <strong>catch it precisely</strong></li>
+<li>There's a shared parent class <code>PunchError</code>, so the caller can also <strong>catch them all at once</strong></li>
+<li>The class name itself is documentation – just from the class name, you know what happened, without reading the message</li>
+</ul>
+<p>That's the value of custom exception classes – <strong>errors become part of your code's structure too</strong>.</p>
+<p>Custom exception classes can carry data too, for example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python19/exception-handling/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class PunchError(Exception):
+    def __init__(self, message, user_id=None, hour=None):
+        super().__init__(message)
+        self.user_id = user_id
+        self.hour = hour
+
+
+try:
+    raise PunchError(&#x27;Work has not started yet&#x27;, user_id=123, hour=8)
+except PunchError as e:
+    print(f&#x27;Message: {e}&#x27;)
+    print(f&#x27;User: {e.user_id}&#x27;)
+    print(f&#x27;Hour: {e.hour}&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Message: Work has not started yet
+User: 123
+Hour: 8</code></pre></div>
+<p>When you need more context, put it in the exception object. For back-end logging and monitoring, structured errors like this are really valuable.</p></article></section><section id="read-exercise-05-custom-exception" class="rex-card" aria-label="Exercise 5">
+<header class="rex-head"><div class="rex-top"><span class="rex-badge">Exercise 5 / 5</span><span class="rex-title">A custom exception: InvalidScoreError</span></div>
+<div class="prose prose-sm ex-prompt"><p>Define a custom exception class <code>InvalidScoreError</code> that inherits from <code>Exception</code>.</p>
+<p>Then write a function <code>check_score(score)</code>:</p>
+<ul>
+<li>If <code>score &lt; 0</code> or <code>score &gt; 100</code>, raise <code>InvalidScoreError(f'Score {score} is not valid')</code></li>
+<li>Otherwise print <code>f'Score is valid: {score}'</code></li>
+</ul>
+<p>Then run, in order:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">check_score(85)
+try:
+    check_score(120)
+except InvalidScoreError as e:
+    print(f&#x27;Caught an exception: {e}&#x27;)</code></pre></div>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Score is valid: 85
+Caught an exception: Score 120 is not valid</code></pre></div></div></header>
+<a class="rex-go focus-ring" href="/lessons/python19/exception-handling/#exercise-05-custom-exception"><span class="rex-go-sub">Write it in the editor, get it checked, see the answer</span><span class="rex-go-main">Do this one on the challenge page →</span></a>
+</section><section id="step-12" class="step-card read" data-kind="step" aria-label="Teaching step 13">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 13 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Built-in exceptions cheat sheet</h3>
+<p>You've seen some already, but you might want to know "what are the common built-in exceptions?" Here's a cheat sheet that covers 90% of what you'll meet at work:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Exception class</th>
+<th>When it happens</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ValueError</code></td>
+<td>The type is right but the value isn't allowed</td>
+<td><code>int('abc')</code></td>
+</tr>
+<tr>
+<td><code>TypeError</code></td>
+<td>The type is wrong</td>
+<td><code>'a' + 1</code></td>
+</tr>
+<tr>
+<td><code>KeyError</code></td>
+<td>The key isn't in the dictionary</td>
+<td><code>{'a': 1}['b']</code></td>
+</tr>
+<tr>
+<td><code>IndexError</code></td>
+<td>The sequence index is out of range</td>
+<td><code>[1, 2][5]</code></td>
+</tr>
+<tr>
+<td><code>AttributeError</code></td>
+<td>The object doesn't have that attribute</td>
+<td><code>'abc'.foo</code></td>
+</tr>
+<tr>
+<td><code>NameError</code></td>
+<td>Using a variable that isn't defined</td>
+<td><code>print(undefined_x)</code></td>
+</tr>
+<tr>
+<td><code>FileNotFoundError</code></td>
+<td>The file doesn't exist</td>
+<td><code>open('not_exist.txt')</code></td>
+</tr>
+<tr>
+<td><code>ZeroDivisionError</code></td>
+<td>Dividing by zero</td>
+<td><code>1 / 0</code></td>
+</tr>
+<tr>
+<td><code>ImportError</code></td>
+<td>An import failed</td>
+<td><code>import not_exist_module</code></td>
+</tr>
+<tr>
+<td><code>ModuleNotFoundError</code></td>
+<td>A module can't be found (child of <code>ImportError</code>)</td>
+<td><code>import not_exist_module</code></td>
+</tr>
+<tr>
+<td><code>RuntimeError</code></td>
+<td>A general runtime error</td>
+<td>Not used much; avoid if you can</td>
+</tr>
+<tr>
+<td><code>NotImplementedError</code></td>
+<td>An abstract method wasn't implemented</td>
+<td>Common in interfaces/abstract classes</td>
+</tr>
+<tr>
+<td><code>StopIteration</code></td>
+<td>An iterator has run out</td>
+<td>Python usually handles this itself</td>
+</tr>
+<tr>
+<td><code>OSError</code></td>
+<td>An operating-system-level error</td>
+<td>e.g. not enough permission to read/write</td>
+</tr>
+<tr>
+<td><code>PermissionError</code></td>
+<td>Not enough permission (child of <code>OSError</code>)</td>
+<td>Writing to a read-only file</td>
+</tr>
+<tr>
+<td><code>RecursionError</code></td>
+<td>Recursion went too deep</td>
+<td>Recursion without a stopping condition</td>
+</tr>
+<tr>
+<td><code>KeyboardInterrupt</code></td>
+<td>The user pressed Ctrl+C</td>
+<td><strong>Don't</strong> catch this one</td>
+</tr>
+<tr>
+<td><code>SystemExit</code></td>
+<td>Raised by <code>sys.exit()</code></td>
+<td><strong>Don't</strong> catch this one either</td>
+</tr>
+</tbody>
+</table></div>
+<p>Let me stress those last two again: <code>KeyboardInterrupt</code> and <code>SystemExit</code> are direct children of <code>BaseException</code>, <strong>not</strong> <code>Exception</code>. So a normal <code>except Exception</code> doesn't catch them – which is a good thing, because it avoids accidents.</p></article></section><section id="step-13" class="step-card read" data-kind="step" aria-label="Teaching step 14">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 14 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Want to report several errors at once? – Exception groups (Python 3.11+)</h3>
+<p>By now, you know all the normal exception handling. Next is a <strong>fairly new</strong> feature added in Python 3.11: <strong>exception groups</strong> (PEP 654).</p>
+<p>First, the problem. Say "Brother Shui" has a batch job in the "Coding Dept": send requests to five URLs and save all the results. The code looks roughly like this:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def fetch_one(url):
+    # Pretend this might fail
+    if &#x27;bad&#x27; in url:
+        raise ValueError(f&#x27;Bad argument: {url}&#x27;)
+    if &#x27;down&#x27; in url:
+        raise ConnectionError(f&#x27;Cannot connect: {url}&#x27;)
+    return f&#x27;Content of {url}&#x27;
+
+
+def fetch_all(urls):
+    results = []
+    for url in urls:
+        results.append(fetch_one(url))
+    return results</code></pre></div>
+<p>Think: if two of the <code>urls</code> raise <code>ValueError</code> and one raises <code>ConnectionError</code>, what happens with the traditional approach?</p>
+<p>After the first URL raises an error, <code>fetch_all</code> exits straight away, and <strong>the rest never run</strong>. You'd never know about the other two errors. But your task needs to "<strong>see all the failing URLs at once</strong>", so the operations team can fix them all in one go, without running it again and again.</p>
+<p>Traditional try/except can only tell you about the <strong>first</strong> error. It can't handle this. So what do you do?</p>
+<p>The home-made way is to collect each URL's exception yourself:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def fetch_all(urls):
+    results = []
+    errors = []
+    for url in urls:
+        try:
+            results.append(fetch_one(url))
+        except Exception as e:
+            errors.append(e)
+    return results, errors</code></pre></div>
+<p>It works, but there are a few problems:</p>
+<ul>
+<li>The caller gets a <code>(results, errors)</code> pair, which makes the signature ugly</li>
+<li>Errors come back as a "list", so the caller has to check with <code>if</code> and write their own loop to report them</li>
+<li>This is a <strong>home-made</strong> system, so every library does it differently – nothing's standard</li>
+</ul>
+<p>PEP 654 solves this. Python 3.11 added <code>ExceptionGroup</code>, made specifically to "<strong>package several exceptions into one</strong>" and raise them:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def fetch_all(urls):
+    results = []
+    errors = []
+    for url in urls:
+        try:
+            results.append(fetch_one(url))
+        except Exception as e:
+            errors.append(e)
+    if errors:
+        raise ExceptionGroup(&#x27;Some URLs failed&#x27;, errors)
+    return results</code></pre></div>
+<p>Let's call it:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">urls = [&#x27;ok-1&#x27;, &#x27;bad-2&#x27;, &#x27;down-3&#x27;, &#x27;ok-4&#x27;, &#x27;bad-5&#x27;]
+try:
+    fetch_all(urls)
+except ExceptionGroup as eg:
+    print(f&#x27;There are {len(eg.exceptions)} errors&#x27;)
+    for e in eg.exceptions:
+        print(f&#x27;  - {type(e).__name__}: {e}&#x27;)</code></pre></div>
+<p>Output (on Python 3.11+):</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">There are 3 errors
+  - ValueError: Bad argument: bad-2
+  - ConnectionError: Cannot connect: down-3
+  - ValueError: Bad argument: bad-5</code></pre></div>
+<p>That's the heart of exception groups: <strong>raise a group of exceptions at once, and the caller gets all the errors at once</strong>.</p>
+<p>This needs Python 3.11+ – older versions can't run it. Run <code>python3 --version</code> to check whether yours is 3.11+.</p></article></section><section id="step-14" class="step-card read" data-kind="step" aria-label="Teaching step 15">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 15 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Splitting an exception group with <code>except*</code></h3>
+<p>You might ask: "After catching an <code>ExceptionGroup</code>, can I handle it by exception type, like a normal except?"</p>
+<p>Yes. Python 3.11 also added new syntax: <code>except*</code> (with a star). It's made to <strong>split an exception group by type</strong>. Look:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def fetch_all(urls):
+    results = []
+    errors = []
+    for url in urls:
+        try:
+            results.append(fetch_one(url))
+        except Exception as e:
+            errors.append(e)
+    if errors:
+        raise ExceptionGroup(&#x27;Some URLs failed&#x27;, errors)
+    return results
+
+
+urls = [&#x27;ok-1&#x27;, &#x27;bad-2&#x27;, &#x27;down-3&#x27;, &#x27;ok-4&#x27;, &#x27;bad-5&#x27;]
+try:
+    fetch_all(urls)
+except* ValueError as eg:
+    print(f&#x27;{len(eg.exceptions)} argument errors:&#x27;)
+    for e in eg.exceptions:
+        print(f&#x27;  - {e}&#x27;)
+except* ConnectionError as eg:
+    print(f&#x27;{len(eg.exceptions)} connection errors:&#x27;)
+    for e in eg.exceptions:
+        print(f&#x27;  - {e}&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">2 argument errors:
+  - Bad argument: bad-2
+  - Bad argument: bad-5
+1 connection errors:
+  - Cannot connect: down-3</code></pre></div>
+<p>See? The two <code>except*</code> branches automatically <strong>split</strong> the <code>ExceptionGroup</code> into two parts by type, and handle each one. A normal <code>except</code> can't do this – once a normal <code>except</code> matches, it runs once and that's it. But <code>except*</code> goes through <strong>the whole group</strong> and picks out everything of the matching type.</p>
+<p>Key points about <code>except*</code>:</p>
+<ul>
+<li>The syntax is <code>except* ExceptionType:</code> – note the star right after <code>except</code></li>
+<li>The <code>eg</code> you get is a <strong>new</strong> <code>ExceptionGroup</code> containing only the matching exceptions</li>
+<li><strong>Every</strong> <code>except*</code> branch is checked (not just the first). Exceptions that don't match are "re-packaged" and keep going outwards</li>
+<li>You can't mix it with normal <code>except</code>. A <code>try</code> must use either all <code>except</code>, or all <code>except*</code></li>
+</ul>
+<p>Now think: if a group has both <code>ValueError</code> and <code>OSError</code>, but you only wrote <code>except* ValueError</code>, what happens to the <code>OSError</code>s?</p>
+<p>Answer: they're <strong>re-packaged into a new <code>ExceptionGroup</code> and raised again</strong>. This is the most basic difference between <code>except*</code> and <code>except</code> – <code>except</code> "takes one", while <code>except*</code> "takes the matching group, and passes the rest on".</p></article></section><section id="step-15" class="step-card read" data-kind="step" aria-label="Teaching step 16">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 16 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>add_note – adding notes to exceptions (Python 3.11+)</h3>
+<p>Next to exception groups, there's a small feature called <code>add_note</code>, also added in 3.11. It's really handy for debugging.</p>
+<p>When debugging, do you often wonder: "Which line raised this <code>KeyError</code>? Which user or which request caused it?" The exception itself only shows the key name, with no context. <code>add_note</code> is for adding that context:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def process_user(user_id, data):
+    try:
+        return data[&#x27;name&#x27;]
+    except KeyError as e:
+        e.add_note(f&#x27;Error while processing user {user_id}&#x27;)
+        e.add_note(f&#x27;Data keys: {list(data.keys())}&#x27;)
+        raise
+
+
+process_user(123, {&#x27;age&#x27;: 18})</code></pre></div>
+<p>Output (end of the traceback):</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">KeyError: &#x27;name&#x27;
+Error while processing user 123
+Data keys: [&#x27;age&#x27;]</code></pre></div>
+<p><code>add_note</code> adds the string to the exception object's <code>__notes__</code> list. When the traceback is printed, these notes appear automatically after the exception message.</p>
+<p>Why not just raise a new <code>KeyError('Error while processing user 123, data keys: [age]')</code>? Because that <strong>would lose part of the original traceback</strong>. <code>add_note</code> "keeps the original exception + adds a note", which is lighter and more elegant.</p>
+<p>You can call <code>add_note</code> many times, adding one note each time. It's especially useful when debugging library code or writing middleware.</p></article></section><section id="step-16" class="step-card read" data-kind="step" aria-label="Teaching step 17">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 17 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Mini project: safe_divide and batch division</h3>
+<p>We've covered a lot. Let's finish with a small project. The task:</p>
+<ul>
+<li>Write a function <code>safe_divide(a, b)</code> that returns the result normally, returns <code>None</code> when dividing by zero, and also returns <code>None</code> for other errors</li>
+<li>Write a function <code>batch_divide(pairs)</code> that divides a list of <code>(a, b)</code> pairs, and reports <strong>all</strong> the errors together using an <code>ExceptionGroup</code></li>
+</ul>
+<p>First, the first one:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python19/exception-handling/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def safe_divide(a, b):
+    try:
+        return a / b
+    except ZeroDivisionError:
+        print(f&#x27;  Division by zero: {a} / {b}&#x27;)
+        return None
+    except TypeError as e:
+        print(f&#x27;  Type error: {e}&#x27;)
+        return None
+
+
+print(safe_divide(10, 2))
+print(safe_divide(10, 0))
+print(safe_divide(&#x27;a&#x27;, 1))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">5.0
+  Division by zero: 10 / 0
+None
+  Type error: unsupported operand type(s) for /: &#x27;str&#x27; and &#x27;int&#x27;
+None</code></pre></div>
+<p>Simple, but good enough. Now the batch version – using an exception group:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def divide_strict(a, b):
+    if b == 0:
+        raise ZeroDivisionError(f&#x27;{a} / 0&#x27;)
+    if not isinstance(a, (int, float)) or not isinstance(b, (int, float)):
+        raise TypeError(f&#x27;{a!r} / {b!r} has the wrong type&#x27;)
+    return a / b
+
+
+def batch_divide(pairs):
+    results = []
+    errors = []
+    for a, b in pairs:
+        try:
+            results.append(divide_strict(a, b))
+        except Exception as e:
+            errors.append(e)
+    if errors:
+        raise ExceptionGroup(f&#x27;Batch division had {len(errors)} errors&#x27;, errors)
+    return results
+
+
+pairs = [(10, 2), (10, 0), (&#x27;a&#x27;, 1), (8, 4), (5, 0)]
+
+try:
+    print(batch_divide(pairs))
+except* ZeroDivisionError as eg:
+    print(f&#x27;{len(eg.exceptions)} division-by-zero errors:&#x27;)
+    for e in eg.exceptions:
+        print(f&#x27;  - {e}&#x27;)
+except* TypeError as eg:
+    print(f&#x27;{len(eg.exceptions)} type errors:&#x27;)
+    for e in eg.exceptions:
+        print(f&#x27;  - {e}&#x27;)</code></pre></div>
+<p>Output (Python 3.11+):</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">2 division-by-zero errors:
+  - 10 / 0
+  - 5 / 0
+1 type errors:
+  - &#x27;a&#x27; / 1 has the wrong type</code></pre></div>
+<p>See how it all works:</p>
+<ol>
+<li><code>divide_strict</code> strictly raises exceptions – if the arguments are wrong, it never quietly returns <code>None</code></li>
+<li><code>batch_divide</code> collects all the exceptions and raises them together in an <code>ExceptionGroup</code></li>
+<li>The caller uses <code>except*</code> to group them by type, and reports <strong>all</strong> the errors at once</li>
+</ol>
+<p>This is the <strong>partial failure</strong> pattern that exception groups bring: <strong>whatever should succeed succeeds, whatever should fail fails, and all errors are reported together</strong>. This pattern is very common in asyncio concurrency, batch RPC calls and parallel fetching. Before Python 3.11 you had to build it yourself; from 3.11, it's built into the language.</p></article></section><section id="step-17" class="step-card read" data-kind="step" aria-label="Teaching step 18">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 18 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Nested exception groups – a tree structure</h3>
+<p>Let's go a bit deeper. An <code>ExceptionGroup</code> is itself an exception. So can it go <strong>inside another <code>ExceptionGroup</code></strong>?</p>
+<p>Yes. Exception groups form a <strong>tree</strong> – a group can hold normal exceptions, and also other groups. This nesting is common in situations like "distributed tasks, where sub-tasks have their own sub-tasks".</p>
+<p>Here's an example. Say "Brother Shui" wants to update lots of employees' information. For each employee, two parts need updating separately – "basic info" and "clock-in records" – and either part might fail:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def update_employee(emp):
+    sub_errors = []
+    try:
+        update_basic_info(emp)
+    except Exception as e:
+        sub_errors.append(e)
+    try:
+        update_punch_record(emp)
+    except Exception as e:
+        sub_errors.append(e)
+    if sub_errors:
+        raise ExceptionGroup(f&#x27;Failed to update employee {emp}&#x27;, sub_errors)
+
+
+def batch_update(employees):
+    errors = []
+    for emp in employees:
+        try:
+            update_employee(emp)
+        except Exception as e:
+            errors.append(e)
+    if errors:
+        raise ExceptionGroup(&#x27;Some updates in the batch failed&#x27;, errors)</code></pre></div>
+<p>An exception group from this structure is <strong>nested</strong>: the outermost group holds several "Failed to update employee X" sub-groups. The clever thing about <code>except*</code> is that <strong>it can see through any number of nesting levels</strong> and pull out all exceptions of the given type.</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">try:
+    batch_update(employees)
+except* ConnectionError as eg:
+    print(f&#x27;Network errors: {len(eg.exceptions)} groups&#x27;)
+except* ValueError as eg:
+    print(f&#x27;Argument errors: {len(eg.exceptions)} groups&#x27;)</code></pre></div>
+<p>Whether a <code>ConnectionError</code> is in the first level or the second, <code>except*</code> will find it. This is the biggest difference from a normal <code>except</code>.</p></article></section><section id="step-18" class="step-card read" data-kind="step" aria-label="Teaching step 19">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 19 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3><code>eg.subgroup</code> and <code>eg.split</code> – working with exception groups by hand</h3>
+<p><code>except*</code> is usually enough, but sometimes you want finer control – for example, handling only exceptions that meet a <strong>specific condition</strong>, not just grouping by type. <code>ExceptionGroup</code> has two useful methods for this: <code>subgroup</code> and <code>split</code>.</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">errors = [
+    ValueError(&#x27;bad value 1&#x27;),
+    TypeError(&#x27;bad type&#x27;),
+    ValueError(&#x27;bad value 2&#x27;),
+    ConnectionError(&#x27;network down&#x27;),
+]
+eg = ExceptionGroup(&#x27;a pile of errors&#x27;, errors)
+
+# subgroup picks out by condition
+value_eg = eg.subgroup(ValueError)
+print(f&#x27;ValueError sub-group: {len(value_eg.exceptions)}&#x27;)
+
+# split splits it into two parts: &quot;matching&quot; and &quot;not matching&quot;
+matched, rest = eg.split(ValueError)
+print(f&#x27;Matched: {len(matched.exceptions)}; rest: {len(rest.exceptions)}&#x27;)</code></pre></div>
+<p>Output (Python 3.11+):</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">ValueError sub-group: 2
+Matched: 2; rest: 2</code></pre></div>
+<p>Both <code>subgroup</code> and <code>split</code> take either a <strong>type</strong> or a <strong>checking function</strong> as their argument. The function version is especially flexible:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">matched, rest = eg.split(lambda e: &#x27;bad&#x27; in str(e))</code></pre></div>
+<p>This picks out every error whose message contains the word "bad". When you write complicated middleware or scheduler code, these two methods are very useful.</p></article></section><section id="step-19" class="step-card read" data-kind="step" aria-label="Teaching step 20">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 20 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Don't make these mistakes (anti-patterns)</h3>
+<p>Almost all badly-written exception handling falls into the following <strong>anti-patterns</strong>. Let's go through them one by one, each with a "wrong" and a "right" version.</p>
+<h4>Anti-pattern 1: swallowing exceptions</h4>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Wrong
+try:
+    do_something()
+except Exception:
+    pass</code></pre></div>
+<p>This is called <strong>swallowing an exception</strong>. Something went wrong, but you don't log it, don't re-raise it, and don't return a special value – you'll never be able to find the root cause of problems.</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Right
+import logging
+
+try:
+    do_something()
+except Exception:
+    logging.exception(&#x27;do_something failed&#x27;)
+    raise</code></pre></div>
+<p>At the very least, log it. If you decide not to re-raise it, you must have a clear business reason – and I strongly recommend adding a comment explaining "why we don't re-raise".</p>
+<h4>Anti-pattern 2: catching too widely</h4>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Wrong
+try:
+    age = int(input(&#x27;Age: &#x27;))
+    save_to_db(age)
+except Exception:
+    print(&#x27;Something went wrong&#x27;)</code></pre></div>
+<p>This <code>try</code> does two things: converting and saving to the database. An error in either step gets caught the same way, and the error information is lost.</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Right
+try:
+    age = int(input(&#x27;Age: &#x27;))
+except ValueError:
+    print(&#x27;Please enter a valid number&#x27;)
+    return
+
+try:
+    save_to_db(age)
+except OSError as e:
+    print(f&#x27;Failed to write to the database: {e}&#x27;)
+    return</code></pre></div>
+<p>Each <code>try</code> block wraps <strong>one thing only</strong>, and catches the exception types <strong>specific to it</strong>. This is the "smallest scope" rule for exception handling.</p>
+<h4>Anti-pattern 3: using exceptions for normal flow control</h4>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Wrong – checking whether a key is in a dict
+try:
+    val = d[&#x27;key&#x27;]
+    use(val)
+except KeyError:
+    use_default()</code></pre></div>
+<p>It's not that it doesn't work – but if the logic <strong>can</strong> be written with <code>if / else</code>, don't use exceptions. Exceptions cost more than normal branches, and they make the code's intention less clear.</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Right
+val = d.get(&#x27;key&#x27;)
+if val is not None:
+    use(val)
+else:
+    use_default()</code></pre></div>
+<p>So when are exceptions the right choice? When <strong>"normally, this shouldn't go wrong"</strong> – like reading files, network requests, or checking user input. These are really "error handling" situations, so exceptions fit naturally.</p>
+<h4>Anti-pattern 4: forgetting the caller needs the original information</h4>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Wrong
+try:
+    do_thing()
+except SomeError as e:
+    raise MyError(&#x27;Operation failed&#x27;)</code></pre></div>
+<p>This throws away the original exception completely. The caller gets <code>MyError</code>, but the traceback has no information about <code>SomeError</code> – the root cause is lost.</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Right
+try:
+    do_thing()
+except SomeError as e:
+    raise MyError(&#x27;Operation failed&#x27;) from e</code></pre></div>
+<p>Remember <code>from e</code>. It's a tiny effort, but it can save you during a real production incident.</p>
+<h4>Anti-pattern 5: using <code>except</code> instead of type checking</h4>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Wrong
+try:
+    n = int(x)
+except (TypeError, ValueError):
+    n = 0</code></pre></div>
+<p>If <code>x</code>'s type should really be checked, checking it directly is clearer than relying on an exception as a safety net. Of course, a safety net for <strong>outside input</strong> is reasonable – but your internal logic shouldn't be written like this.</p></article></section><section id="step-20" class="step-card read" data-kind="step" aria-label="Teaching step 21">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 21 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>assert – lightweight checks while debugging</h3>
+<p>Besides exception handling, Python has a cousin called <code>assert</code>. Its job is to <strong>put "I assume X is definitely true" checks into your code</strong>. If it's not true, it raises an <code>AssertionError</code>.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python19/exception-handling/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def calculate_average(nums):
+    assert len(nums) &gt; 0, &#x27;Cannot average an empty list&#x27;
+    return sum(nums) / len(nums)
+
+
+print(calculate_average([1, 2, 3]))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">2.0</code></pre></div>
+<p>The syntax is <code>assert expression, error message</code>. If the expression is false, it raises <code>AssertionError</code>.</p>
+<p>But! <code>assert</code> has an <strong>important trap</strong>: when you run code with <code>python -O</code> (optimised mode), <strong>every <code>assert</code> statement is thrown away</strong>. So you must <strong>never</strong> use <code>assert</code> to check input in production. It should only be used for "development and debugging", "test assertions" and "protecting internal invariants" (things that should always be true inside your code).</p>
+<p>Wrong example:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def withdraw(account, amount):
+    assert amount &gt; 0, &#x27;Withdrawal amount must be positive&#x27;   # Wrong – the check vanishes in optimised mode
+    account.balance -= amount</code></pre></div>
+<p>The right way:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def withdraw(account, amount):
+    if amount &lt;= 0:
+        raise ValueError(&#x27;Withdrawal amount must be positive&#x27;)
+    account.balance -= amount</code></pre></div>
+<p>Remember a simple rule: <strong><code>assert</code> is for programmers; <code>raise</code> is for the program.</strong></p></article></section><section id="step-21" class="step-card read" data-kind="step" aria-label="Teaching step 22">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 22 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>The traceback module – printing errors more nicely</h3>
+<p>After catching an exception, sometimes you want to control <strong>how</strong> the error is printed – for example, when writing logs, or an error page for a web back end. The standard library's <code>traceback</code> module does this.</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import traceback
+
+
+def do_work():
+    return 1 / 0
+
+
+try:
+    do_work()
+except ZeroDivisionError:
+    # Turn the full traceback into a string
+    s = traceback.format_exc()
+    print(&#x27;--- Error log ---&#x27;)
+    print(s)
+    print(&#x27;--- End ---&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">--- Error log ---
+Traceback (most recent call last):
+  File &quot;...&quot;, line 8, in &lt;module&gt;
+    do_work()
+  File &quot;...&quot;, line 5, in do_work
+    return 1 / 0
+           ~~^~~
+ZeroDivisionError: division by zero
+
+--- End ---</code></pre></div>
+<p><code>traceback.format_exc()</code> turns the full traceback of the exception currently being handled into a string. You can save that string to a log, send it in an email, or store it in a database.</p>
+<p>Similar functions:</p>
+<ul>
+<li><code>traceback.print_exc()</code>: print it straight to <code>stderr</code></li>
+<li><code>traceback.format_exception(exc)</code>: pass in an exception object, get a list of strings</li>
+<li><code>traceback.print_exception(exc)</code>: pass in an exception object, print it to <code>stderr</code></li>
+</ul>
+<p>These are really handy when writing your own middleware or logging framework.</p></article></section><section id="step-22" class="step-card read" data-kind="step" aria-label="Teaching step 23">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 23 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>logging.exception – the recommended way to log</h3>
+<p>In production code, you'll almost always use the <code>logging</code> module. It has special support for exceptions:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+
+def risky():
+    return 1 / 0
+
+
+try:
+    risky()
+except Exception:
+    logger.exception(&#x27;Calling risky failed&#x27;)</code></pre></div>
+<p>Output (excerpt):</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">ERROR:__main__:Calling risky failed
+Traceback (most recent call last):
+  File &quot;...&quot;, line 11, in &lt;module&gt;
+    risky()
+  File &quot;...&quot;, line 7, in risky
+    return 1 / 0
+           ~~^~~
+ZeroDivisionError: division by zero</code></pre></div>
+<p><code>logger.exception(msg)</code> is the same as <code>logger.error(msg, exc_info=True)</code>. It <strong>automatically</strong> adds the current exception's traceback to the log.</p>
+<p>If you write back-end services, remember this: <strong>wherever you catch an exception, you almost always want a <code>logger.exception</code>. Otherwise, tracking down problems in production will make you cry.</strong></p></article></section><section id="step-23" class="step-card read" data-kind="step" aria-label="Teaching step 24">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 24 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>warnings – gentler than exceptions</h3>
+<p>An exception means "it blew up". But sometimes you want to say "it works, but I don't recommend it" – for example, an old API that's about to be removed, or an argument combination with performance problems. That's when you use Python's <code>warnings</code> module.</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import warnings
+
+
+def old_api(x):
+    warnings.warn(&#x27;old_api is deprecated, please use new_api instead&#x27;, DeprecationWarning)
+    return x * 2
+
+
+print(old_api(3))</code></pre></div>
+<p>Output (the stderr part):</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">warning: DeprecationWarning: old_api is deprecated, please use new_api instead
+6</code></pre></div>
+<p><code>warnings.warn(message, category)</code> is a "gentle heads-up" – the program keeps running as normal, but the caller can see the message in stderr.</p>
+<p>The key difference between warnings and exceptions: <strong>warnings don't stop the program by default</strong>. But you can use <code>warnings.filterwarnings('error')</code> to upgrade them to exceptions – handy in tests, to force people to clean up deprecated usage.</p>
+<p>If you write libraries for other people, you must know this. It's much friendlier than just raising an exception.</p></article></section><section id="step-24" class="step-card read" data-kind="step" aria-label="Teaching step 25">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 25 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>try/except inside an expression – not allowed</h3>
+<p>You might have used <code>try</code> expressions in other languages, like Rust's <code>?</code> or Kotlin's <code>runCatching</code>. Python does <strong>not</strong> have this. In Python, <code>try/except</code> can only be a <strong>statement</strong>, not an expression:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Wrong – the syntax doesn&#x27;t allow this
+result = try:
+    int(x)
+except ValueError:
+    0</code></pre></div>
+<p>To get a one-line "use a default if conversion fails", the standard way is to wrap it in a small helper function:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python19/exception-handling/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def safe_int(x, default=0):
+    try:
+        return int(x)
+    except (TypeError, ValueError):
+        return default
+
+
+print(safe_int(&#x27;42&#x27;))
+print(safe_int(&#x27;abc&#x27;))
+print(safe_int(None, default=-1))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">42
+0
+-1</code></pre></div>
+<p>"The Pythonic way is to wrap it in a small function" – remember this.</p></article></section><section id="step-25" class="step-card read" data-kind="step" aria-label="Teaching step 26">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 26 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>EAFP vs LBYL – Python's philosophy</h3>
+<p>Finally, let's compare two <strong>styles</strong>. Understanding this really helps you organise your code.</p>
+<ul>
+<li><strong>LBYL</strong> (Look Before You Leap): check the condition first with <code>if</code>, then do the operation</li>
+<li><strong>EAFP</strong> (Easier to Ask Forgiveness than Permission): just do the operation, and use <code>try/except</code> as a safety net if it fails</li>
+</ul>
+<p>For example, "open a file and read it":</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># LBYL
+import os
+
+if os.path.exists(&#x27;config.json&#x27;):
+    with open(&#x27;config.json&#x27;, &#x27;r&#x27;) as f:
+        data = f.read()
+else:
+    data = &#x27;&#x27;</code></pre></div>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># EAFP
+try:
+    with open(&#x27;config.json&#x27;, &#x27;r&#x27;) as f:
+        data = f.read()
+except FileNotFoundError:
+    data = &#x27;&#x27;</code></pre></div>
+<p>Many other languages (like Java) lean towards LBYL, but <strong>Python culture leans towards EAFP</strong>. There are two reasons:</p>
+<ol>
+<li>LBYL has a "<strong>checked, then it changed</strong>" risk when several things run at once (for example, <code>os.path.exists</code> says yes, but a second later someone else deletes the file, and <code>open</code> still blows up)</li>
+<li>EAFP reads more like natural language – "I'll just do it, and deal with it if it doesn't work"</li>
+</ol>
+<p>Of course, EAFP doesn't suit every situation. For example, <code>dict.get(key, default)</code> is clearer than <code>try / except KeyError</code> for dictionary lookups. Here's how to decide:</p>
+<ul>
+<li><strong>Usually succeeds, occasionally fails</strong> → use EAFP (exceptions)</li>
+<li><strong>Often needs to branch in normal use</strong> → use LBYL (<code>if/else</code>)</li>
+</ul></article></section><section id="step-26" class="step-card read" data-kind="step" aria-label="Teaching step 27">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 27 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>A few final words</h3>
+<p>Let's review today's content:</p>
+<ol>
+<li><strong><code>try / except</code></strong> is Python's core structure for handling errors. Remember: "children first, parents last"</li>
+<li>Catch <strong>several exceptions</strong> with <code>except (A, B)</code>; get the exception object with <code>as e</code></li>
+<li><strong>Exceptions form a family tree</strong> – catching a parent catches all its children. Use <code>Exception</code> as a catch-all, never a bare <code>except:</code></li>
+<li><strong><code>else</code></strong> runs "only if nothing went wrong"; <strong><code>finally</code></strong> runs "no matter what"</li>
+<li><strong><code>raise</code></strong> raises an exception yourself; <strong><code>raise ... from e</code></strong> makes an explicit exception chain, so you can find the root cause when debugging</li>
+<li><strong>Custom exception classes</strong> make errors part of your code's structure – essential when business logic gets complicated</li>
+<li><strong><code>ExceptionGroup</code> + <code>except*</code></strong> (Python 3.11+) solve the problem of "reporting several errors at once"</li>
+<li><strong><code>add_note</code></strong> (Python 3.11+) adds debugging context to an exception – more elegant than raising a new one</li>
+</ol>
+<p>How well you handle exceptions is one of the biggest differences between beginners and experienced programmers. Beginners either don't handle them at all – the program blows up and that's it – or handle them badly – <code>except Exception: pass</code> swallows every error, and when something goes wrong, nobody can save it. Experienced programmers catch precisely, pass errors on sensibly, wrap them when needed, and never quietly swallow them.</p>
+<p>In the next article, we'll keep moving forward and talk about generators and iterators, taking your code up another level. Keep going!</p></article></section><section id="step-27" class="step-card read" data-kind="step" aria-label="Teaching step 28">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 28 / 28</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Narrow the error down to one input</h3>
+<p>This time, let's change the earlier "skip negative numbers" exercise so it clearly reports the problem. First, let's agree: the input is some text, and it should contain a non-negative integer:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python19/exception-handling/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def parse_minutes(text):
+    try:
+        minutes = int(text)
+    except ValueError:
+        raise ValueError(&#x27;Minutes must be written as a whole number&#x27;) from None
+    if minutes &lt; 0:
+        raise ValueError(&#x27;Minutes cannot be negative&#x27;)
+    return minutes
+
+
+for text in [&#x27;15&#x27;, &#x27;0&#x27;, &#x27;-3&#x27;, &#x27;abc&#x27;]:
+    try:
+        print(parse_minutes(text))
+    except ValueError as error:
+        print(error)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">15
+0
+Minutes cannot be negative
+Minutes must be written as a whole number</code></pre></div>
+<p>We catch <code>ValueError</code> here because we know exactly which failure we're dealing with. This doesn't mean it can handle every type of input. For example, passing a list as <code>text</code> is a different kind of problem – using the interface wrongly.</p>
+<p>When you meet a long traceback, first look at the <strong>error type and message at the bottom</strong>, then look upwards for your own file and the line that called it. Keep the input that fails, and remove unrelated screens, loops and file operations step by step, until you have the <strong>shortest code that still shows the problem</strong>. After each removal, run it again to check it still shows the same problem.</p>
+<p>When you need to ask for help, describe the problem in five parts: <strong>the environment you ran it in, the shortest code, the actual input, the expected result, and the actual result with the full error</strong>. Then add what you've already tried. Try describing <code>parse_minutes('-3')</code> in these five parts yourself, and then change the input to <code>'15'</code> as a working comparison.</p></article></section><section id="lesson-end" aria-label="Chapter summary"><div class="read-cta"><p>Finished reading? Practising once is how you really learn it.</p><a class="read-cta-btn focus-ring" href="/lessons/python19/exception-handling/">Practise in challenge mode →</a></div><nav aria-label="Chapter navigation" class="chapter-nav"><div class="cn-grid"><a class="chap-nav prev focus-ring" href="/lessons/python18/pathlib/read/"><span class="cn-label">← Previous chapter</span><span class="cn-title">18 · pathlib: modern path handling</span></a><div class="cn-mid"><span>Exception handling</span></div><a class="chap-nav next focus-ring" href="/lessons/python20/dataclass/read/"><span class="cn-label">Next chapter →</span><span class="cn-title">20 · dataclass</span></a></div></nav></section></article></div>
+    <aside class="lesson-sidebar right" aria-label="This chapter"><nav aria-label="This chapter's contents"><div class="side-label up">In this chapter</div><p class="toc-chapter">Exception handling</p><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Exception handling</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">Why do programs &quot;blow up&quot;?</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">The simplest try / except</span></a></li><li class="toc-li" data-target="read-exercise-01-safe-divide"><a href="#read-exercise-01-safe-divide" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">safe_divide: handle dividing by zero with try/except</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">Catching several kinds of exceptions</span></a></li><li class="toc-li" data-target="read-exercise-02-parse-int"><a href="#read-exercise-02-parse-int" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">Catch ValueError</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">Getting the exception object – as e</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">The catch-all – except Exception</span></a></li><li class="toc-li" data-target="step-6"><a href="#step-6" class="toc-link focus-ring"><span class="toc-kind">Teaching 07</span><span class="toc-title">The exception family – the inheritance tree</span></a></li><li class="toc-li" data-target="step-7"><a href="#step-7" class="toc-link focus-ring"><span class="toc-kind">Teaching 08</span><span class="toc-title">else – runs only when nothing went wrong</span></a></li><li class="toc-li" data-target="step-8"><a href="#step-8" class="toc-link focus-ring"><span class="toc-kind">Teaching 09</span><span class="toc-title">finally – runs no matter what</span></a></li><li class="toc-li" data-target="read-exercise-03-finally"><a href="#read-exercise-03-finally" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">finally: clean-up always runs</span></a></li><li class="toc-li" data-target="step-9"><a href="#step-9" class="toc-link focus-ring"><span class="toc-kind">Teaching 10</span><span class="toc-title">Raising exceptions yourself – raise</span></a></li><li class="toc-li" data-target="read-exercise-04-raise-age"><a href="#read-exercise-04-raise-age" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">raise: raising an exception yourself</span></a></li><li class="toc-li" data-target="step-10"><a href="#step-10" class="toc-link focus-ring"><span class="toc-kind">Teaching 11</span><span class="toc-title">Exception chaining – raise ... from e</span></a></li><li class="toc-li" data-target="step-11"><a href="#step-11" class="toc-link focus-ring"><span class="toc-kind">Teaching 12</span><span class="toc-title">Custom exception classes</span></a></li><li class="toc-li" data-target="read-exercise-05-custom-exception"><a href="#read-exercise-05-custom-exception" class="toc-link focus-ring"><span class="toc-kind">Exercise 5</span><span class="toc-title">A custom exception: InvalidScoreError</span></a></li><li class="toc-li" data-target="step-12"><a href="#step-12" class="toc-link focus-ring"><span class="toc-kind">Teaching 13</span><span class="toc-title">Built-in exceptions cheat sheet</span></a></li><li class="toc-li" data-target="step-13"><a href="#step-13" class="toc-link focus-ring"><span class="toc-kind">Teaching 14</span><span class="toc-title">Want to report several errors at once? – Exception groups (Python 3.11+)</span></a></li><li class="toc-li" data-target="step-14"><a href="#step-14" class="toc-link focus-ring"><span class="toc-kind">Teaching 15</span><span class="toc-title">Splitting an exception group with except</span></a></li><li class="toc-li" data-target="step-15"><a href="#step-15" class="toc-link focus-ring"><span class="toc-kind">Teaching 16</span><span class="toc-title">add_note – adding notes to exceptions (Python 3.11+)</span></a></li><li class="toc-li" data-target="step-16"><a href="#step-16" class="toc-link focus-ring"><span class="toc-kind">Teaching 17</span><span class="toc-title">Mini project: safe_divide and batch division</span></a></li><li class="toc-li" data-target="step-17"><a href="#step-17" class="toc-link focus-ring"><span class="toc-kind">Teaching 18</span><span class="toc-title">Nested exception groups – a tree structure</span></a></li><li class="toc-li" data-target="step-18"><a href="#step-18" class="toc-link focus-ring"><span class="toc-kind">Teaching 19</span><span class="toc-title">eg.subgroup and eg.split – working with exception groups by hand</span></a></li><li class="toc-li" data-target="step-19"><a href="#step-19" class="toc-link focus-ring"><span class="toc-kind">Teaching 20</span><span class="toc-title">Don&#x27;t make these mistakes (anti-patterns)</span></a></li><li class="toc-li" data-target="step-20"><a href="#step-20" class="toc-link focus-ring"><span class="toc-kind">Teaching 21</span><span class="toc-title">assert – lightweight checks while debugging</span></a></li><li class="toc-li" data-target="step-21"><a href="#step-21" class="toc-link focus-ring"><span class="toc-kind">Teaching 22</span><span class="toc-title">The traceback module – printing errors more nicely</span></a></li><li class="toc-li" data-target="step-22"><a href="#step-22" class="toc-link focus-ring"><span class="toc-kind">Teaching 23</span><span class="toc-title">logging.exception – the recommended way to log</span></a></li><li class="toc-li" data-target="step-23"><a href="#step-23" class="toc-link focus-ring"><span class="toc-kind">Teaching 24</span><span class="toc-title">warnings – gentler than exceptions</span></a></li><li class="toc-li" data-target="step-24"><a href="#step-24" class="toc-link focus-ring"><span class="toc-kind">Teaching 25</span><span class="toc-title">try/except inside an expression – not allowed</span></a></li><li class="toc-li" data-target="step-25"><a href="#step-25" class="toc-link focus-ring"><span class="toc-kind">Teaching 26</span><span class="toc-title">EAFP vs LBYL – Python&#x27;s philosophy</span></a></li><li class="toc-li" data-target="step-26"><a href="#step-26" class="toc-link focus-ring"><span class="toc-kind">Teaching 27</span><span class="toc-title">A few final words</span></a></li><li class="toc-li" data-target="step-27"><a href="#step-27" class="toc-link focus-ring"><span class="toc-kind">Teaching 28</span><span class="toc-title">Narrow the error down to one input</span></a></li></ol></nav></aside>
+  </div>
+  <dialog class="dir-dialog" aria-labelledby="dir-title"><div class="dd-inner"><div class="dd-head"><h2 id="dir-title">Contents</h2><button type="button" class="dd-close focus-ring">Close</button></div>
+  <div class="dd-tabs" aria-label="Contents scope"><button type="button" class="dd-tab focus-ring" data-tab="all" aria-pressed="true">All lessons</button><button type="button" class="dd-tab focus-ring" data-tab="chapter" aria-pressed="false">This chapter</button></div>
+  <div class="dd-body"><div class="dd-pane" data-pane="all"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/read/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/read/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/read/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/read/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/read/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/read/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/read/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/read/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/read/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/read/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/read/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/read/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/read/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/read/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/read/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/read/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/read/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/read/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/read/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python19/exception-handling/read/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/read/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/read/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/read/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/read/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/read/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/read/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/read/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/read/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/read/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></div><div class="dd-pane" data-pane="chapter" hidden><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Exception handling</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">Why do programs &quot;blow up&quot;?</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">The simplest try / except</span></a></li><li class="toc-li" data-target="read-exercise-01-safe-divide"><a href="#read-exercise-01-safe-divide" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">safe_divide: handle dividing by zero with try/except</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">Catching several kinds of exceptions</span></a></li><li class="toc-li" data-target="read-exercise-02-parse-int"><a href="#read-exercise-02-parse-int" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">Catch ValueError</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">Getting the exception object – as e</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">The catch-all – except Exception</span></a></li><li class="toc-li" data-target="step-6"><a href="#step-6" class="toc-link focus-ring"><span class="toc-kind">Teaching 07</span><span class="toc-title">The exception family – the inheritance tree</span></a></li><li class="toc-li" data-target="step-7"><a href="#step-7" class="toc-link focus-ring"><span class="toc-kind">Teaching 08</span><span class="toc-title">else – runs only when nothing went wrong</span></a></li><li class="toc-li" data-target="step-8"><a href="#step-8" class="toc-link focus-ring"><span class="toc-kind">Teaching 09</span><span class="toc-title">finally – runs no matter what</span></a></li><li class="toc-li" data-target="read-exercise-03-finally"><a href="#read-exercise-03-finally" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">finally: clean-up always runs</span></a></li><li class="toc-li" data-target="step-9"><a href="#step-9" class="toc-link focus-ring"><span class="toc-kind">Teaching 10</span><span class="toc-title">Raising exceptions yourself – raise</span></a></li><li class="toc-li" data-target="read-exercise-04-raise-age"><a href="#read-exercise-04-raise-age" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">raise: raising an exception yourself</span></a></li><li class="toc-li" data-target="step-10"><a href="#step-10" class="toc-link focus-ring"><span class="toc-kind">Teaching 11</span><span class="toc-title">Exception chaining – raise ... from e</span></a></li><li class="toc-li" data-target="step-11"><a href="#step-11" class="toc-link focus-ring"><span class="toc-kind">Teaching 12</span><span class="toc-title">Custom exception classes</span></a></li><li class="toc-li" data-target="read-exercise-05-custom-exception"><a href="#read-exercise-05-custom-exception" class="toc-link focus-ring"><span class="toc-kind">Exercise 5</span><span class="toc-title">A custom exception: InvalidScoreError</span></a></li><li class="toc-li" data-target="step-12"><a href="#step-12" class="toc-link focus-ring"><span class="toc-kind">Teaching 13</span><span class="toc-title">Built-in exceptions cheat sheet</span></a></li><li class="toc-li" data-target="step-13"><a href="#step-13" class="toc-link focus-ring"><span class="toc-kind">Teaching 14</span><span class="toc-title">Want to report several errors at once? – Exception groups (Python 3.11+)</span></a></li><li class="toc-li" data-target="step-14"><a href="#step-14" class="toc-link focus-ring"><span class="toc-kind">Teaching 15</span><span class="toc-title">Splitting an exception group with except</span></a></li><li class="toc-li" data-target="step-15"><a href="#step-15" class="toc-link focus-ring"><span class="toc-kind">Teaching 16</span><span class="toc-title">add_note – adding notes to exceptions (Python 3.11+)</span></a></li><li class="toc-li" data-target="step-16"><a href="#step-16" class="toc-link focus-ring"><span class="toc-kind">Teaching 17</span><span class="toc-title">Mini project: safe_divide and batch division</span></a></li><li class="toc-li" data-target="step-17"><a href="#step-17" class="toc-link focus-ring"><span class="toc-kind">Teaching 18</span><span class="toc-title">Nested exception groups – a tree structure</span></a></li><li class="toc-li" data-target="step-18"><a href="#step-18" class="toc-link focus-ring"><span class="toc-kind">Teaching 19</span><span class="toc-title">eg.subgroup and eg.split – working with exception groups by hand</span></a></li><li class="toc-li" data-target="step-19"><a href="#step-19" class="toc-link focus-ring"><span class="toc-kind">Teaching 20</span><span class="toc-title">Don&#x27;t make these mistakes (anti-patterns)</span></a></li><li class="toc-li" data-target="step-20"><a href="#step-20" class="toc-link focus-ring"><span class="toc-kind">Teaching 21</span><span class="toc-title">assert – lightweight checks while debugging</span></a></li><li class="toc-li" data-target="step-21"><a href="#step-21" class="toc-link focus-ring"><span class="toc-kind">Teaching 22</span><span class="toc-title">The traceback module – printing errors more nicely</span></a></li><li class="toc-li" data-target="step-22"><a href="#step-22" class="toc-link focus-ring"><span class="toc-kind">Teaching 23</span><span class="toc-title">logging.exception – the recommended way to log</span></a></li><li class="toc-li" data-target="step-23"><a href="#step-23" class="toc-link focus-ring"><span class="toc-kind">Teaching 24</span><span class="toc-title">warnings – gentler than exceptions</span></a></li><li class="toc-li" data-target="step-24"><a href="#step-24" class="toc-link focus-ring"><span class="toc-kind">Teaching 25</span><span class="toc-title">try/except inside an expression – not allowed</span></a></li><li class="toc-li" data-target="step-25"><a href="#step-25" class="toc-link focus-ring"><span class="toc-kind">Teaching 26</span><span class="toc-title">EAFP vs LBYL – Python&#x27;s philosophy</span></a></li><li class="toc-li" data-target="step-26"><a href="#step-26" class="toc-link focus-ring"><span class="toc-kind">Teaching 27</span><span class="toc-title">A few final words</span></a></li><li class="toc-li" data-target="step-27"><a href="#step-27" class="toc-link focus-ring"><span class="toc-kind">Teaching 28</span><span class="toc-title">Narrow the error down to one input</span></a></li></ol></div></div></div></dialog>
+  <div class="py-toast" hidden><span class="spinner"></span><span class="py-toast-text">Loading Python…</span></div>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>© 2026 Python for Beginners · English edition of the <a href="https://github.com/walter201230/Python">walter201230/Python</a> tutorial (CC BY 4.0)</span>
+    <div class="footer-links"><a href="/">Course list</a><a href="/about/">About this site</a><a href="https://github.com/walter201230/Python">GitHub</a></div>
+  </div>
+</footer>
+<script src="/assets/site.js?v=20261028"></script>
+</body>
+</html>

@@ -1,0 +1,786 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>pyproject.toml + uv (full read) – Python for Beginners</title>
+<meta name="description" content="Modern Python project structure: standard pyproject.toml config + uv, the super-fast package manager.">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css?v=20261028">
+
+</head>
+<body data-page="read" data-lesson="python23" data-total="0">
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="/" aria-label="Python for Beginners – home"><span class="gradient-text-flow" data-text="Python for Beginners">Python for Beginners</span></a>
+    <nav class="header-nav">
+      <a class="nav-link" href="/about/">About</a>
+      <a class="nav-icon focus-ring" href="https://github.com/walter201230/Python" aria-label="Original tutorial on GitHub" title="Original tutorial on GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+      <button type="button" class="theme-toggle focus-ring" aria-label="Switch theme"><span class="knob"><svg class="ic-moon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button>
+    </nav>
+  </div>
+</header>
+<main class="site-main">
+<div class="lesson-shell bg-tech-grid">
+  <div class="mobile-bar"><div class="mb-inner"><button type="button" class="dir-btn focus-ring" aria-haspopup="dialog">Contents</button></div></div>
+  <div class="lesson-columns">
+    <aside class="lesson-sidebar left" aria-label="All lessons"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/read/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/read/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/read/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/read/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/read/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/read/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/read/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/read/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/read/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/read/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/read/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/read/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/read/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/read/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/read/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/read/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/read/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/read/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/read/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/read/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/read/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/read/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/read/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python23/pyproject-uv/read/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/read/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/read/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/read/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/read/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/read/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></aside>
+    <div class="lesson-main"><article class="lesson-article"><header class="lesson-head"><h1>pyproject.toml + uv</h1><p class="lh-sub">Full read · <span class="accent">18</span> teaching parts<span class="sep">·</span>about <span class="accent">25</span> min</p>
+<p class="lh-note">This page is the read-through version of the chapter, with every explanation in one place. To write code and get it checked, go to <a class="accent-link focus-ring" href="/lessons/python23/pyproject-uv/">challenge mode</a>.</p></header><section id="step-0" class="step-card read" data-kind="step" aria-label="Teaching step 1">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 01 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>pyproject.toml + uv: putting an end to "it works on my computer but not on yours"</h2>
+<p>Have you ever had this nightmare? Brother Shui packs up his code and sends it to a teammate. The teammate runs it and gets a pile of <code>ModuleNotFoundError</code>s. Brother Shui says: "Just <code>pip install</code> it." The teammate asks: "Which version?" Brother Shui searches his computer, can't find a complete <code>requirements.txt</code> anywhere, and finally mumbles: "Er… it works on my computer. That's weird."</p>
+<p>This happens all the time in the Python world. It was like this three years ago, and five years ago. Go back even further to ancient times, and people used a scattered pile of files – <code>setup.py</code> + <code>requirements.txt</code> + <code>MANIFEST.in</code> + <code>setup.cfg</code> – each handling one bit of the job. Beginners wanted to cry.</p>
+<p>"Why is it so complicated?" you might ask.</p>
+<p>The answer is <strong>history</strong>. Python's packaging tools evolved slowly, and every generation of tools left behind some files of its own. It wasn't until PEP 518 in 2018, followed by PEP 621 in 2021, that the community finally agreed: <strong>put all project metadata, dependencies and tool settings into one single file, called <code>pyproject.toml</code>.</strong></p>
+<p>Then in 2024, a new tool called <code>uv</code> arrived, made by <code>Astral</code> (the people behind <code>ruff</code>). It's written in <code>Rust</code>, it's 10 to 100 times faster than <code>pip</code>, it's a single program with no dependencies, and one command installs it.</p>
+<p>These two weapons together are what this chapter is about. After this chapter, when you start a new project, going from nothing to "a project that runs, locks its dependencies and runs tests" takes just four or five commands. When a teammate asks "which version do I install?", just send them the project folder. They run <code>uv sync</code>, and the exact same environment grows on their computer. That's the experience you should have in 2026.</p></article></section><section id="step-1" class="step-card read" data-kind="step" aria-label="Teaching step 2">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 02 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>What was so bad about the old way?</h3>
+<p>First, let's remember what the old way looked like. A "proper" Python project usually had these files:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">my-project/
+├── setup.py
+├── setup.cfg
+├── requirements.txt
+├── requirements-dev.txt
+├── MANIFEST.in
+├── pytest.ini
+├── .flake8
+├── tox.ini
+└── my_project/
+    └── __init__.py</code></pre></div>
+<p>Eight or nine config files alone, each doing something different:</p>
+<ul>
+<li><code>setup.py</code>: for packaging – tells <code>pip</code> the project's name, version and entry points</li>
+<li><code>setup.cfg</code>: part of <code>setup.py</code>'s settings could move here, if you felt like it</li>
+<li><code>requirements.txt</code>: the list of production dependencies</li>
+<li><code>requirements-dev.txt</code>: the list of development dependencies (testing, <code>linter</code>, <code>formatter</code>)</li>
+<li><code>MANIFEST.in</code>: which non-code files to include when packaging</li>
+<li><code>pytest.ini</code>: settings for <code>pytest</code></li>
+<li><code>.flake8</code>: settings for <code>flake8</code></li>
+<li><code>tox.ini</code>: for testing on several Python versions</li>
+</ul>
+<p>Is your head spinning yet? And that's not even the worst part. The worst part is:</p>
+<p><strong><code>requirements.txt</code> doesn't lock versions.</strong></p>
+<p>Have you written a <code>requirements.txt</code> like this?</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">requests
+flask
+sqlalchemy</code></pre></div>
+<p>Clean and simple – three lines. Six months later, a teammate downloads it and runs it. <code>requests</code> automatically installs the newest version, an old API has been removed, and the code breaks. This is the famous gap between "it runs" and "it can be reproduced".</p>
+<p>It's not that the old way couldn't solve this – but it needed a pile of patches: <code>pip-tools</code> to make <code>requirements.lock</code>, <code>pipenv</code> to maintain <code>Pipfile.lock</code>, <code>poetry</code> to maintain <code>poetry.lock</code>. Every tool had its own <code>lock</code> file format, and they didn't work with each other.</p>
+<p>"Didn't <code>Pipenv</code> solve this?" Some of you might remember it. Pipenv was popular for a while, but it was painfully slow. Installing <code>numpy</code> could take 30 seconds just to work out dependencies, and big projects took minutes. Engineers' lives drained away waiting for <code>pipenv install</code>.</p>
+<p>Then came <code>poetry</code>, much faster than <code>pipenv</code>, but with its own problems: it invented its own dependency syntax (using <code>^</code> and <code>~</code> for version ranges), which wasn't fully compatible with the standard <code>PEP 508</code>, so moving to or from it wasn't smooth.</p>
+<p>By 2024, the community had finally cleaned things up:</p>
+<ul>
+<li><strong>Metadata format</strong>: unified as <code>pyproject.toml</code> (<code>PEP 621</code>)</li>
+<li><strong>Dependency format</strong>: unified as <code>PEP 508</code></li>
+<li><strong>Tool</strong>: <code>uv</code> is recommended (the speed king)</li>
+</ul>
+<p>Let's look step by step at how much easier the new way is.</p></article></section><section id="step-2" class="step-card read" data-kind="step" aria-label="Teaching step 3">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 03 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>What is pyproject.toml?</h3>
+<p><code>pyproject.toml</code> is a file name, and the file format is <code>TOML</code>. If you've never seen <code>TOML</code>, don't worry – it's a config format that's friendlier than <code>JSON</code> and stricter than <code>YAML</code>. It looks like this:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">[project]
+name = &quot;my-project&quot;
+version = &quot;0.1.0&quot;</code></pre></div>
+<p>The square brackets <code>[project]</code> mark a <strong>section</strong>, and the <code>key = value</code> lines below it are settings. Strings use double quotes, numbers are written directly, and lists use square brackets – much like most programming languages.</p>
+<p>The core idea of <code>pyproject.toml</code> is: <strong>put all of a project's information in one file</strong>. What can go in it? Look at this complete example:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">[project]
+name = &quot;my-project&quot;
+version = &quot;0.1.0&quot;
+description = &quot;A small tool by Two Drops&quot;
+requires-python = &quot;&gt;=3.10&quot;
+dependencies = [
+    &quot;httpx&gt;=0.27&quot;,
+    &quot;click&gt;=8.0&quot;,
+]
+
+[project.optional-dependencies]
+dev = [
+    &quot;pytest&gt;=8.0&quot;,
+    &quot;ruff&gt;=0.5&quot;,
+]
+
+[build-system]
+requires = [&quot;hatchling&quot;]
+build-backend = &quot;hatchling.build&quot;
+
+[tool.ruff]
+line-length = 100
+
+[tool.pytest.ini_options]
+testpaths = [&quot;tests&quot;]</code></pre></div>
+<p>Count how many jobs this one file does:</p>
+<ul>
+<li>The <code>[project]</code> section: project name, version, <code>Python</code> version requirement, dependency list – these used to be in <code>setup.py</code></li>
+<li>The <code>[project.optional-dependencies]</code> section: development dependencies and optional dependencies – used to be <code>requirements-dev.txt</code></li>
+<li>The <code>[build-system]</code> section: how to package the project – used to be <code>setup.py</code> + <code>MANIFEST.in</code></li>
+<li>The <code>[tool.ruff]</code> section: <code>ruff</code> settings – used to be <code>.ruff.toml</code> or <code>setup.cfg</code></li>
+<li>The <code>[tool.pytest.ini_options]</code> section: <code>pytest</code> settings – used to be <code>pytest.ini</code></li>
+</ul>
+<p>One file does everything. When a newcomer takes over a project, they open <code>pyproject.toml</code>, scan it top to bottom, and have the whole project's metadata, dependencies and tool settings in their head.</p>
+<p>"Isn't this just <code>package.json</code>?" you'll ask if you've written <code>Node.js</code>.</p>
+<p>Yes – the idea was copied from <code>package.json</code>, but <code>pyproject.toml</code> is stricter. It says the <code>[project]</code> section must follow <code>PEP 621</code>, and tool settings go under <code>[tool.*]</code> sections, so nothing ends up in the wrong place.</p>
+<p>Next, let's go through the fields one by one.</p></article></section><section id="step-3" class="step-card read" data-kind="step" aria-label="Teaching step 4">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 04 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>The smallest pyproject.toml, field by field</h3>
+<p>Here's the minimum a project needs to run:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">[project]
+name = &quot;my-project&quot;
+version = &quot;0.1.0&quot;
+requires-python = &quot;&gt;=3.10&quot;
+dependencies = [
+    &quot;httpx&gt;=0.27&quot;,
+]</code></pre></div>
+<p>Five fields. Let's explain each one.</p>
+<h4>name</h4>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">name = &quot;my-project&quot;</code></pre></div>
+<p>The project's name. This is the name used when publishing to <code>PyPI</code>, and it's unique across the whole internet. Naming rules:</p>
+<ul>
+<li>Only letters, digits, hyphens <code>-</code>, underscores <code>_</code> and dots <code>.</code></li>
+<li>Not case-sensitive – <code>My-Project</code> and <code>my_project</code> are the same name to <code>PyPI</code></li>
+<li>By convention, all lowercase with hyphens</li>
+</ul>
+<p>When choosing a name, note that the <strong>project name</strong> (<code>name</code>) and the <strong>import name</strong> (what you <code>import</code>) aren't always the same. For example, the famous <code>Pillow</code> has the project name <code>Pillow</code>, but you <code>import PIL</code>. <code>scikit-learn</code> has a hyphen in its project name, but you <code>import sklearn</code>.</p>
+<p>If your project is just for fun and won't be published to <code>PyPI</code>, name it however you like – but it's still good to follow the conventions.</p>
+<h4>version</h4>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">version = &quot;0.1.0&quot;</code></pre></div>
+<p>The version number. It's best to follow <strong>Semantic Versioning</strong>, in the format <code>MAJOR.MINOR.PATCH</code>:</p>
+<ul>
+<li><code>MAJOR</code>: big, incompatible changes (e.g. going from <code>1.x</code> to <code>2.x</code>, old code might stop working)</li>
+<li><code>MINOR</code>: new features that are backwards-compatible (<code>0.1.x</code> to <code>0.2.x</code>)</li>
+<li><code>PATCH</code>: bug fixes that are backwards-compatible (<code>0.1.0</code> to <code>0.1.1</code>)</li>
+</ul>
+<p>New projects start at <code>0.1.0</code>, and the first stable release is <code>1.0.0</code>. You can also use tools like <code>setuptools-scm</code> to take the version automatically from a <code>git tag</code>, but let's not go into that yet – get comfortable with the basics first.</p>
+<h4>requires-python</h4>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">requires-python = &quot;&gt;=3.10&quot;</code></pre></div>
+<p>Says which version of <code>Python</code> the project needs. Brother Shui strongly recommends always writing this line, for three reasons:</p>
+<ol>
+<li>If someone installs your package with <code>Python 3.7</code>, they get an error straight away, instead of crashing halfway through</li>
+<li><code>pip</code> uses this information to pick suitable sub-dependencies</li>
+<li>Tools (<code>ruff</code>, <code>mypy</code>) use it to decide which syntax is available</li>
+</ol>
+<p>The version range syntax follows <code>PEP 440</code>:</p>
+<ul>
+<li><code>&gt;=3.10</code>: 3.10 or higher</li>
+<li><code>&gt;=3.10,&lt;4.0</code>: from 3.10, but below 4.0</li>
+<li><code>~=3.10</code>: the 3.10.x series, not 3.11</li>
+<li><code>==3.10.*</code>: any patch version of 3.10</li>
+</ul>
+<p>For a new project in 2026, Brother Shui suggests: just write <code>&gt;=3.10</code> or <code>&gt;=3.11</code>. 3.9 is close to retirement, and modern features (<code>match</code> statements, better type hints) only start in 3.10.</p>
+<h4>dependencies</h4>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">dependencies = [
+    &quot;httpx&gt;=0.27&quot;,
+    &quot;click&gt;=8.0&quot;,
+]</code></pre></div>
+<p>The list of dependencies the project needs to run. Each item is a string following <code>PEP 508</code> syntax. Common forms:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">dependencies = [
+    &quot;httpx&quot;,                   # Any version
+    &quot;httpx&gt;=0.27&quot;,             # From 0.27 up
+    &quot;httpx&gt;=0.27,&lt;1.0&quot;,        # A range
+    &quot;httpx==0.27.2&quot;,           # Pinned exactly
+    &quot;httpx[http2]&quot;,            # With extras
+    &quot;httpx ; python_version &gt;= &#x27;3.10&#x27;&quot;,  # A conditional dependency
+]</code></pre></div>
+<p>The most common form is a <strong>lower limit</strong> like <code>&gt;=X.Y</code>. That's the community convention: write a lower limit, not an upper limit, unless you really know an upper version will cause problems. Why? If you write <code>httpx&lt;1.0</code> today, and <code>httpx 1.0</code> comes out tomorrow, every project that depends on yours gets stuck and is forced to deal with it. This is called "upper-bound pollution", and it's poison.</p>
+<p>The <strong>exact</strong> versions of dependencies are recorded in a <strong>lock</strong> file (<code>uv.lock</code>), which we'll see below.</p>
+<h4>A complete minimal example</h4>
+<p>Put the five fields together, and a working minimal <code>pyproject.toml</code> looks like this:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">[project]
+name = &quot;my-project&quot;
+version = &quot;0.1.0&quot;
+requires-python = &quot;&gt;=3.10&quot;
+dependencies = [
+    &quot;httpx&gt;=0.27&quot;,
+]</code></pre></div>
+<p>That's it. Five lines – much shorter than <code>setup.py</code>, and much shorter than <code>setup.cfg</code> + <code>requirements.txt</code> together. A newcomer understands it at a glance.</p>
+<p>For projects that "won't be published to <code>PyPI</code> – just an internal script", this is enough. To publish to <code>PyPI</code>, you also need a <code>[build-system]</code> section to tell the packaging tool how to build it – <code>uv init</code> below creates it for you.</p></article></section><section id="step-4" class="step-card read" data-kind="step" aria-label="Teaching step 5">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 05 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>What is uv, and how do you install it?</h3>
+<p>That's the file format. Now for the tool.</p>
+<p><code>uv</code> is a <code>Python</code> package manager and project manager from <code>Astral</code>. You might know this company – their <code>ruff</code> is now the standard <code>Python linter</code> and <code>formatter</code>. <code>uv</code> is their next product, and its goal is to replace a whole set of old tools: <code>pip</code>, <code>pip-tools</code>, <code>pipenv</code>, <code>poetry</code>, <code>virtualenv</code> and <code>pyenv</code>.</p>
+<p>Sounds bold, right? But <code>uv</code> really does it. Its selling points:</p>
+<ul>
+<li><strong>Fast</strong>: written in <code>Rust</code>, it works out dependencies 10–100 times faster than <code>pip</code>. Installing <code>numpy</code> takes half a second, not ages like <code>pipenv</code></li>
+<li><strong>A single program</strong>: <code>uv</code> itself doesn't need <code>Python</code>. It's one executable file you can put anywhere and use</li>
+<li><strong>All in one</strong>: project management (creating projects, adding dependencies, running scripts), <code>Python</code> version management (installing <code>Python</code> interpreters) and virtual environment management (<code>venv</code>) – all in one tool</li>
+<li><strong>Compatible</strong>: <code>uv pip install</code> is used just like <code>pip install</code>. <code>pyproject.toml</code> uses the <code>PEP 621</code> standard, so there are no walls to moving in or out</li>
+</ul>
+<p>Since its release in early 2024, <code>uv</code> has been quickly adopted by big companies and open-source projects. Now in 2026, <code>uv</code> is the first choice for new projects – almost no question.</p>
+<h4>Installing uv</h4>
+<p>The easiest way for <code>macOS</code> users:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">brew install uv</code></pre></div>
+<p>A general way that works on any platform:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">curl -LsSf https://astral.sh/uv/install.sh | sh</code></pre></div>
+<p><code>Windows</code> users can use <code>PowerShell</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">powershell -ExecutionPolicy ByPass -c &quot;irm https://astral.sh/uv/install.ps1 | iex&quot;</code></pre></div>
+<p>If you already have <code>pip</code>, you can also do this:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">pip install uv</code></pre></div>
+<p>But Brother Shui recommends installing it on its own – <code>uv</code> was designed to get away from <code>pip</code>, so there's no need to tie it to <code>pip</code>.</p>
+<p>After installing, check the version:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv --version</code></pre></div>
+<p>The output is something like:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">uv 0.5.20</code></pre></div>
+<p>Your version number may be different – as long as it prints something, you're good.</p>
+<h4>By the way: installing Python itself</h4>
+<p>Many people don't have a suitable version of <code>Python</code> on their computer, or only have the system's <code>Python 3.9</code>. <code>uv</code> can install <code>Python</code> for you too:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv python install 3.12</code></pre></div>
+<p>After this, <code>Python 3.12</code> is installed in a folder that <code>uv</code> manages. It's like a lightweight <code>pyenv</code>.</p>
+<p>See which <code>Python</code>s are installed:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv python list</code></pre></div>
+<p>The output is roughly:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">cpython-3.12.7-macos-aarch64-none           /Users/foo/.local/share/uv/python/...
+cpython-3.11.10-macos-aarch64-none          /Users/foo/.local/share/uv/python/...
+cpython-3.10.15-macos-aarch64-none          /Users/foo/.local/share/uv/python/...</code></pre></div>
+<p>From now on, when you start a new project, just pick the version you want – no worrying about what's installed on your computer.</p></article></section><section id="step-5" class="step-card read" data-kind="step" aria-label="Teaching step 6">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 06 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>uv init: creating a project</h3>
+<p>Enough theory – let's get going.</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv init my-project</code></pre></div>
+<p>This one command does a lot. Look at the folder it creates:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">cd my-project
+ls -la</code></pre></div>
+<p>Roughly:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">.git/
+.gitignore
+.python-version
+README.md
+main.py
+pyproject.toml</code></pre></div>
+<p>Let's look at each file.</p>
+<h4>.python-version</h4>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">3.12</code></pre></div>
+<p>This one file pins the <code>Python</code> version the project uses. On any computer with <code>uv</code> installed, go into this folder, and <code>uv</code> automatically uses <code>3.12</code> – installing it if needed. That's where <code>uv python install</code> above comes in handy.</p>
+<h4>pyproject.toml</h4>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">[project]
+name = &quot;my-project&quot;
+version = &quot;0.1.0&quot;
+description = &quot;Add your description here&quot;
+readme = &quot;README.md&quot;
+requires-python = &quot;&gt;=3.12&quot;
+dependencies = []</code></pre></div>
+<p>Very like the minimal example we wrote by hand, with just <code>description</code> and <code>readme</code> added. <code>uv init</code> assumes you'll write a <code>README.md</code>, so it creates an empty one for you.</p>
+<p><code>dependencies = []</code> is empty, because we haven't added any dependencies yet.</p>
+<h4>main.py</h4>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python23/pyproject-uv/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def main():
+    print(&quot;Hello from my-project!&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()</code></pre></div>
+<p>A "Hello World" entry point you can run straight away.</p>
+<h4>.gitignore</h4>
+<p><code>uv</code> also creates a general <code>.gitignore</code> for <code>Python</code> projects, which ignores <code>__pycache__/</code>, <code>.venv/</code>, <code>*.pyc</code> and so on. No more copying <code>.gitignore</code> templates from the internet.</p>
+<h4>Let's run it</h4>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv run main.py</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Hello from my-project!</code></pre></div>
+<p><code>uv run</code> is one of <code>uv</code>'s main commands. It does these things:</p>
+<ol>
+<li>Checks whether the project's <code>Python</code> version is suitable, and installs it if not</li>
+<li>Checks whether the <code>.venv/</code> virtual environment exists, and creates it if not</li>
+<li>Checks whether all dependencies are installed, and installs them if not</li>
+<li>Runs the command using the project's virtual environment</li>
+</ol>
+<p>So you can see: from <code>uv init</code> to running code takes <strong>two commands</strong> – <code>uv init my-project</code> and <code>uv run main.py</code>. No "create a virtual environment, activate it, install dependencies" steps in between. That's the <code>uv</code> experience.</p></article></section><section id="step-6" class="step-card read" data-kind="step" aria-label="Teaching step 7">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 07 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>uv add: adding dependencies</h3>
+<p>The new project runs. Now let's add something. How do you usually install <code>httpx</code>?</p>
+<p>The old way:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">pip install httpx
+# Then open requirements.txt by hand and add a line
+echo &quot;httpx&quot; &gt;&gt; requirements.txt</code></pre></div>
+<p>Two steps – and it's easy to forget the second one. It works fine after installing, but you commit your code without updating <code>requirements.txt</code>, and your teammate's copy doesn't run.</p>
+<p>The <code>uv</code> way:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv add httpx</code></pre></div>
+<p>One command. What does it do behind the scenes?</p>
+<ol>
+<li>Works out the newest version of <code>httpx</code> (that fits the project's <code>requires-python</code>)</li>
+<li>Installs it in the project's <code>.venv/</code></li>
+<li>Writes <code>httpx&gt;=0.28</code> into the <code>dependencies</code> in <code>pyproject.toml</code></li>
+<li>Updates <code>uv.lock</code>, pinning the exact versions of <code>httpx</code> and all its own dependencies</li>
+</ol>
+<p>Open <code>pyproject.toml</code> and look:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">[project]
+name = &quot;my-project&quot;
+version = &quot;0.1.0&quot;
+requires-python = &quot;&gt;=3.12&quot;
+dependencies = [
+    &quot;httpx&gt;=0.28&quot;,
+]</code></pre></div>
+<p><code>dependencies</code> has a new line, added automatically. You don't need to look after this list by hand.</p>
+<h4>Adding several dependencies</h4>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv add httpx click rich</code></pre></div>
+<p>Add three at once. They're worked out together, much faster than <code>pip install</code>-ing them one by one.</p>
+<h4>Adding development dependencies</h4>
+<p><code>pytest</code> for testing and <code>ruff</code> as a <code>linter</code> aren't needed when the project <strong>runs</strong> – only while developing – so they should go in <strong>development dependencies</strong>. <code>uv</code> uses the <code>--dev</code> flag:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv add --dev pytest ruff</code></pre></div>
+<p>This time <code>pyproject.toml</code> gets a new section:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">[dependency-groups]
+dev = [
+    &quot;pytest&gt;=8.3&quot;,
+    &quot;ruff&gt;=0.8&quot;,
+]</code></pre></div>
+<p>Note it's <code>[dependency-groups]</code>, not <code>[project.optional-dependencies]</code> – this is the new <code>PEP 735</code> format, which <code>uv</code> uses by default. Both work, but <code>dependency-groups</code> is the new standard from 2024, made specially for dependencies that "aren't published, only used for local development".</p>
+<h4>Removing dependencies</h4>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv remove rich</code></pre></div>
+<p>It's not only removed from <code>pyproject.toml</code> – it's also uninstalled from <code>.venv/</code>, and <code>uv.lock</code> is updated. Cleanly removed.</p>
+<h4>Upgrading dependencies</h4>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv add httpx --upgrade</code></pre></div>
+<p>Or:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv lock --upgrade-package httpx</code></pre></div>
+<p>Upgrades to the newest version that fits the rules.</p>
+<h4>Giving a version range</h4>
+<p>If you have special requirements for the version:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv add &quot;httpx&gt;=0.27,&lt;0.30&quot;</code></pre></div>
+<p>This writes <code>httpx&gt;=0.27,&lt;0.30</code> into <code>pyproject.toml</code>. <code>uv</code> picks the newest version within that range.</p></article></section><section id="step-7" class="step-card read" data-kind="step" aria-label="Teaching step 8">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 08 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>uv run: running commands</h3>
+<p><code>uv run</code> can run more than <code>main.py</code> – it can run any command.</p>
+<p>Run a bit of <code>Python</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv run python -c &quot;import httpx; print(httpx.__version__)&quot;</code></pre></div>
+<p>The output is roughly:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">0.28.1</code></pre></div>
+<p>Run <code>pytest</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv run pytest</code></pre></div>
+<p>Run your own script:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv run python scripts/build.py</code></pre></div>
+<p>The good thing about <code>uv run</code> is that <strong>it makes sure the project's virtual environment is used</strong>. You don't need <code>source .venv/bin/activate</code>, or to activate it again every time you open a new terminal. Just go into the project folder and <code>uv run</code>.</p>
+<p>"What if I want to activate it and run lots of commands?" You can do that too:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">source .venv/bin/activate
+python -c &quot;import httpx; print(httpx.__version__)&quot;
+pytest</code></pre></div>
+<p>After activating, it's the same as the traditional way. But Brother Shui hardly ever activates any more – putting <code>uv run</code> in front of each command is enough.</p>
+<h4>Running command-line tools</h4>
+<p>Many packages install a command-line tool. For example, after installing <code>ruff</code> you get a <code>ruff</code> command. In a <code>uv</code> project, run it like this:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv run ruff check .</code></pre></div>
+<p><code>uv</code> finds <code>ruff</code> in <code>.venv/bin/</code> and runs it.</p>
+<h4>Running a one-off command</h4>
+<p>Sometimes you want to use a tool without adding it to your project's dependencies. For example, to quickly see how <code>httpie</code> sends a request:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uvx httpie https://httpbin.org/get</code></pre></div>
+<p><code>uvx</code> is short for <code>uv tool run</code>. It installs <code>httpie</code> in a temporary environment, runs it, and throws it away – without messing up your project. It's like <code>pipx run</code>, but much faster.</p>
+<p>Similarly, run <code>cowsay</code> just once:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uvx cowsay &quot;Hello Two Drops&quot;</code></pre></div>
+<p>You can use this for lots of "install once, use once" situations.</p></article></section><section id="step-8" class="step-card read" data-kind="step" aria-label="Teaching step 9">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 09 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>uv sync: syncing dependencies</h3>
+<p>Now for the key question: <strong>how does a teammate run it after downloading it?</strong></p>
+<p>The old way:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">git clone &lt;repo&gt;
+cd &lt;repo&gt;
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+pip install -r requirements-dev.txt</code></pre></div>
+<p>Five commands. And they differ across platforms – the command to activate a virtual environment is different on <code>Windows</code>.</p>
+<p>The <code>uv</code> way:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">git clone &lt;repo&gt;
+cd &lt;repo&gt;
+uv sync</code></pre></div>
+<p>Done. <code>uv sync</code> will:</p>
+<ol>
+<li>Check the <code>Python</code> version set in <code>.python-version</code>, and install it if needed</li>
+<li>Create <code>.venv/</code> (if it doesn't exist)</li>
+<li>Install every dependency (including development dependencies) at the <strong>exact</strong> versions pinned in <code>uv.lock</code></li>
+</ol>
+<p>"Exact versions" is the key. <code>uv.lock</code> doesn't record <code>httpx&gt;=0.28</code> – it records <code>httpx==0.28.1</code>, and pins all of <code>httpx</code>'s own dependencies to exact versions too. So the environment <code>uv sync</code> creates is <strong>identical, byte for byte</strong>, to the one on Brother Shui's computer.</p>
+<p>In the past, every time you ran <code>pip install -r requirements.txt</code>, the dependency resolution might pick different versions (unless you'd pinned every indirect dependency by hand in <code>requirements.txt</code>, which is torture). <code>uv sync</code> automates all of this.</p>
+<h4>What does uv.lock look like?</h4>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">head -30 uv.lock</code></pre></div>
+<p>Roughly:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">version = 1
+revision = 1
+requires-python = &quot;&gt;=3.12&quot;
+
+[[package]]
+name = &quot;anyio&quot;
+version = &quot;4.6.2.post1&quot;
+source = { registry = &quot;https://pypi.org/simple&quot; }
+dependencies = [
+    { name = &quot;idna&quot; },
+    { name = &quot;sniffio&quot; },
+]
+sdist = { url = &quot;https://files.pythonhosted.org/packages/.../anyio-4.6.2.post1.tar.gz&quot;, hash = &quot;sha256:...&quot; }</code></pre></div>
+<p>Each package records:</p>
+<ul>
+<li>Its name and version</li>
+<li>Where it comes from (<code>PyPI</code>, <code>git</code>, a local path…)</li>
+<li>Which other packages it depends on</li>
+<li>The download address and hash of its source package (<code>sdist</code>)</li>
+<li>The download address and hash of its binary package (<code>wheel</code>)</li>
+</ul>
+<p>The <strong>hash</strong> is key – <code>uv sync</code> checks it when installing, making sure the downloaded package is exactly the same as when it was locked. This protects against <strong>supply-chain attacks</strong> like "someone tampered with a package on <code>PyPI</code>".</p>
+<h4>A few common sync options</h4>
+<p>Install only production dependencies, not development ones (common when deploying):</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv sync --no-dev</code></pre></div>
+<p>Force everything to be reinstalled (e.g. after changing <code>pyproject.toml</code>):</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv sync --reinstall</code></pre></div>
+<p>Install only one <code>dependency-group</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv sync --only-group dev</code></pre></div>
+<p>90% of the time, plain <code>uv sync</code> with no options is all you need.</p></article></section><section id="step-9" class="step-card read" data-kind="step" aria-label="Teaching step 10">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 10 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Automatic virtual environment management</h3>
+<p>You all know the old virtual environment routine:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">python -m venv .venv
+source .venv/bin/activate    # macOS/Linux
+.venv\Scripts\activate       # Windows
+pip install ...</code></pre></div>
+<p>It has a few pain points:</p>
+<ol>
+<li>It's easy to forget to activate – every new terminal needs activating again</li>
+<li>It's different on different platforms – <code>Windows</code> and <code>macOS</code> use different commands</li>
+<li>Switching projects means <code>deactivate</code> first, then activate the new one – annoying</li>
+<li>Using the wrong virtual environment is a common bug – "I installed <code>httpx</code>, so why does <code>import</code> fail? Oh, I'm in the wrong environment"</li>
+</ol>
+<p><code>uv</code>'s approach: <strong>you don't need to activate at all.</strong> Run every command with <code>uv run</code>, and <code>uv</code> automatically finds the <code>.venv/</code> in the current folder and uses its <code>Python</code>. You don't even have to remember "which environment is active right now".</p>
+<p>To see which <code>Python</code> is being used:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv run which python</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">/Users/walter/projects/my-project/.venv/bin/python</code></pre></div>
+<p>Go into the project folder, and the project's <code>.venv</code> is used automatically.</p>
+<h4>You can still activate by hand if you want</h4>
+<p>To work with the traditional way, <code>uv</code> lets you activate too:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">source .venv/bin/activate
+python main.py</code></pre></div>
+<p>After activating, use the <code>python</code> command directly – no <code>uv run</code> needed. Brother Shui does this occasionally, when "running lots of commands in a row and wanting to keep the environment active".</p></article></section><section id="step-10" class="step-card read" data-kind="step" aria-label="Teaching step 11">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 11 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Moving over from requirements.txt</h3>
+<p>If you have an old project that already uses <code>requirements.txt</code>, how do you move it over?</p>
+<h4>Situation 1: lock straight from requirements.txt</h4>
+<p>If your <code>requirements.txt</code> is already "input rules" (ranges like <code>httpx&gt;=0.27</code>), you can do this:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv pip compile requirements.in &gt; requirements.txt</code></pre></div>
+<p>By convention, <code>requirements.in</code> is the <strong>input</strong> (with version ranges), and <code>requirements.txt</code> is the <strong>output</strong> (pinned exact versions). This is the <code>pip-tools</code> convention, and <code>uv pip compile</code> is fully compatible with it.</p>
+<p>If you don't have a <code>requirements.in</code>, only a <code>requirements.txt</code> that already has exact versions, you can just use it as your lock file and skip this step.</p>
+<h4>Situation 2: turn requirements.txt into pyproject.toml</h4>
+<p>This is a more complete move. Say your current <code>requirements.txt</code> is:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">httpx&gt;=0.27
+click&gt;=8.0
+sqlalchemy&gt;=2.0</code></pre></div>
+<p>Step 1: in the project's root folder, run:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv init --no-package</code></pre></div>
+<p><code>--no-package</code> tells <code>uv</code> this is just an app, not something to publish to <code>PyPI</code>. It creates <code>pyproject.toml</code> and <code>.python-version</code>, but no <code>[build-system]</code> section.</p>
+<p>Step 2: <code>uv add</code> the dependencies from <code>requirements.txt</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv add httpx click sqlalchemy</code></pre></div>
+<p>Or all at once:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv add -r requirements.txt</code></pre></div>
+<p><code>-r</code> makes <code>uv</code> read <code>requirements.txt</code> and add all its dependencies to <code>pyproject.toml</code>.</p>
+<p>Step 3: delete the old <code>requirements.txt</code> (or, to stay compatible, export one from <code>pyproject.toml</code>):</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv export --no-dev &gt; requirements.txt</code></pre></div>
+<p>Now <code>requirements.txt</code> becomes "exact versions exported from the lock file", and old tools (like <code>Docker</code> image build scripts) can keep using it.</p>
+<h4>Situation 3: moving over from poetry</h4>
+<p><code>poetry</code> projects use <code>pyproject.toml</code> too, but the format isn't exactly <code>PEP 621</code> – dependencies go in a <code>[tool.poetry.dependencies]</code> section.</p>
+<p>The quickest way to move:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uvx pdm import pyproject.toml</code></pre></div>
+<p>Or rewrite the <code>[tool.poetry.dependencies]</code> section by hand into a <code>dependencies</code> list under <code>[project]</code>. Change <code>poetry</code>'s <code>^1.0</code> to <code>&gt;=1.0,&lt;2.0</code>, and <code>~1.0</code> to <code>&gt;=1.0,&lt;1.1</code> – just translate by the rules.</p>
+<p>After moving, delete <code>poetry.lock</code> and run <code>uv lock</code> to create a new <code>uv.lock</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv lock</code></pre></div>
+<h4>Situation 4: moving over from pipenv</h4>
+<p><code>pipenv</code> uses <code>Pipfile</code> and <code>Pipfile.lock</code>. Convert by hand: the <code>[packages]</code> section in <code>Pipfile</code> maps to <code>dependencies</code>, and <code>[dev-packages]</code> maps to <code>[dependency-groups].dev</code>. Then <code>uv lock</code> to create the new lock file.</p></article></section><section id="step-11" class="step-card read" data-kind="step" aria-label="Teaching step 12">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 12 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>uv vs pip vs poetry vs pipenv – side by side</h3>
+<p>You often hear people say one tool is good and another is bad. Here's Brother Shui's unemotional comparison:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Speed</th>
+<th>Lock file</th>
+<th>Project management</th>
+<th>Python management</th>
+<th>Recommendation in 2026</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pip</code></td>
+<td>Slow</td>
+<td>None (needs <code>pip-tools</code>)</td>
+<td>No</td>
+<td>No</td>
+<td>For maintaining old projects</td>
+</tr>
+<tr>
+<td><code>pipenv</code></td>
+<td>Very slow</td>
+<td><code>Pipfile.lock</code></td>
+<td>Yes</td>
+<td>No</td>
+<td>Not recommended</td>
+</tr>
+<tr>
+<td><code>poetry</code></td>
+<td>Medium</td>
+<td><code>poetry.lock</code></td>
+<td>Yes</td>
+<td>No</td>
+<td>Still usable</td>
+</tr>
+<tr>
+<td><code>uv</code></td>
+<td>Super fast</td>
+<td><code>uv.lock</code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td><strong>First choice</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>Now you know. For a new project in 2026, just choose <code>uv</code>. For an old project still on <code>pip</code> + <code>requirements.txt</code>, it's worth moving over soon. If an old project uses <code>poetry</code>, don't panic – if it works, let it run, and think about it at the next big rewrite.</p></article></section><section id="step-12" class="step-card read" data-kind="step" aria-label="Teaching step 13">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 13 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>In practice: from nothing to "runs, locked, tested"</h3>
+<p>After all that, let's do a complete mini project. The task: write a little tool that "fetches a URL and prints the response status code". Requirements:</p>
+<ol>
+<li>Use <code>httpx</code> to send the request</li>
+<li>Write a test with <code>pytest</code></li>
+<li>Lock the dependencies, so a teammate can run it straight away</li>
+</ol>
+<p>The full set of commands:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash"># 1. Create the project
+uv init url-checker
+cd url-checker
+
+# 2. Add a production dependency
+uv add httpx
+
+# 3. Add a development dependency
+uv add --dev pytest
+
+# 4. Write the code (shown below)
+
+# 5. Run the tests
+uv run pytest
+
+# 6. Commit to git
+git add .
+git commit -m &quot;init project&quot;</code></pre></div>
+<p>Now the code. First, the main logic file <code>url_checker.py</code>:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import httpx
+
+
+def check_url(url: str) -&gt; int:
+    &quot;&quot;&quot;Return the response status code of the URL&quot;&quot;&quot;
+    response = httpx.get(url, timeout=5.0)
+    return response.status_code
+
+
+def main():
+    url = &quot;https://httpbin.org/status/200&quot;
+    code = check_url(url)
+    print(f&quot;{url} -&gt; {code}&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()</code></pre></div>
+<p>Then the test file <code>tests/test_url_checker.py</code>:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from url_checker import check_url
+
+
+def test_check_url_returns_int():
+    &quot;&quot;&quot;Just an illustration – a real test should mock httpx&quot;&quot;&quot;
+    # In real tests you would use respx or httpx.MockTransport to mock it
+    pass
+
+
+def test_status_code_type():
+    &quot;&quot;&quot;Assuming 200 is 200, the type should be int&quot;&quot;&quot;
+    assert isinstance(200, int)</code></pre></div>
+<p>Run the tests:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv run pytest</code></pre></div>
+<p>Roughly:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">========================= test session starts =========================
+collected 2 items
+
+tests/test_url_checker.py ..                                    [100%]
+========================= 2 passed in 0.05s =========================</code></pre></div>
+<p>Run the main program:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv run url_checker.py</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">https://httpbin.org/status/200 -&gt; 200</code></pre></div>
+<p>Send it to a teammate:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">git push origin main</code></pre></div>
+<p>The teammate downloads it:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">git clone &lt;repo&gt;
+cd url-checker
+uv sync
+uv run url_checker.py</code></pre></div>
+<p>Three commands, an identical environment, and it runs. That's the 2026 workflow.</p>
+<h4>The project's final folder structure</h4>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">url-checker/
+├── .git/
+├── .gitignore
+├── .python-version
+├── .venv/              # Created by uv automatically – not committed to git
+├── README.md
+├── pyproject.toml
+├── tests/
+│   └── test_url_checker.py
+├── url_checker.py
+└── uv.lock</code></pre></div>
+<p>What goes into <code>git</code>:</p>
+<ul>
+<li><code>.gitignore</code></li>
+<li><code>.python-version</code></li>
+<li><code>README.md</code></li>
+<li><code>pyproject.toml</code></li>
+<li><code>uv.lock</code> (<strong>very important</strong> – don't forget to commit it)</li>
+<li><code>tests/</code></li>
+<li><code>url_checker.py</code></li>
+</ul>
+<p>What doesn't go into <code>git</code>:</p>
+<ul>
+<li><code>.venv/</code> (<code>uv init</code> adds it to <code>.gitignore</code> automatically)</li>
+<li><code>__pycache__/</code>, <code>*.pyc</code></li>
+</ul>
+<p>A common mistake: forgetting to commit <code>uv.lock</code>. Without the lock file, <code>uv sync</code> can't guarantee the versions match – it will work out the dependencies on the spot, and the result might be different each time. So remember: <strong><code>uv.lock</code> is part of the project and must go into <code>git</code>.</strong></p></article></section><section id="step-13" class="step-card read" data-kind="step" aria-label="Teaching step 14">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 14 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Some common traps and tips</h3>
+<h4>Trap 1: committing .venv to git</h4>
+<p>Beginners easily forget to add <code>.venv/</code> to <code>.gitignore</code>. <code>uv init</code> handles this for you, but if you moved an old project over by hand, remember to check <code>.gitignore</code>.</p>
+<h4>Trap 2: forgetting uv.lock</h4>
+<p>We just said it, but here it is again: <code>uv.lock</code> must go into <code>git</code>.</p>
+<h4>Trap 3: installing packages globally</h4>
+<p>Sometimes you'll habitually type <code>pip install something</code>, and it gets installed into the system <code>Python</code>, nothing to do with your project. In a <code>uv</code> project:</p>
+<ul>
+<li>To add a project dependency, use <code>uv add</code></li>
+<li>To install a command-line tool globally, use <code>uv tool install</code> (e.g. <code>uv tool install ruff</code>)</li>
+<li>To run something just once, use <code>uvx</code></li>
+</ul>
+<p>Don't <code>pip install</code> directly in a <code>uv</code> project unless you really know what you're doing.</p>
+<h4>Tip 1: a shared global cache</h4>
+<p><code>uv</code> has a global cache, so all projects share the packages they've downloaded. You can see where it is like this:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv cache dir</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">/Users/walter/.cache/uv</code></pre></div>
+<p>The first <code>uv sync</code> in a new project installs in seconds if the packages are already cached – no downloading again. That's another reason <code>uv</code> is so fast.</p>
+<p>Clear the cache:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv cache clean</code></pre></div>
+<p>You don't usually need to – only when you're short of disk space.</p>
+<h4>Tip 2: use pyproject.toml as your settings centre</h4>
+<p>As we said, <code>pyproject.toml</code> isn't just for project metadata – it can hold tool settings too. A fuller example:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">[project]
+name = &quot;my-project&quot;
+version = &quot;0.1.0&quot;
+requires-python = &quot;&gt;=3.12&quot;
+dependencies = [
+    &quot;httpx&gt;=0.28&quot;,
+]
+
+[dependency-groups]
+dev = [
+    &quot;pytest&gt;=8.3&quot;,
+    &quot;ruff&gt;=0.8&quot;,
+    &quot;mypy&gt;=1.13&quot;,
+]
+
+[tool.ruff]
+line-length = 100
+target-version = &quot;py312&quot;
+
+[tool.ruff.lint]
+select = [&quot;E&quot;, &quot;F&quot;, &quot;I&quot;, &quot;UP&quot;, &quot;B&quot;]
+
+[tool.pytest.ini_options]
+testpaths = [&quot;tests&quot;]
+addopts = &quot;-v&quot;
+
+[tool.mypy]
+python_version = &quot;3.12&quot;
+strict = true</code></pre></div>
+<p>The settings for <code>ruff</code>, <code>pytest</code> and <code>mypy</code> are all together, so a newcomer can open one file and see everything. Settings that used to be scattered across <code>.flake8</code>, <code>.pylintrc</code>, <code>pytest.ini</code>, <code>mypy.ini</code> and so on can all be brought back into one place.</p>
+<h4>Tip 3: install command-line tools with <code>uv tool install</code></h4>
+<p>Want to install <code>ruff</code> globally so it works in any folder?</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv tool install ruff</code></pre></div>
+<p>Same as <code>pipx install ruff</code>, but much faster. After installing, <code>ruff</code> is on your <code>PATH</code>.</p>
+<p>Upgrade:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv tool upgrade ruff</code></pre></div>
+<p>Uninstall:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv tool uninstall ruff</code></pre></div>
+<p>You can use <code>uv tool</code> instead of <code>pipx</code>, and instead of <code>brew install</code> for some <code>Python</code> command-line tools.</p>
+<h4>Tip 4: run one-off commands with <code>uvx</code></h4>
+<p>We mentioned <code>uvx</code> earlier, but it's worth saying again. When you want to try a tool without installing it globally:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uvx ruff check .
+uvx pycowsay &quot;Hello&quot;
+uvx httpie GET https://httpbin.org/get</code></pre></div>
+<p><code>uvx</code> installs it in a temporary environment, runs it, and throws it away. Dozens of times faster than <code>pipx run</code>.</p></article></section><section id="step-14" class="step-card read" data-kind="step" aria-label="Teaching step 15">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 15 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>You can use uv for single-file scripts too</h3>
+<p>An advanced trick: sometimes you write a one-off script – maybe just 50 lines of <code>Python</code> – but it needs <code>httpx</code>. Do you really need a whole new project for 50 lines?</p>
+<p><code>uv</code> supports <strong>inline dependencies</strong> (<code>PEP 723</code>). Write some metadata at the top of the script:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># /// script
+# requires-python = &quot;&gt;=3.12&quot;
+# dependencies = [
+#     &quot;httpx&quot;,
+# ]
+# ///
+
+import httpx
+
+response = httpx.get(&quot;https://httpbin.org/get&quot;)
+print(response.status_code)</code></pre></div>
+<p>Run it:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv run script.py</code></pre></div>
+<p><code>uv</code> reads the metadata at the top of the script, creates a temporary environment, installs <code>httpx</code>, runs it, and throws the environment away. <strong>A single .py file is a complete project</strong> – send one file to a teammate and it runs.</p>
+<p>Writing "one-off little tools" will never be the same again.</p></article></section><section id="step-15" class="step-card read" data-kind="step" aria-label="Teaching step 16">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 16 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>About publishing to PyPI</h3>
+<p>This chapter is mainly about managing <strong>projects</strong>. Publishing to <code>PyPI</code> isn't the focus, but let's mention it briefly so you know.</p>
+<p>Plain <code>uv init</code> with no options creates a <code>pyproject.toml</code> <strong>without</strong> a <code>[build-system]</code> section, meaning it's an <strong>app</strong>, not a <strong>library</strong>. If you want to publish to <code>PyPI</code>, start it like this:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv init --package my-library</code></pre></div>
+<p><code>--package</code> creates a <code>pyproject.toml</code> with a <code>[build-system]</code> section, and a standard package structure like <code>src/my_library/__init__.py</code>.</p>
+<p>To package it, run:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv build</code></pre></div>
+<p>This creates a <code>.tar.gz</code> (source package) and a <code>.whl</code> (wheel) in the <code>dist/</code> folder.</p>
+<p>To publish to <code>PyPI</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv publish</code></pre></div>
+<p>The first time, you need to register a <code>PyPI</code> account and set up an <code>API token</code>. That's beyond this chapter – read the official <code>uv publish</code> docs when you want to publish.</p>
+<p>For most people, <code>uv</code>'s core value is managing dependencies for <strong>apps</strong> – not for publishing packages, but so that "if it runs on my computer, it runs on yours". <code>uv sync</code> does that in one go.</p></article></section><section id="step-16" class="step-card read" data-kind="step" aria-label="Teaching step 17">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 17 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Summary</h3>
+<p>This chapter has a lot of information. Here it is boiled down to a few things you can remember:</p>
+<p><strong>First, <code>pyproject.toml</code> replaces everything.</strong></p>
+<p><code>setup.py</code>, <code>setup.cfg</code>, <code>requirements.txt</code>, <code>requirements-dev.txt</code>, <code>pytest.ini</code>, <code>.flake8</code>, <code>tox.ini</code> – in 2026, that whole scattered pile can go into one <code>pyproject.toml</code> file. Start new projects this way.</p>
+<p><strong>Second, <code>uv</code> is the package manager of choice in 2026.</strong></p>
+<p>Made by <code>Astral</code>, written in <code>Rust</code>, 10–100x faster, a single program, and it manages <code>Python</code> versions, virtual environments and dependencies all together.</p>
+<p><strong>Third, remember these five core commands.</strong></p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv init my-project       # Create a project
+uv add httpx             # Add a production dependency
+uv add --dev pytest      # Add a development dependency
+uv sync                  # Sync the environment (what a teammate runs after downloading)
+uv run python main.py    # Run a command</code></pre></div>
+<p><strong>Fourth, <code>uv.lock</code> must go into git.</strong></p>
+<p>It's what guarantees the environment is identical, byte for byte.</p>
+<p><strong>Fifth, old projects can use <code>uv pip compile</code> to make <code>requirements.txt</code>; new projects use <code>uv add</code> + <code>uv sync</code>.</strong></p>
+<p>Next time you start a new project, free yourself from the tedious routine of "install a <code>Python</code> interpreter, create a virtual environment, install dependencies, write <code>setup.py</code>". One <code>uv init</code>, one <code>uv add</code>, and in seconds you go from nothing to running. A teammate downloads it, runs <code>uv sync</code>, and gets exactly the same environment.</p>
+<p>From 2026 on, "it works on my computer but not on yours" can go in the bin of history.</p></article></section><section id="step-17" class="step-card read" data-kind="step" aria-label="Teaching step 18">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 18 / 18</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Check your setup with a small project you can hand to someone else</h3>
+<p>This chapter has lots of commands. Let's give them one concrete job: put the study-time tracker tool from the last chapter into its own project, and check that it runs in a clean, clear environment.</p>
+<p>On your own computer, choose a new practice folder, and do these in order:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv init study-tracker-practice
+cd study-tracker-practice</code></pre></div>
+<p>Copy the final exercise's <code>tracker.py</code> and <code>test_tracker.py</code> into this new project, then run:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv run tracker.py --help
+uv run python -m unittest -v</code></pre></div>
+<p>The tool itself only uses the standard library. The first time you set up the environment, it may need to download Python, depending on your network. Don't take this example's lack of third-party dependencies to mean that real projects don't need to manage dependencies.</p>
+<p>When you're done, explain to yourself: what does <code>pyproject.toml</code> record? Which Python is being used? Which files are source code, and which were generated locally? Once you add real dependencies, practise with the lock file and the sync command. The point of this check is getting the same result from one clear folder and one set of commands – not memorising tool names.</p>
+<p>You can read the <a href="https://docs.astral.sh/uv/guides/projects/">official uv project guide</a> to understand what the commands mean. The terminal and environment exercises need your own computer – don't type these shell commands into the browser Python editor.</p></article></section><section id="lesson-end" aria-label="Chapter summary"><nav aria-label="Chapter navigation" class="chapter-nav"><div class="cn-grid"><a class="chap-nav prev focus-ring" href="/lessons/python22/async/read/"><span class="cn-label">← Previous chapter</span><span class="cn-title">22 · async / await</span></a><div class="cn-mid"><span>pyproject.toml + uv</span></div><a class="chap-nav next focus-ring" href="/lessons/python24/ruff/read/"><span class="cn-label">Next chapter →</span><span class="cn-title">24 · ruff: all-in-one code checking</span></a></div></nav></section></article></div>
+    <aside class="lesson-sidebar right" aria-label="This chapter"><nav aria-label="This chapter's contents"><div class="side-label up">In this chapter</div><p class="toc-chapter">pyproject.toml + uv</p><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">pyproject.toml + uv: putting an end to &quot;it works on my computer but not on yours&quot;</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">What was so bad about the old way?</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">What is pyproject.toml?</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">The smallest pyproject.toml, field by field</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">What is uv, and how do you install it?</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">uv init: creating a project</span></a></li><li class="toc-li" data-target="step-6"><a href="#step-6" class="toc-link focus-ring"><span class="toc-kind">Teaching 07</span><span class="toc-title">uv add: adding dependencies</span></a></li><li class="toc-li" data-target="step-7"><a href="#step-7" class="toc-link focus-ring"><span class="toc-kind">Teaching 08</span><span class="toc-title">uv run: running commands</span></a></li><li class="toc-li" data-target="step-8"><a href="#step-8" class="toc-link focus-ring"><span class="toc-kind">Teaching 09</span><span class="toc-title">uv sync: syncing dependencies</span></a></li><li class="toc-li" data-target="step-9"><a href="#step-9" class="toc-link focus-ring"><span class="toc-kind">Teaching 10</span><span class="toc-title">Automatic virtual environment management</span></a></li><li class="toc-li" data-target="step-10"><a href="#step-10" class="toc-link focus-ring"><span class="toc-kind">Teaching 11</span><span class="toc-title">Moving over from requirements.txt</span></a></li><li class="toc-li" data-target="step-11"><a href="#step-11" class="toc-link focus-ring"><span class="toc-kind">Teaching 12</span><span class="toc-title">uv vs pip vs poetry vs pipenv – side by side</span></a></li><li class="toc-li" data-target="step-12"><a href="#step-12" class="toc-link focus-ring"><span class="toc-kind">Teaching 13</span><span class="toc-title">In practice: from nothing to &quot;runs, locked, tested&quot;</span></a></li><li class="toc-li" data-target="step-13"><a href="#step-13" class="toc-link focus-ring"><span class="toc-kind">Teaching 14</span><span class="toc-title">Some common traps and tips</span></a></li><li class="toc-li" data-target="step-14"><a href="#step-14" class="toc-link focus-ring"><span class="toc-kind">Teaching 15</span><span class="toc-title">You can use uv for single-file scripts too</span></a></li><li class="toc-li" data-target="step-15"><a href="#step-15" class="toc-link focus-ring"><span class="toc-kind">Teaching 16</span><span class="toc-title">About publishing to PyPI</span></a></li><li class="toc-li" data-target="step-16"><a href="#step-16" class="toc-link focus-ring"><span class="toc-kind">Teaching 17</span><span class="toc-title">Summary</span></a></li><li class="toc-li" data-target="step-17"><a href="#step-17" class="toc-link focus-ring"><span class="toc-kind">Teaching 18</span><span class="toc-title">Check your setup with a small project you can hand to someone else</span></a></li></ol></nav></aside>
+  </div>
+  <dialog class="dir-dialog" aria-labelledby="dir-title"><div class="dd-inner"><div class="dd-head"><h2 id="dir-title">Contents</h2><button type="button" class="dd-close focus-ring">Close</button></div>
+  <div class="dd-tabs" aria-label="Contents scope"><button type="button" class="dd-tab focus-ring" data-tab="all" aria-pressed="true">All lessons</button><button type="button" class="dd-tab focus-ring" data-tab="chapter" aria-pressed="false">This chapter</button></div>
+  <div class="dd-body"><div class="dd-pane" data-pane="all"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/read/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/read/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/read/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/read/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/read/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/read/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/read/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/read/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/read/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/read/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/read/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/read/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/read/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/read/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/read/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/read/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/read/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/read/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/read/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/read/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/read/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/read/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/read/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python23/pyproject-uv/read/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/read/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/read/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/read/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/read/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/read/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></div><div class="dd-pane" data-pane="chapter" hidden><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">pyproject.toml + uv: putting an end to &quot;it works on my computer but not on yours&quot;</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">What was so bad about the old way?</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">What is pyproject.toml?</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">The smallest pyproject.toml, field by field</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">What is uv, and how do you install it?</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">uv init: creating a project</span></a></li><li class="toc-li" data-target="step-6"><a href="#step-6" class="toc-link focus-ring"><span class="toc-kind">Teaching 07</span><span class="toc-title">uv add: adding dependencies</span></a></li><li class="toc-li" data-target="step-7"><a href="#step-7" class="toc-link focus-ring"><span class="toc-kind">Teaching 08</span><span class="toc-title">uv run: running commands</span></a></li><li class="toc-li" data-target="step-8"><a href="#step-8" class="toc-link focus-ring"><span class="toc-kind">Teaching 09</span><span class="toc-title">uv sync: syncing dependencies</span></a></li><li class="toc-li" data-target="step-9"><a href="#step-9" class="toc-link focus-ring"><span class="toc-kind">Teaching 10</span><span class="toc-title">Automatic virtual environment management</span></a></li><li class="toc-li" data-target="step-10"><a href="#step-10" class="toc-link focus-ring"><span class="toc-kind">Teaching 11</span><span class="toc-title">Moving over from requirements.txt</span></a></li><li class="toc-li" data-target="step-11"><a href="#step-11" class="toc-link focus-ring"><span class="toc-kind">Teaching 12</span><span class="toc-title">uv vs pip vs poetry vs pipenv – side by side</span></a></li><li class="toc-li" data-target="step-12"><a href="#step-12" class="toc-link focus-ring"><span class="toc-kind">Teaching 13</span><span class="toc-title">In practice: from nothing to &quot;runs, locked, tested&quot;</span></a></li><li class="toc-li" data-target="step-13"><a href="#step-13" class="toc-link focus-ring"><span class="toc-kind">Teaching 14</span><span class="toc-title">Some common traps and tips</span></a></li><li class="toc-li" data-target="step-14"><a href="#step-14" class="toc-link focus-ring"><span class="toc-kind">Teaching 15</span><span class="toc-title">You can use uv for single-file scripts too</span></a></li><li class="toc-li" data-target="step-15"><a href="#step-15" class="toc-link focus-ring"><span class="toc-kind">Teaching 16</span><span class="toc-title">About publishing to PyPI</span></a></li><li class="toc-li" data-target="step-16"><a href="#step-16" class="toc-link focus-ring"><span class="toc-kind">Teaching 17</span><span class="toc-title">Summary</span></a></li><li class="toc-li" data-target="step-17"><a href="#step-17" class="toc-link focus-ring"><span class="toc-kind">Teaching 18</span><span class="toc-title">Check your setup with a small project you can hand to someone else</span></a></li></ol></div></div></div></dialog>
+  <div class="py-toast" hidden><span class="spinner"></span><span class="py-toast-text">Loading Python…</span></div>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>© 2026 Python for Beginners · English edition of the <a href="https://github.com/walter201230/Python">walter201230/Python</a> tutorial (CC BY 4.0)</span>
+    <div class="footer-links"><a href="/">Course list</a><a href="/about/">About this site</a><a href="https://github.com/walter201230/Python">GitHub</a></div>
+  </div>
+</footer>
+<script src="/assets/site.js?v=20261028"></script>
+</body>
+</html>

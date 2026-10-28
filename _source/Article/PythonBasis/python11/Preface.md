@@ -9,9 +9,9 @@ Let's just get it done!
 
 Here's what this part covers:
 
-- 1. Using Enum Classes
-- 2. The Source Code of Enum
-- 3. Enums with Custom Values
-- 4. Comparing Enums
+- 1\. Using Enum Classes
+- 2\. The Source Code of Enum
+- 3\. Enums with Custom Values
+- 4\. Comparing Enums
 
 

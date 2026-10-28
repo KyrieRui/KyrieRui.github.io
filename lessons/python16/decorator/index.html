@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decorators – Python for Beginners</title>
+<meta name="description" content="One @decorator line adds logging, caching or permissions to a function – Python&#x27;s most elegant syntax sugar.">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css?v=20261028">
+
+</head>
+<body data-page="lesson" data-lesson="python16" data-total="3">
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="/" aria-label="Python for Beginners – home"><span class="gradient-text-flow" data-text="Python for Beginners">Python for Beginners</span></a>
+    <nav class="header-nav">
+      <a class="nav-link" href="/about/">About</a>
+      <a class="nav-icon focus-ring" href="https://github.com/walter201230/Python" aria-label="Original tutorial on GitHub" title="Original tutorial on GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+      <button type="button" class="theme-toggle focus-ring" aria-label="Switch theme"><span class="knob"><svg class="ic-moon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button>
+    </nav>
+  </div>
+</header>
+<main class="site-main">
+<div class="lesson-shell bg-tech-grid">
+  <div class="mobile-bar"><div class="mb-inner"><button type="button" class="dir-btn focus-ring" aria-haspopup="dialog">Contents</button></div></div>
+  <div class="lesson-columns">
+    <aside class="lesson-sidebar left" aria-label="All lessons"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></aside>
+    <div class="lesson-main"><article class="lesson-article"><header class="lesson-head"><h1>Decorators</h1><p class="lh-sub"><span class="accent">3</span> exercises<span class="sep">·</span>about <span class="accent">30</span> min<span class="sep">·</span>solve one to unlock the next part</p>
+<p class="lh-link"><a class="subtle-link focus-ring" href="/lessons/python16/decorator/read/">Read the whole chapter →</a></p></header><section id="step-0" class="step-card item" data-kind="step" aria-label="Teaching step 1">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 01 / 01</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><p>In the last article, we learned about closures by solving a real problem. This article does the same: we'll slowly change a task, step by step, to understand Python <strong>decorators</strong>.</p>
+<p>First, here's a function that prints an employee's clock-in message:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def punch():
+    print(&#x27;Nickname: Two Drops  Department: Coding Dept  Clocked in for work&#x27;)
+
+
+punch()</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Nickname: Two Drops  Department: Coding Dept  Clocked in for work</code></pre></div>
+<p>Then the product team says: "That's no good – the clock-in doesn't show the date! Add the date." Should be easy, done in a minute. OK, let's just add some code to print the date:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import time
+
+
+def punch():
+    print(time.strftime(&#x27;%Y-%m-%d&#x27;, time.localtime(time.time())))
+    print(&#x27;Nickname: Two Drops  Department: Coding Dept  Clocked in for work&#x27;)
+
+
+punch()</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">2018-01-09
+Nickname: Two Drops  Department: Coding Dept  Clocked in for work</code></pre></div>
+<p>This works, but it changes the structure of the function. The function was meant to print an employee's info and say they clocked in. Adding date-printing code could lead to lots of repeated code. For example, if somewhere else you only need the employee info and clock-in message without the date, do you write another function? Also, printing the current date is something you'll use often, so it could be a shared function that other modules call. Of course, this is thinking about the project as a whole.</p>
+<p>So, let's change this code using <strong>functional programming</strong>. From what we've learned, Python functions have two features: functions are objects, and functions can be nested inside functions. Let's change the code to this:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import time
+
+
+def punch():
+    print(&#x27;Nickname: Two Drops  Department: Coding Dept  Clocked in for work&#x27;)
+
+
+def add_time(func):
+    print(time.strftime(&#x27;%Y-%m-%d&#x27;, time.localtime(time.time())))
+    func()
+
+
+add_time(punch)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">2018-01-09
+Nickname: Two Drops  Department: Coding Dept  Clocked in for work</code></pre></div>
+<p>See? We didn't change the <code>punch</code> function at all. And any function that needs the current date printed can just be passed into <code>add_time</code>, like this:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import time
+
+
+def punch():
+    print(&#x27;Nickname: Two Drops  Department: Coding Dept  Clocked in for work&#x27;)
+
+
+def add_time(func):
+    print(time.strftime(&#x27;%Y-%m-%d&#x27;, time.localtime(time.time())))
+    func()
+
+
+def holiday():
+    print(&#x27;It is too cold – day off today!&#x27;)
+
+
+add_time(punch)
+add_time(holiday)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">2018-01-09
+Nickname: Two Drops  Department: Coding Dept  Clocked in for work
+2018-01-09
+It is too cold – day off today!</code></pre></div>
+<p>Functional programming is handy, isn't it? But every time we call it, we have to pass the original function in as an argument. Is there a better way? Yes – the <strong>decorator</strong>, which this article is about. Writing a decorator is a lot like writing a closure, just without the free variable. Here's the decorator version of the code above, so you can compare it with the functional version:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import time
+
+
+def decorator(func):
+    def punch():
+        print(time.strftime(&#x27;%Y-%m-%d&#x27;, time.localtime(time.time())))
+        func()
+
+    return punch
+
+
+def punch():
+    print(&#x27;Nickname: Two Drops  Department: Coding Dept  Clocked in for work&#x27;)
+
+
+f = decorator(punch)
+f()</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">2018-01-09
+Nickname: Two Drops  Department: Coding Dept  Clocked in for work</code></pre></div>
+<p>From the code, a decorator function usually does three things:</p>
+<ol>
+<li>Takes a function as an argument</li>
+<li>Has a <strong>wrapper function</strong> inside it. The wrapper takes the same arguments as the original function, runs the original function, and also does something extra</li>
+<li>Returns the wrapper function</li>
+</ol>
+<p>But look closely – this decorator version seems even more trouble than the functional version! It looks more complicated, and even a bit pointless.</p>
+<p>That's because we haven't used the decorator's <strong>syntactic sugar</strong> yet. From the code above, you can see that when Python added decorators, it didn't add any new language features – it's all based on what functions can already do. This shows decorators aren't special to Python – they're a general programming idea in every language. But Python designed the <code>@</code> syntactic sugar to make it simpler and easier to define a decorator, have it wrap the original function, and assign the result back to the original function's name. So you could say the heart of Python decorators is this syntactic sugar.</p>
+<p>How do you use it? Easy. After writing the decorator function as above, just put <code>@</code> and the decorator's name above the original function, like this:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import time
+
+
+def decorator(func):
+    def punch():
+        print(time.strftime(&#x27;%Y-%m-%d&#x27;, time.localtime(time.time())))
+        func()
+
+    return punch
+
+@decorator
+def punch():
+    print(&#x27;Nickname: Two Drops  Department: Coding Dept  Clocked in for work&#x27;)
+
+punch()</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">2018-01-09
+Nickname: Two Drops  Department: Coding Dept  Clocked in for work</code></pre></div>
+<p>Now this is really convenient – especially when calling it. In the example, after adding the decorator, we just put the decorator's syntactic sugar above the original function. The function itself doesn't need to change at all, and the places that call it don't need to change either.</p>
+<p>But there's still a problem: the clock-in message is fixed. If we want to pass it in through arguments, how do we write the decorator? The function inside the decorator can use <code>*args</code> for variable arguments. But <code>*args</code> alone doesn't cover every case – it doesn't handle keyword arguments. To handle keyword arguments too, we also add <code>**kwargs</code>.</p>
+<p>So the final form of the decorator can be written like this:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import time
+
+
+def decorator(func):
+    def punch(*args, **kwargs):
+        print(time.strftime(&#x27;%Y-%m-%d&#x27;, time.localtime(time.time())))
+        func(*args, **kwargs)
+
+    return punch
+
+
+@decorator
+def punch(name, department):
+    print(f&#x27;Nickname: {name}  Department: {department}  Clocked in for work&#x27;)
+
+
+@decorator
+def print_args(reason, **kwargs):
+    print(reason)
+    print(kwargs)
+
+
+punch(&#x27;Two Drops&#x27;, &#x27;Coding Dept&#x27;)
+print_args(&#x27;Two Drops&#x27;, sex=&#x27;Male&#x27;, age=99)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">2018-01-09
+Nickname: Two Drops  Department: Coding Dept  Clocked in for work
+2018-01-09
+Two Drops
+{&#x27;sex&#x27;: &#x27;Male&#x27;, &#x27;age&#x27;: 99}</code></pre></div>
+<h3>When you add a decorator, does the function run straight away?</h3>
+<p>We've gone from clocking in all the way to decorators. Now let's look clearly at the <strong>order</strong> things happen in: what happens when <code>@decorator</code> appears, and what happens later when we call <code>punch()</code>?</p>
+<p>Let's use a list to record the steps, so we don't mix up "creating the wrapper" with "doing the clock-in":</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">events = []
+
+
+def decorator(func):
+    events.append(&#x27;Wrapper created&#x27;)
+
+    def wrapper(*args, **kwargs):
+        events.append(&#x27;Original function called&#x27;)
+        return func(*args, **kwargs)
+
+    return wrapper
+
+
+@decorator
+def punch(name):
+    return f&#x27;{name} clocked in&#x27;
+
+
+print(events)
+print(punch(&#x27;Two Drops&#x27;))
+print(events)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[&#x27;Wrapper created&#x27;]
+Two Drops clocked in
+[&#x27;Wrapper created&#x27;, &#x27;Original function called&#x27;]</code></pre></div>
+<p>The first line shows that <strong>before</strong> we reach <code>punch('Two Drops')</code>, the decorator has already received the original function and returned the wrapper – but the body of the original function hasn't run yet. Only when we later call <code>punch</code> do we go into <code>wrapper</code>, which then calls the original function.</p>
+<p>This order comes from how <strong>this</strong> decorator is written: it returns <code>wrapper</code> and doesn't call the original function while creating the wrapper. A decorator can contain other logic too, so to know when things run, look at which level the call is written at.</p>
+<p>You can think of <code>@decorator</code> as a shortcut for defining the function and then running <code>punch = decorator(punch)</code>. Decorators are built on what functions can already do, but <code>@</code> is special decorator syntax. Keep the syntax and the function-wrapping that happens behind it separate in your head.</p>
+<h3>The original function worked out a result – did the wrapper pass it on?</h3>
+<p>In the clock-in example, we mostly showed the effect by printing, so the original function didn't need to return a result. But if you decorate a function that <strong>calculates</strong> something, and the wrapper only calls it without returning the result, the caller outside won't get the value it worked out.</p>
+<p>Let's try it with a function that records study time:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def add_log(func):
+    def wrapper(*args, **kwargs):
+        print(&#x27;Start counting&#x27;)
+        result = func(*args, **kwargs)
+        print(&#x27;Counting done&#x27;)
+        return result
+
+    return wrapper
+
+
+@add_log
+def total_minutes(first, second):
+    return first + second
+
+
+minutes = total_minutes(5, second=10)
+print(minutes)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Start counting
+Counting done
+15</code></pre></div>
+<p>Try a small experiment: remove only the <code>return result</code> in <code>wrapper</code>, leave everything else the same, and run it again. The last line becomes <code>None</code>. It's not that the original function didn't work out <code>15</code> – it's that the wrapper didn't <strong>pass</strong> that result on to the caller outside.</p>
+<p>In this example, <code>*args</code> collects positional arguments and <code>**kwargs</code> collects keyword arguments, and then they're passed on to the original function the same way. They just <strong>forward</strong> arguments – they don't make the original function accept arguments it didn't support before. If you pass the wrong arguments, the original function will still give an error.</p>
+<h3>Check it yourself – don't stop just because you saw the log messages</h3>
+<p>Keep using <code>add_log</code> from above, and call <code>total_minutes(0, 0)</code> and <code>total_minutes(first=12, second=3)</code>. Each time, you should first see two log lines, and then the print outside should show <code>0</code> and <code>15</code>.</p>
+<p>Then go back to the first example and call <code>punch('Two Drops')</code> once more. <code>events</code> should have only <strong>one</strong> 'Wrapper created', and <strong>two</strong> 'Original function called'. If you can explain why the wrapper isn't created twice, you've understood the difference between when the decorator runs and when the wrapper runs.</p>
+<p>When you run the date examples, you'll get today's date. When checking, look at what it does and the order – the date doesn't need to match the old example.</p></article></section><section id="exercise-01-log" class="ex-card item" data-kind="exercise" data-exercise="01-log" aria-label="Exercise 1: Write a @log decorator">
+<script type="application/json" class="ex-data">{"id": "01-log", "lesson": "python16", "starter": "# Define the decorator log: take func, print a line before and after calling it inside wrapper, then return wrapper\n# Decorate hello() (which prints hello world) with @log, then call hello()\n\n", "solution": "def log(func):\n    def wrapper():\n        print('Starting')\n        func()\n        print('Finished')\n    return wrapper\n\n@log\ndef hello():\n    print('hello world')\n\nhello()", "grading": {"requiredAst": ["FunctionDef:log"], "stdoutEquals": "Starting\nhello world\nFinished\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 1 / 3</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Write a @log decorator</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Write a decorator <code>log</code>:</p>
+<ul>
+<li>It takes a function as its argument</li>
+<li>Before calling the original function, it does <code>print('Starting')</code></li>
+<li>After calling the original function, it does <code>print('Finished')</code></li>
+</ul>
+<p>Then decorate a function <code>hello()</code> with <code>@log</code> (inside it: <code>print('hello world')</code>), and call <code>hello()</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Starting
+hello world
+Finished</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>The three parts of a decorator: take func, define wrapper, return wrapper (note: wrapper, not wrapper())</p></li></template><template class="hint-tpl"><li><p>Inside wrapper: print('Starting') first → call func() → then print('Finished')</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def log(func):
+    def wrapper():
+        print(&#x27;Starting&#x27;)
+        func()
+        print(&#x27;Finished&#x27;)
+    return wrapper
+
+@log
+def hello():
+    print(&#x27;hello world&#x27;)
+
+hello()</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># Define the decorator log: take func, print a line before and after calling it inside wrapper, then return wrapper
+# Decorate hello() (which prints hello world) with @log, then call hello()
+
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="exercise-02-uppercase" class="ex-card item" data-kind="exercise" data-exercise="02-uppercase" aria-label="Exercise 2: @uppercase: changing the return value">
+<script type="application/json" class="ex-data">{"id": "02-uppercase", "lesson": "python16", "starter": "# Define the decorator uppercase: in wrapper, catch the original function's return value, make it capitals and return it\n# Decorate greet(name) with @uppercase, then print the two calls as shown above\n\n", "solution": "def uppercase(func):\n    def wrapper(*args, **kwargs):\n        result = func(*args, **kwargs)\n        return result.upper()\n    return wrapper\n\n@uppercase\ndef greet(name):\n    return 'hello ' + name\n\nprint(greet('alice'))\nprint(greet('bob'))", "grading": {"requiredAst": ["FunctionDef:uppercase"], "stdoutEquals": "HELLO ALICE\nHELLO BOB\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 2 / 3</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">@uppercase: changing the return value</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Write a decorator <code>uppercase</code>:</p>
+<ul>
+<li>It takes a function <code>func</code></li>
+<li>It calls the original function to get its result, <code>result</code></li>
+<li>It returns <code>result.upper()</code> (in capitals) from the wrapper</li>
+</ul>
+<p>Then decorate a function <code>greet(name)</code> with <code>@uppercase</code>; inside it: <code>return 'hello ' + name</code>.</p>
+<p>Finally:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">print(greet(&#x27;alice&#x27;))
+print(greet(&#x27;bob&#x27;))</code></pre></div>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">HELLO ALICE
+HELLO BOB</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>Inside wrapper, catch the original function's return value: result = func(<em>args, </em>*kwargs)</p></li></template><template class="hint-tpl"><li><p>Then return result.upper() – so print(greet(...)) gets the capital-letter result</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def uppercase(func):
+    def wrapper(*args, **kwargs):
+        result = func(*args, **kwargs)
+        return result.upper()
+    return wrapper
+
+@uppercase
+def greet(name):
+    return &#x27;hello &#x27; + name
+
+print(greet(&#x27;alice&#x27;))
+print(greet(&#x27;bob&#x27;))</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># Define the decorator uppercase: in wrapper, catch the original function&#x27;s return value, make it capitals and return it
+# Decorate greet(name) with @uppercase, then print the two calls as shown above
+
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="exercise-03-count-calls" class="ex-card item" data-kind="exercise" data-exercise="03-count-calls" aria-label="Exercise 3: @count_calls: counting calls">
+<script type="application/json" class="ex-data">{"id": "03-count-calls", "lesson": "python16", "starter": "# Define the decorator count_calls: keep count in the closure; in wrapper, change it with nonlocal and print the message\n# Don't forget to import functools and add @functools.wraps(func) to wrapper\n# Decorate say_hi() with @count_calls and call it 3 times\n\n", "solution": "import functools\n\ndef count_calls(func):\n    count = 0\n    @functools.wraps(func)\n    def wrapper(*args, **kwargs):\n        nonlocal count\n        count = count + 1\n        print(f'Call number {count}')\n        return func(*args, **kwargs)\n    return wrapper\n\n@count_calls\ndef say_hi():\n    print('hi')\n\nsay_hi()\nsay_hi()\nsay_hi()", "grading": {"requiredAst": ["FunctionDef:count_calls"], "stdoutEquals": "Call number 1\nhi\nCall number 2\nhi\nCall number 3\nhi\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 3 / 3</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">@count_calls: counting calls</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Write a decorator <code>count_calls</code>:</p>
+<ul>
+<li>Keep a counter <code>count = 0</code> in the closure</li>
+<li>Each time the decorated function is called, add 1 to <code>count</code>, then <code>print(f'Call number {count}')</code>, then call the original function</li>
+<li>Add <code>@functools.wraps(func)</code> to <code>wrapper</code> – the good habit from the last section, don't forget it</li>
+</ul>
+<p>Then decorate a function <code>say_hi()</code> with <code>@count_calls</code> (inside it: <code>print('hi')</code>), and call <code>say_hi()</code> 3 times in a row.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Call number 1
+hi
+Call number 2
+hi
+Call number 3
+hi</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>Set count = 0 in the outer part of the decorator; wrapper needs nonlocal count to change it (this is closures + decorators together)</p></li></template><template class="hint-tpl"><li><p>Each time wrapper runs: add 1 to count → print the message → then func(<em>args, </em>*kwargs); don't forget to import functools and add @functools.wraps(func) to wrapper</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import functools
+
+def count_calls(func):
+    count = 0
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        nonlocal count
+        count = count + 1
+        print(f&#x27;Call number {count}&#x27;)
+        return func(*args, **kwargs)
+    return wrapper
+
+@count_calls
+def say_hi():
+    print(&#x27;hi&#x27;)
+
+say_hi()
+say_hi()
+say_hi()</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># Define the decorator count_calls: keep count in the closure; in wrapper, change it with nonlocal and print the message
+# Don&#x27;t forget to import functools and add @functools.wraps(func) to wrapper
+# Decorate say_hi() with @count_calls and call it 3 times
+
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><div class="lock-banner" hidden><span aria-hidden="true">🔒</span>Solve this exercise to unlock the next part ·<span class="accent lock-k">0</span><span aria-hidden="true">/</span><span>3</span></div><section id="lesson-end" aria-label="Chapter summary"><div class="done-banner" hidden><div class="done-emoji" aria-hidden="true">🎉</div><p class="done-title">Chapter complete!</p><p class="done-sub">You solved all 3 exercises in this chapter.</p></div><nav aria-label="Chapter navigation" class="chapter-nav"><div class="cn-grid"><a class="chap-nav prev focus-ring" href="/lessons/python15/closure/"><span class="cn-label">← Previous chapter</span><span class="cn-title">15 · Closures</span></a><div class="cn-mid"><span>Decorators</span></div><a class="chap-nav next focus-ring" href="/lessons/python17/readable-code/"><span class="cn-label">Next chapter →</span><span class="cn-title">17 · Readable code</span></a></div></nav></section></article></div>
+    <aside class="lesson-sidebar right" aria-label="This chapter"><nav aria-label="This chapter's contents"><div class="side-label up">In this chapter</div><p class="toc-chapter">Decorators</p><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">When you add a decorator, does the function run straight away?</span></a></li><li class="toc-li" data-target="exercise-01-log"><a href="#exercise-01-log" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">Write a @log decorator</span></a></li><li class="toc-li" data-target="exercise-02-uppercase"><a href="#exercise-02-uppercase" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">@uppercase: changing the return value</span></a></li><li class="toc-li" data-target="exercise-03-count-calls"><a href="#exercise-03-count-calls" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">@count_calls: counting calls</span></a></li></ol></nav></aside>
+  </div>
+  <dialog class="dir-dialog" aria-labelledby="dir-title"><div class="dd-inner"><div class="dd-head"><h2 id="dir-title">Contents</h2><button type="button" class="dd-close focus-ring">Close</button></div>
+  <div class="dd-tabs" aria-label="Contents scope"><button type="button" class="dd-tab focus-ring" data-tab="all" aria-pressed="true">All lessons</button><button type="button" class="dd-tab focus-ring" data-tab="chapter" aria-pressed="false">This chapter</button></div>
+  <div class="dd-body"><div class="dd-pane" data-pane="all"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></div><div class="dd-pane" data-pane="chapter" hidden><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">When you add a decorator, does the function run straight away?</span></a></li><li class="toc-li" data-target="exercise-01-log"><a href="#exercise-01-log" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">Write a @log decorator</span></a></li><li class="toc-li" data-target="exercise-02-uppercase"><a href="#exercise-02-uppercase" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">@uppercase: changing the return value</span></a></li><li class="toc-li" data-target="exercise-03-count-calls"><a href="#exercise-03-count-calls" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">@count_calls: counting calls</span></a></li></ol></div></div></div></dialog>
+  <div class="py-toast" hidden><span class="spinner"></span><span class="py-toast-text">Loading Python…</span></div>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>© 2026 Python for Beginners · English edition of the <a href="https://github.com/walter201230/Python">walter201230/Python</a> tutorial (CC BY 4.0)</span>
+    <div class="footer-links"><a href="/">Course list</a><a href="/about/">About this site</a><a href="https://github.com/walter201230/Python">GitHub</a></div>
+  </div>
+</footer>
+<script src="/assets/site.js?v=20261028"></script>
+</body>
+</html>

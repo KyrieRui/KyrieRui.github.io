@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Closures – Python for Beginners</title>
+<meta name="description" content="A function inside a function that captures outer variables – understand closures and you understand decorators.">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css?v=20261028">
+
+</head>
+<body data-page="lesson" data-lesson="python15" data-total="3">
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="/" aria-label="Python for Beginners – home"><span class="gradient-text-flow" data-text="Python for Beginners">Python for Beginners</span></a>
+    <nav class="header-nav">
+      <a class="nav-link" href="/about/">About</a>
+      <a class="nav-icon focus-ring" href="https://github.com/walter201230/Python" aria-label="Original tutorial on GitHub" title="Original tutorial on GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+      <button type="button" class="theme-toggle focus-ring" aria-label="Switch theme"><span class="knob"><svg class="ic-moon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button>
+    </nav>
+  </div>
+</header>
+<main class="site-main">
+<div class="lesson-shell bg-tech-grid">
+  <div class="mobile-bar"><div class="mb-inner"><button type="button" class="dir-btn focus-ring" aria-haspopup="dialog">Contents</button></div></div>
+  <div class="lesson-columns">
+    <aside class="lesson-sidebar left" aria-label="All lessons"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></aside>
+    <div class="lesson-main"><article class="lesson-article"><header class="lesson-head"><h1>Closures</h1><p class="lh-sub"><span class="accent">3</span> exercises<span class="sep">·</span>about <span class="accent">30</span> min<span class="sep">·</span>solve one to unlock the next part</p>
+<p class="lh-link"><a class="subtle-link focus-ring" href="/lessons/python15/closure/read/">Read the whole chapter →</a></p></header><section id="step-0" class="step-card item" data-kind="step" aria-label="Teaching step 1">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 01 / 01</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><p>There are already lots of articles online about Python <strong>closures</strong>. In this one, we'll understand closures by solving a real problem.</p>
+<p>Here's the problem: we want to keep a running record of our study time, in minutes. For example, if I study for 2 minutes, it returns 2. Later, I study for 10 more minutes, so it returns 12. It keeps adding up the study time like this.</p>
+<p>For this problem, most people would create a <strong>global variable</strong> to store the time, and a function to add each new study time. Usually it would look like this:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">time = 0
+
+def insert_time(min):
+    time = time + min
+    return  time
+
+print(insert_time(2))
+print(insert_time(10))</code></pre></div>
+<p>Think carefully – is there a problem here?</p>
+<p>In fact, this gives an error in Python:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">UnboundLocalError: local variable &#x27;time&#x27; referenced before assignment</code></pre></div>
+<p>That's because in Python, if a function uses the same name as a global variable <strong>and changes its value</strong>, that name becomes a <strong>local</strong> variable inside the function. So the function tries to use it before it's been defined inside the function, and you get this error.</p>
+<p>If you really do want to use the global variable and change it inside a function, how?</p>
+<p>We can use the <code>global</code> keyword, like this:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">time = 0
+
+
+def insert_time(min):
+    global  time
+    time = time + min
+    return  time
+
+print(insert_time(2))
+print(insert_time(10))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">2
+12</code></pre></div>
+<p>But this uses a global variable, and in real projects we try to avoid global variables whenever we can. Because any module or function can freely access a global variable, its value can become unpredictable. For example, programmer A changes the global variable <code>time</code>, and at the same time programmer B changes <code>time</code> too. If one of them makes a mistake, it's very hard to find and fix.</p>
+<p>Global variables make functions and modules less reusable, because different functions and modules all depend on them. Global variables also make code harder to read – the reader might not realise a variable is global.</p>
+<p>Is there a better way?</p>
+<p>Let's solve it with a closure. Look at the code first:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">time = 0
+
+
+def study_time(time):
+    def insert_time(min):
+        nonlocal  time
+        time = time + min
+        return time
+
+    return insert_time
+
+
+f = study_time(time)
+print(f(2))
+print(time)
+print(f(10))
+print(time)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">2
+0
+12
+0</code></pre></div>
+<p>The most obvious thing is that the global variable <code>time</code> never changes at all. This code uses the <code>nonlocal</code> keyword, which means "use the variable from the outer (non-global) function". So how does this code run, step by step? Look at the comments below:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">time = 0
+
+
+def study_time(time):
+    def insert_time(min):                # Define a function inside a function. It adds the time and returns the final value
+        nonlocal time
+        time = time + min
+        return time
+
+    return insert_time                   # The outer function study_time returns the insert_time function. In Python, functions are objects too, so you can return a function
+
+
+f = study_time(time)                     # Call study_time. It returns the insert_time function, so f is really the insert_time object
+print(f(2))
+print(time)
+print(f(10))                             # This is like calling insert_time(10)
+print(time)</code></pre></div>
+<p>When an inner function can use variables from the outer function's local scope, we call this a <strong>closure</strong>. Put more simply: when a function is returned as an object and carries outer variables with it, it forms a closure.</p>
+<p>Closures avoid global variables. They also let you connect a function with some data (an environment) it works on. Closures can make code more elegant. And <strong>decorators</strong>, which we'll see in the next article, are built on closures too.</p>
+<p>Now there's a question: just because I say it's a closure, does that make it one? Is there a way to check that this function really is a closure?</p>
+<p>Yes. Every function has a <code>__closure__</code> attribute. If the function is a closure, it returns a tuple of <strong>cell</strong> objects. A cell's <code>cell_contents</code> attribute is the variable stored in the closure.</p>
+<p>Let's print it and see:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">time = 0
+
+
+def study_time(time):
+    def insert_time(min):
+        nonlocal  time
+        time = time + min
+        return time
+
+    return insert_time
+
+
+f = study_time(time)
+print(f.__closure__)
+print(f(2))
+print(time)
+print(f.__closure__[0].cell_contents)
+print(f(10))
+print(time)
+print(f.__closure__[0].cell_contents)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">(&lt;cell at 0x0000000000410C48: int object at 0x000000001D6AB420&gt;,)
+2
+0
+2
+12
+0
+12</code></pre></div>
+<p>From the output, the value is always stored in the closure's <code>cell_contents</code>. This is the biggest feature of closures: they <strong>bind</strong> the parent function's variables to the function defined inside it. Even after the parent function that made the closure has finished, the closure still exists.</p>
+<p>Making a closure is a bit like a class (the parent function) making an instance (the closure). The difference: a parent function only runs when it's called, and its environment is freed when it finishes. A class is created when the file runs, and its scope usually lasts until the program ends. So for features you want to reuse, but that aren't big enough to be a class, a closure can use fewer resources than a class, and is lighter and more flexible.</p>
+<h3>Two people recording study time – will their records get mixed up?</h3>
+<p>So far we've been recording one set of study time. What if one person studies Python and another reads books, and they both use the same <code>study_time</code>? Will their records get mixed up?</p>
+<p>First, guess what the four prints below will show:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def study_time(time):
+    def insert_time(minutes):
+        nonlocal time
+        time = time + minutes
+        return time
+
+    return insert_time
+
+
+python_time = study_time(0)
+reading_time = study_time(0)
+same_record = python_time
+
+print(python_time(2))
+print(same_record(10))
+print(reading_time(5))
+print(python_time(0))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">2
+12
+5
+12</code></pre></div>
+<p>Let's go through them in the order they're called:</p>
+<ol>
+<li><code>study_time(0)</code> is called twice. Each time, it creates its <strong>own</strong> <code>time</code>, and returns an inner function that uses that variable.</li>
+<li><code>same_record = python_time</code> just makes another name point to the function we already have. It doesn't call <code>study_time</code> again, and doesn't create a new record.</li>
+<li><code>python_time(2)</code> adds to the first record, making it <code>2</code>. <code>same_record(10)</code> then adds to the <strong>same</strong> record, making it <code>12</code>.</li>
+<li><code>reading_time(5)</code> changes the second record, so it gives <code>5</code>.</li>
+<li>Finally, adding <code>0</code> to the first record leaves it at <code>12</code>.</li>
+</ol>
+<p>The same outer function can make several <strong>separate</strong> records. The same inner function can also be pointed to by several names. Keep these two things apart, and you won't mix up "making a new closure" with "calling a closure you already have".</p>
+<p>Here's one more detail to add to the definition above: what really matters is that the inner function <strong>uses the outer function's variables</strong>. Returning the inner function is just how this example lets the outside keep using it – it's not a required step to form a closure. You can compare with <a href="https://docs.python.org/3.13/glossary.html#term-closure-variable">closure variable in the official glossary</a>.</p>
+<h3>Returning a function vs calling a function – it's all in the brackets</h3>
+<p>Look again at <code>return insert_time</code> above. There are no brackets, so it hands the <strong>function itself</strong> to the caller. Only after getting it do we write <code>python_time(2)</code> to record some study.</p>
+<p>What if we wrote <code>return insert_time(2)</code> instead? Then the outer function would call <code>insert_time</code> once straight away, and return the <strong>number</strong> it calculated. The caller would get a number, and then writing <code>python_time(2)</code> would fail, because you can't call a number like a function.</p>
+<p>Also, <code>nonlocal</code> is needed here because of the <strong>reassignment</strong>: <code>time = time + minutes</code>. It's not something you have to write every time an inner function uses an outer variable. You don't need it just to <strong>read</strong> an outer variable. And if you're working with an outer list, just calling the list's <code>append()</code> isn't reassigning the variable either. When you're not sure, ask yourself: is this line pointing the name somewhere new, or changing the existing object?</p>
+<h3>Make your own record with a starting value</h3>
+<p>This time, don't start from <code>0</code>. Create two records: <code>python_time = study_time(30)</code> and <code>reading_time = study_time(10)</code>.</p>
+<p>Record, in order: Python <code>5</code> minutes, reading <code>2</code> minutes, Python <code>3</code> minutes. You should get <code>35</code>, <code>12</code>, <code>38</code>. Then create <code>another_name = python_time</code> and use it to add <code>2</code> minutes. The first record should become <code>40</code>.</p>
+<p>First write down on paper (or in your notes) which record each step changes, then change the code and check. If your results are different, first check whether you accidentally called <code>study_time</code> again and started a brand-new record.</p>
+<p>When you print <code>__closure__</code>, the memory addresses change from computer to computer – they don't have to match the example. What you should look at is the variable being kept and how it changes. When comparing how many resources closures and classes use, you need to look at the actual code and actually measure it – it's not a promise that every closure uses less than every class. This problem only needs to keep one running total, so a closure expresses it clearly.</p></article></section><section id="exercise-02-make-adder" class="ex-card item" data-kind="exercise" data-exercise="02-make-adder" aria-label="Exercise 1: An adder factory">
+<script type="application/json" class="ex-data">{"id": "02-make-adder", "lesson": "python15", "starter": "# Define make_adder(n), returning an inner function adder(x) that returns the sum of x and n\n# Use make_adder to make add10 and add100\n# Call each one once (with 5) and print the result\n\n", "solution": "def make_adder(n):\n    def adder(x):\n        return x + n\n    return adder\n\nadd10 = make_adder(10)\nprint(add10(5))\nadd100 = make_adder(100)\nprint(add100(5))", "grading": {"requiredAst": ["FunctionDef:make_adder"], "stdoutEquals": "15\n105\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 1 / 3</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">An adder factory</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Define a function <code>make_adder(n)</code>:</p>
+<ul>
+<li>It takes a number <code>n</code></li>
+<li>It returns an inner function <code>adder(x)</code>, which returns <code>x + n</code></li>
+</ul>
+<p>Then:</p>
+<ol>
+<li>Use <code>make_adder(10)</code> to make <code>add10</code></li>
+<li><code>print(add10(5))</code> – should print <code>15</code></li>
+<li>Use <code>make_adder(100)</code> to make <code>add100</code></li>
+<li><code>print(add100(5))</code> – should print <code>105</code></li>
+</ol>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">15
+105</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>The inner function only reads n and doesn't change it, so nonlocal isn't needed</p></li></template><template class="hint-tpl"><li><p>make_adder(10) and make_adder(100) are two different closures, each carrying its own n</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def make_adder(n):
+    def adder(x):
+        return x + n
+    return adder
+
+add10 = make_adder(10)
+print(add10(5))
+add100 = make_adder(100)
+print(add100(5))</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># Define make_adder(n), returning an inner function adder(x) that returns the sum of x and n
+# Use make_adder to make add10 and add100
+# Call each one once (with 5) and print the result
+
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="exercise-01-make-counter" class="ex-card item" data-kind="exercise" data-exercise="01-make-counter" aria-label="Exercise 2: A counter made with a closure">
+<script type="application/json" class="ex-data">{"id": "01-make-counter", "lesson": "python15", "starter": "# Define make_counter(): count = 0 inside, return the inner function counter\n# Each call to counter adds 1 to count and returns the new value (remember nonlocal)\n# Then use make_counter() to make c, call it 3 times and print each return value\n\n", "solution": "def make_counter():\n    count = 0\n    def counter():\n        nonlocal count\n        count = count + 1\n        return count\n    return counter\n\nc = make_counter()\nprint(c())\nprint(c())\nprint(c())", "grading": {"requiredAst": ["FunctionDef:make_counter", "Nonlocal"], "stdoutEquals": "1\n2\n3\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 2 / 3</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">A counter made with a closure</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Define a function <code>make_counter()</code>:</p>
+<ul>
+<li>Inside, it keeps <code>count = 0</code></li>
+<li>It returns an inner function <code>counter()</code>; each time <code>counter()</code> is called, it adds 1 to <code>count</code> and returns the new value (remember to use <code>nonlocal</code>)</li>
+</ul>
+<p>Then:</p>
+<ol>
+<li><code>c = make_counter()</code></li>
+<li>Call <code>c()</code> 3 times in a row, <code>print</code>ing the return value each time</li>
+</ol>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">1
+2
+3</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>The outer function sets count = 0; the inner function needs nonlocal count to change it</p></li></template><template class="hint-tpl"><li><p>The outer function returns the inner function object (note: return counter, not return counter())</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def make_counter():
+    count = 0
+    def counter():
+        nonlocal count
+        count = count + 1
+        return count
+    return counter
+
+c = make_counter()
+print(c())
+print(c())
+print(c())</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># Define make_counter(): count = 0 inside, return the inner function counter
+# Each call to counter adds 1 to count and returns the new value (remember nonlocal)
+# Then use make_counter() to make c, call it 3 times and print each return value
+
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="exercise-03-study-time" class="ex-card item" data-kind="exercise" data-exercise="03-study-time" aria-label="Exercise 3: Add up study time with a closure">
+<script type="application/json" class="ex-data">{"id": "03-study-time", "lesson": "python15", "starter": "# Define study_time(time), returning an inner function insert_time(min)\n# Each call to insert_time adds min to time and returns the current total (remember nonlocal)\n# Use study_time(0) to make f, call it three times in the order above and print each result\n\n", "solution": "def study_time(time):\n    def insert_time(min):\n        nonlocal time\n        time = time + min\n        return time\n    return insert_time\n\nf = study_time(0)\nprint(f(2))\nprint(f(10))\nprint(f(5))", "grading": {"requiredAst": ["FunctionDef:study_time", "Nonlocal"], "stdoutEquals": "2\n12\n17\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 3 / 3</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Add up study time with a closure</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Back to the task from the start of this chapter – adding up study time with a closure.</p>
+<p>Define a function <code>study_time(time)</code>:</p>
+<ul>
+<li>It takes a starting <code>time</code></li>
+<li>It returns an inner function <code>insert_time(min)</code>; each call adds <code>min</code> to <code>time</code> and returns the current total (remember to use <code>nonlocal</code>)</li>
+</ul>
+<p>Then:</p>
+<ol>
+<li><code>f = study_time(0)</code></li>
+<li><code>print(f(2))</code> – studied for 2 minutes</li>
+<li><code>print(f(10))</code> – studied another 10 minutes</li>
+<li><code>print(f(5))</code> – studied another 5 minutes</li>
+</ol>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">2
+12
+17</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>The outer study_time takes time as a parameter; the inner insert_time changes it with nonlocal time (the parameter name min comes from the original tutorial – it temporarily hides the built-in min() function; in real projects, a name like minutes that doesn't clash is better)</p></li></template><template class="hint-tpl"><li><p>The outer function returns the inner function object insert_time (no brackets)</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def study_time(time):
+    def insert_time(min):
+        nonlocal time
+        time = time + min
+        return time
+    return insert_time
+
+f = study_time(0)
+print(f(2))
+print(f(10))
+print(f(5))</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># Define study_time(time), returning an inner function insert_time(min)
+# Each call to insert_time adds min to time and returns the current total (remember nonlocal)
+# Use study_time(0) to make f, call it three times in the order above and print each result
+
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><div class="lock-banner" hidden><span aria-hidden="true">🔒</span>Solve this exercise to unlock the next part ·<span class="accent lock-k">0</span><span aria-hidden="true">/</span><span>3</span></div><section id="lesson-end" aria-label="Chapter summary"><div class="done-banner" hidden><div class="done-emoji" aria-hidden="true">🎉</div><p class="done-title">Chapter complete!</p><p class="done-sub">You solved all 3 exercises in this chapter.</p></div><nav aria-label="Chapter navigation" class="chapter-nav"><div class="cn-grid"><a class="chap-nav prev focus-ring" href="/lessons/python14/regex/"><span class="cn-label">← Previous chapter</span><span class="cn-title">14 · Regular expressions</span></a><div class="cn-mid"><span>Closures</span></div><a class="chap-nav next focus-ring" href="/lessons/python16/decorator/"><span class="cn-label">Next chapter →</span><span class="cn-title">16 · Decorators</span></a></div></nav></section></article></div>
+    <aside class="lesson-sidebar right" aria-label="This chapter"><nav aria-label="This chapter's contents"><div class="side-label up">In this chapter</div><p class="toc-chapter">Closures</p><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Two people recording study time – will their records get mixed up?</span></a></li><li class="toc-li" data-target="exercise-02-make-adder"><a href="#exercise-02-make-adder" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">An adder factory</span></a></li><li class="toc-li" data-target="exercise-01-make-counter"><a href="#exercise-01-make-counter" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">A counter made with a closure</span></a></li><li class="toc-li" data-target="exercise-03-study-time"><a href="#exercise-03-study-time" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">Add up study time with a closure</span></a></li></ol></nav></aside>
+  </div>
+  <dialog class="dir-dialog" aria-labelledby="dir-title"><div class="dd-inner"><div class="dd-head"><h2 id="dir-title">Contents</h2><button type="button" class="dd-close focus-ring">Close</button></div>
+  <div class="dd-tabs" aria-label="Contents scope"><button type="button" class="dd-tab focus-ring" data-tab="all" aria-pressed="true">All lessons</button><button type="button" class="dd-tab focus-ring" data-tab="chapter" aria-pressed="false">This chapter</button></div>
+  <div class="dd-body"><div class="dd-pane" data-pane="all"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></div><div class="dd-pane" data-pane="chapter" hidden><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Two people recording study time – will their records get mixed up?</span></a></li><li class="toc-li" data-target="exercise-02-make-adder"><a href="#exercise-02-make-adder" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">An adder factory</span></a></li><li class="toc-li" data-target="exercise-01-make-counter"><a href="#exercise-01-make-counter" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">A counter made with a closure</span></a></li><li class="toc-li" data-target="exercise-03-study-time"><a href="#exercise-03-study-time" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">Add up study time with a closure</span></a></li></ol></div></div></div></dialog>
+  <div class="py-toast" hidden><span class="spinner"></span><span class="py-toast-text">Loading Python…</span></div>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>© 2026 Python for Beginners · English edition of the <a href="https://github.com/walter201230/Python">walter201230/Python</a> tutorial (CC BY 4.0)</span>
+    <div class="footer-links"><a href="/">Course list</a><a href="/about/">About this site</a><a href="https://github.com/walter201230/Python">GitHub</a></div>
+  </div>
+</footer>
+<script src="/assets/site.js?v=20261028"></script>
+</body>
+</html>

@@ -1,0 +1,875 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>async / await (full read) – Python for Beginners</title>
+<meta name="description" content="Coroutine basics: async def + await + asyncio.run + gather for concurrency.">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css?v=20261028">
+
+</head>
+<body data-page="read" data-lesson="python22" data-total="4">
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="/" aria-label="Python for Beginners – home"><span class="gradient-text-flow" data-text="Python for Beginners">Python for Beginners</span></a>
+    <nav class="header-nav">
+      <a class="nav-link" href="/about/">About</a>
+      <a class="nav-icon focus-ring" href="https://github.com/walter201230/Python" aria-label="Original tutorial on GitHub" title="Original tutorial on GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+      <button type="button" class="theme-toggle focus-ring" aria-label="Switch theme"><span class="knob"><svg class="ic-moon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button>
+    </nav>
+  </div>
+</header>
+<main class="site-main">
+<div class="lesson-shell bg-tech-grid">
+  <div class="mobile-bar"><div class="mb-inner"><button type="button" class="dir-btn focus-ring" aria-haspopup="dialog">Contents</button></div></div>
+  <div class="lesson-columns">
+    <aside class="lesson-sidebar left" aria-label="All lessons"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/read/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/read/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/read/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/read/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/read/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/read/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/read/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/read/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/read/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/read/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/read/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/read/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/read/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/read/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/read/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/read/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/read/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/read/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/read/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/read/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/read/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/read/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python22/async/read/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/read/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/read/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/read/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/read/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/read/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/read/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></aside>
+    <div class="lesson-main"><article class="lesson-article"><header class="lesson-head"><h1>async / await</h1><p class="lh-sub">Full read · <span class="accent">17</span> teaching parts<span class="sep">·</span><span class="accent">4</span> exercises<span class="sep">·</span>about <span class="accent">60</span> min</p>
+<p class="lh-note">This page is the read-through version of the chapter, with every explanation in one place. To write code and get it checked, go to <a class="accent-link focus-ring" href="/lessons/python22/async/">challenge mode</a>.</p></header><section id="step-0" class="step-card read" data-kind="step" aria-label="Teaching step 1">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 01 / 17</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>Async programming: async/await lets one thread wait for a hundred things at once</h2>
+<p>Have you ever written a web scraper? Here's a quick one:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python22/async/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import time
+
+
+def fake_get(url):
+    time.sleep(0.01)
+    return f&#x27;GOT {url}&#x27;
+
+
+def main():
+    urls = [f&#x27;https://example.com/{i}&#x27; for i in range(5)]
+    start = time.perf_counter()
+    results = []
+    for u in urls:
+        results.append(fake_get(u))
+    cost = time.perf_counter() - start
+    print(f&#x27;Got {len(results)} results in {cost:.3f} seconds&#x27;)
+
+
+main()</code></pre></div>
+<p>The output is roughly:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Got 5 results in 0.05 seconds</code></pre></div>
+<p>Each request pretends to take 0.01 seconds, so 5 in a row take 0.05 seconds. With real network requests of 200 milliseconds each, 100 in a row would take 20 seconds – painfully slow.</p>
+<p>"Easy – use threads!" someone says straight away. "100 URLs, 100 threads, run them all together."</p>
+<p>Threads can solve this, of course. But isn't 100 threads a bit extravagant? 99% of the time, those 100 threads are all doing the same thing: <strong>waiting</strong> for network packets to come back. This is really a <strong>waiting</strong> problem, not a <strong>computing</strong> problem. Starting 100 operating-system threads just to "wait" makes neither the CPU nor the memory happy.</p>
+<p>And with lots of threads, old friends like "locks", "race conditions" and "deadlocks" start knocking on your door one by one. You just wanted to fetch some web pages – why are you suddenly studying operating systems?</p>
+<p>Python gives us another way: <code>asyncio</code>. Its selling point is simple – <strong>one thread, waiting for a hundred things at once</strong>. Your first reaction to that is probably: "That can't be right – how can one thread do a hundred things at once?"</p>
+<p>That's the question this chapter answers.</p></article></section><section id="step-1" class="step-card read" data-kind="step" aria-label="Teaching step 2">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 02 / 17</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>A gut-feeling comparison: 3 seconds in a row vs 1 second together</h3>
+<p>Let's skip the theory and see the effect first. Below is "normal" code that runs one after another. Three tasks, each waiting 1 second:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import time
+
+
+def task(name):
+    time.sleep(1)
+    return f&#x27;{name} done&#x27;
+
+
+start = time.perf_counter()
+r1 = task(&#x27;Clock in&#x27;)
+r2 = task(&#x27;Query&#x27;)
+r3 = task(&#x27;Upload&#x27;)
+cost = time.perf_counter() - start
+print(r1, r2, r3)
+print(f&#x27;{cost:.2f} seconds in total&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Clock in done Query done Upload done
+3.01 seconds in total</code></pre></div>
+<p>Each one politely waits its turn, one second at a time. Nothing special.</p>
+<p>Now the async version:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import asyncio
+import time
+
+
+async def task(name):
+    await asyncio.sleep(1)
+    return f&#x27;{name} done&#x27;
+
+
+async def main():
+    start = time.perf_counter()
+    r1, r2, r3 = await asyncio.gather(
+        task(&#x27;Clock in&#x27;),
+        task(&#x27;Query&#x27;),
+        task(&#x27;Upload&#x27;),
+    )
+    cost = time.perf_counter() - start
+    print(r1, r2, r3)
+    print(f&#x27;{cost:.2f} seconds in total&#x27;)
+
+
+asyncio.run(main())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Clock in done Query done Upload done
+1.00 seconds in total</code></pre></div>
+<p>3 seconds became 1 second – the three tasks really did finish "at the same time". Don't worry yet about what <code>async</code>, <code>await</code> and <code>gather</code> mean. Just remember one fact: <strong>while one coroutine is waiting in <code>asyncio.sleep(1)</code>, another coroutine can use the CPU for its own work.</strong> The three coroutines' waits <strong>overlap</strong>, so the total time is the longest one, not all three added together.</p>
+<p>That's the core magic of <code>asyncio</code>. It doesn't secretly start threads, and it doesn't make the CPU faster. What it does is simple: <strong>when a coroutine is waiting for I/O (input/output), it gives the CPU to other coroutines, and carries on when the wait is over.</strong></p>
+<p>By now you should have a bit of a feel for it. Let's take the syntax apart step by step.</p></article></section><section id="step-2" class="step-card read" data-kind="step" aria-label="Teaching step 3">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 03 / 17</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Your first async function: how is it different from a normal function?</h3>
+<p>A normal function looks like this:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python22/async/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def hello():
+    return &#x27;Hello, Two Drops&#x27;
+
+
+print(hello())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Hello, Two Drops</code></pre></div>
+<p>Add the <code>async</code> keyword, and it becomes a <strong>coroutine function</strong>:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">async def hello():
+    return &#x27;Hello, Two Drops&#x27;
+
+
+print(hello())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">&lt;coroutine object hello at 0x...&gt;
+RuntimeWarning: coroutine &#x27;hello&#x27; was never awaited</code></pre></div>
+<p>Do you see the difference? It's the same <code>print(hello())</code>, but the normal function returns the string <code>'Hello, Two Drops'</code>, while the coroutine function returns a <strong>coroutine object</strong> – a <code>&lt;coroutine object&gt;</code>, not a string.</p>
+<p>Even worse, Python adds a warning: "this coroutine was never awaited".</p>
+<p>What does that mean? Here's the key idea:</p>
+<ul>
+<li><code>async def</code> does <strong>not</strong> define "a function that runs straight away"</li>
+<li>When you call a function defined with <code>async def</code>, <strong>it doesn't run at all</strong> – it just gives you back a "to-do slip"</li>
+</ul>
+<p>Think of it like this: calling a normal function <code>hello()</code> is like "sending someone to do a job and getting the result immediately". Calling a coroutine function <code>hello()</code> is like "writing a job slip and handing it to you – when and who does it is another matter".</p>
+<p>This "job slip" is the coroutine object. It must be <strong>awaited</strong>, or handed to the event loop to run, before the code inside it actually runs.</p></article></section><section id="step-3" class="step-card read" data-kind="step" aria-label="Teaching step 4">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 04 / 17</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>await: making a coroutine run</h3>
+<p>So how do you make the job slip actually happen? With <code>await</code>:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import asyncio
+
+
+async def hello():
+    return &#x27;Hello, Two Drops&#x27;
+
+
+async def main():
+    result = await hello()
+    print(result)
+
+
+asyncio.run(main())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Hello, Two Drops</code></pre></div>
+<p>Now we get the string. You can read <code>await hello()</code> as "please finish the <code>hello()</code> job slip for me, and give me the result".</p>
+<p>But there's a very important limit: <strong><code>await</code> can only be written inside an <code>async def</code> function</strong>. Try writing <code>await</code> in a normal function, and Python tells you <code>SyntaxError: 'await' outside async function</code>.</p>
+<p>"So what if I want to call an <code>async def</code> function from a normal script?" That's where the next character comes in – <code>asyncio.run()</code>.</p></article></section><section id="step-4" class="step-card read" data-kind="step" aria-label="Teaching step 5">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 05 / 17</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>asyncio.run(): the door into the async world</h3>
+<p><code>asyncio.run()</code> is the "door" between synchronous (normal) code and asynchronous code. It takes a coroutine object, starts an <strong>event loop</strong>, runs the coroutine to the end, and then closes the event loop:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import asyncio
+
+
+async def main():
+    print(&#x27;I am in the async world&#x27;)
+    await asyncio.sleep(0.01)
+    print(&#x27;I am in the async world again&#x27;)
+
+
+asyncio.run(main())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">I am in the async world
+I am in the async world again</code></pre></div>
+<p>There's a very important design hidden here: <strong>a whole program usually has only one event loop, started by <code>asyncio.run()</code></strong>. Every coroutine runs inside this loop. You can picture it like this:</p>
+<ul>
+<li>The synchronous world → one straight road, one step after another</li>
+<li>The async world → a control centre (the event loop) with lots of coroutines hanging on it; whoever can run gets to run</li>
+</ul>
+<p><code>asyncio.run()</code> is the entrance from the synchronous world into the async world. A program should only call it once (calling it inside itself gives an error).</p>
+<p>So far, you've learned three basic ideas: <code>async def</code> defines a coroutine function, <code>await</code> waits for a coroutine's result, and <code>asyncio.run()</code> starts the event loop. With these three, you can already write the smallest working async program.</p></article></section><section id="read-exercise-01-hello" class="rex-card" aria-label="Exercise 1">
+<header class="rex-head"><div class="rex-top"><span class="rex-badge">Exercise 1 / 4</span><span class="rex-title">Your first async function</span></div>
+<div class="prose prose-sm ex-prompt"><p>Use <code>async def</code> to define a coroutine function <code>hello</code> that prints <code>'hi'</code>.</p>
+<p>Then start it with <code>asyncio.run(hello())</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">hi</code></pre></div></div></header>
+<a class="rex-go focus-ring" href="/lessons/python22/async/#exercise-01-hello"><span class="rex-go-sub">Write it in the editor, get it checked, see the answer</span><span class="rex-go-main">Do this one on the challenge page →</span></a>
+</section><section id="read-exercise-02-sleep-order" class="rex-card" aria-label="Exercise 2">
+<header class="rex-head"><div class="rex-top"><span class="rex-badge">Exercise 2 / 4</span><span class="rex-title">The order of awaits one after another</span></div>
+<div class="prose prose-sm ex-prompt"><p>Define a coroutine function <code>step(name)</code>:</p>
+<ul>
+<li>First <code>print(f'{name} start')</code></li>
+<li>Then <code>await asyncio.sleep(0)</code></li>
+<li>Finally <code>print(f'{name} end')</code></li>
+</ul>
+<p>Then define <code>main</code>: <code>await step('A')</code>, then <code>await step('B')</code>.</p>
+<p>Start it with <code>asyncio.run(main())</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">A start
+A end
+B start
+B end</code></pre></div>
+<p>(Explanation: because the <code>await</code>s run one after another, B always comes after A.)</p></div></header>
+<a class="rex-go focus-ring" href="/lessons/python22/async/#exercise-02-sleep-order"><span class="rex-go-sub">Write it in the editor, get it checked, see the answer</span><span class="rex-go-main">Do this one on the challenge page →</span></a>
+</section><section id="step-5" class="step-card read" data-kind="step" aria-label="Teaching step 6">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 06 / 17</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>What happens if you don't await a coroutine object?</h3>
+<p>How serious is that "coroutine was never awaited" warning? Here's some code where it's very easy to fall into the trap:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import asyncio
+
+
+async def punch():
+    print(&#x27;Two Drops starts clocking in&#x27;)
+    await asyncio.sleep(0.01)
+    print(&#x27;Two Drops finished clocking in&#x27;)
+
+
+async def main():
+    punch()
+    print(&#x27;main is finished&#x27;)
+
+
+asyncio.run(main())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">main is finished
+RuntimeWarning: coroutine &#x27;punch&#x27; was never awaited</code></pre></div>
+<p>Can you see what's wrong? The <code>punch()</code> line never printed "Two Drops starts clocking in". <code>punch()</code> only created a coroutine object, which was then thrown away – not a single line inside it ran.</p>
+<p>This is one of <code>asyncio</code>'s most classic traps: <strong>forgetting <code>await</code></strong>. In the synchronous world, writing a function name with brackets means running it. In the async world, writing a function name with brackets only "gets you a job slip" – without <code>await</code>, you've thrown the slip in the bin.</p>
+<p>The correct way, of course, is:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import asyncio
+
+
+async def punch():
+    print(&#x27;Two Drops starts clocking in&#x27;)
+    await asyncio.sleep(0.01)
+    print(&#x27;Two Drops finished clocking in&#x27;)
+
+
+async def main():
+    await punch()
+    print(&#x27;main is finished&#x27;)
+
+
+asyncio.run(main())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Two Drops starts clocking in
+Two Drops finished clocking in
+main is finished</code></pre></div>
+<p>Remember this: <strong>a coroutine that isn't awaited might as well not exist.</strong></p></article></section><section id="step-6" class="step-card read" data-kind="step" aria-label="Teaching step 7">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 07 / 17</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Waiting for several at once: asyncio.gather</h3>
+<p>Now you can write async code that runs one after another. But back to the first example – 3 tasks done in 1 second – how does "waiting for several at once" work? The answer is <code>asyncio.gather</code>.</p>
+<p>First, the wrong way:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import asyncio
+import time
+
+
+async def task(name):
+    await asyncio.sleep(0.5)
+    return f&#x27;{name} done&#x27;
+
+
+async def main():
+    start = time.perf_counter()
+    r1 = await task(&#x27;A&#x27;)
+    r2 = await task(&#x27;B&#x27;)
+    r3 = await task(&#x27;C&#x27;)
+    cost = time.perf_counter() - start
+    print(r1, r2, r3)
+    print(f&#x27;Took {cost:.2f} seconds&#x27;)
+
+
+asyncio.run(main())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">A done B done C done
+Took 1.50 seconds</code></pre></div>
+<p>"Isn't async supposed to be fast? Why is it still 1.5 seconds?"</p>
+<p>Look carefully. <code>await task('A')</code> comes first, meaning "wait for A to finish, then carry on". One <code>await</code> after another is really just running them <strong>in a row</strong>. <code>async/await</code> does <strong>not</strong> make things run together automatically.</p>
+<p>To run them together, you must clearly tell the event loop "these can all start at the same time". That's what <code>asyncio.gather</code> does:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import asyncio
+import time
+
+
+async def task(name):
+    await asyncio.sleep(0.5)
+    return f&#x27;{name} done&#x27;
+
+
+async def main():
+    start = time.perf_counter()
+    r1, r2, r3 = await asyncio.gather(
+        task(&#x27;A&#x27;),
+        task(&#x27;B&#x27;),
+        task(&#x27;C&#x27;),
+    )
+    cost = time.perf_counter() - start
+    print(r1, r2, r3)
+    print(f&#x27;Took {cost:.2f} seconds&#x27;)
+
+
+asyncio.run(main())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">A done B done C done
+Took 0.50 seconds</code></pre></div>
+<p>That's the <strong>concurrency</strong> you wanted. <code>asyncio.gather</code> takes any number of coroutines, gives them all to the event loop together, waits for all of them to finish, and then returns the results packed up in order.</p>
+<p>Key points to underline:</p>
+<ul>
+<li><code>gather</code> returns <strong>a list of all the results</strong>, in the same order you passed them in</li>
+<li>If any coroutine raises an exception, by default the whole <code>gather</code> raises it</li>
+<li>You can pass in coroutines, or Task objects (covered below)</li>
+</ul>
+<p><code>gather</code> is one of the most-used functions in <code>asyncio</code>. Whenever you need "run several at once", it should be your first thought (or <code>TaskGroup</code>, which we'll see later).</p></article></section><section id="read-exercise-03-gather-two" class="rex-card" aria-label="Exercise 3">
+<header class="rex-head"><div class="rex-top"><span class="rex-badge">Exercise 3 / 4</span><span class="rex-title">Run two coroutines at the same time with gather</span></div>
+<div class="prose prose-sm ex-prompt"><p>Define a coroutine function <code>task(name)</code>:</p>
+<ul>
+<li><code>await asyncio.sleep(0.01)</code></li>
+<li>Return <code>f'{name} done'</code></li>
+</ul>
+<p>In <code>main</code>, use <code>asyncio.gather(task('A'), task('B'))</code> to run both at the same time, assign the results to <code>r1, r2</code>, then <strong>in order</strong>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">print(r1)
+print(r2)</code></pre></div>
+<p>Start it with <code>asyncio.run(main())</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">A done
+B done</code></pre></div>
+<p>(Note: <code>gather</code> returns results in the same order you passed them in, so the result here is always the same.)</p></div></header>
+<a class="rex-go focus-ring" href="/lessons/python22/async/#exercise-03-gather-two"><span class="rex-go-sub">Write it in the editor, get it checked, see the answer</span><span class="rex-go-main">Do this one on the challenge page →</span></a>
+</section><section id="read-exercise-04-gather-fetch" class="rex-card" aria-label="Exercise 4">
+<header class="rex-head"><div class="rex-top"><span class="rex-badge">Exercise 4 / 4</span><span class="rex-title">Fetching at the same time (simulated)</span></div>
+<div class="prose prose-sm ex-prompt"><p>The browser sandbox can't go online, so we'll use <code>asyncio.sleep</code> to pretend to fetch something.</p>
+<p>Define a coroutine function <code>fetch(url)</code>:</p>
+<ul>
+<li><code>await asyncio.sleep(0.01)</code> (pretending to wait for the network)</li>
+<li>Return <code>f'fetched {url}'</code></li>
+</ul>
+<p>In <code>main</code>, use <code>asyncio.gather</code> to fetch three URLs at the same time: <code>'a'</code>, <code>'b'</code> and <code>'c'</code>, and assign the returned list to <code>results</code>. Then use a <code>for</code> loop to <code>print</code> each result in order.</p>
+<p>Start it with <code>asyncio.run(main())</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">fetched a
+fetched b
+fetched c</code></pre></div></div></header>
+<a class="rex-go focus-ring" href="/lessons/python22/async/#exercise-04-gather-fetch"><span class="rex-go-sub">Write it in the editor, get it checked, see the answer</span><span class="rex-go-main">Do this one on the challenge page →</span></a>
+</section><section id="step-7" class="step-card read" data-kind="step" aria-label="Teaching step 8">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 08 / 17</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Task: "sending out" a coroutine</h3>
+<p><code>gather</code> is great, but sometimes we want finer control: "send the job out first, let it run in the background, go do something else, and come back for the result when I need it".</p>
+<p>This "send it out" action is called a <strong>Task</strong>, created with <code>asyncio.create_task()</code>:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import asyncio
+import time
+
+
+async def slow_job(name, delay):
+    await asyncio.sleep(delay)
+    return f&#x27;{name} done&#x27;
+
+
+async def main():
+    start = time.perf_counter()
+    t1 = asyncio.create_task(slow_job(&#x27;A&#x27;, 0.3))
+    t2 = asyncio.create_task(slow_job(&#x27;B&#x27;, 0.5))
+    print(&#x27;Both tasks have been sent out; main can do other things&#x27;)
+    await asyncio.sleep(0.1)
+    print(&#x27;Let me clock in first&#x27;)
+    r1 = await t1
+    r2 = await t2
+    cost = time.perf_counter() - start
+    print(r1, r2)
+    print(f&#x27;Took {cost:.2f} seconds&#x27;)
+
+
+asyncio.run(main())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Both tasks have been sent out; main can do other things
+Let me clock in first
+A done B done
+Took 0.50 seconds</code></pre></div>
+<p>Look at the time – 0.5 seconds, not 0.3 + 0.5 = 0.8 seconds. Why? <code>create_task</code> registers the coroutine with the event loop and starts it running <strong>straight away</strong>, without waiting for <code>await</code>. The line <code>await t1</code> only says "I want this result now – if it's not ready, I'll wait here". While it waits, t2 is also running at the same time.</p>
+<p>So what's the difference between <code>create_task</code> and <code>gather</code>?</p>
+<ul>
+<li><code>gather(coros...)</code> sends them all out at once and collects them all at once – compact</li>
+<li><code>create_task(coro)</code> sends them out one by one; you can <code>await</code> each one separately, and <code>cancel</code> them – flexible</li>
+</ul>
+<p>A common combination in real code: use lots of <code>create_task</code> calls to send tasks out, and at the end use <code>await asyncio.gather(*tasks)</code> to collect them all at once. That way you get Task objects for fine control, and the convenience of gather.</p>
+<h4>A small trap: passing coroutines vs Tasks to gather</h4>
+<p><code>gather</code>'s arguments can be coroutine objects or Task objects. They look about the same, but there's a detail:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import asyncio
+
+
+async def job(name):
+    await asyncio.sleep(0.01)
+    return name
+
+
+async def main():
+    coro = job(&#x27;A&#x27;)
+    await asyncio.gather(coro, job(&#x27;B&#x27;))
+
+
+asyncio.run(main())</code></pre></div>
+<p>Here <code>job('A')</code> and <code>job('B')</code> are both coroutine objects. <code>gather</code> automatically wraps them into Tasks and puts them in the event loop. So both ways work the same.</p>
+<p>Just be careful: <strong>a coroutine object can only be awaited once.</strong> You can't pass the same <code>coro</code> to <code>gather</code> twice:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import asyncio
+
+
+async def job():
+    return 1
+
+
+async def main():
+    coro = job()
+    await asyncio.gather(coro, coro)
+
+
+asyncio.run(main())</code></pre></div>
+<p>This gives an error saying the coroutine was awaited more than once. To run the same coroutine function N times at once, write N calls, like <code>[job() for _ in range(N)]</code>.</p></article></section><section id="step-8" class="step-card read" data-kind="step" aria-label="Teaching step 9">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 09 / 17</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>asyncio.sleep vs time.sleep: the blocking trap</h3>
+<p>There's one trap in async programming that's the most common of all: <strong><code>time.sleep</code> freezes the entire event loop.</strong></p>
+<p>Here's the bad example:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import asyncio
+import time
+
+
+async def task(name):
+    time.sleep(0.5)
+    return f&#x27;{name} done&#x27;
+
+
+async def main():
+    start = time.perf_counter()
+    await asyncio.gather(task(&#x27;A&#x27;), task(&#x27;B&#x27;), task(&#x27;C&#x27;))
+    cost = time.perf_counter() - start
+    print(f&#x27;Took {cost:.2f} seconds&#x27;)
+
+
+asyncio.run(main())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Took 1.50 seconds</code></pre></div>
+<p>"Isn't this gather? Why is it 1.5 seconds again?"</p>
+<p>The reason is <code>time.sleep</code>. It's a <strong>synchronous blocking</strong> function – when called, it does <strong>not</strong> give the CPU back to the event loop. Writing <code>time.sleep(0.5)</code> is like telling the operating system "put this whole thread to sleep for 0.5 seconds". The whole event loop – meaning <strong>every</strong> coroutine – is frozen.</p>
+<p><code>asyncio.sleep(0.5)</code> is completely different. It's a coroutine, and when used with <code>await</code>, it tells the event loop: "I'm going to sleep for 0.5 seconds – feel free to schedule others in the meantime."</p>
+<p>Remember this golden rule: <strong>inside an <code>async</code> function, every synchronous call that blocks must be swapped for an async version.</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Synchronous (blocking – don't use)</th>
+<th>Async (the replacement)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time.sleep(s)</code></td>
+<td><code>await asyncio.sleep(s)</code></td>
+</tr>
+<tr>
+<td><code>requests.get(url)</code></td>
+<td><code>await httpx.AsyncClient().get(url)</code></td>
+</tr>
+<tr>
+<td>Standard <code>open(f).read()</code></td>
+<td>the <code>aiofiles</code> library, or hand it to a thread pool</td>
+</tr>
+</tbody>
+</table></div>
+<p>What if you really have to call a synchronous blocking library? <code>asyncio</code> has an escape hatch – <code>asyncio.to_thread</code> – which hands the call to a thread pool:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import asyncio
+import time
+
+
+def blocking_call():
+    time.sleep(0.5)
+    return &#x27;Sync task done&#x27;
+
+
+async def main():
+    start = time.perf_counter()
+    r1, r2 = await asyncio.gather(
+        asyncio.to_thread(blocking_call),
+        asyncio.to_thread(blocking_call),
+    )
+    cost = time.perf_counter() - start
+    print(r1, r2)
+    print(f&#x27;Took {cost:.2f} seconds&#x27;)
+
+
+asyncio.run(main())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Sync task done Sync task done
+Took 0.50 seconds</code></pre></div>
+<p><code>asyncio.to_thread</code> is a compromise: the event loop doesn't freeze, but you still pay the cost of threads. If there's a native async library you can use (like <code>httpx</code>, below), prefer that.</p></article></section><section id="step-9" class="step-card read" data-kind="step" aria-label="Teaching step 10">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 10 / 17</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Timeouts: wait_for and timeout</h3>
+<p>If you write network requests, you'll have this worry: "What if the server on the other end never replies? Will my coroutine wait forever?"</p>
+<p>That's when you need a <strong>timeout</strong>. <code>asyncio</code> gives you two ways.</p>
+<p><strong>First: <code>asyncio.wait_for</code></strong> – the old way, which "wraps" the coroutine:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import asyncio
+
+
+async def slow_job():
+    await asyncio.sleep(2)
+    return &#x27;Finally done&#x27;
+
+
+async def main():
+    try:
+        r = await asyncio.wait_for(slow_job(), timeout=0.5)
+        print(r)
+    except asyncio.TimeoutError:
+        print(&#x27;Timed out – not waiting any more&#x27;)
+
+
+asyncio.run(main())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Timed out – not waiting any more</code></pre></div>
+<p><code>wait_for(coro, timeout=0.5)</code> means "give this coroutine 0.5 seconds; if it takes longer, cancel it and raise <code>TimeoutError</code>".</p>
+<p><strong>Second: <code>asyncio.timeout</code></strong> (Python 3.11+) – the new way, using <code>async with</code> as a context:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import asyncio
+
+
+async def slow_job():
+    await asyncio.sleep(2)
+    return &#x27;Finally done&#x27;
+
+
+async def main():
+    try:
+        async with asyncio.timeout(0.5):
+            r = await slow_job()
+            print(r)
+    except TimeoutError:
+        print(&#x27;Timed out – not waiting any more&#x27;)
+
+
+asyncio.run(main())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Timed out – not waiting any more</code></pre></div>
+<p>Same effect, but nicer to write – if you want a timeout on "this section", just wrap it in <code>async with</code>. The second way is especially handy for putting one timeout on several <code>await</code>s. For new code, <code>asyncio.timeout</code> is recommended.</p>
+<p>Note a small change: since 3.11, <code>asyncio.TimeoutError</code> <strong>is</strong> the built-in <code>TimeoutError</code>, so <code>except TimeoutError</code> catches it too – no need to write <code>asyncio.TimeoutError</code>.</p></article></section><section id="step-10" class="step-card read" data-kind="step" aria-label="Teaching step 11">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 11 / 17</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Cancelling: Task.cancel()</h3>
+<p>A timeout is really "automatic cancelling". Cancelling by hand is easy too:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import asyncio
+
+
+async def long_running():
+    try:
+        for i in range(10):
+            print(f&#x27;Still running {i}&#x27;)
+            await asyncio.sleep(0.05)
+    except asyncio.CancelledError:
+        print(&#x27;I was cancelled – cleaning up&#x27;)
+        raise
+
+
+async def main():
+    t = asyncio.create_task(long_running())
+    await asyncio.sleep(0.12)
+    t.cancel()
+    try:
+        await t
+    except asyncio.CancelledError:
+        print(&#x27;The task really was cancelled&#x27;)
+
+
+asyncio.run(main())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Still running 0
+Still running 1
+Still running 2
+I was cancelled – cleaning up
+The task really was cancelled</code></pre></div>
+<p><code>Task.cancel()</code> raises a <code>CancelledError</code> inside the coroutine. The coroutine can catch it to clean up, but I <strong>strongly recommend</strong> <code>raise</code>-ing it again after cleaning up, so the outside knows the task really was cancelled. Quietly swallowing <code>CancelledError</code> is another very sneaky trap.</p></article></section><section id="step-11" class="step-card read" data-kind="step" aria-label="Teaching step 12">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 12 / 17</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>TaskGroup: the upgraded gather from 3.11</h3>
+<p><code>gather</code> works well, so why did Python 3.11 add <code>TaskGroup</code>?</p>
+<p>Let's look at an awkward situation with <code>gather</code>. Three tasks; one raises an error. What should happen to the other two?</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import asyncio
+
+
+async def good(name, delay):
+    await asyncio.sleep(delay)
+    return f&#x27;{name} ok&#x27;
+
+
+async def bad():
+    await asyncio.sleep(0.1)
+    raise ValueError(&#x27;Broken&#x27;)
+
+
+async def main():
+    try:
+        await asyncio.gather(good(&#x27;A&#x27;, 0.5), bad(), good(&#x27;B&#x27;, 0.5))
+    except ValueError as e:
+        print(&#x27;main caught&#x27;, e)
+
+
+asyncio.run(main())</code></pre></div>
+<p>The output is roughly:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">main caught Broken</code></pre></div>
+<p>Looks fine. But think – what about A and B, the two 0.5-second tasks? They're actually <strong>still quietly running in the background</strong>. <code>gather</code>'s default behaviour is "if one fails, raise the exception outwards, and let the other tasks keep running in the event loop". If A is writing a file and B is sending a request, they'll run to the end (and maybe raise errors too) before stopping. This "walk off and leave others working behind your back" behaviour isn't safe.</p>
+<p><code>TaskGroup</code> solves this:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import asyncio
+
+
+async def good(name, delay):
+    await asyncio.sleep(delay)
+    return f&#x27;{name} ok&#x27;
+
+
+async def bad():
+    await asyncio.sleep(0.1)
+    raise ValueError(&#x27;Broken&#x27;)
+
+
+async def main():
+    try:
+        async with asyncio.TaskGroup() as tg:
+            t_a = tg.create_task(good(&#x27;A&#x27;, 0.5))
+            t_bad = tg.create_task(bad())
+            t_b = tg.create_task(good(&#x27;B&#x27;, 0.5))
+    except* ValueError as eg:
+        print(&#x27;TaskGroup caught an exception group:&#x27;, eg.exceptions)
+
+
+asyncio.run(main())</code></pre></div>
+<p>The output is roughly:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">TaskGroup caught an exception group: (ValueError(&#x27;Broken&#x27;),)</code></pre></div>
+<p>The advantages of <code>TaskGroup</code>:</p>
+<ul>
+<li><strong>It automatically waits for everything to finish</strong>: before <code>async with</code> exits, every task is definitely done</li>
+<li><strong>One fails, all are cancelled</strong>: after <code>bad</code> raises an error, A and B are cancelled straight away – they don't keep running in the background</li>
+<li><strong>Exception groups (<code>ExceptionGroup</code>)</strong>: when several tasks fail at once, all the exceptions are packed into one <code>ExceptionGroup</code>, which you catch with the <code>except*</code> syntax</li>
+</ul>
+<p>In new code, use <code>TaskGroup</code> whenever you can – it's safer and more controllable than <code>gather</code>. <code>gather</code> suits simple situations with one or two tasks, where you don't care much about cancelling.</p>
+<blockquote>
+<p>Don't panic about the strange <code>except*</code> syntax – it's the special syntax for "exception groups" from PEP 654, added in Python 3.11. Simply put, it means "pick out one type of exception from an exception group and catch it". If you don't need it yet, that's fine – just know it exists.</p>
+</blockquote></article></section><section id="step-12" class="step-card read" data-kind="step" aria-label="Teaching step 13">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 13 / 17</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>async with and async for</h3>
+<p>In the <code>asyncio.timeout(0.5)</code> example, you saw <code>async with</code>. That's an <strong>asynchronous context manager</strong> – its <code>__enter__</code> and <code>__exit__</code> are replaced by async versions called <code>__aenter__</code> and <code>__aexit__</code>.</p>
+<p>When do you need <code>async with</code>? The most common case is network clients:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import asyncio
+import httpx
+
+
+async def main():
+    async with httpx.AsyncClient() as client:
+        r = await client.get(&#x27;https://httpbin.org/get&#x27;)
+        print(r.status_code)
+
+
+asyncio.run(main())</code></pre></div>
+<p>It's <code>async with</code> because "closing this connection pool" might itself involve I/O, so it can't be a normal synchronous <code>__exit__</code>.</p>
+<p>Similarly, there are <strong>asynchronous iterators</strong> – <code>async for</code>. For example, some libraries support streaming data:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import httpx
+import asyncio
+
+
+async def main():
+    async with httpx.AsyncClient() as client:
+        async with client.stream(&#x27;GET&#x27;, &#x27;https://httpbin.org/stream/3&#x27;) as resp:
+            async for line in resp.aiter_lines():
+                print(&#x27;line:&#x27;, line)
+
+
+asyncio.run(main())</code></pre></div>
+<p><code>async for line in resp.aiter_lines()</code> means: each time a line is read (which may mean waiting for the network), give it to me, then keep waiting for the next line. A normal <code>for</code> can't do this – only <code>async for</code> can.</p>
+<p>Remember the pattern:</p>
+<ul>
+<li>Normal objects and contexts → <code>with</code>, <code>for</code></li>
+<li>Objects involving I/O and coroutines → <code>async with</code>, <code>async for</code></li>
+</ul></article></section><section id="step-13" class="step-card read" data-kind="step" aria-label="Teaching step 14">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 14 / 17</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>When to use async, and when not to</h3>
+<p>After all that, let's get back to the basic question: what situations suit async?</p>
+<p><code>asyncio</code>'s strength is <strong>I/O-bound</strong> work – where the program spends most of its time <strong>waiting</strong>: for the network, the disk, a database, or user input. In these situations, the waiting can <strong>overlap</strong>, so async lets one thread wait for countless things at once, with immediate results.</p>
+<p><code>asyncio</code>'s weakness is <strong>CPU-bound</strong> work – where the program spends most of its time <strong>calculating</strong>: encryption, image processing, machine-learning inference. There's no "waiting" to take advantage of – the CPU is busy all the time – so async can't help. One thread can only use one core, while the other seven cores sit idle.</p>
+<p>A comparison table:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>What to use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fetching 100 URLs</td>
+<td><code>asyncio</code> + <code>httpx</code></td>
+</tr>
+<tr>
+<td>Reading and writing lots of files at once</td>
+<td><code>asyncio</code> + <code>aiofiles</code></td>
+</tr>
+<tr>
+<td>A high-traffic web service (one machine handling thousands of connections)</td>
+<td><code>asyncio</code> + <code>FastAPI / aiohttp</code></td>
+</tr>
+<tr>
+<td>Video conversion, big matrix calculations</td>
+<td><code>multiprocessing</code> or C extensions</td>
+</tr>
+<tr>
+<td>Sorting huge amounts of data locally</td>
+<td>Multiple processes + splitting into chunks</td>
+</tr>
+<tr>
+<td>A bit of I/O and a bit of CPU at the same time</td>
+<td>An async main framework + <code>asyncio.to_thread</code> or <code>run_in_executor</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Remember it like this: <strong>async is for "waiting", not for "calculating".</strong></p></article></section><section id="step-14" class="step-card read" data-kind="step" aria-label="Teaching step 15">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 15 / 17</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>In practice: 100 URLs, one-by-one vs together</h3>
+<p>Theory's done. Time for a real comparison, to see how much faster <code>asyncio + httpx</code> really is than <code>requests</code>.</p>
+<p>First, install <code>httpx</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">pip install httpx</code></pre></div>
+<p>The code below runs two versions: a synchronous one using <code>httpx</code>'s synchronous client (which behaves like <code>requests</code>), and a concurrent one using <code>httpx.AsyncClient</code> with <code>asyncio.gather</code>. Both make 50 requests, and we compare the total time:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import asyncio
+import time
+import httpx
+
+URLS = [f&#x27;https://httpbin.org/delay/1?i={i}&#x27; for i in range(50)]
+
+
+def fetch_sync():
+    with httpx.Client(timeout=30) as client:
+        return [client.get(u).status_code for u in URLS]
+
+
+async def fetch_async():
+    async with httpx.AsyncClient(timeout=30) as client:
+        tasks = [client.get(u) for u in URLS]
+        responses = await asyncio.gather(*tasks)
+        return [r.status_code for r in responses]
+
+
+def main():
+    start = time.perf_counter()
+    sync_codes = fetch_sync()
+    sync_cost = time.perf_counter() - start
+    print(f&#x27;Synchronous, 50 requests: {sync_cost:.2f} seconds, all 200 = {all(c == 200 for c in sync_codes)}&#x27;)
+
+    start = time.perf_counter()
+    async_codes = asyncio.run(fetch_async())
+    async_cost = time.perf_counter() - start
+    print(f&#x27;Concurrent, 50 requests: {async_cost:.2f} seconds, all 200 = {all(c == 200 for c in async_codes)}&#x27;)
+
+    print(f&#x27;Speed-up: {sync_cost / async_cost:.1f} times&#x27;)
+
+
+main()</code></pre></div>
+<p>The <code>httpbin.org/delay/1</code> endpoint deliberately waits 1 second before replying, so we can see the difference. One run looks roughly like this:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Synchronous, 50 requests: 53.21 seconds, all 200 = True
+Concurrent, 50 requests: 1.62 seconds, all 200 = True
+Speed-up: 32.8 times</code></pre></div>
+<p>50 requests, squeezed from 53 seconds down to under 2 – that's the power of <code>asyncio + httpx</code>. You can change this code to the URL list you care about – fetching blog posts, calling internal APIs, pinging services in bulk – and see results straight away.</p>
+<p>A few things to watch out for in practice:</p>
+<ol>
+<li><strong>Give <code>httpx.AsyncClient</code> a <code>timeout</code></strong>, or it will hang forever when it meets a "zombie" service</li>
+<li><strong>Don't blindly run thousands at once</strong> – the server on the other end might not cope, and could rate-limit you or even block your IP. Usually you use <code>asyncio.Semaphore</code> to limit the maximum number running at once:</li>
+</ol>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import asyncio
+import httpx
+
+
+async def fetch_one(client, sem, url):
+    async with sem:
+        r = await client.get(url)
+        return r.status_code
+
+
+async def fetch_many(urls, max_concurrency=10):
+    sem = asyncio.Semaphore(max_concurrency)
+    async with httpx.AsyncClient(timeout=30) as client:
+        tasks = [fetch_one(client, sem, u) for u in urls]
+        return await asyncio.gather(*tasks)
+
+
+urls = [f&#x27;https://httpbin.org/delay/1?i={i}&#x27; for i in range(100)]
+codes = asyncio.run(fetch_many(urls, max_concurrency=10))
+print(len(codes))</code></pre></div>
+<p><code>Semaphore(10)</code> means "at most 10 tasks may come in at once" – the 11th has to queue. That way you get the benefit of running things together, without knocking the other server over.</p>
+<ol start="3">
+<li><strong>Error handling</strong>: by default, <code>gather</code> raises as soon as one fails, and you lose the whole batch. If you're OK with "partial failure", pass <code>return_exceptions=True</code>, so <code>gather</code> returns exceptions as results:</li>
+</ol>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import asyncio
+import httpx
+
+
+async def fetch(client, url):
+    r = await client.get(url, timeout=5)
+    r.raise_for_status()
+    return r.status_code
+
+
+async def main():
+    urls = [&#x27;https://httpbin.org/get&#x27;, &#x27;https://httpbin.org/status/500&#x27;, &#x27;https://httpbin.org/get&#x27;]
+    async with httpx.AsyncClient() as client:
+        results = await asyncio.gather(
+            *(fetch(client, u) for u in urls),
+            return_exceptions=True,
+        )
+    for u, r in zip(urls, results):
+        if isinstance(r, Exception):
+            print(f&#x27;{u} failed: {r}&#x27;)
+        else:
+            print(f&#x27;{u} succeeded: {r}&#x27;)
+
+
+asyncio.run(main())</code></pre></div>
+<p>This is especially useful when scraping lots of data – it keeps going even if 99 succeed and 1 fails.</p></article></section><section id="step-15" class="step-card read" data-kind="step" aria-label="Teaching step 16">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 16 / 17</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Summary</h3>
+<p>By now, you should have a complete feel for <code>asyncio</code>. Let's quickly look back at the path we took:</p>
+<ul>
+<li><strong>The problem</strong>: 100 network requests one-by-one are painfully slow, and threads are heavy and messy</li>
+<li><strong>Gut-feeling comparison</strong>: 3 tasks in 1 second vs 3 seconds – the difference comes from overlapping the "waiting"</li>
+<li><strong>The basic trio</strong>: <code>async def</code> defines a coroutine function, <code>await</code> waits for a result, <code>asyncio.run()</code> enters the event loop</li>
+<li><strong>Coroutine objects</strong>: not awaiting one is like not writing it – the most common trap</li>
+<li><strong>Concurrency tools</strong>: <code>asyncio.gather</code> waits for several at once; <code>asyncio.create_task</code> sends a task out</li>
+<li><strong>The blocking trap</strong>: <code>time.sleep</code> freezes the whole event loop – use <code>asyncio.sleep</code> instead</li>
+<li><strong>Timeouts and cancelling</strong>: <code>asyncio.wait_for</code> (old way), <code>asyncio.timeout</code> (new way), <code>Task.cancel</code> (by hand)</li>
+<li><strong>TaskGroup</strong>: the safer upgrade from 3.11 – waits for everything automatically, cancels everything on error</li>
+<li><strong>Async contexts</strong>: <code>async with</code> and <code>async for</code> are standard for I/O situations</li>
+<li><strong>When to use it</strong>: only use async for I/O-bound work; for CPU-bound work, stick with multiple processes</li>
+<li><strong>In practice</strong>: <code>asyncio + httpx</code> fetching 50 URLs – a speed-up of over 30 times you can see with your own eyes</li>
+</ul>
+<p><code>asyncio</code>'s syntax looks fancy, but really it just adds scheduling to "waiting". When you write code, ask yourself: "Is this step waiting for something?" If so, try an <code>await</code> – you might be pleasantly surprised.</p>
+<p>In the next article, we'll talk about something else that's fun. First, run all the code in this chapter yourself, and get a feel for what "one thread waiting for a hundred things at once" is like.</p></article></section><section id="step-16" class="step-card read" data-kind="step" aria-label="Teaching step 17">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 17 / 17</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Look at the waiting and the results – don't compare seconds yet</h3>
+<p>If you only look at "how many seconds faster" in async examples, it's easy to miss what's actually being waited for. Below, each task returns a number of minutes. Focus first on how the tasks are created, waited for, and in what order the results come back:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python22/async/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import asyncio
+
+
+async def read_minutes(value):
+    await asyncio.sleep(0)
+    return value
+
+
+async def main():
+    tasks = [read_minutes(15), read_minutes(10)]
+    results = await asyncio.gather(*tasks)
+    print(results)
+
+
+asyncio.run(main())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[15, 10]</code></pre></div>
+<p><code>read_minutes(15)</code> creates a coroutine object. <code>gather</code> waits for these jobs to finish and arranges the results by the <strong>position you passed them in</strong>. It's not "whoever finishes first goes first in the results list".</p>
+<p>Change <code>tasks</code> to an empty list yourself – the result should be <code>[]</code>. Then add <code>read_minutes(0)</code> – you should get <code>[15, 10, 0]</code>. This checks whether we understand the results better than using a tiny delay to "prove" speed.</p>
+<p>Local scripts start with <code>asyncio.run()</code>. If an interactive environment already has an event loop running, follow that environment's way of running things. The learning website has already adapted to this, so you can run the existing exercises here. Also, async doesn't automatically turn pure calculation into parallel calculation. Before choosing it, check whether your task is actually waiting for work it can step aside from.</p></article></section><section id="lesson-end" aria-label="Chapter summary"><div class="read-cta"><p>Finished reading? Practising once is how you really learn it.</p><a class="read-cta-btn focus-ring" href="/lessons/python22/async/">Practise in challenge mode →</a></div><nav aria-label="Chapter navigation" class="chapter-nav"><div class="cn-grid"><a class="chap-nav prev focus-ring" href="/lessons/python21/context-manager/read/"><span class="cn-label">← Previous chapter</span><span class="cn-title">21 · Context managers (with)</span></a><div class="cn-mid"><span>async / await</span></div><a class="chap-nav next focus-ring" href="/lessons/python23/pyproject-uv/read/"><span class="cn-label">Next chapter →</span><span class="cn-title">23 · pyproject.toml + uv</span></a></div></nav></section></article></div>
+    <aside class="lesson-sidebar right" aria-label="This chapter"><nav aria-label="This chapter's contents"><div class="side-label up">In this chapter</div><p class="toc-chapter">async / await</p><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Async programming: async/await lets one thread wait for a hundred things at once</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">A gut-feeling comparison: 3 seconds in a row vs 1 second together</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">Your first async function: how is it different from a normal function?</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">await: making a coroutine run</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">asyncio.run(): the door into the async world</span></a></li><li class="toc-li" data-target="read-exercise-01-hello"><a href="#read-exercise-01-hello" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">Your first async function</span></a></li><li class="toc-li" data-target="read-exercise-02-sleep-order"><a href="#read-exercise-02-sleep-order" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">The order of awaits one after another</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">What happens if you don&#x27;t await a coroutine object?</span></a></li><li class="toc-li" data-target="step-6"><a href="#step-6" class="toc-link focus-ring"><span class="toc-kind">Teaching 07</span><span class="toc-title">Waiting for several at once: asyncio.gather</span></a></li><li class="toc-li" data-target="read-exercise-03-gather-two"><a href="#read-exercise-03-gather-two" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">Run two coroutines at the same time with gather</span></a></li><li class="toc-li" data-target="read-exercise-04-gather-fetch"><a href="#read-exercise-04-gather-fetch" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">Fetching at the same time (simulated)</span></a></li><li class="toc-li" data-target="step-7"><a href="#step-7" class="toc-link focus-ring"><span class="toc-kind">Teaching 08</span><span class="toc-title">Task: &quot;sending out&quot; a coroutine</span></a></li><li class="toc-li" data-target="step-8"><a href="#step-8" class="toc-link focus-ring"><span class="toc-kind">Teaching 09</span><span class="toc-title">asyncio.sleep vs time.sleep: the blocking trap</span></a></li><li class="toc-li" data-target="step-9"><a href="#step-9" class="toc-link focus-ring"><span class="toc-kind">Teaching 10</span><span class="toc-title">Timeouts: wait_for and timeout</span></a></li><li class="toc-li" data-target="step-10"><a href="#step-10" class="toc-link focus-ring"><span class="toc-kind">Teaching 11</span><span class="toc-title">Cancelling: Task.cancel()</span></a></li><li class="toc-li" data-target="step-11"><a href="#step-11" class="toc-link focus-ring"><span class="toc-kind">Teaching 12</span><span class="toc-title">TaskGroup: the upgraded gather from 3.11</span></a></li><li class="toc-li" data-target="step-12"><a href="#step-12" class="toc-link focus-ring"><span class="toc-kind">Teaching 13</span><span class="toc-title">async with and async for</span></a></li><li class="toc-li" data-target="step-13"><a href="#step-13" class="toc-link focus-ring"><span class="toc-kind">Teaching 14</span><span class="toc-title">When to use async, and when not to</span></a></li><li class="toc-li" data-target="step-14"><a href="#step-14" class="toc-link focus-ring"><span class="toc-kind">Teaching 15</span><span class="toc-title">In practice: 100 URLs, one-by-one vs together</span></a></li><li class="toc-li" data-target="step-15"><a href="#step-15" class="toc-link focus-ring"><span class="toc-kind">Teaching 16</span><span class="toc-title">Summary</span></a></li><li class="toc-li" data-target="step-16"><a href="#step-16" class="toc-link focus-ring"><span class="toc-kind">Teaching 17</span><span class="toc-title">Look at the waiting and the results – don&#x27;t compare seconds yet</span></a></li></ol></nav></aside>
+  </div>
+  <dialog class="dir-dialog" aria-labelledby="dir-title"><div class="dd-inner"><div class="dd-head"><h2 id="dir-title">Contents</h2><button type="button" class="dd-close focus-ring">Close</button></div>
+  <div class="dd-tabs" aria-label="Contents scope"><button type="button" class="dd-tab focus-ring" data-tab="all" aria-pressed="true">All lessons</button><button type="button" class="dd-tab focus-ring" data-tab="chapter" aria-pressed="false">This chapter</button></div>
+  <div class="dd-body"><div class="dd-pane" data-pane="all"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/read/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/read/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/read/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/read/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/read/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/read/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/read/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/read/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/read/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/read/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/read/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/read/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/read/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/read/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/read/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/read/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/read/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/read/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/read/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/read/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/read/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/read/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python22/async/read/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/read/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/read/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/read/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/read/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/read/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/read/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></div><div class="dd-pane" data-pane="chapter" hidden><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Async programming: async/await lets one thread wait for a hundred things at once</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">A gut-feeling comparison: 3 seconds in a row vs 1 second together</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">Your first async function: how is it different from a normal function?</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">await: making a coroutine run</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">asyncio.run(): the door into the async world</span></a></li><li class="toc-li" data-target="read-exercise-01-hello"><a href="#read-exercise-01-hello" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">Your first async function</span></a></li><li class="toc-li" data-target="read-exercise-02-sleep-order"><a href="#read-exercise-02-sleep-order" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">The order of awaits one after another</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">What happens if you don&#x27;t await a coroutine object?</span></a></li><li class="toc-li" data-target="step-6"><a href="#step-6" class="toc-link focus-ring"><span class="toc-kind">Teaching 07</span><span class="toc-title">Waiting for several at once: asyncio.gather</span></a></li><li class="toc-li" data-target="read-exercise-03-gather-two"><a href="#read-exercise-03-gather-two" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">Run two coroutines at the same time with gather</span></a></li><li class="toc-li" data-target="read-exercise-04-gather-fetch"><a href="#read-exercise-04-gather-fetch" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">Fetching at the same time (simulated)</span></a></li><li class="toc-li" data-target="step-7"><a href="#step-7" class="toc-link focus-ring"><span class="toc-kind">Teaching 08</span><span class="toc-title">Task: &quot;sending out&quot; a coroutine</span></a></li><li class="toc-li" data-target="step-8"><a href="#step-8" class="toc-link focus-ring"><span class="toc-kind">Teaching 09</span><span class="toc-title">asyncio.sleep vs time.sleep: the blocking trap</span></a></li><li class="toc-li" data-target="step-9"><a href="#step-9" class="toc-link focus-ring"><span class="toc-kind">Teaching 10</span><span class="toc-title">Timeouts: wait_for and timeout</span></a></li><li class="toc-li" data-target="step-10"><a href="#step-10" class="toc-link focus-ring"><span class="toc-kind">Teaching 11</span><span class="toc-title">Cancelling: Task.cancel()</span></a></li><li class="toc-li" data-target="step-11"><a href="#step-11" class="toc-link focus-ring"><span class="toc-kind">Teaching 12</span><span class="toc-title">TaskGroup: the upgraded gather from 3.11</span></a></li><li class="toc-li" data-target="step-12"><a href="#step-12" class="toc-link focus-ring"><span class="toc-kind">Teaching 13</span><span class="toc-title">async with and async for</span></a></li><li class="toc-li" data-target="step-13"><a href="#step-13" class="toc-link focus-ring"><span class="toc-kind">Teaching 14</span><span class="toc-title">When to use async, and when not to</span></a></li><li class="toc-li" data-target="step-14"><a href="#step-14" class="toc-link focus-ring"><span class="toc-kind">Teaching 15</span><span class="toc-title">In practice: 100 URLs, one-by-one vs together</span></a></li><li class="toc-li" data-target="step-15"><a href="#step-15" class="toc-link focus-ring"><span class="toc-kind">Teaching 16</span><span class="toc-title">Summary</span></a></li><li class="toc-li" data-target="step-16"><a href="#step-16" class="toc-link focus-ring"><span class="toc-kind">Teaching 17</span><span class="toc-title">Look at the waiting and the results – don&#x27;t compare seconds yet</span></a></li></ol></div></div></div></dialog>
+  <div class="py-toast" hidden><span class="spinner"></span><span class="py-toast-text">Loading Python…</span></div>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>© 2026 Python for Beginners · English edition of the <a href="https://github.com/walter201230/Python">walter201230/Python</a> tutorial (CC BY 4.0)</span>
+    <div class="footer-links"><a href="/">Course list</a><a href="/about/">About this site</a><a href="https://github.com/walter201230/Python">GitHub</a></div>
+  </div>
+</footer>
+<script src="/assets/site.js?v=20261028"></script>
+</body>
+</html>

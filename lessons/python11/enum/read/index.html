@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enum classes (full read) – Python for Beginners</title>
+<meta name="description" content="Replace magic constants with Enum, so constants explain themselves.">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css?v=20261028">
+
+</head>
+<body data-page="read" data-lesson="python11" data-total="4">
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="/" aria-label="Python for Beginners – home"><span class="gradient-text-flow" data-text="Python for Beginners">Python for Beginners</span></a>
+    <nav class="header-nav">
+      <a class="nav-link" href="/about/">About</a>
+      <a class="nav-icon focus-ring" href="https://github.com/walter201230/Python" aria-label="Original tutorial on GitHub" title="Original tutorial on GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+      <button type="button" class="theme-toggle focus-ring" aria-label="Switch theme"><span class="knob"><svg class="ic-moon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button>
+    </nav>
+  </div>
+</header>
+<main class="site-main">
+<div class="lesson-shell bg-tech-grid">
+  <div class="mobile-bar"><div class="mb-inner"><button type="button" class="dir-btn focus-ring" aria-haspopup="dialog">Contents</button></div></div>
+  <div class="lesson-columns">
+    <aside class="lesson-sidebar left" aria-label="All lessons"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/read/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/read/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/read/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/read/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/read/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/read/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/read/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/read/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/read/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/read/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/read/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python11/enum/read/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/read/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/read/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/read/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/read/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/read/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/read/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/read/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/read/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/read/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/read/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/read/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/read/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/read/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/read/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/read/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/read/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/read/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></aside>
+    <div class="lesson-main"><article class="lesson-article"><header class="lesson-head"><h1>Enum classes</h1><p class="lh-sub">Full read · <span class="accent">6</span> teaching parts<span class="sep">·</span><span class="accent">4</span> exercises<span class="sep">·</span>about <span class="accent">40</span> min</p>
+<p class="lh-note">This page is the read-through version of the chapter, with every explanation in one place. To write code and get it checked, go to <a class="accent-link focus-ring" href="/lessons/python11/enum/">challenge mode</a>.</p></header><section id="step-0" class="step-card read" data-kind="step" aria-label="Teaching step 1">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 01 / 06</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>Introduction</h2>
+<p>14 October 2019, 16:59:38 – I just checked, and there are only five chapters left to fix in the basics section.</p>
+<p>Let's just get it done!</p>
+<h2>Contents</h2>
+<p>Here's what this part covers:</p>
+<ul>
+<li>1. Using Enum Classes</li>
+<li>2. The Source Code of Enum</li>
+<li>3. Enums with Custom Values</li>
+<li>4. Comparing Enums</li>
+</ul></article></section><section id="step-1" class="step-card read" data-kind="step" aria-label="Teaching step 2">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 02 / 06</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>1. Using Enum Classes</h2>
+<p>In real projects, we always need to define <strong>constants</strong>. One way to define constants is to use capitalised variable names with integers – for example, months:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">JAN = 1
+FEB = 2
+MAR = 3
+...
+NOV = 11
+DEC = 12</code></pre></div>
+<p>This is quick and simple, but the type is just <code>int</code>, and they're still variables (they could be changed).</p>
+<p>Is there a better way?</p>
+<p>We can define a class, where each constant is a unique instance inside the class.</p>
+<p>Python has an <code>Enum</code> class (short for <strong>enumeration</strong>) that does exactly this:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
+
+from enum import Enum
+
+Month = Enum(&#x27;Month&#x27;, (&#x27;Jan&#x27;, &#x27;Feb&#x27;, &#x27;Mar&#x27;, &#x27;Apr&#x27;, &#x27;May&#x27;, &#x27;Jun&#x27;, &#x27;Jul&#x27;, &#x27;Aug&#x27;, &#x27;Sep&#x27;, &#x27;Oct&#x27;, &#x27;Nov&#x27;, &#x27;Dec&#x27;))
+
+# Loop through the enum
+for name, member in Month.__members__.items():
+    print(name, &#x27;---------&#x27;, member, &#x27;----------&#x27;, member.value)
+
+# Use one constant directly
+print(&#x27;\n&#x27;, Month.Jan)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Jan --------- Month.Jan --------- 1
+Feb --------- Month.Feb --------- 2
+Mar --------- Month.Mar --------- 3
+Apr --------- Month.Apr --------- 4
+May --------- Month.May --------- 5
+Jun --------- Month.Jun --------- 6
+Jul --------- Month.Jul --------- 7
+Aug --------- Month.Aug --------- 8
+Sep --------- Month.Sep --------- 9
+Oct --------- Month.Oct --------- 10
+Nov --------- Month.Nov --------- 11
+Dec --------- Month.Dec --------- 12
+
+ Month.Jan</code></pre></div>
+<p>We used <code>Enum</code> to define an enum class.</p>
+<p>In the code above, we created an enum type for months called <code>Month</code>. Look at the arguments: the first one, <code>Month</code>, is the name of the enum class. The second, a tuple, gives the enum's members. And we use <code>__members__</code> to loop through all its members.</p>
+<p>Note: <code>member.value</code> is an <code>int</code> constant given to each member automatically, starting from <strong>1</strong> by default.</p>
+<p><strong>Also, every Enum member is a singleton (there's only ever one of it). Members can't be instantiated and can't be changed.</strong></p>
+<h3>A status's name and a status's value</h3>
+<p>We want to label study tasks as "To do" or "Done". Let's use an enum to list the allowed statuses clearly, and look at the member's name and value separately:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python11/enum/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from enum import Enum
+
+
+class StudyState(Enum):
+    TODO = &#x27;To do&#x27;
+    DONE = &#x27;Done&#x27;
+
+
+print(StudyState.TODO.name)
+print(StudyState.TODO.value)
+print(StudyState(&#x27;Done&#x27;) is StudyState.DONE)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">TODO
+To do
+True</code></pre></div>
+<p><code>TODO</code> is the member's <strong>name</strong>, and <code>'To do'</code> is the <strong>value</strong> we gave it. <code>StudyState('Done')</code> finds the member by its value – it doesn't create a new status with any content you like.</p>
+<p>Try a value that was never defined and look at the <code>ValueError</code>. Then compare <code>StudyState.TODO == 'To do'</code>. The result is <code>False</code>, because a normal <code>Enum</code> member here is not the same thing as its string value. Comparison rules for other kinds of enums depend on their type – don't assume from this one example that all enums work like strings.</p>
+<p>The source code analysis in this chapter can help you understand how it's built. But after you've finished a small task like choosing a status, coming back to it usually makes it easier to know which part of the logic you're following.</p></article></section><section id="step-2" class="step-card read" data-kind="step" aria-label="Teaching step 3">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 03 / 06</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>2. The Source Code of Enum</h2>
+<p>From the example above, we know <code>__members__</code> lets us loop through all the members of an enum class.</p>
+<p>But have you wondered why?</p>
+<p>When you saw that code, did you wonder how <code>__members__</code> is able to list all the members of an enum?</p>
+<p>Let's take a rough look at how Enum is built in its source code.</p>
+<p>Enum lives in the module <code>enum.py</code>. First, here's a piece of the <code>Enum</code> class:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class Enum(metaclass=EnumMeta):
+    &quot;&quot;&quot;Generic enumeration.
+    Derive from this class to define new enumerations.
+    &quot;&quot;&quot;</code></pre></div>
+<p>You can see <code>Enum</code> uses the metaclass <code>EnumMeta</code>. Now here's the relevant piece of <code>EnumMeta</code>:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class EnumMeta(type):
+    &quot;&quot;&quot;Metaclass for Enum&quot;&quot;&quot;
+    @property
+    def __members__(cls):
+        &quot;&quot;&quot;Returns a mapping of member name-&gt;value.
+        This mapping lists all enum members, including aliases. Note that this
+        is a read-only view of the internal mapping.
+        &quot;&quot;&quot;
+        return MappingProxyType(cls._member_map_)</code></pre></div>
+<p>First, the <code>__members__</code> method returns a <code>MappingProxyType</code> that wraps a dict (a map). And <code>@property</code> changes how <code>__members__(cls)</code> is used, so it's accessed like a variable instead of a method. That's why we can just write <code>__members__</code> to access it.</p></article></section><section id="read-exercise-01-define-color" class="rex-card" aria-label="Exercise 1">
+<header class="rex-head"><div class="rex-top"><span class="rex-badge">Exercise 1 / 4</span><span class="rex-title">Define a Color enum class</span></div>
+<div class="prose prose-sm ex-prompt"><p>Use <code>from ... import</code> to import <code>Enum</code> from the <code>enum</code> module, then:</p>
+<ol>
+<li>Define a class <code>Color</code> that inherits from <code>Enum</code>, with three members:
+   - <code>RED = 1</code>
+   - <code>GREEN = 2</code>
+   - <code>BLUE = 3</code></li>
+<li><code>print(Color.RED)</code></li>
+</ol>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Color.RED</code></pre></div>
+<blockquote>
+<p>Tip: printing an Enum member directly shows it as <code>ClassName.MemberName</code> by default.</p>
+</blockquote></div></header>
+<a class="rex-go focus-ring" href="/lessons/python11/enum/#exercise-01-define-color"><span class="rex-go-sub">Write it in the editor, get it checked, see the answer</span><span class="rex-go-main">Do this one on the challenge page →</span></a>
+</section><section id="read-exercise-02-name-value" class="rex-card" aria-label="Exercise 2">
+<header class="rex-head"><div class="rex-top"><span class="rex-badge">Exercise 2 / 4</span><span class="rex-title">Get .name and .value</span></div>
+<div class="prose prose-sm ex-prompt"><p>Carry on with the <code>Color</code> enum from the last exercise (with <code>RED=1</code> / <code>GREEN=2</code> / <code>BLUE=3</code>). This time:</p>
+<ol>
+<li><code>print(Color.GREEN.name)</code> – print the member's name</li>
+<li><code>print(Color.GREEN.value)</code> – print the member's value</li>
+</ol>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">GREEN
+2</code></pre></div></div></header>
+<a class="rex-go focus-ring" href="/lessons/python11/enum/#exercise-02-name-value"><span class="rex-go-sub">Write it in the editor, get it checked, see the answer</span><span class="rex-go-main">Do this one on the challenge page →</span></a>
+</section><section id="read-exercise-03-iterate" class="rex-card" aria-label="Exercise 3">
+<header class="rex-head"><div class="rex-top"><span class="rex-badge">Exercise 3 / 4</span><span class="rex-title">Go through all the members of an Enum</span></div>
+<div class="prose prose-sm ex-prompt"><p>Define the same <code>Color</code> enum (<code>RED=1</code> / <code>GREEN=2</code> / <code>BLUE=3</code>), then use a <code>for</code> loop to go through it and print each member's <code>.name</code> <strong>in the order they were defined</strong>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">RED
+GREEN
+BLUE</code></pre></div>
+<blockquote>
+<p>Tip: <code>for c in Color:</code> gives you each member, then <code>c.name</code> gets its name.</p>
+</blockquote></div></header>
+<a class="rex-go focus-ring" href="/lessons/python11/enum/#exercise-03-iterate"><span class="rex-go-sub">Write it in the editor, get it checked, see the answer</span><span class="rex-go-main">Do this one on the challenge page →</span></a>
+</section><section id="step-3" class="step-card read" data-kind="step" aria-label="Teaching step 4">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 04 / 06</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>3. Custom types, @unique, auto()</h2>
+<h3>1. Values can be any type</h3>
+<p>An <code>Enum</code> member's value doesn't have to be a number – strings, tuples and objects all work:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python11/enum/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from enum import Enum
+
+class Month(Enum):
+    Jan = &#x27;January&#x27;
+    Feb = &#x27;February&#x27;
+    Mar = &#x27;March&#x27;
+    # ...
+    Dec = &#x27;December&#x27;
+
+print(Month.Jan)         # Month.Jan
+print(Month.Jan.name)    # &#x27;Jan&#x27;
+print(Month.Jan.value)   # &#x27;January&#x27;</code></pre></div>
+<h3>2. @unique: no repeated values</h3>
+<p>By default, an Enum <strong>allows</strong> several members to have the same value – the later one becomes another name (an alias) for the earlier one.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python11/enum/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from enum import Enum
+
+class Color(Enum):
+    RED = 1
+    SCARLET = 1   # no error – SCARLET becomes another name for RED
+
+print(Color.SCARLET is Color.RED)   # True</code></pre></div>
+<p>If you don't want that, add the <code>@unique</code> decorator. It forces every value to be unique and raises an error straight away if one repeats:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from enum import Enum, unique
+
+@unique
+class Color(Enum):
+    RED = 1
+    GREEN = 2
+    BLUE = 3
+    # SCARLET = 1   ← adding this line gives a ValueError</code></pre></div>
+<h3>3. auto(): let Python choose the values</h3>
+<p>Lots of members, and you don't care what the actual values are? Use <code>auto()</code> to let Python assign them:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python11/enum/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from enum import Enum, auto
+
+class Weekday(Enum):
+    MON = auto()
+    TUE = auto()
+    WED = auto()
+    THU = auto()
+    FRI = auto()
+    SAT = auto()
+    SUN = auto()
+
+print(Weekday.MON.value)   # 1
+print(Weekday.SUN.value)   # 7</code></pre></div>
+<p><code>auto()</code> starts at 1 and counts up by default. To change the starting value or the step, you can override the <code>_generate_next_value_</code> method (an advanced trick – skip it for now).</p>
+<h3>4. IntEnum / StrEnum</h3>
+<p>If you want Enum members to <strong>also be ints</strong> (so they can do arithmetic and be compared with ints), use <code>IntEnum</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python11/enum/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from enum import IntEnum
+
+class Priority(IntEnum):
+    LOW = 1
+    MID = 5
+    HIGH = 10
+
+print(Priority.LOW &lt; Priority.HIGH)   # True
+print(Priority.MID + 1)               # 6</code></pre></div>
+<p><code>StrEnum</code> (Python 3.11+) is the same idea for strings.</p></article></section><section id="read-exercise-04-auto" class="rex-card" aria-label="Exercise 4">
+<header class="rex-head"><div class="rex-top"><span class="rex-badge">Exercise 4 / 4</span><span class="rex-title">Assign values automatically with auto()</span></div>
+<div class="prose prose-sm ex-prompt"><p>Use <code>from ... import</code> to import both <code>Enum</code> and <code>auto</code> from the <code>enum</code> module, then:</p>
+<ol>
+<li>Define a class <code>Weekday</code> that inherits from <code>Enum</code>, with three members all given values by <code>auto()</code>:
+   - <code>MON = auto()</code>
+   - <code>TUE = auto()</code>
+   - <code>WED = auto()</code></li>
+<li><code>print(Weekday.MON.value)</code></li>
+<li><code>print(Weekday.WED.value)</code></li>
+</ol>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">1
+3</code></pre></div>
+<blockquote>
+<p>Tip: <code>auto()</code> starts at 1 by default and counts up in the order members are defined.</p>
+</blockquote></div></header>
+<a class="rex-go focus-ring" href="/lessons/python11/enum/#exercise-04-auto"><span class="rex-go-sub">Write it in the editor, get it checked, see the answer</span><span class="rex-go-main">Do this one on the challenge page →</span></a>
+</section><section id="step-4" class="step-card read" data-kind="step" aria-label="Teaching step 5">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 05 / 06</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>3. Enums with Custom Values</h2>
+<p>Sometimes we need to control the values in an enum. We can make our own class that inherits from <code>Enum</code>. Let's change the example above:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
+from enum import Enum, unique
+
+Enum(&#x27;Month&#x27;, (&#x27;Jan&#x27;, &#x27;Feb&#x27;, &#x27;Mar&#x27;, &#x27;Apr&#x27;, &#x27;May&#x27;, &#x27;Jun&#x27;, &#x27;Jul&#x27;, &#x27;Aug&#x27;, &#x27;Sep&#x27;, &#x27;Oct&#x27;, &#x27;Nov&#x27;, &#x27;Dec&#x27;))
+
+
+# The @unique decorator checks that there are no repeated values
+@unique
+class Month(Enum):
+    Jan = &#x27;January&#x27;
+    Feb = &#x27;February&#x27;
+    Mar = &#x27;March&#x27;
+    Apr = &#x27;April&#x27;
+    May = &#x27;May&#x27;
+    Jun = &#x27;June&#x27;
+    Jul = &#x27;July&#x27;
+    Aug = &#x27;August&#x27;
+    Sep = &#x27;September &#x27;
+    Oct = &#x27;October&#x27;
+    Nov = &#x27;November&#x27;
+    Dec = &#x27;December&#x27;
+
+
+if __name__ == &#x27;__main__&#x27;:
+    print(Month.Jan, &#x27;----------&#x27;,
+          Month.Jan.name, &#x27;----------&#x27;, Month.Jan.value)
+    for name, member in Month.__members__.items():
+        print(name, &#x27;----------&#x27;, member, &#x27;----------&#x27;, member.value)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Month.Jan ---------- Jan ---------- January
+Jan ---------- Month.Jan ---------- January
+Feb ---------- Month.Feb ---------- February
+Mar ---------- Month.Mar ---------- March
+Apr ---------- Month.Apr ---------- April
+May ---------- Month.May ---------- May
+Jun ---------- Month.Jun ---------- June
+Jul ---------- Month.Jul ---------- July
+Aug ---------- Month.Aug ---------- August
+Sep ---------- Month.Sep ---------- September
+Oct ---------- Month.Oct ---------- October
+Nov ---------- Month.Nov ---------- November
+Dec ---------- Month.Dec ---------- December</code></pre></div>
+<p>From this example, we can see the <code>enum</code> module gives us enum types that can be <strong>iterated</strong> and <strong>compared</strong>. It lets you create clearly defined names for values, instead of using bare integers or strings.</p></article></section><section id="step-5" class="step-card read" data-kind="step" aria-label="Teaching step 6">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 06 / 06</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>4. Comparing Enums</h2>
+<p>Enum members have no order, so they can only be compared by <strong>identity</strong> (<code>is</code>) and <strong>equality</strong> (<code>==</code>). Let's see how <code>==</code> and <code>is</code> work:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
+from enum import Enum
+
+
+class User(Enum):
+    Twowater = 98
+    Liangdianshui = 30
+    Tom = 12
+
+
+Twowater = User.Twowater
+Liangdianshui = User.Liangdianshui
+
+print(Twowater == Liangdianshui, Twowater == User.Twowater)
+print(Twowater is Liangdianshui, Twowater is User.Twowater)
+
+try:
+    print(&#x27;\n&#x27;.join(&#x27;  &#x27; + s.name for s in sorted(User)))
+except TypeError as err:
+    print(f&#x27; Error : {err}&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">
+False True
+False True
+ Error : &#x27;&lt;&#x27; not supported between instances of &#x27;User&#x27; and &#x27;User&#x27;</code></pre></div>
+<p>Look at the last line of output: there's an error. That's because the greater-than and less-than operators raise a <code>TypeError</code>. In other words, members of an <code>Enum</code> class <strong>can't</strong> be compared with <code>&lt;</code> or <code>&gt;</code>.</p>
+<p>So can we make enum members comparable by size?</p>
+<p>Of course! Use the <code>IntEnum</code> class, and comparisons work.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><a href="/lessons/python11/enum/">Practise on the challenge page →</a></div></div><pre class="cb-code" tabindex="0"><code class="language-python">#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
+import enum
+
+
+class User(enum.IntEnum):
+    Twowater = 98
+    Liangdianshui = 30
+    Tom = 12
+
+
+try:
+    print(&#x27;\n&#x27;.join(s.name for s in sorted(User)))
+except TypeError as err:
+    print(f&#x27; Error : {err}&#x27;)</code></pre></div>
+<p>Look at the output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Tom
+Liangdianshui
+Twowater</code></pre></div>
+<p>You can see the enum members are sorted by the size of their values. So they <strong>can</strong> be compared by size.</p></article></section><section id="lesson-end" aria-label="Chapter summary"><div class="read-cta"><p>Finished reading? Practising once is how you really learn it.</p><a class="read-cta-btn focus-ring" href="/lessons/python11/enum/">Practise in challenge mode →</a></div><nav aria-label="Chapter navigation" class="chapter-nav"><div class="cn-grid"><a class="chap-nav prev focus-ring" href="/lessons/python10/magic-methods/read/"><span class="cn-label">← Previous chapter</span><span class="cn-title">10 · Magic methods</span></a><div class="cn-mid"><span>Enum classes</span></div><a class="chap-nav next focus-ring" href="/lessons/python12/metaclass/read/"><span class="cn-label">Next chapter →</span><span class="cn-title">12 · Metaclasses</span></a></div></nav></section></article></div>
+    <aside class="lesson-sidebar right" aria-label="This chapter"><nav aria-label="This chapter's contents"><div class="side-label up">In this chapter</div><p class="toc-chapter">Enum classes</p><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Introduction</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">1. Using Enum Classes</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">2. The Source Code of Enum</span></a></li><li class="toc-li" data-target="read-exercise-01-define-color"><a href="#read-exercise-01-define-color" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">Define a Color enum class</span></a></li><li class="toc-li" data-target="read-exercise-02-name-value"><a href="#read-exercise-02-name-value" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">Get .name and .value</span></a></li><li class="toc-li" data-target="read-exercise-03-iterate"><a href="#read-exercise-03-iterate" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">Go through all the members of an Enum</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">3. Custom types, @unique, auto()</span></a></li><li class="toc-li" data-target="read-exercise-04-auto"><a href="#read-exercise-04-auto" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">Assign values automatically with auto()</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">3. Enums with Custom Values</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">4. Comparing Enums</span></a></li></ol></nav></aside>
+  </div>
+  <dialog class="dir-dialog" aria-labelledby="dir-title"><div class="dd-inner"><div class="dd-head"><h2 id="dir-title">Contents</h2><button type="button" class="dd-close focus-ring">Close</button></div>
+  <div class="dd-tabs" aria-label="Contents scope"><button type="button" class="dd-tab focus-ring" data-tab="all" aria-pressed="true">All lessons</button><button type="button" class="dd-tab focus-ring" data-tab="chapter" aria-pressed="false">This chapter</button></div>
+  <div class="dd-body"><div class="dd-pane" data-pane="all"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/read/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/read/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/read/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/read/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/read/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/read/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/read/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/read/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/read/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/read/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/read/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python11/enum/read/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/read/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/read/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/read/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/read/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/read/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/read/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/read/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/read/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/read/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/read/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/read/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/read/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/read/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/read/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/read/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/read/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/read/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></div><div class="dd-pane" data-pane="chapter" hidden><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Introduction</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">1. Using Enum Classes</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">2. The Source Code of Enum</span></a></li><li class="toc-li" data-target="read-exercise-01-define-color"><a href="#read-exercise-01-define-color" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">Define a Color enum class</span></a></li><li class="toc-li" data-target="read-exercise-02-name-value"><a href="#read-exercise-02-name-value" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">Get .name and .value</span></a></li><li class="toc-li" data-target="read-exercise-03-iterate"><a href="#read-exercise-03-iterate" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">Go through all the members of an Enum</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">3. Custom types, @unique, auto()</span></a></li><li class="toc-li" data-target="read-exercise-04-auto"><a href="#read-exercise-04-auto" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">Assign values automatically with auto()</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">3. Enums with Custom Values</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">4. Comparing Enums</span></a></li></ol></div></div></div></dialog>
+  <div class="py-toast" hidden><span class="spinner"></span><span class="py-toast-text">Loading Python…</span></div>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>© 2026 Python for Beginners · English edition of the <a href="https://github.com/walter201230/Python">walter201230/Python</a> tutorial (CC BY 4.0)</span>
+    <div class="footer-links"><a href="/">Course list</a><a href="/about/">About this site</a><a href="https://github.com/walter201230/Python">GitHub</a></div>
+  </div>
+</footer>
+<script src="/assets/site.js?v=20261028"></script>
+</body>
+</html>

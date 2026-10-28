@@ -1,0 +1,1754 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Readable code – Python for Beginners</title>
+<meta name="description" content="Good names + early returns + comprehensions + type hints – code others (and you, six months later) can read.">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css?v=20261028">
+
+</head>
+<body data-page="lesson" data-lesson="python17" data-total="4">
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="/" aria-label="Python for Beginners – home"><span class="gradient-text-flow" data-text="Python for Beginners">Python for Beginners</span></a>
+    <nav class="header-nav">
+      <a class="nav-link" href="/about/">About</a>
+      <a class="nav-icon focus-ring" href="https://github.com/walter201230/Python" aria-label="Original tutorial on GitHub" title="Original tutorial on GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+      <button type="button" class="theme-toggle focus-ring" aria-label="Switch theme"><span class="knob"><svg class="ic-moon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button>
+    </nav>
+  </div>
+</header>
+<main class="site-main">
+<div class="lesson-shell bg-tech-grid">
+  <div class="mobile-bar"><div class="mb-inner"><button type="button" class="dir-btn focus-ring" aria-haspopup="dialog">Contents</button></div></div>
+  <div class="lesson-columns">
+    <aside class="lesson-sidebar left" aria-label="All lessons"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></aside>
+    <div class="lesson-main"><article class="lesson-article"><header class="lesson-head"><h1>Readable code</h1><p class="lh-sub"><span class="accent">4</span> exercises<span class="sep">·</span>about <span class="accent">145</span> min<span class="sep">·</span>solve one to unlock the next part</p>
+<p class="lh-link"><a class="subtle-link focus-ring" href="/lessons/python17/readable-code/read/">Read the whole chapter →</a></p></header><section id="step-0" class="step-card item" data-kind="step" aria-label="Teaching step 1">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 01 / 20</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>Introduction</h2>
+<p>This chapter maybe shouldn't come so early. If you read it before you start learning, lots of things will look confusing.</p>
+<p>But we put it here so you can have a quick look and get a first impression. Later, as you learn, it will also be easy to come back and check.</p>
+<h2>Contents</h2>
+<ul>
+<li><a href="/lessons/python17/readable-code/">1. Quick Overview</a><ul>
+<li>1. Encoding</li>
+<li>2. Code Layout<ul>
+<li>2.1 Indentation</li>
+<li>2.2 Line Length</li>
+<li>2.3 Quotes</li>
+<li>2.4 Blank Lines</li>
+<li>2.5 Encoding</li>
+</ul>
+</li>
+<li>3. import Statements</li>
+<li>4. Spaces</li>
+<li>5. Line Breaks</li>
+<li>6. docstring</li>
+</ul>
+</li>
+<li><a href="/lessons/python17/readable-code/">2. Comments</a><ul>
+<li>1. Comments<ul>
+<li>1.1 Block Comments</li>
+<li>1.2 Inline Comments</li>
+<li>1.3 Tips</li>
+</ul>
+</li>
+<li>2. Documentation Comments (Docstrings)</li>
+</ul>
+</li>
+<li><a href="/lessons/python17/readable-code/">3. Naming Rules</a><ul>
+<li>1. Modules</li>
+<li>2. Class Names</li>
+<li>3. Functions</li>
+<li>4. Variable Names</li>
+<li>5. Constants</li>
+</ul>
+</li>
+</ul></article></section><section id="step-1" class="step-card item" data-kind="step" aria-label="Teaching step 2">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 02 / 20</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>1. Quick Overview</h2>
+<h3>1. Encoding</h3>
+<ul>
+<li>Unless there is a special reason, always save files in UTF-8 encoding.</li>
+<li>Unless there is a special reason, put <code>#-*-coding:utf-8-*-</code> at the top of the file.</li>
+</ul>
+<h3>2. Code Layout</h3>
+<h4>2.1 Indentation</h4>
+<ul>
+<li>Always use 4 spaces for indentation.</li>
+</ul>
+<h4>2.2 Line Length</h4>
+<p>Try to keep each line under 80 characters. (In special cases it can be a bit longer than 80, but never more than 120.)</p>
+<p>Why:</p>
+<ul>
+<li>It helps when you compare two versions of code side by side.</li>
+<li>It's easier to read code in a terminal window.</li>
+<li>A line that is too long may mean the design has a problem.</li>
+</ul>
+<h4>2.3 Quotes</h4>
+<p>Simply put: use double quotes for human language, and single quotes for machine labels. So <strong>in code</strong>, you should mostly use <strong>single quotes</strong>.</p>
+<ul>
+<li><strong><em>Human language</em></strong> <strong>uses double quotes</strong> <code>"..."</code><br>
+   For example, error messages. In many cases this is unicode, written as <code>u"Hello world"</code></li>
+<li><strong><em>Machine labels</em></strong> <strong>use single quotes</strong> <code>'...'</code>
+   For example, the keys in a dict</li>
+<li><strong><em>Regular expressions</em></strong> <strong>use raw double quotes</strong> <code>r"..."</code></li>
+<li><strong><em>Documentation strings (docstrings)</em></strong> <strong>use three double quotes</strong> <code>"""......"""</code></li>
+</ul>
+<h4>2.4 Blank Lines</h4>
+<ul>
+<li>Leave two blank lines between top-level functions and class definitions.</li>
+<li>Leave one blank line between methods inside a class.</li>
+</ul>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class A:
+
+    def __init__(self):
+        pass
+
+    def hello(self):
+        pass
+
+
+def main():
+    pass   </code></pre></div>
+<ul>
+<li>You can use several blank lines to separate groups of related functions.</li>
+<li>Inside a function, you can use blank lines to separate parts of the logic.</li>
+</ul>
+<h3>3. import Statements</h3>
+<ul>
+<li>Write each import on its own line.</li>
+</ul>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Correct
+import os
+import sys
+
+# Not recommended
+import sys,os
+
+# Correct
+from subprocess import Popen, PIPE</code></pre></div>
+<ul>
+<li>Use <strong>absolute</strong> imports.</li>
+</ul>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Correct
+from foo.bar import Bar
+
+# Not recommended
+from ..bar import Bar</code></pre></div>
+<ul>
+<li>Put imports at the top of the file, after the module description and docstring, and before global variables.</li>
+<li>Put imports in order, with one blank line between each group.</li>
+</ul>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import os
+import sys
+
+import msgpack
+import zmq
+
+import foo</code></pre></div>
+<ul>
+<li>When you import a class from another module, you can use a relative import.</li>
+</ul>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from myclass import MyClass</code></pre></div>
+<ul>
+<li>If two names clash, use the namespace (the module name) to tell them apart.</li>
+</ul>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import bar
+import foo.bar
+
+bar.Bar()
+foo.bar.Bar()</code></pre></div>
+<h3>4. Spaces</h3>
+<ul>
+<li>Put one space on each side of a binary operator <code>[=,-,+=,==,&gt;,in,is not, and]</code>:</li>
+</ul>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Correct
+i = i + 1
+submitted += 1
+x = x * 2 - 1
+hypot2 = x * x + y * y
+c = (a + b) * (a - b)
+
+# Not recommended
+i=i+1
+submitted +=1
+x = x*2 - 1
+hypot2 = x*x + y*y
+c = (a+b) * (a-b)</code></pre></div>
+<ul>
+<li>In a function's parameter list, put a space after each <code>,</code></li>
+</ul>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Correct
+def complex(real, imag):
+    pass
+
+# Not recommended
+def complex(real,imag):
+    pass</code></pre></div>
+<ul>
+<li>In a function's parameter list, do <strong>not</strong> put spaces around the <code>=</code> of a default value.</li>
+</ul>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Correct
+def complex(real, imag=0.0):
+    pass
+
+# Not recommended
+def complex(real, imag = 0.0):
+    pass</code></pre></div>
+<ul>
+<li>Don't add extra spaces right after an opening bracket or right before a closing bracket.</li>
+</ul>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Correct
+spam(ham[1], {eggs: 2})
+
+# Not recommended
+spam( ham[1], { eggs : 2 } )</code></pre></div>
+<ul>
+<li>Don't put extra spaces before the opening bracket of an index.</li>
+</ul>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Correct
+dict[&#x27;key&#x27;] = list[index]
+
+# Not recommended
+dict [&#x27;key&#x27;] = list [index]</code></pre></div>
+<ul>
+<li>Don't add extra spaces just to line up <code>=</code> signs.</li>
+</ul>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Correct
+x = 1
+y = 2
+long_variable = 3
+
+# Not recommended
+x             = 1
+y             = 2
+long_variable = 3</code></pre></div>
+<h3>5. Line Breaks</h3>
+<p>Python lets you break a line inside brackets. There are two ways to do it.</p>
+<p>1) Line the second line up with the opening bracket.</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">foo = long_function_name(var_one, var_two,
+                         var_three, var_four)</code></pre></div>
+<p>2) Indent the second line by 4 spaces. Use this when you break the line right after the opening bracket.</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def long_function_name(
+        var_one, var_two, var_three,
+        var_four):
+    print(var_one)</code></pre></div>
+<p>You can also use a backslash <code>\</code> to break a line. Binary operators like <code>+</code> and <code>.</code> should go at the end of the line. Long strings can be broken this way too.</p>
+<div class="cb not-prose" data-mode="syntax"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Syntax only</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">session.query(MyTable).\
+        filter_by(id=1).\
+        one()
+
+print &#x27;Hello, &#x27;\
+      &#x27;%s %s!&#x27; %\
+      (&#x27;Harry&#x27;, &#x27;Potter&#x27;)</code></pre></div>
+<p>Don't write compound statements – that means don't put several statements on one line:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Correct
+do_first()
+do_second()
+do_third()
+
+# Not recommended
+do_first();do_second();do_third();</code></pre></div>
+<p><code>if/for/while</code> must always start a new line for their body:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Correct
+if foo == &#x27;blah&#x27;:
+    do_blah_thing()
+
+# Not recommended
+if foo == &#x27;blah&#x27;: do_blash_thing()</code></pre></div>
+<h3>6. docstring</h3>
+<p>The two most basic docstring rules:</p>
+<ol>
+<li>Every public module, function, class and method should have a docstring. Private methods don't need one, but you should put a block comment after the <code>def</code> to explain them.</li>
+<li>The closing <code>"""</code> of a docstring should be on its own line, unless the whole docstring fits on one line.</li>
+</ol>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">&quot;&quot;&quot;Return a foobar
+Optional plotz says to frobnicate the bizbaz first.
+&quot;&quot;&quot;
+
+&quot;&quot;&quot;Oneline docstring&quot;&quot;&quot;</code></pre></div></article></section><section id="step-2" class="step-card item" data-kind="step" aria-label="Teaching step 3">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 03 / 20</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>2. Comments</h2>
+<h3>1. Comments</h3>
+<h4>1.1 Block Comments</h4>
+<p>Put one space after the <code>#</code>. Separate paragraphs with an empty comment line (which still needs a <code>#</code>).</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Block comment
+# Block comment
+#
+# Block comment
+# Block comment</code></pre></div>
+<h4>1.2 Inline Comments</h4>
+<p>Leave at least two spaces between the code and the comment. Don't write comments that say nothing useful.</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Correct
+x = x + 1  # Make the border one pixel thicker
+
+# Not recommended (a useless comment)
+x = x + 1 # add 1 to x</code></pre></div>
+<h4>1.3 Tips</h4>
+<ul>
+<li>
+<p>In important parts of your code (or tricky parts), try to write comments whenever you can.</p>
+</li>
+<li>
+<p>For really important comments, put lines of <code>=</code> around them so they stand out.</p>
+</li>
+</ul>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">app = create_app(name, options)
+
+
+# =====================================
+# Do NOT add get/post app routes here !!!
+# =====================================
+
+
+if __name__ == &#x27;__main__&#x27;:
+    app.run()</code></pre></div>
+<h3>2. Documentation Comments (Docstrings)</h3>
+<p>A docstring is usually placed at the top of a module, function or class. Python can then read it through the object's <code>__doc__</code> attribute.
+Editors and IDEs can also use docstrings to show helpful hints.</p>
+<ul>
+<li>A docstring starts and ends with <code>"""</code>. Don't break the line right after the opening quotes. If it has several lines, the closing quotes must be on a new line. Here is an example in Google's docstring style:</li>
+</ul>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: utf-8 -*-
+&quot;&quot;&quot;Example docstrings.
+
+This module demonstrates documentation as specified by the `Google Python
+Style Guide`_. Docstrings may extend over multiple lines. Sections are created
+with a section header and a colon followed by a block of indented text.
+
+Example:
+    Examples can be given using either the ``Example`` or ``Examples``
+    sections. Sections support any reStructuredText formatting, including
+    literal blocks::
+
+        $ python example_google.py
+
+Section breaks are created by resuming unindented text. Section breaks
+are also implicitly created anytime a new section starts.
+&quot;&quot;&quot;</code></pre></div>
+<ul>
+<li>Don't just copy the function's signature into the docstring. Instead, describe what it does, and explain the parameters and return value.</li>
+</ul>
+<div class="cb not-prose" data-mode="syntax"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Syntax only</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">#  Not recommended (don&#x27;t just repeat the signature)
+def function(a, b):
+    &quot;&quot;&quot;function(a, b) -&gt; list&quot;&quot;&quot;
+    ... ...
+
+
+#  Correct
+def function(a, b):
+    &quot;&quot;&quot;Work out and return the average of the data from a to b&quot;&quot;&quot;
+    ... ...</code></pre></div>
+<ul>
+<li>Describe parameters and return values using the numpy style, like this:</li>
+</ul>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def func(arg1, arg2):
+    &quot;&quot;&quot;Write a one-sentence summary here (e.g. Calculate the average).
+
+    Write the detailed description here.
+
+    Parameters
+    ----------
+    arg1 : int
+        Description of arg1
+    arg2 : int
+        Description of arg2
+
+    Returns
+    -------
+    int
+        Description of the return value
+
+    See Also
+    --------
+    otherfunc : other related functions...
+
+    Examples
+    --------
+    Examples use doctest format. Code after `&gt;&gt;&gt;` can be run automatically
+    as test cases by doc-testing tools.
+
+    &gt;&gt;&gt; a=[1,2,3]
+    &gt;&gt;&gt; print [x + 3 for x in a]
+    [4, 5, 6]
+    &quot;&quot;&quot;</code></pre></div>
+<ul>
+<li>
+<p>Docstrings can be in any language, but don't mix two languages in one docstring.</p>
+</li>
+<li>
+<p>Longer is not better. Usually one or two sentences are enough to explain things.</p>
+</li>
+<li>
+<p>Modules, public classes and public methods should have docstrings whenever possible.</p>
+</li>
+</ul></article></section><section id="step-3" class="step-card item" data-kind="step" aria-label="Teaching step 4">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 04 / 20</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>3. Naming Rules</h2>
+<h3>1. Modules</h3>
+<ul>
+<li>Module names should be lowercase, starting with a lowercase letter. Try not to use underscores (unless the name has a few words).</li>
+</ul>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Good module names
+import decoder
+import html_parser
+
+# Not recommended
+import Decoder</code></pre></div>
+<h3>2. Class Names</h3>
+<ul>
+<li>Class names use <strong>CamelCase</strong>: start each word with a capital letter. Private classes can start with one underscore.</li>
+</ul>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class Farm():
+    pass
+
+class AnimalFarm(Farm):
+    pass
+
+class _PrivateFarm(Farm):
+    pass</code></pre></div>
+<ul>
+<li>Put related classes and top-level functions in the same module. Unlike Java, you don't need one module per class.</li>
+</ul>
+<h3>3. Functions</h3>
+<ul>
+<li>Function names are always lowercase. If there are several words, join them with underscores.</li>
+</ul>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def run():
+    pass
+
+def run_with_env():
+    pass</code></pre></div>
+<ul>
+<li>Put one underscore <code>_</code> in front of private function names.</li>
+</ul>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class Person():
+
+    def _private_func():
+        pass</code></pre></div>
+<h3>4. Variable Names</h3>
+<ul>
+<li>Variable names should be lowercase. If there are several words, join them with underscores.</li>
+</ul>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">if __name__ == &#x27;__main__&#x27;:
+    count = 0
+    school_name = &#x27;&#x27;</code></pre></div>
+<ul>
+<li>Constants are ALL CAPITALS. If there are several words, join them with underscores.</li>
+</ul>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">MAX_CLIENT = 100
+MAX_CONNECTION = 1000
+CONNECTION_TIMEOUT = 600</code></pre></div>
+<h3>5. Constants</h3>
+<ul>
+<li>Constants use capital letters, with words separated by underscores.</li>
+</ul>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">MAX_OVERFLOW = 100
+
+class FooBar:
+
+    def foo_bar(self, print_):
+        print(print_)</code></pre></div></article></section><section id="step-4" class="step-card item" data-kind="step" aria-label="Teaching step 5">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 05 / 20</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>2. Early return</h2>
+<p>Look at this 'check the login' code:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def login(user, password):
+    if user is not None:
+        if user.is_active:
+            if user.check_password(password):
+                if not user.is_locked:
+                    return &#x27;Logged in&#x27;
+                else:
+                    return &#x27;Account locked&#x27;
+            else:
+                return &#x27;Wrong password&#x27;
+        else:
+            return &#x27;Account not activated&#x27;
+    else:
+        return &#x27;User does not exist&#x27;</code></pre></div>
+<p>Four levels of nesting – by the time you reach the third <code>if</code>, you've forgotten what the first condition was.</p>
+<h3>Early return: send the unusual cases away first</h3>
+<p>"<strong>Handle the edge cases first, so the main path can sit at the outer level</strong>" – that's the core idea of early return.</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def login(user, password):
+    if user is None:
+        return &#x27;User does not exist&#x27;
+    if not user.is_active:
+        return &#x27;Account not activated&#x27;
+    if not user.check_password(password):
+        return &#x27;Wrong password&#x27;
+    if user.is_locked:
+        return &#x27;Account locked&#x27;
+    return &#x27;Logged in&#x27;</code></pre></div>
+<p>Can you see what changed?</p>
+<ul>
+<li>No <code>else</code></li>
+<li>No nesting</li>
+<li>Each failure condition <strong>takes just one line</strong></li>
+<li>The last line is the "success path" – easy to find at a glance</li>
+</ul>
+<h3>The general pattern</h3>
+<p>Whenever you see this shape:</p>
+<div class="cb not-prose" data-mode="syntax"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Syntax only</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">if condition_is_true:
+    # a big chunk of the main path
+    ...
+else:
+    return error</code></pre></div>
+<p>you can rewrite it as:</p>
+<div class="cb not-prose" data-mode="syntax"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Syntax only</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">if not condition_is_true:
+    return error
+# a big chunk of the main path (not indented)
+...</code></pre></div>
+<p>The main path moves back from 1 level of indentation to 0. When several conditions stack up, the difference is huge.</p>
+<h3>When not to use early return</h3>
+<p>Not every <code>if</code> should be an early return. If the two branches are <strong>equally important</strong> – like "return X for odd, Y for even" – just write a normal <code>if/else</code>; there's no need to force it into an early return.</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def parity(n):
+    if n % 2 == 0:
+        return &#x27;even&#x27;
+    else:
+        return &#x27;odd&#x27;</code></pre></div>
+<p>This is actually clearer. Early return is for <strong>flattening error handling</strong>, not for getting rid of every <code>else</code>.</p></article></section><section id="exercise-01-early-return" class="ex-card item" data-kind="exercise" data-exercise="01-early-return" aria-label="Exercise 1: Rewrite nested ifs with early returns">
+<script type="application/json" class="ex-data">{"id": "01-early-return", "lesson": "python17", "starter": "# The old nested version looked like this (three levels of nesting, structure only – don't hand this in):\n# def check(score):\n#     if 0 <= score <= 100:\n#         if score >= 90:\n#             ... (left out: two more levels of if/else nested here)\n#     else:\n#         return 'Invalid score'\n\n# Rewrite check with early returns here: return the invalid-score case first, then check each level from high to low\n# Finally print the four calls asked for above\n\n", "solution": "def check(score):\n    if score < 0 or score > 100:\n        return 'Invalid score'\n    if score >= 90:\n        return 'Excellent'\n    if score >= 60:\n        return 'Pass'\n    return 'Fail'\n\nprint(check(95))\nprint(check(72))\nprint(check(40))\nprint(check(150))", "grading": {"requiredAst": ["FunctionDef:check"], "stdoutEquals": "Excellent\nPass\nFail\nInvalid score\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 1 / 4</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Rewrite nested ifs with early returns</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>The old version of the function <code>check(score)</code> used three levels of nesting. Rewrite <code>check(score)</code> using <strong>early returns</strong>, keeping the same logic:</p>
+<ul>
+<li><code>score &lt; 0</code> or <code>score &gt; 100</code>: return <code>'Invalid score'</code></li>
+<li><code>score &gt;= 90</code>: return <code>'Excellent'</code></li>
+<li><code>score &gt;= 60</code>: return <code>'Pass'</code></li>
+<li>anything else: return <code>'Fail'</code></li>
+</ul>
+<p>Then call <code>print(check(95))</code>, <code>print(check(72))</code>, <code>print(check(40))</code> and <code>print(check(150))</code> in turn.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Excellent
+Pass
+Fail
+Invalid score</code></pre></div>
+<p>Tip: an 'early return' means you return the unusual cases first, leaving the main path at the outer level – no else, no nesting.</p></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>First return the 'Invalid score' case – after that, every score left is valid</p></li></template><template class="hint-tpl"><li><p>Then if score &gt;= 90: return 'Excellent', if score &gt;= 60: return 'Pass', and finally return 'Fail'</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def check(score):
+    if score &lt; 0 or score &gt; 100:
+        return &#x27;Invalid score&#x27;
+    if score &gt;= 90:
+        return &#x27;Excellent&#x27;
+    if score &gt;= 60:
+        return &#x27;Pass&#x27;
+    return &#x27;Fail&#x27;
+
+print(check(95))
+print(check(72))
+print(check(40))
+print(check(150))</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># The old nested version looked like this (three levels of nesting, structure only – don&#x27;t hand this in):
+# def check(score):
+#     if 0 &lt;= score &lt;= 100:
+#         if score &gt;= 90:
+#             ... (left out: two more levels of if/else nested here)
+#     else:
+#         return &#x27;Invalid score&#x27;
+
+# Rewrite check with early returns here: return the invalid-score case first, then check each level from high to low
+# Finally print the four calls asked for above
+
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-5" class="step-card item" data-kind="step" aria-label="Teaching step 6">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 06 / 20</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>3. Comprehensions</h2>
+<p>Python has a special, elegant way to write "make one collection of data from another" – <strong>comprehensions</strong>.</p>
+<h3>1. List comprehensions</h3>
+<p>Here's a task: "pick out all the positive numbers in <code>nums</code>". The old way:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">nums = [-2, 1, -3, 4, 0, -5, 6]
+positives = []
+for x in nums:
+    if x &gt; 0:
+        positives.append(x)
+print(positives)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[1, 4, 6]</code></pre></div>
+<p>Four lines – to say one sentence: "collect every x in nums where x &gt; 0 into a list".</p>
+<p>A list comprehension turns that sentence straight into code:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">nums = [-2, 1, -3, 4, 0, -5, 6]
+positives = [x for x in nums if x &gt; 0]
+print(positives)</code></pre></div>
+<p>Same output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[1, 4, 6]</code></pre></div>
+<p>How to read it: "<strong>collect <code>x</code>, for each <code>x</code> from <code>nums</code>, where <code>x &gt; 0</code></strong>".</p>
+<h3>2. The general shape of a comprehension</h3>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[expression for variable in iterable if condition]</code></pre></div>
+<ul>
+<li><strong>expression</strong>: what to do to each item before collecting it (if nothing, just write the variable name)</li>
+<li><strong>for ... in</strong>: which sequence to go through</li>
+<li><strong>if</strong>: an optional filter – leave it out if you don't need it</li>
+</ul>
+<p>A few examples:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># square every number
+[x * x for x in [1, 2, 3, 4]]   # [1, 4, 9, 16]
+
+# make everything capitals
+[s.upper() for s in [&#x27;ab&#x27;, &#x27;cd&#x27;]]  # [&#x27;AB&#x27;, &#x27;CD&#x27;]
+
+# squares of the even numbers
+[x * x for x in range(10) if x % 2 == 0]  # [0, 4, 16, 36, 64]</code></pre></div>
+<h3>3. Dict comprehensions</h3>
+<p>Doubling every value in a dictionary, the old way:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">prices = {&#x27;apple&#x27;: 5, &#x27;banana&#x27;: 3, &#x27;cherry&#x27;: 10}
+doubled = {}
+for k, v in prices.items():
+    doubled[k] = v * 2
+print(doubled)</code></pre></div>
+<p>With a dict comprehension:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">prices = {&#x27;apple&#x27;: 5, &#x27;banana&#x27;: 3, &#x27;cherry&#x27;: 10}
+doubled = {k: v * 2 for k, v in prices.items()}
+print(doubled)</code></pre></div>
+<p>The shape: <code>{key: value for variable in iterable}</code>.</p>
+<h3>4. When not to use a comprehension</h3>
+<p>Comprehensions feel great, but <strong>shorter isn't always better</strong>. If one comprehension is stuffed with:</p>
+<ul>
+<li>several <code>for</code> loops</li>
+<li>complicated conditions</li>
+<li>complicated expressions</li>
+</ul>
+<p>then stop – go back to a plain <code>for</code> loop. A comprehension that doesn't fit on one line and takes three twists is much harder to read than a four-line for loop.</p>
+<p>Remember this test: <strong>if you can read it at a glance – use a comprehension; if you have to stop and translate it – use a for loop</strong>.</p></article></section><section id="exercise-02-list-comp" class="ex-card item" data-kind="exercise" data-exercise="02-list-comp" aria-label="Exercise 2: List comprehension: pick the positive numbers and square them">
+<script type="application/json" class="ex-data">{"id": "02-list-comp", "lesson": "python17", "starter": "nums = [-2, 1, -3, 4, 0, -5, 6]\n\n# Make result with one line of list comprehension\n# result = [...]\n\n# print(result)\n", "solution": "nums = [-2, 1, -3, 4, 0, -5, 6]\nresult = [x * x for x in nums if x > 0]\nprint(result)", "grading": {"requiredAst": ["ListComp"], "stdoutEquals": "[1, 16, 36]\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 2 / 4</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">List comprehension: pick the positive numbers and square them</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Here's a list for you: <code>nums = [-2, 1, -3, 4, 0, -5, 6]</code>.</p>
+<p>Use a <strong>list comprehension</strong> to make a new list <code>result</code> containing 'the square of every positive number' in <code>nums</code> (note: <code>0</code> isn't positive).</p>
+<p>Then <code>print(result)</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[1, 16, 36]</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>The shape is: [expression for variable in sequence if condition]</p></li></template><template class="hint-tpl"><li><p>The expression is x * x, and the filter is x &gt; 0</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">nums = [-2, 1, -3, 4, 0, -5, 6]
+result = [x * x for x in nums if x &gt; 0]
+print(result)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">nums = [-2, 1, -3, 4, 0, -5, 6]
+
+# Make result with one line of list comprehension
+# result = [...]
+
+# print(result)
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="exercise-03-dict-comp" class="ex-card item" data-kind="exercise" data-exercise="03-dict-comp" aria-label="Exercise 3: Dict comprehension: double every price">
+<script type="application/json" class="ex-data">{"id": "03-dict-comp", "lesson": "python17", "starter": "prices = {'apple': 5, 'banana': 3, 'cherry': 10}\n\n# Make doubled with a dict comprehension\n# doubled = {...}\n\n# print(doubled)\n", "solution": "prices = {'apple': 5, 'banana': 3, 'cherry': 10}\ndoubled = {k: v * 2 for k, v in prices.items()}\nprint(doubled)", "grading": {"requiredAst": ["DictComp"], "stdoutEquals": "{'apple': 10, 'banana': 6, 'cherry': 20}\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 3 / 4</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Dict comprehension: double every price</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Here's a price list for you: <code>prices = {'apple': 5, 'banana': 3, 'cherry': 10}</code>.</p>
+<p>Use a <strong>dict comprehension</strong> to make a new dictionary <code>doubled</code> – same keys, but every value doubled.</p>
+<p>Then <code>print(doubled)</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">{&#x27;apple&#x27;: 10, &#x27;banana&#x27;: 6, &#x27;cherry&#x27;: 20}</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>The shape is: {key: value for variable in iterable}</p></li></template><template class="hint-tpl"><li><p>Use prices.items() to get the key k and the value v together</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">prices = {&#x27;apple&#x27;: 5, &#x27;banana&#x27;: 3, &#x27;cherry&#x27;: 10}
+doubled = {k: v * 2 for k, v in prices.items()}
+print(doubled)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">prices = {&#x27;apple&#x27;: 5, &#x27;banana&#x27;: 3, &#x27;cherry&#x27;: 10}
+
+# Make doubled with a dict comprehension
+# doubled = {...}
+
+# print(doubled)
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-6" class="step-card item" data-kind="step" aria-label="Teaching step 7">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 07 / 20</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><p>After the earlier chapters, I'm sure you can now write pretty decent Python code. Functions, classes, closures, decorators – no problem. But here's the thing about writing code: enjoying writing it yourself is one thing. Having someone else read it, or coming back to it yourself six months later, is something else.</p>
+<p>Come on, let's look at some code that "Brother Shui" handed over to a teammate last week:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def calc(x, y, op):
+    if op == &#x27;add&#x27;:
+        return x + y
+    elif op == &#x27;sub&#x27;:
+        return x - y</code></pre></div>
+<p>The teammate stares at <code>calc</code>, totally confused: are <code>x</code> and <code>y</code> numbers or strings? What else can <code>op</code> be? What type does it return? They have to dig through the code that calls it, or just shout: "Brother Shui, how do I use this function?!"</p>
+<p>Sound familiar? Python is a dynamic language. Variables don't need to declare their type, which makes writing code feel great. But once a project gets big and lots of people work on it, things go wrong very easily.</p>
+<p>Think about what problems this "unclear type" code causes:</p>
+<ul>
+<li>Someone passes the wrong type and doesn't notice while coding. It only crashes after it's released, when a user clicks some button.</li>
+<li>The IDE can't give you accurate code completion – it doesn't even know what your variable is, so how can it suggest which methods you can use?</li>
+<li>Refactoring is scary – if you change this function's parameters, what else will break? You can only search the whole project, then check each line by eye.</li>
+<li>Teammates keep interrupting each other – every time you want to use a function you don't know, you have to ask its author "what does this parameter mean?"</li>
+</ul>
+<p>To solve this, Python 3.5 introduced <strong>type hints</strong>. They kept improving through 3.9, 3.10 and 3.12, and they're really easy to use now. Sadly, lots of older tutorials barely mention them, so many people have written Python for years and still write <code>def f(x, y)</code> with nothing else.</p>
+<p>Imagine this: "Brother Shui" suddenly takes the weekend off and hands his project over to a teammate. The code has dozens of functions, and every one looks like <code>def process(data, config, cb)</code>. The teammate opens one file and is lost – is <code>data</code> a dict or a list? Is <code>config</code> an object or a path? Is <code>cb</code> a function or a string? They have to ask about every single one, or trace through the whole call stack. That's their whole weekend gone.</p>
+<p>But if the function signature had been <code>def process(data: dict[str, int], config: Path, cb: Callable[[str], None])</code> from the start, the teammate would understand at a glance, without asking anyone. That's the most direct value of type hints.</p>
+<p>So today, let's talk all about type hints, so the code you write is clearer and more professional.</p></article></section><section id="step-7" class="step-card item" data-kind="step" aria-label="Teaching step 8">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 08 / 20</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>The simplest type hints</h3>
+<p>Let's fix the <code>calc</code> function above. Say it adds or subtracts two integers:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def calc(x: int, y: int, op: str) -&gt; int:
+    if op == &#x27;add&#x27;:
+        return x + y
+    elif op == &#x27;sub&#x27;:
+        return x - y
+    return 0
+
+
+print(calc(3, 5, &#x27;add&#x27;))
+print(calc(10, 4, &#x27;sub&#x27;))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">8
+6</code></pre></div>
+<p>See? Now the function is clear at a glance: <code>x</code> and <code>y</code> are <code>int</code>, <code>op</code> is <code>str</code>, and the return value is <code>int</code> too. Even without any comments, the signature tells you enough.</p>
+<p>The syntax is simple. Remember two things:</p>
+<ul>
+<li>After a parameter, add <code>: type</code></li>
+<li>For the return value, add <code>-&gt; type</code></li>
+</ul>
+<p>Remember it like this: <strong>"parameters get a colon, the return gets an arrow"</strong>. It's 100% compatible with the old way of writing. Old code without hints can run together with new code that has hints, without changing a single character.</p>
+<p>Some of you might ask: "Can I hint only the parameters and not the return value? Or only the return value and not the parameters?"</p>
+<p>Absolutely. You can add hints wherever you want – you don't have to hint everything. For example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def double(x: int):
+    return x * 2
+
+
+def greet(name) -&gt; str:
+    return f&#x27;Hello, {name}&#x27;
+
+
+print(double(3))
+print(greet(&#x27;Two Drops&#x27;))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">6
+Hello, Two Drops</code></pre></div>
+<p>But to keep the "contract" clear, I suggest you <strong>either hint everything, or hint nothing</strong>. Half-and-half looks messy, and readers will wonder: "Did they forget to hint that one, or was it on purpose?"</p>
+<p>Here's a really important point you must remember: <strong>the Python interpreter does NOT check these types.</strong> They're just "notes" – for people, and for tools (IDEs, static checkers).</p>
+<p>Don't believe me? Let's pass the wrong type on purpose:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def calc(x: int, y: int) -&gt; int:
+    return x + y
+
+
+print(calc(&#x27;Two Drops&#x27;, &#x27; Coding Dept&#x27;))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Two Drops Coding Dept</code></pre></div>
+<p>See? We hinted <code>int</code>, but passing strings still runs, because strings support <code>+</code> too. Python didn't stop anything. So type hints aren't "type enforcement" – they're more like a "contract" written for your teammates.</p>
+<p>Then someone will ask: "If it's not enforced, why bother?"</p>
+<p>Good question. Here's why:</p>
+<ul>
+<li>IDEs (PyCharm, VS Code) can use hints to give you <strong>accurate code completion and error warnings</strong></li>
+<li>Static checking tools (like mypy and pyright) can catch type errors <strong>before the code runs</strong></li>
+<li>Teammates (including your future self) <strong>save lots of guessing time</strong> when reading code</li>
+</ul>
+<p>These three reasons alone are enough to take type hints seriously.</p>
+<p>Another thing many people find confusing: "How do I hint a parameter that has a default value?" Easy – the hint goes first, then the equals sign and default value:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def punch(name: str, dept: str = &#x27;Coding Dept&#x27;) -&gt; None:
+    print(f&#x27;{name} ({dept}) clocked in&#x27;)
+
+
+punch(&#x27;Two Drops&#x27;)
+punch(&#x27;Three Drops&#x27;, &#x27;Design Dept&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Two Drops (Coding Dept) clocked in
+Three Drops (Design Dept) clocked in</code></pre></div>
+<p>The format is <code>name: type = default</code>. Just put the three parts in that order.</p>
+<p>What about variable arguments like <code>*args</code> and <code>**kwargs</code>? You can hint them too. You write the type of <strong>each single item</strong>, not the type of the whole tuple/dict:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def sum_all(*nums: int) -&gt; int:
+    return sum(nums)
+
+
+def make_user(**fields: str) -&gt; dict[str, str]:
+    return fields
+
+
+print(sum_all(1, 2, 3, 4, 5))
+print(make_user(name=&#x27;Two Drops&#x27;, dept=&#x27;Coding Dept&#x27;))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">15
+{&#x27;name&#x27;: &#x27;Two Drops&#x27;, &#x27;dept&#x27;: &#x27;Coding Dept&#x27;}</code></pre></div>
+<p><code>*nums: int</code> means "each item in the tuple <code>nums</code> is an int", <strong>not</strong> "<code>nums</code> itself is an int". <code>**fields: str</code> is the same – each value is a str. Beginners often get this wrong, so remember it.</p></article></section><section id="exercise-04-type-hints" class="ex-card item" data-kind="exercise" data-exercise="04-type-hints" aria-label="Exercise 4: Write a function with type hints">
+<script type="application/json" class="ex-data">{"id": "04-type-hints", "lesson": "python17", "starter": "# Define greet with type hints here\n# def greet(name: ...) -> ...:\n#     return ...\n\n# print(greet('World'))\n", "solution": "def greet(name: str) -> str:\n    return f'Hello, {name}'\n\nprint(greet('World'))", "grading": {"requiredAst": ["FunctionDef:greet"], "stdoutEquals": "Hello, World\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 4 / 4</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Write a function with type hints</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Define a function <code>greet</code> <strong>with full type hints</strong>:</p>
+<ul>
+<li>Parameter <code>name</code>, of type <code>str</code></li>
+<li>Return type <code>str</code></li>
+<li>Body: return <code>f'Hello, {name}'</code></li>
+</ul>
+<p>Then call <code>print(greet('World'))</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Hello, World</code></pre></div>
+<p>Note: a colon after the parameter, an arrow for the return type.</p>
+<p>(The checker only looks at the output – it can't tell whether you wrote the hints. But the hints are the point of this exercise, so please add them.)</p></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>The parameter hint goes after the parameter: name: str</p></li></template><template class="hint-tpl"><li><p>The return hint goes after ): -&gt; str</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def greet(name: str) -&gt; str:
+    return f&#x27;Hello, {name}&#x27;
+
+print(greet(&#x27;World&#x27;))</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># Define greet with type hints here
+# def greet(name: ...) -&gt; ...:
+#     return ...
+
+# print(greet(&#x27;World&#x27;))
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-8" class="step-card item" data-kind="step" aria-label="Teaching step 9">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 09 / 20</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Common basic types</h3>
+<p>The types you can write in hints are mostly Python's built-in ones:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>int</code></td>
+<td>Integer</td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td>Floating-point number</td>
+</tr>
+<tr>
+<td><code>str</code></td>
+<td>String</td>
+</tr>
+<tr>
+<td><code>bool</code></td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td><code>list</code></td>
+<td>List</td>
+</tr>
+<tr>
+<td><code>dict</code></td>
+<td>Dictionary</td>
+</tr>
+<tr>
+<td><code>tuple</code></td>
+<td>Tuple</td>
+</tr>
+<tr>
+<td><code>set</code></td>
+<td>Set</td>
+</tr>
+<tr>
+<td><code>bytes</code></td>
+<td>Bytes</td>
+</tr>
+<tr>
+<td><code>None</code></td>
+<td>Nothing (used as a return type)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Here's an example that uses several of them – a function that makes an employee profile for the "Coding Dept":</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def make_profile(name: str, age: int, salary: float, is_active: bool) -&gt; str:
+    return f&#x27;{name} ({age} years old, salary {salary}, active: {is_active})&#x27;
+
+
+print(make_profile(&#x27;Two Drops&#x27;, 28, 12000.5, True))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Two Drops (28 years old, salary 12000.5, active: True)</code></pre></div>
+<p>Try pasting this code into PyCharm or VS Code. When you type <code>make_profile(</code>, the IDE immediately pops up parameter hints: "the first parameter <code>name</code> is a str, the second parameter <code>age</code> is an int…". Without hints, the IDE can only dully tell you "four parameters go here", and you have to remember all the types yourself.</p>
+<p>See how adding hints instantly makes coding nicer?</p>
+<p>And this one table covers most situations. Basic types aren't fancy – the key is to use them <strong>accurately</strong>. If it's an <code>int</code>, write <code>int</code>; if it's a <code>str</code>, write <code>str</code>. Don't be lazy and write <code>object</code> or <code>Any</code>, which swallows everything.</p>
+<p>A few more words about <code>bool</code>. In Python, <code>bool</code> is actually a <strong>subclass</strong> of <code>int</code> (<code>True == 1</code>, <code>False == 0</code>). So if a parameter is hinted <code>int</code> and you pass <code>True</code>, the type checker won't complain. But the other way round – a parameter hinted <code>bool</code> and you pass <code>1</code> – the checker will stop you. Just be aware of this; when writing hints, follow your <strong>real intention</strong>: use <code>bool</code> for on/off switches, and <code>int</code> for numbers.</p>
+<p>One more small trap with <code>int</code>: Python's <code>int</code> has <strong>unlimited precision</strong>. There's no <code>int32</code> or <code>int64</code>, so there's only one <code>int</code> in hints. People used to C or Java sometimes look for "where's int32?" – it doesn't exist. Just use <code>int</code> with confidence.</p>
+<p>Here's a mixed signature you'd often see when writing an "employee profile":</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def make_employee(
+    name: str,
+    age: int,
+    height: float,
+    is_intern: bool,
+    skills: list,
+    address: dict,
+) -&gt; str:
+    return f&#x27;{name} / {age} years old / {height}m / intern: {is_intern} / skills: {skills} / address: {address}&#x27;
+
+
+print(make_employee(
+    &#x27;Two Drops&#x27;, 28, 1.75, False,
+    [&#x27;Python&#x27;, &#x27;Django&#x27;],
+    {&#x27;city&#x27;: &#x27;Shenzhen&#x27;, &#x27;street&#x27;: &#x27;Science Park&#x27;},
+))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Two Drops / 28 years old / 1.75m / intern: False / skills: [&#x27;Python&#x27;, &#x27;Django&#x27;] / address: {&#x27;city&#x27;: &#x27;Shenzhen&#x27;, &#x27;street&#x27;: &#x27;Science Park&#x27;}</code></pre></div>
+<p>This signature is much clearer now. But look closely: <code>skills: list</code> and <code>address: dict</code> aren't good enough yet. What's <strong>inside</strong> the list? What types are the dictionary's keys and values? We don't know. That's what <strong>container types</strong> in the next section are for.</p>
+<p>If a function returns nothing (that is, it returns <code>None</code>), write <code>None</code> as the return type:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def greet(name: str) -&gt; None:
+    print(f&#x27;Hello, {name}&#x27;)
+
+
+greet(&#x27;Two Drops&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Hello, Two Drops</code></pre></div>
+<p>Note: <code>-&gt; None</code> here doesn't mean "I didn't write a return type". It means "I'm clearly telling you this function has no meaningful return value". These two feel very different to a reader.</p>
+<p>Now picture this. The "Coding Dept" clock-in function (the one from the decorators chapter), with hints added, looks like this:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import time
+
+
+def punch(name: str, dept: str) -&gt; None:
+    today = time.strftime(&#x27;%Y-%m-%d&#x27;, time.localtime(time.time()))
+    print(f&#x27;{today}: Nickname: {name}  Department: {dept}  Clocked in for work&#x27;)
+
+
+punch(&#x27;Two Drops&#x27;, &#x27;Coding Dept&#x27;)</code></pre></div>
+<p>Output (the date changes with the current time):</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">2026-04-28: Nickname: Two Drops  Department: Coding Dept  Clocked in for work</code></pre></div>
+<p>Look – just adding <code>name: str, dept: str</code> and <code>-&gt; None</code> to the signature completely explains how to use the function: pass in strings, get nothing back, and it prints something. From a reader's point of view, isn't that much easier?</p></article></section><section id="step-9" class="step-card item" data-kind="step" aria-label="Teaching step 10">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 10 / 20</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>What if a function might return None?</h3>
+<p>Let's imagine a real situation. The "Coding Dept" employee list is a dictionary, and we write a function that looks up an employee ID by nickname:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">employees = {&#x27;Two Drops&#x27;: &#x27;001&#x27;, &#x27;Three Drops&#x27;: &#x27;002&#x27;}
+
+
+def find_id(name: str) -&gt; str:
+    return employees.get(name)
+
+
+print(find_id(&#x27;Two Drops&#x27;))
+print(find_id(&#x27;Four Drops&#x27;))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">001
+None</code></pre></div>
+<p>See the problem? We said the return type is <code>str</code>, but when the employee doesn't exist, <code>dict.get()</code> returns <code>None</code>, not a <code>str</code>. The hint and the real behaviour don't match.</p>
+<p>"Either return X, or return None" is very common. The old way to write it was with <code>Optional</code> from the <code>typing</code> module:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from typing import Optional
+
+
+employees = {&#x27;Two Drops&#x27;: &#x27;001&#x27;, &#x27;Three Drops&#x27;: &#x27;002&#x27;}
+
+
+def find_id(name: str) -&gt; Optional[str]:
+    return employees.get(name)
+
+
+print(find_id(&#x27;Two Drops&#x27;))
+print(find_id(&#x27;Four Drops&#x27;))</code></pre></div>
+<p><code>Optional[str]</code> means "this value is either a <code>str</code> or <code>None</code>".</p>
+<p>But importing <code>Optional</code> from <code>typing</code> every time gets really annoying. In Python 3.10, a simpler way was introduced (PEP 604): join the types with a vertical bar <code>|</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">employees = {&#x27;Two Drops&#x27;: &#x27;001&#x27;, &#x27;Three Drops&#x27;: &#x27;002&#x27;}
+
+
+def find_id(name: str) -&gt; str | None:
+    return employees.get(name)
+
+
+print(find_id(&#x27;Two Drops&#x27;))
+print(find_id(&#x27;Four Drops&#x27;))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">001
+None</code></pre></div>
+<p>Doesn't <code>str | None</code> read more naturally? "A string <strong>or</strong> nothing" – just like "or" in English.</p>
+<p>I really want to stress this: a return type of <code>str | None</code> <strong>does not mean the caller can just use it as a str</strong>. You must check which one it is before using it. Look at this:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def find_id(name: str) -&gt; str | None:
+    db = {&#x27;Two Drops&#x27;: &#x27;001&#x27;}
+    return db.get(name)
+
+
+emp_id = find_id(&#x27;Four Drops&#x27;)
+print(emp_id.upper())</code></pre></div>
+<p>The IDE will immediately underline <code>emp_id.upper()</code> in red, because <code>emp_id</code> might be <code>None</code>, and <code>None</code> has no <code>upper</code> method. The correct way is to check first:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def find_id(name: str) -&gt; str | None:
+    db = {&#x27;Two Drops&#x27;: &#x27;001&#x27;}
+    return db.get(name)
+
+
+emp_id = find_id(&#x27;Two Drops&#x27;)
+if emp_id is not None:
+    print(emp_id.upper())
+else:
+    print(&#x27;Employee not found&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">001</code></pre></div>
+<p>Inside this <code>if</code> branch, the type checker <strong>automatically narrows</strong> the type – it knows that inside <code>if emp_id is not None:</code>, <code>emp_id</code> must be a <code>str</code>, so <code>.upper()</code> is fine. This clever trick is called <strong>type narrowing</strong>, and it's one of the most useful abilities of modern type checkers.</p>
+<p>And <code>|</code> isn't just for <code>None</code> – you can join as many types as you like:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def to_int(value: int | str | float) -&gt; int:
+    return int(value)
+
+
+print(to_int(3))
+print(to_int(&#x27;5&#x27;))
+print(to_int(7.8))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">3
+5
+7</code></pre></div>
+<p><code>int | str | float</code> means "this parameter can be an int, a str or a float". The technical name for this is a <strong>union type</strong>.</p>
+<blockquote>
+<p>The <code>X | Y</code> syntax only works in Python 3.10+. If your project still uses 3.9 or older, you have to use <code>from typing import Union; Union[X, Y]</code>. But honestly, it's 2026 – upgrade if you can.</p>
+</blockquote>
+<p>To sum up:</p>
+<ul>
+<li>Old way: <code>Optional[str]</code>, <code>Union[int, str]</code> – needs <code>from typing import ...</code></li>
+<li>New way: <code>str | None</code>, <code>int | str</code> – no import needed, just write it</li>
+</ul>
+<p>For new code, always use the new way.</p>
+<p>One more small detail. Once a function has a return type of <code>X | None</code>, <strong>the caller is "reminded" to handle the None case</strong>. For example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">employees = {&#x27;Two Drops&#x27;: &#x27;001&#x27;, &#x27;Three Drops&#x27;: &#x27;002&#x27;}
+
+
+def find_id(name: str) -&gt; str | None:
+    return employees.get(name)
+
+
+emp_id = find_id(&#x27;Four Drops&#x27;)
+if emp_id is None:
+    print(&#x27;Employee not found&#x27;)
+else:
+    print(f&#x27;Employee ID: {emp_id}&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Employee not found</code></pre></div>
+<p>Without <code>| None</code>, the caller can easily forget to check for empty values, and go straight on to join strings or query a database with the return value – then crash halfway through. Hints + a static checker can remind you the moment you forget to check.</p></article></section><section id="step-10" class="step-card item" data-kind="step" aria-label="Teaching step 11">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 11 / 20</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>How to hint container types</h3>
+<p>Just saying <code>list</code> isn't enough. Look at this function:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def total_salary(salaries: list) -&gt; float:
+    return sum(salaries)
+
+
+print(total_salary([10000, 12000, 8000]))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">30000</code></pre></div>
+<p>It says <code>list</code>, but it doesn't say <strong>what's in</strong> the list. ints? floats? strs? The reader still has to guess.</p>
+<p>Here comes the old way again: import capitalised <code>List</code>, <code>Dict</code>, <code>Tuple</code> and so on from <code>typing</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from typing import List
+
+
+def total_salary(salaries: List[float]) -&gt; float:
+    return sum(salaries)
+
+
+print(total_salary([10000, 12000, 8000]))</code></pre></div>
+<p><code>List[float]</code> means "a list that holds floats". The type in the square brackets is the type of the elements.</p>
+<p>In Python 3.9 (PEP 585), the Python team said: "Everyone uses these every day – having to import them is so annoying. Why not just let <code>list</code> itself take square brackets?" And so the new way arrived:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def total_salary(salaries: list[float]) -&gt; float:
+    return sum(salaries)
+
+
+print(total_salary([10000, 12000, 8000]))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">30000</code></pre></div>
+<p>Look – we just use lowercase <code>list[float]</code> directly, with no import. Other containers work the same way:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def group_by_dept(staff: dict[str, list[str]]) -&gt; int:
+    return len(staff)
+
+
+data = {
+    &#x27;Coding Dept&#x27;: [&#x27;Two Drops&#x27;, &#x27;Three Drops&#x27;],
+    &#x27;Design Dept&#x27;: [&#x27;Four Drops&#x27;],
+}
+print(group_by_dept(data))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">2</code></pre></div>
+<p><code>dict[str, list[str]]</code> means "a dictionary whose keys are str and whose values are lists of str". Even nested types like this are easy to read.</p>
+<p>While we're here, a word about choosing between <code>list</code> and <code>Sequence</code>. <code>list[int]</code> feels natural to write, but sometimes your function doesn't really need a list – it just needs something you can loop through and index. In that case, <code>Sequence</code> is more flexible:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from collections.abc import Sequence
+
+
+def first_and_last(items: Sequence[int]) -&gt; tuple[int, int]:
+    return items[0], items[-1]
+
+
+print(first_and_last([1, 2, 3]))
+print(first_and_last((10, 20, 30)))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">(1, 3)
+(10, 30)</code></pre></div>
+<p><code>Sequence[int]</code> accepts lists, tuples, strings… anything that's an <strong>ordered container</strong>. Similar ones are <code>Iterable[X]</code> (anything you can loop through, even a generator) and <code>Mapping[K, V]</code> (anything you can look up values in like a dict). These abstract types are especially useful when writing libraries, because they let a function accept a wider range of inputs. For everyday code, don't worry too much – plain <code>list[int]</code> is totally fine.</p>
+<p><code>tuple</code> is a bit special. For a fixed-length tuple, write the type of each position:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def parse_point(p: tuple[int, int]) -&gt; int:
+    x, y = p
+    return x + y
+
+
+print(parse_point((3, 5)))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">8</code></pre></div>
+<p>For a tuple of any length where every element is the same type (less common), use <code>...</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def join_names(names: tuple[str, ...]) -&gt; str:
+    return &#x27;, &#x27;.join(names)
+
+
+print(join_names((&#x27;Two Drops&#x27;, &#x27;Three Drops&#x27;, &#x27;Four Drops&#x27;)))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Two Drops, Three Drops, Four Drops</code></pre></div>
+<p><code>set</code> is like <code>list</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def unique_count(tags: set[str]) -&gt; int:
+    return len(tags)
+
+
+print(unique_count({&#x27;Python&#x27;, &#x27;Java&#x27;, &#x27;Python&#x27;}))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">2</code></pre></div>
+<p>Remember this: <strong>from 3.9 on, all built-in containers can be used directly as types – no need to import the capitalised versions from <code>typing</code>.</strong></p>
+<p>Let's look at a few more complicated nested containers. Say we have a data structure that records how many times each employee clocked in each day:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">punches: dict[str, dict[str, int]] = {
+    &#x27;Two Drops&#x27;: {&#x27;2026-04-26&#x27;: 2, &#x27;2026-04-27&#x27;: 1},
+    &#x27;Three Drops&#x27;: {&#x27;2026-04-26&#x27;: 1, &#x27;2026-04-27&#x27;: 2},
+}
+
+
+def total_punches(data: dict[str, dict[str, int]], name: str) -&gt; int:
+    return sum(data.get(name, {}).values())
+
+
+print(total_punches(punches, &#x27;Two Drops&#x27;))
+print(total_punches(punches, &#x27;Three Drops&#x27;))
+print(total_punches(punches, &#x27;Four Drops&#x27;))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">3
+3
+0</code></pre></div>
+<p>Nested types like <code>dict[str, dict[str, int]]</code> can be tiring to read at first. But break it down – "the outer keys are <code>str</code> (employee nicknames), and the values are <code>dict[str, int]</code> (date → count)" – and the logic is clear. Later we'll see that if a nested type like this appears many times, you can simplify it with a <strong>type alias</strong>.</p>
+<p>Let's do a bigger example to practise. The "Coding Dept" wants a staff statistics function. The input is a list of employee records, and the output is the number of people in each department:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def count_by_dept(records: list[dict[str, str]]) -&gt; dict[str, int]:
+    result: dict[str, int] = {}
+    for r in records:
+        dept = r[&#x27;dept&#x27;]
+        result[dept] = result.get(dept, 0) + 1
+    return result
+
+
+data = [
+    {&#x27;name&#x27;: &#x27;Two Drops&#x27;, &#x27;dept&#x27;: &#x27;Coding Dept&#x27;},
+    {&#x27;name&#x27;: &#x27;Three Drops&#x27;, &#x27;dept&#x27;: &#x27;Coding Dept&#x27;},
+    {&#x27;name&#x27;: &#x27;Four Drops&#x27;, &#x27;dept&#x27;: &#x27;Design Dept&#x27;},
+]
+print(count_by_dept(data))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">{&#x27;Coding Dept&#x27;: 2, &#x27;Design Dept&#x27;: 1}</code></pre></div>
+<p>The whole function's input and output are clear just from the signature <code>list[dict[str, str]] -&gt; dict[str, int]</code>: "pass in a list of field-name-to-value dictionaries, and get back a department-to-headcount dictionary". Nice, right?</p>
+<p>There's a small detail hidden here: <code>result: dict[str, int] = {}</code> inside the function also has a hint. It tells the IDE "result will hold str → int". Otherwise, when the IDE sees <code>result = {}</code>, it can only guess "an empty dict, anything can go in", and won't warn you if you make a mistake.</p></article></section><section id="step-11" class="step-card item" data-kind="step" aria-label="Teaching step 12">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 12 / 20</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Variables can have hints too</h3>
+<p>It's not just function parameters and return values – normal variables can have hints too. The syntax is the same as for parameters:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">name: str = &#x27;Two Drops&#x27;
+age: int = 28
+salary: float = 12000.5
+tags: list[str] = [&#x27;Python&#x27;, &#x27;Backend&#x27;]
+
+print(name, age, salary, tags)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Two Drops 28 12000.5 [&#x27;Python&#x27;, &#x27;Backend&#x27;]</code></pre></div>
+<p>Then someone asks: "When I assign a variable, isn't the type obvious? Why not just write <code>name = 'Brother Shui'</code>? Why add a hint?"</p>
+<p>There are two situations where it's really needed:</p>
+<p>First: <strong>when the starting value doesn't show the final type</strong>. For example, you create an empty list and want to tell others "this list will hold strings":</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">employees: list[str] = []
+employees.append(&#x27;Two Drops&#x27;)
+employees.append(&#x27;Three Drops&#x27;)
+print(employees)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[&#x27;Two Drops&#x27;, &#x27;Three Drops&#x27;]</code></pre></div>
+<p>Without a hint, when the IDE sees <code>employees = []</code>, it can only guess "a list, element type unknown", and won't complain whatever you append. With <code>list[str]</code>, if you accidentally write <code>employees.append(123)</code>, the IDE underlines it in red straight away.</p>
+<p>Here's a very realistic little scenario. We're writing the setup code for a login points system – "Brother Shui" earns some points every day he logs in, but he starts with none:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">points: int = 0
+visited_pages: list[str] = []
+last_login: str | None = None
+
+
+points += 5
+visited_pages.append(&#x27;Home&#x27;)
+last_login = &#x27;2026-04-28&#x27;
+
+print(points, visited_pages, last_login)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">5 [&#x27;Home&#x27;] 2026-04-28</code></pre></div>
+<p>Look at the line <code>last_login: str | None = None</code>. It starts as <code>None</code>, but its type is <code>str | None</code>. Saying "this can be empty, and gets a real value later" is very common in long processes. Without the hint, the IDE might decide <code>last_login</code> is just <code>None</code>. It might not complain when you later assign a string, but the meaning isn't as clear.</p>
+<p>The same goes for empty dicts and empty sets:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">scores: dict[str, int] = {}
+scores[&#x27;Two Drops&#x27;] = 95
+scores[&#x27;Three Drops&#x27;] = 88
+print(scores)
+
+
+unique_tags: set[str] = set()
+unique_tags.add(&#x27;Python&#x27;)
+unique_tags.add(&#x27;Backend&#x27;)
+unique_tags.add(&#x27;Python&#x27;)
+print(unique_tags)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">{&#x27;Two Drops&#x27;: 95, &#x27;Three Drops&#x27;: 88}
+{&#x27;Python&#x27;, &#x27;Backend&#x27;}</code></pre></div>
+<p>Second: <strong>declaring without assigning</strong>. For example, class attributes:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class Employee:
+    name: str
+    age: int
+
+    def __init__(self, name: str, age: int):
+        self.name = name
+        self.age = age
+
+
+emp = Employee(&#x27;Two Drops&#x27;, 28)
+print(emp.name, emp.age)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Two Drops 28</code></pre></div>
+<p>Writing <code>name: str</code> directly in the class body declares an attribute of type <code>str</code>, without even giving a default value. You'll see this much more with dataclasses, which come later.</p>
+<p>You can also give default values directly in the class body, much like declaring variables:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class Counter:
+    count: int = 0
+    name: str = &#x27;Default counter&#x27;
+
+    def incr(self) -&gt; None:
+        self.count += 1
+
+
+c = Counter()
+c.incr()
+c.incr()
+print(c.name, c.count)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Default counter 2</code></pre></div>
+<p>Careful: giving default values in the class body really creates <strong>class attributes</strong> (shared by all instances). If the default is immutable (int, str, tuple…), it works almost the same as an instance default. But if the default is a <strong>mutable</strong> object like a list or dict, it's a trap – all instances share the same list! So for list and dict fields, we usually set them up in <code>__init__</code>, or use a dataclass with <code>field(default_factory=list)</code>. More on that later.</p></article></section><section id="step-12" class="step-card item" data-kind="step" aria-label="Teaching step 13">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 13 / 20</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Callable and Any – two special roles</h3>
+<p>After hinting a few functions, sooner or later you'll ask: "My function's parameter is another function – how do I hint that?"</p>
+<p>If you've learned decorators, you'll remember that functions are objects too, and can be passed around. The type for "something you can call" is <code>Callable</code>, from <code>collections.abc</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from collections.abc import Callable
+
+
+def apply(func: Callable[[int, int], int], x: int, y: int) -&gt; int:
+    return func(x, y)
+
+
+print(apply(lambda a, b: a + b, 3, 5))
+print(apply(lambda a, b: a * b, 3, 5))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">8
+15</code></pre></div>
+<p>How do you read <code>Callable[[int, int], int]</code>? Inside the square brackets, the first list is the <strong>parameter types</strong>, and the second item is the <strong>return type</strong>. So it means: "a function that takes two ints and returns an int".</p>
+<blockquote>
+<p>Before Python 3.9, <code>Callable</code> was also imported from <code>typing</code>. From 3.9 on, it's recommended to import it from <code>collections.abc</code>.</p>
+</blockquote>
+<p>If you've learned decorators, you'll realise a decorator is really "something that takes a function and returns a function". So decorators can be hinted with <code>Callable</code> too:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from collections.abc import Callable
+
+
+def with_log(func: Callable[[int, int], int]) -&gt; Callable[[int, int], int]:
+    def wrapper(x: int, y: int) -&gt; int:
+        print(f&#x27;Calling {func.__name__}({x}, {y})&#x27;)
+        return func(x, y)
+    return wrapper
+
+
+@with_log
+def add(x: int, y: int) -&gt; int:
+    return x + y
+
+
+print(add(3, 5))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Calling add(3, 5)
+8</code></pre></div>
+<p>The signature of <code>with_log</code> is clear at a glance: "I take in a function that takes two ints and returns an int, and give back a function of exactly the same shape". Of course, to write a general decorator that can wrap <strong>any</strong> function, <code>Callable</code> alone isn't enough – you need more advanced tools like <code>ParamSpec</code> and <code>TypeVar</code>. That's a different topic, so we won't go into it here.</p>
+<p>There's another role called <code>Any</code>, which means "any type is fine, don't check". Use it when you <strong>really don't care</strong> about the type:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from typing import Any
+
+
+def log(value: Any) -&gt; None:
+    print(f&#x27;Log: {value}&#x27;)
+
+
+log(&#x27;Two Drops&#x27;)
+log(123)
+log([1, 2, 3])</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Log: Two Drops
+Log: 123
+Log: [1, 2, 3]</code></pre></div>
+<p><code>Any</code> sounds handy, but be careful with it. Once you hint <code>Any</code>, the type checker ignores that value completely – you throw away all the benefits of hints. If you can write a specific type, never use <code>Any</code>.</p>
+<p>You might ask: "So when should I use <code>Any</code>?" Usually in two situations:</p>
+<ul>
+<li>You're writing a truly general tool function and really don't know what type will come in (like <code>print</code>)</li>
+<li>You're working with an old library without hints, where even its author can't say what the types are, and forcing a hint would make things messier</li>
+</ul>
+<p>Otherwise, <strong>first choose a specific type, then a union type, then a loose abstract type like <code>object</code> or <code>Sequence</code>, and only as a last resort, <code>Any</code>.</strong> That's the priority order for writing hints – remember it.</p>
+<p>For example, say we want a function that turns any input into a string. Your first idea might be:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from typing import Any
+
+
+def to_str(x: Any) -&gt; str:
+    return str(x)
+
+
+print(to_str(123))
+print(to_str([1, 2, 3]))
+print(to_str({&#x27;name&#x27;: &#x27;Two Drops&#x27;}))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">123
+[1, 2, 3]
+{&#x27;name&#x27;: &#x27;Two Drops&#x27;}</code></pre></div>
+<p>But think about it: is <code>x</code> really "anything at all"? No. <code>str(x)</code> really just calls <code>x.__str__()</code>, so a more accurate description is "any object that <code>str()</code> can handle". Every object in Python has <code>__str__</code> (inherited from <code>object</code>), so <code>object</code> is actually more accurate here than <code>Any</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def to_str(x: object) -&gt; str:
+    return str(x)
+
+
+print(to_str(123))
+print(to_str([1, 2, 3]))
+print(to_str({&#x27;name&#x27;: &#x27;Two Drops&#x27;}))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">123
+[1, 2, 3]
+{&#x27;name&#x27;: &#x27;Two Drops&#x27;}</code></pre></div>
+<p>Same result, but the hint works much better as built-in documentation. When readers see <code>x: Any</code>, they wonder "can I pass functions, classes, generators?" When they see <code>x: object</code>, they immediately understand "any object works". Paying attention to details like this makes your code read very professionally.</p>
+<p>While we're here, <code>object</code> is often confused with <code>Any</code>. <code>object</code> is the parent of all types. Hinting <code>object</code> means "pass anything, but once you have it, you can only use methods every object has (like <code>str()</code>)". It looks like <code>Any</code>, but it behaves very differently:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def show(x: object) -&gt; None:
+    print(str(x))
+
+
+show(&#x27;Two Drops&#x27;)
+show(123)
+show([1, 2, 3])</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Two Drops
+123
+[1, 2, 3]</code></pre></div>
+<p>If you hint <code>x</code> as <code>object</code> and then write <code>x.upper()</code> in the function, the type checker complains – because "<code>object</code> has no <code>upper</code> method". With <code>Any</code>, it wouldn't complain. So if you want "the function accepts any type, but you must check/convert it before using it", <code>object</code> is safer than <code>Any</code>.</p></article></section><section id="step-13" class="step-card item" data-kind="step" aria-label="Teaching step 14">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 14 / 20</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Is your type too long? Give it a nickname (alias)</h3>
+<p>Let's look at a slightly more complicated situation. The "Coding Dept" wants an archive of all employees. Each employee's profile is "name + list of tags", and the whole archive is a mapping of "department name → list of employee profiles". The hint looks like this:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def add_employee(
+    db: dict[str, list[tuple[str, list[str]]]],
+    dept: str,
+    profile: tuple[str, list[str]],
+) -&gt; None:
+    db.setdefault(dept, []).append(profile)
+
+
+db: dict[str, list[tuple[str, list[str]]]] = {}
+add_employee(db, &#x27;Coding Dept&#x27;, (&#x27;Two Drops&#x27;, [&#x27;Python&#x27;, &#x27;Backend&#x27;]))
+add_employee(db, &#x27;Coding Dept&#x27;, (&#x27;Three Drops&#x27;, [&#x27;Frontend&#x27;]))
+print(db)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">{&#x27;Coding Dept&#x27;: [(&#x27;Two Drops&#x27;, [&#x27;Python&#x27;, &#x27;Backend&#x27;]), (&#x27;Three Drops&#x27;, [&#x27;Frontend&#x27;])]}</code></pre></div>
+<p>Isn't <code>dict[str, list[tuple[str, list[str]]]]</code> really tiring to read? And every time you need this type you have to copy it again. Miss one square bracket somewhere, and you've planted a bug.</p>
+<p>This is when <strong>type aliases</strong> come in. From Python 3.12, there's a brand-new <code>type</code> keyword (PEP 695). You can write:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">type Profile = tuple[str, list[str]]
+type EmployeeDB = dict[str, list[Profile]]
+
+
+def add_employee(db: EmployeeDB, dept: str, profile: Profile) -&gt; None:
+    db.setdefault(dept, []).append(profile)
+
+
+db: EmployeeDB = {}
+add_employee(db, &#x27;Coding Dept&#x27;, (&#x27;Two Drops&#x27;, [&#x27;Python&#x27;, &#x27;Backend&#x27;]))
+add_employee(db, &#x27;Coding Dept&#x27;, (&#x27;Three Drops&#x27;, [&#x27;Frontend&#x27;]))
+print(db)</code></pre></div>
+<blockquote>
+<p>The <code>type Alias = ...</code> syntax only works in Python 3.12+.</p>
+</blockquote>
+<p>Now the names <code>Profile</code> and <code>EmployeeDB</code> explain their meaning at a glance. And because the type is defined in one place, it's easy to change.</p>
+<p>Let's actually run it (on 3.12+):</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">Profile = tuple[str, list[str]]
+EmployeeDB = dict[str, list[Profile]]
+
+
+def add_employee(db: EmployeeDB, dept: str, profile: Profile) -&gt; None:
+    db.setdefault(dept, []).append(profile)
+
+
+db: EmployeeDB = {}
+add_employee(db, &#x27;Coding Dept&#x27;, (&#x27;Two Drops&#x27;, [&#x27;Python&#x27;, &#x27;Backend&#x27;]))
+add_employee(db, &#x27;Coding Dept&#x27;, (&#x27;Three Drops&#x27;, [&#x27;Frontend&#x27;]))
+print(db)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">{&#x27;Coding Dept&#x27;: [(&#x27;Two Drops&#x27;, [&#x27;Python&#x27;, &#x27;Backend&#x27;]), (&#x27;Three Drops&#x27;, [&#x27;Frontend&#x27;])]}</code></pre></div>
+<p>Note: the code above actually uses <strong>plain assignment</strong> – it assigns the type to a normal variable. This works in every version that supports type hints, and at runtime it just defines an ordinary variable. But strictly speaking, type checkers won't necessarily treat it as a "type alias".</p>
+<p>If your project runs on 3.10 or 3.11, and you want to clearly tell the checker "this is an alias", use <code>TypeAlias</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from typing import TypeAlias
+
+
+Profile: TypeAlias = tuple[str, list[str]]
+EmployeeDB: TypeAlias = dict[str, list[Profile]]
+
+
+def add_employee(db: EmployeeDB, dept: str, profile: Profile) -&gt; None:
+    db.setdefault(dept, []).append(profile)
+
+
+db: EmployeeDB = {}
+add_employee(db, &#x27;Coding Dept&#x27;, (&#x27;Two Drops&#x27;, [&#x27;Python&#x27;]))
+print(db)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">{&#x27;Coding Dept&#x27;: [(&#x27;Two Drops&#x27;, [&#x27;Python&#x27;])]}</code></pre></div>
+<p>A quick summary:</p>
+<ul>
+<li>Python 3.12+: just write <code>type Alias = ...</code> – the cleanest</li>
+<li>Python 3.10/3.11: use <code>Alias: TypeAlias = ...</code></li>
+<li>Plain assignment <code>Alias = ...</code>: works, but the meaning isn't as clear as the other two</li>
+</ul>
+<p>Type aliases have another very useful job: <strong>giving names to business ideas</strong>. Like this:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">UserId = int
+ProductId = int
+
+
+def get_user(uid: UserId) -&gt; str:
+    return f&#x27;User {uid}&#x27;
+
+
+def get_product(pid: ProductId) -&gt; str:
+    return f&#x27;Product {pid}&#x27;
+
+
+print(get_user(1001))
+print(get_product(2002))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">User 1001
+Product 2002</code></pre></div>
+<p><code>UserId</code> and <code>ProductId</code> are both <code>int</code> underneath, but they have different names. Reading <code>def get_user(uid: UserId)</code> tells you much more than <code>def get_user(uid: int)</code> – you can see at a glance "this int isn't just any number, it's a user ID".</p>
+<p>Here's an example of what <strong>not</strong> to do. The "Coding Dept"'s original code looked like this:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def transfer(from_id: int, to_id: int, product_id: int, amount: int) -&gt; bool:
+    print(f&#x27;Transfer {amount} of product {product_id} from user {from_id} to user {to_id}&#x27;)
+    return True
+
+
+transfer(1001, 2002, 3003, 5)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Transfer 5 of product 3003 from user 1001 to user 2002</code></pre></div>
+<p>All four parameters are <code>int</code>. Get the order wrong when calling it, and you're in trouble – a product ID might be used as a user ID, or an amount as a product ID, and there won't even be an error, because the types match. With named aliases, the syntax still doesn't force anything, but the IDE hint becomes <code>from_id: UserId, to_id: UserId, product_id: ProductId, amount: int</code>, so you're much less likely to make a mistake.</p>
+<p>To go further and really prevent bugs like "passing a product ID as a user ID", you can use <code>NewType</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from typing import NewType
+
+
+UserId = NewType(&#x27;UserId&#x27;, int)
+ProductId = NewType(&#x27;ProductId&#x27;, int)
+
+
+def get_user(uid: UserId) -&gt; str:
+    return f&#x27;User {uid}&#x27;
+
+
+print(get_user(UserId(1001)))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">User 1001</code></pre></div>
+<p>At runtime, <code>NewType</code> is just a function that passes the value straight through. But to the type checker, <code>UserId</code> and <code>int</code> are two <strong>different</strong> types – passing a plain <code>int</code> will be flagged. This truly turns a "business idea" into a "type". It's especially useful in big projects, but for small projects, <code>type Alias</code> is enough.</p></article></section><section id="step-14" class="step-card item" data-kind="step" aria-label="Teaching step 15">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 15 / 20</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>How to hint class attributes</h3>
+<p>We wrote an <code>Employee</code> class earlier. Let's go a bit deeper into hinting class attributes.</p>
+<p>The plainest way looks like this:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class Employee:
+    def __init__(self, name, age, salary):
+        self.name = name
+        self.age = age
+        self.salary = salary
+
+
+emp = Employee(&#x27;Two Drops&#x27;, 28, 12000.5)
+print(emp.name)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Two Drops</code></pre></div>
+<p>Reading this <code>Employee</code> class, just from <code>__init__</code> we can't tell what type each attribute is. Let's improve it:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class Employee:
+    def __init__(self, name: str, age: int, salary: float) -&gt; None:
+        self.name = name
+        self.age = age
+        self.salary = salary
+
+
+emp = Employee(&#x27;Two Drops&#x27;, 28, 12000.5)
+print(emp.name, emp.age, emp.salary)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Two Drops 28 12000.5</code></pre></div>
+<p>Once the parameters have hints, the IDE can usually work out that <code>self.name</code> is a <code>str</code>. If you want to be even clearer, declare the attributes separately in the class body too:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class Employee:
+    name: str
+    age: int
+    salary: float
+
+    def __init__(self, name: str, age: int, salary: float) -&gt; None:
+        self.name = name
+        self.age = age
+        self.salary = salary
+
+
+emp = Employee(&#x27;Two Drops&#x27;, 28, 12000.5)
+print(emp.name, emp.age, emp.salary)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Two Drops 28 12000.5</code></pre></div>
+<p>The three lines at the top of the class body are <strong>class-level hints</strong>, for type checkers and tools. Together with <code>self.xxx = xxx</code> in <code>__init__</code>, they make the class's "attribute blueprint" clear at a glance.</p>
+<p>Do "<code>name: str</code> in the class body" and "<code>self.name = name</code> in <code>__init__</code>" have to go together? Strictly no, but pairing them is safest. If you only declare in the class body without assigning in <code>__init__</code>, accessing it gives an <code>AttributeError</code>. If you only assign in <code>__init__</code> without declaring in the class body, the type checker has a less clear picture of the class's attributes.</p>
+<p>Instance methods follow the same rules. You don't hint <code>self</code>; hint the other parameters and the return value as normal:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class Wallet:
+    balance: float
+
+    def __init__(self, initial: float = 0) -&gt; None:
+        self.balance = initial
+
+    def deposit(self, amount: float) -&gt; float:
+        self.balance += amount
+        return self.balance
+
+    def can_afford(self, price: float) -&gt; bool:
+        return self.balance &gt;= price
+
+
+w = Wallet(100.0)
+print(w.deposit(50.5))
+print(w.can_afford(120))
+print(w.can_afford(160))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">150.5
+True
+False</code></pre></div>
+<p>The signatures read smoothly, right? <code>deposit</code> "takes a float, returns a float"; <code>can_afford</code> "takes a float, returns a bool". The intention is clear at a glance.</p>
+<p>Now think: after writing a few classes like this – "a bunch of attributes + an <code>__init__</code> that's all assignments" – doesn't it get annoying? You write every attribute twice (once in the class body, once in <code>__init__</code>).</p>
+<p>Yes – that's exactly the problem <code>dataclass</code> solves. It lets you write only the type declarations in the class body, and creates <code>__init__</code> for you automatically. We'll cover this in <code>python20</code>. Let's keep you in suspense for now.</p></article></section><section id="step-15" class="step-card item" data-kind="step" aria-label="Teaching step 16">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 16 / 20</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Protocol – duck typing for type hints</h3>
+<p>If you've used Python for a while, you've heard the saying: "If it walks like a duck and quacks like a duck, it's a duck." This is <strong>duck typing</strong>. One of Python's core ideas is: "I don't care whether you're an instance of the Duck class – as long as you can <code>quack()</code>, I'll treat you as a duck."</p>
+<p>But here's the problem: how do you say that with type hints? You can't write <code>def feed(d: Duck)</code> and force everyone to inherit from <code>Duck</code> – that goes against the whole idea of duck typing.</p>
+<p>Python 3.8 introduced <code>Protocol</code> (PEP 544) to solve exactly this. It means: <strong>as long as an object has the methods and attributes I need, it fits this protocol – even if it doesn't inherit from it.</strong></p>
+<p>Let's look at an example. The "Coding Dept" keeps lots of different animals, and we want a general function that "makes them make a sound":</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from typing import Protocol
+
+
+class Quacker(Protocol):
+    def quack(self) -&gt; str:
+        ...
+
+
+class Duck:
+    def quack(self) -&gt; str:
+        return &#x27;Quack quack quack&#x27;
+
+
+class Dog:
+    def quack(self) -&gt; str:
+        return &#x27;Woof woof woof (actually I am not a duck)&#x27;
+
+
+def let_it_quack(animal: Quacker) -&gt; None:
+    print(animal.quack())
+
+
+let_it_quack(Duck())
+let_it_quack(Dog())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Quack quack quack
+Woof woof woof (actually I am not a duck)</code></pre></div>
+<p>Look – neither <code>Duck</code> nor <code>Dog</code> inherits from <code>Quacker</code>, but they both have a <code>quack</code> method, so passing them to <code>let_it_quack</code> is fine. This is called <strong>structural subtyping</strong>. If you pass in an object <strong>without</strong> a <code>quack</code> method, the type checker complains straight away.</p>
+<p>The good thing about <code>Protocol</code> is that you don't need to plan the inheritance in advance – as long as the "shape" matches, it works. It's a really handy tool for writing libraries and frameworks.</p>
+<p>Here's a more realistic example. Say we want a tool function that prints the size of anything. Thinking in duck typing: "if you can call <code>len()</code> on it, it has a size":</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from typing import Protocol
+
+
+class Sized(Protocol):
+    def __len__(self) -&gt; int:
+        ...
+
+
+def show_size(obj: Sized) -&gt; None:
+    print(f&#x27;The size is {len(obj)}&#x27;)
+
+
+show_size(&#x27;Two&#x27;)
+show_size([1, 2, 3, 4])
+show_size({&#x27;a&#x27;: 1, &#x27;b&#x27;: 2})</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">The size is 3
+The size is 4
+The size is 2</code></pre></div>
+<p><code>str</code>, <code>list</code> and <code>dict</code> don't inherit from our <code>Sized</code>, but they all have <code>__len__</code>, so they all fit the protocol. This "by shape, not by inheritance" polymorphism is both flexible and type-safe.</p>
+<p><code>Protocol</code> can describe <strong>attributes</strong> as well as methods. For example, "I need an object with a <code>name</code> attribute":</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from typing import Protocol
+
+
+class HasName(Protocol):
+    name: str
+
+
+class Employee:
+    def __init__(self, name: str, dept: str) -&gt; None:
+        self.name = name
+        self.dept = dept
+
+
+class Pet:
+    def __init__(self, name: str, kind: str) -&gt; None:
+        self.name = name
+        self.kind = kind
+
+
+def shout_name(obj: HasName) -&gt; None:
+    print(f&#x27;Hello, {obj.name}!&#x27;)
+
+
+shout_name(Employee(&#x27;Two Drops&#x27;, &#x27;Coding Dept&#x27;))
+shout_name(Pet(&#x27;Goldie&#x27;, &#x27;duck&#x27;))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Hello, Two Drops!
+Hello, Goldie!</code></pre></div>
+<p><code>Employee</code> and <code>Pet</code> have nothing to do with each other, but both have a <code>name</code> attribute, so both can be passed to <code>shout_name</code>.</p>
+<p>This is really useful when writing libraries or middle layers – you don't force callers to inherit from your base class. Their existing types can plug straight in as long as the "shape" fits. It's extremely extensible.</p>
+<p>This is just a taste. <code>Protocol</code> has deeper features like <code>runtime_checkable</code> and attribute protocols – I'll leave those for curious readers to explore.</p></article></section><section id="step-16" class="step-card item" data-kind="step" aria-label="Teaching step 17">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 17 / 20</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Once you've written hints, how do you actually check the types?</h3>
+<p>By now you're probably asking: "I've written all these hints, but the Python interpreter doesn't enforce them. So how do I actually find type errors?"</p>
+<p>Answer: use a <strong>static type checker</strong>. The two common ones are:</p>
+<ul>
+<li><code>mypy</code>: the veteran, with the most mature community</li>
+<li><code>pyright</code>: made by Microsoft, fast – it's the core of Pylance in VS Code</li>
+</ul>
+<p>Pick either one. To install:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">pip install mypy</code></pre></div>
+<p>Say we've written a file <code>bad.py</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">def add(x: int, y: int) -&gt; int:
+    return x + y
+
+
+print(add(&#x27;Two Drops&#x27;, 3))</code></pre></div>
+<p><code>python bad.py</code> doesn't notice anything is wrong until that line actually runs (and then it crashes with a <code>TypeError</code>). But run <code>mypy bad.py</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">bad.py:5: error: Argument 1 to &quot;add&quot; has incompatible type &quot;str&quot;; expected &quot;int&quot;  [arg-type]
+Found 1 error in 1 file (checked 1 source file)</code></pre></div>
+<p>Now try another typical mistake – forgetting to handle <code>None</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">def find_id(name: str) -&gt; str | None:
+    db = {&#x27;Two Drops&#x27;: &#x27;001&#x27;}
+    return db.get(name)
+
+
+emp_id = find_id(&#x27;Four Drops&#x27;)
+print(emp_id.upper())</code></pre></div>
+<p>Running it with <code>python</code> gives <code>AttributeError: 'NoneType' object has no attribute 'upper'</code> – that would be a crash in the live app. But <code>mypy</code> warns you as soon as you've written the code:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">bad.py:7: error: Item &quot;None&quot; of &quot;str | None&quot; has no attribute &quot;upper&quot;  [union-attr]</code></pre></div>
+<p>See? For mistakes like "forgot to check for None", mypy is a lifesaver – edge cases you didn't think of, it finds by scanning the code.</p>
+<p>Errors that would slip through at runtime, mypy catches <strong>after you write the code but before you run it</strong>. That's the biggest point of type hints.</p>
+<p>In real projects, people usually add mypy or pyright to <strong>CI</strong> (automatic checks), running together with unit tests, to stop lots of silly mistakes before code is merged.</p>
+<p>You might ask again: "My IDE (PyCharm, VS Code) already underlines errors using the hints. Do I still need to run mypy separately?"</p>
+<p>Answer: <strong>yes, it's best to</strong>. Here's why:</p>
+<ul>
+<li>IDE underlines only show when you open that file. Old files nobody opens can hide type errors for years</li>
+<li>IDE settings can be different on different people's computers – some see the warnings, some don't</li>
+<li>Running mypy in CI is "objective and enforced" – if it fails, the code is blocked, and nobody can pretend they didn't see it</li>
+</ul>
+<p>So the recommended approach: <strong>rely on the IDE for instant feedback while coding, and let mypy/pyright guard the gate before code is submitted.</strong> With both lines of defence, type errors can really be controlled.</p>
+<p>One last common question: "If an old project has lots of code without hints, will mypy fill the screen with errors?" Yes. So for old projects, people usually <strong>add it gradually</strong>:</p>
+<ul>
+<li>First, loosen the checks in <code>mypy.ini</code> or <code>pyproject.toml</code> (<code>--ignore-missing-imports</code>, don't require return type hints, and so on)</li>
+<li>All new code gets hints; old code gets hints when you touch it</li>
+<li>After a few rounds, coverage slowly rises, and you gradually tighten the rules</li>
+</ul>
+<p>Never switch on <code>--strict</code> from day one – that basically means "I'm going to rewrite the whole project", and nobody can handle that. Step by step is the safe way.</p></article></section><section id="step-17" class="step-card item" data-kind="step" aria-label="Teaching step 18">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 18 / 20</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Some common questions</h3>
+<p>To finish, let's answer some questions people keep asking:</p>
+<p><strong>Q1: Do hints make Python slower?</strong></p>
+<p>Hardly at all. To the interpreter, hints are just "read them and store them in <code>__annotations__</code>". No checking happens at runtime. Unless a function is called extremely often and has extremely complicated hints, you won't be able to measure any difference. Write them without worrying.</p>
+<p><strong>Q2: Do hints clash with docstrings?</strong></p>
+<p>No – they work together. Hints cover <strong>types</strong>; docstrings cover <strong>business meaning, rules about behaviour, and examples</strong>. Using both gives the full picture:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def punch(name: str, dept: str = &#x27;Coding Dept&#x27;) -&gt; None:
+    &quot;&quot;&quot;Record an employee clocking in for work.
+
+    Args:
+        name: the employee&#x27;s nickname, e.g. &#x27;Two Drops&#x27;
+        dept: the department name, &#x27;Coding Dept&#x27; by default
+
+    Clock-ins are only recorded in memory, not written to a database.
+    &quot;&quot;&quot;
+    print(f&#x27;{name} ({dept}) clocked in&#x27;)
+
+
+punch(&#x27;Two Drops&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Two Drops (Coding Dept) clocked in</code></pre></div>
+<p><strong>Q3: Do I have to add hints to every line?</strong></p>
+<p>No. From most to least important:</p>
+<ol>
+<li><strong>Public functions/classes</strong> (ones other people will call): try to hint them all – this is the interface contract</li>
+<li><strong>Complicated business functions</strong> (many parameters, deep nesting): hint them, to make later maintenance easier</li>
+<li><strong>Simple one-off scripts</strong>: up to you; it's fine without</li>
+</ol>
+<p>In a loop like <code>for i in range(10): print(i)</code>, <code>i</code> is obviously an <code>int</code> – no need to force in <code>i: int</code>. The value of hints is <strong>removing confusion</strong>. Adding them where there's no confusion just makes code wordy.</p>
+<p><strong>Q4: What if a third-party library has no hints?</strong></p>
+<p>Lots of older libraries may not have hints. Then you can:</p>
+<ul>
+<li>Check whether the library has a <code>py.typed</code> marker (which means the author promises type support)</li>
+<li>If not, use the stub packages maintained by the <code>typeshed</code> community (package names are usually <code>types-xxx</code>)</li>
+<li>If there really is nothing, add a variable hint where you call it to "patch" it: <code>result: list[str] = some_legacy_lib.get_data()</code></li>
+</ul>
+<p>Popular modern libraries (FastAPI, httpx, Pydantic, SQLAlchemy 2.x and so on) have fully embraced type hints. When choosing a new library, it's worth checking this.</p></article></section><section id="step-18" class="step-card item" data-kind="step" aria-label="Teaching step 19">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 19 / 20</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Summary</h3>
+<p>At first, type hints look like extra work for Python. Once you get used to them, you'll love them. Three final points:</p>
+<ul>
+<li><strong>Hints are only for people and tools</strong> – the Python interpreter doesn't enforce them. To really check types, run mypy or pyright</li>
+<li><strong>Use the new syntax</strong>: <code>X | None</code> instead of <code>Optional[X]</code>, <code>list[int]</code> instead of <code>List[int]</code> – one less import, a lot cleaner</li>
+<li><strong>Start with signatures</strong>: function parameters and return values give you the most value for your effort. Add variable and class attribute hints as needed. When a type gets ridiculously long, give it a name with a type alias</li>
+</ul>
+<p>Build the habit of writing hints, and your code will get more professional every day.</p>
+<p>Finally, a little puzzle for curious readers: in this article we've seen <code>int | None</code>, <code>list[int]</code>, <code>Callable[[int, int], int]</code>, <code>Protocol</code>, type aliases… So how would you write a function that "takes any type T and returns a list of that same type T" (for example, "wrap any item in a one-item list")?</p>
+<p>Hint: you need <strong>generics</strong>. The keyword is <code>TypeVar</code>, or the new generic syntax in Python 3.12+ (<code>def wrap[T](x: T) -&gt; list[T]: ...</code>). It's a bit advanced, but once you've written a few tool functions and small frameworks, you'll naturally want to look it up. Good work takes time – let's take it slowly.</p>
+<p>Here are some more directions to explore after this chapter:</p>
+<ul>
+<li><code>Literal['get', 'post']</code>: limit a string to a few allowed values – great for writing API clients</li>
+<li><code>TypedDict</code>: give each key in a dictionary its own type – much better than <code>dict[str, Any]</code></li>
+<li><code>Final</code>: say "this variable must not be changed after it's assigned"</li>
+<li><code>@override</code> (Python 3.12+): clearly mark "I am overriding a parent class's method"</li>
+<li>The <code>Self</code> type (Python 3.11+): a neater way to write "returns myself" in a class</li>
+<li>Generic classes, generic functions, <code>ParamSpec</code>: standard tools for writing libraries</li>
+</ul>
+<p>These are all members of the type hint family. You don't need to learn them all at once – learning each one when you need it is the most efficient way.</p>
+<p>The most important thing about type hints isn't "learning them all" – it's <strong>using them</strong>. Starting today, add a signature every time you write a new function. Look back in a month, and you'll find your coding "muscle memory" has completely changed. That's enough.</p></article></section><section id="step-19" class="step-card item" data-kind="step" aria-label="Teaching step 20">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 20 / 20</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Once hints are written, is the input guaranteed to be correct?</h3>
+<p>We've explained what type hints are for. Now check for yourself how they differ from checks at runtime:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def add_minutes(first: int, second: int) -&gt; int:
+    return first + second
+
+
+print(add_minutes(5, 10))
+print(add_minutes(&#x27;5&#x27;, &#x27;10&#x27;))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">15
+510</code></pre></div>
+<p>The second time, we passed strings, and the interpreter still joined them together as strings. Hints help people and static checkers understand what you meant, but they don't automatically turn text into integers for us, or reject input that breaks our rules.</p>
+<p>Add a docstring to this function yourself, saying the unit is minutes, and decide whether negative numbers are allowed. "The type is an integer" only answers part of the question. Is it non-negative? Is there a maximum? What happens with an empty record? You still need to write down these rules clearly and test them.</p>
+<p>When reading, look at names and function interfaces first, then look up advanced hints as you need them. You don't have to master every type tool before writing a small function.</p></article></section><div class="lock-banner" hidden><span aria-hidden="true">🔒</span>Solve this exercise to unlock the next part ·<span class="accent lock-k">0</span><span aria-hidden="true">/</span><span>4</span></div><section id="lesson-end" aria-label="Chapter summary"><div class="done-banner" hidden><div class="done-emoji" aria-hidden="true">🎉</div><p class="done-title">Chapter complete!</p><p class="done-sub">You solved all 4 exercises in this chapter.</p></div><nav aria-label="Chapter navigation" class="chapter-nav"><div class="cn-grid"><a class="chap-nav prev focus-ring" href="/lessons/python16/decorator/"><span class="cn-label">← Previous chapter</span><span class="cn-title">16 · Decorators</span></a><div class="cn-mid"><span>Readable code</span></div><a class="chap-nav next focus-ring" href="/lessons/python18/pathlib/"><span class="cn-label">Next chapter →</span><span class="cn-title">18 · pathlib: modern path handling</span></a></div></nav></section></article></div>
+    <aside class="lesson-sidebar right" aria-label="This chapter"><nav aria-label="This chapter's contents"><div class="side-label up">In this chapter</div><p class="toc-chapter">Readable code</p><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Introduction</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">1. Quick Overview</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">2. Comments</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">3. Naming Rules</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">2. Early return</span></a></li><li class="toc-li" data-target="exercise-01-early-return"><a href="#exercise-01-early-return" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">Rewrite nested ifs with early returns</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">3. Comprehensions</span></a></li><li class="toc-li" data-target="exercise-02-list-comp"><a href="#exercise-02-list-comp" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">List comprehension: pick the positive numbers and square them</span></a></li><li class="toc-li" data-target="exercise-03-dict-comp"><a href="#exercise-03-dict-comp" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">Dict comprehension: double every price</span></a></li><li class="toc-li" data-target="step-6"><a href="#step-6" class="toc-link focus-ring"><span class="toc-kind">Teaching 07</span><span class="toc-title">Readable code</span></a></li><li class="toc-li" data-target="step-7"><a href="#step-7" class="toc-link focus-ring"><span class="toc-kind">Teaching 08</span><span class="toc-title">The simplest type hints</span></a></li><li class="toc-li" data-target="exercise-04-type-hints"><a href="#exercise-04-type-hints" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">Write a function with type hints</span></a></li><li class="toc-li" data-target="step-8"><a href="#step-8" class="toc-link focus-ring"><span class="toc-kind">Teaching 09</span><span class="toc-title">Common basic types</span></a></li><li class="toc-li" data-target="step-9"><a href="#step-9" class="toc-link focus-ring"><span class="toc-kind">Teaching 10</span><span class="toc-title">What if a function might return None?</span></a></li><li class="toc-li" data-target="step-10"><a href="#step-10" class="toc-link focus-ring"><span class="toc-kind">Teaching 11</span><span class="toc-title">How to hint container types</span></a></li><li class="toc-li" data-target="step-11"><a href="#step-11" class="toc-link focus-ring"><span class="toc-kind">Teaching 12</span><span class="toc-title">Variables can have hints too</span></a></li><li class="toc-li" data-target="step-12"><a href="#step-12" class="toc-link focus-ring"><span class="toc-kind">Teaching 13</span><span class="toc-title">Callable and Any – two special roles</span></a></li><li class="toc-li" data-target="step-13"><a href="#step-13" class="toc-link focus-ring"><span class="toc-kind">Teaching 14</span><span class="toc-title">Is your type too long? Give it a nickname (alias)</span></a></li><li class="toc-li" data-target="step-14"><a href="#step-14" class="toc-link focus-ring"><span class="toc-kind">Teaching 15</span><span class="toc-title">How to hint class attributes</span></a></li><li class="toc-li" data-target="step-15"><a href="#step-15" class="toc-link focus-ring"><span class="toc-kind">Teaching 16</span><span class="toc-title">Protocol – duck typing for type hints</span></a></li><li class="toc-li" data-target="step-16"><a href="#step-16" class="toc-link focus-ring"><span class="toc-kind">Teaching 17</span><span class="toc-title">Once you&#x27;ve written hints, how do you actually check the types?</span></a></li><li class="toc-li" data-target="step-17"><a href="#step-17" class="toc-link focus-ring"><span class="toc-kind">Teaching 18</span><span class="toc-title">Some common questions</span></a></li><li class="toc-li" data-target="step-18"><a href="#step-18" class="toc-link focus-ring"><span class="toc-kind">Teaching 19</span><span class="toc-title">Summary</span></a></li><li class="toc-li" data-target="step-19"><a href="#step-19" class="toc-link focus-ring"><span class="toc-kind">Teaching 20</span><span class="toc-title">Once hints are written, is the input guaranteed to be correct?</span></a></li></ol></nav></aside>
+  </div>
+  <dialog class="dir-dialog" aria-labelledby="dir-title"><div class="dd-inner"><div class="dd-head"><h2 id="dir-title">Contents</h2><button type="button" class="dd-close focus-ring">Close</button></div>
+  <div class="dd-tabs" aria-label="Contents scope"><button type="button" class="dd-tab focus-ring" data-tab="all" aria-pressed="true">All lessons</button><button type="button" class="dd-tab focus-ring" data-tab="chapter" aria-pressed="false">This chapter</button></div>
+  <div class="dd-body"><div class="dd-pane" data-pane="all"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></div><div class="dd-pane" data-pane="chapter" hidden><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Introduction</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">1. Quick Overview</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">2. Comments</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">3. Naming Rules</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">2. Early return</span></a></li><li class="toc-li" data-target="exercise-01-early-return"><a href="#exercise-01-early-return" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">Rewrite nested ifs with early returns</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">3. Comprehensions</span></a></li><li class="toc-li" data-target="exercise-02-list-comp"><a href="#exercise-02-list-comp" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">List comprehension: pick the positive numbers and square them</span></a></li><li class="toc-li" data-target="exercise-03-dict-comp"><a href="#exercise-03-dict-comp" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">Dict comprehension: double every price</span></a></li><li class="toc-li" data-target="step-6"><a href="#step-6" class="toc-link focus-ring"><span class="toc-kind">Teaching 07</span><span class="toc-title">Readable code</span></a></li><li class="toc-li" data-target="step-7"><a href="#step-7" class="toc-link focus-ring"><span class="toc-kind">Teaching 08</span><span class="toc-title">The simplest type hints</span></a></li><li class="toc-li" data-target="exercise-04-type-hints"><a href="#exercise-04-type-hints" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">Write a function with type hints</span></a></li><li class="toc-li" data-target="step-8"><a href="#step-8" class="toc-link focus-ring"><span class="toc-kind">Teaching 09</span><span class="toc-title">Common basic types</span></a></li><li class="toc-li" data-target="step-9"><a href="#step-9" class="toc-link focus-ring"><span class="toc-kind">Teaching 10</span><span class="toc-title">What if a function might return None?</span></a></li><li class="toc-li" data-target="step-10"><a href="#step-10" class="toc-link focus-ring"><span class="toc-kind">Teaching 11</span><span class="toc-title">How to hint container types</span></a></li><li class="toc-li" data-target="step-11"><a href="#step-11" class="toc-link focus-ring"><span class="toc-kind">Teaching 12</span><span class="toc-title">Variables can have hints too</span></a></li><li class="toc-li" data-target="step-12"><a href="#step-12" class="toc-link focus-ring"><span class="toc-kind">Teaching 13</span><span class="toc-title">Callable and Any – two special roles</span></a></li><li class="toc-li" data-target="step-13"><a href="#step-13" class="toc-link focus-ring"><span class="toc-kind">Teaching 14</span><span class="toc-title">Is your type too long? Give it a nickname (alias)</span></a></li><li class="toc-li" data-target="step-14"><a href="#step-14" class="toc-link focus-ring"><span class="toc-kind">Teaching 15</span><span class="toc-title">How to hint class attributes</span></a></li><li class="toc-li" data-target="step-15"><a href="#step-15" class="toc-link focus-ring"><span class="toc-kind">Teaching 16</span><span class="toc-title">Protocol – duck typing for type hints</span></a></li><li class="toc-li" data-target="step-16"><a href="#step-16" class="toc-link focus-ring"><span class="toc-kind">Teaching 17</span><span class="toc-title">Once you&#x27;ve written hints, how do you actually check the types?</span></a></li><li class="toc-li" data-target="step-17"><a href="#step-17" class="toc-link focus-ring"><span class="toc-kind">Teaching 18</span><span class="toc-title">Some common questions</span></a></li><li class="toc-li" data-target="step-18"><a href="#step-18" class="toc-link focus-ring"><span class="toc-kind">Teaching 19</span><span class="toc-title">Summary</span></a></li><li class="toc-li" data-target="step-19"><a href="#step-19" class="toc-link focus-ring"><span class="toc-kind">Teaching 20</span><span class="toc-title">Once hints are written, is the input guaranteed to be correct?</span></a></li></ol></div></div></div></dialog>
+  <div class="py-toast" hidden><span class="spinner"></span><span class="py-toast-text">Loading Python…</span></div>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>© 2026 Python for Beginners · English edition of the <a href="https://github.com/walter201230/Python">walter201230/Python</a> tutorial (CC BY 4.0)</span>
+    <div class="footer-links"><a href="/">Course list</a><a href="/about/">About this site</a><a href="https://github.com/walter201230/Python">GitHub</a></div>
+  </div>
+</footer>
+<script src="/assets/site.js?v=20261028"></script>
+</body>
+</html>

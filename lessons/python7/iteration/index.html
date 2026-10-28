@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Iteration – Python for Beginners</title>
+<meta name="description" content="How for...in works, custom iterators, and generator functions with yield.">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css?v=20261028">
+
+</head>
+<body data-page="lesson" data-lesson="python7" data-total="5">
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="/" aria-label="Python for Beginners – home"><span class="gradient-text-flow" data-text="Python for Beginners">Python for Beginners</span></a>
+    <nav class="header-nav">
+      <a class="nav-link" href="/about/">About</a>
+      <a class="nav-icon focus-ring" href="https://github.com/walter201230/Python" aria-label="Original tutorial on GitHub" title="Original tutorial on GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+      <button type="button" class="theme-toggle focus-ring" aria-label="Switch theme"><span class="knob"><svg class="ic-moon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button>
+    </nav>
+  </div>
+</header>
+<main class="site-main">
+<div class="lesson-shell bg-tech-grid">
+  <div class="mobile-bar"><div class="mb-inner"><button type="button" class="dir-btn focus-ring" aria-haspopup="dialog">Contents</button></div></div>
+  <div class="lesson-columns">
+    <aside class="lesson-sidebar left" aria-label="All lessons"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></aside>
+    <div class="lesson-main"><article class="lesson-article"><header class="lesson-head"><h1>Iteration</h1><p class="lh-sub"><span class="accent">5</span> exercises<span class="sep">·</span>about <span class="accent">60</span> min<span class="sep">·</span>solve one to unlock the next part</p>
+<p class="lh-link"><a class="subtle-link focus-ring" href="/lessons/python7/iteration/read/">Read the whole chapter →</a></p></header><section id="step-0" class="step-card item" data-kind="step" aria-label="Teaching step 1">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 01 / 06</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>Introduction</h2>
+<p>This part has quite a lot in it, and it's harder to understand than earlier parts. Beginners might feel totally lost after reading it – that's normal. If you're confused after reading, I suggest you keep going with the later chapters, and come back to read this again a few times once you've finished.</p>
+<p>Note: This is also the one chapter I didn't change during my second round of edits.</p>
+<h2>Contents</h2>
+<p>Iterators and Generators</p>
+<ul>
+<li>1. Iteration</li>
+<li>2. Python Iterators</li>
+<li>3. List Comprehensions<ul>
+<li>1. Ways to create a list</li>
+<li>2. Writing a list comprehension</li>
+</ul>
+</li>
+<li>4. Generators<ul>
+<li>1. Why we need generators</li>
+<li>2. Creating a generator</li>
+<li>3. Looping through a generator</li>
+<li>4. Writing a generator as a function</li>
+<li>5. Printing Pascal's triangle</li>
+</ul>
+</li>
+<li>5. Examples Using Iterators and Generators Together<ul>
+<li>1. Looping backwards</li>
+<li>2. Looping through several sequences at once</li>
+</ul>
+</li>
+</ul></article></section><section id="step-1" class="step-card item" data-kind="step" aria-label="Teaching step 2">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 02 / 06</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>1. Iteration</h2>
+<p>What is <strong>iteration</strong>?</p>
+<p>In Java, for example, we use index numbers to go through the elements of a List. In Python, given a list or tuple, we can use a <code>for</code> loop to go through it. Going through things one by one like this is called <strong>iteration</strong>.</p>
+<p>But Python's <code>for</code> loop is more general than Java's <code>for</code> loop. Why? Because Python's <code>for</code> loop doesn't only work on lists and tuples – it works on any other <strong>iterable</strong> object too.</p>
+<p>In other words, anything that is iterable can be looped over, whether it has index numbers or not.</p>
+<p>For example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">
+# -*- coding: UTF-8 -*-
+
+# 1. Use a for loop to go through a string
+for char in &#x27;liangdianshui&#x27; :
+    print ( char , end = &#x27; &#x27; )
+
+print(&#x27;\n&#x27;)
+
+# 2. Use a for loop to go through a list
+list1 = [1,2,3,4,5]
+for num1 in list1 :
+    print ( num1 , end = &#x27; &#x27; )
+
+print(&#x27;\n&#x27;)
+
+# 3. A for loop can also go through a dict
+dict1 = {&#x27;name&#x27;:&#x27;Two Drops&#x27;,&#x27;age&#x27;:&#x27;23&#x27;,&#x27;sex&#x27;:&#x27;Male&#x27;}
+
+for key in dict1 :    # Go through the keys in the dict
+    print ( key , end = &#x27; &#x27; )
+
+print(&#x27;\n&#x27;)
+
+for value in dict1.values() :   # Go through the values in the dict
+	print ( value , end = &#x27; &#x27; )
+
+print (&#x27;\n&#x27;)
+
+# If each element in a list has two parts, that&#x27;s easy to loop through too
+for x , y in [ (1,&#x27;a&#x27;) , (2,&#x27;b&#x27;) , (3,&#x27;c&#x27;) ] :
+	print ( x , y )</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">l i a n g d i a n s h u i 
+
+1 2 3 4 5 
+
+name age sex 
+
+Two Drops 23 Male 
+
+1 a
+2 b
+3 c</code></pre></div></article></section><section id="exercise-01-for-iterate" class="ex-card item" data-kind="exercise" data-exercise="01-for-iterate" aria-label="Exercise 1: Add up a list with for">
+<script type="application/json" class="ex-data">{"id": "01-for-iterate", "lesson": "python7", "starter": "numbers = [1, 2, 3, 4, 5]\n# First set total to 0, then use a for loop to add each item to it\n# Print total after the loop\n", "solution": "numbers = [1, 2, 3, 4, 5]\ntotal = 0\nfor n in numbers:\n    total = total + n\nprint(total)", "grading": {"requiredAst": ["For"], "stdoutEquals": "15\n", "varsEqual": {"total": 15}}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 1 / 5</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Add up a list with for</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Here's a list for you:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">numbers = [1, 2, 3, 4, 5]</code></pre></div>
+<p>Use a <code>for</code> loop to add up all the items in <code>numbers</code>, put the result in the variable <code>total</code>, then <code>print(total)</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">15</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>Inside the for loop, add each n to total</p></li></template><template class="hint-tpl"><li><p>Remember to print(total) after the loop, not inside it</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">numbers = [1, 2, 3, 4, 5]
+total = 0
+for n in numbers:
+    total = total + n
+print(total)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">numbers = [1, 2, 3, 4, 5]
+# First set total to 0, then use a for loop to add each item to it
+# Print total after the loop
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-2" class="step-card item" data-kind="step" aria-label="Teaching step 3">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 03 / 06</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>2. Python Iterators</h2>
+<p>Above, we briefly introduced iteration. Iteration is one of Python's most powerful features, and it's a way to get at the elements of a collection. Now for the main topic: <strong>iterators</strong>. An iterator is an object that <strong>remembers where it is</strong> while looping through something.</p>
+<p>An iterator starts at the first element of a collection and keeps going until every element has been visited.</p>
+<p>An iterator can only go <strong>forward</strong>, never backward.</p>
+<p>Iterators have two basic functions: <code>iter()</code> and <code>next()</code>. Strings, lists and tuples can all be used to make an iterator. You can loop through an iterator with a normal <code>for</code> statement, or with the <code>next()</code> function.</p>
+<p>Example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># 1. Make an iterator from a string
+str1 = &#x27;liangdianshui&#x27;
+iter1 = iter ( str1 )
+
+# 2. Make an iterator from a list
+list1 = [1,2,3,4]
+iter2 = iter ( list1 )
+
+# 3. Make an iterator from a tuple
+tuple1 = ( 1,2,3,4 )
+iter3 = iter ( tuple1 )
+
+# Use a for loop to go through the iterator
+for x in iter1 :
+    print ( x , end = &#x27; &#x27; )
+
+print(&#x27;\n------------------------&#x27;)
+ 
+# Use next() to go through the iterator
+while True :
+    try :
+        print ( next ( iter3 ) )
+    except StopIteration :
+        break</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">l i a n g d i a n s h u i 
+------------------------
+1
+2
+3
+4</code></pre></div></article></section><section id="exercise-02-iter-next" class="ex-card item" data-kind="exercise" data-exercise="02-iter-next" aria-label="Exercise 2: Take items one by one with iter and next">
+<script type="application/json" class="ex-data">{"id": "02-iter-next", "lesson": "python7", "starter": "nums = [10, 20, 30]\n# Use iter() to turn nums into an iterator, assign it to it\n# Then use next(it) three times, printing each one\n", "solution": "nums = [10, 20, 30]\nit = iter(nums)\nprint(next(it))\nprint(next(it))\nprint(next(it))", "grading": {"requiredAst": ["Assign:it"], "stdoutEquals": "10\n20\n30\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 2 / 5</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Take items one by one with iter and next</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Here's a list for you:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">nums = [10, 20, 30]</code></pre></div>
+<p>Please:</p>
+<ol>
+<li>Use <code>iter()</code> to turn <code>nums</code> into an iterator and assign it to the variable <code>it</code>.</li>
+<li>Use <code>next(it)</code> three times in a row, printing each one.</li>
+</ol>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">10
+20
+30</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>iter(nums) turns a list into an iterator object</p></li></template><template class="hint-tpl"><li><p>Each call to next(it) gives you the next item</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">nums = [10, 20, 30]
+it = iter(nums)
+print(next(it))
+print(next(it))
+print(next(it))</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">nums = [10, 20, 30]
+# Use iter() to turn nums into an iterator, assign it to it
+# Then use next(it) three times, printing each one
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-3" class="step-card item" data-kind="step" aria-label="Teaching step 4">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 04 / 06</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>3. List Comprehensions</h2>
+<h3>1. Ways to Create a List</h3>
+<p>From what we've learned, we know how to create a list. But sometimes, creating a list by assigning values is too much work – especially for lists that follow a pattern. Writing and assigning each value one by one is a pain. Say we want a list of 30 elements, from 1 to 30. We can write:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+
+list1=list ( range (1,31) )
+print(list1)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]</code></pre></div>
+<p>We actually mentioned this before when we printed the times tables. With that method it only took a few lines of code. See the earlier chapter: <a href="/lessons/python5/conditions-and-loops/">Examples Using Conditions and Loops Together</a></p>
+<p>But with a <strong>list comprehension</strong>, you can make the times tables in <strong>one line</strong> of code.</p>
+<p>You heard that right – one line.</p>
+<p>Here it is:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">print(&#x27;\n&#x27;.join([&#x27; &#x27;.join (f&#x27;{x}x{y}={x*y:2d}&#x27;  for x in range(1,y+1)) for y in range(1,10)]))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">1x1= 1
+1x2= 2 2x2= 4
+1x3= 3 2x3= 6 3x3= 9
+1x4= 4 2x4= 8 3x4=12 4x4=16
+1x5= 5 2x5=10 3x5=15 4x5=20 5x5=25
+1x6= 6 2x6=12 3x6=18 4x6=24 5x6=30 6x6=36
+1x7= 7 2x7=14 3x7=21 4x7=28 5x7=35 6x7=42 7x7=49
+1x8= 8 2x8=16 3x8=24 4x8=32 5x8=40 6x8=48 7x8=56 8x8=64
+1x9= 9 2x9=18 3x9=27 4x9=36 5x9=45 6x9=54 7x9=63 8x9=72 9x9=81</code></pre></div>
+<p>But first, we need to learn how to write a list comprehension.</p>
+<h3>2. Writing a List Comprehension</h3>
+<p>First, here's the syntax of a list comprehension:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">[expr for iter_var in iterable] 
+[expr for iter_var in iterable if cond_expr]</code></pre></div>
+<p>The first form: loop through everything in <code>iterable</code>. Each time, put the current item into <code>iter_var</code>, use <code>iter_var</code> in the expression, and finally build a list from the results of the expression.</p>
+<p>The second form adds a condition. Only items that meet the condition are put into <code>iter_var</code> and used in the expression. Then a list is built from the results.</p>
+<p>It's not hard to understand. Since it makes a list, it's wrapped in <code>[]</code>. Inside, the element you want to make goes <strong>first</strong>, followed by a <code>for</code> loop, or a <code>for</code> loop plus a condition.</p>
+<p>Example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+list1=[x * x for x in range(1, 11)]
+print(list1)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]</code></pre></div>
+<p>You can see we put the element we want, <code>x * x</code>, at the front, followed by a <code>for</code> loop – and the list is created. What about when there's an <code>if</code> after the <code>for</code> loop? How do we understand that?</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+list1= [x * x for x in range(1, 11) if x % 2 == 0]
+print(list1)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[4, 16, 36, 64, 100]</code></pre></div>
+<p>This example finds the squares of the even numbers from 1 to 10. As we said, <code>x * x</code> is the element to make. The rest is really just an <code>if</code> check inside a <code>for</code> loop.</p>
+<p>With this in mind, you can guess that a <code>for</code> loop can also go inside another <code>for</code> loop. Example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+list1= [(x+1,y+1) for x in range(3) for y in range(5)] 
+print(list1)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (2, 1), (2, 2), (2, 3), (2, 4), (2, 5), (3, 1), (3, 2), (3, 3), (3, 4), (3, 5)]</code></pre></div>
+<p>Once you know how a list comprehension is put together, it's not hard to understand. A list comprehension just combines things we've already learned into a shorter way of writing them.</p></article></section><section id="exercise-03-list-comp" class="ex-card item" data-kind="exercise" data-exercise="03-list-comp" aria-label="Exercise 3: List comprehension: squares of even numbers">
+<script type="application/json" class="ex-data">{"id": "03-list-comp", "lesson": "python7", "starter": "# result = [... for ... in range(...) if ...]\n# print(result)\n", "solution": "result = [x * x for x in range(1, 11) if x % 2 == 0]\nprint(result)", "grading": {"requiredAst": ["ListComp"], "stdoutEquals": "[4, 16, 36, 64, 100]\n", "varsEqual": {"result": [4, 16, 36, 64, 100]}}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 3 / 5</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">List comprehension: squares of even numbers</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Use <strong>one line</strong> of list comprehension to make the <strong>squares of all the even numbers</strong> from 1 to 10 (including 10), assign it to the variable <code>result</code>, then <code>print(result)</code>.</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[4, 16, 36, 64, 100]</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>1 to 10 (including 10) is range(1, 11)</p></li></template><template class="hint-tpl"><li><p>Checking for even: x % 2 == 0</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">result = [x * x for x in range(1, 11) if x % 2 == 0]
+print(result)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># result = [... for ... in range(...) if ...]
+# print(result)
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-4" class="step-card item" data-kind="step" aria-label="Teaching step 5">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 05 / 06</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>4. Generators</h2>
+<h3>1. Why We Need Generators</h3>
+<p>From what we just learned, a list comprehension lets us create a list directly.</p>
+<p>But memory is limited, so a list can't be infinitely big. Also, creating a list with 10 million elements takes up a lot of space. And if we only need the first few elements, the space used by all the rest is completely wasted.</p>
+<p><strong>So, if the elements of a list can be worked out with some rule, could we work out each next element while we loop, instead of all at once?</strong></p>
+<p>Then we wouldn't need to build the whole list, and we'd save lots of space.</p>
+<p><strong>In Python, this "work it out as you loop" mechanism is called a generator.</strong></p>
+<p>In Python, a function that uses <code>yield</code> is called a <strong>generator</strong>.</p>
+<p>Unlike a normal function, a generator is a function that returns an iterator. It can only be used for iteration. To put it more simply, a generator <strong>is</strong> an iterator.</p>
+<p>While a generator runs, each time it reaches <code>yield</code>, the function <strong>pauses</strong>, saves everything about where it is, and gives back the <code>yield</code> value. The next time <code>next()</code> is called, it carries on from where it stopped.</p>
+<p>So how do we create a generator?</p>
+<h3>2. Creating a Generator</h3>
+<p>The very simplest way is to change the <code>[]</code> of a list comprehension to <code>()</code>:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+gen= (x * x for x in range(10))
+print(gen)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">&lt;generator object &lt;genexpr&gt; at 0x0000000002734A40&gt;</code></pre></div>
+<p>The only difference between creating a List and a generator is the outer <code>[]</code> versus <code>()</code>.</p>
+<p>But a generator doesn't really create a list of numbers. Instead it returns a generator, which works out one item at a time and "yields" (produces) it.</p>
+<p>Generator expressions use <strong>lazy evaluation</strong>. Values are only worked out when they're asked for, so for long lists they use memory much more efficiently.</p>
+<p>Now that we know how to create a generator, how do we see what's inside?</p>
+<h3>3. Looping Through a Generator</h3>
+<p>Our first thought for going through things is a <code>for</code> loop. Right, let's try it:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+gen= (x * x for x in range(10))
+
+for num  in  gen :
+	print(num)</code></pre></div>
+<p>That's right – it just works. And since we talked about iterators above, can we go through it with <code>next()</code>? Of course we can.</p>
+<h3>4. Writing a Generator as a Function</h3>
+<p>We said above that the very simplest way to create a generator is to change a list comprehension's <code>[]</code> to <code>()</code>. So why are we suddenly creating one with a function?</p>
+<p>A generator is a kind of iterator, but you can only loop through it <strong>once</strong>.</p>
+<p>That's because it doesn't store all its values in memory – it makes them as it runs. You use it by looping, either with a <code>for</code> loop, or by passing it to any function or structure that can loop.</p>
+<p>In real code, most generators are written as <strong>functions</strong>. So how do we create one with a function?</p>
+<p>Wait a moment – look at this example first:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+def my_function():
+    for i in range(10):
+        print ( i )
+
+my_function()</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">0
+1
+2
+3
+4
+5
+6
+7
+8
+9</code></pre></div>
+<p>To turn it into a generator, just change <code>print ( i )</code> to <code>yield i</code>. Here's the changed example:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+def my_function():
+    for i in range(10):
+        yield i
+
+print(my_function())</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">&lt;generator object my_function at 0x0000000002534A40&gt;</code></pre></div>
+<p>But this example doesn't really suit a generator – it doesn't show what's special about them. Generators are best when you <strong>don't</strong> want to put a huge set of results into memory all at once, especially when making those results involves loops. Doing that would use a lot of resources.</p>
+<p>For example, here's a generator for the Fibonacci sequence:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+def fibon(n):
+    a = b = 1
+    for i in range(n):
+        yield a
+        a, b = b, a + b
+
+# Use the function
+for x in fibon(1000000):
+    print(x , end = &#x27; &#x27;)</code></pre></div>
+<p>What happens when you run it (the output keeps scrolling with Fibonacci numbers; the first few look like this):</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597 2584 4181 6765 ...</code></pre></div>
+<p>See? Even with a huge argument like that, it doesn't freeze, because it doesn't use many resources. The hardest part to understand is that a generator runs <strong>differently</strong> from a normal function. A normal function runs from top to bottom and returns when it hits <code>return</code> or its last line. A generator function runs each time <code>next()</code> is called, returns when it hits <code>yield</code>, and next time continues from that <code>yield</code>.</p>
+<p>For example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+def odd():
+    print ( &#x27;step 1&#x27; )
+    yield ( 1 )
+    print ( &#x27;step 2&#x27; )
+    yield ( 3 )
+    print ( &#x27;step 3&#x27; )
+    yield ( 5 )
+
+o = odd()
+print( next( o ) )
+print( next( o ) )
+print( next( o ) )</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">step 1
+1
+step 2
+3
+step 3
+5</code></pre></div>
+<p>You can see <code>odd</code> isn't a normal function – it's a generator. When it hits <code>yield</code>, it stops, and next time it carries on. After 3 <code>yield</code>s, there are no more. If you call <code>print( next( o ) )</code> again, you'll get an error. So you usually need to catch errors when using generator functions.</p>
+<h3>5. Printing Pascal's Triangle</h3>
+<p>Now that we've learned about generators, we can use them to print <strong>Pascal's triangle</strong>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+def triangles( n ):         # Pascal&#x27;s triangle
+    L = [1]
+    while True:
+        yield L
+        L.append(0)
+        L = [ L [ i -1 ] + L [ i ] for i in range (len(L))]
+
+n= 0
+for t in triangles( 10 ):   # Just change the function name to run it
+    print(t)
+    n = n + 1
+    if n == 10:
+        break</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">[1]
+[1, 1]
+[1, 2, 1]
+[1, 3, 3, 1]
+[1, 4, 6, 4, 1]
+[1, 5, 10, 10, 5, 1]
+[1, 6, 15, 20, 15, 6, 1]
+[1, 7, 21, 35, 35, 21, 7, 1]
+[1, 8, 28, 56, 70, 56, 28, 8, 1]
+[1, 9, 36, 84, 126, 126, 84, 36, 9, 1]</code></pre></div>
+<h3>Why is the second loop empty?</h3>
+<p>Now that we've seen generators, let's try one with study time. First predict the three outputs, especially the last one:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def valid_minutes(records):
+    for minutes in records:
+        if minutes &gt;= 0:
+            yield minutes
+
+
+source = valid_minutes([15, 0, 10])
+print(next(source))
+print(list(source))
+print(list(source))</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">15
+[0, 10]
+[]</code></pre></div>
+<p>The first <code>next()</code> already took one value. Then <code>list(source)</code> keeps taking values until they're all used up. The last line still uses the <strong>same</strong> generator, and it doesn't go back to the start by itself.</p>
+<p>If you want to loop through again, call <code>valid_minutes(...)</code> again to make a <strong>new</strong> generator. If you want to use the same worked-out results many times, you can save them into a list first, depending on how much data there is and what you need. Choose based on what you really need.</p>
+<p>Try it yourself: change the input to <code>[-3, 0, 5]</code>. The three outputs should be <code>0</code>, <code>[5]</code> and <code>[]</code>. If the input is empty, calling <code>next(source)</code> raises <code>StopIteration</code>. You can try <code>next(source, 'No records')</code> and think about whether you really need that default result. Don't think "iterable" means "starts again from the beginning every time you loop".</p></article></section><section id="exercise-04-generator" class="ex-card item" data-kind="exercise" data-exercise="04-generator" aria-label="Exercise 4: Write a generator function">
+<script type="application/json" class="ex-data">{"id": "04-generator", "lesson": "python7", "starter": "# Define a generator function count_up(n) that yields 1 to n in turn\n# Then use a for loop over count_up(5), printing each one\n", "solution": "def count_up(n):\n    for i in range(1, n + 1):\n        yield i\n\nfor x in count_up(5):\n    print(x)", "grading": {"requiredAst": ["FunctionDef:count_up", "Yield"], "stdoutEquals": "1\n2\n3\n4\n5\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 4 / 5</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Write a generator function</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Define a <strong>generator function</strong> <code>count_up(n)</code> that <code>yield</code>s <code>1, 2, ..., n</code> in turn.</p>
+<p>Then use a <code>for</code> loop to go through <code>count_up(5)</code>, printing each value (one number per line).</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">1
+2
+3
+4
+5</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 3)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>Change print(i) in a normal function to yield i, and it becomes a generator function</p></li></template><template class="hint-tpl"><li><p>Use range(1, n + 1) so that n itself is included</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def count_up(n):
+    for i in range(1, n + 1):
+        yield i
+
+for x in count_up(5):
+    print(x)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor"># Define a generator function count_up(n) that yields 1 to n in turn
+# Then use a for loop over count_up(5), printing each one
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><section id="step-5" class="step-card item" data-kind="step" aria-label="Teaching step 6">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 06 / 06</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>5. Examples Using Iterators and Generators Together</h2>
+<p>Iterators and generators are closely connected, so some ideas need to be looked at together.</p>
+<h3>1. Looping Backwards</h3>
+<p>Looping backwards is something you'll often need. In the first iteration example, we printed the elements of a list from 1 to 5:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">list1 = [1,2,3,4,5]
+for num1 in list1 :
+    print ( num1 , end = &#x27; &#x27; )</code></pre></div>
+<p>What about from 5 to 1? That's easy too. Python has a built-in function <code>reversed()</code>:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">list1 = [1,2,3,4,5]
+for num1 in reversed(list1) :
+    print ( num1 , end = &#x27; &#x27; )</code></pre></div>
+<p>Looping backwards is simple, but note: <strong>it only works if the object's size can be known in advance, or if the object has a special <code>__reversed__()</code> method. If neither is true, you must first turn the object into a list.</strong></p>
+<p>Often, we can make a custom class loop backwards by giving it a <code>__reversed__()</code> method. Some of this hasn't been covered in earlier chapters yet, but have a look anyway. If you have some programming experience, you should be able to follow after learning the above.</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+
+class Countdown:
+    def __init__(self, start):
+        self.start = start
+
+    def __iter__(self):
+    	# Forward iterator
+        n = self.start
+        while n &gt; 0:
+            yield n
+            n -= 1
+
+    def __reversed__(self):
+    	# Reverse iterator
+        n = 1
+        while n &lt;= self.start:
+            yield n
+            n += 1
+
+for rr in reversed(Countdown(30)):
+    print(rr)
+for rr in Countdown(30):
+    print(rr)</code></pre></div>
+<p>The output is 1 to 30, then 30 to 1 – first in the reversed order, then in the normal order.</p>
+<h3>2. Looping Through Several Sequences at Once</h3>
+<p>Do you want to loop through several sequences at the same time, taking one element from each one each time? Have you needed that?</p>
+<p>To loop through several sequences at once, use the <code>zip()</code> function. Example:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+
+names = [&#x27;laingdianshui&#x27;, &#x27;twowater&#x27;, &#x27;Two Drops&#x27;]
+ages = [18, 19, 20]
+for name, age in zip(names, ages):
+     print(name,age)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">laingdianshui 18
+twowater 19
+Two Drops 20</code></pre></div>
+<p><code>zip(a, b)</code> makes an iterator that gives back tuples <code>(x, y)</code>, where <code>x</code> comes from <code>a</code> and <code>y</code> comes from <code>b</code>. As soon as one of the sequences reaches its end, the loop stops. So the number of loops is the length of the <strong>shortest</strong> sequence. Make sure you understand this: if <code>a</code> and <code>b</code> are different lengths, it goes by the shortest one and stops when that one runs out.</p>
+<p>With <code>zip()</code>, we can also turn a list of keys and a list of values into a dict:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># -*- coding: UTF-8 -*-
+
+names = [&#x27;laingdianshui&#x27;, &#x27;twowater&#x27;, &#x27;Two Drops&#x27;]
+ages = [18, 19, 20]
+
+dict1= dict(zip(names,ages))
+
+print(dict1)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">{&#x27;laingdianshui&#x27;: 18, &#x27;twowater&#x27;: 19, &#x27;Two Drops&#x27;: 20}</code></pre></div>
+<p>One more thing: <code>zip()</code> can take more than two sequences – not just two.</p></article></section><section id="exercise-05-zip-pair" class="ex-card item" data-kind="exercise" data-exercise="05-zip-pair" aria-label="Exercise 5: Pair up two lists with zip">
+<script type="application/json" class="ex-data">{"id": "05-zip-pair", "lesson": "python7", "starter": "names = ['Alice', 'Bob', 'Cathy']\nages = [18, 19, 20]\n# Use zip to pair the two lists; in the for loop, unpack into name and age and print each pair\n", "solution": "names = ['Alice', 'Bob', 'Cathy']\nages = [18, 19, 20]\nfor name, age in zip(names, ages):\n    print(name, age)", "grading": {"requiredAst": ["For"], "stdoutEquals": "Alice 18\nBob 19\nCathy 20\n"}}</script>
+<header class="ex-head">
+  <div class="ex-top"><span class="ex-label"><span class="pulse-dot"></span>Exercise 5 / 5</span><span class="ex-sep" aria-hidden="true">·</span><span class="ex-title">Pair up two lists with zip</span>
+  <span class="ex-solved-badge" hidden>✓ Solved</span></div>
+  <div class="prose prose-sm ex-prompt"><p>Here are two lists for you:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">names = [&#x27;Alice&#x27;, &#x27;Bob&#x27;, &#x27;Cathy&#x27;]
+ages = [18, 19, 20]</code></pre></div>
+<p>Use <code>zip()</code> to pair them up, then use a <code>for</code> loop to print each pair in the format <code>name age</code> (with <strong>one space</strong> between).</p>
+<p>The output should be:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Alice 18
+Bob 19
+Cathy 20</code></pre></div></div>
+  <div class="ex-hints"><button type="button" class="hint-btn focus-ring">💡 Hint (<span class="hint-n">0</span> / 4)</button><ol class="hint-list"></ol><template class="hint-tpl"><li><p>zip(names, ages) takes one item from each list at the same time, making (name, age)</p></li></template><template class="hint-tpl"><li><p>Unpack straight in the for: for name, age in zip(...)</p></li></template><template class="hint-tpl"><li><p>print(name, age) separates them with a space by default</p></li></template><template class="hint-tpl"><li><p>Full code:</p><div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">names = [&#x27;Alice&#x27;, &#x27;Bob&#x27;, &#x27;Cathy&#x27;]
+ages = [18, 19, 20]
+for name, age in zip(names, ages):
+    print(name, age)</code></pre></div></li></template></div>
+</header>
+<div class="ex-editor-wrap">
+  <div class="ed-bar"><div class="ed-file"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="ed-name">main.py</span></div><span class="ed-state">Editable</span></div>
+  <div class="ed-host"><textarea class="ed-fallback" spellcheck="false" aria-label="Code editor">names = [&#x27;Alice&#x27;, &#x27;Bob&#x27;, &#x27;Cathy&#x27;]
+ages = [18, 19, 20]
+# Use zip to pair the two lists; in the for loop, unpack into name and age and print each pair
+</textarea></div>
+  <div class="ed-actions"><button type="button" class="answer-btn focus-ring">Show answer</button>
+    <div class="ed-btns"><button type="button" class="btn-run focus-ring" data-action="run" title="Run (⌘/Ctrl + Enter)">▶ Run</button><button type="button" class="btn-check gradient-tech-green focus-ring" data-action="check" title="Check answer (⌘/Ctrl + Shift + Enter)">Check answer</button></div></div>
+  <div class="ex-output" hidden><div class="out-label">Output</div><pre class="out-pre"></pre></div>
+</div>
+<div class="ex-result" role="status" aria-live="polite" hidden></div>
+</section><div class="lock-banner" hidden><span aria-hidden="true">🔒</span>Solve this exercise to unlock the next part ·<span class="accent lock-k">0</span><span aria-hidden="true">/</span><span>5</span></div><section id="lesson-end" aria-label="Chapter summary"><div class="done-banner" hidden><div class="done-emoji" aria-hidden="true">🎉</div><p class="done-title">Chapter complete!</p><p class="done-sub">You solved all 5 exercises in this chapter.</p></div><nav aria-label="Chapter navigation" class="chapter-nav"><div class="cn-grid"><a class="chap-nav prev focus-ring" href="/lessons/python6/functions/"><span class="cn-label">← Previous chapter</span><span class="cn-title">06 · Functions</span></a><div class="cn-mid"><span>Iteration</span></div><a class="chap-nav next focus-ring" href="/lessons/python8/oop/"><span class="cn-label">Next chapter →</span><span class="cn-title">08 · Object-oriented programming</span></a></div></nav></section></article></div>
+    <aside class="lesson-sidebar right" aria-label="This chapter"><nav aria-label="This chapter's contents"><div class="side-label up">In this chapter</div><p class="toc-chapter">Iteration</p><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Introduction</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">1. Iteration</span></a></li><li class="toc-li" data-target="exercise-01-for-iterate"><a href="#exercise-01-for-iterate" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">Add up a list with for</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">2. Python Iterators</span></a></li><li class="toc-li" data-target="exercise-02-iter-next"><a href="#exercise-02-iter-next" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">Take items one by one with iter and next</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">3. List Comprehensions</span></a></li><li class="toc-li" data-target="exercise-03-list-comp"><a href="#exercise-03-list-comp" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">List comprehension: squares of even numbers</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">4. Generators</span></a></li><li class="toc-li" data-target="exercise-04-generator"><a href="#exercise-04-generator" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">Write a generator function</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">5. Examples Using Iterators and Generators Together</span></a></li><li class="toc-li" data-target="exercise-05-zip-pair"><a href="#exercise-05-zip-pair" class="toc-link focus-ring"><span class="toc-kind">Exercise 5</span><span class="toc-title">Pair up two lists with zip</span></a></li></ol></nav></aside>
+  </div>
+  <dialog class="dir-dialog" aria-labelledby="dir-title"><div class="dd-inner"><div class="dd-head"><h2 id="dir-title">Contents</h2><button type="button" class="dd-close focus-ring">Close</button></div>
+  <div class="dd-tabs" aria-label="Contents scope"><button type="button" class="dd-tab focus-ring" data-tab="all" aria-pressed="true">All lessons</button><button type="button" class="dd-tab focus-ring" data-tab="chapter" aria-pressed="false">This chapter</button></div>
+  <div class="dd-body"><div class="dd-pane" data-pane="all"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></div><div class="dd-pane" data-pane="chapter" hidden><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Introduction</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">1. Iteration</span></a></li><li class="toc-li" data-target="exercise-01-for-iterate"><a href="#exercise-01-for-iterate" class="toc-link focus-ring"><span class="toc-kind">Exercise 1</span><span class="toc-title">Add up a list with for</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">2. Python Iterators</span></a></li><li class="toc-li" data-target="exercise-02-iter-next"><a href="#exercise-02-iter-next" class="toc-link focus-ring"><span class="toc-kind">Exercise 2</span><span class="toc-title">Take items one by one with iter and next</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">3. List Comprehensions</span></a></li><li class="toc-li" data-target="exercise-03-list-comp"><a href="#exercise-03-list-comp" class="toc-link focus-ring"><span class="toc-kind">Exercise 3</span><span class="toc-title">List comprehension: squares of even numbers</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">4. Generators</span></a></li><li class="toc-li" data-target="exercise-04-generator"><a href="#exercise-04-generator" class="toc-link focus-ring"><span class="toc-kind">Exercise 4</span><span class="toc-title">Write a generator function</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">5. Examples Using Iterators and Generators Together</span></a></li><li class="toc-li" data-target="exercise-05-zip-pair"><a href="#exercise-05-zip-pair" class="toc-link focus-ring"><span class="toc-kind">Exercise 5</span><span class="toc-title">Pair up two lists with zip</span></a></li></ol></div></div></div></dialog>
+  <div class="py-toast" hidden><span class="spinner"></span><span class="py-toast-text">Loading Python…</span></div>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>© 2026 Python for Beginners · English edition of the <a href="https://github.com/walter201230/Python">walter201230/Python</a> tutorial (CC BY 4.0)</span>
+    <div class="footer-links"><a href="/">Course list</a><a href="/about/">About this site</a><a href="https://github.com/walter201230/Python">GitHub</a></div>
+  </div>
+</footer>
+<script src="/assets/site.js?v=20261028"></script>
+</body>
+</html>

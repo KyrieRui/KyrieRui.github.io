@@ -1,0 +1,2017 @@
+[
+ {
+  "id": "01-hello-python",
+  "title": "向 Python 打个招呼",
+  "prompt": "用一行代码，让程序打印出：\n\n```\n你好，Python！\n```\n\n注意：是 **中文逗号** 和 **中文感叹号**，照着抄就好。",
+  "starterCode": "# 用 print() 打印一句话\n",
+  "solution": "print('你好，Python！')",
+  "grading": {
+   "stdoutEquals": "你好，Python！\n"
+  },
+  "hints": [
+   "调用 print() 函数，把要显示的文字用单引号或双引号包起来",
+   "标点要用中文的「，」和「！」，不要打成英文逗号",
+   "完整代码：\nprint('你好，Python！')"
+  ],
+  "_lesson": "python1"
+ },
+ {
+  "id": "01-hello-world",
+  "title": "打印 Hello, World!",
+  "prompt": "用 `print` 函数打印 `Hello, World!`（注意首字母大写；逗号和感叹号都是英文半角，逗号后面还有一个空格）。",
+  "starterCode": "# 在这里写你的代码\n",
+  "solution": "print('Hello, World!')",
+  "grading": {
+   "stdoutEquals": "Hello, World!\n"
+  },
+  "hints": [
+   "用 print 函数",
+   "字符串要用引号（单引号 ' 或双引号 \" 都可以）",
+   "完整代码大概是：print('Hello, World!')"
+  ],
+  "_lesson": "python2"
+ },
+ {
+  "id": "09-string-basics",
+  "title": "字符串：含双引号的字符串怎么写",
+  "prompt": "请定义变量 `quote`，存这段字符串：\n\n```\n他说：\"Python 真好玩！\"\n```\n\n注意里面有一对**英文双引号** `\"`。\n\n小提示：字符串里有双引号时，最省事的是外层换用单引号 `'...'` 或三引号 `'''...'''`（外层坚持用双引号也行，但里面的每个双引号都得加反斜杠转义，麻烦）。\n\n然后用 `print(quote)` 打印它。",
+  "starterCode": "# 字符串里有双引号，外层用单引号或三引号\n",
+  "solution": "quote = '他说：\"Python 真好玩！\"'\nprint(quote)",
+  "grading": {
+   "varsEqual": {
+    "quote": "他说：\"Python 真好玩！\""
+   },
+   "stdoutEquals": "他说：\"Python 真好玩！\"\n"
+  },
+  "hints": [
+   "外层用单引号 '...'，里面就可以直接放双引号",
+   "也可以用三引号 '''...'''",
+   "完整代码：\nquote = '他说：\"Python 真好玩！\"'\nprint(quote)"
+  ],
+  "_lesson": "python2"
+ },
+ {
+  "id": "03-arithmetic",
+  "title": "基础算术",
+  "prompt": "用 `print` 打印 `48 + 56` 的结果。\n\n直接把 `48 + 56` 写在 `print()` 括号里就行——Python 会先算出来再打印。\n\n输出应该是：\n```\n104\n```",
+  "starterCode": "# 用 print 打印 48 + 56 的结果\n",
+  "solution": "print(48 + 56)",
+  "grading": {
+   "stdoutEquals": "104\n"
+  },
+  "hints": [
+   "数字不用加引号，直接写 48 + 56",
+   "整体放在 print() 里：print(48 + 56)"
+  ],
+  "_lesson": "python2"
+ },
+ {
+  "id": "10-bool-logic",
+  "title": "布尔值：and / or / not",
+  "prompt": "用 `print` 分三行打印这三个布尔运算的结果（每个一行）：\n\n1. `True and False`\n2. `True or False`\n3. `not True`\n\n输出应该是：\n```\nFalse\nTrue\nFalse\n```",
+  "starterCode": "# 三行 print，分别打印三个布尔表达式的结果\n",
+  "solution": "print(True and False)\nprint(True or False)\nprint(not True)",
+  "grading": {
+   "stdoutEquals": "False\nTrue\nFalse\n"
+  },
+  "hints": [
+   "True、False 首字母都要大写",
+   "直接 print(表达式)，Python 会先算出 True/False 再打印",
+   "完整代码：\nprint(True and False)\nprint(True or False)\nprint(not True)"
+  ],
+  "_lesson": "python2"
+ },
+ {
+  "id": "04-string-concat",
+  "title": "用 f-string 拼一句话",
+  "prompt": "已经给你定义了 `name = '水哥'` 和 `age = 28`。\n\n请用 **f-string** 拼成 `我叫水哥，今年 28 岁。`，赋值给变量 `intro`，再打印它。\n\n注意：\n- 必须用 f-string（不能用 `+` 手动拼）\n- `水哥` 和 `28` 必须通过 `{name}`、`{age}` 插进去，不能直接写死在字符串里\n- 中文逗号 `，`、句号 `。`，全角\n- `{age}` 前后各有一个**半角空格**（`今年 28 岁` 里 `28` 两边都有空格）\n\n输出应该是：\n```\n我叫水哥，今年 28 岁。\n```",
+  "starterCode": "name = '水哥'\nage = 28\n# 用 f-string 拼成一句话，赋值给 intro 并打印\n",
+  "solution": "name = '水哥'\nage = 28\nintro = f'我叫{name}，今年 {age} 岁。'\nprint(intro)",
+  "grading": {
+   "varsEqual": {
+    "intro": "我叫水哥，今年 28 岁。"
+   },
+   "stdoutEquals": "我叫水哥，今年 28 岁。\n",
+   "requiredAst": [
+    "JoinedStr",
+    "FormattedValue"
+   ]
+  },
+  "hints": [
+   "f-string 的写法：在字符串前面加 f，比如 f'我叫{name}'",
+   "{} 里直接写变量名，会被替换成变量的值",
+   "完整代码：\nname = '水哥'\nage = 28\nintro = f'我叫{name}，今年 {age} 岁。'\nprint(intro)"
+  ],
+  "_lesson": "python2"
+ },
+ {
+  "id": "07-ascii-code",
+  "title": "看见 ASCII 码",
+  "prompt": "上面提到大写字母 `A` 的 ASCII 码是 **65**，小写字母 `z` 的 ASCII 码是 **122**。\n\nPython 里用 `ord('A')` 就能拿到一个字符的 ASCII 码。\n\n请用一行 `print` 同时打印 `A` 和 `z` 的 ASCII 码，中间用空格隔开。\n\n小提示：`print` 可以一次接收多个值，用逗号分开，比如 `print(a, b)`——打印时会自动用空格连接。\n\n输出应该是：\n```\n65 122\n```",
+  "starterCode": "# 用 print 同时打印 ord('A') 和 ord('z')\n",
+  "solution": "print(ord('A'), ord('z'))",
+  "grading": {
+   "stdoutEquals": "65 122\n"
+  },
+  "hints": [
+   "ord('A') 返回 65，ord('z') 返回 122",
+   "print 接受多个参数，用逗号分开，会自动用空格连接：print(a, b)",
+   "完整代码：print(ord('A'), ord('z'))"
+  ],
+  "_lesson": "python2"
+ },
+ {
+  "id": "08-type-conversion",
+  "title": "字符串转整数",
+  "prompt": "已经给你定义了 `age_str = '28'`——**字符串**，不是整数。\n\n直接对字符串做加法会报错，需要先用 `int()` 转成整数。请：\n\n1. 用 `int(age_str)` 把它转成整数，赋给变量 `age`\n2. 打印 `age + 2`\n\n输出应该是：\n```\n30\n```",
+  "starterCode": "age_str = '28'\n# 1. 用 int(age_str) 转成整数，赋给 age\n# 2. 打印 age + 2\n",
+  "solution": "age_str = '28'\nage = int(age_str)\nprint(age + 2)",
+  "grading": {
+   "varsEqual": {
+    "age": 28
+   },
+   "stdoutEquals": "30\n"
+  },
+  "hints": [
+   "int('28') 返回整数 28",
+   "把它赋给变量：age = int(age_str)",
+   "完整代码：\nage_str = '28'\nage = int(age_str)\nprint(age + 2)"
+  ],
+  "_lesson": "python2"
+ },
+ {
+  "id": "02-variable-assign",
+  "title": "变量赋值并打印",
+  "prompt": "创建一个变量 `name`，把字符串 `'水哥'` 赋给它，然后用 `print` 打印 `name`。\n\n输出应该是：\n```\n水哥\n```",
+  "starterCode": "# 在这里写你的代码\n",
+  "solution": "name = '水哥'\nprint(name)",
+  "grading": {
+   "varsEqual": {
+    "name": "水哥"
+   },
+   "stdoutEquals": "水哥\n"
+  },
+  "hints": [
+   "用 = 把字符串 '水哥' 赋给变量 name",
+   "再用 print(name) 打印它（注意是 print(name)，不是 print('name')）",
+   "完整代码：\nname = '水哥'\nprint(name)"
+  ],
+  "_lesson": "python2"
+ },
+ {
+  "id": "05-combined",
+  "title": "综合：变量 + 计算 + f-string",
+  "prompt": "已经给你定义了 `apples = 12` 和 `oranges = 8`。\n\n请你做两件事：\n\n1. 把 `apples` 和 `oranges` 加起来，赋给变量 `total`\n2. 用 **f-string** 打印 `一共 20 个水果。`（其中 `20` 必须用 `total` 变量插入，不能直接写死数字）\n\n输出应该是：\n```\n一共 20 个水果。\n```",
+  "starterCode": "apples = 12\noranges = 8\n# 1. 把 apples + oranges 赋给 total\n# 2. 用 f-string 打印 \"一共 X 个水果。\"，X 用 total 插入\n",
+  "solution": "apples = 12\noranges = 8\ntotal = apples + oranges\nprint(f'一共 {total} 个水果。')",
+  "grading": {
+   "varsEqual": {
+    "total": 20
+   },
+   "stdoutEquals": "一共 20 个水果。\n",
+   "requiredAst": [
+    "Assign:total",
+    "JoinedStr",
+    "FormattedValue"
+   ]
+  },
+  "hints": [
+   "第 1 步：把 apples 和 oranges 相加，结果存进新变量 total",
+   "第 2 步：print(f'一共 {total} 个水果。')",
+   "注意标点和空格：句号必须是全角「。」，「共」和数字、数字和「个」之间各有一个半角空格"
+  ],
+  "_lesson": "python2"
+ },
+ {
+  "id": "01-create-list",
+  "title": "创建第一个 List",
+  "prompt": "创建一个变量 `numbers`，把整数 `1, 2, 3, 4, 5` 装到一个 List 里赋给它。\n\n然后用 `print` 打印 `numbers`。\n\n输出应该是：\n```\n[1, 2, 3, 4, 5]\n```",
+  "starterCode": "# 用中括号 [] 创建一个 List，元素之间用逗号分隔\n",
+  "solution": "numbers = [1, 2, 3, 4, 5]\nprint(numbers)",
+  "grading": {
+   "varsEqual": {
+    "numbers": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "stdoutEquals": "[1, 2, 3, 4, 5]\n"
+  },
+  "hints": [
+   "List 的写法是 [元素1, 元素2, ...]",
+   "完整代码：\nnumbers = [1, 2, 3, 4, 5]\nprint(numbers)"
+  ],
+  "_lesson": "python3"
+ },
+ {
+  "id": "02-list-access",
+  "title": "索引和切片",
+  "prompt": "已经给你定义了 `fruits = ['apple', 'banana', 'cherry', 'date', 'fig']`。\n\n请：\n\n1. 用索引 `print` 出第 3 个元素（也就是 `cherry`）\n2. 用切片 `print` 出 `fruits[1:4]`\n\n输出应该是：\n```\ncherry\n['banana', 'cherry', 'date']\n```",
+  "starterCode": "fruits = ['apple', 'banana', 'cherry', 'date', 'fig']\n# 1. print 第 3 个元素（索引从 0 开始）\n# 2. print 切片 fruits[1:4]\n",
+  "solution": "fruits = ['apple', 'banana', 'cherry', 'date', 'fig']\nprint(fruits[2])\nprint(fruits[1:4])",
+  "grading": {
+   "stdoutEquals": "cherry\n['banana', 'cherry', 'date']\n"
+  },
+  "hints": [
+   "索引从 0 开始：第 3 个元素是 fruits[2]",
+   "切片 [1:4] 是左闭右开，包含索引 1、2、3，不包含 4",
+   "完整代码：\nfruits = ['apple', 'banana', 'cherry', 'date', 'fig']\nprint(fruits[2])\nprint(fruits[1:4])"
+  ],
+  "_lesson": "python3"
+ },
+ {
+  "id": "03-list-update",
+  "title": "修改 + 追加",
+  "prompt": "已经给你定义了 `colors = ['red', 'green', 'blue']`。\n\n请：\n\n1. 把索引 1 处的元素（`green`）改成大写 `GREEN`\n2. 用 `append` 在末尾追加 `'yellow'`\n3. `print(colors)`\n\n输出应该是：\n```\n['red', 'GREEN', 'blue', 'yellow']\n```",
+  "starterCode": "colors = ['red', 'green', 'blue']\n# 1. 把索引 1 处的元素改成大写的 'GREEN'\n# 2. 用 append 在末尾追加 'yellow'\n# 3. 打印 colors\n",
+  "solution": "colors = ['red', 'green', 'blue']\ncolors[1] = 'GREEN'\ncolors.append('yellow')\nprint(colors)",
+  "grading": {
+   "varsEqual": {
+    "colors": [
+     "red",
+     "GREEN",
+     "blue",
+     "yellow"
+    ]
+   },
+   "stdoutEquals": "['red', 'GREEN', 'blue', 'yellow']\n"
+  },
+  "hints": [
+   "改某个位置：colors[1] = 'GREEN'",
+   "末尾追加：colors.append('yellow')",
+   "完整代码：\ncolors = ['red', 'green', 'blue']\ncolors[1] = 'GREEN'\ncolors.append('yellow')\nprint(colors)"
+  ],
+  "_lesson": "python3"
+ },
+ {
+  "id": "04-list-ops",
+  "title": "拼接与长度",
+  "prompt": "已经给你定义了 `a = [1, 2, 3]` 和 `b = [4, 5, 6]`。\n\n请：\n\n1. 用 `+` 把它们拼成新的列表 `c`\n2. `print(c)`\n3. 用 `len()` 打印 `c` 的元素个数\n\n输出应该是：\n```\n[1, 2, 3, 4, 5, 6]\n6\n```",
+  "starterCode": "a = [1, 2, 3]\nb = [4, 5, 6]\n# 1. 用 + 把 a 和 b 拼成新列表 c\n# 2. 打印 c\n# 3. 用 len 打印 c 的元素个数\n",
+  "solution": "a = [1, 2, 3]\nb = [4, 5, 6]\nc = a + b\nprint(c)\nprint(len(c))",
+  "grading": {
+   "varsEqual": {
+    "c": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   "stdoutEquals": "[1, 2, 3, 4, 5, 6]\n6\n"
+  },
+  "hints": [
+   "List 之间可以用 + 拼接：c = a + b",
+   "len(c) 返回列表的元素个数",
+   "完整代码：\na = [1, 2, 3]\nb = [4, 5, 6]\nc = a + b\nprint(c)\nprint(len(c))"
+  ],
+  "_lesson": "python3"
+ },
+ {
+  "id": "05-tuple-create",
+  "title": "单元素 tuple 的逗号陷阱",
+  "prompt": "请创建一个**只有一个元素** `42` 的元组 `t`，然后 `print(t)`。\n\n注意：单元素的 tuple **必须**在元素后面加逗号 —— `(42,)` 才是 tuple，`(42)` 是数字 42。\n\n输出应该是：\n```\n(42,)\n```",
+  "starterCode": "# 单元素 tuple 必须加逗号\n",
+  "solution": "t = (42,)\nprint(t)",
+  "grading": {
+   "stdoutEquals": "(42,)\n",
+   "requiredAst": [
+    "Assign:t",
+    "Tuple"
+   ]
+  },
+  "hints": [
+   "(42) 是一个数字表达式，不是 tuple",
+   "(42,) 才是 tuple — 注意逗号",
+   "完整代码：\nt = (42,)\nprint(t)"
+  ],
+  "_lesson": "python3"
+ },
+ {
+  "id": "06-tuple-access",
+  "title": "tuple 取值与切片",
+  "prompt": "已经给你定义了 `days = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri')`。\n\n请：\n\n1. `print` 第 4 个元素（也就是 `Thu`）\n2. `print` 切片 `days[2:4]`\n\n输出应该是：\n```\nThu\n('Wed', 'Thu')\n```",
+  "starterCode": "days = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri')\n# 1. 用索引 print 第 4 个元素\n# 2. print 切片 days[2:4]\n",
+  "solution": "days = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri')\nprint(days[3])\nprint(days[2:4])",
+  "grading": {
+   "stdoutEquals": "Thu\n('Wed', 'Thu')\n"
+  },
+  "hints": [
+   "索引从 0 开始：第 4 个是 days[3]",
+   "切片用法跟 List 一样：days[2:4]",
+   "完整代码：\ndays = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri')\nprint(days[3])\nprint(days[2:4])"
+  ],
+  "_lesson": "python3"
+ },
+ {
+  "id": "07-tuple-ops",
+  "title": "list 转 tuple + max",
+  "prompt": "已经给你定义了 `nums = [3, 1, 4, 1, 5, 9, 2, 6]`。\n\n请：\n\n1. 用 `tuple()` 把它转成元组，赋给 `t`\n2. `print` 这个 tuple 的元素个数（`len`）\n3. `print` 这个 tuple 里的最大值（`max`）\n\n输出应该是：\n```\n8\n9\n```",
+  "starterCode": "nums = [3, 1, 4, 1, 5, 9, 2, 6]\n# 1. 用 tuple() 把 nums 转成元组，赋给 t\n# 2. 用 len 打印元素个数\n# 3. 用 max 打印最大值\n",
+  "solution": "nums = [3, 1, 4, 1, 5, 9, 2, 6]\nt = tuple(nums)\nprint(len(t))\nprint(max(t))",
+  "grading": {
+   "stdoutEquals": "8\n9\n",
+   "requiredAst": [
+    "Assign:t"
+   ]
+  },
+  "hints": [
+   "tuple(nums) 把 list 转成 tuple",
+   "len 算个数，max 取最大值",
+   "完整代码：\nnums = [3, 1, 4, 1, 5, 9, 2, 6]\nt = tuple(nums)\nprint(len(t))\nprint(max(t))"
+  ],
+  "_lesson": "python3"
+ },
+ {
+  "id": "01-dict-create",
+  "title": "创建一个 dict",
+  "prompt": "请创建一个字典 `phone_book`，存这三对联系人：\n\n- `'Alice'` → `'13800001111'`\n- `'Bob'` → `'13800002222'`\n- `'Carol'` → `'13800003333'`\n\n然后 `print(phone_book)`。\n\n输出应该是：\n```\n{'Alice': '13800001111', 'Bob': '13800002222', 'Carol': '13800003333'}\n```",
+  "starterCode": "# 用花括号 {} 创建 dict，写法是 {key: value, ...}\n",
+  "solution": "phone_book = {'Alice': '13800001111', 'Bob': '13800002222', 'Carol': '13800003333'}\nprint(phone_book)",
+  "grading": {
+   "varsEqual": {
+    "phone_book": {
+     "Alice": "13800001111",
+     "Bob": "13800002222",
+     "Carol": "13800003333"
+    }
+   },
+   "stdoutEquals": "{'Alice': '13800001111', 'Bob': '13800002222', 'Carol': '13800003333'}\n"
+  },
+  "hints": [
+   "dict 的写法：{'key1': 'value1', 'key2': 'value2'}",
+   "完整代码：\nphone_book = {'Alice': '13800001111', 'Bob': '13800002222', 'Carol': '13800003333'}\nprint(phone_book)"
+  ],
+  "_lesson": "python4"
+ },
+ {
+  "id": "02-dict-access",
+  "title": "按 key 取值",
+  "prompt": "已经给你定义了：\n```python\nscores = {'语文': 90, '数学': 85, '英语': 78}\n```\n\n请用 `print` 打印 `数学` 这一科的分数（用 `scores['数学']`）。\n\n输出应该是：\n```\n85\n```",
+  "starterCode": "scores = {'语文': 90, '数学': 85, '英语': 78}\n# 用 scores['数学'] 取出分数并 print\n",
+  "solution": "scores = {'语文': 90, '数学': 85, '英语': 78}\nprint(scores['数学'])",
+  "grading": {
+   "stdoutEquals": "85\n"
+  },
+  "hints": [
+   "用 dict[key] 的形式取值",
+   "完整代码：\nscores = {'语文': 90, '数学': 85, '英语': 78}\nprint(scores['数学'])"
+  ],
+  "_lesson": "python4"
+ },
+ {
+  "id": "03-dict-modify",
+  "title": "新增 + 修改",
+  "prompt": "已经给你定义了：\n```python\nscores = {'语文': 90, '数学': 85}\n```\n\n请：\n\n1. 新增一项 `'英语': 78`\n2. 把 `'数学'` 的分数改成 `92`\n3. `print(scores)`\n\n输出应该是：\n```\n{'语文': 90, '数学': 92, '英语': 78}\n```",
+  "starterCode": "scores = {'语文': 90, '数学': 85}\n# 先新增英语的分数，再修改数学的分数，最后打印 scores\n",
+  "solution": "scores = {'语文': 90, '数学': 85}\nscores['英语'] = 78\nscores['数学'] = 92\nprint(scores)",
+  "grading": {
+   "varsEqual": {
+    "scores": {
+     "语文": 90,
+     "数学": 92,
+     "英语": 78
+    }
+   },
+   "stdoutEquals": "{'语文': 90, '数学': 92, '英语': 78}\n"
+  },
+  "hints": [
+   "新增和修改都是 dict[key] = value——key 不存在就新增，存在就覆盖",
+   "完整代码：\nscores = {'语文': 90, '数学': 85}\nscores['英语'] = 78\nscores['数学'] = 92\nprint(scores)"
+  ],
+  "_lesson": "python4"
+ },
+ {
+  "id": "04-dict-merge",
+  "title": "用 | 合并两个 dict",
+  "prompt": "已经给你定义了：\n```python\nold = {'a': 1, 'b': 2}\nnew = {'b': 99, 'c': 3}\n```\n\n请用 `|` 把它们合并成 `merged`（注意：右边覆盖左边，所以 `'b'` 应该取 99），然后 `print(merged)`。\n\n输出应该是：\n```\n{'a': 1, 'b': 99, 'c': 3}\n```",
+  "starterCode": "old = {'a': 1, 'b': 2}\nnew = {'b': 99, 'c': 3}\n# 用 | 合并两个 dict，结果赋给 merged 并打印\n",
+  "solution": "old = {'a': 1, 'b': 2}\nnew = {'b': 99, 'c': 3}\nmerged = old | new\nprint(merged)",
+  "grading": {
+   "varsEqual": {
+    "merged": {
+     "a": 1,
+     "b": 99,
+     "c": 3
+    }
+   },
+   "stdoutEquals": "{'a': 1, 'b': 99, 'c': 3}\n"
+  },
+  "hints": [
+   "Python 3.9+ 才有 | 合并写法",
+   "右边的 'b': 99 会覆盖左边的 'b': 2",
+   "完整代码：\nold = {'a': 1, 'b': 2}\nnew = {'b': 99, 'c': 3}\nmerged = old | new\nprint(merged)"
+  ],
+  "_lesson": "python4"
+ },
+ {
+  "id": "05-set-dedup",
+  "title": "用 set 去重",
+  "prompt": "已经给你定义了：\n```python\nnums = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3]\n```\n\n请：\n\n1. 把 `nums` 转成 `set`，去重\n2. 再用 `sorted()` 把 set 排序成 list，赋给 `unique`（这样输出顺序稳定）\n3. `print(unique)`\n\n输出应该是：\n```\n[1, 2, 3, 4, 5, 6, 9]\n```",
+  "starterCode": "nums = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3]\n# 先用 set 去重，再用 sorted 排序，结果赋给 unique 并打印\n",
+  "solution": "nums = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3]\nunique = sorted(set(nums))\nprint(unique)",
+  "grading": {
+   "varsEqual": {
+    "unique": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     9
+    ]
+   },
+   "stdoutEquals": "[1, 2, 3, 4, 5, 6, 9]\n"
+  },
+  "hints": [
+   "set(nums) 自动去重——重复值只保留一个",
+   "sorted(set) 把 set 转成有序的 list",
+   "完整代码：\nnums = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3]\nunique = sorted(set(nums))\nprint(unique)"
+  ],
+  "_lesson": "python4"
+ },
+ {
+  "id": "06-set-add",
+  "title": "set 的 add",
+  "prompt": "已经给你定义了：\n```python\ntags = {'python', 'web'}\n```\n\n请：\n\n1. 用 `add` 添加 `'ai'`\n2. 再用 `add` 添加一次 `'python'`（已存在，不会有变化）\n3. 用 `print(sorted(tags))` 把元素**排序后**打印（这样输出稳定）\n\n输出应该是：\n```\n['ai', 'python', 'web']\n```",
+  "starterCode": "tags = {'python', 'web'}\n# 用 add 先后添加 'ai' 和 'python'，再打印排序后的 tags\n",
+  "solution": "tags = {'python', 'web'}\ntags.add('ai')\ntags.add('python')\nprint(sorted(tags))",
+  "grading": {
+   "stdoutEquals": "['ai', 'python', 'web']\n"
+  },
+  "hints": [
+   "tags.add(x) 添加元素，重复添加同一个值无效",
+   "set 是无序的，print 顺序不固定——所以题目让你 sorted 再 print",
+   "完整代码：\ntags = {'python', 'web'}\ntags.add('ai')\ntags.add('python')\nprint(sorted(tags))"
+  ],
+  "_lesson": "python4"
+ },
+ {
+  "id": "07-set-ops",
+  "title": "求交集",
+  "prompt": "已经给你定义了：\n```python\na = {1, 2, 3, 4, 5}\nb = {3, 4, 5, 6, 7}\n```\n\n请用 `&` 求 `a` 和 `b` 的**交集**（两边都有的元素），再用 `sorted()` 转成排序后的 list，赋给 `common`，然后 `print(common)`。\n\n输出应该是：\n```\n[3, 4, 5]\n```",
+  "starterCode": "a = {1, 2, 3, 4, 5}\nb = {3, 4, 5, 6, 7}\n# 用 & 求交集，sorted 排序后赋给 common 并打印\n",
+  "solution": "a = {1, 2, 3, 4, 5}\nb = {3, 4, 5, 6, 7}\ncommon = sorted(a & b)\nprint(common)",
+  "grading": {
+   "varsEqual": {
+    "common": [
+     3,
+     4,
+     5
+    ]
+   },
+   "stdoutEquals": "[3, 4, 5]\n"
+  },
+  "hints": [
+   "a & b 求两个 set 的交集",
+   "sorted() 转成有序 list 让输出稳定",
+   "完整代码：\na = {1, 2, 3, 4, 5}\nb = {3, 4, 5, 6, 7}\ncommon = sorted(a & b)\nprint(common)"
+  ],
+  "_lesson": "python4"
+ },
+ {
+  "id": "01-if-basic",
+  "title": "if / else：判断及格",
+  "prompt": "已经给你定义了 `score = 75`。\n\n请用 `if / else` 判断：\n\n- 如果 `score >= 60`：`print('及格')`\n- 否则：`print('不及格')`\n\n输出应该是：\n```\n及格\n```",
+  "starterCode": "score = 75\n# 用 if / else 判断\n",
+  "solution": "score = 75\nif score >= 60:\n    print('及格')\nelse:\n    print('不及格')",
+  "grading": {
+   "stdoutEquals": "及格\n",
+   "requiredAst": [
+    "If"
+   ]
+  },
+  "hints": [
+   "if 后面要冒号，下一行缩进 4 个空格",
+   "完整代码：\nscore = 75\nif score >= 60:\n    print('及格')\nelse:\n    print('不及格')"
+  ],
+  "_lesson": "python5"
+ },
+ {
+  "id": "02-if-elif",
+  "title": "elif：成绩等级",
+  "prompt": "已经给你定义了 `score = 85`。\n\n请用 `if / elif / else` 按下面的规则打印等级：\n\n- `>= 90`：`'优秀'`\n- `>= 80`：`'良好'`\n- `>= 60`：`'及格'`\n- 其它：`'不及格'`\n\n输出应该是：\n```\n良好\n```",
+  "starterCode": "score = 85\n# 用 if / elif / else 判断\n",
+  "solution": "score = 85\nif score >= 90:\n    print('优秀')\nelif score >= 80:\n    print('良好')\nelif score >= 60:\n    print('及格')\nelse:\n    print('不及格')",
+  "grading": {
+   "stdoutEquals": "良好\n",
+   "requiredAst": [
+    "If"
+   ]
+  },
+  "hints": [
+   "elif 是 else if 的简写",
+   "判断从严到松：>= 90 → >= 80 → >= 60 → else",
+   "完整代码：\nscore = 85\nif score >= 90:\n    print('优秀')\nelif score >= 80:\n    print('良好')\nelif score >= 60:\n    print('及格')\nelse:\n    print('不及格')"
+  ],
+  "_lesson": "python5"
+ },
+ {
+  "id": "03-if-and-or",
+  "title": "and / or：联合条件",
+  "prompt": "已经给你定义了：\n```python\nage = 22\nhas_id = True\n```\n\n请用 `and` 判断：**当 `age >= 18` 而且 `has_id` 为 True**，打印 `'可以进入'`，否则打印 `'谢绝入内'`。\n\n输出应该是：\n```\n可以进入\n```",
+  "starterCode": "age = 22\nhas_id = True\n# 用 if + and 判断\n",
+  "solution": "age = 22\nhas_id = True\nif age >= 18 and has_id:\n    print('可以进入')\nelse:\n    print('谢绝入内')",
+  "grading": {
+   "stdoutEquals": "可以进入\n",
+   "requiredAst": [
+    "If",
+    "BoolOp"
+   ]
+  },
+  "hints": [
+   "两个条件都成立才行：用 and 把它们连起来",
+   "has_id 已经是 bool，直接 has_id 即可，不用 has_id == True",
+   "完整代码：\nage = 22\nhas_id = True\nif age >= 18 and has_id:\n    print('可以进入')\nelse:\n    print('谢绝入内')"
+  ],
+  "_lesson": "python5"
+ },
+ {
+  "id": "04-match-case",
+  "title": "match / case：处理指令",
+  "prompt": "已经给你定义了 `command = 'pause'`。\n\n请用 `match / case` 按下面规则 `print`：\n\n- `'start'` → `'启动'`\n- `'stop'` → `'停止'`\n- `'pause'` → `'暂停'`\n- 其它 → `'未知指令'`\n\n输出应该是：\n```\n暂停\n```",
+  "starterCode": "command = 'pause'\n# 用 match / case 匹配 command，四种指令各打印对应文字\n# 别忘了用 case _ 兜底打印「未知指令」\n",
+  "solution": "command = 'pause'\nmatch command:\n    case 'start':\n        print('启动')\n    case 'stop':\n        print('停止')\n    case 'pause':\n        print('暂停')\n    case _:\n        print('未知指令')",
+  "grading": {
+   "stdoutEquals": "暂停\n",
+   "requiredAst": [
+    "Match"
+   ]
+  },
+  "hints": [
+   "match 后面是要匹配的变量；每个 case 后面是要匹配的值（match 语法需要 Python 3.10+，这里的运行环境是 3.12，放心用）",
+   "case _ 是兜底，相当于 else",
+   "完整代码：\ncommand = 'pause'\nmatch command:\n    case 'start':\n        print('启动')\n    case 'stop':\n        print('停止')\n    case 'pause':\n        print('暂停')\n    case _:\n        print('未知指令')"
+  ],
+  "_lesson": "python5"
+ },
+ {
+  "id": "05-for-range",
+  "title": "for + range：求和",
+  "prompt": "用 `for` 循环加 `range` 算 **1 到 10 的和**（包含 10），赋给变量 `total`，然后 `print(total)`。\n\n输出应该是：\n```\n55\n```",
+  "starterCode": "# 先把 total 初始化为 0\n# 用 for + range 遍历 1 到 10，逐个累加到 total\n# 循环结束后打印 total\n",
+  "solution": "total = 0\nfor n in range(1, 11):\n    total = total + n\nprint(total)",
+  "grading": {
+   "varsEqual": {
+    "total": 55
+   },
+   "stdoutEquals": "55\n",
+   "requiredAst": [
+    "For"
+   ]
+  },
+  "hints": [
+   "range(1, 11) 生成 1 到 10（左闭右开，要写 11 才包含 10）",
+   "在循环里累加：total = total + n",
+   "完整代码：\ntotal = 0\nfor n in range(1, 11):\n    total = total + n\nprint(total)"
+  ],
+  "_lesson": "python5"
+ },
+ {
+  "id": "06-while",
+  "title": "while：倒计时",
+  "prompt": "用 `while` 循环从 5 倒数到 1（含 1），每个数 `print` 一行。\n\n输出应该是：\n```\n5\n4\n3\n2\n1\n```",
+  "starterCode": "# 先定义倒计时变量 n，从 5 开始\n# 用 while 循环：每轮打印 n，再让 n 减 1，直到打印完 1\n",
+  "solution": "n = 5\nwhile n >= 1:\n    print(n)\n    n = n - 1",
+  "grading": {
+   "stdoutEquals": "5\n4\n3\n2\n1\n",
+   "requiredAst": [
+    "While"
+   ]
+  },
+  "hints": [
+   "条件：while n >= 1",
+   "循环体里要 n = n - 1，否则会死循环",
+   "完整代码：\nn = 5\nwhile n >= 1:\n    print(n)\n    n = n - 1"
+  ],
+  "_lesson": "python5"
+ },
+ {
+  "id": "07-break-continue",
+  "title": "continue：1-10 的奇数和",
+  "prompt": "用 `for + range` 遍历 1 到 10。**遇到偶数用 `continue` 跳过**，把奇数加起来赋给 `total`，最后 `print(total)`。\n\n输出应该是：\n```\n25\n```\n\n（1 + 3 + 5 + 7 + 9 = 25）",
+  "starterCode": "# 先把 total 初始化为 0，再用 for + range 遍历 1 到 10\n# 偶数用 continue 跳过，奇数累加到 total\n# 最后打印 total\n",
+  "solution": "total = 0\nfor n in range(1, 11):\n    if n % 2 == 0:\n        continue\n    total = total + n\nprint(total)",
+  "grading": {
+   "varsEqual": {
+    "total": 25
+   },
+   "stdoutEquals": "25\n",
+   "requiredAst": [
+    "For",
+    "Continue"
+   ]
+  },
+  "hints": [
+   "n % 2 == 0 表示 n 是偶数（除以 2 余 0）",
+   "continue 让本次循环到此为止，进入下一轮",
+   "完整代码：\ntotal = 0\nfor n in range(1, 11):\n    if n % 2 == 0:\n        continue\n    total = total + n\nprint(total)"
+  ],
+  "_lesson": "python5"
+ },
+ {
+  "id": "01-define-add",
+  "title": "定义一个 add 函数",
+  "prompt": "请定义一个函数 `add(a, b)`，返回 `a + b`。\n\n然后调用 `add(3, 5)` 把结果赋给 `result`，再 `print(result)`。\n\n输出应该是：\n```\n8\n```",
+  "starterCode": "# 用 def 定义 add 函数，返回两个参数之和\n# 调用它把结果赋给 result，再打印出来\n",
+  "solution": "def add(a, b):\n    return a + b\n\nresult = add(3, 5)\nprint(result)",
+  "grading": {
+   "varsEqual": {
+    "result": 8
+   },
+   "stdoutEquals": "8\n",
+   "requiredAst": [
+    "FunctionDef:add"
+   ]
+  },
+  "hints": [
+   "用 def 关键字定义函数",
+   "函数体里 return a + b",
+   "完整代码：\ndef add(a, b):\n    return a + b\n\nresult = add(3, 5)\nprint(result)"
+  ],
+  "_lesson": "python6"
+ },
+ {
+  "id": "02-multi-return",
+  "title": "多返回值",
+  "prompt": "请定义函数 `min_max(nums)`，接收一个 list，返回**最小值和最大值**两个数（用逗号 return）。\n\n然后调用 `min_max([3, 1, 4, 1, 5, 9, 2, 6])`，把结果**解包**到 `lo` 和 `hi` 两个变量，再 `print(lo)` 和 `print(hi)`。\n\n输出应该是：\n```\n1\n9\n```",
+  "starterCode": "# 定义 min_max 函数，用逗号一次 return 最小值和最大值\n# 调用后把结果解包到 lo、hi，分别打印\n",
+  "solution": "def min_max(nums):\n    return min(nums), max(nums)\n\nlo, hi = min_max([3, 1, 4, 1, 5, 9, 2, 6])\nprint(lo)\nprint(hi)",
+  "grading": {
+   "varsEqual": {
+    "lo": 1,
+    "hi": 9
+   },
+   "stdoutEquals": "1\n9\n",
+   "requiredAst": [
+    "FunctionDef:min_max"
+   ]
+  },
+  "hints": [
+   "用 return min(nums), max(nums) 一次返回两个值（实际上是 tuple）",
+   "解包：lo, hi = min_max(...)",
+   "完整代码：\ndef min_max(nums):\n    return min(nums), max(nums)\n\nlo, hi = min_max([3, 1, 4, 1, 5, 9, 2, 6])\nprint(lo)\nprint(hi)"
+  ],
+  "_lesson": "python6"
+ },
+ {
+  "id": "03-default-arg",
+  "title": "默认参数",
+  "prompt": "请定义函数 `greet(name, greeting='Hello')`：第一个参数 `name` 必传，第二个参数 `greeting` 默认为 `'Hello'`。函数体打印 `f'{greeting}, {name}!'`。\n\n然后：\n1. 调用 `greet('Alice')`（用默认 greeting）\n2. 调用 `greet('Bob', '早上好')`（覆盖默认值）\n\n输出应该是：\n```\nHello, Alice!\n早上好, Bob!\n```",
+  "starterCode": "# 定义 greet 函数：name 必传，greeting 默认为 'Hello'\n# 函数体用 f-string 打印问候语\n# 按题目要求调用两次：一次用默认值，一次覆盖默认值\n",
+  "solution": "def greet(name, greeting='Hello'):\n    print(f'{greeting}, {name}!')\n\ngreet('Alice')\ngreet('Bob', '早上好')",
+  "grading": {
+   "stdoutEquals": "Hello, Alice!\n早上好, Bob!\n",
+   "requiredAst": [
+    "FunctionDef:greet"
+   ]
+  },
+  "hints": [
+   "默认参数写法：def greet(name, greeting='Hello'):",
+   "调用时不传第二个参数会用默认值",
+   "完整代码：\ndef greet(name, greeting='Hello'):\n    print(f'{greeting}, {name}!')\n\ngreet('Alice')\ngreet('Bob', '早上好')"
+  ],
+  "_lesson": "python6"
+ },
+ {
+  "id": "04-args",
+  "title": "*args：可变参数",
+  "prompt": "请定义函数 `total(*nums)`，把传入的所有数字加起来返回。\n\n然后：\n1. 调用 `total(1, 2, 3)` 赋给 `a`\n2. 调用 `total(1, 2, 3, 4, 5, 6)` 赋给 `b`\n3. `print(a)` `print(b)`\n\n输出应该是：\n```\n6\n21\n```",
+  "starterCode": "# 用 *nums 定义 total 函数，把传入的所有数字累加后返回\n# 按题目要求调用两次，赋给 a、b 并分别打印\n",
+  "solution": "def total(*nums):\n    s = 0\n    for n in nums:\n        s = s + n\n    return s\n\na = total(1, 2, 3)\nb = total(1, 2, 3, 4, 5, 6)\nprint(a)\nprint(b)",
+  "grading": {
+   "varsEqual": {
+    "a": 6,
+    "b": 21
+   },
+   "stdoutEquals": "6\n21\n",
+   "requiredAst": [
+    "FunctionDef:total"
+   ]
+  },
+  "hints": [
+   "*nums 接收任意多个参数收成 tuple",
+   "函数体里 for n in nums 遍历累加，或者直接 return sum(nums)",
+   "完整代码：\ndef total(*nums):\n    s = 0\n    for n in nums:\n        s = s + n\n    return s\n\na = total(1, 2, 3)\nb = total(1, 2, 3, 4, 5, 6)\nprint(a)\nprint(b)"
+  ],
+  "_lesson": "python6"
+ },
+ {
+  "id": "05-lambda",
+  "title": "lambda：用匿名函数排序",
+  "prompt": "已经给你定义了：\n```python\nusers = [\n    {'name': 'Alice', 'age': 30},\n    {'name': 'Bob', 'age': 25},\n    {'name': 'Carol', 'age': 28},\n]\n```\n\n请用 `sorted` 加 **lambda** 把 `users` 按 `age` 升序排序，赋给 `sorted_users`，然后用 `for` 循环依次 `print` 每个人的 `name` 和 `age`（用空格分隔）。\n\n输出应该是：\n```\nBob 25\nCarol 28\nAlice 30\n```",
+  "starterCode": "users = [\n    {'name': 'Alice', 'age': 30},\n    {'name': 'Bob', 'age': 25},\n    {'name': 'Carol', 'age': 28},\n]\n# 用 sorted 配合 lambda 按 age 升序排序，赋给 sorted_users\n# 再用 for 循环依次打印每个人的 name 和 age\n",
+  "solution": "users = [\n    {'name': 'Alice', 'age': 30},\n    {'name': 'Bob', 'age': 25},\n    {'name': 'Carol', 'age': 28},\n]\nsorted_users = sorted(users, key=lambda u: u['age'])\nfor u in sorted_users:\n    print(u['name'], u['age'])",
+  "grading": {
+   "varsEqual": {
+    "sorted_users": [
+     {
+      "name": "Bob",
+      "age": 25
+     },
+     {
+      "name": "Carol",
+      "age": 28
+     },
+     {
+      "name": "Alice",
+      "age": 30
+     }
+    ]
+   },
+   "stdoutEquals": "Bob 25\nCarol 28\nAlice 30\n",
+   "requiredAst": [
+    "Lambda"
+   ]
+  },
+  "hints": [
+   "sorted 的 key 参数接收一个函数：每个元素拿来生成「排序依据」",
+   "lambda u: u['age'] 等价于 def f(u): return u['age']",
+   "完整代码：\nusers = [\n    {'name': 'Alice', 'age': 30},\n    {'name': 'Bob', 'age': 25},\n    {'name': 'Carol', 'age': 28},\n]\nsorted_users = sorted(users, key=lambda u: u['age'])\nfor u in sorted_users:\n    print(u['name'], u['age'])"
+  ],
+  "_lesson": "python6"
+ },
+ {
+  "id": "01-for-iterate",
+  "title": "用 for 把 list 累加",
+  "prompt": "已经给了你一个 list：\n\n```python\nnumbers = [1, 2, 3, 4, 5]\n```\n\n请用 `for` 循环把 `numbers` 里的所有元素加起来，放进变量 `total`，然后 `print(total)`。\n\n输出应该是：\n```\n15\n```",
+  "starterCode": "numbers = [1, 2, 3, 4, 5]\n# 先把 total 初始化为 0，再用 for 循环把每个元素累加进去\n# 循环结束后打印 total\n",
+  "solution": "numbers = [1, 2, 3, 4, 5]\ntotal = 0\nfor n in numbers:\n    total = total + n\nprint(total)",
+  "grading": {
+   "varsEqual": {
+    "total": 15
+   },
+   "stdoutEquals": "15\n",
+   "requiredAst": [
+    "For"
+   ]
+  },
+  "hints": [
+   "在 for 循环里把每个 n 累加到 total",
+   "别忘了循环结束后再 print(total)，不要写在循环里",
+   "完整代码：\nnumbers = [1, 2, 3, 4, 5]\ntotal = 0\nfor n in numbers:\n    total = total + n\nprint(total)"
+  ],
+  "_lesson": "python7"
+ },
+ {
+  "id": "02-iter-next",
+  "title": "用 iter 和 next 一个一个取",
+  "prompt": "已经给了你一个 list：\n\n```python\nnums = [10, 20, 30]\n```\n\n请：\n\n1. 用 `iter()` 把 `nums` 变成迭代器，赋给变量 `it`。\n2. 用 `next(it)` 连续取 3 次，分别 `print` 出来。\n\n输出应该是：\n```\n10\n20\n30\n```",
+  "starterCode": "nums = [10, 20, 30]\n# 用 iter() 把 nums 变成迭代器，赋给 it\n# 再用 next(it) 连续取三次，分别打印\n",
+  "solution": "nums = [10, 20, 30]\nit = iter(nums)\nprint(next(it))\nprint(next(it))\nprint(next(it))",
+  "grading": {
+   "stdoutEquals": "10\n20\n30\n",
+   "requiredAst": [
+    "Assign:it"
+   ]
+  },
+  "hints": [
+   "iter(nums) 会把 list 变成迭代器对象",
+   "每调用一次 next(it) 就吐出下一个元素",
+   "完整代码：\nnums = [10, 20, 30]\nit = iter(nums)\nprint(next(it))\nprint(next(it))\nprint(next(it))"
+  ],
+  "_lesson": "python7"
+ },
+ {
+  "id": "03-list-comp",
+  "title": "列表生成式：偶数的平方",
+  "prompt": "用 **一行** 列表生成式，生成 1 到 10（含 10）中所有 **偶数的平方**，赋给变量 `result`，然后 `print(result)`。\n\n输出应该是：\n```\n[4, 16, 36, 64, 100]\n```",
+  "starterCode": "# result = [... for ... in range(...) if ...]\n# print(result)\n",
+  "solution": "result = [x * x for x in range(1, 11) if x % 2 == 0]\nprint(result)",
+  "grading": {
+   "varsEqual": {
+    "result": [
+     4,
+     16,
+     36,
+     64,
+     100
+    ]
+   },
+   "stdoutEquals": "[4, 16, 36, 64, 100]\n",
+   "requiredAst": [
+    "ListComp"
+   ]
+  },
+  "hints": [
+   "1 到 10（含 10）用 range(1, 11)",
+   "判断偶数：x % 2 == 0",
+   "完整代码：\nresult = [x * x for x in range(1, 11) if x % 2 == 0]\nprint(result)"
+  ],
+  "_lesson": "python7"
+ },
+ {
+  "id": "04-generator",
+  "title": "写一个生成器函数",
+  "prompt": "请定义一个 **生成器函数** `count_up(n)`，它依次 `yield` 出 `1, 2, ..., n`。\n\n然后用 `for` 循环遍历 `count_up(5)`，把每个值 `print` 出来（每个数占一行）。\n\n输出应该是：\n```\n1\n2\n3\n4\n5\n```",
+  "starterCode": "# 定义生成器函数 count_up(n)，依次 yield 出 1 到 n\n# 再用 for 循环遍历 count_up(5)，逐个打印\n",
+  "solution": "def count_up(n):\n    for i in range(1, n + 1):\n        yield i\n\nfor x in count_up(5):\n    print(x)",
+  "grading": {
+   "stdoutEquals": "1\n2\n3\n4\n5\n",
+   "requiredAst": [
+    "FunctionDef:count_up",
+    "Yield"
+   ]
+  },
+  "hints": [
+   "把普通函数里的 print(i) 改成 yield i，就成了生成器函数",
+   "用 range(1, n + 1) 才能包含 n 本身",
+   "完整代码：\ndef count_up(n):\n    for i in range(1, n + 1):\n        yield i\n\nfor x in count_up(5):\n    print(x)"
+  ],
+  "_lesson": "python7"
+ },
+ {
+  "id": "05-zip-pair",
+  "title": "用 zip 配对两个 list",
+  "prompt": "已经给了你两个 list：\n\n```python\nnames = ['Alice', 'Bob', 'Cathy']\nages = [18, 19, 20]\n```\n\n请用 `zip()` 把它们配成对，再用 `for` 循环每一对都按 `name age` 的格式 print 出来（中间 **一个空格**）。\n\n输出应该是：\n```\nAlice 18\nBob 19\nCathy 20\n```",
+  "starterCode": "names = ['Alice', 'Bob', 'Cathy']\nages = [18, 19, 20]\n# 用 zip 把两个 list 配成对，for 循环里拆包成 name、age 后逐对打印\n",
+  "solution": "names = ['Alice', 'Bob', 'Cathy']\nages = [18, 19, 20]\nfor name, age in zip(names, ages):\n    print(name, age)",
+  "grading": {
+   "stdoutEquals": "Alice 18\nBob 19\nCathy 20\n",
+   "requiredAst": [
+    "For"
+   ]
+  },
+  "hints": [
+   "zip(names, ages) 会同时从两个 list 各取一个元素，组成 (name, age)",
+   "在 for 里直接拆包：for name, age in zip(...)",
+   "print(name, age) 默认就用空格分隔",
+   "完整代码：\nnames = ['Alice', 'Bob', 'Cathy']\nages = [18, 19, 20]\nfor name, age in zip(names, ages):\n    print(name, age)"
+  ],
+  "_lesson": "python7"
+ },
+ {
+  "id": "01-class-basic",
+  "title": "定义你的第一个类",
+  "prompt": "请定义一个类 `Animal`，类里有一个方法 `sound`，方法体打印 `'某种声音'`。\n\n然后：\n1. 实例化 `Animal()` 赋给 `a`\n2. 调用 `a.sound()`\n\n输出应该是：\n```\n某种声音\n```",
+  "starterCode": "# 定义类 Animal，写一个 sound 方法打印题目要求的文字\n# 再实例化赋给 a，调用 a.sound()\n\n",
+  "solution": "class Animal:\n    def sound(self):\n        print('某种声音')\n\na = Animal()\na.sound()",
+  "grading": {
+   "stdoutEquals": "某种声音\n",
+   "requiredAst": [
+    "ClassDef:Animal",
+    "FunctionDef:sound"
+   ]
+  },
+  "hints": [
+   "用 class 定义类，方法跟函数差不多但第一个参数要写 self",
+   "实例化：a = Animal()，调用方法：a.sound()",
+   "完整代码：\nclass Animal:\n    def sound(self):\n        print('某种声音')\n\na = Animal()\na.sound()"
+  ],
+  "_lesson": "python8"
+ },
+ {
+  "id": "02-init",
+  "title": "用 __init__ 给对象传参",
+  "prompt": "请定义类 `Person`：\n\n- `__init__` 接收 `name` 和 `age`，分别保存到 `self.name` 和 `self.age`\n- 方法 `greet`：打印 `f'我叫 {self.name}，今年 {self.age} 岁'`\n\n然后实例化 `Person('张三', 18)` 赋给 `p`，调用 `p.greet()`。\n\n输出应该是：\n```\n我叫 张三，今年 18 岁\n```",
+  "starterCode": "# 定义类 Person：__init__ 接收 name、age，保存到实例属性\n# 写 greet 方法，按题目格式打印自我介绍\n# 最后实例化 p 并调用 p.greet()\n\n",
+  "solution": "class Person:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\n    def greet(self):\n        print(f'我叫 {self.name}，今年 {self.age} 岁')\n\np = Person('张三', 18)\np.greet()",
+  "grading": {
+   "stdoutEquals": "我叫 张三，今年 18 岁\n",
+   "requiredAst": [
+    "ClassDef:Person",
+    "FunctionDef:__init__",
+    "FunctionDef:greet"
+   ]
+  },
+  "hints": [
+   "__init__ 前后各两个下划线",
+   "在 __init__ 里用 self.xxx = ... 设置实例属性",
+   "完整代码：\nclass Person:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\n    def greet(self):\n        print(f'我叫 {self.name}，今年 {self.age} 岁')\n\np = Person('张三', 18)\np.greet()"
+  ],
+  "_lesson": "python8"
+ },
+ {
+  "id": "03-inheritance",
+  "title": "继承：Student 继承 Person",
+  "prompt": "已经给你定义了：\n```python\nclass Person:\n    def __init__(self, name):\n        self.name = name\n    def greet(self):\n        print(f'我叫 {self.name}')\n```\n\n请定义一个**继承自 `Person`** 的类 `Student`，给它加一个方法 `study`，打印 `f'{self.name} 在学习'`。\n\n然后实例化 `Student('小明')` 赋给 `s`，依次调用 `s.greet()` 和 `s.study()`。\n\n输出应该是：\n```\n我叫 小明\n小明 在学习\n```",
+  "starterCode": "class Person:\n    def __init__(self, name):\n        self.name = name\n    def greet(self):\n        print(f'我叫 {self.name}')\n\n# 定义继承自 Person 的类 Student，加一个 study 方法\n# 实例化 s 后依次调用 greet 和 study\n\n",
+  "solution": "class Person:\n    def __init__(self, name):\n        self.name = name\n    def greet(self):\n        print(f'我叫 {self.name}')\n\nclass Student(Person):\n    def study(self):\n        print(f'{self.name} 在学习')\n\ns = Student('小明')\ns.greet()\ns.study()",
+  "grading": {
+   "stdoutEquals": "我叫 小明\n小明 在学习\n",
+   "requiredAst": [
+    "ClassDef:Student",
+    "FunctionDef:study"
+   ]
+  },
+  "hints": [
+   "继承写法：class Student(Person):",
+   "Student 没写 __init__ 也没关系——会自动用父类的",
+   "完整代码：\nclass Person:\n    def __init__(self, name):\n        self.name = name\n    def greet(self):\n        print(f'我叫 {self.name}')\n\nclass Student(Person):\n    def study(self):\n        print(f'{self.name} 在学习')\n\ns = Student('小明')\ns.greet()\ns.study()"
+  ],
+  "_lesson": "python8"
+ },
+ {
+  "id": "04-polymorphism",
+  "title": "多态：重写父类方法",
+  "prompt": "已经给你定义了：\n```python\nclass Animal:\n    def sound(self):\n        print('一些声音')\n```\n\n请定义两个继承自 `Animal` 的类 `Dog` 和 `Cat`，分别**重写** `sound` 方法：\n\n- `Dog.sound` 打印 `'汪汪'`\n- `Cat.sound` 打印 `'喵喵'`\n\n然后用 `for` 循环依次调用 `Dog().sound()`、`Cat().sound()`。\n\n输出应该是：\n```\n汪汪\n喵喵\n```",
+  "starterCode": "class Animal:\n    def sound(self):\n        print('一些声音')\n\n# 定义 Dog 和 Cat 继承 Animal，各自重写 sound 方法\n# 用 for 循环遍历两个实例并依次调用 sound\n\n",
+  "solution": "class Animal:\n    def sound(self):\n        print('一些声音')\n\nclass Dog(Animal):\n    def sound(self):\n        print('汪汪')\n\nclass Cat(Animal):\n    def sound(self):\n        print('喵喵')\n\nfor a in [Dog(), Cat()]:\n    a.sound()",
+  "grading": {
+   "stdoutEquals": "汪汪\n喵喵\n",
+   "requiredAst": [
+    "ClassDef:Dog",
+    "ClassDef:Cat",
+    "FunctionDef:sound",
+    "For"
+   ]
+  },
+  "hints": [
+   "在子类里重新定义同名方法，就会覆盖父类的",
+   "for a in [Dog(), Cat()]: 遍历两个对象",
+   "完整代码：\nclass Animal:\n    def sound(self):\n        print('一些声音')\n\nclass Dog(Animal):\n    def sound(self):\n        print('汪汪')\n\nclass Cat(Animal):\n    def sound(self):\n        print('喵喵')\n\nfor a in [Dog(), Cat()]:\n    a.sound()"
+  ],
+  "_lesson": "python8"
+ },
+ {
+  "id": "01-import-math",
+  "title": "用 math 模块算圆周长",
+  "prompt": "请用 `import` 引入 `math` 模块，然后利用 `math.pi`：\n\n1. 计算半径 `r = 5` 时的圆周长，公式 `2 * math.pi * r`\n2. 把结果保留 **4 位小数**（用内置函数 `round(..., 4)`）赋给变量 `c`\n3. `print(c)`\n\n输出应该是：\n```\n31.4159\n```",
+  "starterCode": "# 导入 math 模块，用 math.pi 按公式算出半径为 5 的圆周长\n# 用 round 保留 4 位小数，赋给 c 并打印\n\n",
+  "solution": "import math\n\nr = 5\nc = round(2 * math.pi * r, 4)\nprint(c)",
+  "grading": {
+   "stdoutEquals": "31.4159\n",
+   "varsEqual": {
+    "c": 31.4159
+   },
+   "requiredAst": [
+    "Import"
+   ]
+  },
+  "hints": [
+   "用 import math 把 math 模块导进来",
+   "math.pi 就是圆周率 π",
+   "完整代码：\nimport math\n\nr = 5\nc = round(2 * math.pi * r, 4)\nprint(c)"
+  ],
+  "_lesson": "python9"
+ },
+ {
+  "id": "02-from-import",
+  "title": "from···import：直接拎出 sqrt",
+  "prompt": "用 `from···import` 语法 **直接** 从 `math` 模块导入 `sqrt` 函数（不要用 `import math`），然后：\n\n1. 计算 `sqrt(16)`\n2. 把结果赋给变量 `result`\n3. `print(result)`\n\n输出应该是：\n```\n4.0\n```",
+  "starterCode": "# 用 from···import 从 math 模块直接导入 sqrt\n# 计算 16 的平方根，赋给 result 并打印\n\n",
+  "solution": "from math import sqrt\n\nresult = sqrt(16)\nprint(result)",
+  "grading": {
+   "stdoutEquals": "4.0\n",
+   "varsEqual": {
+    "result": 4
+   },
+   "requiredAst": [
+    "ImportFrom"
+   ]
+  },
+  "hints": [
+   "语法是 from 模块名 import 名字",
+   "from math import sqrt 之后可以直接写 sqrt(16)，不用前缀",
+   "完整代码：\nfrom math import sqrt\n\nresult = sqrt(16)\nprint(result)"
+  ],
+  "_lesson": "python9"
+ },
+ {
+  "id": "03-datetime",
+  "title": "用 datetime 模块构造日期",
+  "prompt": "用 `from···import` 从 `datetime` 模块导入 `date` 类，然后：\n\n1. 创建 `2026 年 1 月 1 日` 这个日期，赋给变量 `d`：`d = date(2026, 1, 1)`\n2. 分别 `print` 它的 `year`、`month`、`day` 三个属性\n\n输出应该是：\n```\n2026\n1\n1\n```",
+  "starterCode": "# 从 datetime 模块导入 date 类\n# 构造 2026 年 1 月 1 日的日期对象，赋给 d\n# 分别打印它的 year、month、day 属性\n\n",
+  "solution": "from datetime import date\n\nd = date(2026, 1, 1)\nprint(d.year)\nprint(d.month)\nprint(d.day)",
+  "grading": {
+   "stdoutEquals": "2026\n1\n1\n",
+   "requiredAst": [
+    "ImportFrom"
+   ]
+  },
+  "hints": [
+   "from datetime import date",
+   "date(年, 月, 日) 构造一个日期对象，再用 .year / .month / .day 取属性",
+   "完整代码：\nfrom datetime import date\n\nd = date(2026, 1, 1)\nprint(d.year)\nprint(d.month)\nprint(d.day)"
+  ],
+  "_lesson": "python9"
+ },
+ {
+  "id": "04-json",
+  "title": "用 json 模块序列化字典",
+  "prompt": "请用 `import` 引入 `json` 模块，然后：\n\n1. 定义字典 `data = {'name': 'Alice', 'age': 18}`\n2. 用 `json.dumps(data)` 把它转成 JSON 字符串，赋给变量 `s`\n3. `print(s)`\n\n输出应该是：\n```\n{\"name\": \"Alice\", \"age\": 18}\n```\n\n> 提示：`json.dumps` 默认会在键和值之间加空格（`, ` 和 `: `），别自己手写字符串。",
+  "starterCode": "# 导入 json 模块，定义题目要求的字典 data\n# 用 json.dumps 把它转成 JSON 字符串，赋给 s 并打印\n\n",
+  "solution": "import json\n\ndata = {'name': 'Alice', 'age': 18}\ns = json.dumps(data)\nprint(s)",
+  "grading": {
+   "varsEqual": {
+    "s": "{\"name\": \"Alice\", \"age\": 18}"
+   },
+   "stdoutEquals": "{\"name\": \"Alice\", \"age\": 18}\n",
+   "requiredAst": [
+    "Import"
+   ]
+  },
+  "hints": [
+   "import json",
+   "json.dumps(字典) 返回 JSON 字符串",
+   "完整代码：\nimport json\n\ndata = {'name': 'Alice', 'age': 18}\ns = json.dumps(data)\nprint(s)"
+  ],
+  "_lesson": "python9"
+ },
+ {
+  "id": "01-str",
+  "title": "用 __str__ 让 print 输出友好",
+  "prompt": "请定义类 `Book`：\n\n- `__init__` 接收 `title`，保存到 `self.title`\n- `__str__` 返回字符串 `f'《{self.title}》'`\n\n然后实例化 `Book('Python 入门')` 赋给 `b`，并 `print(b)`。\n\n输出应该是：\n```\n《Python 入门》\n```",
+  "starterCode": "# 定义 Book 类：在 __init__ 里保存 title，__str__ 返回《书名》格式的字符串\n# 再实例化一本《Python 入门》赋给 b，并打印 b\n\n",
+  "solution": "class Book:\n    def __init__(self, title):\n        self.title = title\n\n    def __str__(self):\n        return f'《{self.title}》'\n\nb = Book('Python 入门')\nprint(b)",
+  "grading": {
+   "stdoutEquals": "《Python 入门》\n",
+   "requiredAst": [
+    "ClassDef:Book",
+    "FunctionDef:__str__"
+   ]
+  },
+  "hints": [
+   "__str__ 必须返回一个字符串，不能用 print",
+   "f'《{self.title}》' 用 f-string 把书名套进《》",
+   "完整代码：\nclass Book:\n    def __init__(self, title):\n        self.title = title\n    def __str__(self):\n        return f'《{self.title}》'\nb = Book('Python 入门')\nprint(b)"
+  ],
+  "_lesson": "python10"
+ },
+ {
+  "id": "02-eq",
+  "title": "用 __eq__ 自定义相等",
+  "prompt": "请定义类 `Money`：\n\n- `__init__` 接收 `amount`，保存到 `self.amount`\n- `__eq__` 比较两个 `Money` 对象的 `amount` 是否相等；如果对方不是 `Money`（比如 `Money(100) == 100`），应该返回 `False` 而不是报错\n\n然后创建：\n\n```python\na = Money(100)\nb = Money(100)\nc = Money(50)\n```\n\n并依次执行：\n\n```python\nprint(a == b)\nprint(a == c)\n```\n\n输出应该是：\n```\nTrue\nFalse\n```",
+  "starterCode": "# 定义 Money 类：在 __init__ 里保存 amount\n# __eq__ 里先用 isinstance 确认对方也是 Money，再比较两者的 amount\n# 创建 a、b、c 三个对象，依次打印 a == b 和 a == c\n\n",
+  "solution": "class Money:\n    def __init__(self, amount):\n        self.amount = amount\n\n    def __eq__(self, other):\n        return isinstance(other, Money) and self.amount == other.amount\n\na = Money(100)\nb = Money(100)\nc = Money(50)\nprint(a == b)\nprint(a == c)",
+  "grading": {
+   "stdoutEquals": "True\nFalse\n",
+   "requiredAst": [
+    "ClassDef:Money",
+    "FunctionDef:__eq__"
+   ]
+  },
+  "hints": [
+   "__eq__(self, other) 接收第二个参数 other",
+   "先用 isinstance(other, Money) 确认对方也是 Money，再比较 amount——不然 Money(100) == 100 会直接报错",
+   "完整代码：\nclass Money:\n    def __init__(self, amount):\n        self.amount = amount\n    def __eq__(self, other):\n        return isinstance(other, Money) and self.amount == other.amount\na = Money(100)\nb = Money(100)\nc = Money(50)\nprint(a == b)\nprint(a == c)"
+  ],
+  "_lesson": "python10"
+ },
+ {
+  "id": "03-len",
+  "title": "用 __len__ 让 len() 工作",
+  "prompt": "请定义类 `Playlist`：\n\n- `__init__` 接收 `songs`（一个列表），保存到 `self.songs`\n- `__len__` 返回 `self.songs` 的长度\n\n然后实例化 `p = Playlist(['歌1', '歌2', '歌3'])`，调用 `print(len(p))`。\n\n输出应该是：\n```\n3\n```",
+  "starterCode": "# 定义 Playlist 类：在 __init__ 里保存 songs 列表\n# __len__ 返回歌曲数量\n# 实例化 p 之后打印 len(p)\n\n",
+  "solution": "class Playlist:\n    def __init__(self, songs):\n        self.songs = songs\n\n    def __len__(self):\n        return len(self.songs)\n\np = Playlist(['歌1', '歌2', '歌3'])\nprint(len(p))",
+  "grading": {
+   "stdoutEquals": "3\n",
+   "requiredAst": [
+    "ClassDef:Playlist",
+    "FunctionDef:__len__"
+   ]
+  },
+  "hints": [
+   "__len__ 必须返回一个非负整数",
+   "直接返回内部列表的长度：return len(self.songs)",
+   "完整代码：\nclass Playlist:\n    def __init__(self, songs):\n        self.songs = songs\n    def __len__(self):\n        return len(self.songs)\np = Playlist(['歌1', '歌2', '歌3'])\nprint(len(p))"
+  ],
+  "_lesson": "python10"
+ },
+ {
+  "id": "05-getitem",
+  "title": "用 __getitem__ 让对象支持下标",
+  "prompt": "请定义类 `Stack`：\n\n- `__init__` 接收 `items`（一个列表），保存到 `self.items`\n- `__getitem__(self, i)` 返回 `self.items[i]`\n\n然后执行：\n\n```python\ns = Stack(['a', 'b', 'c'])\nprint(s[0])\nprint(s[-1])\n```\n\n输出应该是：\n```\na\nc\n```",
+  "starterCode": "# 定义 Stack 类：在 __init__ 里保存 items 列表\n# __getitem__ 把下标访问转发给内部列表\n# 实例化 s 之后打印 s[0] 和 s[-1]\n\n",
+  "solution": "class Stack:\n    def __init__(self, items):\n        self.items = items\n\n    def __getitem__(self, i):\n        return self.items[i]\n\ns = Stack(['a', 'b', 'c'])\nprint(s[0])\nprint(s[-1])",
+  "grading": {
+   "stdoutEquals": "a\nc\n",
+   "requiredAst": [
+    "ClassDef:Stack",
+    "FunctionDef:__getitem__"
+   ]
+  },
+  "hints": [
+   "__getitem__(self, i) 中 i 就是中括号里的值",
+   "直接转发给内部列表：return self.items[i]",
+   "完整代码：\nclass Stack:\n    def __init__(self, items):\n        self.items = items\n    def __getitem__(self, i):\n        return self.items[i]\ns = Stack(['a', 'b', 'c'])\nprint(s[0])\nprint(s[-1])"
+  ],
+  "_lesson": "python10"
+ },
+ {
+  "id": "04-add",
+  "title": "用 __add__ 让对象支持 +",
+  "prompt": "请定义二维向量类 `Vec2`：\n\n- `__init__` 接收 `x` 和 `y`，分别保存到 `self.x` / `self.y`\n- `__add__(self, other)` 返回一个新的 `Vec2(self.x + other.x, self.y + other.y)`\n- `__repr__` 返回字符串 `f'Vec2({self.x}, {self.y})'`\n\n然后执行：\n\n```python\nv1 = Vec2(1, 2)\nv2 = Vec2(3, 4)\nv3 = v1 + v2\nprint(v3)\n```\n\n输出应该是：\n```\nVec2(4, 6)\n```",
+  "starterCode": "# 定义 Vec2 类：在 __init__ 里保存 x、y\n# __add__ 返回坐标分别相加后的新 Vec2，__repr__ 返回 Vec2(x, y) 格式的字符串\n# 创建 v1、v2，相加得到 v3 并打印\n\n",
+  "solution": "class Vec2:\n    def __init__(self, x, y):\n        self.x = x\n        self.y = y\n\n    def __add__(self, other):\n        return Vec2(self.x + other.x, self.y + other.y)\n\n    def __repr__(self):\n        return f'Vec2({self.x}, {self.y})'\n\nv1 = Vec2(1, 2)\nv2 = Vec2(3, 4)\nv3 = v1 + v2\nprint(v3)",
+  "grading": {
+   "stdoutEquals": "Vec2(4, 6)\n",
+   "requiredAst": [
+    "ClassDef:Vec2",
+    "FunctionDef:__add__",
+    "FunctionDef:__repr__"
+   ]
+  },
+  "hints": [
+   "__add__ 通常返回一个新对象，不要修改 self",
+   "把 x、y 分别相加，包成新的 Vec2 返回",
+   "完整代码：\nclass Vec2:\n    def __init__(self, x, y):\n        self.x = x\n        self.y = y\n    def __add__(self, other):\n        return Vec2(self.x + other.x, self.y + other.y)\n    def __repr__(self):\n        return f'Vec2({self.x}, {self.y})'\nv1 = Vec2(1, 2)\nv2 = Vec2(3, 4)\nv3 = v1 + v2\nprint(v3)"
+  ],
+  "_lesson": "python10"
+ },
+ {
+  "id": "01-define-color",
+  "title": "定义一个 Color 枚举类",
+  "prompt": "请用 `from ... import` 从 `enum` 模块导入 `Enum`，然后：\n\n1. 定义一个继承 `Enum` 的类 `Color`，包含三个成员：\n   - `RED = 1`\n   - `GREEN = 2`\n   - `BLUE = 3`\n2. `print(Color.RED)`\n\n输出应该是：\n```\nColor.RED\n```\n\n> 提示：直接 `print` 一个 Enum 成员，默认会打出 `类名.成员名` 这种格式。",
+  "starterCode": "# 从 enum 模块导入 Enum\n# 定义 Color 枚举类，包含 RED、GREEN、BLUE 三个成员\n# 打印 Color.RED\n\n",
+  "solution": "from enum import Enum\n\nclass Color(Enum):\n    RED = 1\n    GREEN = 2\n    BLUE = 3\n\nprint(Color.RED)",
+  "grading": {
+   "stdoutEquals": "Color.RED\n",
+   "requiredAst": [
+    "ImportFrom",
+    "ClassDef:Color"
+   ]
+  },
+  "hints": [
+   "from enum import Enum",
+   "class Color(Enum): 然后在类体里写 RED = 1 等成员",
+   "完整代码：\nfrom enum import Enum\n\nclass Color(Enum):\n    RED = 1\n    GREEN = 2\n    BLUE = 3\n\nprint(Color.RED)"
+  ],
+  "_lesson": "python11"
+ },
+ {
+  "id": "02-name-value",
+  "title": "访问 .name 和 .value",
+  "prompt": "继续上一题的 `Color` 枚举（含 `RED=1` / `GREEN=2` / `BLUE=3`），这次：\n\n1. `print(Color.GREEN.name)` —— 打印成员名\n2. `print(Color.GREEN.value)` —— 打印成员值\n\n输出应该是：\n```\nGREEN\n2\n```",
+  "starterCode": "# 定义含 RED、GREEN、BLUE 三个成员的 Color 枚举\n# 分别打印 Color.GREEN 的 name 和 value\n\n",
+  "solution": "from enum import Enum\n\nclass Color(Enum):\n    RED = 1\n    GREEN = 2\n    BLUE = 3\n\nprint(Color.GREEN.name)\nprint(Color.GREEN.value)",
+  "grading": {
+   "stdoutEquals": "GREEN\n2\n",
+   "requiredAst": [
+    "ClassDef:Color"
+   ]
+  },
+  "hints": [
+   ".name 是字符串形式的成员名",
+   ".value 是定义时给的那个值",
+   "完整代码：\nfrom enum import Enum\n\nclass Color(Enum):\n    RED = 1\n    GREEN = 2\n    BLUE = 3\n\nprint(Color.GREEN.name)\nprint(Color.GREEN.value)"
+  ],
+  "_lesson": "python11"
+ },
+ {
+  "id": "03-iterate",
+  "title": "遍历 Enum 的所有成员",
+  "prompt": "定义同样的 `Color` 枚举（`RED=1` / `GREEN=2` / `BLUE=3`），然后用 `for` 循环遍历它，**按定义顺序** 依次打印每个成员的 `.name`。\n\n输出应该是：\n```\nRED\nGREEN\nBLUE\n```\n\n> 提示：`for c in Color:` 就能拿到每个成员，再用 `c.name` 取它的名字。",
+  "starterCode": "# 定义同样的 Color 枚举\n# 用 for 循环遍历 Color，按定义顺序打印每个成员的 name\n\n",
+  "solution": "from enum import Enum\n\nclass Color(Enum):\n    RED = 1\n    GREEN = 2\n    BLUE = 3\n\nfor c in Color:\n    print(c.name)",
+  "grading": {
+   "stdoutEquals": "RED\nGREEN\nBLUE\n",
+   "requiredAst": [
+    "ClassDef:Color",
+    "For"
+   ]
+  },
+  "hints": [
+   "Enum 类本身就是可迭代的：for member in Color",
+   "用 c.name 取成员名字符串",
+   "完整代码：\nfrom enum import Enum\n\nclass Color(Enum):\n    RED = 1\n    GREEN = 2\n    BLUE = 3\n\nfor c in Color:\n    print(c.name)"
+  ],
+  "_lesson": "python11"
+ },
+ {
+  "id": "04-auto",
+  "title": "用 auto() 自动分配值",
+  "prompt": "请用 `from ... import` 从 `enum` 模块同时导入 `Enum` 和 `auto`，然后：\n\n1. 定义一个继承 `Enum` 的类 `Weekday`，三个成员都用 `auto()` 自动赋值：\n   - `MON = auto()`\n   - `TUE = auto()`\n   - `WED = auto()`\n2. `print(Weekday.MON.value)`\n3. `print(Weekday.WED.value)`\n\n输出应该是：\n```\n1\n3\n```\n\n> 提示：`auto()` 默认从 1 开始，按定义顺序递增。",
+  "starterCode": "# 从 enum 模块同时导入 Enum 和 auto\n# 定义 Weekday 枚举，MON、TUE、WED 都用 auto() 自动赋值\n# 打印 MON 和 WED 的 value\n\n",
+  "solution": "from enum import Enum, auto\n\nclass Weekday(Enum):\n    MON = auto()\n    TUE = auto()\n    WED = auto()\n\nprint(Weekday.MON.value)\nprint(Weekday.WED.value)",
+  "grading": {
+   "stdoutEquals": "1\n3\n",
+   "requiredAst": [
+    "ImportFrom:auto",
+    "ClassDef:Weekday"
+   ]
+  },
+  "hints": [
+   "from enum import Enum, auto 一次导入两个名字",
+   "成员定义里直接写 MON = auto()",
+   "完整代码：\nfrom enum import Enum, auto\n\nclass Weekday(Enum):\n    MON = auto()\n    TUE = auto()\n    WED = auto()\n\nprint(Weekday.MON.value)\nprint(Weekday.WED.value)"
+  ],
+  "_lesson": "python11"
+ },
+ {
+  "id": "01-detect-meta",
+  "title": "类的类是什么？",
+  "prompt": "请定义一个最普通的类 `Foo`（里面写 `pass` 即可）。\n\n然后用 `type()` 检查 `Foo` 的类型，再用 `is` 判断它是不是 `type`，按下面的格式打印两行：\n\n```\n<class 'type'>\nTrue\n```\n\n提示：第一行是 `print(type(Foo))`，第二行是 `print(type(Foo) is type)`。",
+  "starterCode": "# 定义一个最简单的类 Foo（类体写 pass）\n# 用 type() 打印 Foo 的类型\n# 再打印 type(Foo) is type 的判断结果\n\n",
+  "solution": "class Foo:\n    pass\n\nprint(type(Foo))\nprint(type(Foo) is type)",
+  "grading": {
+   "stdoutEquals": "<class 'type'>\nTrue\n",
+   "requiredAst": [
+    "ClassDef:Foo"
+   ]
+  },
+  "hints": [
+   "用 class Foo: pass 定义一个最简类",
+   "type(Foo) 会返回 <class 'type'>",
+   "完整代码：\nclass Foo:\n    pass\n\nprint(type(Foo))\nprint(type(Foo) is type)"
+  ],
+  "_lesson": "python12"
+ },
+ {
+  "id": "02-build-greeter",
+  "title": "用 type() 三参数动态造类",
+  "prompt": "请**不要使用 `class` 关键字**，用 `type()` 三参数语法动态创建一个类 `Greeter`：\n\n- 父类：`(object,)`\n- 含一个方法 `greet(self)`，方法体打印 `'hi'`——先用 `def` 定义一个普通函数 `greet(self)`，再把它放进属性字典 `{'greet': greet}`\n\n创建后实例化并调用 `g.greet()`，再 `print(type(Greeter))` 证明它是 `type` 的实例。\n\n输出应该是：\n```\nhi\n<class 'type'>\n```",
+  "starterCode": "# 先用 def 定义普通函数 greet(self)，让它打印 'hi'\n# 用 type() 三参数语法创建 Greeter，把 greet 放进属性字典\n# 实例化后调用 greet 方法，最后打印 type(Greeter)\n\n",
+  "solution": "def greet(self):\n    print('hi')\n\nGreeter = type('Greeter', (object,), {'greet': greet})\n\ng = Greeter()\ng.greet()\nprint(type(Greeter))",
+  "grading": {
+   "stdoutEquals": "hi\n<class 'type'>\n",
+   "requiredAst": [
+    "Assign:Greeter",
+    "FunctionDef:greet"
+   ]
+  },
+  "hints": [
+   "type() 三参数：type(类名字符串, 父类元组, 属性字典)",
+   "先 def 一个普通函数 greet(self)，再把它塞进字典 {'greet': greet}",
+   "完整代码：\ndef greet(self):\n    print('hi')\n\nGreeter = type('Greeter', (object,), {'greet': greet})\ng = Greeter()\ng.greet()\nprint(type(Greeter))"
+  ],
+  "_lesson": "python12"
+ },
+ {
+  "id": "03-custom-meta",
+  "title": "自定义元类自动加属性",
+  "prompt": "请定义一个**继承 `type`** 的元类 `AnimalMeta`：\n\n- 重写 `__new__(mcs, name, bases, attrs)`\n- 在 `attrs` 里塞一个 `species = 'animal'`\n- 用 `super().__new__(mcs, name, bases, attrs)` 返回类\n\n然后定义一个空类 `Dog(metaclass=AnimalMeta)`，里面写 `pass`。\n\n最后打印 `Dog.species`。\n\n输出应该是：\n```\nanimal\n```",
+  "starterCode": "# 定义继承 type 的元类 AnimalMeta，重写 __new__\n# 在 attrs 里塞入 species 后用 super().__new__ 返回类\n# 定义空类 Dog 并指定 metaclass，最后打印 Dog.species\n\n",
+  "solution": "class AnimalMeta(type):\n    def __new__(mcs, name, bases, attrs):\n        attrs['species'] = 'animal'\n        return super().__new__(mcs, name, bases, attrs)\n\nclass Dog(metaclass=AnimalMeta):\n    pass\n\nprint(Dog.species)",
+  "grading": {
+   "stdoutEquals": "animal\n",
+   "requiredAst": [
+    "ClassDef:AnimalMeta",
+    "ClassDef:Dog",
+    "FunctionDef:__new__"
+   ]
+  },
+  "hints": [
+   "元类要继承 type：class AnimalMeta(type):",
+   "在 __new__ 里给 attrs 字典加一个键值对，然后 super().__new__ 返回",
+   "用元类的语法是 class Dog(metaclass=AnimalMeta):"
+  ],
+  "_lesson": "python12"
+ },
+ {
+  "id": "01-findall-digits",
+  "title": "用 re.findall 抓出全部数字",
+  "prompt": "字符串 `'abc123def456ghi789'` 里夹杂着一些**连续的数字段**。\n\n请用 `re.findall` 把所有连续数字段抓出来，赋给变量 `nums`，然后 `print(nums)`。\n\n输出应该是：\n```\n['123', '456', '789']\n```\n\n提示：连续数字可以用 `\\d+`。",
+  "starterCode": "import re\n\ns = 'abc123def456ghi789'\n# nums = re.findall(...)\n# print(nums)\n",
+  "solution": "import re\n\ns = 'abc123def456ghi789'\nnums = re.findall(r'\\d+', s)\nprint(nums)",
+  "grading": {
+   "varsEqual": {
+    "nums": [
+     "123",
+     "456",
+     "789"
+    ]
+   },
+   "stdoutEquals": "['123', '456', '789']\n",
+   "requiredAst": [
+    "Import:re"
+   ]
+  },
+  "hints": [
+   "记得 import re",
+   "正则用 r'...' 原始字符串避免反斜杠转义",
+   "完整代码：\nimport re\ns = 'abc123def456ghi789'\nnums = re.findall(r'\\d+', s)\nprint(nums)"
+  ],
+  "_lesson": "python14"
+ },
+ {
+  "id": "02-match-phone",
+  "title": "用 re.match 校验手机号",
+  "prompt": "请写一个函数 `is_phone(s)`：判断字符串 `s` 是不是合法的中国大陆手机号。\n\n规则：\n- 总共 11 位\n- 第 1 位必须是 `1`\n- 第 2 位是 `3` ~ `9`\n- 后面 9 位都是数字\n\n用 `re.match` 实现。匹配成功返回 `True`，否则 `False`。\n\n然后调用：\n\n```python\nprint(is_phone('13812345678'))\nprint(is_phone('12345'))\nprint(is_phone('1381234567a'))\n```\n\n输出应该是：\n```\nTrue\nFalse\nFalse\n```\n\n提示：用 `^1[3-9]\\d{9}$` 这条正则。拆开看：`^` 锁定字符串开头、`$` 锁定结尾（少了它们，半截字符串也能匹配上）；`[3-9]` 表示 3 到 9 之间任意一个数字；`\\d{9}` 表示连续 9 个数字。",
+  "starterCode": "import re\n\n# 定义函数 is_phone(s)：用 re.match 按题面给的正则判断，返回 True 或 False\n# 再用题面的三个号码分别调用 is_phone 并打印结果\n\n",
+  "solution": "import re\n\ndef is_phone(s):\n    return bool(re.match(r'^1[3-9]\\d{9}$', s))\n\nprint(is_phone('13812345678'))\nprint(is_phone('12345'))\nprint(is_phone('1381234567a'))",
+  "grading": {
+   "stdoutEquals": "True\nFalse\nFalse\n",
+   "requiredAst": [
+    "FunctionDef:is_phone",
+    "Import:re"
+   ]
+  },
+  "hints": [
+   "re.match 返回 Match 对象或 None，bool(...) 转成 True/False",
+   "正则里 `^` 和 `$` 锁定开头和结尾，避免半截字符串也通过",
+   "完整代码：\nimport re\ndef is_phone(s):\n    return bool(re.match(r'^1[3-9]\\d{9}$', s))\nprint(is_phone('13812345678'))\nprint(is_phone('12345'))\nprint(is_phone('1381234567a'))"
+  ],
+  "_lesson": "python14"
+ },
+ {
+  "id": "03-groups-email",
+  "title": "用分组提取邮箱的用户名和域名",
+  "prompt": "已知字符串 `email = 'alice@example.com'`。\n\n请用 `re.match` + 分组 `(...)`，把**用户名**和**域名**分别抽出来，依次 `print`。\n\n要求：\n- 第 1 个分组匹配用户名（`@` 之前的部分）\n- 第 2 个分组匹配域名（`@` 之后的部分）\n- 用 `m.group(1)` 取用户名，`m.group(2)` 取域名\n\n输出应该是：\n```\nalice\nexample.com\n```\n\n提示：可以用正则 `(\\w+)@(\\w+\\.\\w+)`。",
+  "starterCode": "import re\n\nemail = 'alice@example.com'\n# m = re.match(...)\n# print(m.group(1))\n# print(m.group(2))\n",
+  "solution": "import re\n\nemail = 'alice@example.com'\nm = re.match(r'(\\w+)@(\\w+\\.\\w+)', email)\nprint(m.group(1))\nprint(m.group(2))",
+  "grading": {
+   "stdoutEquals": "alice\nexample.com\n",
+   "requiredAst": [
+    "Import:re"
+   ]
+  },
+  "hints": [
+   "分组就是把想抽出来的部分用 () 包起来",
+   "`\\.` 匹配字面意义的点；不加反斜杠 `.` 是任意字符",
+   "完整代码：\nimport re\nemail = 'alice@example.com'\nm = re.match(r'(\\w+)@(\\w+\\.\\w+)', email)\nprint(m.group(1))\nprint(m.group(2))"
+  ],
+  "_lesson": "python14"
+ },
+ {
+  "id": "04-sub-spaces",
+  "title": "用 re.sub 把多空格压成单空格",
+  "prompt": "已知一段被「多空格」污染的文本：\n\n```python\ns = 'hello   world  python  is   cool'\n```\n\n请用 `re.sub` 把**一段或多段连续的空白**替换成**一个空格**，赋给变量 `cleaned`，然后 `print(cleaned)`。\n\n输出应该是：\n```\nhello world python is cool\n```\n\n提示：`\\s+` 匹配「一个或多个空白字符」。",
+  "starterCode": "import re\n\ns = 'hello   world  python  is   cool'\n# cleaned = re.sub(...)\n# print(cleaned)\n",
+  "solution": "import re\n\ns = 'hello   world  python  is   cool'\ncleaned = re.sub(r'\\s+', ' ', s)\nprint(cleaned)",
+  "grading": {
+   "varsEqual": {
+    "cleaned": "hello world python is cool"
+   },
+   "stdoutEquals": "hello world python is cool\n",
+   "requiredAst": [
+    "Import:re"
+   ]
+  },
+  "hints": [
+   "re.sub(pattern, repl, string)：第二个参数是替换值",
+   "用 `\\s+` 匹配「一个或多个空白」，加号是 1 次或多次",
+   "完整代码：\nimport re\ns = 'hello   world  python  is   cool'\ncleaned = re.sub(r'\\s+', ' ', s)\nprint(cleaned)"
+  ],
+  "_lesson": "python14"
+ },
+ {
+  "id": "02-make-adder",
+  "title": "加法器工厂",
+  "prompt": "请定义一个函数 `make_adder(n)`：\n\n- 接收一个数字 `n`\n- 返回一个内层函数 `adder(x)`，作用是返回 `x + n`\n\n然后：\n\n1. 用 `make_adder(10)` 生成 `add10`\n2. `print(add10(5))` —— 应该输出 `15`\n3. 用 `make_adder(100)` 生成 `add100`\n4. `print(add100(5))` —— 应该输出 `105`\n\n输出应该是：\n```\n15\n105\n```",
+  "starterCode": "# 定义 make_adder(n)，返回内层函数 adder(x)，作用是返回 x 与 n 的和\n# 用 make_adder 分别生成 add10 和 add100\n# 各调用一次（参数 5）并打印结果\n\n",
+  "solution": "def make_adder(n):\n    def adder(x):\n        return x + n\n    return adder\n\nadd10 = make_adder(10)\nprint(add10(5))\nadd100 = make_adder(100)\nprint(add100(5))",
+  "grading": {
+   "stdoutEquals": "15\n105\n",
+   "requiredAst": [
+    "FunctionDef:make_adder"
+   ]
+  },
+  "hints": [
+   "内层函数只读 n，不修改它，所以不需要 nonlocal",
+   "make_adder(10) 和 make_adder(100) 是两个不同的闭包，各自带着不同的 n",
+   "完整代码：\ndef make_adder(n):\n    def adder(x):\n        return x + n\n    return adder\n\nadd10 = make_adder(10)\nprint(add10(5))\nadd100 = make_adder(100)\nprint(add100(5))"
+  ],
+  "_lesson": "python15"
+ },
+ {
+  "id": "01-make-counter",
+  "title": "用闭包实现计数器",
+  "prompt": "请定义一个函数 `make_counter()`：\n\n- 内部维护一个 `count = 0`\n- 返回一个内层函数 `counter()`，每次调用 `counter()` 时让 `count` 加 1 并返回新值（记得用 `nonlocal`）\n\n然后：\n\n1. `c = make_counter()`\n2. 连续调用 3 次 `c()`，每次都 `print` 它的返回值\n\n输出应该是：\n```\n1\n2\n3\n```",
+  "starterCode": "# 定义 make_counter()：内部 count = 0，返回内层函数 counter\n# counter 每次调用让 count 加 1 并返回新值（记得用 nonlocal）\n# 再用 make_counter() 生成 c，连续调用 3 次并逐次打印返回值\n\n",
+  "solution": "def make_counter():\n    count = 0\n    def counter():\n        nonlocal count\n        count = count + 1\n        return count\n    return counter\n\nc = make_counter()\nprint(c())\nprint(c())\nprint(c())",
+  "grading": {
+   "stdoutEquals": "1\n2\n3\n",
+   "requiredAst": [
+    "FunctionDef:make_counter",
+    "Nonlocal"
+   ]
+  },
+  "hints": [
+   "外层函数定义 count = 0，内层函数用 nonlocal count 才能改它",
+   "外层函数 return 内层函数对象（注意：return counter，不是 return counter()）",
+   "完整代码：\ndef make_counter():\n    count = 0\n    def counter():\n        nonlocal count\n        count = count + 1\n        return count\n    return counter\n\nc = make_counter()\nprint(c())\nprint(c())\nprint(c())"
+  ],
+  "_lesson": "python15"
+ },
+ {
+  "id": "03-study-time",
+  "title": "用闭包累加学习时间",
+  "prompt": "回到本章开头的需求——用闭包累加学习时间。\n\n请定义函数 `study_time(time)`：\n\n- 接收初始 `time`\n- 返回一个内层函数 `insert_time(min)`，每次调用时把 `min` 累加到 `time` 上并返回当前总时间（记得用 `nonlocal`）\n\n然后：\n\n1. `f = study_time(0)`\n2. `print(f(2))` —— 学了 2 分钟\n3. `print(f(10))` —— 又学了 10 分钟\n4. `print(f(5))` —— 又学了 5 分钟\n\n输出应该是：\n```\n2\n12\n17\n```",
+  "starterCode": "# 定义 study_time(time)，返回内层函数 insert_time(min)\n# insert_time 每次把 min 累加到 time 并返回当前总时间（记得用 nonlocal）\n# 用 study_time(0) 生成 f，按题目顺序调用三次并逐次打印\n\n",
+  "solution": "def study_time(time):\n    def insert_time(min):\n        nonlocal time\n        time = time + min\n        return time\n    return insert_time\n\nf = study_time(0)\nprint(f(2))\nprint(f(10))\nprint(f(5))",
+  "grading": {
+   "stdoutEquals": "2\n12\n17\n",
+   "requiredAst": [
+    "FunctionDef:study_time",
+    "Nonlocal"
+   ]
+  },
+  "hints": [
+   "外层 study_time 接收 time 作为参数；内层 insert_time 通过 nonlocal time 修改它（参数名 min 沿用原教程写法，它会临时遮住内置函数 min()——真实项目里建议用 minutes 这类不冲突的名字）",
+   "外层函数 return 内层函数对象 insert_time（不要带括号）",
+   "完整代码：\ndef study_time(time):\n    def insert_time(min):\n        nonlocal time\n        time = time + min\n        return time\n    return insert_time\n\nf = study_time(0)\nprint(f(2))\nprint(f(10))\nprint(f(5))"
+  ],
+  "_lesson": "python15"
+ },
+ {
+  "id": "01-log",
+  "title": "写一个 @log 装饰器",
+  "prompt": "请写一个装饰器 `log`：\n\n- 接收一个函数作为参数\n- 在调用原函数前 `print('开始执行')`\n- 在调用原函数后 `print('执行结束')`\n\n然后用 `@log` 装饰一个 `hello()` 函数（函数体里 `print('hello world')`），再调用 `hello()`。\n\n输出应该是：\n```\n开始执行\nhello world\n执行结束\n```",
+  "starterCode": "# 定义装饰器 log：接收 func，在 wrapper 里调用前后各打印一句，再 return wrapper\n# 用 @log 装饰 hello()（函数体打印 hello world），最后调用 hello()\n\n",
+  "solution": "def log(func):\n    def wrapper():\n        print('开始执行')\n        func()\n        print('执行结束')\n    return wrapper\n\n@log\ndef hello():\n    print('hello world')\n\nhello()",
+  "grading": {
+   "stdoutEquals": "开始执行\nhello world\n执行结束\n",
+   "requiredAst": [
+    "FunctionDef:log"
+   ]
+  },
+  "hints": [
+   "装饰器三件套：接收 func，定义 wrapper，return wrapper（注意是 wrapper 不是 wrapper()）",
+   "在 wrapper 里：先 print('开始执行') → 调 func() → 再 print('执行结束')",
+   "完整代码：\ndef log(func):\n    def wrapper():\n        print('开始执行')\n        func()\n        print('执行结束')\n    return wrapper\n\n@log\ndef hello():\n    print('hello world')\n\nhello()"
+  ],
+  "_lesson": "python16"
+ },
+ {
+  "id": "02-uppercase",
+  "title": "@uppercase：改造返回值",
+  "prompt": "请写一个装饰器 `uppercase`：\n\n- 接收一个函数 `func`\n- 调用原函数拿到返回结果 `result`\n- 把 `result.upper()`（转大写）作为 wrapper 的返回值\n\n然后用 `@uppercase` 装饰一个函数 `greet(name)`，函数体 `return 'hello ' + name`。\n\n最后：\n```python\nprint(greet('alice'))\nprint(greet('bob'))\n```\n\n输出应该是：\n```\nHELLO ALICE\nHELLO BOB\n```",
+  "starterCode": "# 定义装饰器 uppercase：在 wrapper 里接住原函数的返回值，转大写后返回\n# 用 @uppercase 装饰 greet(name)，最后按题面打印两次调用结果\n\n",
+  "solution": "def uppercase(func):\n    def wrapper(*args, **kwargs):\n        result = func(*args, **kwargs)\n        return result.upper()\n    return wrapper\n\n@uppercase\ndef greet(name):\n    return 'hello ' + name\n\nprint(greet('alice'))\nprint(greet('bob'))",
+  "grading": {
+   "stdoutEquals": "HELLO ALICE\nHELLO BOB\n",
+   "requiredAst": [
+    "FunctionDef:uppercase"
+   ]
+  },
+  "hints": [
+   "wrapper 里要把原函数的返回值接住：result = func(*args, **kwargs)",
+   "再 return result.upper() —— 这样 print(greet(...)) 拿到的就是大写的结果",
+   "完整代码：\ndef uppercase(func):\n    def wrapper(*args, **kwargs):\n        result = func(*args, **kwargs)\n        return result.upper()\n    return wrapper\n\n@uppercase\ndef greet(name):\n    return 'hello ' + name\n\nprint(greet('alice'))\nprint(greet('bob'))"
+  ],
+  "_lesson": "python16"
+ },
+ {
+  "id": "03-count-calls",
+  "title": "@count_calls：统计调用次数",
+  "prompt": "请写一个装饰器 `count_calls`：\n\n- 在闭包里维护一个计数器 `count = 0`\n- 被装饰的函数每次被调用时，给 `count` 加 1，然后 `print(f'第 {count} 次调用')` 再调用原函数\n- 给 `wrapper` 加上 `@functools.wraps(func)`——上一节刚讲过的好习惯，别忘了\n\n然后用 `@count_calls` 装饰一个函数 `say_hi()`（函数体 `print('hi')`），并连续调用 3 次 `say_hi()`。\n\n输出应该是：\n```\n第 1 次调用\nhi\n第 2 次调用\nhi\n第 3 次调用\nhi\n```",
+  "starterCode": "# 定义装饰器 count_calls：闭包里维护 count，wrapper 里用 nonlocal 修改并打印提示\n# 别忘了 import functools，给 wrapper 加上 @functools.wraps(func)\n# 用 @count_calls 装饰 say_hi()，连续调用 3 次\n\n",
+  "solution": "import functools\n\ndef count_calls(func):\n    count = 0\n    @functools.wraps(func)\n    def wrapper(*args, **kwargs):\n        nonlocal count\n        count = count + 1\n        print(f'第 {count} 次调用')\n        return func(*args, **kwargs)\n    return wrapper\n\n@count_calls\ndef say_hi():\n    print('hi')\n\nsay_hi()\nsay_hi()\nsay_hi()",
+  "grading": {
+   "stdoutEquals": "第 1 次调用\nhi\n第 2 次调用\nhi\n第 3 次调用\nhi\n",
+   "requiredAst": [
+    "FunctionDef:count_calls"
+   ]
+  },
+  "hints": [
+   "装饰器外层定义 count = 0；wrapper 里用 nonlocal count 才能改它（这正是闭包+装饰器的结合）",
+   "每次进入 wrapper：给 count 加 1 → print 提示 → 再 func(*args, **kwargs)；别忘了 import functools 并给 wrapper 加 @functools.wraps(func)",
+   "完整代码：\nimport functools\n\ndef count_calls(func):\n    count = 0\n    @functools.wraps(func)\n    def wrapper(*args, **kwargs):\n        nonlocal count\n        count = count + 1\n        print(f'第 {count} 次调用')\n        return func(*args, **kwargs)\n    return wrapper\n\n@count_calls\ndef say_hi():\n    print('hi')\n\nsay_hi()\nsay_hi()\nsay_hi()"
+  ],
+  "_lesson": "python16"
+ },
+ {
+  "id": "01-early-return",
+  "title": "用早返回重写嵌套 if",
+  "prompt": "下面这段函数 `check(score)` 用了三层嵌套——请用**早返回**重写一个函数 `check(score)`，逻辑保持一致：\n\n- `score < 0` 或 `score > 100`：返回 `'非法分数'`\n- `score >= 90`：返回 `'优秀'`\n- `score >= 60`：返回 `'及格'`\n- 其他：返回 `'不及格'`\n\n然后依次调用 `print(check(95))`、`print(check(72))`、`print(check(40))`、`print(check(150))`。\n\n输出应该是：\n```\n优秀\n及格\n不及格\n非法分数\n```\n\n提示：「早返回」就是先把异常情况 return 掉，把主流程留在最外层，不写 else、不嵌套。",
+  "starterCode": "# 旧的嵌套版本长这样（三层嵌套，仅示意结构，不要交这种）：\n# def check(score):\n#     if 0 <= score <= 100:\n#         if score >= 90:\n#             ……（省略：这里又嵌套了两层 if/else）\n#     else:\n#         return '非法分数'\n\n# 在这里重写早返回版的 check：先把非法分数的情况 return 掉，再从高到低逐档判断\n# 最后依次 print 题面要求的四个调用\n\n",
+  "solution": "def check(score):\n    if score < 0 or score > 100:\n        return '非法分数'\n    if score >= 90:\n        return '优秀'\n    if score >= 60:\n        return '及格'\n    return '不及格'\n\nprint(check(95))\nprint(check(72))\nprint(check(40))\nprint(check(150))",
+  "grading": {
+   "stdoutEquals": "优秀\n及格\n不及格\n非法分数\n",
+   "requiredAst": [
+    "FunctionDef:check"
+   ]
+  },
+  "hints": [
+   "先把「非法分数」的情况 return 掉——这一步退出后，剩下都是合法分数",
+   "再依次 if score >= 90: return '优秀'，if score >= 60: return '及格'，最后 return '不及格'",
+   "完整代码：\ndef check(score):\n    if score < 0 or score > 100:\n        return '非法分数'\n    if score >= 90:\n        return '优秀'\n    if score >= 60:\n        return '及格'\n    return '不及格'\n\nprint(check(95))\nprint(check(72))\nprint(check(40))\nprint(check(150))"
+  ],
+  "_lesson": "python17"
+ },
+ {
+  "id": "02-list-comp",
+  "title": "列表推导式：挑出正数并平方",
+  "prompt": "已经给你一个列表 `nums = [-2, 1, -3, 4, 0, -5, 6]`。\n\n请用**列表推导式**生成一个新列表 `result`——里面装的是 `nums` 中所有「正数的平方」（注意 `0` 不算正数）。\n\n然后 `print(result)`。\n\n输出应该是：\n```\n[1, 16, 36]\n```",
+  "starterCode": "nums = [-2, 1, -3, 4, 0, -5, 6]\n\n# 用一行列表推导式生成 result\n# result = [...]\n\n# print(result)\n",
+  "solution": "nums = [-2, 1, -3, 4, 0, -5, 6]\nresult = [x * x for x in nums if x > 0]\nprint(result)",
+  "grading": {
+   "stdoutEquals": "[1, 16, 36]\n",
+   "requiredAst": [
+    "ListComp"
+   ]
+  },
+  "hints": [
+   "结构是：[表达式 for 变量 in 序列 if 条件]",
+   "表达式是 x * x，过滤条件是 x > 0",
+   "完整代码：\nnums = [-2, 1, -3, 4, 0, -5, 6]\nresult = [x * x for x in nums if x > 0]\nprint(result)"
+  ],
+  "_lesson": "python17"
+ },
+ {
+  "id": "03-dict-comp",
+  "title": "字典推导式：把所有价格翻倍",
+  "prompt": "已经给你一个价格表 `prices = {'apple': 5, 'banana': 3, 'cherry': 10}`。\n\n请用**字典推导式**生成一个新字典 `doubled`——所有键不变，但每个值翻倍。\n\n然后 `print(doubled)`。\n\n输出应该是：\n```\n{'apple': 10, 'banana': 6, 'cherry': 20}\n```",
+  "starterCode": "prices = {'apple': 5, 'banana': 3, 'cherry': 10}\n\n# 用字典推导式生成 doubled\n# doubled = {...}\n\n# print(doubled)\n",
+  "solution": "prices = {'apple': 5, 'banana': 3, 'cherry': 10}\ndoubled = {k: v * 2 for k, v in prices.items()}\nprint(doubled)",
+  "grading": {
+   "stdoutEquals": "{'apple': 10, 'banana': 6, 'cherry': 20}\n",
+   "requiredAst": [
+    "DictComp"
+   ]
+  },
+  "hints": [
+   "结构是：{键: 值 for 变量 in 可迭代对象}",
+   "用 prices.items() 同时拿到键 k 和值 v",
+   "完整代码：\nprices = {'apple': 5, 'banana': 3, 'cherry': 10}\ndoubled = {k: v * 2 for k, v in prices.items()}\nprint(doubled)"
+  ],
+  "_lesson": "python17"
+ },
+ {
+  "id": "04-type-hints",
+  "title": "写一个带类型注解的函数",
+  "prompt": "请定义一个函数 `greet`，**带上完整的类型注解**：\n\n- 参数 `name`，类型 `str`\n- 返回值类型 `str`\n- 函数体：返回 `f'Hello, {name}'`\n\n然后调用 `print(greet('World'))`。\n\n输出应该是：\n```\nHello, World\n```\n\n注意：参数加冒号、返回加箭头。\n\n（说明：判分只检查输出，注解写没写它看不出来——但注解正是本题的练习点，请自觉带上。）",
+  "starterCode": "# 在这里定义带类型注解的 greet 函数\n# def greet(name: ...) -> ...:\n#     return ...\n\n# print(greet('World'))\n",
+  "solution": "def greet(name: str) -> str:\n    return f'Hello, {name}'\n\nprint(greet('World'))",
+  "grading": {
+   "stdoutEquals": "Hello, World\n",
+   "requiredAst": [
+    "FunctionDef:greet"
+   ]
+  },
+  "hints": [
+   "参数注解写在参数后面：name: str",
+   "返回值注解写在 ) 后面：-> str",
+   "完整代码：\ndef greet(name: str) -> str:\n    return f'Hello, {name}'\n\nprint(greet('World'))"
+  ],
+  "_lesson": "python17"
+ },
+ {
+  "id": "01-name-suffix-stem",
+  "title": "提取路径的 name / suffix / stem",
+  "prompt": "请：\n\n1. 从 `pathlib` 导入 `Path`\n2. 创建路径对象 `p = Path('/tmp/data/foo.txt')`\n3. 依次 print 它的 `.name`、`.suffix`、`.stem`\n\n输出应该是：\n```\nfoo.txt\n.txt\nfoo\n```\n\n注意：`print(p.name)` 输出的是 `foo.txt`，**不是** `'foo.txt'`——直接打印不带引号。",
+  "starterCode": "# 从 pathlib 导入 Path，创建指向 /tmp/data/foo.txt 的路径对象\n# 依次打印它的 .name、.suffix、.stem\n\n",
+  "solution": "from pathlib import Path\n\np = Path('/tmp/data/foo.txt')\nprint(p.name)\nprint(p.suffix)\nprint(p.stem)",
+  "grading": {
+   "stdoutEquals": "foo.txt\n.txt\nfoo\n",
+   "requiredAst": [
+    "ImportFrom"
+   ]
+  },
+  "hints": [
+   "用 from pathlib import Path 把 Path 类导入",
+   ".name 是带后缀的完整文件名，.suffix 是「.xxx」带点的扩展名，.stem 是去掉后缀的主干",
+   "完整代码：\nfrom pathlib import Path\np = Path('/tmp/data/foo.txt')\nprint(p.name)\nprint(p.suffix)\nprint(p.stem)"
+  ],
+  "_lesson": "python18"
+ },
+ {
+  "id": "02-joining",
+  "title": "用 / 操作符拼接路径",
+  "prompt": "请用 `/` 操作符把三段拼成一个完整路径：\n\n1. 从 `pathlib` 导入 `Path`\n2. 用 `Path('/home/user') / 'docs' / 'report.pdf'` 拼出路径，赋值给 `p`\n3. `print(str(p))`\n\n输出应该是：\n```\n/home/user/docs/report.pdf\n```\n\n告别 `os.path.join`！",
+  "starterCode": "# 从 pathlib 导入 Path\n# 用 / 操作符把 /home/user、docs、report.pdf 三段拼成路径 p，再打印\n\n",
+  "solution": "from pathlib import Path\n\np = Path('/home/user') / 'docs' / 'report.pdf'\nprint(str(p))",
+  "grading": {
+   "stdoutEquals": "/home/user/docs/report.pdf\n",
+   "requiredAst": [
+    "ImportFrom"
+   ]
+  },
+  "hints": [
+   "Path 重载了 / 操作符，所以可以直接 Path('/home/user') / 'docs' / 'report.pdf'",
+   "str(p) 把 Path 对象转成字符串——也可以直接 print(p)，效果一样",
+   "完整代码：\nfrom pathlib import Path\np = Path('/home/user') / 'docs' / 'report.pdf'\nprint(str(p))"
+  ],
+  "_lesson": "python18"
+ },
+ {
+  "id": "03-parents",
+  "title": "拿父目录和祖先目录",
+  "prompt": "已经给你 `p = Path('/a/b/c/d.txt')`。\n\n请：\n\n1. `print(p.parent)` —— 一级父目录\n2. `print(p.parents[1])` —— 二级祖先\n\n输出应该是：\n```\n/a/b/c\n/a/b\n```\n\n注意：`.parent` 是属性（不带括号），`.parents[i]` 是序列下标——`[0]` 是直接父目录、`[1]` 是再上一层。",
+  "starterCode": "from pathlib import Path\n\np = Path('/a/b/c/d.txt')\n\n# 用 .parent 和 .parents[1] 分别打印一级父目录和二级祖先\n\n",
+  "solution": "from pathlib import Path\n\np = Path('/a/b/c/d.txt')\nprint(p.parent)\nprint(p.parents[1])",
+  "grading": {
+   "stdoutEquals": "/a/b/c\n/a/b\n",
+   "requiredAst": [
+    "ImportFrom"
+   ]
+  },
+  "hints": [
+   ".parent 跟 .parents[0] 等价——都是直接父目录",
+   ".parents[1] 是 .parent.parent，再往上一层",
+   "完整代码：\nfrom pathlib import Path\np = Path('/a/b/c/d.txt')\nprint(p.parent)\nprint(p.parents[1])"
+  ],
+  "_lesson": "python18"
+ },
+ {
+  "id": "04-suffixes",
+  "title": "多后缀文件：.suffixes",
+  "prompt": "对于 `foo.tar.gz` 这种「多后缀」的文件名：\n\n- `.suffix` 只给**最后一个**后缀（`.gz`）\n- `.suffixes` 给一个**列表**，包含所有后缀\n\n请：\n\n1. 从 `pathlib` 导入 `Path`\n2. 创建 `p = Path('test.tar.gz')`\n3. `print(p.suffixes)`\n\n输出应该是：\n```\n['.tar', '.gz']\n```",
+  "starterCode": "# 从 pathlib 导入 Path，创建指向 test.tar.gz 的路径对象\n# 用 .suffixes 打印它的所有后缀\n\n",
+  "solution": "from pathlib import Path\n\np = Path('test.tar.gz')\nprint(p.suffixes)",
+  "grading": {
+   "stdoutEquals": "['.tar', '.gz']\n",
+   "requiredAst": [
+    "ImportFrom"
+   ]
+  },
+  "hints": [
+   ".suffix（单数）只给最后一个；.suffixes（复数）给所有",
+   "顺序是从前到后——['.tar', '.gz']",
+   "完整代码：\nfrom pathlib import Path\np = Path('test.tar.gz')\nprint(p.suffixes)"
+  ],
+  "_lesson": "python18"
+ },
+ {
+  "id": "01-safe-divide",
+  "title": "safe_divide：用 try/except 处理除零",
+  "prompt": "请写一个函数 `safe_divide(a, b)`：\n\n- 正常情况下返回 `a / b`\n- 如果 `b` 是 0，捕获 `ZeroDivisionError`，打印 `'除数不能是零'`，然后返回 `None`\n\n然后调用：\n\n```python\nprint(safe_divide(10, 2))\nprint(safe_divide(10, 0))\n```\n\n输出应该是：\n```\n5.0\n除数不能是零\nNone\n```\n\n注意 `safe_divide(10, 0)` 因为返回 `None`，外层 `print` 会打印 `None`。",
+  "starterCode": "# 定义 safe_divide(a, b)，用 try/except 捕获 ZeroDivisionError\n# 除零时先打印提示，再返回 None\n# 最后按题目要求调用两次并 print 结果\n\n",
+  "solution": "def safe_divide(a, b):\n    try:\n        return a / b\n    except ZeroDivisionError:\n        print('除数不能是零')\n        return None\n\nprint(safe_divide(10, 2))\nprint(safe_divide(10, 0))",
+  "grading": {
+   "stdoutEquals": "5.0\n除数不能是零\nNone\n",
+   "requiredAst": [
+    "FunctionDef:safe_divide",
+    "Try"
+   ]
+  },
+  "hints": [
+   "用 try / except ZeroDivisionError 包住 a / b",
+   "except 分支里先 print，再 return None",
+   "完整代码：\ndef safe_divide(a, b):\n    try:\n        return a / b\n    except ZeroDivisionError:\n        print('除数不能是零')\n        return None\n\nprint(safe_divide(10, 2))\nprint(safe_divide(10, 0))"
+  ],
+  "_lesson": "python19"
+ },
+ {
+  "id": "02-parse-int",
+  "title": "捕获 ValueError",
+  "prompt": "请写一个函数 `parse_int(s)`：\n\n- 尝试把 `s` 转成 `int` 并返回\n- 如果 `int(s)` 抛 `ValueError`，捕获之后打印 `f'无法转换：{s}'`，然后返回 `0`\n\n然后调用：\n\n```python\nprint(parse_int('42'))\nprint(parse_int('abc'))\nprint(parse_int('100'))\n```\n\n输出应该是：\n```\n42\n无法转换：abc\n0\n100\n```",
+  "starterCode": "# 定义 parse_int(s)，用 try/except 捕获 ValueError\n# 转换失败时先打印提示，再返回 0\n# 最后按题目要求调用三次并 print 结果\n\n",
+  "solution": "def parse_int(s):\n    try:\n        return int(s)\n    except ValueError:\n        print(f'无法转换：{s}')\n        return 0\n\nprint(parse_int('42'))\nprint(parse_int('abc'))\nprint(parse_int('100'))",
+  "grading": {
+   "stdoutEquals": "42\n无法转换：abc\n0\n100\n",
+   "requiredAst": [
+    "FunctionDef:parse_int",
+    "Try"
+   ]
+  },
+  "hints": [
+   "用 try / except ValueError 包住 int(s)",
+   "except 分支里先 print，再 return 0",
+   "完整代码：\ndef parse_int(s):\n    try:\n        return int(s)\n    except ValueError:\n        print(f'无法转换：{s}')\n        return 0\n\nprint(parse_int('42'))\nprint(parse_int('abc'))\nprint(parse_int('100'))"
+  ],
+  "_lesson": "python19"
+ },
+ {
+  "id": "03-finally",
+  "title": "finally：清理一定要跑",
+  "prompt": "请写一个函数 `do_work(x)`：\n\n- 在 `try` 里打印 `'开始工作'`，然后执行 `10 / x`\n- 用 `except ZeroDivisionError` 捕获除零，打印 `'除数为零'`\n- 用 `finally` 打印 `'清理完成'`\n\n然后依次调用：\n\n```python\ndo_work(2)\nprint('---')\ndo_work(0)\n```\n\n输出应该是：\n```\n开始工作\n清理完成\n---\n开始工作\n除数为零\n清理完成\n```\n\n注意：`do_work(2)` 时不会触发 `except`，但 `finally` 一定会跑。",
+  "starterCode": "# 定义 do_work(x)，用 try/except/finally 组织三处打印\n# finally 里的打印不管成功失败都会执行\n# 最后按题目要求依次调用 do_work(2)、打印分隔线、do_work(0)\n\n",
+  "solution": "def do_work(x):\n    try:\n        print('开始工作')\n        10 / x\n    except ZeroDivisionError:\n        print('除数为零')\n    finally:\n        print('清理完成')\n\ndo_work(2)\nprint('---')\ndo_work(0)",
+  "grading": {
+   "stdoutEquals": "开始工作\n清理完成\n---\n开始工作\n除数为零\n清理完成\n",
+   "requiredAst": [
+    "FunctionDef:do_work",
+    "Try"
+   ]
+  },
+  "hints": [
+   "顺序：try → except → finally",
+   "不管成功还是失败，finally 都会执行",
+   "完整代码：\ndef do_work(x):\n    try:\n        print('开始工作')\n        10 / x\n    except ZeroDivisionError:\n        print('除数为零')\n    finally:\n        print('清理完成')\n\ndo_work(2)\nprint('---')\ndo_work(0)"
+  ],
+  "_lesson": "python19"
+ },
+ {
+  "id": "04-raise-age",
+  "title": "raise：主动抛异常",
+  "prompt": "请写一个函数 `set_age(age)`：\n\n- 如果 `age < 0`，主动 `raise ValueError(f'年龄不能为负：{age}')`\n- 否则返回 `age`\n\n然后用 `try / except ValueError` 调用 `set_age(-5)`，捕获到异常后打印 `f'参数错误：{e}'`。\n\n输出应该是：\n```\n参数错误：年龄不能为负：-5\n```",
+  "starterCode": "# 定义 set_age(age)，age 为负时用 raise 抛出 ValueError\n# 再用 try/except ValueError as e 包住 set_age(-5) 的调用并打印错误信息\n\n",
+  "solution": "def set_age(age):\n    if age < 0:\n        raise ValueError(f'年龄不能为负：{age}')\n    return age\n\ntry:\n    set_age(-5)\nexcept ValueError as e:\n    print(f'参数错误：{e}')",
+  "grading": {
+   "stdoutEquals": "参数错误：年龄不能为负：-5\n",
+   "requiredAst": [
+    "FunctionDef:set_age",
+    "Raise"
+   ]
+  },
+  "hints": [
+   "raise ValueError('错误信息')，注意带括号",
+   "用 except ValueError as e 拿到异常对象",
+   "完整代码：\ndef set_age(age):\n    if age < 0:\n        raise ValueError(f'年龄不能为负：{age}')\n    return age\n\ntry:\n    set_age(-5)\nexcept ValueError as e:\n    print(f'参数错误：{e}')"
+  ],
+  "_lesson": "python19"
+ },
+ {
+  "id": "05-custom-exception",
+  "title": "自定义异常：InvalidScoreError",
+  "prompt": "请定义一个自定义异常类 `InvalidScoreError`，继承自 `Exception`。\n\n再写一个函数 `check_score(score)`：\n\n- 如果 `score < 0` 或 `score > 100`，抛 `InvalidScoreError(f'分数 {score} 不合法')`\n- 否则打印 `f'分数合法：{score}'`\n\n然后用 `try / except InvalidScoreError as e` 依次调用：\n\n```python\ncheck_score(85)\ntry:\n    check_score(120)\nexcept InvalidScoreError as e:\n    print(f'捕获到异常：{e}')\n```\n\n输出应该是：\n```\n分数合法：85\n捕获到异常：分数 120 不合法\n```",
+  "starterCode": "# 定义继承 Exception 的异常类 InvalidScoreError\n# 写 check_score(score)，分数越界时 raise，否则打印合法提示\n# 先直接调用 check_score(85)，再在 try/except 里调用 check_score(120)\n\n",
+  "solution": "class InvalidScoreError(Exception):\n    pass\n\ndef check_score(score):\n    if score < 0 or score > 100:\n        raise InvalidScoreError(f'分数 {score} 不合法')\n    print(f'分数合法：{score}')\n\ncheck_score(85)\ntry:\n    check_score(120)\nexcept InvalidScoreError as e:\n    print(f'捕获到异常：{e}')",
+  "grading": {
+   "stdoutEquals": "分数合法：85\n捕获到异常：分数 120 不合法\n",
+   "requiredAst": [
+    "ClassDef:InvalidScoreError",
+    "FunctionDef:check_score",
+    "Raise",
+    "Try"
+   ]
+  },
+  "hints": [
+   "class InvalidScoreError(Exception): pass 一行就够",
+   "在 check_score 里用 raise InvalidScoreError(...) 抛出",
+   "完整代码：\nclass InvalidScoreError(Exception):\n    pass\n\ndef check_score(score):\n    if score < 0 or score > 100:\n        raise InvalidScoreError(f'分数 {score} 不合法')\n    print(f'分数合法：{score}')\n\ncheck_score(85)\ntry:\n    check_score(120)\nexcept InvalidScoreError as e:\n    print(f'捕获到异常：{e}')"
+  ],
+  "_lesson": "python19"
+ },
+ {
+  "id": "01-basic-point",
+  "title": "用 @dataclass 定义 Point",
+  "prompt": "请用 `@dataclass` 装饰器定义一个 `Point` 类：\n\n- 两个字段：`x: int`、`y: int`\n- 然后实例化 `Point(1, 2)` 赋给变量 `p`，并 `print(p)`\n\n输出应该是：\n```\nPoint(x=1, y=2)\n```\n\n（这正是 `dataclass` 自动生成的 `__repr__` 输出。）",
+  "starterCode": "# 从 dataclasses 导入 dataclass\n# 用 @dataclass 定义 Point 类，两个 int 字段 x、y（记得写类型注解）\n# 实例化 Point(1, 2) 赋给 p，再打印 p\n\n",
+  "solution": "from dataclasses import dataclass\n\n@dataclass\nclass Point:\n    x: int\n    y: int\n\np = Point(1, 2)\nprint(p)",
+  "grading": {
+   "stdoutEquals": "Point(x=1, y=2)\n",
+   "requiredAst": [
+    "ClassDef:Point"
+   ]
+  },
+  "hints": [
+   "记得 from dataclasses import dataclass",
+   "字段必须带类型注解：x: int、y: int",
+   "完整代码：\nfrom dataclasses import dataclass\n\n@dataclass\nclass Point:\n    x: int\n    y: int\n\np = Point(1, 2)\nprint(p)"
+  ],
+  "_lesson": "python20"
+ },
+ {
+  "id": "02-default-factory",
+  "title": "可变默认值：default_factory",
+  "prompt": "请用 `@dataclass` 定义一个 `Team` 类：\n\n- 字段 `name: str`\n- 字段 `members: list`，默认值用 `field(default_factory=list)` 给一个空列表\n\n然后：\n\n```python\nt1 = Team('A 队')\nt2 = Team('B 队')\nt1.members.append('小明')\nprint(t1)\nprint(t2)\n```\n\n输出应该是：\n```\nTeam(name='A 队', members=['小明'])\nTeam(name='B 队', members=[])\n```\n\n（验证两个实例的 `members` 各自独立，没共享同一个列表。）",
+  "starterCode": "# 从 dataclasses 导入 dataclass 和 field\n# 定义 Team 类：name 是 str；members 是 list，默认值用 field(default_factory=list)\n# 按题面创建 t1、t2，往 t1.members 追加「小明」，再分别打印 t1、t2\n\n",
+  "solution": "from dataclasses import dataclass, field\n\n@dataclass\nclass Team:\n    name: str\n    members: list = field(default_factory=list)\n\nt1 = Team('A 队')\nt2 = Team('B 队')\nt1.members.append('小明')\nprint(t1)\nprint(t2)",
+  "grading": {
+   "stdoutEquals": "Team(name='A 队', members=['小明'])\nTeam(name='B 队', members=[])\n",
+   "requiredAst": [
+    "ClassDef:Team"
+   ]
+  },
+  "hints": [
+   "注意要 from dataclasses import dataclass, field",
+   "field(default_factory=list) 而不是直接 = []",
+   "完整代码：\nfrom dataclasses import dataclass, field\n\n@dataclass\nclass Team:\n    name: str\n    members: list = field(default_factory=list)\n\nt1 = Team('A 队')\nt2 = Team('B 队')\nt1.members.append('小明')\nprint(t1)\nprint(t2)"
+  ],
+  "_lesson": "python20"
+ },
+ {
+  "id": "03-frozen-hash",
+  "title": "frozen=True：不可变 + 可 hash",
+  "prompt": "请用 `@dataclass(frozen=True)` 定义一个 `Point` 类（字段 `x: int`、`y: int`），让它不可变同时能进 `set`。\n\n然后：\n\n```python\np1 = Point(1, 2)\np2 = Point(1, 2)\np3 = Point(3, 4)\ns = {p1, p2, p3}\nprint(len(s))\n```\n\n因为 `p1` 和 `p2` 字段值一样，被 set 当成同一个元素，所以输出应该是：\n```\n2\n```\n\n这正是 `frozen=True` 的副产品——自动生成 `__hash__`。",
+  "starterCode": "# 用 @dataclass(frozen=True) 定义 Point 类，两个 int 字段 x、y\n# 按题面创建 p1、p2、p3，放进一个 set\n# 打印这个 set 的长度\n\n",
+  "solution": "from dataclasses import dataclass\n\n@dataclass(frozen=True)\nclass Point:\n    x: int\n    y: int\n\np1 = Point(1, 2)\np2 = Point(1, 2)\np3 = Point(3, 4)\ns = {p1, p2, p3}\nprint(len(s))",
+  "grading": {
+   "stdoutEquals": "2\n",
+   "requiredAst": [
+    "ClassDef:Point"
+   ]
+  },
+  "hints": [
+   "装饰器要写成 @dataclass(frozen=True)",
+   "frozen=True 会自动生成 __hash__，让对象能进 set",
+   "完整代码：\nfrom dataclasses import dataclass\n\n@dataclass(frozen=True)\nclass Point:\n    x: int\n    y: int\n\np1 = Point(1, 2)\np2 = Point(1, 2)\np3 = Point(3, 4)\ns = {p1, p2, p3}\nprint(len(s))"
+  ],
+  "_lesson": "python20"
+ },
+ {
+  "id": "04-eq",
+  "title": "自动 __eq__：按字段值比较",
+  "prompt": "请用 `@dataclass` 定义一个 `Book` 类：\n\n- `title: str`\n- `author: str`\n- `pages: int`\n\n然后实例化三本书：\n\n```python\nb1 = Book('Python 入门', '小明', 300)\nb2 = Book('Python 入门', '小明', 300)\nb3 = Book('Python 入门', '小明', 500)\nprint(b1 == b2)\nprint(b1 == b3)\nprint(b1 is b2)\n```\n\n输出应该是：\n```\nTrue\nFalse\nFalse\n```\n\n说明：`==` 比的是字段值（`b1` 和 `b2` 完全相同所以是 `True`），`is` 比的是对象身份（`b1` 和 `b2` 是两个不同的对象，所以是 `False`）。",
+  "starterCode": "# 用 @dataclass 定义 Book 类：title、author 是 str，pages 是 int\n# 按题面创建 b1、b2、b3 三本书\n# 依次打印 b1 == b2、b1 == b3、b1 is b2 的结果\n\n",
+  "solution": "from dataclasses import dataclass\n\n@dataclass\nclass Book:\n    title: str\n    author: str\n    pages: int\n\nb1 = Book('Python 入门', '小明', 300)\nb2 = Book('Python 入门', '小明', 300)\nb3 = Book('Python 入门', '小明', 500)\nprint(b1 == b2)\nprint(b1 == b3)\nprint(b1 is b2)",
+  "grading": {
+   "stdoutEquals": "True\nFalse\nFalse\n",
+   "requiredAst": [
+    "ClassDef:Book"
+   ]
+  },
+  "hints": [
+   "@dataclass 默认会生成 __eq__，逐字段比较",
+   "== 比字段值，is 比对象身份，是两件事",
+   "完整代码：\nfrom dataclasses import dataclass\n\n@dataclass\nclass Book:\n    title: str\n    author: str\n    pages: int\n\nb1 = Book('Python 入门', '小明', 300)\nb2 = Book('Python 入门', '小明', 300)\nb3 = Book('Python 入门', '小明', 500)\nprint(b1 == b2)\nprint(b1 == b3)\nprint(b1 is b2)"
+  ],
+  "_lesson": "python20"
+ },
+ {
+  "id": "01-with-stringio",
+  "title": "用 with 操作 StringIO",
+  "prompt": "`io.StringIO` 是一个「内存里的文件」，也实现了上下文管理器协议。\n\n请用 `with` 配合 `io.StringIO()`：\n\n1. 在 `with` 块里 `write` 字符串 `'Hello'`\n2. 在 `with` 块里再 `write` 字符串 `' World'`\n3. 把 `getvalue()` 的结果（`Hello World`）赋给变量 `text`\n4. `print(text)`\n\n输出应该是：\n```\nHello World\n```",
+  "starterCode": "import io\n# 用 with 打开 io.StringIO()，块内先后 write 两段字符串\n# 在块内把 getvalue() 的结果赋给 text，最后打印 text\n\n",
+  "solution": "import io\nwith io.StringIO() as buf:\n    buf.write('Hello')\n    buf.write(' World')\n    text = buf.getvalue()\nprint(text)",
+  "grading": {
+   "varsEqual": {
+    "text": "Hello World"
+   },
+   "stdoutEquals": "Hello World\n",
+   "requiredAst": [
+    "With"
+   ]
+  },
+  "hints": [
+   "io.StringIO 也支持 with 语法",
+   "在 with 块**里面**赋值 text，with 退出后 buf 已关，但 text 还在",
+   "完整代码：\nimport io\nwith io.StringIO() as buf:\n    buf.write('Hello')\n    buf.write(' World')\n    text = buf.getvalue()\nprint(text)"
+  ],
+  "_lesson": "python21"
+ },
+ {
+  "id": "02-custom-class",
+  "title": "自定义上下文管理器类",
+  "prompt": "请定义一个类 `Section`，实现上下文管理协议：\n\n- `__enter__` 打印 `'>>> 开始'`，并 `return self`\n- `__exit__` 打印 `'<<< 结束'`\n\n然后用 `with Section():` 包住一行 `print('做事中')`。\n\n输出应该是：\n```\n>>> 开始\n做事中\n<<< 结束\n```",
+  "starterCode": "# 定义 Section 类，实现 __enter__ 和 __exit__\n# __enter__ 打印开始提示并返回 self，__exit__ 打印结束提示\n# 再用 with 配合 Section 实例，块内打印「做事中」\n\n",
+  "solution": "class Section:\n    def __enter__(self):\n        print('>>> 开始')\n        return self\n\n    def __exit__(self, exc_type, exc_val, tb):\n        print('<<< 结束')\n\nwith Section():\n    print('做事中')",
+  "grading": {
+   "stdoutEquals": ">>> 开始\n做事中\n<<< 结束\n",
+   "requiredAst": [
+    "ClassDef:Section",
+    "With"
+   ]
+  },
+  "hints": [
+   "__enter__ 和 __exit__ 都要在类里定义",
+   "__exit__ 必须接收 4 个参数：self, exc_type, exc_val, tb",
+   "完整代码：\nclass Section:\n    def __enter__(self):\n        print('>>> 开始')\n        return self\n\n    def __exit__(self, exc_type, exc_val, tb):\n        print('<<< 结束')\n\nwith Section():\n    print('做事中')"
+  ],
+  "_lesson": "python21"
+ },
+ {
+  "id": "03-contextmanager",
+  "title": "用 @contextmanager 写一个 banner",
+  "prompt": "请用 `@contextmanager` 写一个**生成器函数版**的上下文管理器 `banner(title)`：\n\n- 进入时（yield 前）：打印 `f'==== {title} ===='`\n- yield（无值）\n- 退出时（yield 后）：打印 `'================'`\n\n然后用 `with banner('开始任务'):` 包住一行 `print('做事中')`。\n\n输出应该是：\n```\n==== 开始任务 ====\n做事中\n================\n```",
+  "starterCode": "from contextlib import contextmanager\n\n# 用 @contextmanager 装饰生成器函数 banner(title)\n# yield 前打印开头横幅，yield 后打印结尾横线（用 try/finally 包住 yield）\n# 再用 with 配合 banner('开始任务')，块内打印「做事中」\n\n",
+  "solution": "from contextlib import contextmanager\n\n@contextmanager\ndef banner(title):\n    print(f'==== {title} ====')\n    try:\n        yield\n    finally:\n        print('================')\n\nwith banner('开始任务'):\n    print('做事中')",
+  "grading": {
+   "stdoutEquals": "==== 开始任务 ====\n做事中\n================\n",
+   "requiredAst": [
+    "FunctionDef:banner",
+    "With",
+    "ImportFrom:contextmanager"
+   ]
+  },
+  "hints": [
+   "@contextmanager 只装饰生成器函数，要用 yield",
+   "yield 之前是进入时跑的，yield 之后是退出时跑的",
+   "记得用 try/finally 包住 yield，保证清理一定执行"
+  ],
+  "_lesson": "python21"
+ },
+ {
+  "id": "04-suppress",
+  "title": "用 contextlib.suppress 忽略异常",
+  "prompt": "用 `contextlib.suppress` 忽略 `ZeroDivisionError`：\n\n1. 用 `with suppress(ZeroDivisionError):` 包住一段 `x = 1 / 0`（这一行会抛异常但被吞掉）\n2. `with` 之后 `print('done')`\n\n输出应该是：\n```\ndone\n```\n\n（关键是程序不会因为除零异常崩掉）",
+  "starterCode": "from contextlib import suppress\n# 用 with 配合 suppress 忽略 ZeroDivisionError，块内做一次除零运算\n# with 结束后打印 done\n\n",
+  "solution": "from contextlib import suppress\nwith suppress(ZeroDivisionError):\n    x = 1 / 0\nprint('done')",
+  "grading": {
+   "stdoutEquals": "done\n",
+   "requiredAst": [
+    "With",
+    "ImportFrom:suppress"
+   ]
+  },
+  "hints": [
+   "suppress(异常类型) 让该种异常被静默吞掉，其它异常照常抛",
+   "完整代码：\nfrom contextlib import suppress\nwith suppress(ZeroDivisionError):\n    x = 1 / 0\nprint('done')"
+  ],
+  "_lesson": "python21"
+ },
+ {
+  "id": "01-hello",
+  "title": "第一个 async 函数",
+  "prompt": "请用 `async def` 定义一个协程函数 `hello`，函数体打印 `'hi'`。\n\n然后用 `asyncio.run(hello())` 启动它。\n\n输出应该是：\n```\nhi\n```",
+  "starterCode": "import asyncio\n\n# 用 async def 定义协程函数 hello，函数体打印 'hi'\n# 再用 asyncio.run 启动它\n\n",
+  "solution": "import asyncio\n\nasync def hello():\n    print('hi')\n\nasyncio.run(hello())",
+  "grading": {
+   "stdoutEquals": "hi\n",
+   "requiredAst": [
+    "AsyncFunctionDef:hello",
+    "Import:asyncio"
+   ]
+  },
+  "hints": [
+   "async def 跟 def 几乎一样，多个 async 关键字而已",
+   "asyncio.run(hello()) 注意 hello() 后面的括号——传协程对象进去",
+   "完整代码：\nimport asyncio\n\nasync def hello():\n    print('hi')\n\nasyncio.run(hello())"
+  ],
+  "_lesson": "python22"
+ },
+ {
+  "id": "02-sleep-order",
+  "title": "串行 await 的顺序",
+  "prompt": "请定义协程函数 `step(name)`：\n\n- 先 `print(f'{name} 开始')`\n- 然后 `await asyncio.sleep(0)`\n- 最后 `print(f'{name} 结束')`\n\n再定义 `main`：依次 `await step('A')`、`await step('B')`。\n\n用 `asyncio.run(main())` 启动。\n\n输出应该是：\n```\nA 开始\nA 结束\nB 开始\nB 结束\n```\n\n（说明：因为是 `await` 串行调用，B 一定排在 A 后面。）",
+  "starterCode": "import asyncio\n\n# 定义协程函数 step(name)：先打印「开始」，await asyncio.sleep(0)，再打印「结束」\n# 再定义 main：依次 await step('A')、await step('B')\n# 最后用 asyncio.run 启动 main\n\n",
+  "solution": "import asyncio\n\nasync def step(name):\n    print(f'{name} 开始')\n    await asyncio.sleep(0)\n    print(f'{name} 结束')\n\nasync def main():\n    await step('A')\n    await step('B')\n\nasyncio.run(main())",
+  "grading": {
+   "stdoutEquals": "A 开始\nA 结束\nB 开始\nB 结束\n",
+   "requiredAst": [
+    "AsyncFunctionDef:step",
+    "AsyncFunctionDef:main"
+   ]
+  },
+  "hints": [
+   "在 step 里：print → await asyncio.sleep(0) → print",
+   "main 里串行写两次 await：await step('A') 然后 await step('B')",
+   "完整代码：\nimport asyncio\n\nasync def step(name):\n    print(f'{name} 开始')\n    await asyncio.sleep(0)\n    print(f'{name} 结束')\n\nasync def main():\n    await step('A')\n    await step('B')\n\nasyncio.run(main())"
+  ],
+  "_lesson": "python22"
+ },
+ {
+  "id": "03-gather-two",
+  "title": "用 gather 并发跑两个协程",
+  "prompt": "请定义协程函数 `task(name)`：\n\n- `await asyncio.sleep(0.01)`\n- 返回 `f'{name} done'`\n\n在 `main` 里用 `asyncio.gather(task('A'), task('B'))` 同时跑两个，把结果赋给 `r1, r2`，然后**按顺序**：\n\n```python\nprint(r1)\nprint(r2)\n```\n\n用 `asyncio.run(main())` 启动。\n\n输出应该是：\n```\nA done\nB done\n```\n\n（注意：`gather` 返回结果的顺序和传入顺序一致，所以这里是确定性的。）",
+  "starterCode": "import asyncio\n\n# 定义协程函数 task(name)：先睡 0.01 秒，再返回名字加 done 的字符串\n# 在 main 里用 asyncio.gather 同时跑 task('A') 和 task('B')，结果解包成 r1、r2\n# 按顺序打印 r1、r2，最后用 asyncio.run 启动 main\n\n",
+  "solution": "import asyncio\n\nasync def task(name):\n    await asyncio.sleep(0.01)\n    return f'{name} done'\n\nasync def main():\n    r1, r2 = await asyncio.gather(task('A'), task('B'))\n    print(r1)\n    print(r2)\n\nasyncio.run(main())",
+  "grading": {
+   "stdoutEquals": "A done\nB done\n",
+   "requiredAst": [
+    "AsyncFunctionDef:task",
+    "AsyncFunctionDef:main"
+   ]
+  },
+  "hints": [
+   "task 里要先 await asyncio.sleep(0.01) 再 return",
+   "gather 接收多个协程对象：asyncio.gather(task('A'), task('B'))",
+   "gather 返回的是一个结果列表，可以解包成 r1, r2"
+  ],
+  "_lesson": "python22"
+ },
+ {
+  "id": "04-gather-fetch",
+  "title": "并发抓取（模拟）",
+  "prompt": "浏览器沙盒不能联网，咱们用 `asyncio.sleep` 模拟一次抓取。\n\n请定义协程函数 `fetch(url)`：\n\n- `await asyncio.sleep(0.01)`（模拟等网络）\n- 返回 `f'fetched {url}'`\n\n在 `main` 里用 `asyncio.gather` 并发抓取三个 URL：`'a'`、`'b'`、`'c'`，把返回的列表赋给 `results`。然后用 `for` 循环按顺序 `print` 每个结果。\n\n用 `asyncio.run(main())` 启动。\n\n输出应该是：\n```\nfetched a\nfetched b\nfetched c\n```",
+  "starterCode": "import asyncio\n\n# 定义协程函数 fetch(url)：模拟等待 0.01 秒后返回抓取结果字符串\n# 在 main 里用 asyncio.gather 并发抓取 'a'、'b'、'c'，结果赋给 results\n# 用 for 循环按顺序打印每个结果，最后用 asyncio.run 启动 main\n\n",
+  "solution": "import asyncio\n\nasync def fetch(url):\n    await asyncio.sleep(0.01)\n    return f'fetched {url}'\n\nasync def main():\n    results = await asyncio.gather(fetch('a'), fetch('b'), fetch('c'))\n    for r in results:\n        print(r)\n\nasyncio.run(main())",
+  "grading": {
+   "stdoutEquals": "fetched a\nfetched b\nfetched c\n",
+   "requiredAst": [
+    "AsyncFunctionDef:fetch",
+    "AsyncFunctionDef:main",
+    "For"
+   ]
+  },
+  "hints": [
+   "fetch 函数：await asyncio.sleep(0.01) 之后 return f'fetched {url}'",
+   "gather 三个协程：asyncio.gather(fetch('a'), fetch('b'), fetch('c'))",
+   "gather 返回的列表顺序和传入顺序一致，for r in results 直接 print 即可"
+  ],
+  "_lesson": "python22"
+ },
+ {
+  "id": "01-first-log",
+  "title": "第一条 log",
+  "prompt": "用 `logging.basicConfig` 把日志级别调到 `INFO`，再用 `logging.info` 打印 `'第一条日志'`。\n\n注意：starterCode 已经把 logging 配置成输出到 stdout 并使用 `format='%(levelname)s:%(message)s'` 简化格式，你只需写最后一行 `logging.info(...)`。\n\n输出应该是：\n```\nINFO:第一条日志\n```",
+  "starterCode": "import logging\nimport sys\n\nlogging.basicConfig(\n    stream=sys.stdout,\n    level=logging.INFO,\n    format='%(levelname)s:%(message)s',\n    force=True,\n)\n\n# TODO: 用 logging.info 打印 '第一条日志'\n",
+  "solution": "import logging\nimport sys\n\nlogging.basicConfig(\n    stream=sys.stdout,\n    level=logging.INFO,\n    format='%(levelname)s:%(message)s',\n    force=True,\n)\n\nlogging.info('第一条日志')",
+  "grading": {
+   "stdoutEquals": "INFO:第一条日志\n"
+  },
+  "hints": [
+   "logging.info('内容') 是调用 root logger 打印 INFO 级别日志",
+   "格式由 basicConfig 的 format 控制，咱们已经预设成 '级别:内容'",
+   "完整代码：\nimport logging\nimport sys\n\nlogging.basicConfig(\n    stream=sys.stdout,\n    level=logging.INFO,\n    format='%(levelname)s:%(message)s',\n    force=True,\n)\n\nlogging.info('第一条日志')"
+  ],
+  "_lesson": "python26"
+ },
+ {
+  "id": "02-five-levels",
+  "title": "5 个日志级别",
+  "prompt": "starterCode 已经把日志级别调到 `DEBUG`（最低级别，所有日志都显示）。\n\n请按顺序调用 5 个级别：\n\n1. `logging.debug('调试')`\n2. `logging.info('信息')`\n3. `logging.warning('警告')`\n4. `logging.error('错误')`\n5. `logging.critical('致命')`\n\n输出应该是：\n```\nDEBUG:调试\nINFO:信息\nWARNING:警告\nERROR:错误\nCRITICAL:致命\n```",
+  "starterCode": "import logging\nimport sys\n\nlogging.basicConfig(\n    stream=sys.stdout,\n    level=logging.DEBUG,\n    format='%(levelname)s:%(message)s',\n    force=True,\n)\n\n# TODO: 按 debug → info → warning → error → critical 顺序打印\n",
+  "solution": "import logging\nimport sys\n\nlogging.basicConfig(\n    stream=sys.stdout,\n    level=logging.DEBUG,\n    format='%(levelname)s:%(message)s',\n    force=True,\n)\n\nlogging.debug('调试')\nlogging.info('信息')\nlogging.warning('警告')\nlogging.error('错误')\nlogging.critical('致命')",
+  "grading": {
+   "stdoutEquals": "DEBUG:调试\nINFO:信息\nWARNING:警告\nERROR:错误\nCRITICAL:致命\n"
+  },
+  "hints": [
+   "level=logging.DEBUG 让所有级别都打出来",
+   "顺序：debug → info → warning → error → critical",
+   "完整代码：\nimport logging\nimport sys\n\nlogging.basicConfig(\n    stream=sys.stdout,\n    level=logging.DEBUG,\n    format='%(levelname)s:%(message)s',\n    force=True,\n)\n\nlogging.debug('调试')\nlogging.info('信息')\nlogging.warning('警告')\nlogging.error('错误')\nlogging.critical('致命')"
+  ],
+  "_lesson": "python26"
+ },
+ {
+  "id": "04-warning-only",
+  "title": "只打 WARNING 及以上",
+  "prompt": "starterCode 已经把日志级别调到 `logging.WARNING`，你只需要依次调用：\n\n```python\nlogging.info('看不见的 info')\nlogging.warning('看得见的 warning')\nlogging.error('看得见的 error')\n```\n\n因为级别 = WARNING，**INFO 会被过滤掉**，只剩 WARNING / ERROR / CRITICAL。\n\n输出应该是：\n```\nWARNING:看得见的 warning\nERROR:看得见的 error\n```",
+  "starterCode": "import logging\nimport sys\n\nlogging.basicConfig(\n    stream=sys.stdout,\n    level=logging.WARNING,\n    format='%(levelname)s:%(message)s',\n    force=True,\n)\n\n# TODO: 三行 logging 调用：info / warning / error\n",
+  "solution": "import logging\nimport sys\n\nlogging.basicConfig(\n    stream=sys.stdout,\n    level=logging.WARNING,\n    format='%(levelname)s:%(message)s',\n    force=True,\n)\n\nlogging.info('看不见的 info')\nlogging.warning('看得见的 warning')\nlogging.error('看得见的 error')",
+  "grading": {
+   "stdoutEquals": "WARNING:看得见的 warning\nERROR:看得见的 error\n"
+  },
+  "hints": [
+   "level=logging.WARNING 让 INFO/DEBUG 都被过滤",
+   "三行调用顺序：info → warning → error",
+   "完整代码：\nimport logging\nimport sys\n\nlogging.basicConfig(\n    stream=sys.stdout,\n    level=logging.WARNING,\n    format='%(levelname)s:%(message)s',\n    force=True,\n)\n\nlogging.info('看不见的 info')\nlogging.warning('看得见的 warning')\nlogging.error('看得见的 error')"
+  ],
+  "_lesson": "python26"
+ },
+ {
+  "id": "03-named-logger",
+  "title": "用 getLogger 给 logger 取名字",
+  "prompt": "请用 `logging.getLogger('app.punch')` 创建一个有名字的 logger，赋给变量 `logger`，然后用它打印 `'用户开始打卡'`。\n\nstarterCode 已经把 format 改成 `'%(name)s:%(levelname)s:%(message)s'`——`%(name)s` 会输出 logger 的名字。\n\n输出应该是：\n```\napp.punch:INFO:用户开始打卡\n```",
+  "starterCode": "import logging\nimport sys\n\nlogging.basicConfig(\n    stream=sys.stdout,\n    level=logging.INFO,\n    format='%(name)s:%(levelname)s:%(message)s',\n    force=True,\n)\n\n# 用 logging.getLogger 创建名为 'app.punch' 的 logger，赋给变量 logger\n# 再用这个 logger 打印一条 INFO 级别的 '用户开始打卡'\n",
+  "solution": "import logging\nimport sys\n\nlogging.basicConfig(\n    stream=sys.stdout,\n    level=logging.INFO,\n    format='%(name)s:%(levelname)s:%(message)s',\n    force=True,\n)\n\nlogger = logging.getLogger('app.punch')\nlogger.info('用户开始打卡')",
+  "grading": {
+   "stdoutEquals": "app.punch:INFO:用户开始打卡\n"
+  },
+  "hints": [
+   "logging.getLogger('名字') 拿一个有名字的 logger",
+   "用这个 logger 打印日志：logger.info(...)",
+   "完整代码：\nimport logging\nimport sys\n\nlogging.basicConfig(\n    stream=sys.stdout,\n    level=logging.INFO,\n    format='%(name)s:%(levelname)s:%(message)s',\n    force=True,\n)\n\nlogger = logging.getLogger('app.punch')\nlogger.info('用户开始打卡')"
+  ],
+  "_lesson": "python26"
+ }
+]

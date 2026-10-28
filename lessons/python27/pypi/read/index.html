@@ -1,0 +1,1078 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Publishing to PyPI (full read) – Python for Beginners</title>
+<meta name="description" content="From zero to pip install – src layout, uv build, uv publish: release a CLI tool of your own.">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css?v=20261028">
+
+</head>
+<body data-page="read" data-lesson="python27" data-total="0">
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="/" aria-label="Python for Beginners – home"><span class="gradient-text-flow" data-text="Python for Beginners">Python for Beginners</span></a>
+    <nav class="header-nav">
+      <a class="nav-link" href="/about/">About</a>
+      <a class="nav-icon focus-ring" href="https://github.com/walter201230/Python" aria-label="Original tutorial on GitHub" title="Original tutorial on GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+      <button type="button" class="theme-toggle focus-ring" aria-label="Switch theme"><span class="knob"><svg class="ic-moon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button>
+    </nav>
+  </div>
+</header>
+<main class="site-main">
+<div class="lesson-shell bg-tech-grid">
+  <div class="mobile-bar"><div class="mb-inner"><button type="button" class="dir-btn focus-ring" aria-haspopup="dialog">Contents</button></div></div>
+  <div class="lesson-columns">
+    <aside class="lesson-sidebar left" aria-label="All lessons"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/read/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/read/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/read/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/read/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/read/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/read/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/read/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/read/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/read/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/read/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/read/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/read/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/read/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/read/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/read/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/read/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/read/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/read/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/read/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/read/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/read/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/read/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/read/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/read/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/read/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/read/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/read/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python27/pypi/read/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/read/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></aside>
+    <div class="lesson-main"><article class="lesson-article"><header class="lesson-head"><h1>Publishing to PyPI</h1><p class="lh-sub">Full read · <span class="accent">26</span> teaching parts<span class="sep">·</span>about <span class="accent">35</span> min</p>
+<p class="lh-note">This page is the read-through version of the chapter, with every explanation in one place. To write code and get it checked, go to <a class="accent-link focus-ring" href="/lessons/python27/pypi/">challenge mode</a>.</p></header><section id="step-0" class="step-card read" data-kind="step" aria-label="Teaching step 1">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 01 / 26</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>Publishing to PyPI + typer: let the whole world use your tool with one pip install</h2>
+<p>Have you ever had a moment like this?</p>
+<p>Brother Shui writes a little tool on his own computer – say, "rename lots of screenshot files at once", "analyse exported chat history" or "automatically add a watermark to images". The script is a hundred or two lines, works nicely, and he uses it every day. Then one day a friend sees it and says: "That's handy – can I have a copy?"</p>
+<p>So Brother Shui sends <code>tool.py</code> over in a chat message. The first thing the friend says is: "How do I use this?"</p>
+<p>"Install <code>pillow</code> and <code>httpx</code>."</p>
+<p>"OK, done."</p>
+<p>"Now install <code>pyyaml</code>."</p>
+<p>"Done."</p>
+<p>"Run <code>python tool.py</code>."</p>
+<p>"Error – it says it can't find <code>requests</code>."</p>
+<p>"Oh right, you need <code>requests</code> too."</p>
+<p>Five minutes of back and forth, and the friend gives up.</p>
+<p>This is the "last mile" problem of Python tools – the code runs for you, but it's a struggle for anyone else to use. In the Node world it's one line, <code>npm install -g xxx</code>. In Rust, <code>cargo install xxx</code>. In Go, <code>go install xxx</code>. Does Python really have to be "install this, then install that"?</p>
+<p>Of course not. Python has its own "global app store" called <strong>PyPI</strong> (the Python Package Index). Package your tool properly and upload it, and anyone can install it with one line, <code>pip install my-tool</code>. No more teaching people step by step.</p>
+<p>In this chapter, we'll go through the whole process from scratch. After it, you should be able to:</p>
+<ol>
+<li>Know what PyPI is, and how it relates to <code>pip</code></li>
+<li>Turn your own project into a standard "publishable" structure</li>
+<li>Use one <code>uv build</code> command to package your project as a <code>wheel</code> and an <code>sdist</code></li>
+<li>Practise on TestPyPI first, then publish to the real PyPI</li>
+<li>Use <code>[project.scripts]</code> to turn a Python function into a system command</li>
+<li>Use <code>typer</code> to write command-line tools 10 times more elegant than <code>argparse</code></li>
+<li>Connect the whole publishing process to GitHub Actions, so adding a tag publishes a release automatically</li>
+</ol>
+<p>In the second half, we'll use <code>typer</code> to write a small command-line tool, <code>todo-cli</code>, and publish it to PyPI so anyone in the world can <code>pip install todo-cli</code>. This little project ties both halves together – run through it once and it'll all make sense.</p>
+<p>Let's go.</p></article></section><section id="step-1" class="step-card read" data-kind="step" aria-label="Teaching step 2">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 02 / 26</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>What is PyPI?</h3>
+<p>When you type <code>pip install requests</code>, where is the package downloaded from? The answer is PyPI.</p>
+<p><strong>PyPI (the Python Package Index) is the global public package repository maintained officially for Python</strong>, at <code>https://pypi.org</code>. As of 2026, it holds over 600,000 Python packages, downloaded tens of billions of times a month. All the well-known Python packages – <code>requests</code>, <code>numpy</code>, <code>flask</code>, <code>django</code>, <code>pandas</code>, <code>fastapi</code> – live on PyPI.</p>
+<p>What <code>pip install xxx</code> really means is: "download the package called <code>xxx</code> from PyPI and install it into the current Python environment".</p>
+<p>How does PyPI relate to GitHub? They each do their own job:</p>
+<ul>
+<li><strong>GitHub</strong> is where <strong>source code</strong> lives, for developers to read</li>
+<li><strong>PyPI</strong> is where <strong>packaged releases</strong> live, for users to install with <code>pip</code></li>
+</ul>
+<p>A project usually has both – source code hosted on GitHub, releases uploaded to PyPI. Packages you use, like <code>requests</code> and <code>flask</code>, have their source on GitHub and their packages on PyPI, with matching version numbers.</p>
+<p>PyPI also has a "sister site" called <strong>TestPyPI</strong>, at <code>https://test.pypi.org</code>. It's a practice ground – before publishing a release, upload it to TestPyPI first to try it out, and only publish to the real PyPI once you're sure it's fine. The two sites are completely separate – accounts, passwords and tokens don't work across them.</p>
+<p>"Why have TestPyPI?" Because on PyPI, <strong>a released version can never be changed or deleted</strong>. If your hand slips when publishing – you upload <code>0.1.0</code> and then find the version number was wrong, or files were missing from the package – you can't take it back. You can only publish <code>0.1.1</code>, and the broken version stays on PyPI forever as part of history. So practising on TestPyPI before the real PyPI is a good habit.</p>
+<p>Next, let's build a project that can be published to PyPI, step by step.</p></article></section><section id="step-2" class="step-card read" data-kind="step" aria-label="Teaching step 3">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 03 / 26</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>First, get the project structure right</h3>
+<p>The most common folder layout for Python projects looks like this:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">my-tool/
+├── my_tool.py
+└── README.md</code></pre></div>
+<p>Or, a bit more carefully:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">my-tool/
+├── my_tool/
+│   ├── __init__.py
+│   └── main.py
+└── README.md</code></pre></div>
+<p>These work fine locally, but once you package and publish, a hidden trap appears – <strong>Python automatically adds the current folder to <code>sys.path</code></strong>. So when you run tests, you're importing "the source code in the project's root folder" rather than "the package installed in the environment", and problems get hidden.</p>
+<p>The community now recommends a layout called <strong>src layout</strong>, which looks like this:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">my-tool/
+├── pyproject.toml
+├── README.md
+├── LICENSE
+├── src/
+│   └── my_tool/
+│       ├── __init__.py
+│       └── main.py
+└── tests/
+    └── test_main.py</code></pre></div>
+<p>Notice the extra <code>src/</code> folder in the middle. It's not decoration. Its job is to <strong>force the source code out of the project's root folder</strong>. That way you <strong>must</strong> install the package into the environment before you can import it, which avoids the trap above.</p>
+<p>"Is that a hassle?" Not at all. With <code>uv</code> and <code>pyproject.toml</code>, the tools recognise the <code>src/</code> layout automatically – nothing to configure.</p>
+<p>Let's start a new project with <code>uv</code> and look at the default structure:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv init --package my-tool
+cd my-tool
+ls -R</code></pre></div>
+<p>The output is roughly:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">.
+├── README.md
+├── pyproject.toml
+└── src
+    └── my_tool
+        └── __init__.py</code></pre></div>
+<p>This one <code>uv init --package</code> line builds the <code>src layout</code> skeleton for you. Note the <code>--package</code> option – without it, <code>uv init</code> builds an "app" structure by default (not for packaging). With it, you get a "library/tool" structure (for packaging and publishing).</p>
+<p>Open <code>pyproject.toml</code> and look at what <code>uv</code> created:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">[project]
+name = &quot;my-tool&quot;
+version = &quot;0.1.0&quot;
+description = &quot;Add your description here&quot;
+readme = &quot;README.md&quot;
+requires-python = &quot;&gt;=3.10&quot;
+dependencies = []
+
+[build-system]
+requires = [&quot;hatchling&quot;]
+build-backend = &quot;hatchling.build&quot;
+
+[project.scripts]
+my-tool = &quot;my_tool:main&quot;</code></pre></div>
+<p>The skeleton is all there – the <code>[project]</code> section for metadata, the <code>[build-system]</code> section for the packaging back end, and the <code>[project.scripts]</code> section for command-line entry points. Next, let's fill in each field properly.</p></article></section><section id="step-3" class="step-card read" data-kind="step" aria-label="Teaching step 4">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 04 / 26</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>The required fields in pyproject.toml</h3>
+<p>To publish to PyPI, a few fields in the <code>[project]</code> section are unavoidable – name, version, description, Python version requirement and dependencies. Let's go through them one by one.</p>
+<h4>name: the package's globally unique name</h4>
+<p><code>name</code> is the <code>xxx</code> people type in <code>pip install xxx</code> after you publish to PyPI. <strong>It's unique across the whole of PyPI</strong>, like a domain name – first come, first served. Before choosing a name, check <code>https://pypi.org/project/xxx/</code> to see whether it's taken.</p>
+<p>Naming rules: only letters, digits, <code>-</code>, <code>_</code> and <code>.</code> are allowed; it's not case-sensitive; and it can't start with a digit. The community usually uses lowercase with hyphens, like <code>my-tool</code>, <code>todo-cli</code> or <code>http-prompt</code>.</p>
+<p>Note one detail: <strong>the package name (<code>name</code>) and the import name (the <code>xxx</code> in <code>import xxx</code>) aren't always the same</strong>. For example, you <code>pip install scikit-learn</code> but <code>import sklearn</code>. You <code>pip install Pillow</code> but <code>import PIL</code>. That's because:</p>
+<ul>
+<li><code>name</code> is the project name on PyPI, and can contain hyphens</li>
+<li>The import name is a Python module name, which must be a valid Python identifier – no hyphens</li>
+</ul>
+<p>Brother Shui's advice: to avoid confusing users, <strong>keep the two names as similar as possible</strong>. For example, if the package name is <code>my-tool</code>, call the import name <code>my_tool</code> (hyphens become underscores – the usual Python habit).</p>
+<h4>version: the version number</h4>
+<p><code>version</code> is the version number of this release, written as a string, like <code>"0.1.0"</code>, <code>"1.2.3"</code> or <code>"2.0.0a1"</code>.</p>
+<p>The community strongly recommends <strong>Semantic Versioning (SemVer)</strong> – three numbers, <code>MAJOR.MINOR.PATCH</code>:</p>
+<ul>
+<li><strong>Major version</strong>: big changes that aren't backwards-compatible (removing functions, changing signatures)</li>
+<li><strong>Minor version</strong>: new features that are backwards-compatible</li>
+<li><strong>Patch version</strong>: bug fixes that are backwards-compatible</li>
+</ul>
+<p>New projects start at <code>0.1.0</code>. Before 1.0, everything is "unstable", and the API can change freely. After 1.0, be careful about changing the API.</p>
+<p>PyPI also has an iron rule – <strong>each version number can only be uploaded once</strong>. If you publish <code>0.1.0</code> and want to take it back and publish again – sorry, you can't. You must change it to <code>0.1.1</code> or <code>0.1.0.post1</code> and publish again.</p>
+<h4>description: a one-sentence description</h4>
+<p><code>description</code> is a one-sentence summary. It's shown at the top of the PyPI page and in search results. Write something decent – don't publish with the default <code>"Add your description here"</code>, or it'll look embarrassing once it's live.</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">description = &quot;A small tool by Two Drops that adds watermarks to lots of images at once&quot;</code></pre></div>
+<h4>readme: the long description</h4>
+<p><code>readme</code> is the project's long description, shown as the main text on its PyPI page. Just point it to a Markdown file:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">readme = &quot;README.md&quot;</code></pre></div>
+<p><code>uv init</code> already created an empty <code>README.md</code> for you – fill it in. It should at least have a short introduction, the install command and a minimal usage example.</p>
+<h4>authors / maintainers: the authors</h4>
+<p><code>authors</code> is a list of authors. Each author is an object with at least a name; email is optional:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">authors = [
+    { name = &quot;Two Drops&quot;, email = &quot;liangdianshui@example.com&quot; },
+]</code></pre></div>
+<h4>requires-python: the Python version requirement</h4>
+<p><code>requires-python</code> limits which Python versions this package supports:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">requires-python = &quot;&gt;=3.10&quot;</code></pre></div>
+<p>Don't write <code>&gt;=3.0</code> – then ancient Python versions will try to install it too, causing lots of compatibility problems. A sensible choice in 2026 is <code>&gt;=3.10</code> or <code>&gt;=3.11</code>; 3.9 is at the edge of end-of-life.</p>
+<h4>dependencies: the dependency list</h4>
+<p><code>dependencies</code> lists the other packages this package needs to run:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">dependencies = [
+    &quot;httpx&gt;=0.27&quot;,
+    &quot;typer&gt;=0.12&quot;,
+]</code></pre></div>
+<p>Each one follows PEP 508 syntax – <code>package name</code> + version rule. Common version rules:</p>
+<ul>
+<li><code>&gt;=0.27</code>: 0.27 or higher – the most common</li>
+<li><code>~=0.27</code>: a compatible version, <code>&gt;=0.27, &lt;0.28</code></li>
+<li><code>==0.27.1</code>: an exact version – hardly ever used</li>
+<li><code>&gt;=0.27, &lt;1.0</code>: a range</li>
+</ul>
+<p>"Should I write version numbers?" <strong>I strongly recommend writing a minimum version</strong>, like <code>httpx&gt;=0.27</code>. That way, when someone installs it, at least <code>httpx</code> won't be so old that functions are missing. Don't casually write an upper limit – fixing it tightly makes dependency conflicts more likely for your users.</p>
+<p>A complete minimal publishable <code>pyproject.toml</code> looks roughly like this:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">[project]
+name = &quot;my-tool&quot;
+version = &quot;0.1.0&quot;
+description = &quot;A small tool by Two Drops&quot;
+readme = &quot;README.md&quot;
+requires-python = &quot;&gt;=3.10&quot;
+authors = [
+    { name = &quot;Two Drops&quot;, email = &quot;liangdianshui@example.com&quot; },
+]
+dependencies = [
+    &quot;httpx&gt;=0.27&quot;,
+]
+
+[build-system]
+requires = [&quot;hatchling&quot;]
+build-backend = &quot;hatchling.build&quot;</code></pre></div>
+<p>The next section explains what <code>[build-system]</code> is.</p></article></section><section id="step-4" class="step-card read" data-kind="step" aria-label="Teaching step 5">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 05 / 26</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>build-backend: who does the packaging?</h3>
+<p>At the end of that <code>pyproject.toml</code> is this section:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">[build-system]
+requires = [&quot;hatchling&quot;]
+build-backend = &quot;hatchling.build&quot;</code></pre></div>
+<p>What are these two lines doing? To explain, we first need to understand the roles in Python packaging.</p>
+<p>Python packaging has two roles – the <strong>front end</strong> and the <strong>back end</strong>:</p>
+<ul>
+<li>The <strong>front end</strong> is the command the user types, like <code>pip</code>, <code>uv</code> or <code>build</code></li>
+<li>The <strong>back end</strong> is the library that does the real work – turning source code into a <code>wheel</code> and an <code>sdist</code></li>
+</ul>
+<p>The PEP 517 standard separated the two: the front end only calls the back end, and the back end can be swapped freely. The <code>[build-system]</code> section tells the front end "which back end I use".</p>
+<p>The community's three main back ends today:</p>
+<ul>
+<li><strong><code>hatchling</code></strong>: from the <code>Hatch</code> project – simple to configure, very extensible, <strong>the first choice for new projects</strong></li>
+<li><strong><code>setuptools</code></strong>: the ancient, well-established back end – used by almost every old project</li>
+<li><strong><code>poetry-core</code></strong>: the back end that comes with the Poetry project, used with the Poetry tool</li>
+</ul>
+<p>You might also see <code>flit-core</code>, <code>pdm-backend</code> and <code>maturin</code> (for extensions written in Rust) in the wild – different choices for the same job.</p>
+<p>Why recommend <code>hatchling</code>? Three reasons –</p>
+<ol>
+<li><strong>Simple to configure.</strong> <code>uv init --package</code> uses it by default, so you don't need to change anything</li>
+<li><strong>Modern.</strong> It natively supports <code>src layout</code> and PEP 621 metadata, with no historical baggage</li>
+<li><strong>Officially backed.</strong> <code>hatch</code> is a project of the PyPA (Python Packaging Authority)</li>
+</ol>
+<p>"Isn't <code>setuptools</code> more widespread?" It is, but its configuration is complicated and messy, and new projects don't need that trouble. Unless you need C extensions or compatibility with ten-year-old code, just pick <code>hatchling</code>.</p>
+<p>Keep this section as the default in your <code>pyproject.toml</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">[build-system]
+requires = [&quot;hatchling&quot;]
+build-backend = &quot;hatchling.build&quot;</code></pre></div>
+<p><code>requires</code> lists "packages needed to <strong>build</strong> this project". These are different from <code>[project].dependencies</code> – those are "packages needed to <strong>run</strong> this project", while these are "packages needed to <strong>package</strong> this project".</p>
+<p>In the next section, let's try packaging the project.</p></article></section><section id="step-5" class="step-card read" data-kind="step" aria-label="Teaching step 6">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 06 / 26</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Building locally: one <code>uv build</code> command</h3>
+<p>Once you've written your code, how do you package it in a publishable format? One command –</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv build</code></pre></div>
+<p>Run it, and the output is roughly:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Building source distribution...
+Building wheel from source distribution...
+Successfully built dist/my_tool-0.1.0.tar.gz
+Successfully built dist/my_tool-0.1.0-py3-none-any.whl</code></pre></div>
+<p>Open the <code>dist/</code> folder:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">dist/
+├── my_tool-0.1.0-py3-none-any.whl
+└── my_tool-0.1.0.tar.gz</code></pre></div>
+<p>What are these two files?</p>
+<ul>
+<li><strong>The <code>.whl</code> file (wheel)</strong>: a ready-built package. When users <code>pip install</code>, this is chosen first, because it needs no building – it installs instantly</li>
+<li><strong>The <code>.tar.gz</code> file (sdist, source distribution)</strong>: a source package. It contains the whole project's source, for users with unusual environments who need to build from source</li>
+</ul>
+<p>There's a rule in the file name – <code>package-version-PythonVersion-ABI-platform</code>:</p>
+<ul>
+<li><code>py3</code>: works with any Python 3</li>
+<li><code>none</code>: doesn't depend on a specific ABI</li>
+<li><code>any</code>: works on any platform</li>
+</ul>
+<p>If your package contains C extensions, the <code>whl</code> name becomes something like <code>my_tool-0.1.0-cp311-cp311-linux_x86_64.whl</code>, which only works on CPython 3.11 on Linux x86_64. You'd need to build a separate <code>whl</code> for every platform.</p>
+<p>A pure Python project has just one <code>py3-none-any.whl</code> that works everywhere – the easiest.</p>
+<p>"What if I don't have <code>uv</code>?" You can use the official <code>build</code> tool instead:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">pip install build
+python -m build</code></pre></div>
+<p>Same result. Use whichever you prefer – the rest of this chapter uses <code>uv</code>.</p>
+<p>After building successfully, <strong>always install it locally first and try it</strong>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv pip install dist/my_tool-0.1.0-py3-none-any.whl</code></pre></div>
+<p>Or:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">pip install dist/my_tool-0.1.0-py3-none-any.whl</code></pre></div>
+<p>After installing, run your tool and check that it works. This is the last line of defence before publishing. If you find a problem now, you can still fix it; once it's on PyPI, it's too late.</p></article></section><section id="step-6" class="step-card read" data-kind="step" aria-label="Teaching step 7">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 07 / 26</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Registering a TestPyPI account</h3>
+<p>The package is built. Next – upload it. First practise on TestPyPI, then publish to the real PyPI.</p>
+<p>How to register on TestPyPI –</p>
+<ol>
+<li>Open <code>https://test.pypi.org/account/register/</code></li>
+<li>Register an account with your email and verify the email</li>
+<li>After logging in, go to <code>Account settings</code></li>
+<li>Turn on <strong>two-factor authentication (2FA)</strong> – TestPyPI now requires it. You can use a TOTP app like Authy, Google Authenticator or 1Password</li>
+<li>Go to the <code>API tokens</code> page and create a token, choosing the scope <code>Entire account</code> (for your first upload, you can't limit it to a specific project, because the project doesn't exist yet)</li>
+<li>Copy the token – <strong>you can only see it once; close the page and it's gone</strong></li>
+</ol>
+<p>A TestPyPI token looks like this:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">pypi-AgEIcHlwaS5vcmcCJ...(a long base64 string)</code></pre></div>
+<p>Save this token in a password manager.</p>
+<p>Registering on the real PyPI is the same – <code>https://pypi.org/account/register/</code>, turn on 2FA, create a token, save it. Remember, PyPI and TestPyPI are two separate websites, with separate accounts and tokens.</p>
+<p>"How do I use the token?" You'll use it in the next section.</p></article></section><section id="step-7" class="step-card read" data-kind="step" aria-label="Teaching step 8">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 08 / 26</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Practising by uploading to TestPyPI</h3>
+<p>The command to publish to TestPyPI –</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv publish --publish-url https://test.pypi.org/legacy/ \
+    --token pypi-AgEIcHlwaS5vcmcCJ...</code></pre></div>
+<p>Or, more safely, use an environment variable:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">export UV_PUBLISH_TOKEN=pypi-AgEIcHlwaS5vcmcCJ...
+uv publish --publish-url https://test.pypi.org/legacy/</code></pre></div>
+<p>If it succeeds, the output is roughly:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Uploading my_tool-0.1.0-py3-none-any.whl
+Uploading my_tool-0.1.0.tar.gz
+Published https://test.pypi.org/project/my-tool/0.1.0/</code></pre></div>
+<p>Open the link, and your little tool is sitting on TestPyPI, with its title, description, version, README and dependency list.</p>
+<p>Next – <strong>install it from TestPyPI and check it works</strong>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">pip install --index-url https://test.pypi.org/simple/ \
+    --extra-index-url https://pypi.org/simple/ \
+    my-tool</code></pre></div>
+<p>Notice the two index options here –</p>
+<ul>
+<li><code>--index-url https://test.pypi.org/simple/</code>: look for the package you just uploaded on TestPyPI</li>
+<li><code>--extra-index-url https://pypi.org/simple/</code>: look for dependencies on the real PyPI (because your dependencies, like <code>httpx</code>, are published on the real PyPI)</li>
+</ul>
+<p>Without the second option, the dependencies won't install properly from TestPyPI (TestPyPI only has what you just uploaded, not <code>httpx</code>). This is the most common beginner trap – remember it.</p>
+<p>After installing, run your tool. If it works – congratulations, you've mastered the publishing process.</p></article></section><section id="step-8" class="step-card read" data-kind="step" aria-label="Teaching step 9">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 09 / 26</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Uploading to the real PyPI</h3>
+<p>Once your TestPyPI practice succeeds, publishing to the real PyPI is one command –</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">export UV_PUBLISH_TOKEN=pypi-your-real-token-...
+uv publish</code></pre></div>
+<p>By default, <code>uv publish</code> uploads to <code>https://upload.pypi.org/legacy/</code> – the real PyPI.</p>
+<p>After publishing, open <code>https://pypi.org/project/my-tool/</code>, and your project is on PyPI. Now anyone can:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">pip install my-tool</code></pre></div>
+<p>and install your tool into their own environment. Even Brother Shui gets a little excited writing this – it means your code is on the global public repository, and anyone can use it.</p>
+<p>"What if I want to take a release down after publishing?" PyPI has a <strong>yank</strong> feature – the version number stays, but by default new installs won't find it. Note that this only "hides" it, it doesn't "delete" it – users who already installed it can keep using it. Completely deleting a version isn't allowed, so that dependency chains don't break.</p></article></section><section id="step-9" class="step-card read" data-kind="step" aria-label="Teaching step 10">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 10 / 26</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Managing version numbers: by hand vs automatically</h3>
+<p>You've published <code>0.1.0</code>, and after a while you want to publish <code>0.1.1</code>. How do you change the version number?</p>
+<p><strong>By hand</strong> – open <code>pyproject.toml</code>, change <code>version = "0.1.0"</code> to <code>version = "0.1.1"</code>, then <code>uv build</code> + <code>uv publish</code> again. Simple and direct.</p>
+<p>But doing it by hand has a problem – <code>pyproject.toml</code> and your git tags can easily get out of step. For example, <code>pyproject.toml</code> says <code>0.1.1</code> but the git tag is <code>v0.2.0</code> – which one is right? After a few versions of drifting like this, things get messy.</p>
+<p><strong>Automatically</strong> – use <code>hatch-vcs</code> to work out the version number from git tags automatically. Change <code>pyproject.toml</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">[project]
+name = &quot;my-tool&quot;
+dynamic = [&quot;version&quot;]
+description = &quot;A small tool by Two Drops&quot;
+# ...
+
+[build-system]
+requires = [&quot;hatchling&quot;, &quot;hatch-vcs&quot;]
+build-backend = &quot;hatchling.build&quot;
+
+[tool.hatch.version]
+source = &quot;vcs&quot;</code></pre></div>
+<p>Notice three changes –</p>
+<ol>
+<li><code>version = "0.1.0"</code> becomes <code>dynamic = ["version"]</code>, telling <code>hatchling</code> "the version number isn't fixed – work it out"</li>
+<li><code>hatch-vcs</code> is added to <code>[build-system].requires</code>, bringing in the plugin that works out the version</li>
+<li>A new <code>[tool.hatch.version]</code> section tells <code>hatch-vcs</code> "read it from git"</li>
+</ol>
+<p>After that, the process becomes –</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">git tag v0.1.1
+git push --tags
+uv build
+uv publish</code></pre></div>
+<p>When you <code>uv build</code>, <code>hatch-vcs</code> reads the latest git tag <code>v0.1.1</code>, works out the version number <code>0.1.1</code>, and the package becomes <code>my_tool-0.1.1-py3-none-any.whl</code>.</p>
+<p>If you change the code after adding a tag, <code>hatch-vcs</code> automatically adds a <code>dev</code> suffix, so the version becomes something like <code>0.1.2.dev3+gabc1234</code> – clearly telling you "this is a version still in development".</p>
+<p>Brother Shui's advice: <strong>use the automatic way for new projects</strong>. Doing it by hand is fine at first, but by the third or fourth version, with more developers involved, the automatic way saves lots of checking.</p></article></section><section id="step-10" class="step-card read" data-kind="step" aria-label="Teaching step 11">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 11 / 26</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>README and LICENSE: the minimum for looking "proper"</h3>
+<p>Projects you publish to PyPI <strong>must have a README.md and a LICENSE file</strong>. That's basic good manners in the industry.</p>
+<h4>README.md</h4>
+<p><code>README.md</code> is shown as the main text on your PyPI project page – it's the first thing users see. It should include at least –</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Markdown</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-markdown"># my-tool
+
+A small tool by Two Drops that adds watermarks to lots of images at once.
+
+## Install
+
+```bash
+pip install my-tool</code></pre></div>
+<h3>Usage</h3>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">my-tool ./photos --watermark &quot;© Two Drops&quot;</code></pre></div>
+<h3>License</h3>
+<p>MIT</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">
+Introduction, install, usage, License – four sections are enough. More careful projects also add &quot;Features&quot;, &quot;Examples&quot;, &quot;FAQ&quot; and a &quot;Contributing guide&quot;.
+
+### LICENSE
+
+A licence is a legal document. It tells users &quot;this is how I allow you to use my code&quot;. If you write an open source project without a licence, that means &quot;all rights reserved&quot; – which is actually the strictest option. Other people can&#x27;t use your code, because they haven&#x27;t been given permission.
+
+Pick one of the three common licences –
+
+- **MIT**: the most relaxed – &quot;use it however you like, don&#x27;t sue me, just keep the copyright notice&quot;
+- **Apache 2.0**: similar to MIT, plus a &quot;patent grant&quot; clause, which is friendlier for companies
+- **GPL v3**: a &quot;copyleft&quot; licence – &quot;if you use my code, your code must be open source too&quot;
+
+The community habit: tool and library projects use MIT or Apache 2.0; for app projects, decide for yourself. Brother Shui&#x27;s little tools always use MIT – it&#x27;s simple.
+
+Declare it in `pyproject.toml` too:
+
+```toml
+[project]
+license = { file = &quot;LICENSE&quot; }</code></pre></div>
+<p>Or use an SPDX identifier (PEP 639, officially adopted in 2024):</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">[project]
+license = &quot;MIT&quot;</code></pre></div>
+<p>The second form is more modern, but some older tools don't understand it yet – it depends on how much you're willing to put up with.</p></article></section><section id="step-11" class="step-card read" data-kind="step" aria-label="Teaching step 12">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 12 / 26</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Publishing automatically with CI: add a tag, publish a release</h3>
+<p>Running <code>uv build</code> + <code>uv publish</code> by hand every time gets boring after two or three releases. The ideal is – <strong>add a git tag, and CI builds and publishes to PyPI automatically</strong>.</p>
+<p>One GitHub Actions workflow can do this. In your project, create a file <code>.github/workflows/release.yml</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">YAML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-yaml">name: Release
+
+on:
+  push:
+    tags:
+      - &quot;v*&quot;
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: astral-sh/setup-uv@v3
+
+      - run: uv build
+
+      - uses: pypa/gh-action-pypi-publish@release/v1</code></pre></div>
+<p>What does this configuration do –</p>
+<ol>
+<li><strong>Trigger</strong>: it runs when you <code>push</code> a tag starting with <code>v</code> (like <code>v0.1.1</code>)</li>
+<li><strong><code>permissions: id-token: write</code></strong>: asks for OpenID Connect permission for the workflow – the "trusted publishing" below needs it</li>
+<li><strong>Build</strong>: packages the project with <code>uv build</code></li>
+<li><strong>Publish</strong>: uploads to PyPI with <code>pypa/gh-action-pypi-publish</code></li>
+</ol>
+<p>The most amazing part – <strong>this process doesn't need a PyPI token at all</strong>. It relies on a feature called <strong>Trusted Publishers</strong>, which PyPI launched in 2023 and which became the recommended approach in 2024.</p>
+<p>How trusted publishing works – PyPI directly trusts the OIDC identity of GitHub Actions. Once you link "this workflow file in this GitHub repository" in your PyPI project settings, PyPI recognises the CI run and lets it upload without a token.</p>
+<p>Setup steps –</p>
+<ol>
+<li>Log in to PyPI and go to your project page → <code>Settings</code> → <code>Publishing</code></li>
+<li>Add a "Trusted Publisher", filling in <code>Owner</code> (your GitHub username/organisation), <code>Repository name</code>, <code>Workflow name</code> (<code>release.yml</code>) and <code>Environment</code> (optional)</li>
+<li>Push a tag to try it</li>
+</ol>
+<p>The commands to add a tag –</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">git tag v0.1.1
+git push origin v0.1.1</code></pre></div>
+<p>GitHub Actions starts running, and a few minutes later your package is on PyPI.</p>
+<p>"What's better about this than a token?" Three things –</p>
+<ol>
+<li><strong>No token expiry to worry about.</strong> Tokens can expire, and then you have to create a new one</li>
+<li><strong>No fear of the token leaking.</strong> The OIDC credential only exists for the moment the workflow runs – it can't be copied out</li>
+<li><strong>The configuration lives on the PyPI side.</strong> No need to change secrets when swapping tokens, so permissions are clearer</li>
+</ol>
+<p>Brother Shui strongly recommends that new projects in 2026 use trusted publishing from day one – it's much cleaner than tokens.</p>
+<p>That's the end of the part about publishing to PyPI. In the next section we change topic – <strong><code>typer</code></strong>, a great tool for writing CLI (command-line) tools.</p></article></section><section id="step-12" class="step-card read" data-kind="step" aria-label="Teaching step 13">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 13 / 26</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>The pain of CLIs: argparse is too wordy</h3>
+<p>Have you ever written a command-line tool? Python's standard library comes with <code>argparse</code>. It works, but it's terribly wordy to write. Look at this:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import argparse
+
+parser = argparse.ArgumentParser(description=&quot;Add a watermark to an image&quot;)
+parser.add_argument(&quot;input&quot;, type=str, help=&quot;Input image path&quot;)
+parser.add_argument(&quot;--watermark&quot;, type=str, default=&quot;© Two Drops&quot;, help=&quot;Watermark text&quot;)
+parser.add_argument(&quot;--opacity&quot;, type=float, default=0.5, help=&quot;Opacity&quot;)
+parser.add_argument(&quot;--verbose&quot;, action=&quot;store_true&quot;, help=&quot;Show details&quot;)
+args = parser.parse_args()
+
+print(f&quot;Input: {args.input}&quot;)
+print(f&quot;Watermark: {args.watermark}&quot;)
+print(f&quot;Opacity: {args.opacity}&quot;)
+print(f&quot;Verbose: {args.verbose}&quot;)</code></pre></div>
+<p>The setup takes 7 lines, but the useful logic is just 4 variables. Why so wordy? Because <code>argparse</code> was written in 2009, before Python had type hints. You have to <code>add_argument</code> every parameter by hand, filling in the type, default and help text each time. The function signature and the parameter declarations live in two places, so it's easy to miss something when you change it.</p>
+<p>Even worse are subcommands – a "main command + subcommand" structure like <code>git commit</code> and <code>git push</code>. In <code>argparse</code> you nest a pile of <code>subparsers</code>, and one look gives you a headache.</p>
+<p>In 2026, is there something better?</p>
+<p>Yes – it's called <strong><code>typer</code></strong>. It was written by Tiangolo, the author of <code>FastAPI</code>, and follows the same idea as <code>FastAPI</code> – <strong>use type hints directly as parameter declarations</strong>. The same feature written with <code>typer</code> looks like this:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import typer
+
+app = typer.Typer()
+
+
+@app.command()
+def watermark(
+    input: str,
+    watermark: str = &quot;© Two Drops&quot;,
+    opacity: float = 0.5,
+    verbose: bool = False,
+):
+    print(f&quot;Input: {input}&quot;)
+    print(f&quot;Watermark: {watermark}&quot;)
+    print(f&quot;Opacity: {opacity}&quot;)
+    print(f&quot;Verbose: {verbose}&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    app()</code></pre></div>
+<p>Take a look – the parameters are written right in the function signature. The type hint is the parameter type, the default value is the command-line default, and help text can be taken from the docstring automatically. The logic is the same as <code>argparse</code>, with half the lines and ten times the readability.</p>
+<p>Next, let's go through <code>typer</code> step by step, starting from the simplest example.</p></article></section><section id="step-13" class="step-card read" data-kind="step" aria-label="Teaching step 14">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 14 / 26</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Your first typer program</h3>
+<p>First, install <code>typer</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv add typer</code></pre></div>
+<p>Or:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">pip install typer</code></pre></div>
+<p>Write the simplest script, <code>hello.py</code>:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import typer
+
+
+def hello(name: str):
+    print(f&quot;Hi {name}&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    typer.run(hello)</code></pre></div>
+<p>Run it:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">python hello.py TwoDrops</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Hi TwoDrops</code></pre></div>
+<p>Now try it without an argument:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">python hello.py</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Usage: hello.py [OPTIONS] NAME
+Try &#x27;hello.py --help&#x27; for help.
+
+Error: Missing argument &#x27;NAME&#x27;.</code></pre></div>
+<p><code>typer</code> automatically did all this for you –</p>
+<ul>
+<li>Parsed the command-line arguments</li>
+<li>Converted types (<code>name</code> is a <code>str</code>, taken straight from the command-line string)</li>
+<li>Reported an error for the missing argument</li>
+<li>Told you there's a <code>--help</code> command</li>
+</ul>
+<p>Try <code>--help</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">python hello.py --help</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Usage: hello.py [OPTIONS] NAME
+
+Arguments:
+  NAME  [required]
+
+Options:
+  --help  Show this message and exit.</code></pre></div>
+<p>The help text was generated by <code>typer</code> automatically. Did you notice? You never wrote <code>parser.add_argument</code>, never wrote <code>--help</code>, never wrote <code>Usage</code> – <code>typer</code> made all of it. That's the power of "<strong>type hints are documentation</strong>".</p>
+<p>The line <code>typer.run(hello)</code> means "turn the <code>hello</code> function into a command-line entry point". It's good for small tools with just one command. If your tool has several commands (like <code>add</code>, <code>list</code> and <code>done</code>), you need the <code>Typer</code> app from the next section.</p></article></section><section id="step-14" class="step-card read" data-kind="step" aria-label="Teaching step 15">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 15 / 26</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>An app with several commands</h3>
+<p>Have you used <code>git</code>? <code>git commit</code>, <code>git push</code>, <code>git pull</code> – one main command with lots of subcommands. In <code>typer</code>, this structure is called a <strong>multi-command app</strong>:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import typer
+
+app = typer.Typer()
+
+
+@app.command()
+def add(item: str):
+    &quot;&quot;&quot;Add a task.&quot;&quot;&quot;
+    print(f&quot;Added: {item}&quot;)
+
+
+@app.command()
+def list():
+    &quot;&quot;&quot;List all tasks.&quot;&quot;&quot;
+    print(&quot;Listing all tasks...&quot;)
+
+
+@app.command()
+def done(index: int):
+    &quot;&quot;&quot;Mark a task as done.&quot;&quot;&quot;
+    print(f&quot;Finished task {index}&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    app()</code></pre></div>
+<p>Look – three steps –</p>
+<ol>
+<li><code>app = typer.Typer()</code>: create an app object</li>
+<li>Decorate the function for each command with <code>@app.command()</code></li>
+<li>Start it with <code>app()</code></li>
+</ol>
+<p>Run it:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">python todo.py add &quot;Learn typer&quot;
+python todo.py list
+python todo.py done 1</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Added: Learn typer
+Listing all tasks...
+Finished task 1</code></pre></div>
+<p>Each function decorated with <code>@app.command()</code> becomes a subcommand, and the function name is the subcommand name. When the user types <code>add</code>, the <code>add</code> function runs; when they type <code>list</code>, the <code>list</code> function runs.</p>
+<p>Try <code>--help</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">python todo.py --help</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Usage: todo.py [OPTIONS] COMMAND [ARGS]...
+
+Options:
+  --install-completion  Install completion for the current shell.
+  --show-completion     Show completion for the current shell.
+  --help                Show this message and exit.
+
+Commands:
+  add   Add a task.
+  done  Mark a task as done.
+  list  List all tasks.</code></pre></div>
+<p>Notice the description next to each command – it comes from each function's docstring. <code>typer</code> reads the docstrings to make the command help. Write clear docstrings, and your CLI documentation is complete.</p>
+<p>Subcommands have help too:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">python todo.py add --help</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Usage: todo.py add [OPTIONS] ITEM
+
+  Add a task.
+
+Arguments:
+  ITEM  [required]</code></pre></div>
+<p>The description and argument list for the <code>add</code> subcommand are all generated automatically.</p></article></section><section id="step-15" class="step-card read" data-kind="step" aria-label="Teaching step 16">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 16 / 26</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Type hints = CLI parameters</h3>
+<p>The most magical thing about <code>typer</code> is that <strong>the type hints on your function's parameters are the types of the CLI parameters</strong>. Whatever type you write, the CLI converts to that type automatically – you don't write a single line of conversion code.</p>
+<p>Supported types –</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import typer
+from pathlib import Path
+from enum import Enum
+
+
+class Color(str, Enum):
+    red = &quot;red&quot;
+    green = &quot;green&quot;
+    blue = &quot;blue&quot;
+
+
+def cmd(
+    text: str,
+    count: int,
+    ratio: float,
+    enabled: bool,
+    file: Path,
+    color: Color,
+):
+    print(f&quot;text={text!r}&quot;)
+    print(f&quot;count={count} (type {type(count).__name__})&quot;)
+    print(f&quot;ratio={ratio} (type {type(ratio).__name__})&quot;)
+    print(f&quot;enabled={enabled}&quot;)
+    print(f&quot;file={file} (type {type(file).__name__})&quot;)
+    print(f&quot;color={color}&quot;)</code></pre></div>
+<p>Run this command –</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">python cmd.py &quot;hi&quot; 10 1.5 ./README.md red</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">text=&#x27;hi&#x27;
+count=10 (type int)
+ratio=1.5 (type float)
+enabled=False
+file=README.md (type PosixPath)
+color=Color.red</code></pre></div>
+<p>Notice a few details –</p>
+<ul>
+<li>With the <code>int</code> type, <code>"10"</code> from the command line automatically becomes an integer</li>
+<li>With the <code>float</code> type, <code>"1.5"</code> automatically becomes a float</li>
+<li>With the <code>Path</code> type, it's automatically wrapped as a <code>pathlib.Path</code> object</li>
+<li>With the <code>Enum</code> type, the value can only be <code>red</code>/<code>green</code>/<code>blue</code> – anything else gives an error straight away</li>
+<li>A <code>bool</code> parameter with no default isn't a positional argument here – it becomes an <code>--enabled/--no-enabled</code> switch, which is why <code>enabled=False</code></li>
+</ul>
+<p>Try typing the wrong type:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">python cmd.py &quot;hi&quot; abc 1.5 ./README.md red</code></pre></div>
+<p><code>typer</code> refuses straight away:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Usage: cmd.py [OPTIONS] TEXT COUNT RATIO FILE COLOR
+Try &#x27;cmd.py --help&#x27; for help.
+
+Error: Invalid value for &#x27;COUNT&#x27;: &#x27;abc&#x27; is not a valid integer.</code></pre></div>
+<p>"Types are validation" – write <code>int</code>, and <code>typer</code> only accepts values that can become an <code>int</code>. Anything else never even gets into your function. Compared with <code>argparse</code>, where you still have to write your own <code>try except</code>, this is so comfortable.</p></article></section><section id="step-16" class="step-card read" data-kind="step" aria-label="Teaching step 17">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 17 / 26</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Optional parameters: the magic of default values</h3>
+<p>Back to the earlier example – is the parameter <code>text: str</code> "required" or "optional"? It's required, because it has no default value.</p>
+<p>To make it optional, just add a default value:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def hello(name: str = &quot;World&quot;):
+    print(f&quot;Hi {name}&quot;)</code></pre></div>
+<p>Now <code>typer</code> changes it from a "positional argument" to an "<strong>option</strong>", and the command line usage becomes:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">python hello.py                   # prints Hi World
+python hello.py --name TwoDrops   # prints Hi TwoDrops</code></pre></div>
+<p>Notice –</p>
+<ul>
+<li><strong>A parameter with no default = a positional argument (Argument)</strong>: required, written right after the command</li>
+<li><strong>A parameter with a default = an option (Option)</strong>: optional, needs the <code>--name</code> prefix</li>
+</ul>
+<p>This matches Python functions' "positional vs keyword arguments" logic. Whether your Python function parameter has a default decides whether the CLI gets a positional argument or an option.</p>
+<p>Short options are easy to add too, with <code>typer.Option</code>:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import typer
+
+
+def hello(
+    name: str = typer.Option(&quot;World&quot;, &quot;--name&quot;, &quot;-n&quot;, help=&quot;Whose name&quot;),
+):
+    print(f&quot;Hi {name}&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    typer.run(hello)</code></pre></div>
+<p>Now –</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">python hello.py -n TwoDrops
+python hello.py --name TwoDrops</code></pre></div>
+<p>The two forms are the same. The first argument to <code>typer.Option</code> is the default value, then come the command-line names, and finally <code>help</code> is the help text.</p></article></section><section id="step-17" class="step-card read" data-kind="step" aria-label="Teaching step 18">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 18 / 26</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Required vs optional parameters: the one-sentence rule</h3>
+<p>If you keep going back and forth between "positional argument" and "option", here's Brother Shui's one-sentence rule –</p>
+<ul>
+<li><strong>"This value must be given" → positional argument.</strong> For example, <code>cp source target</code> – without a source or target, the command can't run</li>
+<li><strong>"This value can be left out, and there's a default behaviour" → option.</strong> For example, <code>ls --all</code> – it runs fine without it</li>
+</ul>
+<p>In a <code>typer</code> function signature –</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def watermark(
+    input: Path,                  # positional: required
+    output: Path,                 # positional: required
+    text: str = &quot;© Two Drops&quot;,    # option: optional, default watermark
+    opacity: float = 0.5,         # option: optional, default 0.5
+    verbose: bool = False,        # option: optional, default False
+):
+    ...</code></pre></div>
+<p>CLI usage:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">my-tool input.jpg output.jpg
+my-tool input.jpg output.jpg --text &quot;Copyright Two Drops&quot; --opacity 0.8 --verbose</code></pre></div>
+<p>When you write CLI tools, <strong>use 1–3 positional arguments at most</strong> – any more and users can't remember the order. If there are more than 3 parameters, make the rest options; it actually reads more clearly.</p></article></section><section id="step-18" class="step-card read" data-kind="step" aria-label="Teaching step 19">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 19 / 26</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Asking the user: prompt and confirm</h3>
+<p>When writing CLI tools, you often have situations like this – "the user didn't pass this value, so I want to ask them". For example, asking "Are you sure?" before deleting files, or "What's the project called?" when setting up a project.</p>
+<p>The old way is <code>input()</code>. <code>typer</code> gives you two nicer tools – <code>typer.prompt</code> and <code>typer.confirm</code>.</p>
+<p>First, <code>prompt</code>, which asks the user a question and gets the answer:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import typer
+
+
+def init():
+    name = typer.prompt(&quot;Project name&quot;)
+    author = typer.prompt(&quot;Author&quot;, default=&quot;Two Drops&quot;)
+    print(f&quot;Creating project {name}, author {author}&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    typer.run(init)</code></pre></div>
+<p>When it runs –</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Project name: my-tool
+Author [Two Drops]:
+Creating project my-tool, author Two Drops</code></pre></div>
+<p>The <code>default</code> argument gives a default value – if the user just presses Enter, the default is used. Much nicer than <code>input()</code>.</p>
+<p><code>confirm</code> asks a yes/no question:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import typer
+
+
+def delete(path: str):
+    sure = typer.confirm(f&quot;Are you sure you want to delete {path}?&quot;)
+    if not sure:
+        print(&quot;Cancelled&quot;)
+        raise typer.Abort()
+    print(f&quot;Deleted {path}&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    typer.run(delete)</code></pre></div>
+<p>When it runs –</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">$ python del.py /tmp/foo
+Are you sure you want to delete /tmp/foo? [y/N]: y
+Deleted /tmp/foo</code></pre></div>
+<p>By default <code>confirm</code> means "no" (if the user just presses Enter = no). Add <code>default=True</code> to make the default "yes".</p>
+<p><code>typer.Abort()</code> is another special exception – it means "the user chose to give up". The CLI exits with a standard exit code (1 by default), and the meaning is clearer than <code>typer.Exit()</code>.</p></article></section><section id="step-19" class="step-card read" data-kind="step" aria-label="Teaching step 20">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 20 / 26</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Exiting with an error: typer.Exit and typer.Abort</h3>
+<p>When you write CLI tools, sometimes the command needs to exit as a "failure" – a file doesn't exist, the network is down, the user typed a wrong value. The Linux habit is "exit code 0 = success, not 0 = failure", and shell scripts use this to decide whether to carry on.</p>
+<p><code>typer</code> gives you two ways to exit –</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import typer
+
+
+def deploy(env: str):
+    if env not in (&quot;dev&quot;, &quot;staging&quot;, &quot;prod&quot;):
+        print(f&quot;Unknown environment: {env}&quot;)
+        raise typer.Exit(code=2)
+    print(f&quot;Starting deployment to {env}&quot;)</code></pre></div>
+<p><code>typer.Exit(code=N)</code> makes the CLI exit straight away with exit code N. The usual conventions –</p>
+<ul>
+<li><code>0</code>: success</li>
+<li><code>1</code>: general failure</li>
+<li><code>2</code>: the user typed a wrong argument</li>
+</ul>
+<p>Don't just use <code>sys.exit(N)</code> everywhere – <code>typer.Exit</code> lets <code>typer</code> finish its own exit handling properly, so stick to <code>typer.Exit</code>.</p>
+<p>The other one is <code>typer.Abort()</code>, meaning "the user stopped". For example, when the user answers no to the <code>confirm</code> above, you <code>raise typer.Abort()</code>. It exits with code 1 like <code>typer.Exit(code=1)</code>, and also prints <code>Aborted!</code>, so the meaning is clearer.</p></article></section><section id="step-20" class="step-card read" data-kind="step" aria-label="Teaching step 21">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 21 / 26</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Coloured output: echo and secho</h3>
+<p>Have you noticed in the output of <code>git status</code> that modified files are red, staged files are green, and hint text is yellow? Adding some colour to a command-line tool makes it easier to read straight away.</p>
+<p><code>typer</code> has simple coloured output built in, called <code>typer.echo</code> and <code>typer.secho</code>:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import typer
+
+
+def status():
+    typer.echo(&quot;Normal text, just like print&quot;)
+    typer.secho(&quot;Success!&quot;, fg=typer.colors.GREEN)
+    typer.secho(&quot;Warning!&quot;, fg=typer.colors.YELLOW)
+    typer.secho(&quot;Error!&quot;, fg=typer.colors.RED, bold=True)
+
+
+if __name__ == &quot;__main__&quot;:
+    typer.run(status)</code></pre></div>
+<p>Run it in a terminal that supports colour – "Success!" is green, "Warning!" is yellow, and "Error!" is bold red. In places without colour support (like when the output is redirected to a file), <code>typer</code> removes the colour codes automatically, so the output stays clean.</p>
+<p>Colours you can use – <code>BLACK</code>, <code>RED</code>, <code>GREEN</code>, <code>YELLOW</code>, <code>BLUE</code>, <code>MAGENTA</code>, <code>CYAN</code>, <code>WHITE</code>, plus styles like <code>bold=True</code> and <code>underline=True</code>.</p>
+<p>"Why not use <code>print</code>?" <code>print</code> can't tell whether the terminal supports colour. When the output is redirected to a file, colour codes turn into messy characters like <code>\x1b[32m</code> and pollute the output. <code>typer.secho</code> handles this detail for you.</p>
+<p>For fancier output (tables, progress bars, Markdown), <code>typer</code> works smoothly with <code>rich</code> – once <code>rich</code> is installed (recent versions of <code>typer</code> install it by default), it's used for things like nicer help and error messages.</p></article></section><section id="step-21" class="step-card read" data-kind="step" aria-label="Teaching step 22">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 22 / 26</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Nested subcommands: app.add_typer</h3>
+<p>When you write a big CLI tool with lots of commands, you'll want to group them – like <code>git remote add</code>, <code>git remote rm</code>, <code>git stash push</code>, <code>git stash pop</code>, "subcommands of subcommands".</p>
+<p><code>typer</code> supports nesting sub-apps:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import typer
+
+app = typer.Typer()
+remote_app = typer.Typer()
+stash_app = typer.Typer()
+
+app.add_typer(remote_app, name=&quot;remote&quot;, help=&quot;Manage remote repositories&quot;)
+app.add_typer(stash_app, name=&quot;stash&quot;, help=&quot;Manage the stash&quot;)
+
+
+@remote_app.command(&quot;add&quot;)
+def remote_add(name: str, url: str):
+    print(f&quot;Adding remote: {name} -&gt; {url}&quot;)
+
+
+@remote_app.command(&quot;rm&quot;)
+def remote_rm(name: str):
+    print(f&quot;Removing remote: {name}&quot;)
+
+
+@stash_app.command(&quot;push&quot;)
+def stash_push():
+    print(&quot;Stashing current changes&quot;)
+
+
+@stash_app.command(&quot;pop&quot;)
+def stash_pop():
+    print(&quot;Restoring the latest stash&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    app()</code></pre></div>
+<p>Run it –</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">python git.py remote add origin git@github.com:walter/python.git
+python git.py remote rm origin
+python git.py stash push
+python git.py stash pop</code></pre></div>
+<p>Each sub-app can have its own sub-apps, in theory forever. But don't really nest more than three levels – users won't remember. Two levels is enough.</p></article></section><section id="step-22" class="step-card read" data-kind="step" aria-label="Teaching step 23">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 23 / 26</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Turning it into a system command: [project.scripts]</h3>
+<p>Right now, your <code>typer</code> tool runs as <code>python todo.py add ...</code>. You have to type <code>python</code> every time, unlike <code>git</code>, which you just type directly. How do you make it a global command?</p>
+<p>The answer is the <code>[project.scripts]</code> section in <code>pyproject.toml</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">[project.scripts]
+todo-cli = &quot;my_tool.cli:app&quot;</code></pre></div>
+<p>The format is <code>command-name = "package.path:function-name"</code>. This line means –</p>
+<ul>
+<li>After this package is installed, the command line has a new command called <code>todo-cli</code></li>
+<li>Running <code>todo-cli</code> is the same as running <code>app</code> in <code>my_tool/cli.py</code></li>
+</ul>
+<p>A <code>typer.Typer()</code> object can be called like a function, so you can use <code>app</code> directly.</p>
+<p>Reinstall the package:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv pip install -e .</code></pre></div>
+<p>Then try:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">todo-cli --help</code></pre></div>
+<p>The help appears straight away. Try more:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">todo-cli add &quot;Learn typer&quot;
+todo-cli list</code></pre></div>
+<p>Exactly the same as <code>python todo.py add ...</code> before, but the command is shorter, and it immediately feels like a real tool.</p>
+<p>"What does <code>uv pip install -e .</code> mean?" <code>-e</code> is editable mode – it installs the package as a "link" to your source code. When you change the source, the command changes straight away, with no reinstalling. Always use <code>-e</code> while developing – it saves countless reinstalls.</p>
+<p>Now all the parts for packaging + CLI are ready. In the next section, we'll tie everything together with one complete small project.</p></article></section><section id="step-23" class="step-card read" data-kind="step" aria-label="Teaching step 24">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 24 / 26</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Hands-on: todo-cli from zero to published</h3>
+<p>Let's follow Brother Shui and write a complete <code>todo-cli</code> tool, and finally publish it to PyPI (with a practice release on TestPyPI). The tool supports three commands –</p>
+<ul>
+<li><code>todo-cli add "Buy vegetables"</code>: add a todo</li>
+<li><code>todo-cli list</code>: list all todos</li>
+<li><code>todo-cli done 1</code>: mark item 1 as done</li>
+</ul>
+<p>The data is stored in <code>~/.todo-cli.json</code> in the user's home folder – the simplest kind of local storage.</p>
+<h4>Step 1: Create the project skeleton</h4>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv init --package todo-cli
+cd todo-cli
+uv add typer</code></pre></div>
+<p><code>uv</code> creates <code>src/todo_cli/__init__.py</code> automatically. We add one more file, <code>src/todo_cli/cli.py</code>.</p>
+<h4>Step 2: Write the core logic</h4>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import json
+from pathlib import Path
+
+import typer
+
+app = typer.Typer(help=&quot;A small todo tool by Two Drops&quot;)
+
+DATA_FILE = Path.home() / &quot;.todo-cli.json&quot;
+
+
+def load_todos() -&gt; list[dict]:
+    &quot;&quot;&quot;Read the todo list. Return an empty list if the file doesn&#x27;t exist.&quot;&quot;&quot;
+    if not DATA_FILE.exists():
+        return []
+    return json.loads(DATA_FILE.read_text(encoding=&quot;utf-8&quot;))
+
+
+def save_todos(todos: list[dict]) -&gt; None:
+    &quot;&quot;&quot;Write the todo list back to the file.&quot;&quot;&quot;
+    DATA_FILE.write_text(
+        json.dumps(todos, ensure_ascii=False, indent=2),
+        encoding=&quot;utf-8&quot;,
+    )
+
+
+@app.command()
+def add(item: str):
+    &quot;&quot;&quot;Add a todo.&quot;&quot;&quot;
+    todos = load_todos()
+    todos.append({&quot;item&quot;: item, &quot;done&quot;: False})
+    save_todos(todos)
+    print(f&quot;Added: {item}&quot;)
+
+
+@app.command(name=&quot;list&quot;)
+def list_todos():
+    &quot;&quot;&quot;List all todos.&quot;&quot;&quot;
+    todos = load_todos()
+    if not todos:
+        print(&quot;No todos yet - add one first&quot;)
+        return
+    for i, t in enumerate(todos, start=1):
+        mark = &quot;[x]&quot; if t[&quot;done&quot;] else &quot;[ ]&quot;
+        print(f&quot;{i}. {mark} {t[&#x27;item&#x27;]}&quot;)
+
+
+@app.command()
+def done(index: int):
+    &quot;&quot;&quot;Mark todo number index as done.&quot;&quot;&quot;
+    todos = load_todos()
+    if index &lt; 1 or index &gt; len(todos):
+        print(f&quot;The number must be between 1 and {len(todos)}&quot;)
+        raise typer.Exit(code=1)
+    todos[index - 1][&quot;done&quot;] = True
+    save_todos(todos)
+    print(f&quot;Done: {todos[index - 1][&#x27;item&#x27;]}&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    app()</code></pre></div>
+<p>Notice a few details –</p>
+<ul>
+<li><code>list</code> is a Python built-in function, so it's better not to use it as a function name. The function is called <code>list_todos</code>, but <code>@app.command(name="list")</code> registers it as the <code>list</code> command</li>
+<li><code>Path.home() / ".todo-cli.json"</code> uses <code>pathlib</code>, which is much more elegant than <code>os.path.join</code> (see the <code>python18</code> chapter)</li>
+<li><code>typer.Exit(code=1)</code> raises a special exception that makes the CLI exit with a non-zero exit code, so scripts can tell whether it succeeded</li>
+<li>The file uses <code>encoding="utf-8"</code>, so non-English text works on Windows too</li>
+</ul>
+<h4>Step 3: Configure pyproject.toml</h4>
+<p>The complete <code>pyproject.toml</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">[project]
+name = &quot;todo-cli&quot;
+version = &quot;0.1.0&quot;
+description = &quot;A tiny todo command-line tool by Two Drops&quot;
+readme = &quot;README.md&quot;
+requires-python = &quot;&gt;=3.10&quot;
+authors = [
+    { name = &quot;Two Drops&quot;, email = &quot;liangdianshui@example.com&quot; },
+]
+license = { file = &quot;LICENSE&quot; }
+dependencies = [
+    &quot;typer&gt;=0.12&quot;,
+]
+
+[project.scripts]
+todo-cli = &quot;todo_cli.cli:app&quot;
+
+[build-system]
+requires = [&quot;hatchling&quot;]
+build-backend = &quot;hatchling.build&quot;</code></pre></div>
+<p>Notice the <code>[project.scripts]</code> line – after you publish, when users <code>pip install todo-cli</code>, they automatically get a new command called <code>todo-cli</code>.</p>
+<h4>Step 4: Install it locally and try it</h4>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv pip install -e .
+todo-cli add &quot;Finish python27&quot;
+todo-cli add &quot;Go and eat&quot;
+todo-cli list
+todo-cli done 1
+todo-cli list</code></pre></div>
+<p>The output is roughly –</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">Added: Finish python27
+Added: Go and eat
+1. [ ] Finish python27
+2. [ ] Go and eat
+Done: Finish python27
+1. [x] Finish python27
+2. [ ] Go and eat</code></pre></div>
+<p>Open <code>~/.todo-cli.json</code> and have a look:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">JSON</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-json">[
+  {
+    &quot;item&quot;: &quot;Finish python27&quot;,
+    &quot;done&quot;: true
+  },
+  {
+    &quot;item&quot;: &quot;Go and eat&quot;,
+    &quot;done&quot;: false
+  }
+]</code></pre></div>
+<p>The data is saved, so even after restarting your computer, the todos are still there.</p>
+<h4>Step 5: Add a README and LICENSE</h4>
+<p><code>README.md</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Markdown</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-markdown"># todo-cli
+
+A tiny todo command-line tool by Two Drops.
+
+## Install
+
+```bash
+pip install todo-cli</code></pre></div>
+<h3>Usage</h3>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">todo-cli add &quot;Learn typer&quot;
+todo-cli list
+todo-cli done 1</code></pre></div>
+<h3>License</h3>
+<p>MIT</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">
+For the `LICENSE` file, just copy the MIT licence and change the year and name to your own.
+
+### Step 6: Build and publish to TestPyPI
+
+```bash
+uv build
+ls dist/</code></pre></div>
+<p>You get –</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">dist/
+├── todo_cli-0.1.0-py3-none-any.whl
+└── todo_cli-0.1.0.tar.gz</code></pre></div>
+<p>Practise on TestPyPI:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">export UV_PUBLISH_TOKEN=pypi-...   # (your TestPyPI token)
+uv publish --publish-url https://test.pypi.org/legacy/</code></pre></div>
+<p>After it succeeds, test it on a clean computer (or in a new virtual environment):</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv venv .test-env
+source .test-env/bin/activate
+pip install --index-url https://test.pypi.org/simple/ \
+    --extra-index-url https://pypi.org/simple/ \
+    todo-cli
+todo-cli --help</code></pre></div>
+<p>If it works, publish to the real PyPI:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">export UV_PUBLISH_TOKEN=pypi-...   # (your real PyPI token)
+uv publish</code></pre></div>
+<p>Open <code>https://pypi.org/project/todo-cli/</code>, and your little tool is live. Brother Shui gets a bit excited again writing this – that's the feeling of "anyone in the world can use it with one line, <code>pip install todo-cli</code>".</p>
+<p>"Is this name unique on PyPI?" If the name is too common, it's very likely already taken on PyPI. When you really publish, choose a more unusual name, like <code>todo-cli-by-walter</code> or <code>my-todo-cli</code>.</p>
+<p>That's the whole process, start to finish – writing code, editing <code>pyproject.toml</code>, installing locally, testing locally, practising on TestPyPI, and publishing to the real PyPI.</p></article></section><section id="step-24" class="step-card read" data-kind="step" aria-label="Teaching step 25">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 25 / 26</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Summary</h3>
+<p>In this chapter, we've conquered two things – "packaging and publishing" and "writing CLIs". Let's review the key points –</p>
+<p><strong>About PyPI</strong>:</p>
+<ol>
+<li><strong>PyPI is Python's global public package repository</strong> – where <code>pip install</code> gets things from</li>
+<li><strong>TestPyPI is the practice ground</strong> – try a release there first, because PyPI versions can't be taken back</li>
+<li><strong>Modern Python projects use <code>src layout</code> + <code>pyproject.toml</code></strong>, with all the metadata in one file</li>
+<li><strong>The minimum fields in the <code>[project]</code> section</strong>: name, version, description, readme, requires-python, dependencies</li>
+<li><strong>The <code>[build-system]</code> section names the packaging back end</strong> – <code>hatchling</code> is the first choice for new projects</li>
+<li><strong>One <code>uv build</code> command packages the project</strong>, producing a <code>wheel</code> (ready-built) and an <code>sdist</code> (source)</li>
+<li><strong>One <code>uv publish</code> command uploads it</strong>, using a token or trusted publishing</li>
+<li><strong>Automate version numbers</strong> – use <code>hatch-vcs</code> to work them out from git tags</li>
+<li><strong>For automatic publishing in CI, use trusted publishing</strong> – cleaner than tokens: add a tag, publish a release</li>
+</ol>
+<p><strong>About typer</strong>:</p>
+<ol start="10">
+<li><strong><code>typer</code> uses type hints directly as CLI parameters</strong> – 10 times simpler than <code>argparse</code></li>
+<li><strong><code>typer.run(func)</code> suits single-command tools</strong>; <code>Typer()</code> + <code>@app.command()</code> suits multi-command tools</li>
+<li><strong>Types are validation</strong> – <code>int</code> is checked automatically, <code>Path</code> is wrapped automatically, <code>Enum</code> limits the values automatically</li>
+<li><strong>No default value = positional argument (required); a default value = option (optional)</strong></li>
+<li><strong><code>[project.scripts]</code> turns a function into a system command</strong>, available everywhere once the package is installed</li>
+<li><strong>Docstrings automatically become command help text</strong> – writing code is writing documentation</li>
+</ol>
+<p>Now you have a complete chain: "write a tool → package it → publish it → let the whole world use it". Next time you want to share a little tool with a friend, don't send <code>tool.py</code> in a chat message – just say "<code>pip install xxx</code>". Very cool.</p>
+<p>Here's some homework for you – take a Python script you use every day (renaming screenshots, counting chat messages, anything), rework it following this chapter, and practise publishing it to TestPyPI once. Even if you don't publish it to the real PyPI, going through the process once makes it muscle memory next time.</p>
+<p>Let's go.</p></article></section><section id="step-25" class="step-card read" data-kind="step" aria-label="Teaching step 26">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 26 / 26</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>First, make the rules for using your local command clear</h3>
+<p>When learning about packaging and publishing, let's first use the study-time tracker to check a smaller goal: when someone gets your code, can they tell how to run it, what to give as arguments, and what happens when something fails?</p>
+<p>In the project folder, run:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">python3 tracker.py --help
+python3 tracker.py --file practice-records.json list
+python3 tracker.py --file practice-records.json total --subject Python</code></pre></div>
+<p>For a records file that doesn't exist yet, it should show "No records yet", and the total time for the chosen subject is <code>0</code>. These two queries don't create a data file just to show an empty result. Next, add a few records as in the last chapter, and check that the help, list, totals and tests all agree.</p>
+<p>This reference tool uses the standard library's <code>argparse</code>, to keep the entry point separate from the core functions. You can practise typer and the packaging steps once the local features are clear – there's no need to upload a package just to check the entry point.</p>
+<p>Write the shortest possible usage guide for your tool: which Python it needs, which folder to run it from, where records are saved, and how it reports damaged data. Once the local features work, practise packaging and installing with this chapter's TestPyPI steps, and check whether someone else can use it by following your guide.</p></article></section><section id="lesson-end" aria-label="Chapter summary"><nav aria-label="Chapter navigation" class="chapter-nav"><div class="cn-grid"><a class="chap-nav prev focus-ring" href="/lessons/python26/logging/read/"><span class="cn-label">← Previous chapter</span><span class="cn-title">26 · Logging</span></a><div class="cn-mid"><span>Publishing to PyPI</span></div><a class="chap-nav next focus-ring" href="/lessons/python28/whats-next/read/"><span class="cn-label">Next chapter →</span><span class="cn-title">28 · After you finish</span></a></div></nav></section></article></div>
+    <aside class="lesson-sidebar right" aria-label="This chapter"><nav aria-label="This chapter's contents"><div class="side-label up">In this chapter</div><p class="toc-chapter">Publishing to PyPI</p><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Publishing to PyPI + typer: let the whole world use your tool with one pip install</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">What is PyPI?</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">First, get the project structure right</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">The required fields in pyproject.toml</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">build-backend: who does the packaging?</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">Building locally: one uv build command</span></a></li><li class="toc-li" data-target="step-6"><a href="#step-6" class="toc-link focus-ring"><span class="toc-kind">Teaching 07</span><span class="toc-title">Registering a TestPyPI account</span></a></li><li class="toc-li" data-target="step-7"><a href="#step-7" class="toc-link focus-ring"><span class="toc-kind">Teaching 08</span><span class="toc-title">Practising by uploading to TestPyPI</span></a></li><li class="toc-li" data-target="step-8"><a href="#step-8" class="toc-link focus-ring"><span class="toc-kind">Teaching 09</span><span class="toc-title">Uploading to the real PyPI</span></a></li><li class="toc-li" data-target="step-9"><a href="#step-9" class="toc-link focus-ring"><span class="toc-kind">Teaching 10</span><span class="toc-title">Managing version numbers: by hand vs automatically</span></a></li><li class="toc-li" data-target="step-10"><a href="#step-10" class="toc-link focus-ring"><span class="toc-kind">Teaching 11</span><span class="toc-title">README and LICENSE: the minimum for looking &quot;proper&quot;</span></a></li><li class="toc-li" data-target="step-11"><a href="#step-11" class="toc-link focus-ring"><span class="toc-kind">Teaching 12</span><span class="toc-title">Publishing automatically with CI: add a tag, publish a release</span></a></li><li class="toc-li" data-target="step-12"><a href="#step-12" class="toc-link focus-ring"><span class="toc-kind">Teaching 13</span><span class="toc-title">The pain of CLIs: argparse is too wordy</span></a></li><li class="toc-li" data-target="step-13"><a href="#step-13" class="toc-link focus-ring"><span class="toc-kind">Teaching 14</span><span class="toc-title">Your first typer program</span></a></li><li class="toc-li" data-target="step-14"><a href="#step-14" class="toc-link focus-ring"><span class="toc-kind">Teaching 15</span><span class="toc-title">An app with several commands</span></a></li><li class="toc-li" data-target="step-15"><a href="#step-15" class="toc-link focus-ring"><span class="toc-kind">Teaching 16</span><span class="toc-title">Type hints = CLI parameters</span></a></li><li class="toc-li" data-target="step-16"><a href="#step-16" class="toc-link focus-ring"><span class="toc-kind">Teaching 17</span><span class="toc-title">Optional parameters: the magic of default values</span></a></li><li class="toc-li" data-target="step-17"><a href="#step-17" class="toc-link focus-ring"><span class="toc-kind">Teaching 18</span><span class="toc-title">Required vs optional parameters: the one-sentence rule</span></a></li><li class="toc-li" data-target="step-18"><a href="#step-18" class="toc-link focus-ring"><span class="toc-kind">Teaching 19</span><span class="toc-title">Asking the user: prompt and confirm</span></a></li><li class="toc-li" data-target="step-19"><a href="#step-19" class="toc-link focus-ring"><span class="toc-kind">Teaching 20</span><span class="toc-title">Exiting with an error: typer.Exit and typer.Abort</span></a></li><li class="toc-li" data-target="step-20"><a href="#step-20" class="toc-link focus-ring"><span class="toc-kind">Teaching 21</span><span class="toc-title">Coloured output: echo and secho</span></a></li><li class="toc-li" data-target="step-21"><a href="#step-21" class="toc-link focus-ring"><span class="toc-kind">Teaching 22</span><span class="toc-title">Nested subcommands: app.add_typer</span></a></li><li class="toc-li" data-target="step-22"><a href="#step-22" class="toc-link focus-ring"><span class="toc-kind">Teaching 23</span><span class="toc-title">Turning it into a system command: [project.scripts]</span></a></li><li class="toc-li" data-target="step-23"><a href="#step-23" class="toc-link focus-ring"><span class="toc-kind">Teaching 24</span><span class="toc-title">Hands-on: todo-cli from zero to published</span></a></li><li class="toc-li" data-target="step-24"><a href="#step-24" class="toc-link focus-ring"><span class="toc-kind">Teaching 25</span><span class="toc-title">Summary</span></a></li><li class="toc-li" data-target="step-25"><a href="#step-25" class="toc-link focus-ring"><span class="toc-kind">Teaching 26</span><span class="toc-title">First, make the rules for using your local command clear</span></a></li></ol></nav></aside>
+  </div>
+  <dialog class="dir-dialog" aria-labelledby="dir-title"><div class="dd-inner"><div class="dd-head"><h2 id="dir-title">Contents</h2><button type="button" class="dd-close focus-ring">Close</button></div>
+  <div class="dd-tabs" aria-label="Contents scope"><button type="button" class="dd-tab focus-ring" data-tab="all" aria-pressed="true">All lessons</button><button type="button" class="dd-tab focus-ring" data-tab="chapter" aria-pressed="false">This chapter</button></div>
+  <div class="dd-body"><div class="dd-pane" data-pane="all"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/read/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/read/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/read/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/read/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/read/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/read/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/read/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/read/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/read/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/read/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/read/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/read/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/read/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/read/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/read/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/read/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/read/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/read/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/read/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/read/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/read/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/read/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/read/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/read/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/read/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/read/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/read/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python27/pypi/read/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/read/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></div><div class="dd-pane" data-pane="chapter" hidden><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">Publishing to PyPI + typer: let the whole world use your tool with one pip install</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">What is PyPI?</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">First, get the project structure right</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">The required fields in pyproject.toml</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">build-backend: who does the packaging?</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">Building locally: one uv build command</span></a></li><li class="toc-li" data-target="step-6"><a href="#step-6" class="toc-link focus-ring"><span class="toc-kind">Teaching 07</span><span class="toc-title">Registering a TestPyPI account</span></a></li><li class="toc-li" data-target="step-7"><a href="#step-7" class="toc-link focus-ring"><span class="toc-kind">Teaching 08</span><span class="toc-title">Practising by uploading to TestPyPI</span></a></li><li class="toc-li" data-target="step-8"><a href="#step-8" class="toc-link focus-ring"><span class="toc-kind">Teaching 09</span><span class="toc-title">Uploading to the real PyPI</span></a></li><li class="toc-li" data-target="step-9"><a href="#step-9" class="toc-link focus-ring"><span class="toc-kind">Teaching 10</span><span class="toc-title">Managing version numbers: by hand vs automatically</span></a></li><li class="toc-li" data-target="step-10"><a href="#step-10" class="toc-link focus-ring"><span class="toc-kind">Teaching 11</span><span class="toc-title">README and LICENSE: the minimum for looking &quot;proper&quot;</span></a></li><li class="toc-li" data-target="step-11"><a href="#step-11" class="toc-link focus-ring"><span class="toc-kind">Teaching 12</span><span class="toc-title">Publishing automatically with CI: add a tag, publish a release</span></a></li><li class="toc-li" data-target="step-12"><a href="#step-12" class="toc-link focus-ring"><span class="toc-kind">Teaching 13</span><span class="toc-title">The pain of CLIs: argparse is too wordy</span></a></li><li class="toc-li" data-target="step-13"><a href="#step-13" class="toc-link focus-ring"><span class="toc-kind">Teaching 14</span><span class="toc-title">Your first typer program</span></a></li><li class="toc-li" data-target="step-14"><a href="#step-14" class="toc-link focus-ring"><span class="toc-kind">Teaching 15</span><span class="toc-title">An app with several commands</span></a></li><li class="toc-li" data-target="step-15"><a href="#step-15" class="toc-link focus-ring"><span class="toc-kind">Teaching 16</span><span class="toc-title">Type hints = CLI parameters</span></a></li><li class="toc-li" data-target="step-16"><a href="#step-16" class="toc-link focus-ring"><span class="toc-kind">Teaching 17</span><span class="toc-title">Optional parameters: the magic of default values</span></a></li><li class="toc-li" data-target="step-17"><a href="#step-17" class="toc-link focus-ring"><span class="toc-kind">Teaching 18</span><span class="toc-title">Required vs optional parameters: the one-sentence rule</span></a></li><li class="toc-li" data-target="step-18"><a href="#step-18" class="toc-link focus-ring"><span class="toc-kind">Teaching 19</span><span class="toc-title">Asking the user: prompt and confirm</span></a></li><li class="toc-li" data-target="step-19"><a href="#step-19" class="toc-link focus-ring"><span class="toc-kind">Teaching 20</span><span class="toc-title">Exiting with an error: typer.Exit and typer.Abort</span></a></li><li class="toc-li" data-target="step-20"><a href="#step-20" class="toc-link focus-ring"><span class="toc-kind">Teaching 21</span><span class="toc-title">Coloured output: echo and secho</span></a></li><li class="toc-li" data-target="step-21"><a href="#step-21" class="toc-link focus-ring"><span class="toc-kind">Teaching 22</span><span class="toc-title">Nested subcommands: app.add_typer</span></a></li><li class="toc-li" data-target="step-22"><a href="#step-22" class="toc-link focus-ring"><span class="toc-kind">Teaching 23</span><span class="toc-title">Turning it into a system command: [project.scripts]</span></a></li><li class="toc-li" data-target="step-23"><a href="#step-23" class="toc-link focus-ring"><span class="toc-kind">Teaching 24</span><span class="toc-title">Hands-on: todo-cli from zero to published</span></a></li><li class="toc-li" data-target="step-24"><a href="#step-24" class="toc-link focus-ring"><span class="toc-kind">Teaching 25</span><span class="toc-title">Summary</span></a></li><li class="toc-li" data-target="step-25"><a href="#step-25" class="toc-link focus-ring"><span class="toc-kind">Teaching 26</span><span class="toc-title">First, make the rules for using your local command clear</span></a></li></ol></div></div></div></dialog>
+  <div class="py-toast" hidden><span class="spinner"></span><span class="py-toast-text">Loading Python…</span></div>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>© 2026 Python for Beginners · English edition of the <a href="https://github.com/walter201230/Python">walter201230/Python</a> tutorial (CC BY 4.0)</span>
+    <div class="footer-links"><a href="/">Course list</a><a href="/about/">About this site</a><a href="https://github.com/walter201230/Python">GitHub</a></div>
+  </div>
+</footer>
+<script src="/assets/site.js?v=20261028"></script>
+</body>
+</html>

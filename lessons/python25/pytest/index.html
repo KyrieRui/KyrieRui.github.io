@@ -1,0 +1,1058 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>pytest: the testing framework – Python for Beginners</title>
+<meta name="description" content="The industry standard: fixtures, parametrize, markers, coverage – tests can be elegant too.">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css?v=20261028">
+
+</head>
+<body data-page="lesson" data-lesson="python25" data-total="0">
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="/" aria-label="Python for Beginners – home"><span class="gradient-text-flow" data-text="Python for Beginners">Python for Beginners</span></a>
+    <nav class="header-nav">
+      <a class="nav-link" href="/about/">About</a>
+      <a class="nav-icon focus-ring" href="https://github.com/walter201230/Python" aria-label="Original tutorial on GitHub" title="Original tutorial on GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+      <button type="button" class="theme-toggle focus-ring" aria-label="Switch theme"><span class="knob"><svg class="ic-moon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button>
+    </nav>
+  </div>
+</header>
+<main class="site-main">
+<div class="lesson-shell bg-tech-grid">
+  <div class="mobile-bar"><div class="mb-inner"><button type="button" class="dir-btn focus-ring" aria-haspopup="dialog">Contents</button></div></div>
+  <div class="lesson-columns">
+    <aside class="lesson-sidebar left" aria-label="All lessons"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></aside>
+    <div class="lesson-main"><article class="lesson-article"><header class="lesson-head"><h1>pytest: the testing framework</h1><p class="lh-sub">Concept reading · about <span class="accent">55</span> min</p>
+<p class="lh-link"><a class="subtle-link focus-ring" href="/lessons/python25/pytest/read/">Read the whole chapter →</a></p></header><section id="step-0" class="step-card item" data-kind="step" aria-label="Teaching step 1">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 01 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>pytest: the testing framework that runs 100 test cases in 30 seconds</h2>
+<p>When you write code, do questions like these often bother you?</p>
+<p>"I just changed one line of this function – will it break something somewhere else?"</p>
+<p>"The boss wants a new feature, but I'm scared to touch this mess of code. What if I break it and the live app crashes?"</p>
+<p>"A teammate sent me a pull request. It looks fine, but I'm not confident."</p>
+<p>Experienced programmers know this fear of "not daring to touch the code". The first time Brother Shui maintained an old 3,000-line project, every single line he changed made him nervous, because there were no tests – nobody knew whether a change would break something. In the end, he could only click through a few pages by hand and build a few requests to check, spending ten minutes before daring to commit. Painfully slow.</p>
+<p>"Is my change OK?" The answer to this question is always: <strong>run the tests and find out.</strong></p>
+<p>So how much trouble is writing tests? Lots of people get a headache when they hear "write tests" – it sounds like extra work. But in the Python world, there's a tool that runs 100 test cases in 30 seconds, where a test takes just three lines of code. It's <code>pytest</code>.</p>
+<p><code>pytest</code> is the standard for testing in Python. <code>Django</code>, <code>FastAPI</code>, <code>Pandas</code>, <code>NumPy</code>, <code>SQLAlchemy</code>, <code>Pydantic</code>, <code>Requests</code>, <code>httpx</code> – almost every Python project you can name uses it to run tests. It has 12k+ stars on GitHub and hundreds of millions of downloads a month on PyPI.</p>
+<p>In this chapter, we'll take <code>pytest</code> from zero to ready-to-use. After it, you should be able to:</p>
+<ol>
+<li>Write your first <code>pytest</code> test, run it, and see a green PASS</li>
+<li>Understand what the <code>tests/</code> folder is doing in other people's projects</li>
+<li>Use core tools like <code>fixture</code>, parametrisation, <code>tmp_path</code> and <code>monkeypatch</code> to write tests that are short and strong</li>
+<li>Add coverage to your project, so you know which lines haven't been tested yet</li>
+<li>Connect tests to <code>CI</code>, so they run automatically when you submit a pull request</li>
+</ol>
+<p>Let's go.</p></article></section><section id="step-1" class="step-card item" data-kind="step" aria-label="Teaching step 2">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 02 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Your first test</h3>
+<p>Let's feel how simple <code>pytest</code> is. Make a new folder:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">mkdir test-demo
+cd test-demo
+uv init
+uv add --dev pytest</code></pre></div>
+<p>Write a perfectly ordinary Python file, <code>mymath.py</code>:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def add(a, b):
+    return a + b
+
+
+def divide(a, b):
+    if b == 0:
+        raise ValueError(&quot;Cannot divide by 0&quot;)
+    return a / b</code></pre></div>
+<p>Then write a test file, <code>test_mymath.py</code>:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from mymath import add, divide
+
+
+def test_add():
+    assert add(2, 3) == 5
+
+
+def test_add_negative():
+    assert add(-1, 1) == 0
+
+
+def test_divide():
+    assert divide(10, 2) == 5</code></pre></div>
+<p>Notice three details: the file name starts with <code>test_</code>, the function names start with <code>test_</code>, and checks use Python's built-in <code>assert</code> keyword. That's all.</p>
+<p>Run it:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv run pytest</code></pre></div>
+<p>The output looks roughly like this:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">============================= test session starts ==============================
+platform darwin -- Python 3.13.1, pytest-8.3.4, pluggy-1.5.0
+rootdir: /Users/walter/test-demo
+collected 3 items
+
+test_mymath.py ...                                                       [100%]
+
+============================== 3 passed in 0.01s ===============================</code></pre></div>
+<p>The three green dots <code>...</code> mean all three tests passed. Done in 0.01 seconds.</p>
+<p>Simpler than you expected, right?</p>
+<p>Now deliberately break the <code>add</code> function – say, change it to <code>return a + b + 1</code> – and run it again:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">test_mymath.py FF.                                                       [100%]
+
+=================================== FAILURES ===================================
+___________________________________ test_add ___________________________________
+
+    def test_add():
+&gt;       assert add(2, 3) == 5
+E       assert 6 == 5
+E        +  where 6 = add(2, 3)
+
+test_mymath.py:4: AssertionError</code></pre></div>
+<p><code>pytest</code> tells you straight away: which line's assert failed, that the left side is <code>6</code> and the right side is <code>5</code>, and where the <code>6</code> came from (worked out by <code>add(2, 3)</code>). Clear at a glance. This is <code>pytest</code>'s "assert rewriting" magic – we'll look at it properly later.</p></article></section><section id="step-2" class="step-card item" data-kind="step" aria-label="Teaching step 3">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 03 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>pytest vs unittest – why choose pytest?</h3>
+<p>You might ask: "Doesn't Python already come with the <code>unittest</code> standard library? Why install <code>pytest</code>?"</p>
+<p>Good question. Let's compare the same test written both ways.</p>
+<p>The <code>unittest</code> way:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import unittest
+
+
+class TestMyMath(unittest.TestCase):
+    def test_add(self):
+        self.assertEqual(add(2, 3), 5)
+
+    def test_divide(self):
+        self.assertEqual(divide(10, 2), 5)
+
+
+if __name__ == &quot;__main__&quot;:
+    unittest.main()</code></pre></div>
+<p>The <code>pytest</code> way:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def test_add():
+    assert add(2, 3) == 5
+
+
+def test_divide():
+    assert divide(10, 2) == 5</code></pre></div>
+<p>What's the difference?</p>
+<ol>
+<li><strong>No need to inherit from <code>TestCase</code>.</strong> <code>pytest</code> uses normal functions – one less layer of class</li>
+<li><strong>No need to remember lots of assert method names.</strong> <code>unittest</code> has <code>assertEqual</code>, <code>assertNotEqual</code>, <code>assertTrue</code>, <code>assertFalse</code>, <code>assertIn</code>, <code>assertIsInstance</code>, <code>assertGreater</code>, <code>assertRaises</code>… dozens of methods to remember. <code>pytest</code> just uses one <code>assert</code></li>
+<li><strong>No need to write <code>__main__</code>.</strong> Just run the <code>pytest</code> command</li>
+</ol>
+<p>The <code>unittest</code> style was actually copied from Java's <code>JUnit</code> – the "class + methods" approach comes from OOP thinking. In a dynamic language like Python, things you can do with normal functions don't need to be that heavy. So after 2010, the Python world gradually moved completely over to <code>pytest</code>.</p>
+<p>Can you still use <code>unittest</code>? Yes. <code>pytest</code> is <strong>backwards-compatible</strong> with <code>unittest</code> – it can run your <code>unittest</code> test cases directly. So moving an old project from <code>unittest</code> is smooth – don't change a single line of code, just switch the command from <code>python -m unittest</code> to <code>pytest</code>. For new projects, I suggest using the <code>pytest</code> style throughout.</p>
+<p>Remember this: <strong>if anyone in the Python world still recommends <code>unittest</code> for a new project today, their information is either ten years old or they haven't kept up.</strong> Just use <code>pytest</code>.</p></article></section><section id="step-3" class="step-card item" data-kind="step" aria-label="Teaching step 4">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 04 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Assert rewriting – the most magical part of pytest</h3>
+<p>We just saw that <code>pytest</code>'s failure messages are really detailed:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">&gt;       assert add(2, 3) == 5
+E       assert 6 == 5
+E        +  where 6 = add(2, 3)</code></pre></div>
+<p>Normally, <code>assert</code> is quite "weak" – when it fails, it just raises <code>AssertionError</code> with no hints at all. Python's built-in <code>assert</code> looks like this when it fails:</p>
+<div class="cb not-prose" data-mode="output"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Output</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">&gt;&gt;&gt; x = 6
+&gt;&gt;&gt; assert x == 5
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+AssertionError</code></pre></div>
+<p>It only tells you "the assert failed". What was on the left and the right? No idea.</p>
+<p>So how does <code>pytest</code> get all that information?</p>
+<p>The answer is <strong>assertion rewriting</strong>. Before <code>pytest</code> loads a test file, it <strong>rewrites</strong> the <code>assert</code> statements in the code – turning a simple <code>assert a == b</code> into "first work out <code>a</code> and <code>b</code> and save them, and if the assert fails, print them". You don't need to write any extra code – it works out of the box.</p>
+<p>More complicated asserts give detailed information too:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def test_list_equal():
+    a = [1, 2, 3, 4, 5]
+    b = [1, 2, 3, 4, 6]
+    assert a == b</code></pre></div>
+<p>Run it, and <code>pytest</code> outputs:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">&gt;       assert a == b
+E       assert [1, 2, 3, 4, 5] == [1, 2, 3, 4, 6]
+E         At index 4 diff: 5 != 6</code></pre></div>
+<p>It even tells you "at position 4, 5 is different from 6". Dictionaries, strings and sets all get a similar "smart diff".</p>
+<p>Don't you think this is even friendlier than <code>unittest.TestCase.assertEqual</code>? Exactly – years ago, <code>unittest</code>-style tools liked methods like <code>assertEqual</code> precisely because "a bare <code>assert</code> gives too little information". <code>pytest</code> solved this problem completely using metaprogramming.</p>
+<p>So the <code>pytest</code> world's recommendation is just one sentence: <strong>use <code>assert</code> for every check – never <code>assertXXX</code>.</strong></p>
+<p>Let's look at some common asserts:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python"># Equal
+assert x == 5
+assert name == &quot;Two Drops&quot;
+
+# Not equal
+assert x != 0
+
+# Contains
+assert &quot;Python&quot; in &quot;I love Python&quot;
+assert 3 in [1, 2, 3]
+
+# True/False
+assert is_valid is True
+assert result is None
+
+# Size of numbers
+assert age &gt;= 18
+assert 0 &lt; score &lt; 100
+
+# Type
+assert isinstance(x, int)</code></pre></div>
+<p>The key is "write ordinary Python expressions". Use <code>==</code> where you can use <code>==</code>, use <code>in</code> where you can use <code>in</code> – no special assert functions to remember. This is the nicest thing about writing <code>pytest</code> tests.</p></article></section><section id="step-4" class="step-card item" data-kind="step" aria-label="Teaching step 5">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 05 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Test discovery – how pytest finds your tests</h3>
+<p>Did you notice something just now? When we ran the <code>pytest</code> command, we <strong>didn't say which file to run</strong>, but it found <code>test_mymath.py</code> automatically. How?</p>
+<p><code>pytest</code> has default <strong>test discovery</strong> rules. Starting from the current folder, it scans all folders recursively, looking for things that match these rules:</p>
+<ol>
+<li><strong>Test files</strong>: <code>test_*.py</code> or <code>*_test.py</code></li>
+<li><strong>Test classes</strong>: classes starting with <code>Test</code> (that have no <code>__init__</code> method)</li>
+<li><strong>Test functions</strong>: functions or methods starting with <code>test_</code></li>
+</ol>
+<p>Some examples:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">my-project/
+├── src/
+│   └── mymath.py
+└── tests/
+    ├── test_mymath.py        # Found automatically ✓
+    ├── test_helper.py        # Found automatically ✓
+    ├── helper_test.py        # Found automatically ✓
+    └── notes.py              # Not recognised ✗</code></pre></div>
+<p>Inside a test file:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def test_add():           # Found automatically ✓
+    pass
+
+
+def helper():             # Not recognised ✗
+    pass
+
+
+class TestUser:           # Found automatically ✓
+    def test_create(self):    # Found automatically ✓
+        pass
+
+    def helper(self):     # Not recognised ✗
+        pass
+
+
+class UserTest:           # Not recognised ✗ (doesn&#x27;t start with Test)
+    pass</code></pre></div>
+<p>When writing tests, the usual folder structure is:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">my-project/
+├── pyproject.toml
+├── src/
+│   └── mypackage/
+│       ├── __init__.py
+│       ├── core.py
+│       └── utils.py
+└── tests/
+    ├── test_core.py
+    └── test_utils.py</code></pre></div>
+<p>Source code goes in <code>src/</code>, tests go in <code>tests/</code>, and <strong>each test file matches the file it tests</strong>. <code>core.py</code> goes with <code>test_core.py</code>, <code>utils.py</code> goes with <code>test_utils.py</code>. That way, when a newcomer sees <code>core.py</code> and wants to find its tests, they find them at a glance.</p>
+<p>How do you use the <code>pytest</code> command? Some common ways:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash"># Run all tests
+pytest
+
+# Run only one file
+pytest tests/test_core.py
+
+# Run only one test function
+pytest tests/test_core.py::test_add
+
+# Run only one method of one class
+pytest tests/test_core.py::TestUser::test_create
+
+# Filter by keyword (function name contains a word)
+pytest -k &quot;add&quot;
+pytest -k &quot;add or divide&quot;
+pytest -k &quot;not slow&quot;
+
+# Show more detailed output
+pytest -v
+
+# Stop at the first failure
+pytest -x
+
+# Show print output (pytest captures it by default)
+pytest -s</code></pre></div>
+<p><code>-v</code> lists the name of every test, with PASSED for the ones that pass:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">test_mymath.py::test_add PASSED
+test_mymath.py::test_add_negative PASSED
+test_mymath.py::test_divide PASSED</code></pre></div>
+<p><code>-x</code> is really useful when debugging – if a pile of tests are all failing, rather than running them all and then looking, stop at the first failure and look at that.</p>
+<p><code>-s</code> lets <code>print</code> output go straight to the terminal, handy for temporarily printing variable values.</p></article></section><section id="step-5" class="step-card item" data-kind="step" aria-label="Teaching step 6">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 06 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>fixture – dependency injection for tests</h3>
+<p>Once you've written lots of tests, you'll notice a problem: <strong>many tests need some "preparation work"</strong>.</p>
+<p>For example:</p>
+<ul>
+<li>To test database features, every test first needs a temporary database connection</li>
+<li>To test an API, every test first needs to start an HTTP client</li>
+<li>To test file operations, every test first needs a temporary folder</li>
+</ul>
+<p>If you write it the "simplest" way:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def test_user_create():
+    db = create_test_db()
+    db.connect()
+    try:
+        user = User(name=&quot;walter&quot;)
+        db.save(user)
+        assert db.get_user(&quot;walter&quot;).name == &quot;walter&quot;
+    finally:
+        db.close()
+
+
+def test_user_delete():
+    db = create_test_db()
+    db.connect()
+    try:
+        user = User(name=&quot;walter&quot;)
+        db.save(user)
+        db.delete_user(&quot;walter&quot;)
+        assert db.get_user(&quot;walter&quot;) is None
+    finally:
+        db.close()</code></pre></div>
+<p>Every test repeats "create the database → connect → close it in finally". Ugly.</p>
+<p><code>pytest</code>'s solution is called a <strong>fixture</strong>. It pulls the "preparation work" out into a function with the <code>@pytest.fixture</code> decorator:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import pytest
+
+
+@pytest.fixture
+def db():
+    &quot;&quot;&quot;Provide a clean test database connection.&quot;&quot;&quot;
+    conn = create_test_db()
+    conn.connect()
+    yield conn         # Hand conn to the test function
+    conn.close()       # Clean up after the test finishes
+
+
+def test_user_create(db):
+    user = User(name=&quot;walter&quot;)
+    db.save(user)
+    assert db.get_user(&quot;walter&quot;).name == &quot;walter&quot;
+
+
+def test_user_delete(db):
+    user = User(name=&quot;walter&quot;)
+    db.save(user)
+    db.delete_user(&quot;walter&quot;)
+    assert db.get_user(&quot;walter&quot;) is None</code></pre></div>
+<p>Do you see the trick?</p>
+<ol>
+<li>Write a <code>db</code> fixture that <code>yield</code>s a connection object</li>
+<li>The test function <strong>lists <code>db</code> as a parameter</strong>, and <code>pytest</code> automatically passes in the value the fixture worked out</li>
+<li>After the test finishes, the clean-up code after <code>yield</code> runs automatically</li>
+</ol>
+<p>A bit like "dependency injection" in Spring/Django, isn't it? Whatever you need, write it as a parameter name, and <code>pytest</code> prepares it for you. <strong>The test function only cares about "what am I testing", not "how do I prepare the data"</strong> – the concerns are completely separated.</p>
+<p>How else can you write fixtures? The most common ways:</p>
+<p><strong>Prepare only, no clean-up</strong>: just <code>return</code> – no need for <code>yield</code>.</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">@pytest.fixture
+def sample_user():
+    return User(name=&quot;walter&quot;, age=28)
+
+
+def test_greet(sample_user):
+    assert greet(sample_user) == &quot;Hello, walter!&quot;</code></pre></div>
+<p><strong>Fixtures can depend on each other.</strong> For example, <code>db</code> depends on <code>config</code>:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">@pytest.fixture
+def config():
+    return {&quot;host&quot;: &quot;localhost&quot;, &quot;port&quot;: 5432}
+
+
+@pytest.fixture
+def db(config):                         # Note: a parameter here too
+    conn = connect(config[&quot;host&quot;], config[&quot;port&quot;])
+    yield conn
+    conn.close()
+
+
+def test_query(db):
+    assert db.ping() is True</code></pre></div>
+<p><code>pytest</code> works out the whole chain of dependencies by itself: it runs <code>config</code> first, uses <code>config</code>'s result to call <code>db</code>, and finally feeds <code>db</code> to the test.</p></article></section><section id="step-6" class="step-card item" data-kind="step" aria-label="Teaching step 7">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 07 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>fixture scope – when to create, when to destroy</h3>
+<p>Here's a real problem –</p>
+<p>"I have a fixture that creates a database connection, and creating it takes 1 second. I have 100 tests that use it. If every test creates it again, that's 100 seconds just creating connections. Can I create it once and share it between all the tests?"</p>
+<p><code>pytest</code>'s answer is the fixture's <code>scope</code> parameter. It has four levels:</p>
+<ul>
+<li><code>function</code> (the default): created before each test function, destroyed after it</li>
+<li><code>class</code>: created before each test class, destroyed after it</li>
+<li><code>module</code>: created before each test file (module), destroyed after it</li>
+<li><code>session</code>: created just once for the whole <code>pytest</code> run, from start to finish</li>
+</ul>
+<p>For example, make the database connection <code>session</code>-level:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">@pytest.fixture(scope=&quot;session&quot;)
+def db():
+    conn = create_test_db()
+    conn.connect()
+    yield conn
+    conn.close()</code></pre></div>
+<p>Now however many tests you run, <code>conn</code> is created once and closed once.</p>
+<p>So which scope should you use when? Here's a rule of thumb –</p>
+<ul>
+<li><strong>If tests must be independent of each other</strong> (each test starts from a clean state): use <code>function</code></li>
+<li><strong>If creating it is very costly</strong> (connecting to a database, starting a container, loading a big model): use <code>module</code> or <code>session</code> – but remember to <strong>clean up state by hand</strong> after each test</li>
+</ul>
+<p>Here's a mixed example:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">@pytest.fixture(scope=&quot;session&quot;)
+def db_connection():
+    &quot;&quot;&quot;The whole session shares one connection – creating it once is enough.&quot;&quot;&quot;
+    conn = connect_to_db()
+    yield conn
+    conn.close()
+
+
+@pytest.fixture(scope=&quot;function&quot;)
+def db(db_connection):
+    &quot;&quot;&quot;Each test gets a clean transaction, rolled back afterwards.&quot;&quot;&quot;
+    txn = db_connection.begin_transaction()
+    yield txn
+    txn.rollback()
+
+
+def test_create_user(db):
+    db.execute(&quot;INSERT INTO users ...&quot;)
+    # After the test, the transaction is rolled back automatically, so the next test still sees a clean database</code></pre></div>
+<p>"Shared connection, separate transactions" is a very common pattern in database testing. The <code>session</code>-level connection keeps it fast, and the <code>function</code>-level transaction keeps tests separate.</p></article></section><section id="step-7" class="step-card item" data-kind="step" aria-label="Teaching step 8">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 08 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Built-in fixtures – some life-savers that come with pytest</h3>
+<p>Before writing your own fixtures, know that <code>pytest</code> already comes with dozens of common ones. Here are the most useful.</p>
+<h4>tmp_path – a temporary folder</h4>
+<p>Tests often need to work with files – reading, writing, deleting. If you just create files anywhere on your disk, you'll have rubbish everywhere after testing. If you manage it yourself with <code>tempfile</code>, you need lots of <code>setup/teardown</code> code.</p>
+<p><code>pytest</code>'s <code>tmp_path</code> fixture just gives you a temporary folder, cleaned up automatically after the test.</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def test_write_and_read(tmp_path):
+    file = tmp_path / &quot;hello.txt&quot;
+    file.write_text(&quot;Two Drops&quot;, encoding=&quot;utf-8&quot;)
+
+    assert file.exists()
+    assert file.read_text(encoding=&quot;utf-8&quot;) == &quot;Two Drops&quot;</code></pre></div>
+<p><code>tmp_path</code> is a <code>pathlib.Path</code> object, so you can join paths with <code>/</code>. Remember <code>pathlib</code> from python18? Here it all comes together perfectly.</p>
+<p>Each test gets a <strong>different</strong> <code>tmp_path</code> folder, so they don't interfere with each other. By default, <code>pytest</code> keeps the temporary folders from the last 3 test runs under <code>/tmp/pytest-of-&lt;user&gt;/</code>. If a test fails, you can look in there to see what the files look like – handy for debugging.</p>
+<h4>monkeypatch – temporarily changing the environment</h4>
+<p>Tests often need to "change some global state" – change environment variables, replace a function, change an object's attribute. And after the test, you must change it back, or it affects the next test.</p>
+<p>The <code>monkeypatch</code> fixture does exactly this. It changes things temporarily and restores them automatically after the test.</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def test_with_env(monkeypatch):
+    monkeypatch.setenv(&quot;API_KEY&quot;, &quot;test-key-123&quot;)
+    assert get_api_key() == &quot;test-key-123&quot;
+    # After the test, API_KEY is restored automatically
+
+
+def test_replace_function(monkeypatch):
+    def fake_get_time():
+        return 1700000000
+    monkeypatch.setattr(&quot;mymodule.time.time&quot;, fake_get_time)
+    # After the test, time.time is restored automatically
+
+
+def test_chdir(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
+    # The current folder temporarily changes to tmp_path, and changes back after the test</code></pre></div>
+<p>Common methods:</p>
+<ul>
+<li><code>monkeypatch.setenv(name, value)</code>: set an environment variable</li>
+<li><code>monkeypatch.delenv(name)</code>: delete an environment variable</li>
+<li><code>monkeypatch.setattr(target, value)</code>: replace an object's attribute</li>
+<li><code>monkeypatch.delattr(target)</code>: delete an attribute</li>
+<li><code>monkeypatch.chdir(path)</code>: change the current folder</li>
+</ul>
+<p>When testing code with outside dependencies, <code>monkeypatch</code> is your first choice – no need to really connect to a database or really send HTTP requests. Just fake a return value.</p>
+<h4>capsys – capturing stdout/stderr</h4>
+<p>How do you test that some code <code>print</code>s the right thing? That's what <code>capsys</code> is for.</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def greet(name):
+    print(f&quot;Hello, {name}!&quot;)
+
+
+def test_greet(capsys):
+    greet(&quot;walter&quot;)
+    captured = capsys.readouterr()
+    assert captured.out == &quot;Hello, walter!\n&quot;
+    assert captured.err == &quot;&quot;</code></pre></div>
+<p><code>capsys.readouterr()</code> returns an object where <code>.out</code> is stdout and <code>.err</code> is stderr. After reading, the buffer is emptied, so calling it again gives only new output.</p>
+<p>Similar fixtures:</p>
+<ul>
+<li><code>capfd</code>: captures output at the file descriptor level (including output from C extensions and child processes)</li>
+<li><code>caplog</code>: captures output from the <code>logging</code> module</li>
+</ul>
+<p><code>capsys</code> is the easiest way to test "does this function print correctly?".</p></article></section><section id="step-8" class="step-card item" data-kind="step" aria-label="Teaching step 9">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 09 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Parametrising – running the same test with several sets of data</h3>
+<p>Do you often write tests like this?</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def test_add_positive():
+    assert add(2, 3) == 5
+
+
+def test_add_negative():
+    assert add(-1, -2) == -3
+
+
+def test_add_zero():
+    assert add(0, 0) == 0
+
+
+def test_add_mixed():
+    assert add(-5, 10) == 5</code></pre></div>
+<p>Testing one addition function with four functions whose bodies are almost identical – only the data differs. Repetition, repetition.</p>
+<p><code>pytest</code>'s <strong>parametrisation</strong> (<code>@pytest.mark.parametrize</code>) squeezes them into one:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import pytest
+
+
+@pytest.mark.parametrize(&quot;a, b, expected&quot;, [
+    (2, 3, 5),
+    (-1, -2, -3),
+    (0, 0, 0),
+    (-5, 10, 5),
+])
+def test_add(a, b, expected):
+    assert add(a, b) == expected</code></pre></div>
+<p>When it runs, <code>pytest</code> treats it as 4 separate tests:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">test_mymath.py::test_add[2-3-5] PASSED
+test_mymath.py::test_add[-1--2--3] PASSED
+test_mymath.py::test_add[0-0-0] PASSED
+test_mymath.py::test_add[-5-10-5] PASSED</code></pre></div>
+<p>You can see at a glance which sets passed and which failed.</p>
+<p>Two key points about the parametrise syntax:</p>
+<ol>
+<li>The first argument is a string listing <strong>the parameter names the test function takes</strong>, separated by commas</li>
+<li>The second argument is a list. Each item is one set of test data (in the same order as the names in the first string)</li>
+</ol>
+<p>You can also give each set a name, to make the output easier to read:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">@pytest.mark.parametrize(&quot;a, b, expected&quot;, [
+    pytest.param(2, 3, 5, id=&quot;add-positives&quot;),
+    pytest.param(-1, -2, -3, id=&quot;add-negatives&quot;),
+    pytest.param(0, 0, 0, id=&quot;add-zeros&quot;),
+])
+def test_add(a, b, expected):
+    assert add(a, b) == expected</code></pre></div>
+<p>Run it:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">test_mymath.py::test_add[add-positives] PASSED
+test_mymath.py::test_add[add-negatives] PASSED
+test_mymath.py::test_add[add-zeros] PASSED</code></pre></div>
+<p>Naming your cases makes the output much easier to understand.</p>
+<p>You can also stack parametrisations – several <code>@pytest.mark.parametrize</code> decorators on top of each other automatically produce every combination:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">@pytest.mark.parametrize(&quot;x&quot;, [1, 2, 3])
+@pytest.mark.parametrize(&quot;y&quot;, [10, 20])
+def test_combo(x, y):
+    print(x, y)</code></pre></div>
+<p>This runs <code>3 × 2 = 6</code> cases in total: <code>(1,10) (1,20) (2,10) (2,20) (3,10) (3,20)</code>.</p>
+<p>Parametrisation is one of <code>pytest</code>'s killer features. <strong>Use it whenever you can – don't copy and paste lots of similar tests.</strong></p></article></section><section id="step-9" class="step-card item" data-kind="step" aria-label="Teaching step 10">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 10 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Asserting exceptions – testing "does it raise an error?"</h3>
+<p>When writing code, we often want a function to raise an exception for bad input – dividing by 0, an empty string, a negative age.</p>
+<p>So how do you test "this function <strong>should</strong> raise a <code>ValueError</code>"? Just writing <code>try/except</code> isn't enough – if the function doesn't raise anything, the test still passes, but logically, <strong>not</strong> raising is exactly the bug.</p>
+<p><code>pytest</code> provides the <code>pytest.raises</code> context manager:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import pytest
+
+
+def test_divide_by_zero():
+    with pytest.raises(ValueError):
+        divide(10, 0)</code></pre></div>
+<p>The code inside <code>with pytest.raises(ValueError):</code> <strong>must raise <code>ValueError</code></strong>. If it raises nothing, or a different exception, the test fails.</p>
+<p>If you also want to check the content of the exception (like the error message):</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def test_divide_by_zero_message():
+    with pytest.raises(ValueError, match=&quot;Cannot divide by 0&quot;):
+        divide(10, 0)</code></pre></div>
+<p>The <code>match</code> argument is a regular expression that's matched against the exception's string.</p>
+<p>Or get the exception object itself for more detailed checks:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def test_divide_by_zero_detail():
+    with pytest.raises(ValueError) as exc_info:
+        divide(10, 0)
+    assert &quot;divide&quot; in str(exc_info.value)
+    assert exc_info.type is ValueError</code></pre></div>
+<p><code>exc_info.value</code> is the exception object that was raised – you can access its attributes like any normal object.</p>
+<p>When writing tests, cover both the <strong>normal path</strong> and the <strong>exception path</strong>. Testing a function with only normal input isn't enough – edge cases, bad input and empty values ("does it raise exceptions gracefully?") matter too.</p></article></section><section id="step-10" class="step-card item" data-kind="step" aria-label="Teaching step 11">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 11 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Skipping and marking – choosing which tests to run</h3>
+<p>When writing tests, you'll often meet situations like these:</p>
+<ul>
+<li>This test only works on Linux, not on Windows</li>
+<li>This test only applies to Python 3.11+</li>
+<li>This test is slow (a dozen seconds or more) – you don't want to run it normally, only in CI</li>
+<li>This test is still being written – mark it as "to do" for now</li>
+</ul>
+<p><code>pytest</code>'s solution is its <strong>mark</strong> system.</p>
+<h4>skip – just skip it</h4>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import pytest
+
+
+@pytest.mark.skip(reason=&quot;Not finished yet&quot;)
+def test_new_feature():
+    assert do_something() == &quot;expected&quot;</code></pre></div>
+<p>When it runs, <code>pytest</code> shows an <code>s</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">test_demo.py s                                                           [100%]
+================== 1 skipped in 0.01s ==================</code></pre></div>
+<p>The test doesn't run, and doesn't count as a failure.</p>
+<h4>skipif – skip on a condition</h4>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import sys
+
+
+@pytest.mark.skipif(sys.platform == &quot;win32&quot;, reason=&quot;Not supported on Windows&quot;)
+def test_unix_specific():
+    assert &quot;/usr/bin&quot; in PATH
+
+
+@pytest.mark.skipif(sys.version_info &lt; (3, 11), reason=&quot;Needs Python 3.11+&quot;)
+def test_exception_group():
+    pass</code></pre></div>
+<p>The first argument is an expression – if it's <code>True</code>, the test is skipped.</p>
+<h4>xfail – expected to fail</h4>
+<p>Some tests can't pass right now, but you don't want to skip them completely. For example, a bug hasn't been fixed yet, and you want the test to stay there as a reminder.</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">@pytest.mark.xfail(reason=&quot;Bug #42 not fixed yet&quot;)
+def test_buggy_feature():
+    assert buggy_function() == &quot;expected&quot;</code></pre></div>
+<p>The logic of <code>xfail</code> is "I expect this to fail":</p>
+<ul>
+<li>If it fails: it's reported as XFAIL – as expected, and not counted as a failure</li>
+<li>If it unexpectedly passes: it's reported as XPASS (a reminder that the bug might have been fixed)</li>
+</ul>
+<h4>Custom markers – sorting tests into groups</h4>
+<p>Sometimes you want to sort tests into groups – "slow tests", "tests that need a database", "network tests".</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">@pytest.mark.slow
+def test_big_data():
+    process_one_million_rows()
+
+
+@pytest.mark.db
+def test_query_user():
+    pass
+
+
+@pytest.mark.network
+def test_fetch_api():
+    pass</code></pre></div>
+<p>Then choose which to run with <code>-m</code> on the command line:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash"># Run only slow tests
+pytest -m slow
+
+# Run everything except slow tests
+pytest -m &quot;not slow&quot;
+
+# Run slow tests or network tests
+pytest -m &quot;slow or network&quot;</code></pre></div>
+<p>Before using custom markers, register them in your settings, or <code>pytest</code> will warn you. In <code>pyproject.toml</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">[tool.pytest.ini_options]
+markers = [
+    &quot;slow: slow tests (take &gt; 1 second)&quot;,
+    &quot;db: tests that need a database&quot;,
+    &quot;network: tests that need the network&quot;,
+]</code></pre></div>
+<p>This has two benefits – it removes the warning, and newcomers reading <code>pyproject.toml</code> can see what kinds of tests the project has.</p></article></section><section id="step-11" class="step-card item" data-kind="step" aria-label="Teaching step 12">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 12 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Coverage – which code hasn't been tested yet?</h3>
+<p>You've written a pile of tests for your project, and they all pass. Great. But have you really "tested everything"?</p>
+<p><strong>Coverage</strong> answers exactly this question – <strong>how much of your code actually ran during the tests?</strong> If you have 100 lines of code and the tests only ran 60, coverage is 60%. The other 40 lines might be hiding bugs.</p>
+<p>The Python tool for measuring coverage is <code>coverage</code>. With <code>pytest</code>, people usually install the <code>pytest-cov</code> plugin, which is simpler.</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv add --dev pytest-cov</code></pre></div>
+<p>Run:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash"># Run the tests + print a coverage report
+pytest --cov=src
+
+# You can also give a package name
+pytest --cov=mypackage
+
+# Show more detail – &quot;which lines weren&#x27;t tested&quot;
+pytest --cov=src --cov-report=term-missing</code></pre></div>
+<p>The output looks roughly like this:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">---------- coverage: platform darwin, python 3.13.1 -----------
+Name              Stmts   Miss  Cover   Missing
+-----------------------------------------------
+src/mymath.py        12      2    83%   15-16
+src/utils.py          8      0   100%
+-----------------------------------------------
+TOTAL                20      2    90%</code></pre></div>
+<p>Look at the <code>Missing</code> column – lines 15 and 16 of <code>mymath.py</code> weren't tested. Go and look – it's probably an edge case that wasn't covered.</p>
+<p>For a more visual view, create an HTML report:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">pytest --cov=src --cov-report=html</code></pre></div>
+<p>This creates a web page report in the <code>htmlcov/</code> folder. Open <code>htmlcov/index.html</code>, click into any file, and you can see <strong>which lines were tested (green) and which weren't (red)</strong> – very clear.</p>
+<p>You can also put default <code>pytest-cov</code> options in <code>pyproject.toml</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">[tool.pytest.ini_options]
+addopts = &quot;--cov=src --cov-report=term-missing&quot;</code></pre></div>
+<p>Now every time you run <code>pytest</code>, you get a coverage report automatically.</p>
+<p>So what coverage is "good enough"? The community's "common sense" numbers are:</p>
+<ul>
+<li><strong>80% or more</strong>: basically a pass</li>
+<li><strong>90% or more</strong>: fairly high-quality project</li>
+<li><strong>100%</strong>: ideal, but usually very costly (you have to test all sorts of "impossible" branches)</li>
+</ul>
+<p>Brother Shui's advice: <strong>don't chase 100% at all costs.</strong> Forcing coverage up leads to lots of "tests written just to make up the numbers", which actually drag the project down. Focus on fully testing key business paths, complicated logic and edge cases. Coverage tools are for <strong>finding gaps</strong>, not for <strong>giving scores</strong>.</p>
+<p>Don't set a hard 90% target for an old project straight away. Start from 50%, and make sure each pull request "doesn't make it go down". Over time, the project will get stronger and stronger.</p></article></section><section id="step-12" class="step-card item" data-kind="step" aria-label="Teaching step 13">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 13 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>conftest.py – sharing fixtures</h3>
+<p>As you write more and more tests, you'll notice a problem – <strong>several test files need the same fixture</strong>.</p>
+<p>For example, <code>test_user.py</code>, <code>test_order.py</code> and <code>test_product.py</code> all need a <code>db</code> fixture. Do you have to write it in every file?</p>
+<p>No. <code>pytest</code> has a special file called <code>conftest.py</code>. <strong>Fixtures in <code>conftest.py</code> are automatically available to all tests in the same folder and its sub-folders</strong> – no import needed.</p>
+<p>For example:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">tests/
+├── conftest.py            # Shared fixtures go here
+├── test_user.py
+├── test_order.py
+└── api/
+    ├── conftest.py        # A sub-folder can have its own too
+    └── test_endpoints.py</code></pre></div>
+<p><code>tests/conftest.py</code>:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import pytest
+
+
+@pytest.fixture
+def db():
+    conn = create_test_db()
+    yield conn
+    conn.close()
+
+
+@pytest.fixture
+def sample_user(db):
+    user = User(name=&quot;walter&quot;, age=28)
+    db.save(user)
+    return user</code></pre></div>
+<p><code>tests/test_user.py</code>:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def test_get_user(db, sample_user):
+    # Use them directly – no import needed
+    assert db.get_user(sample_user.id).name == &quot;walter&quot;</code></pre></div>
+<p><code>tests/test_order.py</code>:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def test_create_order(db, sample_user):
+    # Can be used directly here too
+    order = Order(user=sample_user, amount=100)
+    db.save(order)
+    assert order.id is not None</code></pre></div>
+<p><code>tests/api/conftest.py</code> can add more fixtures that only apply to the <code>api/</code> sub-folder:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import pytest
+
+
+@pytest.fixture
+def http_client():
+    from httpx import Client
+    with Client(base_url=&quot;http://localhost:8000&quot;) as c:
+        yield c</code></pre></div>
+<p><code>pytest</code> starts from the test file's folder and looks <strong>upwards</strong> for every <code>conftest.py</code>, collecting all their fixtures. So <strong>inner folders can use outer fixtures, but not the other way round</strong>.</p>
+<p>Once you understand this rule, your test code becomes very tidy – shared logic all lives in <code>conftest.py</code>, and each test file only focuses on its own job.</p></article></section><section id="step-13" class="step-card item" data-kind="step" aria-label="Teaching step 14">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 14 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Configuring pytest in pyproject.toml</h3>
+<p><code>pytest</code> works with zero configuration by default, but as a project grows, writing a few common settings into <code>pyproject.toml</code> saves a lot of effort.</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">[tool.pytest.ini_options]
+# Where to look for test files
+testpaths = [&quot;tests&quot;]
+
+# Default options (added automatically every time you run pytest)
+addopts = [
+    &quot;-v&quot;,                          # Detailed output
+    &quot;--strict-markers&quot;,            # Error if an unregistered marker is used
+    &quot;--cov=src&quot;,                   # Run coverage
+    &quot;--cov-report=term-missing&quot;,   # Show lines not covered
+]
+
+# Register custom markers
+markers = [
+    &quot;slow: slow tests&quot;,
+    &quot;db: tests that need a database&quot;,
+    &quot;network: tests that need the network&quot;,
+]
+
+# Minimum pytest version
+minversion = &quot;8.0&quot;</code></pre></div>
+<p>If an old project uses <code>setup.cfg</code> or <code>pytest.ini</code>, moving to <code>pyproject.toml</code> is easy – just change the <code>[pytest]</code> section to <code>[tool.pytest.ini_options]</code>. Since <code>pytest 8.x</code>, <code>pyproject.toml</code> support is very mature, so new projects should use it directly.</p></article></section><section id="step-14" class="step-card item" data-kind="step" aria-label="Teaching step 15">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 15 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>A complete mini project – writing tests for a Wallet class</h3>
+<p>Remember the <code>Wallet</code> class we wrote in python17 when learning type hints? This time, let's finish it properly and write a decent set of tests for it.</p>
+<p>First, <code>wallet.py</code> (an upgraded version, with a few more methods and simple saving to a file):</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from __future__ import annotations
+import json
+from pathlib import Path
+
+
+class InsufficientFundsError(Exception):
+    &quot;&quot;&quot;Raised when there isn&#x27;t enough money.&quot;&quot;&quot;
+
+
+class Wallet:
+    &quot;&quot;&quot;A simple wallet.&quot;&quot;&quot;
+
+    def __init__(self, initial: float = 0) -&gt; None:
+        if initial &lt; 0:
+            raise ValueError(&quot;The starting balance cannot be negative&quot;)
+        self.balance: float = initial
+
+    def deposit(self, amount: float) -&gt; float:
+        if amount &lt;= 0:
+            raise ValueError(&quot;The amount to deposit must be greater than 0&quot;)
+        self.balance += amount
+        return self.balance
+
+    def withdraw(self, amount: float) -&gt; float:
+        if amount &lt;= 0:
+            raise ValueError(&quot;The amount to withdraw must be greater than 0&quot;)
+        if amount &gt; self.balance:
+            raise InsufficientFundsError(
+                f&quot;Not enough money: balance is {self.balance}, tried to withdraw {amount}&quot;
+            )
+        self.balance -= amount
+        return self.balance
+
+    def can_afford(self, price: float) -&gt; bool:
+        return self.balance &gt;= price
+
+    def save(self, path: Path) -&gt; None:
+        path.write_text(
+            json.dumps({&quot;balance&quot;: self.balance}),
+            encoding=&quot;utf-8&quot;,
+        )
+
+    @classmethod
+    def load(cls, path: Path) -&gt; Wallet:
+        data = json.loads(path.read_text(encoding=&quot;utf-8&quot;))
+        return cls(initial=data[&quot;balance&quot;])</code></pre></div>
+<p>Looking at this class, there are several things to test:</p>
+<ol>
+<li>Creating it: a negative starting balance should raise <code>ValueError</code></li>
+<li><code>deposit</code>: an amount ≤ 0 should raise <code>ValueError</code>; a normal deposit adds to the balance</li>
+<li><code>withdraw</code>: an amount ≤ 0 raises <code>ValueError</code>; too much raises <code>InsufficientFundsError</code>; a normal withdrawal takes from the balance</li>
+<li><code>can_afford</code>: three cases – below, equal to and above the balance</li>
+<li><code>save</code> / <code>load</code>: write to a file and read it back, and the balance should match</li>
+</ol>
+<p>Next, write the tests in <code>test_wallet.py</code>:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import json
+import pytest
+from wallet import Wallet, InsufficientFundsError
+
+
+# ---------- fixtures ----------
+
+@pytest.fixture
+def empty_wallet() -&gt; Wallet:
+    &quot;&quot;&quot;Each test gets an empty wallet.&quot;&quot;&quot;
+    return Wallet()
+
+
+@pytest.fixture
+def rich_wallet() -&gt; Wallet:
+    &quot;&quot;&quot;Each test gets a wallet with 1000 in it.&quot;&quot;&quot;
+    return Wallet(initial=1000)
+
+
+# ---------- creating ----------
+
+def test_default_balance(empty_wallet):
+    assert empty_wallet.balance == 0
+
+
+def test_init_with_money():
+    w = Wallet(initial=500)
+    assert w.balance == 500
+
+
+def test_negative_initial_raises():
+    with pytest.raises(ValueError, match=&quot;cannot be negative&quot;):
+        Wallet(initial=-1)
+
+
+# ---------- deposit ----------
+
+@pytest.mark.parametrize(&quot;amount, expected&quot;, [
+    (100, 1100),
+    (0.5, 1000.5),
+    (1, 1001),
+])
+def test_deposit(rich_wallet, amount, expected):
+    assert rich_wallet.deposit(amount) == expected
+    assert rich_wallet.balance == expected
+
+
+@pytest.mark.parametrize(&quot;bad_amount&quot;, [0, -1, -100])
+def test_deposit_invalid(empty_wallet, bad_amount):
+    with pytest.raises(ValueError, match=&quot;must be greater than 0&quot;):
+        empty_wallet.deposit(bad_amount)
+
+
+# ---------- withdraw ----------
+
+def test_withdraw_normal(rich_wallet):
+    assert rich_wallet.withdraw(300) == 700
+    assert rich_wallet.balance == 700
+
+
+def test_withdraw_too_much(rich_wallet):
+    with pytest.raises(InsufficientFundsError) as exc_info:
+        rich_wallet.withdraw(2000)
+    assert &quot;Not enough money&quot; in str(exc_info.value)
+
+
+@pytest.mark.parametrize(&quot;bad_amount&quot;, [0, -1])
+def test_withdraw_invalid(rich_wallet, bad_amount):
+    with pytest.raises(ValueError, match=&quot;must be greater than 0&quot;):
+        rich_wallet.withdraw(bad_amount)
+
+
+# ---------- can_afford ----------
+
+@pytest.mark.parametrize(&quot;price, ok&quot;, [
+    (500, True),    # Below the balance
+    (1000, True),   # Equal to the balance
+    (1001, False),  # Above the balance
+    (0, True),      # Can afford 0 too (edge case)
+])
+def test_can_afford(rich_wallet, price, ok):
+    assert rich_wallet.can_afford(price) is ok
+
+
+# ---------- save / load using tmp_path ----------
+
+def test_save_and_load_roundtrip(rich_wallet, tmp_path):
+    file = tmp_path / &quot;wallet.json&quot;
+    rich_wallet.save(file)
+
+    assert file.exists()
+    data = json.loads(file.read_text(encoding=&quot;utf-8&quot;))
+    assert data == {&quot;balance&quot;: 1000}
+
+    loaded = Wallet.load(file)
+    assert loaded.balance == 1000
+
+
+def test_save_overwrite(rich_wallet, tmp_path):
+    file = tmp_path / &quot;wallet.json&quot;
+
+    rich_wallet.save(file)
+    rich_wallet.deposit(500)
+    rich_wallet.save(file)
+
+    loaded = Wallet.load(file)
+    assert loaded.balance == 1500</code></pre></div>
+<p>Run it:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv run pytest -v</code></pre></div>
+<p>Output (excerpt):</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">test_wallet.py::test_default_balance PASSED
+test_wallet.py::test_init_with_money PASSED
+test_wallet.py::test_negative_initial_raises PASSED
+test_wallet.py::test_deposit[100-1100] PASSED
+test_wallet.py::test_deposit[0.5-1000.5] PASSED
+test_wallet.py::test_deposit[1-1001] PASSED
+test_wallet.py::test_deposit_invalid[0] PASSED
+test_wallet.py::test_deposit_invalid[-1] PASSED
+test_wallet.py::test_deposit_invalid[-100] PASSED
+test_wallet.py::test_withdraw_normal PASSED
+test_wallet.py::test_withdraw_too_much PASSED
+test_wallet.py::test_withdraw_invalid[0] PASSED
+test_wallet.py::test_withdraw_invalid[-1] PASSED
+test_wallet.py::test_can_afford[500-True] PASSED
+test_wallet.py::test_can_afford[1000-True] PASSED
+test_wallet.py::test_can_afford[1001-False] PASSED
+test_wallet.py::test_can_afford[0-True] PASSED
+test_wallet.py::test_save_and_load_roundtrip PASSED
+test_wallet.py::test_save_overwrite PASSED
+
+============================= 19 passed in 0.05s ==============================</code></pre></div>
+<p>Count them – there are only 12 test functions, but because of parametrisation, <strong>19 cases actually ran</strong>. 19 cases in 0.05 seconds, covering normal paths, edge cases, exception branches and file I/O.</p>
+<p>Add coverage too:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv run pytest --cov=. --cov-report=term-missing</code></pre></div>
+<p>Ideally this reaches 100% – every method, every branch and every exception path tested.</p>
+<p>This is what you should do from now on, every time you write a class or module – <strong>feature code + test code</strong> appear together like twins. You need both.</p></article></section><section id="step-15" class="step-card item" data-kind="step" aria-label="Teaching step 16">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 16 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>A few common traps</h3>
+<h4>Trap 1: tests affecting each other</h4>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">counter = 0
+
+
+def test_a():
+    global counter
+    counter += 1
+    assert counter == 1
+
+
+def test_b():
+    global counter
+    counter += 1
+    assert counter == 1     # Fails here – counter is already 2</code></pre></div>
+<p>The tests share global state. <code>test_a</code> runs first and changes <code>counter</code>, so <code>test_b</code> doesn't see a clean state.</p>
+<p><strong>Fix</strong>: either use fixtures to prepare state, or make sure the functions being tested have no side effects. <strong>Don't use global variables to pass things between tests.</strong></p>
+<h4>Trap 2: tests take too long</h4>
+<p>As you write more tests, a full run takes minutes. Developers get too lazy to run them, and in the end the tests are useless.</p>
+<p><strong>Fix</strong>:</p>
+<ul>
+<li>Mark slow tests with <code>@pytest.mark.slow</code>; don't run them locally, only in CI</li>
+<li>Raise fixture scopes (e.g. a session-level database connection)</li>
+<li>Use the <code>pytest-xdist</code> plugin to run tests in parallel: <code>pytest -n auto</code></li>
+</ul>
+<h4>Trap 3: comparing floats</h4>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def test_divide():
+    assert divide(1, 3) == 0.3333333333333333    # Floating-point precision problem</code></pre></div>
+<p>Floats have built-in precision errors, so comparing them directly with <code>==</code> often fails.</p>
+<p><strong>Fix</strong>: use <code>pytest.approx</code>:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def test_divide():
+    assert divide(1, 3) == pytest.approx(0.3333, rel=1e-3)</code></pre></div>
+<p><code>approx</code> means "approximately equal", and you can set a relative or absolute tolerance.</p>
+<h4>Trap 4: fixtures that depend on each other in a circle</h4>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">@pytest.fixture
+def a(b):
+    return b + 1
+
+
+@pytest.fixture
+def b(a):       # A circular dependency
+    return a - 1</code></pre></div>
+<p><code>pytest</code> gives an error straight away saying the fixture dependency is recursive.</p>
+<p><strong>Fix</strong>: check the fixture dependency graph and break the circle. It usually means one fixture should be split into two separate ones.</p>
+<h4>Trap 5: you can't see your <code>print</code> debugging</h4>
+<p>While debugging, you add a quick <code>print</code>, run <code>pytest</code>, and see nothing.</p>
+<p><strong>Reason</strong>: by default, <code>pytest</code> captures all stdout, and only shows it when a test fails.</p>
+<p><strong>Fix</strong>: add the <code>-s</code> option:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">pytest -s</code></pre></div>
+<p>Or use <code>pytest --capture=no</code>, which does the same.</p></article></section><section id="step-16" class="step-card item" data-kind="step" aria-label="Teaching step 17">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 17 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>FAQ</h3>
+<p><strong>Q1: Where should tests go? Together with the source code?</strong></p>
+<p>The usual way is to keep them apart – source in <code>src/</code>, tests in <code>tests/</code>. That way the test code isn't included when you package and publish.</p>
+<p>Some projects put tests right next to the source, like <code>mypackage/test_foo.py</code> next to <code>mypackage/foo.py</code>. Both have their advantages. For new projects, Brother Shui recommends keeping them apart.</p>
+<p><strong>Q2: Do I need to test every feature?</strong></p>
+<p>No. <strong>Key paths must be tested, edge cases should be tested first, and exception paths must be tested.</strong> Trivial code like plain getters/setters can go untested. Private functions are mostly covered indirectly by testing the public interface.</p>
+<p><strong>Q3: Are mocks and fixtures the same thing?</strong></p>
+<p>No, but they're often used together.</p>
+<ul>
+<li>A <strong>fixture</strong> "prepares things the test needs" (connections, users, temporary folders)</li>
+<li>A <strong>mock</strong> "pretends to be an object/function" (doesn't really send a request – pretends it returned some value)</li>
+</ul>
+<p><code>pytest</code> comes with <code>monkeypatch</code> (a lightweight mock). For more powerful mocks, use the standard library's <code>unittest.mock</code>, or the third-party <code>pytest-mock</code> plugin.</p>
+<p><strong>Q4: What if my test code has repetition?</strong></p>
+<p>Same as normal code – pull out functions, pull out fixtures, use parametrisation. But <strong>for tests, readability matters more than "Don't Repeat Yourself"</strong>. If avoiding repetition makes a test hard to understand, let it repeat a bit. People reading a test want to see at a glance "what is this testing?", not dig through lots of helper functions.</p>
+<p><strong>Q5: How fast should tests run?</strong></p>
+<p>Unit tests (no database, no network) should run in <strong>seconds</strong> – a project with hundreds of unit tests should aim to finish in a few to a dozen seconds. Integration tests can be slower, but it's best to give them their own marker (like <code>@pytest.mark.integration</code>) and run them separately from unit tests.</p></article></section><section id="step-17" class="step-card item" data-kind="step" aria-label="Teaching step 18">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 18 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Summary</h3>
+<p>After this chapter, you should be able to:</p>
+<ol>
+<li>Write a <code>pytest</code> test: <code>def test_xxx(): assert ...</code></li>
+<li>Use a <code>fixture</code> to pull out preparation work, and <code>scope</code> to control its lifetime</li>
+<li>Use built-in fixtures like <code>tmp_path</code>, <code>monkeypatch</code> and <code>capsys</code> for files, the environment and output</li>
+<li>Use <code>@pytest.mark.parametrize</code> to combine several sets of data for the same logic</li>
+<li>Use <code>with pytest.raises(...)</code> to test exception paths</li>
+<li>Use <code>@pytest.mark.skip</code>, <code>skipif</code> and custom markers to sort tests into groups</li>
+<li>Use <code>pytest-cov</code> to see coverage and find untested code</li>
+<li>Use <code>conftest.py</code> to share fixtures between test files</li>
+<li>Configure <code>pytest</code> in one place, in <code>pyproject.toml</code></li>
+</ol>
+<p>The great thing about <code>pytest</code> is that <strong>with every line of code you write, you feel more confident</strong>. Next time you change old code, run the tests and you'll know whether you broke anything. When Brother Shui wrote his first complete test suite, it felt like a breakthrough: from "too scared to touch it" to "change whatever I like", because that sea of green tests is your most loyal safety net.</p>
+<p>Back to the question at the start: "Is my change OK?"</p>
+<p>Do you have the answer now? Just run the tests.</p>
+<p>In the next chapter, we'll see how to connect all this to GitHub Actions – <code>uv</code> for dependencies, <code>ruff</code> for style, <code>pytest</code> for tests. With all three in place, every pull request runs automatically, reports automatically and rejects bad code automatically. That's when 2026 Python tooling truly comes full circle.</p></article></section><section id="step-18" class="step-card item" data-kind="step" aria-label="Teaching step 19">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 19 / 19</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Find tests in the requirements – don't copy answers from the implementation</h3>
+<p>We want to add up minutes. First, list three situations: no records, normal records, and records that include zero minutes. Work out the expected values by hand first, then check the function:</p>
+<div class="cb not-prose" data-mode="runnable"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Runs on this page</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button><button type="button" class="cb-run" title="Run this code in the browser">▶ Try it</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def total_minutes(records):
+    return sum(record[&#x27;minutes&#x27;] for record in records)
+
+
+assert total_minutes([]) == 0
+assert total_minutes([{&#x27;minutes&#x27;: 15}, {&#x27;minutes&#x27;: 10}]) == 25
+assert total_minutes([{&#x27;minutes&#x27;: 0}, {&#x27;minutes&#x27;: 5}]) == 5
+print(&#x27;3 checks passed&#x27;)</code></pre></div>
+<p>Output:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">3 checks passed</code></pre></div>
+<p>Now change the function yourself to "only return the minutes of the first record", and see which check fails. If the tests only had one record, this mistake might slip through.</p>
+<p>The final project's <code>test_tracker.py</code> also checks subject filtering, saving non-English text, broken files, invalid minutes and command-line behaviour. It uses the standard library's test classes, so it can run with <code>python3 -m unittest -v</code>, and in a project with pytest set up, <code>python3 -m pytest -q</code> can find these tests too.</p>
+<p>File tests should use special test data – don't let tests read or write your real study records directly. The <code>assert</code> statements here are for checking results; they don't replace proper checking of user input in the program, and optimised mode may remove assertions.</p>
+<p>When you read the <a href="https://docs.pytest.org/en/stable/how-to/assert.html">official pytest assertion docs</a>, take the failure you just created with you, and see how the tool's messages help us find the difference.</p></article></section><section id="lesson-end" aria-label="Chapter summary"><nav aria-label="Chapter navigation" class="chapter-nav"><div class="cn-grid"><a class="chap-nav prev focus-ring" href="/lessons/python24/ruff/"><span class="cn-label">← Previous chapter</span><span class="cn-title">24 · ruff: all-in-one code checking</span></a><div class="cn-mid"><span>pytest: the testing framework</span></div><a class="chap-nav next focus-ring" href="/lessons/python26/logging/"><span class="cn-label">Next chapter →</span><span class="cn-title">26 · Logging</span></a></div></nav></section></article></div>
+    <aside class="lesson-sidebar right" aria-label="This chapter"><nav aria-label="This chapter's contents"><div class="side-label up">In this chapter</div><p class="toc-chapter">pytest: the testing framework</p><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">pytest: the testing framework that runs 100 test cases in 30 seconds</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">Your first test</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">pytest vs unittest – why choose pytest?</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">Assert rewriting – the most magical part of pytest</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">Test discovery – how pytest finds your tests</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">fixture – dependency injection for tests</span></a></li><li class="toc-li" data-target="step-6"><a href="#step-6" class="toc-link focus-ring"><span class="toc-kind">Teaching 07</span><span class="toc-title">fixture scope – when to create, when to destroy</span></a></li><li class="toc-li" data-target="step-7"><a href="#step-7" class="toc-link focus-ring"><span class="toc-kind">Teaching 08</span><span class="toc-title">Built-in fixtures – some life-savers that come with pytest</span></a></li><li class="toc-li" data-target="step-8"><a href="#step-8" class="toc-link focus-ring"><span class="toc-kind">Teaching 09</span><span class="toc-title">Parametrising – running the same test with several sets of data</span></a></li><li class="toc-li" data-target="step-9"><a href="#step-9" class="toc-link focus-ring"><span class="toc-kind">Teaching 10</span><span class="toc-title">Asserting exceptions – testing &quot;does it raise an error?&quot;</span></a></li><li class="toc-li" data-target="step-10"><a href="#step-10" class="toc-link focus-ring"><span class="toc-kind">Teaching 11</span><span class="toc-title">Skipping and marking – choosing which tests to run</span></a></li><li class="toc-li" data-target="step-11"><a href="#step-11" class="toc-link focus-ring"><span class="toc-kind">Teaching 12</span><span class="toc-title">Coverage – which code hasn&#x27;t been tested yet?</span></a></li><li class="toc-li" data-target="step-12"><a href="#step-12" class="toc-link focus-ring"><span class="toc-kind">Teaching 13</span><span class="toc-title">conftest.py – sharing fixtures</span></a></li><li class="toc-li" data-target="step-13"><a href="#step-13" class="toc-link focus-ring"><span class="toc-kind">Teaching 14</span><span class="toc-title">Configuring pytest in pyproject.toml</span></a></li><li class="toc-li" data-target="step-14"><a href="#step-14" class="toc-link focus-ring"><span class="toc-kind">Teaching 15</span><span class="toc-title">A complete mini project – writing tests for a Wallet class</span></a></li><li class="toc-li" data-target="step-15"><a href="#step-15" class="toc-link focus-ring"><span class="toc-kind">Teaching 16</span><span class="toc-title">A few common traps</span></a></li><li class="toc-li" data-target="step-16"><a href="#step-16" class="toc-link focus-ring"><span class="toc-kind">Teaching 17</span><span class="toc-title">FAQ</span></a></li><li class="toc-li" data-target="step-17"><a href="#step-17" class="toc-link focus-ring"><span class="toc-kind">Teaching 18</span><span class="toc-title">Summary</span></a></li><li class="toc-li" data-target="step-18"><a href="#step-18" class="toc-link focus-ring"><span class="toc-kind">Teaching 19</span><span class="toc-title">Find tests in the requirements – don&#x27;t copy answers from the implementation</span></a></li></ol></nav></aside>
+  </div>
+  <dialog class="dir-dialog" aria-labelledby="dir-title"><div class="dd-inner"><div class="dd-head"><h2 id="dir-title">Contents</h2><button type="button" class="dd-close focus-ring">Close</button></div>
+  <div class="dd-tabs" aria-label="Contents scope"><button type="button" class="dd-tab focus-ring" data-tab="all" aria-pressed="true">All lessons</button><button type="button" class="dd-tab focus-ring" data-tab="chapter" aria-pressed="false">This chapter</button></div>
+  <div class="dd-body"><div class="dd-pane" data-pane="all"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring" href="/lessons/python24/ruff/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python25/pytest/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></div><div class="dd-pane" data-pane="chapter" hidden><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">pytest: the testing framework that runs 100 test cases in 30 seconds</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">Your first test</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">pytest vs unittest – why choose pytest?</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">Assert rewriting – the most magical part of pytest</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">Test discovery – how pytest finds your tests</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">fixture – dependency injection for tests</span></a></li><li class="toc-li" data-target="step-6"><a href="#step-6" class="toc-link focus-ring"><span class="toc-kind">Teaching 07</span><span class="toc-title">fixture scope – when to create, when to destroy</span></a></li><li class="toc-li" data-target="step-7"><a href="#step-7" class="toc-link focus-ring"><span class="toc-kind">Teaching 08</span><span class="toc-title">Built-in fixtures – some life-savers that come with pytest</span></a></li><li class="toc-li" data-target="step-8"><a href="#step-8" class="toc-link focus-ring"><span class="toc-kind">Teaching 09</span><span class="toc-title">Parametrising – running the same test with several sets of data</span></a></li><li class="toc-li" data-target="step-9"><a href="#step-9" class="toc-link focus-ring"><span class="toc-kind">Teaching 10</span><span class="toc-title">Asserting exceptions – testing &quot;does it raise an error?&quot;</span></a></li><li class="toc-li" data-target="step-10"><a href="#step-10" class="toc-link focus-ring"><span class="toc-kind">Teaching 11</span><span class="toc-title">Skipping and marking – choosing which tests to run</span></a></li><li class="toc-li" data-target="step-11"><a href="#step-11" class="toc-link focus-ring"><span class="toc-kind">Teaching 12</span><span class="toc-title">Coverage – which code hasn&#x27;t been tested yet?</span></a></li><li class="toc-li" data-target="step-12"><a href="#step-12" class="toc-link focus-ring"><span class="toc-kind">Teaching 13</span><span class="toc-title">conftest.py – sharing fixtures</span></a></li><li class="toc-li" data-target="step-13"><a href="#step-13" class="toc-link focus-ring"><span class="toc-kind">Teaching 14</span><span class="toc-title">Configuring pytest in pyproject.toml</span></a></li><li class="toc-li" data-target="step-14"><a href="#step-14" class="toc-link focus-ring"><span class="toc-kind">Teaching 15</span><span class="toc-title">A complete mini project – writing tests for a Wallet class</span></a></li><li class="toc-li" data-target="step-15"><a href="#step-15" class="toc-link focus-ring"><span class="toc-kind">Teaching 16</span><span class="toc-title">A few common traps</span></a></li><li class="toc-li" data-target="step-16"><a href="#step-16" class="toc-link focus-ring"><span class="toc-kind">Teaching 17</span><span class="toc-title">FAQ</span></a></li><li class="toc-li" data-target="step-17"><a href="#step-17" class="toc-link focus-ring"><span class="toc-kind">Teaching 18</span><span class="toc-title">Summary</span></a></li><li class="toc-li" data-target="step-18"><a href="#step-18" class="toc-link focus-ring"><span class="toc-kind">Teaching 19</span><span class="toc-title">Find tests in the requirements – don&#x27;t copy answers from the implementation</span></a></li></ol></div></div></div></dialog>
+  <div class="py-toast" hidden><span class="spinner"></span><span class="py-toast-text">Loading Python…</span></div>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>© 2026 Python for Beginners · English edition of the <a href="https://github.com/walter201230/Python">walter201230/Python</a> tutorial (CC BY 4.0)</span>
+    <div class="footer-links"><a href="/">Course list</a><a href="/about/">About this site</a><a href="https://github.com/walter201230/Python">GitHub</a></div>
+  </div>
+</footer>
+<script src="/assets/site.js?v=20261028"></script>
+</body>
+</html>

@@ -1,0 +1,797 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ruff: all-in-one code checking (full read) – Python for Beginners</title>
+<meta name="description" content="One tool replaces black + flake8 + isort + pyupgrade, 10–100× faster than the old combination.">
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css?v=20261028">
+
+</head>
+<body data-page="read" data-lesson="python24" data-total="0">
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="/" aria-label="Python for Beginners – home"><span class="gradient-text-flow" data-text="Python for Beginners">Python for Beginners</span></a>
+    <nav class="header-nav">
+      <a class="nav-link" href="/about/">About</a>
+      <a class="nav-icon focus-ring" href="https://github.com/walter201230/Python" aria-label="Original tutorial on GitHub" title="Original tutorial on GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+      <button type="button" class="theme-toggle focus-ring" aria-label="Switch theme"><span class="knob"><svg class="ic-moon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button>
+    </nav>
+  </div>
+</header>
+<main class="site-main">
+<div class="lesson-shell bg-tech-grid">
+  <div class="mobile-bar"><div class="mb-inner"><button type="button" class="dir-btn focus-ring" aria-haspopup="dialog">Contents</button></div></div>
+  <div class="lesson-columns">
+    <aside class="lesson-sidebar left" aria-label="All lessons"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/read/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/read/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/read/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/read/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/read/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/read/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/read/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/read/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/read/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/read/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/read/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/read/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/read/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/read/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/read/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/read/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/read/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/read/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/read/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/read/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/read/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/read/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/read/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/read/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python24/ruff/read/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/read/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/read/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/read/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/read/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></aside>
+    <div class="lesson-main"><article class="lesson-article"><header class="lesson-head"><h1>ruff: all-in-one code checking</h1><p class="lh-sub">Full read · <span class="accent">22</span> teaching parts<span class="sep">·</span>about <span class="accent">40</span> min</p>
+<p class="lh-note">This page is the read-through version of the chapter, with every explanation in one place. To write code and get it checked, go to <a class="accent-link focus-ring" href="/lessons/python24/ruff/">challenge mode</a>.</p></header><section id="step-0" class="step-card read" data-kind="step" aria-label="Teaching step 1">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 01 / 22</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h2>ruff: one tool to replace black + flake8 + isort + pyupgrade</h2>
+<p>Do you remember back in 2022? When you started a new Python project, just "keeping the code style consistent" meant installing a pile of things:</p>
+<ul>
+<li><code>black</code>: formats code automatically – handles indentation, line breaks and quotes</li>
+<li><code>flake8</code>: checks for syntax errors, unused variables and bad names</li>
+<li><code>isort</code>: rearranges <code>import</code> statements in alphabetical order and in groups</li>
+<li><code>pyupgrade</code>: upgrades old syntax to newer versions, e.g. <code>Dict[str, int]</code> to <code>dict[str, int]</code></li>
+<li><code>pydocstyle</code>: checks whether docstrings are written properly</li>
+<li><code>bandit</code>: scans for security problems</li>
+</ul>
+<p>Six tools, six config files, six sets of rules. Install each one separately, run each one in CI, call each one before every commit. Back then, setting up the lint pipeline for a new project, Brother Shui could spend half a day just working out how to stop these tools fighting each other.</p>
+<p>"Can't they be combined?" Lots of people asked that back then.</p>
+<p>They couldn't. These tools were independent, and built in different ways: <code>black</code> was written in <code>Python</code>, <code>flake8</code> was written in <code>Python</code> but built on <code>pycodestyle</code>, and <code>isort</code> was its own separate project. Combining them meant rewriting everything.</p>
+<p>Then, at the end of 2022, Astral – the same Astral that made <code>uv</code> in the last chapter – released something called <code>ruff</code>. This company has a speciality: rewriting Python tools in <code>Rust</code>, and making them <strong>10 to 100 times faster than the originals</strong>.</p>
+<p>From the start, <code>ruff</code> implemented the rules of <code>flake8</code>, <code>isort</code>, <code>pyupgrade</code>, <code>pydocstyle</code>, <code>bandit</code> and others all at once. Later it added a <code>format</code> command that swallowed up <code>black</code>'s job too. One program, one config, one set of commands.</p>
+<p>By 2024, <code>ruff</code> had become the standard in the Python community. <code>Pandas</code>, <code>FastAPI</code>, <code>Pydantic</code>, <code>Hugging Face Transformers</code> and <code>Apache Airflow</code> all switched to it. Today in 2026, almost nobody would recommend the old <code>flake8 + black + isort</code> combination for a new project.</p>
+<p>This chapter is about how to use <code>ruff</code>. After it, you should be able to:</p>
+<ol>
+<li>Set up <code>ruff</code> in a new project in five minutes</li>
+<li>Understand the <code>[tool.ruff]</code> settings in someone else's <code>pyproject.toml</code></li>
+<li>Connect <code>ruff</code> to <code>pre-commit</code>, <code>CI</code> and your editor</li>
+<li>Smoothly move an old project over from <code>black + flake8 + isort</code></li>
+</ol></article></section><section id="step-1" class="step-card read" data-kind="step" aria-label="Teaching step 2">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 02 / 22</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>What was so annoying about the old way?</h3>
+<p>First, let's remember how the old way worked. A fairly "proper" project would usually have these config files in its root folder:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">my-project/
+├── pyproject.toml         # Settings for some tools
+├── setup.cfg              # flake8 settings had to go here (or in a separate .flake8)
+├── .flake8                # flake8 settings (optional)
+├── .isort.cfg             # isort settings (optional)
+├── .pre-commit-config.yaml
+└── ...</code></pre></div>
+<p>Each tool had its own favourite place for settings:</p>
+<ul>
+<li><code>black</code> read <code>[tool.black]</code> in <code>pyproject.toml</code></li>
+<li><code>flake8</code> absolutely refused to support <code>pyproject.toml</code> – only <code>.flake8</code> or <code>setup.cfg</code></li>
+<li><code>isort</code> could use <code>pyproject.toml</code>, <code>.isort.cfg</code> or <code>setup.cfg</code> – whichever you liked</li>
+<li><code>pyupgrade</code> had no config file at all – only command-line options</li>
+</ul>
+<p>That's the first trap – <strong>settings scattered everywhere</strong>. A newcomer taking over a project could spend ages just finding the config files.</p>
+<p>The second trap was that <strong>the tools fought each other</strong>. The classic one is <code>black</code> vs <code>flake8</code>. <code>black</code>'s default line length is 88 characters; <code>flake8</code>'s default is 79 (the PEP 8 recommendation). If you didn't make them match, <code>black</code> would format the code and then <code>flake8</code> would complain <code>E501 line too long</code>. What to do? Change <code>flake8</code>, change <code>black</code>, or add <code># noqa</code> comments everywhere.</p>
+<p><code>isort</code> and <code>black</code> fought too. <code>isort</code> sorted <code>import</code>s in a certain style by default, which <code>black</code> didn't always accept. You had to add <code>--profile black</code> to <code>isort</code> to make them agree.</p>
+<p>The third trap was <strong>slowness</strong>. Not "feels a bit slow" – really slow. On a medium-sized project, <code>flake8 .</code> took seconds to tens of seconds; <code>black .</code> took several to a dozen seconds; <code>isort .</code> took a few seconds too. Run them one after another in CI, and tens of seconds were gone. Running lint every time you saved a file was too slow to connect to your editor.</p>
+<p>That was the reality of Python tooling before 2022. Experienced programmers reading this will know the feeling.</p></article></section><section id="step-2" class="step-card read" data-kind="step" aria-label="Teaching step 3">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 03 / 22</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>What is ruff?</h3>
+<p><code>ruff</code> is an open-source Python code checker + formatter from Astral. Two key features:</p>
+<ol>
+<li><strong>It's written in Rust.</strong> Python tools written in Python hit a speed ceiling. Switch to Rust, and they get one or two orders of magnitude faster.</li>
+<li><strong>One tool replaces a whole pile.</strong> <code>flake8</code>, <code>black</code>, <code>isort</code>, <code>pyupgrade</code>, <code>pydocstyle</code>, <code>bandit</code>, some of <code>pylint</code>'s rules and <code>autoflake</code> – all built in.</li>
+</ol>
+<p>Look at the speed comparison <code>ruff</code> published, run on the <code>CPython</code> project (about 250,000 lines of code):</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>flake8</code></td>
+<td>About 12 seconds</td>
+</tr>
+<tr>
+<td><code>pylint</code></td>
+<td>Several minutes</td>
+</tr>
+<tr>
+<td><code>ruff check</code></td>
+<td>About 0.4 seconds</td>
+</tr>
+</tbody>
+</table></div>
+<p>You might be suspicious: "Is it really that fast? Are the numbers made up?" Brother Shui has tried it on his own computer, and <strong>yes, it really is that fast</strong>. On a project with a thousand files, <code>ruff check .</code> often finishes in under a second – you can't even see it "running".</p>
+<p><code>ruff format</code> is similar. On a medium-sized project, <code>black</code> takes a dozen seconds; <code>ruff format</code> takes less than one.</p>
+<p>What's the point of that speed? Two important things:</p>
+<ol>
+<li><strong>Running lint live every time you save</strong> becomes possible. Every time you press <code>Ctrl+S</code> in your editor, <code>ruff</code> runs in the background, and you hardly notice any delay.</li>
+<li><strong>Shorter CI times.</strong> The lint step used to take 30 seconds; now it's done in 1.</li>
+</ol>
+<p>"How many rules does it support?" some of you will want to know. As of 2026, <code>ruff</code> has implemented over 800 rules, covering mainstream <code>flake8</code> + dozens of <code>flake8-*</code> plugins + <code>isort</code> + <code>pyupgrade</code> + <code>pydocstyle</code> + part of <code>pylint</code> + part of <code>bandit</code>. In other words, <code>ruff</code> has taken in the abilities of almost every mainstream Python lint tool.</p></article></section><section id="step-3" class="step-card read" data-kind="step" aria-label="Teaching step 4">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 04 / 22</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Installing</h3>
+<p>As usual, we recommend installing with <code>uv</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv add --dev ruff</code></pre></div>
+<p>"What does <code>--dev</code> mean?" We covered it in the last chapter – it means "install into the development dependency group", so it isn't included when you release to production. <code>ruff</code> is a development tool, only used while developing and in CI, so <code>--dev</code> is the right place.</p>
+<p>If your project doesn't use <code>uv</code> yet, you can install with <code>pip</code> too:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">pip install ruff</code></pre></div>
+<p>Or install it as a global command with <code>pipx</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">pipx install ruff</code></pre></div>
+<p>After installing, check it:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">ruff --version</code></pre></div>
+<p>Output similar to:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">ruff 0.8.0</code></pre></div>
+<p>The exact version number will change – in 2026, <code>ruff</code> is probably past 0.9 or even 1.0.</p>
+<p>"Why hasn't the version even reached 1.0?" a sharp-eyed student might ask. <code>ruff</code>'s authors keep improving it in small steps, and the rule set keeps growing, so the version number stayed at 0.x. But it's been stable enough for production for a long time – lots of community projects use it without any major problems.</p></article></section><section id="step-4" class="step-card read" data-kind="step" aria-label="Teaching step 5">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 05 / 22</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Running it for the first time</h3>
+<p>Go into your project folder and run:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">ruff check .</code></pre></div>
+<p>This scans every <code>.py</code> file in the current folder and checks it against the default rules. The first time, you'll probably see a pile of warnings:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">foo.py:3:1: F401 [*] `os` imported but unused
+foo.py:8:5: E731 Do not assign a `lambda` expression, use a `def`
+bar.py:12:80: E501 Line too long (95 &gt; 79)</code></pre></div>
+<p>The format is clear: <code>file:line:column: rule-code description</code>. If the rule code has a <code>[*]</code> in front of it, that rule can be <strong>fixed automatically</strong>.</p>
+<p>To let <code>ruff</code> fix things automatically, add <code>--fix</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">ruff check --fix .</code></pre></div>
+<p>After this, problems like "<code>os</code> imported but unused" are fixed – <code>ruff</code> simply deletes that <code>import os</code> line. Run <code>ruff check .</code> again, and most of the warnings are gone.</p>
+<p>To format code, use another command:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">ruff format .</code></pre></div>
+<p>This works basically the same as <code>black .</code> – it makes the whole project's style consistent: indentation, quotes and line breaks. If you've used <code>black</code> before, there's nothing new to learn.</p>
+<p>Put these two commands together, and you have the standard routine before every commit:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">ruff check --fix . &amp;&amp; ruff format .</code></pre></div>
+<p>Lint first, then format – done.</p></article></section><section id="step-5" class="step-card read" data-kind="step" aria-label="Teaching step 6">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 06 / 22</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Settings: pyproject.toml</h3>
+<p>All of <code>ruff</code>'s settings go into <code>pyproject.toml</code> – no other files. The settings look like this:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">[tool.ruff]
+# Line length – same as black&#x27;s default
+line-length = 88
+
+# The target Python version – affects how some rules decide
+target-version = &quot;py312&quot;
+
+# Which folders to skip
+exclude = [
+    &quot;.git&quot;,
+    &quot;.venv&quot;,
+    &quot;build&quot;,
+    &quot;dist&quot;,
+    &quot;__pycache__&quot;,
+    &quot;migrations&quot;,
+]
+
+[tool.ruff.lint]
+# Which rule sets to turn on
+select = [&quot;E&quot;, &quot;F&quot;, &quot;I&quot;, &quot;UP&quot;, &quot;B&quot;, &quot;SIM&quot;]
+
+# Which specific rules to ignore
+ignore = [&quot;E501&quot;]
+
+[tool.ruff.format]
+# Quote style: prefer double quotes (black style)
+quote-style = &quot;double&quot;
+# Indentation style: spaces
+indent-style = &quot;space&quot;</code></pre></div>
+<p>That might look confusing, so let's take it apart piece by piece.</p>
+<h4>line-length</h4>
+<p>The line length. Default 88, same as <code>black</code>. If you prefer 100:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">line-length = 100</code></pre></div>
+<h4>target-version</h4>
+<p>The target Python version. This affects how some rules decide. For example, with <code>target-version = "py312"</code>, <code>ruff</code> knows you can use syntax like <code>dict[str, int]</code>, and will suggest changing old code's <code>Dict[str, int]</code>. If you write <code>target-version = "py38"</code>, <code>ruff</code> won't suggest that (because 3.8 doesn't support it).</p>
+<p>Valid values: <code>py38</code>, <code>py39</code>, <code>py310</code>, <code>py311</code>, <code>py312</code>, <code>py313</code>, <code>py314</code>.</p>
+<h4>exclude</h4>
+<p>Which folders not to scan. <code>ruff</code> skips <code>.git</code>, <code>.venv</code>, <code>build</code>, <code>dist</code> and so on by default, but folders like <code>migrations</code> (migration files generated automatically by Django) you need to add yourself.</p>
+<h4>select</h4>
+<p>The most important field – <strong>which rule sets to turn on</strong>. <code>ruff</code> groups rules by <strong>letter prefixes</strong>:</p>
+<ul>
+<li><code>E</code>: <code>pycodestyle</code> errors (PEP 8 style rules)</li>
+<li><code>W</code>: <code>pycodestyle</code> warnings</li>
+<li><code>F</code>: <code>pyflakes</code> (unused variables, undefined names, etc.)</li>
+<li><code>I</code>: <code>isort</code> (import sorting)</li>
+<li><code>UP</code>: <code>pyupgrade</code> (suggestions to upgrade syntax)</li>
+<li><code>B</code>: <code>flake8-bugbear</code> (common bug patterns)</li>
+<li><code>SIM</code>: <code>flake8-simplify</code> (suggestions to simplify code)</li>
+<li><code>N</code>: <code>pep8-naming</code> (naming rules)</li>
+<li><code>D</code>: <code>pydocstyle</code> (docstring rules)</li>
+<li><code>S</code>: <code>flake8-bandit</code> (security checks)</li>
+<li><code>ANN</code>: <code>flake8-annotations</code> (type hints)</li>
+<li><code>C4</code>: <code>flake8-comprehensions</code> (improving comprehensions)</li>
+<li><code>RET</code>: <code>flake8-return</code> (return statement rules)</li>
+<li><code>ARG</code>: <code>flake8-unused-arguments</code> (unused arguments)</li>
+</ul>
+<p>Under each prefix are specific rules. For example, <code>E501</code> is "line too long", and <code>F401</code> is "imported but not used".</p>
+<p>For a new project's first setup, we recommend this set:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">select = [&quot;E&quot;, &quot;F&quot;, &quot;I&quot;, &quot;UP&quot;, &quot;B&quot;, &quot;SIM&quot;]</code></pre></div>
+<p><code>E + F</code> are the basics (PEP 8 + pyflakes), <code>I</code> sorts imports, <code>UP</code> upgrades old syntax, <code>B</code> catches common bugs, and <code>SIM</code> gives some simplifying suggestions. These six groups cover 80% of what you need without too much noise.</p>
+<p>If your project needs high code quality, add <code>N</code> (naming), <code>C4</code> (comprehensions), <code>RET</code> (returns) and <code>ARG</code> (unused arguments).</p>
+<p>If you also want docstring checks (<code>D</code>), be mentally prepared – <code>pydocstyle</code>'s rules are very strict, and an old project will get hundreds of warnings straight away. Try <code>select = ["D"]</code> + <code>ignore = ["D100", "D101", "D102", ...]</code> one rule at a time – don't switch them all on at once.</p>
+<h4>ignore</h4>
+<p>Ignore some specific rules. For example, some projects find 88 characters too short, so they add <code>E501</code> (line too long) to <code>ignore</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">ignore = [&quot;E501&quot;]</code></pre></div>
+<p>Or ignore a whole group:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">ignore = [&quot;D&quot;]</code></pre></div>
+<h4>per-file-ignores</h4>
+<p>Ignore rules for particular files. <code>__init__.py</code> often has imports that look unused (they're really there to re-export things). To stop those warnings:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">[tool.ruff.lint.per-file-ignores]
+&quot;__init__.py&quot; = [&quot;F401&quot;]
+&quot;tests/*&quot; = [&quot;S101&quot;, &quot;ANN&quot;]</code></pre></div>
+<p>In <code>tests/*</code>, <code>assert</code> is allowed (<code>S101</code>), and test functions don't need type hints (<code>ANN</code>).</p>
+<h4>isort sub-settings</h4>
+<p>The <code>I</code> rule set (the isort replacement) has its own sub-settings, under <code>[tool.ruff.lint.isort]</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">[tool.ruff.lint.isort]
+# Treat these as &quot;first-party&quot; packages, sorted separately from third-party ones
+known-first-party = [&quot;my_project&quot;]
+
+# The order of groups in an import block
+section-order = [
+    &quot;future&quot;,
+    &quot;standard-library&quot;,
+    &quot;third-party&quot;,
+    &quot;first-party&quot;,
+    &quot;local-folder&quot;,
+]</code></pre></div>
+<p><code>known-first-party</code> is used a lot – it tells <code>ruff</code> "<code>my_project</code> is my own package", so <code>ruff</code> puts its <code>import</code>s in a separate group, not mixed in with third-party packages.</p></article></section><section id="step-6" class="step-card read" data-kind="step" aria-label="Teaching step 7">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 07 / 22</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>A complete settings example</h3>
+<p>Here's a production-ready <code>pyproject.toml</code> setup you can copy and adapt:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">[tool.ruff]
+line-length = 88
+target-version = &quot;py312&quot;
+exclude = [
+    &quot;.git&quot;,
+    &quot;.venv&quot;,
+    &quot;build&quot;,
+    &quot;dist&quot;,
+    &quot;__pycache__&quot;,
+    &quot;migrations&quot;,
+    &quot;*.ipynb&quot;,
+]
+
+[tool.ruff.lint]
+select = [
+    &quot;E&quot;,   # pycodestyle errors
+    &quot;W&quot;,   # pycodestyle warnings
+    &quot;F&quot;,   # pyflakes
+    &quot;I&quot;,   # isort
+    &quot;UP&quot;,  # pyupgrade
+    &quot;B&quot;,   # flake8-bugbear
+    &quot;SIM&quot;, # flake8-simplify
+    &quot;C4&quot;,  # flake8-comprehensions
+    &quot;N&quot;,   # pep8-naming
+    &quot;RET&quot;, # flake8-return
+]
+ignore = [
+    &quot;E501&quot;,  # Line too long – let the formatter handle it
+    &quot;B008&quot;,  # Calling a function in a default argument – FastAPI&#x27;s Depends uses this
+]
+
+[tool.ruff.lint.per-file-ignores]
+&quot;__init__.py&quot; = [&quot;F401&quot;]
+&quot;tests/*&quot; = [&quot;S101&quot;]
+
+[tool.ruff.lint.isort]
+known-first-party = [&quot;my_project&quot;]
+
+[tool.ruff.format]
+quote-style = &quot;double&quot;
+indent-style = &quot;space&quot;
+line-ending = &quot;auto&quot;</code></pre></div>
+<p>Copy this, change <code>target-version</code> and <code>known-first-party</code>, and it should basically work.</p></article></section><section id="step-7" class="step-card read" data-kind="step" aria-label="Teaching step 8">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 08 / 22</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Common rule sets at a glance</h3>
+<p>Here are the rule sets above in one table, for easy reference:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Prefix</th>
+<th>Original tool</th>
+<th>What it checks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>E</code></td>
+<td><code>pycodestyle</code></td>
+<td>PEP 8 style errors (indentation, spaces)</td>
+</tr>
+<tr>
+<td><code>W</code></td>
+<td><code>pycodestyle</code></td>
+<td>PEP 8 style warnings</td>
+</tr>
+<tr>
+<td><code>F</code></td>
+<td><code>pyflakes</code></td>
+<td>Unused variables, undefined names, import mistakes</td>
+</tr>
+<tr>
+<td><code>I</code></td>
+<td><code>isort</code></td>
+<td>Import sorting and grouping</td>
+</tr>
+<tr>
+<td><code>UP</code></td>
+<td><code>pyupgrade</code></td>
+<td>Upgrading old syntax to newer versions</td>
+</tr>
+<tr>
+<td><code>B</code></td>
+<td><code>flake8-bugbear</code></td>
+<td>Common bug patterns</td>
+</tr>
+<tr>
+<td><code>SIM</code></td>
+<td><code>flake8-simplify</code></td>
+<td>Suggestions to simplify code</td>
+</tr>
+<tr>
+<td><code>N</code></td>
+<td><code>pep8-naming</code></td>
+<td>Naming rules (CamelCase, underscores)</td>
+</tr>
+<tr>
+<td><code>D</code></td>
+<td><code>pydocstyle</code></td>
+<td>Docstring rules</td>
+</tr>
+<tr>
+<td><code>S</code></td>
+<td><code>flake8-bandit</code></td>
+<td>Security checks</td>
+</tr>
+<tr>
+<td><code>ANN</code></td>
+<td><code>flake8-annotations</code></td>
+<td>Type hint checks</td>
+</tr>
+<tr>
+<td><code>C4</code></td>
+<td><code>flake8-comprehensions</code></td>
+<td>Improving comprehensions</td>
+</tr>
+<tr>
+<td><code>RET</code></td>
+<td><code>flake8-return</code></td>
+<td>Return statement style</td>
+</tr>
+<tr>
+<td><code>ARG</code></td>
+<td><code>flake8-unused-arguments</code></td>
+<td>Unused arguments</td>
+</tr>
+<tr>
+<td><code>PT</code></td>
+<td><code>flake8-pytest-style</code></td>
+<td>pytest style</td>
+</tr>
+<tr>
+<td><code>PL</code></td>
+<td><code>pylint</code></td>
+<td>Some pylint rules</td>
+</tr>
+<tr>
+<td><code>RUF</code></td>
+<td><code>ruff</code></td>
+<td>ruff's own original rules</td>
+</tr>
+</tbody>
+</table></div>
+<p>The full list is in the official docs, on the "Rules" page, which clearly lists each rule code, its description, and whether it can be fixed automatically. If you don't understand a rule, just search for its code.</p></article></section><section id="step-8" class="step-card read" data-kind="step" aria-label="Teaching step 9">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 09 / 22</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Automatic fixes in practice</h3>
+<p>What can <code>ruff check --fix .</code> fix? Let's look at some common ones.</p>
+<h4>F401: unused import</h4>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import os
+import sys
+
+print(sys.version)</code></pre></div>
+<p>After <code>ruff check --fix</code>:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import sys
+
+print(sys.version)</code></pre></div>
+<p><code>os</code> wasn't used, so it's deleted.</p>
+<h4>E711: compare with None using <code>is</code></h4>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">if x == None:
+    print(&quot;x is None&quot;)</code></pre></div>
+<p>After fixing:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">if x is None:
+    print(&quot;x is None&quot;)</code></pre></div>
+<p>Why change it? Because <code>==</code> calls the <code>__eq__</code> method, and some classes implement <code>__eq__</code> in strange ways (like <code>numpy</code> arrays), so comparing with <code>None</code> can give surprising results. <code>is None</code> compares <strong>identity</strong> – it only asks "is this the very same object?" – so it's always safe.</p>
+<h4>C408: unnecessary list/dict/tuple calls</h4>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">empty = list()
+d = dict()
+t = tuple()</code></pre></div>
+<p>After fixing:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">empty = []
+d = {}
+t = ()</code></pre></div>
+<p><code>list()</code> and <code>[]</code> mean the same, but <code>list()</code> has to look up the name <code>list</code> in the global namespace and then call it, which is a little slower. Writing the literal directly is faster and shorter.</p>
+<h4>UP006: use the new type hint style</h4>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">from typing import List, Dict
+
+def foo(x: List[int]) -&gt; Dict[str, int]:
+    pass</code></pre></div>
+<p>After fixing (with <code>target-version = "py39"</code> or higher):</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def foo(x: list[int]) -&gt; dict[str, int]:
+    pass</code></pre></div>
+<p>Python 3.9+ supports <code>list[int]</code> directly in type hints, so you don't need to import from <code>typing</code> any more. <code>ruff</code> upgrades it for you automatically.</p>
+<h4>UP008: use super() without arguments</h4>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class Foo(Bar):
+    def __init__(self):
+        super(Foo, self).__init__()</code></pre></div>
+<p>After fixing:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">class Foo(Bar):
+    def __init__(self):
+        super().__init__()</code></pre></div>
+<p>In Python 3, <code>super()</code> with no arguments is enough. The old Python 2 style <code>super(Foo, self)</code> is just historical baggage.</p>
+<h4>SIM108: use a conditional expression instead of if-else</h4>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">if x &gt; 0:
+    y = &quot;positive&quot;
+else:
+    y = &quot;non-positive&quot;</code></pre></div>
+<p><code>ruff</code> will suggest (this one isn't fixed automatically, because it affects readability and needs a human to decide):</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">y = &quot;positive&quot; if x &gt; 0 else &quot;non-positive&quot;</code></pre></div>
+<h4>I001: import sorting</h4>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import sys
+from my_project import utils
+import os
+import requests</code></pre></div>
+<p>After fixing:</p>
+<div class="cb not-prose" data-mode="local"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Run it on your own computer</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">import os
+import sys
+
+import requests
+
+from my_project import utils</code></pre></div>
+<p><code>ruff</code> sorts imports into three groups – "standard library → third-party → first-party" – with a blank line between groups, and alphabetical order inside each group. This is the same as running <code>isort</code>.</p>
+<h4>Unsafe fixes</h4>
+<p>Some fixes <code>ruff</code> won't do by default, because they might change behaviour. For example, changing <code>dict()</code> to <code>{}</code> – in 99% of cases they're the same, but if the name <code>dict</code> has been overwritten in your code, the behaviour changes. These are called <strong>unsafe fixes</strong>, and you need <code>--unsafe-fixes</code> to apply them:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">ruff check --fix --unsafe-fixes .</code></pre></div>
+<p>If you're not sure, run the safe fixes first with <code>ruff check --fix .</code>, then run <code>--unsafe-fixes</code> separately and review the changes.</p></article></section><section id="step-9" class="step-card read" data-kind="step" aria-label="Teaching step 10">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 10 / 22</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>ruff format: the black replacement</h3>
+<p><code>ruff format .</code> does almost exactly what <code>black .</code> does:</p>
+<ul>
+<li>Line length 88 by default</li>
+<li>Double quotes for strings by default</li>
+<li>4-space indentation</li>
+<li>Automatically breaks function arguments that are too long onto new lines</li>
+<li>Lays out dict, list and <code>set</code> literals in a consistent style</li>
+</ul>
+<p>Before formatting:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def foo(a,b,c, d ):
+    return  {  &#x27;name&#x27;:a,&#x27;age&#x27;:b,&#x27;list&#x27;:[1,2,3]  }</code></pre></div>
+<p>After <code>ruff format .</code>:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def foo(a, b, c, d):
+    return {&quot;name&quot;: a, &quot;age&quot;: b, &quot;list&quot;: [1, 2, 3]}</code></pre></div>
+<p>Almost exactly the same as <code>black</code>'s output. Astral's docs clearly say "<code>ruff format</code> is 99.9% compatible with <code>black</code>", so moving from <code>black</code> won't suddenly change your code style.</p>
+<p>There are a few small differences, mainly in edge cases (extremely long lines, special magic comments and so on). Run <code>ruff format</code> and check <code>git diff</code> to see them.</p>
+<p><code>ruff format</code> also has a <code>--check</code> mode that checks without changing anything:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">ruff format --check .</code></pre></div>
+<p>If any files need formatting, the command returns a non-zero exit code. You can use this in CI to block pull requests that "forgot to format before committing".</p></article></section><section id="step-10" class="step-card read" data-kind="step" aria-label="Teaching step 11">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 11 / 22</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Connecting to pre-commit</h3>
+<p><code>pre-commit</code> is a git hook framework that runs checks automatically when you <code>git commit</code>. Install it:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv add --dev pre-commit
+pre-commit install</code></pre></div>
+<p>Then create <code>.pre-commit-config.yaml</code> in the project's root folder:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">YAML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-yaml">repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.0
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format</code></pre></div>
+<p>This config does two things:</p>
+<ol>
+<li>The <code>ruff</code> hook: runs <code>ruff check --fix</code>, fixing whatever can be fixed automatically</li>
+<li>The <code>ruff-format</code> hook: runs <code>ruff format</code></li>
+</ol>
+<p>Every time you <code>git commit</code>, <code>pre-commit</code> runs these two hooks automatically, and only lets the commit through if they pass.</p>
+<p>"What do I put for <code>rev: v0.8.0</code>?" <code>pre-commit</code> has a command that fills in the newest version automatically:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">pre-commit autoupdate</code></pre></div>
+<p>Run it, and the version number in <code>.pre-commit-config.yaml</code> is updated to the newest. I suggest running this every few months.</p>
+<p>After installing <code>pre-commit</code> for the first time, you can run it by hand once:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">pre-commit run --all-files</code></pre></div>
+<p>This goes through every file in the project and clears out all the old problems in one go.</p>
+<p>"Why not just use <code>ruff</code>'s own hook?" some of you will ask. <code>ruff</code> doesn't have its own git hook system – it relies on a general framework like <code>pre-commit</code>. <code>pre-commit</code> is the standard solution in the Python world, and besides <code>ruff</code> it can run other hooks too (like <code>mypy</code> and <code>prettier</code>), all managed in one place.</p></article></section><section id="step-11" class="step-card read" data-kind="step" aria-label="Teaching step 12">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 12 / 22</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Connecting to GitHub Actions CI</h3>
+<p>Using <code>ruff</code> in CI is very simple. Create <code>.github/workflows/lint.yml</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">YAML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-yaml">name: Lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  ruff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+
+      - name: Install ruff
+        run: uv tool install ruff
+
+      - name: Run ruff check
+        run: ruff check --output-format=github .
+
+      - name: Run ruff format check
+        run: ruff format --check .</code></pre></div>
+<p>The <code>--output-format=github</code> option is important – it outputs warnings in a format GitHub Actions understands, so the pull request page shows a little marker right on the problem line. Hover over it to see the rule and explanation. Much better than a plain text log.</p>
+<p>There's also an official action that's even easier:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">YAML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-yaml">- name: Run ruff
+  uses: astral-sh/ruff-action@v3</code></pre></div>
+<p>This action installs <code>ruff</code> and runs <code>ruff check</code> automatically – one line. If you're interested, search GitHub for <code>astral-sh/ruff-action</code> to read its docs.</p>
+<p>As for CI time, the <code>ruff</code> part usually finishes within 5 seconds (including setting up the environment) – much faster than the old <code>flake8 + black + isort</code> set.</p>
+<p>"Can it fix things automatically on a pull request and commit them back?" It can, but you have to handle permissions and forked pull requests carefully. The usual approach is: CI only checks, doesn't fix; developers fix things locally and push again. Automatic fix pull requests need a special bot account + a GitHub App, which is beyond this chapter.</p></article></section><section id="step-12" class="step-card read" data-kind="step" aria-label="Teaching step 13">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 13 / 22</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Connecting to your editor</h3>
+<p>The last mile for code style tools is your editor. Once it's set up, every time you save a file, your editor runs <code>ruff</code> automatically, and problems show up right on the lines they're in. This experience can't be replaced by CI or <code>pre-commit</code>: CI is the safety net, the editor is for every day.</p>
+<h4>VS Code</h4>
+<p>Install this extension: <a href="https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff">Ruff (charliermarsh.ruff)</a></p>
+<p>Then add a few lines to <code>settings.json</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">JSON</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-json">{
+    &quot;[python]&quot;: {
+        &quot;editor.defaultFormatter&quot;: &quot;charliermarsh.ruff&quot;,
+        &quot;editor.formatOnSave&quot;: true,
+        &quot;editor.codeActionsOnSave&quot;: {
+            &quot;source.fixAll.ruff&quot;: &quot;explicit&quot;,
+            &quot;source.organizeImports.ruff&quot;: &quot;explicit&quot;
+        }
+    }
+}</code></pre></div>
+<p>The effect:</p>
+<ul>
+<li>Runs <code>ruff format</code> automatically when you save a file</li>
+<li>Applies every lint fix that can be done automatically</li>
+<li>Tidies up imports automatically</li>
+</ul>
+<p>While you write code, every <code>Ctrl+S</code> runs <code>ruff</code> in the background, and your code tidies itself up.</p>
+<h4>PyCharm</h4>
+<p>PyCharm has an officially supported <code>Ruff</code> plugin. Go to <code>Settings → Plugins</code>, search for "Ruff" and install it.</p>
+<p>After installing:</p>
+<ul>
+<li><code>Settings → Tools → Ruff</code>: tick "Use ruff format" and "Run ruff on save"</li>
+<li><code>Settings → Editor → Code Style → Python</code>: change the line length to 88, to match <code>ruff</code></li>
+</ul>
+<p>The nice thing about PyCharm is that checks show live while you edit, without waiting for a save. Problem code gets a yellow wavy line – hover over it to see the rule.</p>
+<h4>Neovim / Vim</h4>
+<p>Install <code>ruff</code>'s LSP server through <code>nvim-lspconfig</code> + <code>mason.nvim</code>:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Lua</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">require(&quot;lspconfig&quot;).ruff.setup({})</code></pre></div>
+<p>Or use the <code>ruff</code> integration in <code>null-ls</code> / <code>none-ls</code>. Which one depends on your Neovim config framework.</p></article></section><section id="step-13" class="step-card read" data-kind="step" aria-label="Teaching step 14">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 14 / 22</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Moving over from black + flake8 + isort</h3>
+<p>How do you switch an old project? Here are the steps:</p>
+<h4>Step 1: install ruff</h4>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv add --dev ruff</code></pre></div>
+<h4>Step 2: write the ruff settings</h4>
+<p>Using the "complete settings example" above, write a <code>[tool.ruff]</code> section into <code>pyproject.toml</code>. Match key settings like <code>line-length</code> and <code>target-version</code> to your old <code>black</code> settings.</p>
+<h4>Step 3: run it and look at the differences</h4>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">ruff check .
+ruff format --check .</code></pre></div>
+<p><code>ruff check .</code> shows lint warnings, and <code>ruff format --check .</code> shows formatting differences.</p>
+<p><code>ruff format</code> is 99.9% compatible with <code>black</code>, but a few files will still change. Run <code>ruff format .</code> first, look at <code>git diff</code>, and commit once you're happy with the changes.</p>
+<h4>Step 4: remove the old tools</h4>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">uv remove --dev black flake8 isort pyupgrade</code></pre></div>
+<p>If the project still uses <code>pip</code> + <code>requirements-dev.txt</code>, remove them from there.</p>
+<h4>Step 5: remove the old settings</h4>
+<p>Delete <code>.flake8</code>, delete the <code>[flake8]</code> section in <code>setup.cfg</code>, and delete the <code>[tool.black]</code> and <code>[tool.isort]</code> sections in <code>pyproject.toml</code>.</p>
+<h4>Step 6: update pre-commit and CI</h4>
+<p>In <code>.pre-commit-config.yaml</code>, remove the <code>black</code>, <code>flake8</code> and <code>isort</code> hooks and replace them with <code>ruff</code>'s. Same for CI.</p>
+<h4>Step 7: tell the team</h4>
+<p>Send the team a message: "From [date], this project uses ruff. Please pull the latest code and run <code>pre-commit install</code> to reinstall the hooks." This step usually goes smoothly, because <code>ruff format</code> is compatible with <code>black</code>, so code already formatted by <code>black</code> won't change much.</p></article></section><section id="step-14" class="step-card read" data-kind="step" aria-label="Teaching step 15">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 15 / 22</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>ruff vs black + flake8 + isort – comparison table</h3>
+<p>Finally, a comparison table so you've got the full picture:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>The old combo</th>
+<th>ruff</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Number of tools</td>
+<td>At least 3 (black + flake8 + isort), more with pyupgrade and pydocstyle</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Where settings live</td>
+<td>Scattered across <code>pyproject.toml</code>, <code>.flake8</code>, <code>setup.cfg</code>, etc.</td>
+<td>All in <code>pyproject.toml</code></td>
+</tr>
+<tr>
+<td>Speed</td>
+<td>Seconds to tens of seconds</td>
+<td>Usually under 1 second</td>
+</tr>
+<tr>
+<td>Number of rules</td>
+<td>About 500 between them</td>
+<td>800+</td>
+</tr>
+<tr>
+<td>Automatic fixes</td>
+<td>Partly (black, isort, pyupgrade fix automatically; flake8 doesn't)</td>
+<td>Most rules</td>
+</tr>
+<tr>
+<td>Written in</td>
+<td>Python</td>
+<td>Rust</td>
+</tr>
+<tr>
+<td>Installation</td>
+<td>Python packages</td>
+<td>A single program (can also be pip-installed)</td>
+</tr>
+<tr>
+<td>Live lint in the editor</td>
+<td>Slow, poor experience</td>
+<td>Fast, smooth experience</td>
+</tr>
+<tr>
+<td>pyproject.toml support</td>
+<td>Partial (flake8 doesn't support it)</td>
+<td>Full</td>
+</tr>
+</tbody>
+</table></div></article></section><section id="step-15" class="step-card read" data-kind="step" aria-label="Teaching step 16">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 16 / 22</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>ruff's own rules: the RUF series</h3>
+<p>Besides copying other tools' rules, <code>ruff</code> has invented some rules of its own, with the prefix <code>RUF</code>. Let's look at a few common ones.</p>
+<h4>RUF001/RUF002/RUF003: confusable characters</h4>
+<p>If your code has characters that "look like English letters but are actually Greek letters or full-width characters", it triggers <code>RUF001</code>. For example:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">result = data[&quot;nаme&quot;]  # The а here is the Cyrillic letter а, not the English a</code></pre></div>
+<p>You can hardly see the difference, but when the program runs it can't find the key and raises a <code>KeyError</code>. <code>ruff</code> spots characters like this and warns you, saving you from debugging until you doubt everything.</p>
+<h4>RUF005: use unpacking instead of joining lists</h4>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">new_list = [1, 2, 3] + list(other)</code></pre></div>
+<p><code>ruff</code> suggests changing it to:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">new_list = [1, 2, 3, *other]</code></pre></div>
+<p>Unpacking is faster and shorter, and it can join any iterable directly, without turning it into a list first.</p>
+<h4>RUF013: implicit Optional types</h4>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def greet(name: str = None):
+    print(f&quot;Hello, {name}&quot;)</code></pre></div>
+<p>This is very common, but there's a problem – <code>name</code> defaults to <code>None</code>, but its type hint says <code>str</code>. They don't match. <code>ruff</code> suggests:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">def greet(name: str | None = None):
+    print(f&quot;Hello, {name}&quot;)</code></pre></div>
+<p>The old Python way was <code>Optional[str]</code>; in newer Python (3.10+), <code>str | None</code> is cleaner.</p>
+<h4>RUF100: unused noqa</h4>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">x = 1  # noqa: F401</code></pre></div>
+<p>If this line actually has no lint warnings, that <code># noqa</code> is just rubbish. <code>ruff</code> specifically marks these "out-of-date noqa" comments, reminding you to delete them.</p>
+<p>This rule is really useful – after moving an old project to <code>ruff</code>, most of the <code># noqa</code> comments you added for <code>flake8</code> will be out of date, and <code>RUF100</code> finds them all.</p></article></section><section id="step-16" class="step-card read" data-kind="step" aria-label="Teaching step 17">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 17 / 22</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>A common trap: how it relates to mypy</h3>
+<p>Lots of people ask: "Can <code>ruff</code> replace <code>mypy</code>?"</p>
+<p><strong>No.</strong></p>
+<p><code>ruff</code> is a linter + formatter. It checks "code style and common error patterns". <code>mypy</code> is a <strong>type checker</strong>. It works out types across the whole program, like "is the type of this variable right for that function?". They're tools for different jobs, and you use them together.</p>
+<p>The right approach:</p>
+<ul>
+<li>Use <code>ruff</code> for style, imports, obvious bugs and syntax upgrades</li>
+<li>Use <code>mypy</code> or <code>pyright</code> for types</li>
+</ul>
+<p>Run both in CI:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">YAML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-yaml">- run: ruff check .
+- run: ruff format --check .
+- run: mypy .</code></pre></div>
+<p><code>ruff</code> does have some rules (prefix <code>ANN</code>) that do basic type hint checks, like "this function has no return type". But it <strong>doesn't</strong> really work out whether types are consistent. For complicated type problems, you still need <code>mypy</code>.</p></article></section><section id="step-17" class="step-card read" data-kind="step" aria-label="Teaching step 18">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 18 / 22</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>An advanced trick: different rules for different folders</h3>
+<p>Big projects often want "strict rules for the core code, relaxed rules for the scripts folder". Since 0.5, <code>ruff</code> supports <strong>overriding settings for sub-folders</strong>, using <code>[tool.ruff.lint.per-file-ignores]</code> with glob patterns. We saw a simple use earlier; here's a more complicated one:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">[tool.ruff.lint.per-file-ignores]
+# Test files may use assert, and can be a bit longer
+&quot;tests/**/*.py&quot; = [&quot;S101&quot;, &quot;ANN&quot;, &quot;D&quot;]
+
+# One-off scripts – the loosest rules
+&quot;scripts/*.py&quot; = [&quot;ALL&quot;]
+
+# Documentation example code – print is allowed
+&quot;docs/examples/*.py&quot; = [&quot;T20&quot;]
+
+# Leave migration files alone
+&quot;**/migrations/*.py&quot; = [&quot;E&quot;, &quot;F&quot;, &quot;I&quot;, &quot;UP&quot;, &quot;B&quot;]</code></pre></div>
+<p><code>"ALL"</code> is a special value meaning "ignore every rule". So the <code>scripts/*.py</code> line means <code>ruff</code> doesn't check anything in the scripts folder – write it however you like.</p>
+<h4>Nested settings</h4>
+<p>If your project is a <strong>monorepo</strong> with several sub-projects, and each one wants its own <code>ruff</code> settings, put a separate <code>pyproject.toml</code> or <code>ruff.toml</code> in the sub-folder:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Text</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="nohighlight">mono/
+├── pyproject.toml          # Root settings
+├── service-a/
+│   ├── pyproject.toml      # service-a&#x27;s own settings (optional)
+│   └── ...
+└── service-b/
+    ├── ruff.toml           # service-b&#x27;s own settings
+    └── ...</code></pre></div>
+<p>When <code>ruff</code> checks each file, it looks upwards for the nearest settings file. The sub-projects don't interfere with each other.</p></article></section><section id="step-18" class="step-card read" data-kind="step" aria-label="Teaching step 19">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 19 / 22</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>An advanced trick: noqa comments</h3>
+<p>Sometimes you really do want <code>ruff</code> to be quiet. For example, a line uses <code>eval()</code> for a very good reason, but <code>S307</code> (<code>flake8-bandit</code>) warns about it. Then you can add a <code># noqa</code> comment:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">result = eval(user_input)  # noqa: S307</code></pre></div>
+<p><code># noqa: S307</code> means "ignore rule S307 on this line". Separate several rules with commas:</p>
+<div class="cb not-prose" data-mode="context"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Python</span><span class="cb-usage">· Read with the text above</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-python">result = eval(user_input)  # noqa: S307, S102</code></pre></div>
+<p>A bare <code># noqa</code> (without a rule code) works too, but isn't recommended – it ignores <strong>every</strong> rule on that line, like switching off all the lights. Naming the rule is the most precise.</p>
+<p>Before writing <code># noqa</code>, think: is the rule unreasonable, or should the code itself be changed? Most of the time, it's the second one.</p></article></section><section id="step-19" class="step-card read" data-kind="step" aria-label="Teaching step 20">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 20 / 22</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>A few easy traps</h3>
+<p>Finally, here are some traps that even experienced programmers fall into after moving to <code>ruff</code>. Knowing them in advance will save you time.</p>
+<h4>Trap 1: the wrong prefix in select, so rules don't turn on</h4>
+<p>How specific the prefix is decides how many rules you get. Prefixes match like the start of a word:</p>
+<ul>
+<li><code>"E"</code>: turns on every rule starting with E (E1xx, E2xx, E5xx…)</li>
+<li><code>"E1"</code>: turns on every rule starting with E1 (E1xx)</li>
+<li><code>"E101"</code>: turns on only rule E101</li>
+</ul>
+<p>If a prefix doesn't match the rules you expected, nothing you wanted gets turned on – and you won't get an error about it. If you can't remember, start with broad groups like <code>["E", "F", "I"]</code> – as long as it works.</p>
+<h4>Trap 2: writing both select and ignore</h4>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">select = [&quot;E&quot;]
+ignore = [&quot;E501&quot;]</code></pre></div>
+<p>This means "turn on the whole E group, except E501". It's completely valid – <strong>ignore wins</strong>. You'll often see this "turn on a group + leave out one or two" pattern. It's standard.</p>
+<h4>Trap 3: ruff format doesn't read [tool.ruff.lint] settings</h4>
+<p><code>[tool.ruff.lint]</code> controls lint, and <code>[tool.ruff.format]</code> controls formatting – <strong>they're completely separate</strong>. The most common trap: you set <code>quote-style = "double"</code> in <code>[tool.ruff.lint]</code>, but <code>ruff format</code> still uses the default style, because <code>quote-style</code> belongs in <code>[tool.ruff.format]</code>.</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini"># Wrong place
+[tool.ruff.lint]
+quote-style = &quot;double&quot;  # Writing it here does nothing
+
+# Right place
+[tool.ruff.format]
+quote-style = &quot;double&quot;</code></pre></div>
+<h4>Trap 4: preview rules</h4>
+<p><code>ruff</code> also has a set of <strong>preview</strong> rules still being developed, which are off by default. To turn them on:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">TOML</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-ini">[tool.ruff.lint]
+preview = true</code></pre></div>
+<p>Or use <code>ruff check --preview</code> on the command line. The good thing about preview rules is getting new features early. The bad thing is that rule codes and behaviour might change between versions. For production projects, play it safe – <strong>don't turn on preview by default</strong>.</p>
+<h4>Trap 5: forgetting to update the pre-commit hook version</h4>
+<p>The <code>rev: v0.8.0</code> in your <code>.pre-commit-config.yaml</code> is fixed – when <code>ruff</code> releases a new version, it doesn't sync automatically. Six months later, the old <code>ruff</code> can't run the new rules, and different team members having different <code>ruff</code> versions causes problems too.</p>
+<p>Suggestion: run <code>pre-commit autoupdate</code> every month or every quarter to bring all the hook versions up to date. Update CI at the same time.</p></article></section><section id="step-20" class="step-card read" data-kind="step" aria-label="Teaching step 21">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 21 / 22</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Summary</h3>
+<p>After this chapter, you should be able to:</p>
+<ol>
+<li>Install <code>ruff</code>: <code>uv add --dev ruff</code></li>
+<li>Run <code>ruff</code>: <code>ruff check --fix .</code> and <code>ruff format .</code></li>
+<li>Configure <code>ruff</code>: write <code>[tool.ruff.lint] select = ["E", "F", "I", "UP", "B", "SIM"]</code> in <code>pyproject.toml</code></li>
+<li>Connect <code>pre-commit</code>: write <code>.pre-commit-config.yaml</code> and add the <code>ruff-pre-commit</code> repo</li>
+<li>Connect <code>CI</code>: use <code>astral-sh/ruff-action@v3</code> in GitHub Actions</li>
+<li>Connect your editor: install the <code>charliermarsh.ruff</code> extension in VS Code and set it to format on save</li>
+</ol>
+<p>Once this workflow is set up, a new project goes from nothing to "automatic checks, automatic fixes, a CI safety net and live editor feedback" in ten minutes. Leave code style to <code>ruff</code>, and use the energy you save to write the code that really matters.</p>
+<p>In the next chapter, we'll look at <code>pytest</code> – how to write good tests for Python projects. <code>uv</code> for dependencies, <code>ruff</code> for style, <code>pytest</code> for tests – with these three, your 2026 Python tooling is complete.</p></article></section><section id="step-21" class="step-card read" data-kind="step" aria-label="Teaching step 22">
+<div class="step-badge"><span class="sb-dot"></span><span class="mono">Teaching 22 / 22</span><span class="sb-read" hidden>· read</span></div>
+<article class="prose step-prose"><h3>Deal with one check result you understand at a time</h3>
+<p>When a code checker outputs a long list of rule codes, first pick <strong>one</strong> problem you can explain. Don't rush to turn on every rule. Do a read-only check in the final exercise's folder:</p>
+<div class="cb not-prose" data-mode="plain"><div class="cb-bar"><div class="cb-cap"><span class="cb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cb-lang">Bash</span></div><div class="cb-actions"><button type="button" class="cb-copy" aria-label="Copy code" title="Copy the code">Copy</button></div></div><pre class="cb-code" tabindex="0"><code class="language-bash">ruff check .
+ruff format --check .</code></pre></div>
+<p>The first command checks the rules that are turned on; the second checks whether the formatting needs adjusting. The actual output depends on the version, settings and what's in your files – it doesn't need to match some old screenshot exactly.</p>
+<p>If you find an unused import, first find it, make sure it really isn't used, and then fix it in your own practice file. Write down the rule code, the reason and the change, then run the check again. When you meet a rule you don't know, look it up in the <a href="https://docs.astral.sh/ruff/rules/">Ruff rules list</a> to see what it checks and whether there are situations where it doesn't apply.</p>
+<p>Next, deliberately break the addition in the totals function, and check again. You'll see that a style checker doesn't decide "what the total study time should be". Running tests is still necessary. And the other way round: passing tests doesn't mean the code is clear and easy to read. Both kinds of checks are useful in their own way.</p>
+<p>Work in your own practice folder first. Before letting a tool change things automatically, read the reason it reports. After changing, run the tests again to confirm the program's results haven't changed.</p></article></section><section id="lesson-end" aria-label="Chapter summary"><nav aria-label="Chapter navigation" class="chapter-nav"><div class="cn-grid"><a class="chap-nav prev focus-ring" href="/lessons/python23/pyproject-uv/read/"><span class="cn-label">← Previous chapter</span><span class="cn-title">23 · pyproject.toml + uv</span></a><div class="cn-mid"><span>ruff: all-in-one code checking</span></div><a class="chap-nav next focus-ring" href="/lessons/python25/pytest/read/"><span class="cn-label">Next chapter →</span><span class="cn-title">25 · pytest: the testing framework</span></a></div></nav></section></article></div>
+    <aside class="lesson-sidebar right" aria-label="This chapter"><nav aria-label="This chapter's contents"><div class="side-label up">In this chapter</div><p class="toc-chapter">ruff: all-in-one code checking</p><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">ruff: one tool to replace black + flake8 + isort + pyupgrade</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">What was so annoying about the old way?</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">What is ruff?</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">Installing</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">Running it for the first time</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">Settings: pyproject.toml</span></a></li><li class="toc-li" data-target="step-6"><a href="#step-6" class="toc-link focus-ring"><span class="toc-kind">Teaching 07</span><span class="toc-title">A complete settings example</span></a></li><li class="toc-li" data-target="step-7"><a href="#step-7" class="toc-link focus-ring"><span class="toc-kind">Teaching 08</span><span class="toc-title">Common rule sets at a glance</span></a></li><li class="toc-li" data-target="step-8"><a href="#step-8" class="toc-link focus-ring"><span class="toc-kind">Teaching 09</span><span class="toc-title">Automatic fixes in practice</span></a></li><li class="toc-li" data-target="step-9"><a href="#step-9" class="toc-link focus-ring"><span class="toc-kind">Teaching 10</span><span class="toc-title">ruff format: the black replacement</span></a></li><li class="toc-li" data-target="step-10"><a href="#step-10" class="toc-link focus-ring"><span class="toc-kind">Teaching 11</span><span class="toc-title">Connecting to pre-commit</span></a></li><li class="toc-li" data-target="step-11"><a href="#step-11" class="toc-link focus-ring"><span class="toc-kind">Teaching 12</span><span class="toc-title">Connecting to GitHub Actions CI</span></a></li><li class="toc-li" data-target="step-12"><a href="#step-12" class="toc-link focus-ring"><span class="toc-kind">Teaching 13</span><span class="toc-title">Connecting to your editor</span></a></li><li class="toc-li" data-target="step-13"><a href="#step-13" class="toc-link focus-ring"><span class="toc-kind">Teaching 14</span><span class="toc-title">Moving over from black + flake8 + isort</span></a></li><li class="toc-li" data-target="step-14"><a href="#step-14" class="toc-link focus-ring"><span class="toc-kind">Teaching 15</span><span class="toc-title">ruff vs black + flake8 + isort – comparison table</span></a></li><li class="toc-li" data-target="step-15"><a href="#step-15" class="toc-link focus-ring"><span class="toc-kind">Teaching 16</span><span class="toc-title">ruff&#x27;s own rules: the RUF series</span></a></li><li class="toc-li" data-target="step-16"><a href="#step-16" class="toc-link focus-ring"><span class="toc-kind">Teaching 17</span><span class="toc-title">A common trap: how it relates to mypy</span></a></li><li class="toc-li" data-target="step-17"><a href="#step-17" class="toc-link focus-ring"><span class="toc-kind">Teaching 18</span><span class="toc-title">An advanced trick: different rules for different folders</span></a></li><li class="toc-li" data-target="step-18"><a href="#step-18" class="toc-link focus-ring"><span class="toc-kind">Teaching 19</span><span class="toc-title">An advanced trick: noqa comments</span></a></li><li class="toc-li" data-target="step-19"><a href="#step-19" class="toc-link focus-ring"><span class="toc-kind">Teaching 20</span><span class="toc-title">A few easy traps</span></a></li><li class="toc-li" data-target="step-20"><a href="#step-20" class="toc-link focus-ring"><span class="toc-kind">Teaching 21</span><span class="toc-title">Summary</span></a></li><li class="toc-li" data-target="step-21"><a href="#step-21" class="toc-link focus-ring"><span class="toc-kind">Teaching 22</span><span class="toc-title">Deal with one check result you understand at a time</span></a></li></ol></nav></aside>
+  </div>
+  <dialog class="dir-dialog" aria-labelledby="dir-title"><div class="dd-inner"><div class="dd-head"><h2 id="dir-title">Contents</h2><button type="button" class="dd-close focus-ring">Close</button></div>
+  <div class="dd-tabs" aria-label="Contents scope"><button type="button" class="dd-tab focus-ring" data-tab="all" aria-pressed="true">All lessons</button><button type="button" class="dd-tab focus-ring" data-tab="chapter" aria-pressed="false">This chapter</button></div>
+  <div class="dd-body"><div class="dd-pane" data-pane="all"><p class="side-label">All lessons</p><ol class="course-list"><li><a class="course-link focus-ring" href="/lessons/python0/why-python/read/"><span class="cl-num">00</span><span>Why learn Python</span></a></li><li><a class="course-link focus-ring" href="/lessons/python1/intro-and-hello-world/read/"><span class="cl-num">01</span><span>Installing Python &amp; your first program</span></a></li><li><a class="course-link focus-ring" href="/lessons/python2/data-types-and-variables/read/"><span class="cl-num">02</span><span>Basic data types &amp; variables</span></a></li><li><a class="course-link focus-ring" href="/lessons/python3/list-and-tuple/read/"><span class="cl-num">03</span><span>List &amp; Tuple</span></a></li><li><a class="course-link focus-ring" href="/lessons/python4/dict-and-set/read/"><span class="cl-num">04</span><span>Dict &amp; Set</span></a></li><li><a class="course-link focus-ring" href="/lessons/python5/conditions-and-loops/read/"><span class="cl-num">05</span><span>Conditions &amp; loops</span></a></li><li><a class="course-link focus-ring" href="/lessons/python6/functions/read/"><span class="cl-num">06</span><span>Functions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python7/iteration/read/"><span class="cl-num">07</span><span>Iteration</span></a></li><li><a class="course-link focus-ring" href="/lessons/python8/oop/read/"><span class="cl-num">08</span><span>Object-oriented programming</span></a></li><li><a class="course-link focus-ring" href="/lessons/python9/modules/read/"><span class="cl-num">09</span><span>Modules</span></a></li><li><a class="course-link focus-ring" href="/lessons/python10/magic-methods/read/"><span class="cl-num">10</span><span>Magic methods</span></a></li><li><a class="course-link focus-ring" href="/lessons/python11/enum/read/"><span class="cl-num">11</span><span>Enum classes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python12/metaclass/read/"><span class="cl-num">12</span><span>Metaclasses</span></a></li><li><a class="course-link focus-ring" href="/lessons/python13/threading/read/"><span class="cl-num">13</span><span>Threads &amp; processes</span></a></li><li><a class="course-link focus-ring" href="/lessons/python14/regex/read/"><span class="cl-num">14</span><span>Regular expressions</span></a></li><li><a class="course-link focus-ring" href="/lessons/python15/closure/read/"><span class="cl-num">15</span><span>Closures</span></a></li><li><a class="course-link focus-ring" href="/lessons/python16/decorator/read/"><span class="cl-num">16</span><span>Decorators</span></a></li><li><a class="course-link focus-ring" href="/lessons/python17/readable-code/read/"><span class="cl-num">17</span><span>Readable code</span></a></li><li><a class="course-link focus-ring" href="/lessons/python18/pathlib/read/"><span class="cl-num">18</span><span>pathlib: modern path handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python19/exception-handling/read/"><span class="cl-num">19</span><span>Exception handling</span></a></li><li><a class="course-link focus-ring" href="/lessons/python20/dataclass/read/"><span class="cl-num">20</span><span>dataclass</span></a></li><li><a class="course-link focus-ring" href="/lessons/python21/context-manager/read/"><span class="cl-num">21</span><span>Context managers (with)</span></a></li><li><a class="course-link focus-ring" href="/lessons/python22/async/read/"><span class="cl-num">22</span><span>async / await</span></a></li><li><a class="course-link focus-ring" href="/lessons/python23/pyproject-uv/read/"><span class="cl-num">23</span><span>pyproject.toml + uv</span></a></li><li><a class="course-link focus-ring active" href="/lessons/python24/ruff/read/"><span class="cl-num">24</span><span>ruff: all-in-one code checking</span></a></li><li><a class="course-link focus-ring" href="/lessons/python25/pytest/read/"><span class="cl-num">25</span><span>pytest: the testing framework</span></a></li><li><a class="course-link focus-ring" href="/lessons/python26/logging/read/"><span class="cl-num">26</span><span>Logging</span></a></li><li><a class="course-link focus-ring" href="/lessons/python27/pypi/read/"><span class="cl-num">27</span><span>Publishing to PyPI</span></a></li><li><a class="course-link focus-ring" href="/lessons/python28/whats-next/read/"><span class="cl-num">28</span><span>After you finish</span></a></li></ol></div><div class="dd-pane" data-pane="chapter" hidden><ol class="toc-list"><li class="toc-li" data-target="step-0"><a href="#step-0" class="toc-link focus-ring"><span class="toc-kind">Teaching 01</span><span class="toc-title">ruff: one tool to replace black + flake8 + isort + pyupgrade</span></a></li><li class="toc-li" data-target="step-1"><a href="#step-1" class="toc-link focus-ring"><span class="toc-kind">Teaching 02</span><span class="toc-title">What was so annoying about the old way?</span></a></li><li class="toc-li" data-target="step-2"><a href="#step-2" class="toc-link focus-ring"><span class="toc-kind">Teaching 03</span><span class="toc-title">What is ruff?</span></a></li><li class="toc-li" data-target="step-3"><a href="#step-3" class="toc-link focus-ring"><span class="toc-kind">Teaching 04</span><span class="toc-title">Installing</span></a></li><li class="toc-li" data-target="step-4"><a href="#step-4" class="toc-link focus-ring"><span class="toc-kind">Teaching 05</span><span class="toc-title">Running it for the first time</span></a></li><li class="toc-li" data-target="step-5"><a href="#step-5" class="toc-link focus-ring"><span class="toc-kind">Teaching 06</span><span class="toc-title">Settings: pyproject.toml</span></a></li><li class="toc-li" data-target="step-6"><a href="#step-6" class="toc-link focus-ring"><span class="toc-kind">Teaching 07</span><span class="toc-title">A complete settings example</span></a></li><li class="toc-li" data-target="step-7"><a href="#step-7" class="toc-link focus-ring"><span class="toc-kind">Teaching 08</span><span class="toc-title">Common rule sets at a glance</span></a></li><li class="toc-li" data-target="step-8"><a href="#step-8" class="toc-link focus-ring"><span class="toc-kind">Teaching 09</span><span class="toc-title">Automatic fixes in practice</span></a></li><li class="toc-li" data-target="step-9"><a href="#step-9" class="toc-link focus-ring"><span class="toc-kind">Teaching 10</span><span class="toc-title">ruff format: the black replacement</span></a></li><li class="toc-li" data-target="step-10"><a href="#step-10" class="toc-link focus-ring"><span class="toc-kind">Teaching 11</span><span class="toc-title">Connecting to pre-commit</span></a></li><li class="toc-li" data-target="step-11"><a href="#step-11" class="toc-link focus-ring"><span class="toc-kind">Teaching 12</span><span class="toc-title">Connecting to GitHub Actions CI</span></a></li><li class="toc-li" data-target="step-12"><a href="#step-12" class="toc-link focus-ring"><span class="toc-kind">Teaching 13</span><span class="toc-title">Connecting to your editor</span></a></li><li class="toc-li" data-target="step-13"><a href="#step-13" class="toc-link focus-ring"><span class="toc-kind">Teaching 14</span><span class="toc-title">Moving over from black + flake8 + isort</span></a></li><li class="toc-li" data-target="step-14"><a href="#step-14" class="toc-link focus-ring"><span class="toc-kind">Teaching 15</span><span class="toc-title">ruff vs black + flake8 + isort – comparison table</span></a></li><li class="toc-li" data-target="step-15"><a href="#step-15" class="toc-link focus-ring"><span class="toc-kind">Teaching 16</span><span class="toc-title">ruff&#x27;s own rules: the RUF series</span></a></li><li class="toc-li" data-target="step-16"><a href="#step-16" class="toc-link focus-ring"><span class="toc-kind">Teaching 17</span><span class="toc-title">A common trap: how it relates to mypy</span></a></li><li class="toc-li" data-target="step-17"><a href="#step-17" class="toc-link focus-ring"><span class="toc-kind">Teaching 18</span><span class="toc-title">An advanced trick: different rules for different folders</span></a></li><li class="toc-li" data-target="step-18"><a href="#step-18" class="toc-link focus-ring"><span class="toc-kind">Teaching 19</span><span class="toc-title">An advanced trick: noqa comments</span></a></li><li class="toc-li" data-target="step-19"><a href="#step-19" class="toc-link focus-ring"><span class="toc-kind">Teaching 20</span><span class="toc-title">A few easy traps</span></a></li><li class="toc-li" data-target="step-20"><a href="#step-20" class="toc-link focus-ring"><span class="toc-kind">Teaching 21</span><span class="toc-title">Summary</span></a></li><li class="toc-li" data-target="step-21"><a href="#step-21" class="toc-link focus-ring"><span class="toc-kind">Teaching 22</span><span class="toc-title">Deal with one check result you understand at a time</span></a></li></ol></div></div></div></dialog>
+  <div class="py-toast" hidden><span class="spinner"></span><span class="py-toast-text">Loading Python…</span></div>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>© 2026 Python for Beginners · English edition of the <a href="https://github.com/walter201230/Python">walter201230/Python</a> tutorial (CC BY 4.0)</span>
+    <div class="footer-links"><a href="/">Course list</a><a href="/about/">About this site</a><a href="https://github.com/walter201230/Python">GitHub</a></div>
+  </div>
+</footer>
+<script src="/assets/site.js?v=20261028"></script>
+</body>
+</html>
