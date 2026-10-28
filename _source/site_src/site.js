@@ -5,15 +5,6 @@
   var PAGE = body.dataset.page || '';
   var LESSON = body.dataset.lesson || '';
 
-  // Standalone categories share the existing header on generated pages.
-  var nav = doc.querySelector('.header-nav');
-  if (nav) [['/survivor/', 'Games'], ['/fitness/', 'Fitness']].forEach(function (item) {
-    if (!nav.querySelector('a[href="' + item[0] + '"]')) {
-      var link = doc.createElement('a'); link.className = 'nav-link';
-      link.href = item[0]; link.textContent = item[1]; nav.prepend(link);
-    }
-  });
-
   /* ---------------- storage ---------------- */
   function load(key, def) { try { var v = localStorage.getItem(key); return v ? JSON.parse(v) : def; } catch (e) { return def; } }
   function save(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) { /* private mode */ } }
