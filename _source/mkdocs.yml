@@ -1,0 +1,164 @@
+site_name: Python for Beginners
+site_description: A simple-English edition of the walter201230/Python tutorial
+site_url: https://kyrierui.github.io/
+copyright: "Original tutorial © walter201230 (github.com/walter201230/Python), CC BY 4.0. Simple-English translation and adaptation for classroom use."
+
+docs_dir: Article
+
+theme:
+  name: material
+  language: en
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - content.code.copy
+    - navigation.instant
+    - navigation.tracking
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - toc.follow
+
+plugins:
+  - search
+  - glightbox
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - tables
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Why learn Python?: PythonBasis/python0/WhyStudyPython.md
+  - Code style:
+      - Introduction: codeSpecification/codeSpecification_Preface.md
+      - Overview: codeSpecification/codeSpecification_first.md
+      - Comments: codeSpecification/codeSpecification_second.md
+      - Naming: codeSpecification/codeSpecification_third.md
+  - Your first Python program:
+      - Introduction: PythonBasis/python1/Preface.md
+      - About Python: PythonBasis/python1/Introduction.md
+      - Installation: PythonBasis/python1/Installation.md
+      - First program: PythonBasis/python1/The_first_procedure.md
+      - PyCharm IDE: PythonBasis/python1/IDE.md
+  - Data types and variables:
+      - Introduction: PythonBasis/python2/Preface.md
+      - Syntax: PythonBasis/python2/Grammar.md
+      - The print function: PythonBasis/python2/print.md
+      - Basic data types: PythonBasis/python2/Type_of_data.md
+      - String encoding: PythonBasis/python2/StringCoding.md
+      - Type conversion: PythonBasis/python2/Type_conversion.md
+      - Variables: PythonBasis/python2/Variable.md
+  - List and Tuple:
+      - Introduction: PythonBasis/python3/Preface.md
+      - List: PythonBasis/python3/List.md
+      - Tuple: PythonBasis/python3/tuple.md
+  - Dict and Set:
+      - Introduction: PythonBasis/python4/Preface.md
+      - Dict: PythonBasis/python4/Dict.md
+      - Set: PythonBasis/python4/Set.md
+  - Conditions and loops:
+      - Introduction: PythonBasis/python5/Preface.md
+      - Conditions: PythonBasis/python5/If.md
+      - Loops: PythonBasis/python5/Cycle.md
+      - Worked example: PythonBasis/python5/Example.md
+  - Functions:
+      - Introduction: PythonBasis/python6/Preface.md
+      - Defining functions: PythonBasis/python6/1.md
+      - Return values: PythonBasis/python6/2.md
+      - Parameters: PythonBasis/python6/3.md
+      - Passing values: PythonBasis/python6/4.md
+      - Anonymous functions: PythonBasis/python6/5.md
+  - Iterators and generators:
+      - Introduction: PythonBasis/python7/Preface.md
+      - Iteration: PythonBasis/python7/1.md
+      - Iterators: PythonBasis/python7/2.md
+      - List comprehensions: PythonBasis/python7/3.md
+      - Generators: PythonBasis/python7/4.md
+      - Worked example: PythonBasis/python7/5.md
+  - Object-oriented programming:
+      - Introduction: PythonBasis/python8/Preface.md
+      - Concepts: PythonBasis/python8/1.md
+      - Defining classes: PythonBasis/python8/2.md
+      - Class methods: PythonBasis/python8/3.md
+      - Changing class attributes: PythonBasis/python8/4.md
+      - Classes and objects: PythonBasis/python8/5.md
+      - The __init__ method: PythonBasis/python8/6.md
+      - Inheritance: PythonBasis/python8/7.md
+      - Polymorphism: PythonBasis/python8/8.md
+      - Access control: PythonBasis/python8/9.md
+  - Modules and packages:
+      - Introduction: PythonBasis/python9/Preface.md
+      - About modules: PythonBasis/python9/1.md
+      - Using modules: PythonBasis/python9/2.md
+      - The main module: PythonBasis/python9/3.md
+      - Packages: PythonBasis/python9/4.md
+      - Scope: PythonBasis/python9/5.md
+  - Magic Method:
+      - Introduction: PythonBasis/python10/Preface.md
+      - Concepts: PythonBasis/python10/1.md
+      - Construction and initialisation: PythonBasis/python10/2.md
+      - Attribute access: PythonBasis/python10/3.md
+      - Descriptors: PythonBasis/python10/4.md
+      - Custom containers: PythonBasis/python10/5.md
+      - Operator magic methods: PythonBasis/python10/6.md
+  - Enum classes:
+      - Introduction: PythonBasis/python11/Preface.md
+      - Using Enum: PythonBasis/python11/1.md
+      - Enum source code: PythonBasis/python11/2.md
+      - Custom types: PythonBasis/python11/3.md
+      - Comparing enums: PythonBasis/python11/4.md
+  - Metaclasses:
+      - Introduction: PythonBasis/python12/Preface.md
+      - Classes are objects: PythonBasis/python12/1.md
+      - Creating classes with type: PythonBasis/python12/2.md
+      - What is a metaclass?: PythonBasis/python12/3.md
+      - Custom metaclasses: PythonBasis/python12/4.md
+      - Using metaclasses: PythonBasis/python12/5.md
+  - Threads and processes:
+      - Introduction: PythonBasis/python13/Preface.md
+      - Concepts: PythonBasis/python13/1.md
+      - Multithreading: PythonBasis/python13/2.md
+      - Processes: PythonBasis/python13/3.md
+  - Regular expressions:
+      - Introduction: PythonBasis/python14/Preface.md
+      - First look: PythonBasis/python14/1.md
+      - Character sets: PythonBasis/python14/2.md
+      - Quantifiers: PythonBasis/python14/3.md
+      - Boundary matchers: PythonBasis/python14/4.md
+      - re.sub: PythonBasis/python14/5.md
+      - re.match and re.search: PythonBasis/python14/6.md
+      - Common regular expressions: PythonBasis/python14/Common_Regular_Expressions.md
+  - Closures: PythonBasis/python15/1.md
+  - Decorators: PythonBasis/python16/1.md
+  - Type hints: PythonBasis/python17/1.md
+  - pathlib: PythonBasis/python18/1.md
+  - Exceptions and exception groups: PythonBasis/python19/1.md
+  - dataclass and Pydantic: PythonBasis/python20/1.md
+  - Context managers: PythonBasis/python21/1.md
+  - async/await and concurrency: PythonBasis/python22/1.md
+  - pyproject.toml and uv: PythonBasis/python23/1.md
+  - Code style with ruff: PythonBasis/python24/1.md
+  - Testing with pytest: PythonBasis/python25/1.md
+  - logging: PythonBasis/python26/1.md
+  - Publishing to PyPI and typer: PythonBasis/python27/1.md
+  - What to do after you finish: PythonBasis/python28/1.md
+  - "Final project code": examples/study_tracker/README.md

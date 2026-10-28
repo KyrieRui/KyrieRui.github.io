@@ -1,2721 +1,4079 @@
-<!DOCTYPE html>
-<html lang="zh-CN" data-theme="light">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="dark light">
-<title>口琴练习室 · 三角洲键位练习</title>
-<style>
-/* 口琴练习器 —— 主题：浅色为基础，深色为 html[data-theme="dark"] 覆盖；
-   自动模式由 JS 解析系统偏好后写入 data-theme。音区四色沿用原测试台语义
-   低=橙 中=绿 高=蓝 高高=紫 */
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A simple-English edition of the walter201230/Python tutorial">
+      
+      
+      
+        <link rel="canonical" href="https://kyrierui.github.io/">
+      
+      
+      
+        <link rel="next" href="PythonBasis/python0/WhyStudyPython/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Python for Beginners</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
 
-:root {
-  --bg: #f3f4f6;
-  --bg2: #eceef1;
-  --card: #ffffff;
-  --card2: #f7f8fa;
-  --border: #e3e6eb;
-  --ink: #24292f;
-  --sub: #57606a;
-  --accent: #2e8b57;
-  --accent-soft: rgba(46, 139, 87, .12);
-  --reg-low: #d35400;
-  --reg-mid: #27ae60;
-  --reg-high: #2980b9;
-  --reg-top: #8e44ad;
-  --perfect: #f5b041;
-  --warn-fg: #9c3029;
-  --shadow: 0 6px 24px rgba(31, 35, 40, .12);
-  --radius: 10px;
-}
 
-html[data-theme="dark"] {
-  --bg: #14171c;
-  --bg2: #191d24;
-  --card: #1e232c;
-  --card2: #232933;
-  --border: #2a303b;
-  --ink: #e6e9ee;
-  --sub: #8b93a1;
-  --accent: #3fa573;
-  --accent-soft: rgba(63, 165, 115, .16);
-  --reg-low: #e67e22;
-  --reg-mid: #3fa573;
-  --reg-high: #3498db;
-  --reg-top: #9b59b6;
-  --warn-fg: #e8b4b0;
-  --shadow: 0 6px 24px rgba(0, 0, 0, .35);
-}
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
 
-* { box-sizing: border-box; }
-
-html, body { height: 100%; }
-
-body {
-  margin: 0;
-  display: grid;
-  grid-template-rows: auto auto minmax(0, 1fr) auto;
-  height: 100dvh;
-  overflow: hidden;
-  background: var(--bg);
-  color: var(--ink);
-  font-family: "Microsoft YaHei UI", "微软雅黑", "PingFang SC", system-ui, sans-serif;
-  font-size: 14px;
-}
-
-/* ---------- 顶栏 ---------- */
-
-.app-header {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  flex-wrap: wrap;
-  padding: 10px 16px;
-  background: var(--bg2);
-  border-bottom: 1px solid var(--border);
-}
-
-.logo {
-  font-size: 17px;
-  font-weight: 700;
-  margin: 0;
-  letter-spacing: .5px;
-}
-
-.tabs { display: flex; gap: 4px; background: var(--card); padding: 4px; border-radius: 10px; border: 1px solid var(--border); }
-
-.tab {
-  border: 0; background: transparent; color: var(--sub);
-  font: inherit; padding: 6px 14px; border-radius: 7px; cursor: pointer;
-  transition: background .15s, color .15s;
-}
-.tab:hover { color: var(--ink); }
-.tab.active { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
-
-.header-settings { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-
-.ctl { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--sub); }
-
-select, input[type="range"] {
-  font: inherit; font-size: 12.5px; color: var(--ink);
-  background: var(--card2); border: 1px solid var(--border); border-radius: 6px;
-  padding: 4px 8px;
-}
-select:focus-visible, .btn:focus-visible, .tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
-input[type="range"] { padding: 0; height: 22px; accent-color: var(--accent); }
-
-.btn {
-  font: inherit; font-size: 12.5px; color: var(--ink);
-  background: var(--card2); border: 1px solid var(--border); border-radius: 7px;
-  padding: 5px 12px; cursor: pointer;
-  transition: background .15s, border-color .15s;
-}
-.btn:hover { background: var(--card); border-color: var(--sub); }
-.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
-.btn.primary:hover { filter: brightness(1.1); }
-.btn.ghost { background: transparent; }
-.btn.danger { border-color: #7a2d27; color: var(--warn-fg); }
-.btn.danger:hover { background: rgba(192, 57, 43, .15); }
-.btn.small { padding: 3px 10px; }
-.btn.active, .btn[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
-
-.seg { display: inline-flex; border: 1px solid var(--border); border-radius: 7px; overflow: hidden; }
-.seg button {
-  font: inherit; font-size: 12.5px; border: 0; background: transparent; color: var(--sub);
-  padding: 5px 12px; cursor: pointer;
-}
-.seg button + button { border-left: 1px solid var(--border); }
-.seg button.active { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
-
-/* ---------- 曲目控制条 ---------- */
-
-.songbar {
-  display: flex; align-items: center; gap: 10px 14px; flex-wrap: wrap;
-  padding: 8px 16px;
-  background: var(--bg2);
-  border-bottom: 1px solid var(--border);
-}
-
-.controls { display: none; align-items: center; gap: 10px; flex-wrap: wrap; }
-body[data-mode="free"] .controls-free,
-body[data-mode="waterfall"] .controls-waterfall,
-body[data-mode="sheet"] .controls-sheet { display: inline-flex; }
-
-.hint { font-size: 12px; color: var(--sub); }
-
-.hud { margin-left: auto; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.hud[hidden] { display: none; }
-body:not([data-mode="waterfall"]) .hud { display: none; }
-
-.hud-progress { position: relative; width: 90px; height: 6px; border-radius: 3px; background: var(--card2); overflow: hidden; }
-.hud-progress i { position: absolute; inset: 0 auto 0 0; width: 0%; background: var(--accent); border-radius: 3px; transition: width .2s linear; }
-
-.chip {
-  display: inline-flex; align-items: center; gap: 5px;
-  font-size: 12px; color: var(--sub);
-  background: var(--card); border: 1px solid var(--border); border-radius: 999px;
-  padding: 3px 10px;
-}
-.chip b { color: var(--ink); font-variant-numeric: tabular-nums; }
-
-/* ---------- 舞台 ---------- */
-
-.stage { position: relative; min-height: 0; }
-
-.panel { display: none; height: 100%; overflow: auto; }
-body[data-mode="free"] .panel-free,
-body[data-mode="waterfall"] .panel-waterfall,
-body[data-mode="sheet"] .panel-sheet { display: block; }
-
-.panel-free { padding: 16px; max-width: 900px; margin: 0 auto; }
-
-.hero {
-  display: flex; align-items: baseline; gap: 16px;
-  min-height: 64px; margin-bottom: 14px;
-}
-.hero .big, .nowplaying .big { font-size: 30px; font-weight: 700; color: var(--accent); }
-.hero .combo, .nowplaying .combo {
-  font-size: 13px; color: var(--sub);
-  display: block; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-
-.card {
-  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 14px 16px; margin-bottom: 12px;
-}
-
-.note-legend { font-size: 12px; color: var(--sub); margin: 0 0 8px; }
-.sub { color: var(--sub); font-size: 12.5px; line-height: 1.8; margin: 0; }
-.rules p { margin: 0; }
-.tip-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px 18px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
-.tip-list li { font-size: 10.5px; line-height: 1.6; color: var(--sub); }
-.tip-list b { color: var(--ink); font-weight: 700; }
-
-/* 音高条（自由模式）：按八度分行，每行带音区标签 */
-.strip-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
-.strip-row:last-child { margin-bottom: 0; }
-.strip-label {
-  min-width: 68px; flex-shrink: 0;
-  font-size: 12px; font-weight: 600; text-align: right;
-}
-.strip-label.reg-low { color: var(--reg-low); }
-.strip-label.reg-mid { color: var(--reg-mid); }
-.strip-label.reg-high { color: var(--reg-high); }
-.strip-label.reg-top { color: var(--reg-top); }
-.piano { display: flex; flex-wrap: wrap; gap: 2px; }
-.pk {
-  width: 34px; height: 34px; border-radius: 4px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 10.5px; font-family: Consolas, monospace;
-  background: var(--card2); border: 1px solid var(--border); color: var(--sub);
-  transition: background .05s, box-shadow .05s, color .05s;
-}
-.pk.sharps { background: #34495e; color: #ecf0f1; border-color: #2c3e50; }
-html[data-theme="dark"] .pk.sharps { background: #2c3440; border-color: #232933; color: #9aa5b1; }
-.pk.on { background: var(--perfect); border-color: var(--reg-low); box-shadow: 0 0 0 2px var(--reg-low); color: #1b1b1b; }
-
-/* ---------- 瀑布流 ---------- */
-
-.panel-waterfall { position: relative; overflow: hidden; padding: 0; }
-#wfCanvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-
-/* 结算浮层 */
-.overlay {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  background: rgba(10, 12, 16, .6); backdrop-filter: blur(3px);
-  z-index: 5;
-}
-.overlay.hidden { display: none; }
-.overlay-card {
-  background: var(--card); border: 1px solid var(--border); border-radius: 14px;
-  box-shadow: var(--shadow); padding: 22px 28px; min-width: 300px; text-align: center;
-}
-.overlay-card h2 { margin: 0 0 14px; font-size: 20px; }
-.end-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; margin: 0 0 18px; text-align: left; }
-.end-stats dt { color: var(--sub); font-size: 12.5px; }
-.end-stats dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; }
-.overlay-actions { display: flex; gap: 10px; justify-content: center; }
-
-/* ---------- 简谱看谱 ---------- */
-
-.panel-sheet { position: relative; display: none; flex-direction: column; padding: 0; overflow: hidden; }
-body[data-mode="sheet"] .panel-sheet { display: flex; }
-
-.sheet-tools { display: flex; gap: 8px; padding: 8px 16px; border-bottom: 1px solid var(--border); background: var(--bg2); }
-
-.sheet-viewer { position: relative; flex: 1; min-height: 0; overflow: hidden; background: var(--bg); }
-#sheetImg {
-  position: absolute; left: 0; top: 0;
-  transform-origin: 0 0;
-  user-select: none; -webkit-user-drag: none;
-  max-width: none; display: none;
-  box-shadow: var(--shadow);
-  background: #fff; /* 简谱图通常白底 */
-}
-#sheetImg.loaded { display: block; }
-
-.sheet-empty {
-  position: absolute; inset: 0;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  color: var(--sub); gap: 6px;
-  border: 2px dashed var(--border); border-radius: 12px;
-  margin: 16px; pointer-events: none; text-align: center;
-}
-.sheet-viewer.has-img .sheet-empty { display: none; }
-.sheet-viewer.dragover .sheet-empty { border-color: var(--accent); color: var(--accent); }
-.sheet-empty p { margin: 0; font-size: 15px; }
-
-/* ---------- 底栏（常驻） ---------- */
-
-.bottombar {
-  background: var(--bg2);
-  border-top: 1px solid var(--border);
-  padding: 8px 16px 12px;
-}
-
-.bottom-row { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-bottom: 8px; }
-
-.nowplaying { display: flex; align-items: baseline; gap: 12px; min-height: 36px; flex: 1 1 auto; min-width: 0; }
-.nowplaying .big { font-size: 22px; }
-.nowplaying .combo { font-size: 12px; }
-
-.lamps { margin-left: auto; display: flex; gap: 8px; flex-shrink: 0; }
-
-.lamp {
-  display: inline-flex; align-items: center; gap: 7px;
-  font: inherit; font-size: 12px; color: var(--sub);
-  background: var(--card); border: 1px solid var(--border); border-radius: 999px;
-  padding: 5px 12px; cursor: pointer;
-  transition: border-color .1s, color .1s;
-}
-.lamp .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); transition: background .1s; }
-.lamp.on-left { border-color: var(--reg-low); color: var(--ink); }
-.lamp.on-left .dot { background: var(--reg-low); }
-.lamp.on-right { border-color: var(--reg-high); color: var(--ink); }
-.lamp.on-right .dot { background: var(--reg-high); }
-.lamp.on-mid { border-color: var(--reg-top); color: var(--ink); }
-.lamp.on-mid .dot { background: var(--reg-top); }
-.lamp.latched { box-shadow: inset 0 0 0 1px var(--sub); }
-.lamp.hint-left { border-color: var(--reg-low); border-style: dashed; }
-.lamp.hint-right { border-color: var(--reg-high); border-style: dashed; }
-.lamp.hint-mid { border-color: var(--reg-top); border-style: dashed; }
-
-/* 虚拟键行：8 列与瀑布流列对齐 */
-.keys { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; }
-
-.gkey {
-  height: 62px; border-radius: 8px;
-  background: var(--card); border: 1.5px solid var(--border);
-  text-align: center; cursor: pointer; user-select: none; touch-action: none;
-  transition: background .06s, border-color .06s, transform .06s;
-}
-.gkey kbd {
-  display: block; font-size: 18px; font-weight: 700; margin-top: 9px;
-  font-family: Consolas, monospace; color: var(--ink);
-}
-.gkey .nm { display: block; font-size: 11px; color: var(--sub); margin-top: 4px; }
-.gkey.down {
-  background: var(--accent-soft); border-color: var(--accent);
-  transform: translateY(1px);
-}
-.gkey.down kbd { color: var(--accent); }
-.gkey.target { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
-.gkey.target.shake { animation: shake .3s; }
-.gkey.shake { animation: shake .3s; }
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  20% { transform: translateX(-5px); }
-  40% { transform: translateX(5px); }
-  60% { transform: translateX(-3px); }
-  80% { transform: translateX(3px); }
-}
-
-/* ---------- Toast ---------- */
-
-.toast {
-  position: fixed; left: 50%; bottom: 92px; transform: translateX(-50%) translateY(8px);
-  background: var(--card); color: var(--ink); border: 1px solid var(--border);
-  border-radius: 8px; padding: 8px 16px; font-size: 12.5px;
-  box-shadow: var(--shadow); opacity: 0; pointer-events: none;
-  transition: opacity .2s, transform .2s; z-index: 20;
-}
-.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-/* ---------- 响应式 ---------- */
-
-@media (max-width: 560px) {
-  .keys { grid-template-columns: repeat(4, 1fr); }
-  .hud { margin-left: 0; }
-  .app-header { gap: 8px; }
-  .header-settings { margin-left: 0; }
-}
-
-@media (pointer: coarse) {
-  .gkey { height: 68px; }
-  .lamp { padding: 8px 14px; font-size: 13px; }
-}
-
-/* Dopamine glass studio: layout and visual system. */
-:root {
-  --bg:#f6f3fc; --bg2:rgba(255,255,255,.45); --card:rgba(255,255,255,.64);
-  --card2:rgba(255,255,255,.6); --border:rgba(255,255,255,.85);
-  --ink:#302943; --sub:#716780; --accent:#7351d9; --accent-soft:#e8dfff;
-  --reg-low:#c96728; --reg-mid:#258966; --reg-high:#4779d6; --reg-top:#9659d8;
-  --shadow:0 12px 40px #624d9a0d; --radius:24px;
-}
-html[data-theme="dark"] {
-  --bg:#211b34; --bg2:#32284499; --card:#372c4cbb; --card2:#483a5c99;
-  --border:#ffffff24; --ink:#f5edff; --sub:#c5b9d7; --accent:#c7acff; --accent-soft:#574175;
-  --reg-low:#ffb771; --reg-mid:#72dfb3; --reg-high:#91baff; --reg-top:#d6a0ff;
-}
-body {
-  height:100dvh; min-height:740px; padding:24px; gap:18px 26px;
-  grid-template-columns:228px minmax(0,1fr);
-  grid-template-rows:auto auto minmax(290px,1fr) auto;
-  grid-template-areas:"sidebar welcome" "sidebar controls" "sidebar stage" "sidebar keyboard";
-  background:radial-gradient(ellipse at 93% 8%,#ffcfab9c,transparent 38%),radial-gradient(ellipse at 45% 100%,#bdf3dd99,transparent 44%),radial-gradient(ellipse at 6% 35%,#d5c4ffab,transparent 45%),var(--bg);
-  background-attachment:fixed; overflow:auto; font-family:"Avenir Next","PingFang SC","Microsoft YaHei",sans-serif;
-}
-html[data-theme="dark"] body {background:radial-gradient(ellipse at 90% 0%,#71385266,transparent 45%),radial-gradient(ellipse at 10% 80%,#40568066,transparent 50%),var(--bg)}
-.app-header,.songbar,.bottombar,.card,.hero,.panel-waterfall,.panel-sheet {
-  background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
-  backdrop-filter:blur(22px) saturate(135%); -webkit-backdrop-filter:blur(22px) saturate(135%);
-  box-shadow:var(--shadow),inset 0 1px 0 #ffffff30;
-}
-.app-header {grid-area:sidebar; display:flex; flex-direction:column; align-items:stretch; flex-wrap:nowrap; padding:26px 18px; gap:0;}
-.brand {display:flex;align-items:center;gap:9px;margin-bottom:38px;}
-.brand-icon {display:grid;place-items:center;width:42px;height:46px;background:#8d6bea;color:white;border-radius:15px;font-size:38px;line-height:1;transform:rotate(-7deg);box-shadow:0 5px 0 #6e4ac229;}
-.brand-kicker {font-size:8px;font-weight:800;letter-spacing:1.5px;color:var(--sub);}
-.logo {font-size:19px;letter-spacing:-.6px;white-space:nowrap;margin-top:3px;}
-.brand-dot {color:#ff876b;}
-.sidebar-label {font-size:10px;letter-spacing:1px;color:var(--sub);margin:0 0 14px 10px;}
-.tabs {flex-direction:column;gap:9px;padding:0;border:0;background:none;}
-.tab {display:flex;align-items:center;gap:11px;text-align:left;padding:15px 12px;border-radius:14px;font-size:13px;}
-.tab.active {background:#dbccff;color:#4f3396;box-shadow:0 5px 15px #8c6fbb12;}
-.tab:nth-child(2).active {background:#ffe3a1;color:#755321;}
-.tab:nth-child(3).active {background:#bff0dc;color:#256852;}
-.tab-icon {font-size:20px;width:22px;text-align:center;}
-.tab-number {margin-left:auto;font-size:9px;opacity:.6;}
-.header-settings {margin:30px 0 0; padding-top:23px; border-top:1px solid #9986b526;display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.header-settings .sidebar-label,.header-settings .ctl {grid-column:1/-1;}
-.header-settings .ctl {justify-content:space-between;padding:3px 7px;font-size:12px;}
-.header-settings input {width:95px;}
-.header-settings #panicBtn {grid-column:1/-1;}
-.welcome {grid-area:welcome;display:flex;align-items:center;justify-content:space-between;min-height:115px;padding:4px 10px;}
-.eyebrow,.section-kicker {font-size:9px;letter-spacing:1.7px;font-weight:700;color:var(--sub);}
-.welcome h2 {font-size:clamp(23px,2.5vw,36px);font-weight:800;letter-spacing:-1px;margin:10px 0;}
-.welcome h2 span {display:inline-block;color:#f9aa47;margin-left:12px;}
-.welcome p {font-size:12px;color:var(--sub);margin:0;}
-.welcome-art {width:225px;height:104px;position:relative;}
-.mini-harmonica {position:absolute;left:30px;top:32px;display:flex;gap:6px;padding:15px 16px;background:linear-gradient(140deg,#fafff9,#ace5c9);border:2px solid #ffffffc9;border-radius:18px;transform:rotate(-13deg);box-shadow:0 10px 0 #69af9533,0 18px 25px #756baa18;}
-.mini-harmonica i {display:block;width:12px;height:28px;border-radius:7px;background:#659f8b;box-shadow:inset 2px 2px 3px #31544866;}
-.art-note {position:absolute;left:2px;top:0;font-size:44px;color:#a381e8;transform:rotate(-14deg);}
-.art-spark {position:absolute;right:0;bottom:3px;font-size:38px;color:#ee967d;}
-.songbar {grid-area:controls;padding:13px 18px;gap:12px;min-width:0;}
-.controls {gap:9px;}
-.controls-free .hint {font-size:11px;line-height:1.7;}
-.controls-free::before {content:'✦';color:#a17cdc;font-size:19px;}
-select,.btn,.seg {border-radius:10px;}
-select {padding:7px 9px;border-color:#a090b526;max-width:200px;}
-.btn {padding:8px 12px;border-color:#a090b526;font-size:11px;}
-.btn.primary {background:#7855cb;border-color:#7855cb;color:white;}
-.btn.danger {color:var(--warn-fg);border-color:#dca5aa55;background:#f4969610;}
-.btn:hover,.lamp:hover {transform:translateY(-1px);}
-button:focus-visible,.gkey:focus-visible {outline:3px solid #9573db;outline-offset:3px;}
-.seg button {padding:8px 12px;}
-.stage {grid-area:stage;min-width:0;}
-.panel-free {max-width:none;margin:0;padding:0;overflow:auto;}
-body[data-mode="free"] .panel-free {display:grid;grid-template-columns:minmax(200px,.8fr) minmax(390px,1.6fr);grid-template-rows:1fr auto;gap:16px;}
-.hero {display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;margin:0;padding:20px;text-align:center;position:relative;overflow:hidden;background:linear-gradient(145deg,#f7ebffaa,#e9dfff77);}
-.hero::after {content:'';width:140px;height:140px;border-radius:50%;background:#c9b4fa35;position:absolute;right:-80px;top:10px;pointer-events:none;}
-.hero .section-kicker {font-size:8px;letter-spacing:1.4px;}
-.sound-orbit {width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-size:31px;color:#a084d7;background:#ffffff60;}
-.hero .big {font-size:clamp(23px,2.5vw,38px);letter-spacing:-1px;line-height:1.15;}
-.hero .combo {font-size:11px;}
-.hero-tip {font-size:10px;color:var(--sub);margin:0;}
-.sound-bars {display:flex;align-items:center;justify-content:center;gap:5px;height:25px;}
-.sound-bars i {width:5px;height:10px;border-radius:5px;background:#ad91e2;}
-.sound-bars i:nth-child(2n) {height:19px;background:#c6abea;}
-.sound-bars i:nth-child(3n) {height:27px;}
-.card {margin:0;padding:22px;min-width:0;}
-.card-heading {display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:22px;}
-.card-heading h3 {font-size:18px;margin:7px 0 0;}
-.soft-badge {font-size:10px;white-space:nowrap;background:#e8dfff;color:#7452a0;border-radius:30px;padding:7px 10px;}
-#pianoStrip {display:flex;flex-direction:column;gap:12px;}
-.strip-row {flex-wrap:nowrap;gap:10px;margin:0;}
-.strip-label {min-width:53px;font-size:10px;text-align:left;}
-.strip-row .piano {flex:1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px;}
-.pk {width:auto;min-width:0;height:38px;border-radius:8px;font-size:9px;border:1px solid #9a87b21c;background:#fff9;}
-.pk.sharps {background:#b3a6c9;color:#fff;border:0;}
-.pk.on {background:#ffcd69;box-shadow:0 0 0 2px #ec9d46;transform:translateY(-3px);color:#59350a;}
-.rules {grid-column:1/-1;padding:14px 20px;display:flex;gap:18px;align-items:center;background:#ffffff40;}
-.rules .note-legend {margin:0;white-space:nowrap;color:var(--accent);font-weight:700;font-size:11px;}
-.rules .sub {font-size:10px;line-height:1.9;}
-.panel-waterfall,.panel-sheet {height:100%;min-height:290px;overflow:hidden;}
-.panel-waterfall {background:linear-gradient(145deg,#292237ef,#242d44e8);}
-.sheet-tools {background:transparent;padding:12px 16px;}
-.sheet-viewer {background:transparent;}
-.sheet-empty {border-color:#bba1df77;background:linear-gradient(145deg,#f1e9ff44,#c7f1df33);}
-.bottombar {grid-area:keyboard;padding:18px 22px 20px;min-width:0;}
-.keyboard-heading {display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:12px;}
-.keyboard-heading>span:last-child {font-size:10px;color:var(--sub);}
-.bottom-row {gap:12px;margin-bottom:14px;}
-.nowplaying {min-height:20px;align-items:center;}
-.nowplaying .big {font-size:16px;}
-.nowplaying .combo {font-size:10px;}
-.lamp {font-size:10px;padding:7px 10px;background:#fff6;border-color:#9a87b226;}
-.lamp .dot {width:7px;height:7px;}
-.lamp.on-left,.lamp.on-right,.lamp.on-mid {background:var(--accent-soft);}
-.keys {gap:10px;grid-template-columns:repeat(8,minmax(0,1fr));}
-.gkey {--key-color:#e6d6ff;--key-shadow:#ccb5ec;height:78px;border:1px solid #ffffffa8;border-radius:15px;background:var(--key-color);box-shadow:0 5px 0 var(--key-shadow),0 8px 14px #756b9010;}
-.gkey:nth-child(2) {--key-color:#f9d6e7;--key-shadow:#eab5cb;}
-.gkey:nth-child(3) {--key-color:#ffd7c0;--key-shadow:#eeb99c;}
-.gkey:nth-child(4) {--key-color:#ffedaa;--key-shadow:#e7d18d;}
-.gkey:nth-child(5) {--key-color:#d9ecb3;--key-shadow:#b8d08d;}
-.gkey:nth-child(6) {--key-color:#bcebd7;--key-shadow:#96cdb8;}
-.gkey:nth-child(7) {--key-color:#c5e5fb;--key-shadow:#9fc4e2;}
-.gkey:nth-child(8) {--key-color:#d2d7ff;--key-shadow:#b0b7e9;}
-.gkey kbd {font-family:inherit;font-size:23px;color:#51435f;margin-top:12px;}
-.gkey .nm {color:#67596f;font-size:11px;margin-top:3px;}
-.gkey.down {background:var(--key-color);transform:translateY(4px);box-shadow:0 1px 0 var(--key-shadow);filter:saturate(1.8);border-color:#806395;}
-.gkey.down kbd {color:#39234f;}
-.gkey.target {outline:3px solid var(--accent);outline-offset:2px;}
-.toast {bottom:190px;background:var(--card);backdrop-filter:blur(16px);}
-html[data-theme="dark"] .hero {background:linear-gradient(145deg,#67458966,#41315577);}
-html[data-theme="dark"] .pk:not(.sharps):not(.on) {background:#ffffff12;}
-html[data-theme="dark"] .lamp {background:#ffffff0d;}
-html[data-theme="dark"] .rules {background:#ffffff08;}
-@media (min-width:1600px) {body {padding:32px max(32px,calc((100vw - 1580px)/2));gap:24px 30px;} .hero {gap:18px;} .pk {height:48px;} #pianoStrip {gap:18px;} .gkey {height:90px;}}
-@media (max-width:1150px) {
-  body {grid-template-columns:195px minmax(0,1fr);padding:16px;gap:14px;min-height:780px;}
-  .app-header {padding:22px 12px;} .brand-icon {width:34px;height:40px;} .logo {font-size:17px;}
-  .brand-kicker {font-size:7px;} .tab {padding:13px 10px;} .welcome-art {transform:scale(.8);transform-origin:right center;width:180px;}
-  body[data-mode="free"] .panel-free {grid-template-columns:1fr;grid-template-rows:auto auto auto;gap:12px;}
-  .hero {flex-direction:row;flex-wrap:wrap;padding:16px;gap:14px;min-height:92px;}
-  .hero .section-kicker {width:100%;} .sound-orbit,.sound-bars,.hero-tip {display:none;}
-  .card {padding:18px;} .card-heading {margin-bottom:16px;} .pk {height:34px;}
-  .rules {padding:12px 18px;} .lamps {gap:5px;} .bottom-row {flex-wrap:wrap;}.lamps {margin-left:0;}
-}
-@media (max-width:760px) {
-  body {height:auto;min-height:100dvh;display:flex;flex-direction:column;padding:14px;gap:14px;overflow:auto;}
-  .app-header {padding:16px;display:grid;grid-template-columns:1fr auto;gap:16px;}
-  .brand {margin:0;} .brand-icon {height:36px;} .sidebar-label,.sidebar-note {display:none;}
-  .tabs {grid-column:1/-1;flex-direction:row;gap:6px;order:2;}.tab {flex:1;padding:12px 7px;justify-content:center;gap:5px;font-size:12px;}.tab-number {display:none;}
-  .header-settings {grid-column:1/-1;margin:0;border:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;order:3;}
-  .header-settings .ctl {gap:8px;padding:0;}.header-settings input {width:80px;}.header-settings .btn {padding:7px 9px;}
-  .welcome {min-height:90px;padding:8px 6px;}.welcome h2 {font-size:26px;}.welcome-art {width:95px;transform:scale(.55);margin-left:-50px;}.eyebrow {font-size:8px;}
-  .welcome p {font-size:11px;}.songbar {padding:12px 15px;}.stage {min-height:0;}
-  .panel-free {overflow:visible;}.panel-waterfall,.panel-sheet {height:430px;}
-  .bottombar {padding:16px;}.keyboard-heading {flex-wrap:wrap;}.keys {gap:7px;}.gkey {height:68px;border-radius:11px;}.gkey kbd {font-size:19px;}
-  .gkey .nm {font-size:10px;}.lamps {flex-wrap:wrap;}.lamp {padding:7px 9px;font-size:10px;}
-  .rules {display:block;}.rules .note-legend {margin-bottom:7px;}.card {padding:15px;}.strip-row {gap:6px;}.strip-label {min-width:47px;font-size:9px;}
-  .strip-row .piano {gap:3px;}.pk {height:30px;font-size:8px;border-radius:5px;}.card-heading h3 {font-size:16px;}.section-kicker {font-size:8px;}
-  .hud {margin-left:0;}.soft-badge {font-size:9px;}.welcome-art .art-spark {display:none;}
-}
-@media (max-width:390px) {.welcome-art {display:none;}.pk {font-size:7px;}.strip-label {min-width:42px;}.keys {gap:4px;}.tab-icon {font-size:16px;width:18px;}}
-@media (prefers-reduced-motion:reduce) {*,*::before,*::after {animation:none!important;transition:none!important;}}
-@media (max-width:760px) {.welcome-art {display:none;}}
-@media (max-width:760px) {.tab {white-space:nowrap;font-size:11px;}.tab-icon {flex-shrink:0;width:16px;font-size:16px;}}
-
-#testAudioBtn,.audio-status {grid-column:1/-1;}
-.audio-status {font-size:10px;line-height:1.7;color:var(--sub);margin:0 4px 6px;}
-@media(max-width:760px){.audio-status{flex-basis:100%;}}
-
-</style>
-</head>
-<body data-mode="free">
-
-<header class="app-header">
-  <div class="brand"><span class="brand-icon" aria-hidden="true">≋</span><div><span class="brand-kicker">HARMONICA CLUB</span><h1 class="logo">口琴练习室<span class="brand-dot">.</span></h1></div></div>
-  <nav class="tabs" data-ui id="modeTabs">
-    <button data-tab="free" class="tab active"><span class="tab-icon" aria-hidden="true">♩</span>随手即兴<span class="tab-number" aria-hidden="true">01</span></button>
-    <button data-tab="waterfall" class="tab"><span class="tab-icon" aria-hidden="true">▽</span>音符瀑布<span class="tab-number" aria-hidden="true">02</span></button>
-    <button data-tab="sheet" class="tab"><span class="tab-icon" aria-hidden="true">◫</span>识谱跟奏<span class="tab-number" aria-hidden="true">03</span></button>
-  </nav>
-  <div class="header-settings" data-ui>
-    <label class="ctl" title="中音 do 的基准八度">中音 do
-      <select id="baseSel"></select>
-    </label>
-    <label class="ctl" title="音量">音量
-      <input type="range" id="volumeRange" min="0" max="100" value="80">
-    </label>
-    <button id="testAudioBtn" class="btn primary">♫ 测试声音</button>
-    <p id="audioStatus" class="audio-status" role="status" aria-live="polite">没有声音？点击测试，播放一声 do。</p>
-    <button id="muteBtn" class="btn ghost" title="静音（不静音时钟）">静音</button>
-    <button id="themeBtn" class="btn ghost" title="主题：自动（跟随系统）/ 深色 / 浅色">主题：自动</button>
-    <button id="panicBtn" class="btn danger" title="全部松开（紧急停止）">紧急停止</button>
-  </div>
-</header>
-<section class="welcome"><div><span class="eyebrow">MAKE A LITTLE MUSIC</span><p>三角洲键位练习，让下一次演奏更从容。</p></div><div class="welcome-art" aria-hidden="true"><span class="art-note">♪</span><div class="mini-harmonica"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="art-spark">✦</span></div></section>
-
-<div class="songbar" data-ui>
-  <!-- 瀑布流模式的控制条 -->
-  <div class="controls controls-waterfall">
-    <label class="ctl">曲目
-      <select id="songSel"></select>
-    </label>
-    <button id="importMidiBtn" class="btn">导入 MIDI…</button>
-    <input type="file" id="midiFile" accept=".mid,.midi,audio/midi,audio/x-midi" hidden>
-    <label class="ctl" id="channelWrap">通道
-      <select id="channelSel"></select>
-    </label>
-    <div class="seg" id="practiceSeg">
-      <button data-sub="follow">跟练</button>
-      <button data-sub="rhythm" class="active">节奏</button>
+    
+    
+  <link href="assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#python-for-beginners" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
-    <label class="ctl">速度
-      <select id="speedSel">
-        <option value="0.5">0.5×</option>
-        <option value="0.75">0.75×</option>
-        <option value="1" selected>1×</option>
-        <option value="1.25">1.25×</option>
-        <option value="1.5">1.5×</option>
-      </select>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Python for Beginners" class="md-header__button md-logo" aria-label="Python for Beginners" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
     </label>
-    <button id="playBtn" class="btn primary">▶ 开始</button>
-    <button id="resetBtn" class="btn ghost" title="重置">↺</button>
-  </div>
-
-  <!-- 简谱模式的控制条 -->
-  <div class="controls controls-sheet">
-    <button id="importSheetBtn" class="btn">导入简谱图片…</button>
-    <input type="file" id="sheetFile" accept="image/png,image/jpeg,image/webp" hidden>
-    <button id="clearSheetBtn" class="btn ghost">清除图片</button>
-    <span class="chip">拖拽图片到下方</span>
-    <span class="chip">Ctrl+V 粘贴截图</span>
-  </div>
-
-  <!-- 自由模式的提示 -->
-  <div class="controls controls-free">
-    <span class="chip">Z–M 弹 do～si</span>
-    <span class="chip">, 高音 do</span>
-    <span class="chip">左/右键 变八度</span>
-    <span class="chip">中键 升半音</span>
-  </div>
-
-  <!-- 瀑布流 HUD -->
-  <div class="hud" id="hud" hidden>
-    <div class="hud-progress"><i id="hudProgressBar"></i></div>
-    <span class="chip">进度 <b id="hudProgress">0%</b></span>
-    <span class="chip">连击 <b id="hudCombo">0</b></span>
-    <span class="chip">准确率 <b id="hudAcc">—</b></span>
-    <span class="chip">评分 <b id="hudScore">0</b></span>
-  </div>
-</div>
-
-<main class="stage">
-  <!-- 自由练习 -->
-  <section class="panel panel-free" id="freeStage">
-    <div class="hero"><span class="section-kicker">LIVE SOUND · 当前音符</span><span class="sound-orbit" aria-hidden="true">♫</span>
-      <span class="big" id="nowNameBig">—</span>
-      <span class="combo" id="nowComboBig">等待按键…</span><div class="sound-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><p class="hero-tip">按下一个音符，让灵感发声</p>
-    </div>
-    <div class="card">
-      <div class="card-heading"><div><span class="section-kicker">EXPLORE THE NOTES</span><h3>你的音域地图</h3></div><span class="soft-badge">4 个音区</span></div>
-      <div class="piano" id="pianoStrip"></div>
-    </div>
-    <div class="card rules">
-      <div class="note-legend">✦ 上手指南</div>
-      <ul class="tip-list">
-        <li><b>Z X C V B N M</b> → do re mi fa sol la si（中音区）</li>
-        <li><b>,</b>（逗号）→ 高音 do</li>
-        <li>按住 <b>左键</b> 整排降八度 · 按住 <b>右键</b> 整排升八度</li>
-        <li><b>右键 + ,</b> → 高高音 do · 再按 <b>中键</b> → 升半音</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- 瀑布流引导 -->
-  <section class="panel panel-waterfall" id="wfStage">
-    <canvas id="wfCanvas"></canvas>
-    <div class="overlay hidden" id="endOverlay">
-      <div class="overlay-card" data-ui>
-        <h2 id="endTitle">完成！</h2>
-        <dl class="end-stats" id="endStats"></dl>
-        <div class="overlay-actions">
-          <button class="btn primary" id="endRestartBtn">重练</button>
-          <button class="btn ghost" id="endCloseBtn">关闭</button>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Python for Beginners
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- 简谱看谱 -->
-  <section class="panel panel-sheet" id="sheetStage">
-    <div class="sheet-tools" data-ui>
-      <button class="btn ghost small" id="zoomOutBtn">−</button>
-      <button class="btn ghost small" id="zoomInBtn">＋</button>
-      <button class="btn ghost small" id="fitBtn">适配宽度</button>
-      <button class="btn ghost small" id="resetViewBtn">重置</button>
-    </div>
-    <div class="sheet-viewer" id="sheetViewer">
-      <div class="sheet-empty" id="sheetEmpty">
-        <p>把简谱图片拖到这里</p>
-        <p class="sub">或点上方「导入简谱图片…」/ Ctrl+V 粘贴截图</p>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
       </div>
-      <img id="sheetImg" alt="简谱" draggable="false">
-    </div>
-  </section>
-</main>
-
-<footer class="bottombar" data-ui>
-  <div class="keyboard-heading"><span class="section-kicker">PLAY SOMETHING HAPPY</span><span>英文输入法 · 按住发声，松开结束</span></div><div class="bottom-row">
-    <div class="nowplaying">
-      <span class="big" id="nowName">—</span>
-      <span class="combo" id="nowCombo">等待按键…</span>
-    </div>
-    <div class="lamps">
-      <button class="lamp" id="lampLeft" title="点击锁定/解锁 低八度（触屏用）"><i class="dot"></i>左键 低八度</button>
-      <button class="lamp" id="lampRight" title="点击锁定/解锁 高八度（触屏用）"><i class="dot"></i>右键 高八度</button>
-      <button class="lamp" id="lampMid" title="点击锁定/解锁 升半音（触屏用）"><i class="dot"></i>中键 升半音</button>
     </div>
   </div>
-  <div class="keys" id="virtualKeys"></div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Python for Beginners" class="md-nav__button md-logo" aria-label="Python for Beginners" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Python for Beginners
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#about-this-english-edition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        About this English edition
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jump-straight-to" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jump straight to
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python0/WhyStudyPython/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why learn Python?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Code style
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Code style
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="codeSpecification/codeSpecification_Preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="codeSpecification/codeSpecification_first/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="codeSpecification/codeSpecification_second/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Comments
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="codeSpecification/codeSpecification_third/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Naming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Your first Python program
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Your first Python program
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python1/Preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python1/Introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python1/Installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python1/The_first_procedure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    First program
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python1/IDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PyCharm IDE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data types and variables
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data types and variables
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python2/Preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python2/Grammar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Syntax
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python2/print/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The print function
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python2/Type_of_data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic data types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python2/StringCoding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    String encoding
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python2/Type_conversion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type conversion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python2/Variable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    List and Tuple
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    List and Tuple
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python3/Preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python3/List/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    List
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python3/tuple/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tuple
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dict and Set
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Dict and Set
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python4/Preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python4/Dict/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dict
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python4/Set/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Set
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8">
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conditions and loops
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Conditions and loops
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python5/Preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python5/If/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conditions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python5/Cycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loops
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python5/Example/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Worked example
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9">
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Functions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Functions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python6/Preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python6/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Defining functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python6/2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Return values
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python6/3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python6/4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Passing values
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python6/5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anonymous functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10">
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iterators and generators
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Iterators and generators
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python7/Preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python7/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iteration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python7/2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iterators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python7/3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    List comprehensions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python7/4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python7/5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Worked example
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11">
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Object-oriented programming
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Object-oriented programming
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python8/Preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python8/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python8/2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Defining classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python8/3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class methods
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python8/4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changing class attributes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python8/5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes and objects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python8/6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The __init__ method
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python8/7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inheritance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python8/8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Polymorphism
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python8/9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Access control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12">
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modules and packages
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Modules and packages
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python9/Preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python9/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python9/2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Using modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python9/3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The main module
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python9/4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Packages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python9/5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scope
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13">
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Magic Method
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Magic Method
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python10/Preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python10/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python10/2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Construction and initialisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python10/3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Attribute access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python10/4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descriptors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python10/5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Custom containers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python10/6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operator magic methods
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14">
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enum classes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Enum classes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python11/Preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python11/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Using Enum
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python11/2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enum source code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python11/3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Custom types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python11/4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Comparing enums
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15">
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metaclasses
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Metaclasses
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python12/Preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python12/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes are objects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python12/2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Creating classes with type
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python12/3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What is a metaclass?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python12/4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Custom metaclasses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python12/5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Using metaclasses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16">
+        
+          
+          <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threads and processes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Threads and processes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python13/Preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python13/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python13/2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Multithreading
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python13/3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Processes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17">
+        
+          
+          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regular expressions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_17">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Regular expressions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python14/Preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python14/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    First look
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python14/2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Character sets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python14/3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quantifiers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python14/4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Boundary matchers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python14/5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    re.sub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python14/6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    re.match and re.search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python14/Common_Regular_Expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Common regular expressions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python15/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Closures
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python16/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decorators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python17/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type hints
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python18/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    pathlib
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python19/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exceptions and exception groups
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python20/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    dataclass and Pydantic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python21/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Context managers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python22/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    async/await and concurrency
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python23/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    pyproject.toml and uv
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python24/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Code style with ruff
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python25/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing with pytest
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python26/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    logging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python27/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Publishing to PyPI and typer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PythonBasis/python28/1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What to do after you finish
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="examples/study_tracker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Final project code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#about-this-english-edition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        About this English edition
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jump-straight-to" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jump straight to
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="python-for-beginners">Python for Beginners<a class="headerlink" href="#python-for-beginners" title="Permanent link">¶</a></h1>
+<blockquote>
+<p>The IT industry changes and grows faster than most traditional industries. If you stop learning, you'll soon be left behind. But remember: the people left behind are always the ones who stay at beginner level – people with really solid skills are always in demand. So when it comes to learning, we need to be steady and careful.</p>
+<p>Teaching yourself Python is the same. Don't get over-excited at the start and keep bookmarking websites, buying lots of books and downloading piles of video lessons. A few days later, your excitement fades. A few weeks later, you've finally completed the course "From Getting Started to Giving Up". So, learning Python takes one step at a time, steadily and carefully.</p>
+</blockquote>
+<h2 id="about-this-english-edition">About this English edition<a class="headerlink" href="#about-this-english-edition" title="Permanent link">¶</a></h2>
+<p>This is a simple-English translation of the Chinese tutorial by walter201230 (<a href="https://github.com/walter201230/Python">github.com/walter201230/Python</a>), shared under the CC BY 4.0 licence. The tutorial is written for Python 3.10+, and some chapters point out new features from 3.11/3.12/3.13.</p>
+<p>The original author's interactive site, <a href="https://learn-py.org">learn-py.org</a>, lets you write code in the browser with automatic marking (in Chinese).</p>
+<h2 id="jump-straight-to">Jump straight to<a class="headerlink" href="#jump-straight-to" title="Permanent link">¶</a></h2>
+<ul>
+<li><a href="PythonBasis/python0/WhyStudyPython/">Why learn Python?</a></li>
+<li><a href="codeSpecification/codeSpecification_first/">Python code style</a></li>
+<li><a href="PythonBasis/python1/Preface/">Your first Python program</a></li>
+<li><a href="PythonBasis/python2/Type_of_data/">Basic data types</a></li>
+<li><a href="PythonBasis/python8/1/">Object-oriented programming</a></li>
+<li><a href="PythonBasis/python16/1/">Decorators</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden="">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Original tutorial © walter201230 (github.com/walter201230/Python), CC BY 4.0. Simple-English translation and adaptation for classroom use.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
 </footer>
-
-<div class="toast" id="toast"></div>
-
-<script>
-(() => {
-  // harmonica-local/js/audio.js
-  var AudioEngine = class {
-    constructor() {
-      this.ctx = null;
-      this.master = null;
-      this.voice = null;
-      this.muted = false;
-      this._volume = 0.8;
-    }
-    ensure() {
-      try {
-        if (!this.ctx || this.ctx.state === "closed") {
-          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-          if (!AudioContextClass) throw new Error("\u6B64\u6D4F\u89C8\u5668\u4E0D\u652F\u6301 Web Audio");
-          this.ctx = new AudioContextClass();
-          this.master = this.ctx.createGain();
-          this.master.gain.value = this.muted ? 0 : this._volume;
-          this.master.connect(this.ctx.destination);
-        }
-        const ready = this.ctx.state === "running" ? Promise.resolve() : this.ctx.resume();
-        return Promise.resolve(ready).then(() => {
-          const running = this.ctx.state === "running";
-          if (!running) this.reportError("\u6D4F\u89C8\u5668\u97F3\u9891\u4ECD\u88AB\u6682\u505C\uFF0C\u8BF7\u518D\u6B21\u70B9\u51FB\u6D4B\u8BD5\u58F0\u97F3");
-          return running;
-        }).catch((e) => {
-          this.reportError(e.message);
-          return false;
-        });
-      } catch (e) {
-        this.reportError(e.message);
-        return Promise.resolve(false);
-      }
-    }
-    reportError(message) {
-      window.dispatchEvent(new CustomEvent("harmonica-audio-error", { detail: message }));
-    }
-    now() {
-      return this.ctx ? this.ctx.currentTime : performance.now() / 1e3;
-    }
-    freq(p) {
-      return 440 * Math.pow(2, (p - 69) / 12);
-    }
-    setVolume(v) {
-      this._volume = v;
-      if (this.master) this.master.gain.value = this.muted ? 0 : v;
-    }
-    setMuted(m) {
-      this.muted = m;
-      if (this.master) this.master.gain.value = m ? 0 : this._volume;
-    }
-    // 起音气声用的白噪声缓冲区（只生成一次，重复使用）
-    _noiseBuffer() {
-      if (this._noiseBufCache) return this._noiseBufCache;
-      const len = Math.floor(this.ctx.sampleRate * 0.15);
-      const buf = this.ctx.createBuffer(1, len, this.ctx.sampleRate);
-      const data = buf.getChannelData(0);
-      for (let i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
-      this._noiseBufCache = buf;
-      return buf;
-    }
-    // 簧片“毛边”软削波曲线：给锯齿波加一点粗粝的过载感，
-    // 避免像加法合成的电子琴那样每根谐波都干净平滑。
-    _driveCurve() {
-      if (this._driveCurveCache) return this._driveCurveCache;
-      const n = 256, k = 2.6;
-      const curve = new Float32Array(n);
-      const norm = Math.tanh(k);
-      for (let i = 0; i < n; i++) {
-        const x = (i / (n - 1)) * 2 - 1;
-        curve[i] = Math.tanh(k * x) / norm;
-      }
-      this._driveCurveCache = curve;
-      return curve;
-    }
-    noteOn(p) {
-      if (!this.ctx) return;
-      this._releasePrev(0.02);
-      const t = this.ctx.currentTime;
-      const f = this.freq(p);
-      // 单一簧片振荡器（不再叠加失谐副声部——那是电子管风琴的合唱效果，不是簧片乐器该有的味道）
-      const o1 = this.ctx.createOscillator();
-      o1.type = "sawtooth";
-      o1.frequency.value = f;
-      // 软削波让谐波边缘发毛，带出簧片振动的粗粝感
-      const drive = this.ctx.createWaveShaper();
-      drive.curve = this._driveCurve();
-      drive.oversample = "2x";
-      // 共振峰滤波：带通凸显簧片+腔体特有的“嗡鸣”中频峰，而不是用低通把音色磨得四平八稳
-      const formant = this.ctx.createBiquadFilter();
-      formant.type = "bandpass";
-      formant.frequency.value = Math.min(3200, Math.max(500, f * 2.2));
-      formant.Q.value = 1.5;
-      const tone = this.ctx.createBiquadFilter();
-      tone.type = "lowpass";
-      tone.frequency.value = Math.min(7000, Math.max(1800, f * 8));
-      tone.Q.value = 0.4;
-      const env = this.ctx.createGain();
-      env.gain.setValueAtTime(1e-4, t);
-      env.gain.exponentialRampToValueAtTime(0.32, t + 6e-3);
-      // 起音气声：短促带通噪声，模拟吹/吸气瞬间的呼吸感
-      const noiseSrc = this.ctx.createBufferSource();
-      noiseSrc.buffer = this._noiseBuffer();
-      const noiseFilter = this.ctx.createBiquadFilter();
-      noiseFilter.type = "bandpass";
-      noiseFilter.frequency.value = f * 2;
-      noiseFilter.Q.value = 3;
-      const noiseGain = this.ctx.createGain();
-      noiseGain.gain.setValueAtTime(0.16, t);
-      noiseGain.gain.exponentialRampToValueAtTime(1e-4, t + 0.09);
-      // 音高颤动（幅度很小，模拟口腔/喉咙自然的轻微抖动）
-      const lfo = this.ctx.createOscillator();
-      lfo.type = "sine";
-      lfo.frequency.value = 5;
-      const lfoGain = this.ctx.createGain();
-      lfoGain.gain.setValueAtTime(0, t);
-      lfoGain.gain.linearRampToValueAtTime(f * 2e-3, t + 0.2);
-      lfo.connect(lfoGain);
-      lfoGain.connect(o1.frequency);
-      // 气息颤抖：给音量本身加一点不完全规律的起伏，避免电子琴那种纹丝不动的持续音
-      const breath = this.ctx.createOscillator();
-      breath.type = "sine";
-      breath.frequency.value = 4.3 + Math.random() * 1.4;
-      const breathGain = this.ctx.createGain();
-      breathGain.gain.value = 0.02;
-      breath.connect(breathGain);
-      breathGain.connect(env.gain);
-      o1.connect(drive);
-      drive.connect(formant);
-      formant.connect(tone);
-      tone.connect(env);
-      noiseSrc.connect(noiseFilter);
-      noiseFilter.connect(noiseGain);
-      noiseGain.connect(env);
-      env.connect(this.master);
-      o1.start(t);
-      lfo.start(t);
-      breath.start(t);
-      noiseSrc.start(t);
-      noiseSrc.stop(t + 0.12);
-      this.voice = { o1, lfo, breath, env, noiseSrc };
-    }
-    noteOff(release = 0.08) {
-      this._releasePrev(release);
-    }
-    panic() {
-      this._releasePrev(0.01);
-    }
-    _releasePrev(release) {
-      const v = this.voice;
-      if (!v || !this.ctx) return;
-      const t = this.ctx.currentTime;
-      try {
-        if (v.env.gain.cancelAndHoldAtTime) v.env.gain.cancelAndHoldAtTime(t);
-        else {
-          const currentGain = Math.max(v.env.gain.value, 1e-4);
-          v.env.gain.cancelScheduledValues(t);
-          v.env.gain.setValueAtTime(currentGain, t);
-        }
-        v.env.gain.exponentialRampToValueAtTime(1e-4, t + release);
-      } catch (e) {
-      }
-      try {
-        v.o1.stop(t + release + 0.02);
-      } catch (e) {
-      }
-      try {
-        v.lfo.stop(t + release + 0.02);
-      } catch (e) {
-      }
-      try {
-        if (v.breath) v.breath.stop(t + release + 0.02);
-      } catch (e) {
-      }
-      try {
-        if (v.noiseSrc) v.noiseSrc.stop(t + release + 0.02);
-      } catch (e) {
-      }
-      this.voice = null;
-    }
-  };
-  var audio = new AudioEngine();
-
-  // harmonica-local/js/music.js
-  var NAME12 = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
-  var DEG = ["do", "#do", "re", "#re", "mi", "fa", "#fa", "sol", "#sol", "la", "#la", "si"];
-  var KEY_DEG = { "z": 0, "x": 2, "c": 4, "v": 5, "b": 7, "n": 9, "m": 11 };
-  var KEY_BY_PC = { 0: "z", 2: "x", 4: "c", 5: "v", 7: "b", 9: "n", 11: "m" };
-  var WHITE_PCS = /* @__PURE__ */ new Set([0, 2, 4, 5, 7, 9, 11]);
-  var PHYS_KEYS = ["z", "x", "c", "v", "b", "n", "m", ","];
-  var KEY_LABELS = ["Z", "X", "C", "V", "B", "N", "M", "\uFF0C"];
-  function pitchName(p) {
-    return NAME12[(p % 12 + 12) % 12] + (Math.floor(p / 12) - 1);
-  }
-  function degName(p) {
-    return DEG[(p % 12 + 12) % 12];
-  }
-  function regOf(p, b) {
-    const d = Math.floor(p / 12) - 1 - b;
-    return d <= -1 ? "\u4F4E" : d === 0 ? "\u4E2D" : d === 1 ? "\u9AD8" : "\u9AD8\u9AD8";
-  }
-  function pitchFromCombo(key, shift, sharp, baseOct) {
-    const pc = KEY_DEG[key] ?? 0;
-    const oct = baseOct + shift + (key === "," ? 1 : 0);
-    return (oct + 1) * 12 + pc + (sharp ? 1 : 0);
-  }
-  function playableRange(baseOct) {
-    return { min: baseOct * 12, max: (baseOct + 3) * 12 + 1 };
-  }
-  function comboFromPitch(p, baseOct) {
-    let rel = p - (baseOct + 1) * 12;
-    if (rel === 25) return { key: ",", shift: 1, sharp: true };
-    if (rel === 24) return { key: ",", shift: 1, sharp: false };
-    if (rel === 12) return { key: ",", shift: 0, sharp: false };
-    if (rel < -12 || rel > 25) return null;
-    let shift = 0;
-    if (rel < 0) {
-      shift = -1;
-      rel += 12;
-    } else if (rel >= 12) {
-      shift = 1;
-      rel -= 12;
-    }
-    if (WHITE_PCS.has(rel)) return { key: KEY_BY_PC[rel], shift, sharp: false };
-    return { key: KEY_BY_PC[rel - 1], shift, sharp: true };
-  }
-  function fitOctave(pitches, baseOct) {
-    const { min, max } = playableRange(baseOct);
-    let best = 0, bestScore = -1;
-    for (const off of [0, 12, -12, 24, -24]) {
-      let score = 0;
-      for (const p of pitches) {
-        const q = p + off;
-        if (q >= min && q <= max) score++;
-      }
-      if (score > bestScore || score === bestScore && Math.abs(off) < Math.abs(best)) {
-        best = off;
-        bestScore = score;
-      }
-    }
-    return best;
-  }
-  function buildSong(raw, baseOct) {
-    const offset = fitOctave(raw.notes.map((n) => n.pitch), baseOct);
-    const { min, max } = playableRange(baseOct);
-    const secPerBeat = raw.bpm ? 60 / raw.bpm : 0.5;
-    const notes = raw.notes.map((n, i) => {
-      const pitch = n.pitch + offset;
-      const startSec = n.startSec ?? n.startBeat * secPerBeat;
-      const durSec = n.durSec ?? n.durBeats * secPerBeat;
-      const combo = comboFromPitch(pitch, baseOct);
-      const dispP = Math.min(max, Math.max(min, pitch));
-      const dispCombo = combo || comboFromPitch(dispP, baseOct);
-      const col = PHYS_KEYS.indexOf(dispCombo.key);
-      return {
-        idx: i,
-        pitch,
-        startBeat: n.startBeat ?? 0,
-        durBeats: n.durBeats ?? 0,
-        startSec,
-        durSec,
-        combo,
-        outOfRange: !combo,
-        reg: regOf(pitch, baseOct),
-        col
-      };
-    }).sort((a, b) => a.startSec - b.startSec);
-    const durationSec = notes.length ? Math.max(...notes.map((n) => n.startSec + n.durSec)) : 0;
-    return {
-      title: raw.title,
-      source: raw.source,
-      bpm: raw.bpm,
-      octaveOffset: offset,
-      notes,
-      durationSec,
-      judgeableCount: notes.filter((n) => !n.outOfRange).length
-    };
-  }
-
-  // harmonica-local/js/input.js
-  function btnState(button) {
-    return button === 1 ? "middle" : button === 2 ? "right" : button === 0 ? "left" : null;
-  }
-  var InputController = class {
-    constructor({ audio: audio2, baseOct, onEvent }) {
-      this.audio = audio2;
-      this.baseOct = baseOct;
-      this.onEvent = onEvent || (() => {
-      });
-      this.held = [];
-      this.mouseShift = 0;
-      this.mouseSharp = false;
-      this.latch = { shift: 0, sharp: false };
-      this.soundingPitch = null;
-      this._bind();
-    }
-    setBaseOct(o) {
-      this.baseOct = o;
-    }
-    get shift() {
-      return this.mouseShift !== 0 ? this.mouseShift : this.latch.shift;
-    }
-    get sharp() {
-      return this.mouseSharp || this.latch.sharp;
-    }
-    activeKey() {
-      return this.held.length ? this.held[this.held.length - 1] : null;
-    }
-    currentPitch() {
-      const k = this.activeKey();
-      return k ? pitchFromCombo(k, this.shift, this.sharp, this.baseOct) : null;
-    }
-    snapshot() {
-      return {
-        activeKey: this.activeKey(),
-        pitch: this.currentPitch(),
-        shift: this.shift,
-        sharp: this.sharp,
-        held: this.held.slice(),
-        latch: { ...this.latch }
-      };
-    }
-    setLatch(part, value) {
-      if (part === "shift") this.latch.shift = value;
-      else if (part === "sharp") this.latch.sharp = !!value;
-      this.updateMods();
-    }
-    // 按下永远重触发：即使音高没变，玩家这一下也是一次主动起音
-    pressKey(key) {
-      this.audio.ensure();
-      if (!this.held.includes(key)) this.held.push(key);
-      const p = this.currentPitch();
-      this.audio.noteOn(p);
-      this.soundingPitch = p;
-      this._emit("keyonset", key, p);
-    }
-    releaseKey(key) {
-      const i = this.held.indexOf(key);
-      if (i >= 0) this.held.splice(i, 1);
-      const p = this._syncVoice();
-      this._emit("keyoff", this.activeKey(), p);
-    }
-    // 修饰键变化：切音重触发，但不作为新的判定 onset
-    updateMods() {
-      const p = this._syncVoice();
-      this._emit("mods", this.activeKey(), p);
-    }
-    // 让发声跟上按键状态。音高没变就不动当前声部，否则叠按时松开旧键会把还按着的音重播一遍。
-    _syncVoice() {
-      const p = this.currentPitch();
-      if (p === this.soundingPitch) return p;
-      if (p === null) this.audio.noteOff(0.08);
-      else {
-        this.audio.ensure();
-        this.audio.noteOn(p);
-      }
-      this.soundingPitch = p;
-      return p;
-    }
-    releaseAll(alsoVoice) {
-      this.held = [];
-      this.mouseShift = 0;
-      this.mouseSharp = false;
-      if (alsoVoice) {
-        this.audio.noteOff(0.08);
-        this.soundingPitch = null;
-      }
-      this._emit("releaseall", null, null);
-    }
-    _emit(type, key, pitch) {
-      this.onEvent({ type, key, pitch, snapshot: this.snapshot() });
-    }
-    _bind() {
-      document.addEventListener("keydown", (e) => {
-        const k = e.key.toLowerCase();
-        if (PHYS_KEYS.includes(k)) {
-          e.preventDefault();
-          if (!e.repeat) this.pressKey(k);
-        }
-      });
-      document.addEventListener("keyup", (e) => {
-        const k = e.key.toLowerCase();
-        if (PHYS_KEYS.includes(k)) {
-          e.preventDefault();
-          this.releaseKey(k);
-        }
-      });
-      window.addEventListener("blur", () => this.releaseAll(true));
-      document.addEventListener("mousedown", (e) => {
-        const b = btnState(e.button);
-        if (!b) return;
-        if (e.target.closest && e.target.closest("[data-ui]")) return;
-        if (b === "left") this.mouseShift = -1;
-        else if (b === "right") {
-          this.mouseShift = 1;
-          e.preventDefault();
-        } else if (b === "middle") {
-          this.mouseSharp = true;
-          e.preventDefault();
-        } else return;
-        this.audio.ensure();
-        this.updateMods();
-      });
-      document.addEventListener("mouseup", (e) => {
-        const b = btnState(e.button);
-        if (b === "left" && this.mouseShift === -1) this.mouseShift = 0;
-        else if (b === "right" && this.mouseShift === 1) this.mouseShift = 0;
-        else if (b === "middle") this.mouseSharp = false;
-        else return;
-        this.updateMods();
-      });
-      document.addEventListener("contextmenu", (e) => e.preventDefault());
-    }
-  };
-
-  // harmonica-local/js/waterfall.js
-  var REG_COLOR = { "\u4F4E": "#e67e22", "\u4E2D": "#3fa573", "\u9AD8": "#3498db", "\u9AD8\u9AD8": "#9b59b6" };
-  var GRAY = "#5a6270";
-  var ACCENT = "#3fa573";
-  var PX_PER_SEC = 140;
-  var COL_INSET = 4;
-  var Waterfall = class {
-    constructor(canvas) {
-      this.canvas = canvas;
-      this.ctx = canvas.getContext("2d");
-      this.W = 0;
-      this.H = 0;
-      this.dpr = 1;
-      this.fx = [];
-      this._ro = new ResizeObserver(() => this.resize());
-      this._ro.observe(canvas.parentElement || canvas);
-      this.resize();
-    }
-    resize() {
-      const el = this.canvas;
-      const w = el.clientWidth, h = el.clientHeight;
-      this.dpr = window.devicePixelRatio || 1;
-      if (w === 0 || h === 0) return;
-      el.width = Math.round(w * this.dpr);
-      el.height = Math.round(h * this.dpr);
-      this.ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
-      this.W = w;
-      this.H = h;
-    }
-    // ---- 特效 ----
-    flashText(text, color) {
-      this.fx.push({ kind: "text", text, color, t0: this._animT });
-    }
-    ring(col, color) {
-      this.fx.push({ kind: "ring", col, color, t0: this._animT });
-    }
-    colFlash(col, color) {
-      this.fx.push({ kind: "col", col, color, t0: this._animT });
-    }
-    // ---- 主渲染 ----
-    // now     歌曲时间（秒，可为负 = 预备倒数；跟练模式为钳制后时钟）
-    // session PracticeSession（含 rt 运行时音符）
-    // st      { animT, playing, started }
-    render(now, session, st) {
-      this._animT = st.animT;
-      const ctx = this.ctx, W = this.W, H = this.H;
-      if (!W || !H) return;
-      ctx.clearRect(0, 0, W, H);
-      const colW = W / PHYS_KEYS.length;
-      const hitY = H - 14;
-      this._drawBackdrop(hitY);
-      this._drawColumnHeads(colW);
-      if (session) this._drawNotes(now, session, st, colW, hitY);
-      this._drawHitLine(hitY, session, st, colW);
-      this._drawNextHint(session, st.started, hitY);
-      if (session && now < 0) this._drawCountdown(now);
-      if (!st.started) this._drawCenterHint("\u6309 \u7A7A\u683C \u6216\u70B9\u51FB\u300C\u25B6 \u5F00\u59CB\u300D");
-      else if (!st.playing) this._drawCenterHint("\u5DF2\u6682\u505C \xB7 \u7A7A\u683C\u7EE7\u7EED");
-      this._drawFx(colW, hitY);
-    }
-    _drawBackdrop(hitY) {
-      const ctx = this.ctx;
-      const g = ctx.createLinearGradient(0, hitY - 90, 0, hitY);
-      g.addColorStop(0, "rgba(0,0,0,0)");
-      g.addColorStop(1, "rgba(0,0,0,0.22)");
-      ctx.fillStyle = g;
-      ctx.fillRect(0, hitY - 90, this.W, 90);
-    }
-    _drawColumnHeads(colW) {
-      const ctx = this.ctx;
-      ctx.font = "600 11px Consolas, monospace";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillStyle = "rgba(139,147,161,0.85)";
-      for (let i = 0; i < KEY_LABELS.length; i++) {
-        ctx.fillText(KEY_LABELS[i], i * colW + colW / 2, 14);
-      }
-    }
-    _drawNotes(now, session, st, colW, hitY) {
-      const ctx = this.ctx;
-      const next = session.nextNote();
-      for (const n of session.rt) {
-        const bottom = hitY - (n.startSec - now) * PX_PER_SEC;
-        if (bottom < -10) break;
-        const h = Math.max(18, n.durSec * PX_PER_SEC);
-        const top = bottom - h;
-        if (top > this.H + 30) continue;
-        const x = n.col * colW + COL_INSET;
-        const w = colW - COL_INSET * 2;
-        const pc = (n.pitch % 12 + 12) % 12;
-        let fill, alpha = 0.92, label = DEG[pc], sub = pitchName(n.pitch);
-        if (n.outOfRange) {
-          fill = GRAY;
-          alpha = n.judged ? 0.18 : 0.35;
-          label = pitchName(n.pitch);
-          sub = "\u8D85\u97F3\u57DF\xB7\u514D\u5224\u5B9A";
-        } else fill = REG_COLOR[n.reg] || GRAY;
-        if (n.judged) {
-          const age = Math.max(0, now - (n.judgedAt ?? now));
-          if (n.result === "miss") {
-            fill = GRAY;
-            alpha = 0.45;
-          } else if (n.result === "auto") {
-            fill = GRAY;
-            alpha = 0.18;
-          } else alpha = Math.max(0.12, 0.92 - age / 0.6);
-        } else if (n === next && session.mode === "follow" && Math.abs(bottom - hitY) < 2.5) {
-          alpha = 0.7 + 0.3 * (0.5 + 0.5 * Math.sin(st.animT * 6));
-        }
-        ctx.globalAlpha = alpha;
-        this._roundRect(x, top, w, h, 6);
-        ctx.fillStyle = fill;
-        ctx.fill();
-        ctx.lineWidth = 1;
-        ctx.strokeStyle = "rgba(0,0,0,0.35)";
-        ctx.stroke();
-        if (!n.outOfRange) {
-          ctx.fillStyle = "rgba(255,255,255,0.35)";
-          this._roundRect(x + 3, top + 4, 3, Math.max(4, h - 8), 2);
-          ctx.fill();
-        }
-        if (n === next && session.mode === "follow" && !n.judged && Math.abs(bottom - hitY) < 2.5) {
-          ctx.globalAlpha = 0.35 + 0.35 * (0.5 + 0.5 * Math.sin(st.animT * 6));
-          ctx.lineWidth = 2.5;
-          ctx.strokeStyle = fill;
-          this._roundRect(x - 3, top - 3, w + 6, h + 6, 8);
-          ctx.stroke();
-        }
-        ctx.globalAlpha = Math.max(alpha, 0.4);
-        const mods = [];
-        if (!n.outOfRange && n.combo) {
-          if (n.combo.shift === -1) mods.push(["\u5DE6\u952E", "#ffd9a8"]);
-          else if (n.combo.shift === 1) mods.push(["\u53F3\u952E", "#a8d4f2"]);
-          if (n.combo.sharp) mods.push(["\u4E2D\u952E", "#dcb7ef"]);
-        }
-        const cx = x + w / 2;
-        ctx.fillStyle = n.outOfRange ? "#c7ccd4" : "#fff";
-        if (h >= 22) {
-          ctx.font = "700 12.5px system-ui, 'Microsoft YaHei UI'";
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
-          ctx.fillText(label, cx, h < 34 ? top + h / 2 : top + 13);
-        }
-        if (!n.outOfRange && h >= 44) {
-          if (mods.length) {
-            this._drawModLine(mods, cx, top + 29);
-            if (h >= 60) {
-              ctx.font = "9.5px Consolas, monospace";
-              ctx.fillStyle = "rgba(255,255,255,0.55)";
-              ctx.fillText(sub, cx, top + h - 10);
-            }
-          } else {
-            ctx.font = "10px Consolas, monospace";
-            ctx.fillStyle = "rgba(255,255,255,0.6)";
-            ctx.fillText(sub, cx, top + 29);
-          }
-        }
-        if (n.combo && n.combo.sharp && !n.outOfRange && h >= 22 && h < 44) {
-          ctx.beginPath();
-          ctx.arc(x + w - 9, top + 9, 6.5, 0, Math.PI * 2);
-          ctx.fillStyle = "#9b59b6";
-          ctx.fill();
-          ctx.fillStyle = "#fff";
-          ctx.font = "700 9px system-ui";
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
-          ctx.fillText("\u266F", x + w - 9, top + 9.5);
-        }
-      }
-      ctx.globalAlpha = 1;
-    }
-    // 块内修饰键文字行（各修饰键独立着色）
-    _drawModLine(mods, cx, y) {
-      const ctx = this.ctx;
-      ctx.font = "10px system-ui, 'Microsoft YaHei UI'";
-      ctx.textAlign = "left";
-      ctx.textBaseline = "middle";
-      const segs = [];
-      mods.forEach((m, i) => {
-        if (i) segs.push(["\uFF0B", "rgba(255,255,255,0.5)"]);
-        segs.push(m);
-      });
-      const total = segs.reduce((s, [t]) => s + ctx.measureText(t).width, 0);
-      let px = cx - total / 2;
-      for (const [t, c] of segs) {
-        ctx.fillStyle = c;
-        ctx.fillText(t, px, y);
-        px += ctx.measureText(t).width;
-      }
-    }
-    // 判定线上方的「下一音」独立文字行
-    _drawNextHint(session, started, hitY) {
-      if (!started || !session) return;
-      const n = session.nextNote();
-      if (!n || !n.combo) return;
-      const ctx = this.ctx;
-      const parts = [["\u4E0B\u4E00\u97F3", "rgba(255,255,255,0.72)"]];
-      if (n.combo.shift === -1) parts.push(["\u5DE6\u952E", "#ffd9a8"]);
-      else if (n.combo.shift === 1) parts.push(["\u53F3\u952E", "#a8d4f2"]);
-      if (n.combo.sharp) parts.push(["\u4E2D\u952E", "#dcb7ef"]);
-      const keyName = n.combo.key === "," ? "\uFF0C" : n.combo.key.toUpperCase();
-      parts.push(["\u952E[" + keyName + "]", "rgba(255,255,255,0.92)"]);
-      ctx.font = "600 13px system-ui, 'Microsoft YaHei UI'";
-      ctx.textAlign = "left";
-      ctx.textBaseline = "middle";
-      const segs = [];
-      parts.forEach((p, i) => {
-        if (i) segs.push(["\uFF0B", "rgba(255,255,255,0.45)"]);
-        segs.push(p);
-      });
-      const total = segs.reduce((s, [t]) => s + ctx.measureText(t).width, 0);
-      const pad = 14, chipH = 26, y = hitY - 38;
-      ctx.globalAlpha = 0.92;
-      this._roundRect(this.W / 2 - total / 2 - pad, y, total + pad * 2, chipH, 13);
-      ctx.fillStyle = "rgba(12,14,19,0.66)";
-      ctx.fill();
-      ctx.strokeStyle = "rgba(255,255,255,0.14)";
-      ctx.lineWidth = 1;
-      ctx.stroke();
-      let px = this.W / 2 - total / 2;
-      for (const [t, c] of segs) {
-        ctx.fillStyle = c;
-        ctx.fillText(t, px, y + chipH / 2 + 0.5);
-        px += ctx.measureText(t).width;
-      }
-      ctx.globalAlpha = 1;
-    }
-    _drawHitLine(hitY, session, st, colW) {
-      const ctx = this.ctx;
-      ctx.fillStyle = "rgba(63,165,115,0.9)";
-      ctx.fillRect(0, hitY, this.W, 2.5);
-      ctx.fillStyle = "rgba(63,165,115,0.15)";
-      ctx.fillRect(0, hitY + 2.5, this.W, 12);
-      const n = session && session.nextNote();
-      if (n && st.started) {
-        const cx = n.col * colW + colW / 2;
-        const pulse = 0.6 + 0.4 * (0.5 + 0.5 * Math.sin(st.animT * 6));
-        ctx.globalAlpha = pulse;
-        ctx.beginPath();
-        ctx.moveTo(cx - 7, hitY - 14);
-        ctx.lineTo(cx + 7, hitY - 14);
-        ctx.lineTo(cx, hitY - 4);
-        ctx.closePath();
-        ctx.fillStyle = ACCENT;
-        ctx.fill();
-        ctx.globalAlpha = 1;
-      }
-    }
-    _drawCountdown(now) {
-      const ctx = this.ctx;
-      const n = Math.ceil(-now);
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.globalAlpha = 0.9;
-      ctx.fillStyle = "#e6e9ee";
-      ctx.font = "700 56px system-ui, 'Microsoft YaHei UI'";
-      ctx.fillText(String(n), this.W / 2, this.H * 0.42);
-      ctx.font = "14px system-ui, 'Microsoft YaHei UI'";
-      ctx.fillStyle = "#8b93a1";
-      ctx.fillText("\u9884\u5907\u2026", this.W / 2, this.H * 0.42 + 44);
-      ctx.globalAlpha = 1;
-    }
-    _drawCenterHint(text) {
-      const ctx = this.ctx;
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.font = "14px system-ui, 'Microsoft YaHei UI'";
-      ctx.fillStyle = "rgba(139,147,161,0.9)";
-      ctx.fillText(text, this.W / 2, this.H / 2);
-    }
-    _drawFx(colW, hitY) {
-      const ctx = this.ctx, t = this._animT ?? 0;
-      this.fx = this.fx.filter((f) => t - f.t0 < 0.8);
-      for (const f of this.fx) {
-        const age = t - f.t0;
-        if (f.kind === "text") {
-          const a = Math.max(0, 1 - age / 0.7);
-          ctx.globalAlpha = a;
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
-          ctx.font = "800 24px system-ui, 'Microsoft YaHei UI'";
-          ctx.fillStyle = f.color;
-          ctx.fillText(f.text, this.W / 2, this.H * 0.3);
-        } else if (f.kind === "ring") {
-          const a = Math.max(0, 1 - age / 0.5);
-          ctx.globalAlpha = a;
-          ctx.beginPath();
-          ctx.arc(f.col * colW + colW / 2, hitY, 6 + age * 120, 0, Math.PI * 2);
-          ctx.lineWidth = 3;
-          ctx.strokeStyle = f.color;
-          ctx.stroke();
-        } else if (f.kind === "col") {
-          const a = Math.max(0, 1 - age / 0.3) * 0.3;
-          ctx.globalAlpha = a;
-          ctx.fillStyle = f.color;
-          ctx.fillRect(f.col * colW, 0, colW, this.H);
-        }
-        ctx.globalAlpha = 1;
-      }
-    }
-    _roundRect(x, y, w, h, r) {
-      const ctx = this.ctx;
-      if (typeof ctx.roundRect === "function") {
-        ctx.beginPath();
-        ctx.roundRect(x, y, w, h, r);
-      } else {
-        ctx.beginPath();
-        ctx.rect(x, y, w, h);
-      }
-    }
-  };
-
-  // harmonica-local/js/session.js
-  var PracticeSession = class {
-    constructor(song, mode, opts = {}) {
-      this.song = song;
-      this.mode = mode;
-      this.perfectMs = opts.perfectMs ?? 80;
-      this.goodMs = opts.goodMs ?? 300;
-      this.reset();
-    }
-    reset() {
-      this.rt = this.song.notes.map((n) => ({ ...n, judged: false, result: null, judgedAt: null, deltaMs: null }));
-      this.stats = { perfect: 0, good: 0, miss: 0, wrong: 0, extra: 0, combo: 0, maxCombo: 0 };
-      this.finished = false;
-      this.followNow = 0;
-      this._lastWall = null;
-    }
-    nextNote() {
-      return this.rt.find((n) => !n.judged && !n.outOfRange) || null;
-    }
-    // 跟练模式的独立时间轴：宿主每帧用墙钟时间推进。
-    // 只按真实流逝时间前进（可乘速度），且永不超过下一待按音符的开始时刻——
-    // 因此等待期间时间轴冻结，命中后从停靠点按音符时序继续，不会跳拍。
-    startFollow(atSec) {
-      this.followNow = atSec;
-      this._lastWall = null;
-    }
-    // 暂停/恢复后调用：让下一次 advance 以当前墙钟为基准重新计时
-    syncFollowWall() {
-      this._lastWall = null;
-    }
-    advanceFollow(wallNow, speed = 1) {
-      if (this._lastWall === null) {
-        this._lastWall = wallNow;
-        return;
-      }
-      const dt = Math.max(wallNow - this._lastWall, 0);
-      this._lastWall = wallNow;
-      const n = this.nextNote();
-      const target = n ? n.startSec : Infinity;
-      this.followNow = Math.min(this.followNow + dt * speed, target);
-    }
-    // 宿主在每次按下（新 onset）时调用；now 为歌曲时间（秒）
-    press(pitch, now) {
-      if (this.finished) return { result: "extra" };
-      if (this.mode === "follow") return this._pressFollow(pitch, now);
-      return this._pressRhythm(pitch, now);
-    }
-    _pressFollow(pitch, now) {
-      const n = this.nextNote();
-      if (!n) return { result: "extra" };
-      if (pitch === n.pitch) {
-        n.judged = true;
-        n.result = "hit";
-        n.judgedAt = now;
-        this.stats.perfect++;
-        this.stats.combo++;
-        if (this.stats.combo > this.stats.maxCombo) this.stats.maxCombo = this.stats.combo;
-        this._checkFinished(now);
-        return { result: "hit", note: n };
-      }
-      this.stats.wrong++;
-      return { result: "wrong" };
-    }
-    _pressRhythm(pitch, now) {
-      const win = this.goodMs / 1e3;
-      let best = null, bestAbs = Infinity;
-      for (const n of this.rt) {
-        if (n.startSec > now + win + 0.2) break;
-        if (n.judged || n.outOfRange) continue;
-        if (n.startSec + win < now) continue;
-        if (n.pitch !== pitch) continue;
-        const a = Math.abs(n.startSec - now);
-        if (a < bestAbs) {
-          best = n;
-          bestAbs = a;
-        }
-      }
-      if (best) {
-        const deltaMs = Math.round(bestAbs * 1e3);
-        const res = deltaMs <= this.perfectMs ? "perfect" : "good";
-        best.judged = true;
-        best.result = res;
-        best.judgedAt = now;
-        best.deltaMs = deltaMs;
-        this.stats[res]++;
-        this.stats.combo++;
-        if (this.stats.combo > this.stats.maxCombo) this.stats.maxCombo = this.stats.combo;
-        this._checkFinished(now);
-        return { result: res, note: best, deltaMs };
-      }
-      this.stats.extra++;
-      return { result: "extra" };
-    }
-    // 宿主每帧调用。跟练模式传入钳制后的 now（等待时不判 miss）。
-    tick(now) {
-      if (this.finished) return;
-      const win = this.goodMs / 1e3;
-      for (const n of this.rt) {
-        if (n.judged) continue;
-        if (n.startSec + win >= now) continue;
-        if (n.outOfRange) {
-          n.judged = true;
-          n.result = "auto";
-          n.judgedAt = now;
-        } else if (this.mode === "rhythm") {
-          n.judged = true;
-          n.result = "miss";
-          n.judgedAt = now;
-          this.stats.miss++;
-          this.stats.combo = 0;
-        }
-      }
-      this._checkFinished(now);
-    }
-    _checkFinished(now) {
-      if (!this.finished && this.rt.every((n) => n.judged)) this.finished = true;
-    }
-    progress() {
-      const total = this.rt.length || 1;
-      return Math.round(this.rt.filter((n) => n.judged).length / total * 100);
-    }
-    accuracy() {
-      const denom = this.song.judgeableCount;
-      if (!denom) return null;
-      return (this.stats.perfect + 0.6 * this.stats.good) / denom;
-    }
-    score() {
-      return this.stats.perfect * 100 + this.stats.good * 60;
-    }
-  };
-
-  // harmonica-local/js/sheetview.js
-  var CACHE_KEY = "hp_sheet_img";
-  var CACHE_MAX = 2 * 1024 * 1024;
-  var MIN_SCALE = 0.2;
-  var MAX_SCALE = 5;
-  var SheetView = class {
-    constructor(container, { img, onToast, onChange }) {
-      this.container = container;
-      this.img = img;
-      this.onToast = onToast || (() => {
-      });
-      this.onChange = onChange || (() => {
-      });
-      this.scale = 1;
-      this.x = 0;
-      this.y = 0;
-      this._url = null;
-      this._bind();
-    }
-    hasImage() {
-      return this.img.classList.contains("loaded");
-    }
-    loadFromBlob(blob, { silent = false } = {}) {
-      if (!/^image\//.test(blob.type)) {
-        this.onToast("\u53EA\u652F\u6301\u56FE\u7247\u6587\u4EF6\uFF08png / jpg / webp\uFF09");
-        return;
-      }
-      if (this._url) URL.revokeObjectURL(this._url);
-      this._url = URL.createObjectURL(blob);
-      this.img.onload = () => {
-        this.img.classList.add("loaded");
-        this.container.classList.add("has-img");
-        this.resetView();
-        this.onChange();
-      };
-      this.img.src = this._url;
-      this._cache(blob);
-      if (!silent) this.onToast("\u5DF2\u8F7D\u5165\u7B80\u8C31\u56FE\u7247");
-    }
-    loadFromUrl(url) {
-      this.img.onload = () => {
-        this.img.classList.add("loaded");
-        this.container.classList.add("has-img");
-        this.resetView();
-        this.onChange();
-      };
-      this.img.src = url;
-    }
-    clear({ silent = false } = {}) {
-      if (this._url) {
-        URL.revokeObjectURL(this._url);
-        this._url = null;
-      }
-      this.img.removeAttribute("src");
-      this.img.classList.remove("loaded");
-      this.container.classList.remove("has-img");
-      localStorage.removeItem(CACHE_KEY);
-      this.onChange();
-      if (!silent) this.onToast("\u5DF2\u6E05\u9664\u7B80\u8C31\u56FE\u7247");
-    }
-    restoreFromCache() {
-      try {
-        const cached = localStorage.getItem(CACHE_KEY);
-        if (cached) this.loadFromUrl(cached);
-      } catch (e) {
-      }
-    }
-    _cache(blob) {
-      try {
-        if (blob.size > CACHE_MAX) {
-          this.onToast("\u56FE\u7247\u8F83\u5927\uFF08>2MB\uFF09\uFF0C\u672C\u6B21\u7EC3\u4E60\u7ED3\u675F\u540E\u4E0D\u4F1A\u4FDD\u7559");
-          return;
-        }
-        const reader = new FileReader();
-        reader.onload = () => {
-          try {
-            localStorage.setItem(CACHE_KEY, reader.result);
-          } catch (e) {
-          }
-        };
-        reader.readAsDataURL(blob);
-      } catch (e) {
-      }
-    }
-    // ---- 视图变换 ----
-    resetView() {
-      this.scale = 1;
-      this.x = 0;
-      this.y = 0;
-      this._apply();
-      this.fitWidth();
-    }
-    fitWidth() {
-      if (!this.hasImage()) return;
-      const cw = this.container.clientWidth;
-      this.scale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, cw / this.img.naturalWidth));
-      this.x = 0;
-      this.y = 0;
-      this._apply();
-    }
-    zoomBy(k, cx, cy) {
-      const s0 = this.scale, s1 = Math.min(MAX_SCALE, Math.max(MIN_SCALE, s0 * k));
-      if (cx === void 0) {
-        cx = this.container.clientWidth / 2;
-        cy = this.container.clientHeight / 2;
-      }
-      this.x = cx - (cx - this.x) * s1 / s0;
-      this.y = cy - (cy - this.y) * s1 / s0;
-      this.scale = s1;
-      this._apply();
-    }
-    _apply() {
-      this.img.style.transform = `translate(${this.x}px, ${this.y}px) scale(${this.scale})`;
-    }
-    // ---- 交互 ----
-    _bind() {
-      const c = this.container;
-      c.addEventListener("wheel", (e) => {
-        if (!this.hasImage()) return;
-        e.preventDefault();
-        const rect = c.getBoundingClientRect();
-        this.zoomBy(e.deltaY < 0 ? 1.15 : 1 / 1.15, e.clientX - rect.left, e.clientY - rect.top);
-      }, { passive: false });
-      let panning = null;
-      c.addEventListener("pointerdown", (e) => {
-        if (!this.hasImage() || e.button !== 0) return;
-        panning = { x: e.clientX, y: e.clientY, ox: this.x, oy: this.y };
-        c.setPointerCapture(e.pointerId);
-      });
-      c.addEventListener("pointermove", (e) => {
-        if (!panning) return;
-        this.x = panning.ox + (e.clientX - panning.x);
-        this.y = panning.oy + (e.clientY - panning.y);
-        this._apply();
-      });
-      const endPan = () => {
-        panning = null;
-      };
-      c.addEventListener("pointerup", endPan);
-      c.addEventListener("pointercancel", endPan);
-      c.addEventListener("dragover", (e) => {
-        e.preventDefault();
-        if (!this.hasImage()) c.classList.add("dragover");
-      });
-      c.addEventListener("dragleave", () => c.classList.remove("dragover"));
-      c.addEventListener("drop", (e) => {
-        e.preventDefault();
-        c.classList.remove("dragover");
-        const f = e.dataTransfer.files && e.dataTransfer.files[0];
-        if (f) this.loadFromBlob(f);
-      });
-    }
-    // 剪贴板粘贴（仅在简谱模式激活时由 main 调用）
-    handlePaste(e) {
-      const items = e.clipboardData && e.clipboardData.items;
-      if (!items) return;
-      for (const it of items) {
-        if (it.type && it.type.startsWith("image/")) {
-          const f = it.getAsFile();
-          if (f) {
-            this.loadFromBlob(f);
-            e.preventDefault();
-          }
-          return;
-        }
-      }
-    }
-  };
-
-  // harmonica-local/js/midi.js
-  var Reader = class {
-    constructor(view) {
-      this.v = view;
-      this.pos = 0;
-    }
-    u8() {
-      return this.v.getUint8(this.pos++);
-    }
-    u16() {
-      const x = this.v.getUint16(this.pos);
-      this.pos += 2;
-      return x;
-    }
-    u32() {
-      const x = this.v.getUint32(this.pos);
-      this.pos += 4;
-      return x;
-    }
-    str(n) {
-      let s = "";
-      for (let i = 0; i < n; i++) s += String.fromCharCode(this.u8());
-      return s;
-    }
-    vlq() {
-      let v = 0;
-      for (; ; ) {
-        const b = this.u8();
-        v = v << 7 | b & 127;
-        if (!(b & 128)) return v;
-      }
-    }
-    bytes(n) {
-      n = Math.min(n, this.v.byteLength - this.pos);
-      const out = new Uint8Array(this.v.buffer, this.pos, Math.max(0, n));
-      this.pos += n;
-      return out;
-    }
-    skip(n) {
-      this.pos += n;
-    }
-  };
-  function decodeText(bytes) {
-    try {
-      return new TextDecoder("utf-8").decode(bytes);
-    } catch (e) {
-      let s = "";
-      for (const b of bytes) s += String.fromCharCode(b);
-      return s;
-    }
-  }
-  function parseTrack(r, trackEnd, tempoEvents) {
-    let tick = 0, running = 0;
-    const open = /* @__PURE__ */ new Map();
-    const notes = [];
-    let name = "";
-    const closeNote = (key, atTick) => {
-      const o = open.get(key);
-      if (!o) return;
-      open.delete(key);
-      notes.push({ pitch: o.pitch, ch: o.ch, startTick: o.startTick, durTick: Math.max(0, atTick - o.startTick) });
-    };
-    while (r.pos < trackEnd) {
-      tick += r.vlq();
-      let status = r.u8();
-      if (status < 128) {
-        if (!running) break;
-        r.pos--;
-        status = running;
-      } else if (status < 240) {
-        running = status;
-      }
-      const type = status & 240, ch = status & 15;
-      if (type === 144 && r.v.getUint8(r.pos + 1) > 0) {
-        const pitch = r.u8(), vel = r.u8();
-        const key = ch * 128 + pitch;
-        closeNote(key, tick);
-        open.set(key, { pitch, ch, startTick: tick });
-      } else if (type === 128 || type === 144) {
-        const pitch = r.u8();
-        r.skip(1);
-        closeNote(ch * 128 + pitch, tick);
-      } else if (type === 160 || type === 176 || type === 224) {
-        r.skip(2);
-      } else if (type === 192 || type === 208) {
-        r.skip(1);
-      } else if (status === 255) {
-        running = 0;
-        const metaType = r.u8();
-        const len = r.vlq();
-        if (metaType === 81 && len === 3) {
-          const b = r.bytes(3);
-          tempoEvents.push({ tick, usPerQ: b[0] << 16 | b[1] << 8 | b[2] });
-        } else if (metaType === 3) {
-          name = decodeText(r.bytes(len)).trim();
-        } else if (metaType === 47) {
-          r.skip(len);
-          break;
-        } else {
-          r.skip(len);
-        }
-      } else if (status === 240 || status === 247) {
-        running = 0;
-        r.skip(r.vlq());
-      } else {
-        break;
-      }
-    }
-    r.pos = trackEnd;
-    for (const [key, o] of open) closeNote(key, tick);
-    return { name, notes };
-  }
-  function toArrayBuffer(data) {
-    if (data instanceof ArrayBuffer) return data;
-    if (ArrayBuffer.isView(data)) {
-      return data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength);
-    }
-    throw new Error("MIDI \u6570\u636E\u5FC5\u987B\u662F ArrayBuffer \u6216 TypedArray");
-  }
-  function parseMidi(data) {
-    const r = new Reader(new DataView(toArrayBuffer(data)));
-    if (r.str(4) !== "MThd") throw new Error("\u4E0D\u662F\u6709\u6548\u7684 MIDI \u6587\u4EF6\uFF08\u7F3A\u5C11 MThd\uFF09");
-    const headerLen = r.u32();
-    const format = r.u16();
-    const nTracks = r.u16();
-    const division = r.u16();
-    if (division & 32768) throw new Error("\u4E0D\u652F\u6301 SMPTE \u65F6\u5E8F\u7684 MIDI \u6587\u4EF6");
-    const tpq = division || 480;
-    r.skip(Math.max(0, headerLen - 6));
-    const tempoEvents = [{ tick: 0, usPerQ: 5e5 }];
-    const tracks = [];
-    let durationTick = 0;
-    while (r.pos < r.v.byteLength - 8) {
-      const id = r.str(4);
-      const len = r.u32();
-      if (r.pos + len > r.v.byteLength) break;
-      if (id === "MTrk") {
-        const trackEnd = r.pos + len;
-        const t = parseTrack(r, trackEnd, tempoEvents);
-        if (t.notes.length) {
-          tracks.push({ name: t.name, noteCount: t.notes.length, notes: t.notes });
-          for (const n of t.notes) durationTick = Math.max(durationTick, n.startTick + n.durTick);
-        }
-      } else {
-        r.skip(len);
-      }
-    }
-    tempoEvents.sort((a, b) => a.tick - b.tick);
-    const bpm = Math.round(6e7 / tempoEvents[0].usPerQ);
-    const tickToSec = makeTickToSec(tempoEvents, tpq);
-    return { format, tpq, nTracks, tracks, tempoEvents, durationTick, bpm, tickToSec };
-  }
-  function makeTickToSec(tempoEvents, tpq) {
-    return function tickToSec(tick) {
-      let sec = 0, prevTick = 0, usPerQ = tempoEvents[0].usPerQ;
-      for (const e of tempoEvents) {
-        if (e.tick >= tick) break;
-        sec += (e.tick - prevTick) * usPerQ / tpq / 1e6;
-        prevTick = e.tick;
-        usPerQ = e.usPerQ;
-      }
-      return sec + (tick - prevTick) * usPerQ / tpq / 1e6;
-    };
-  }
-  function summarizeChannels(parsed) {
-    const map = /* @__PURE__ */ new Map();
-    for (const t of parsed.tracks) {
-      for (const n of t.notes) {
-        map.set(n.ch, (map.get(n.ch) || 0) + 1);
-      }
-    }
-    return [...map.entries()].map(([ch, noteCount]) => ({ channel: ch + 1, noteCount })).sort((a, b) => a.channel - b.channel);
-  }
-  function bestChannel(parsed) {
-    const channels = summarizeChannels(parsed);
-    let best = null, bestCount = -1;
-    for (const c of channels) {
-      if (c.channel === 10) continue;
-      if (c.noteCount > bestCount) {
-        best = c.channel;
-        bestCount = c.noteCount;
-      }
-    }
-    if (best === null) best = channels.length ? channels[0].channel : null;
-    return best;
-  }
-  function buildSongFromMidi(parsed, channelSel, baseOct, title) {
-    let events;
-    if (channelSel === "merge") {
-      events = parsed.tracks.flatMap((t) => t.notes).filter((n) => n.ch !== 9);
-    } else {
-      const ch = channelSel === void 0 || channelSel === null ? bestChannel(parsed) : channelSel;
-      const ch0 = ch - 1;
-      events = parsed.tracks.flatMap((t) => t.notes).filter((n) => n.ch === ch0);
-    }
-    if (!events.length) throw new Error("\u8BE5\u901A\u9053\u6CA1\u6709\u97F3\u7B26");
-    const notes = reduceToMelody(events, parsed.tickToSec);
-    if (notes.length) {
-      const minStart = Math.min(...notes.map((n) => n.startSec));
-      for (const n of notes) n.startSec -= minStart;
-    }
-    const raw = {
-      title: title || "MIDI \u66F2\u76EE",
-      source: "midi",
-      bpm: parsed.bpm,
-      notes
-    };
-    return buildSong(raw, baseOct);
-  }
-  function reduceToMelody(events, tickToSec) {
-    const sorted = events.slice().sort((a, b) => a.startTick - b.startTick);
-    const out = [];
-    let group = null;
-    for (const e of sorted) {
-      const startSec = tickToSec(e.startTick);
-      if (group && startSec - group.startSec <= 0.03) {
-        if (e.pitch > group.top.pitch) group.top = e;
-      } else {
-        group = { startSec, top: e, startTick: e.startTick };
-        out.push(group);
-      }
-    }
-    return out.map((g) => {
-      const startSec = tickToSec(g.startTick);
-      const durSec = tickToSec(g.top.startTick + g.top.durTick) - tickToSec(g.top.startTick);
-      return {
-        pitch: g.top.pitch,
-        startSec,
-        durSec: Math.max(0.05, durSec),
-        startBeat: g.startTick / 480,
-        // 占位；buildSong 优先使用 startSec
-        durBeats: g.top.durTick / 480
-      };
-    });
-  }
-
-  // harmonica-local/data/songs.js
-  var DEMO_SONGS = [
-    {
-      id: "twinkle",
-      title: "\u5C0F\u661F\u661F",
-      bpm: 100,
-      notes: [
-        // 1 1 5 5 6 6 5- | 4 4 3 3 2 2 1-
-        [72, 0, 1],
-        [72, 1, 1],
-        [79, 2, 1],
-        [79, 3, 1],
-        [81, 4, 1],
-        [81, 5, 1],
-        [79, 6, 2],
-        [77, 8, 1],
-        [77, 9, 1],
-        [76, 10, 1],
-        [76, 11, 1],
-        [74, 12, 1],
-        [74, 13, 1],
-        [72, 14, 2],
-        // 5 5 4 4 3 3 2- （两遍）
-        [79, 16, 1],
-        [79, 17, 1],
-        [77, 18, 1],
-        [77, 19, 1],
-        [76, 20, 1],
-        [76, 21, 1],
-        [74, 22, 2],
-        [79, 24, 1],
-        [79, 25, 1],
-        [77, 26, 1],
-        [77, 27, 1],
-        [76, 28, 1],
-        [76, 29, 1],
-        [74, 30, 2],
-        // 反复前两句
-        [72, 32, 1],
-        [72, 33, 1],
-        [79, 34, 1],
-        [79, 35, 1],
-        [81, 36, 1],
-        [81, 37, 1],
-        [79, 38, 2],
-        [77, 40, 1],
-        [77, 41, 1],
-        [76, 42, 1],
-        [76, 43, 1],
-        [74, 44, 1],
-        [74, 45, 1],
-        [72, 46, 2]
-      ]
-    },
-    {
-      id: "ode",
-      title: "\u6B22\u4E50\u9882",
-      bpm: 110,
-      notes: [
-        // E E F G | G F E D | C C D E | E. D D-
-        [76, 0, 1],
-        [76, 1, 1],
-        [77, 2, 1],
-        [79, 3, 1],
-        [79, 4, 1],
-        [77, 5, 1],
-        [76, 6, 1],
-        [74, 7, 1],
-        [72, 8, 1],
-        [72, 9, 1],
-        [74, 10, 1],
-        [76, 11, 1],
-        [76, 12, 1.5],
-        [74, 13.5, 0.5],
-        [74, 14, 2],
-        // E E F G | G F E D | C C D E | D. C C-
-        [76, 16, 1],
-        [76, 17, 1],
-        [77, 18, 1],
-        [79, 19, 1],
-        [79, 20, 1],
-        [77, 21, 1],
-        [76, 22, 1],
-        [74, 23, 1],
-        [72, 24, 1],
-        [72, 25, 1],
-        [74, 26, 1],
-        [76, 27, 1],
-        [74, 28, 1.5],
-        [72, 29.5, 0.5],
-        [72, 30, 2]
-      ]
-    },
-    {
-      id: "tigers",
-      title: "\u4E24\u53EA\u8001\u864E",
-      bpm: 108,
-      notes: [
-        // 1 2 3 1 | 1 2 3 1 | 3 4 5- | 3 4 5-
-        [72, 0, 1],
-        [74, 1, 1],
-        [76, 2, 1],
-        [72, 3, 1],
-        [72, 4, 1],
-        [74, 5, 1],
-        [76, 6, 1],
-        [72, 7, 1],
-        [76, 8, 1],
-        [77, 9, 1],
-        [79, 10, 2],
-        [76, 12, 1],
-        [77, 13, 1],
-        [79, 14, 2],
-        // 5 6 5 4 | 3 1--- | 5 6 5 4 | 3 1---
-        [79, 16, 1],
-        [81, 17, 1],
-        [79, 18, 1],
-        [77, 19, 1],
-        [76, 20, 1],
-        [72, 21, 3],
-        [79, 24, 1],
-        [81, 25, 1],
-        [79, 26, 1],
-        [77, 27, 1],
-        [76, 28, 1],
-        [72, 29, 3],
-        // 1 5(低) 1- | 1 5(低) 1-
-        [72, 32, 1],
-        [67, 33, 1],
-        [72, 34, 2],
-        [72, 36, 1],
-        [67, 37, 1],
-        [72, 38, 2]
-      ]
-    }
-  ];
-
-  // harmonica-local/js/main.js
-  var $ = (id) => document.getElementById(id);
-  var settings = (() => {
-    try {
-      return JSON.parse(localStorage.getItem("hp_settings")) || {};
-    } catch (e) {
-      return {};
-    }
-  })();
-  var state = {
-    mode: ["free", "waterfall", "sheet"].includes(settings.lastMode) ? settings.lastMode : "free",
-    sub: "rhythm",
-    baseOct: settings.baseOct ?? 5,
-    speed: settings.speed ?? 1,
-    themeMode: ["auto", "dark", "light"].includes(settings.theme) ? settings.theme : "light",
-    rawSongs: [],
-    // {id, title, build(baseOct) → Song}
-    currentIdx: 0,
-    song: null,
-    session: null,
-    started: false,
-    overlayShown: false
-  };
-  var clock = {
-    base: 0,
-    speed: state.speed,
-    leadIn: 3,
-    playing: false,
-    pausedAt: -3,
-    prevA: null,
-    prevN: 0,
-    start() {
-      this.base = audio.now();
-      this.playing = true;
-      this.prevA = null;
-    },
-    pause() {
-      this.pausedAt = this.songNow();
-      this.playing = false;
-    },
-    resume() {
-      this.base = audio.now() - (this.pausedAt + this.leadIn) / this.speed;
-      this.playing = true;
-      this.prevA = null;
-    },
-    stop() {
-      this.playing = false;
-      this.pausedAt = -this.leadIn;
-    },
-    setSpeed(s) {
-      if (this.playing) {
-        const n = this.songNow();
-        this.speed = s;
-        this.base = audio.now() - (n + this.leadIn) / s;
-        this.prevA = null;
-      } else this.speed = s;
-    },
-    songNow() {
-      const a = audio.now();
-      if (!this.playing) {
-        this.prevA = a;
-        return this.pausedAt;
-      }
-      let n = (a - this.base) * this.speed - this.leadIn;
-      if (this.prevA !== null && Math.abs(a - this.prevA) > 2) {
-        n = this.prevN;
-        this.base = a - (n + this.leadIn) / this.speed;
-      }
-      this.prevA = a;
-      this.prevN = n;
-      return n;
-    }
-  };
-  var els = {
-    tabs: [...document.querySelectorAll("#modeTabs .tab")],
-    subBtns: [...document.querySelectorAll("#practiceSeg button")],
-    baseSel: $("baseSel"),
-    volumeRange: $("volumeRange"),
-    muteBtn: $("muteBtn"),
-    themeBtn: $("themeBtn"),
-    panicBtn: $("panicBtn"),
-    songSel: $("songSel"),
-    importMidiBtn: $("importMidiBtn"),
-    midiFile: $("midiFile"),
-    channelWrap: $("channelWrap"),
-    channelSel: $("channelSel"),
-    speedSel: $("speedSel"),
-    playBtn: $("playBtn"),
-    resetBtn: $("resetBtn"),
-    hud: $("hud"),
-    hudProgressBar: $("hudProgressBar"),
-    hudProgress: $("hudProgress"),
-    hudCombo: $("hudCombo"),
-    hudAcc: $("hudAcc"),
-    hudScore: $("hudScore"),
-    freeStage: $("freeStage"),
-    nowNameBig: $("nowNameBig"),
-    nowComboBig: $("nowComboBig"),
-    pianoStrip: $("pianoStrip"),
-    wfCanvas: $("wfCanvas"),
-    endOverlay: $("endOverlay"),
-    endTitle: $("endTitle"),
-    endStats: $("endStats"),
-    endRestartBtn: $("endRestartBtn"),
-    endCloseBtn: $("endCloseBtn"),
-    sheetViewer: $("sheetViewer"),
-    sheetImg: $("sheetImg"),
-    importSheetBtn: $("importSheetBtn"),
-    sheetFile: $("sheetFile"),
-    clearSheetBtn: $("clearSheetBtn"),
-    zoomInBtn: $("zoomInBtn"),
-    zoomOutBtn: $("zoomOutBtn"),
-    fitBtn: $("fitBtn"),
-    resetViewBtn: $("resetViewBtn"),
-    nowName: $("nowName"),
-    nowCombo: $("nowCombo"),
-    lampLeft: $("lampLeft"),
-    lampRight: $("lampRight"),
-    lampMid: $("lampMid"),
-    virtualKeys: $("virtualKeys"),
-    toast: $("toast")
-  };
-  var waterfall = new Waterfall(els.wfCanvas);
-  var keyCells = /* @__PURE__ */ new Map();
-  var toastTimer;
-  function toast(msg) {
-    els.toast.textContent = msg;
-    els.toast.classList.add("show");
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => els.toast.classList.remove("show"), 2400);
-  }
-  var saveTimer;
-  function saveSettings() {
-    clearTimeout(saveTimer);
-    saveTimer = setTimeout(() => {
-      try {
-        localStorage.setItem("hp_settings", JSON.stringify({
-          baseOct: state.baseOct,
-          volume: +els.volumeRange.value,
-          muted: audio.muted,
-          speed: clock.speed,
-          theme: state.themeMode,
-          lastMode: state.mode
-        }));
-      } catch (e) {
-      }
-    }, 300);
-  }
-  var input = new InputController({ audio, baseOct: state.baseOct, onEvent: handleInput });
-  function handleInput(e) {
-    refreshNowDisplay(e.snapshot);
-    if (e.type === "keyonset" && state.mode === "waterfall" && clock.playing && state.session) {
-      judgePress(e);
-    }
-  }
-  function refreshNowDisplay(s) {
-    let name = "\u2014", combo = "\u7B49\u5F85\u6309\u952E\u2026";
-    if (s.activeKey) {
-      const p = s.pitch, reg = regOf(p, state.baseOct);
-      name = reg + degName(p) + "  " + pitchName(p);
-      const mods = [];
-      if (s.shift === -1) mods.push("\u6309\u4F4F\u5DE6\u952E");
-      else if (s.shift === 1) mods.push("\u6309\u4F4F\u53F3\u952E");
-      if (s.sharp) mods.push("\u4E2D\u952E(\u5347\u534A\u97F3)");
-      mods.push(s.activeKey === "," ? "\u952E[\uFF0C]" : "\u952E[" + s.activeKey.toUpperCase() + "]");
-      combo = "\u6309\u4E0B " + mods.join(" + ") + " = " + pitchName(p) + "\uFF08" + reg + "\u97F3\u533A\uFF09";
-    }
-    els.nowName.textContent = name;
-    els.nowCombo.textContent = combo;
-    els.nowNameBig.textContent = name;
-    els.nowComboBig.textContent = combo;
-    els.lampLeft.classList.toggle("on-left", s.shift === -1);
-    els.lampRight.classList.toggle("on-right", s.shift === 1);
-    els.lampMid.classList.toggle("on-mid", s.sharp);
-    els.lampLeft.classList.toggle("latched", s.latch.shift === -1);
-    els.lampRight.classList.toggle("latched", s.latch.shift === 1);
-    els.lampMid.classList.toggle("latched", s.latch.sharp);
-    for (const [k, el] of keyCells) el.classList.toggle("down", s.held.includes(k));
-    if (state.mode === "free") highlightPiano(s.pitch);
-  }
-  function judgePress(e) {
-    const now = state.sub === "follow" ? state.session.followNow : clock.songNow();
-    const r = state.session.press(e.pitch, now);
-    if (r.result === "hit" || r.result === "perfect" || r.result === "good") {
-      const color = r.result === "perfect" ? "#f5b041" : "#3fa573";
-      waterfall.ring(r.note.col, color);
-      const label = state.sub === "follow" ? "\u547D\u4E2D\uFF01" : r.result === "perfect" ? `PERFECT ${fmtDelta(r.deltaMs)}` : `GOOD ${fmtDelta(r.deltaMs)}`;
-      waterfall.flashText(label, color);
-    } else if (r.result === "wrong") {
-      waterfall.colFlash(PHYS_KEYS.indexOf(e.key), "#c0392b");
-      waterfall.flashText("\u6307\u6CD5\u4E0D\u5BF9", "#c0392b");
-      shakeKey(e.key);
-    }
-  }
-  function fmtDelta(ms) {
-    return (ms >= 0 ? "+" : "\u2212") + Math.abs(ms) + "ms";
-  }
-  function shakeKey(key) {
-    const el = keyCells.get(key);
-    if (!el) return;
-    el.classList.remove("shake");
-    void el.offsetWidth;
-    el.classList.add("shake");
-    setTimeout(() => el.classList.remove("shake"), 350);
-  }
-  function initSongs() {
-    state.rawSongs = DEMO_SONGS.map((d) => ({
-      id: d.id,
-      title: d.title,
-      build(baseOct) {
-        return buildSong({
-          title: d.title,
-          source: "demo",
-          bpm: d.bpm,
-          notes: d.notes.map(([pitch, startBeat, durBeats]) => ({ pitch, startBeat, durBeats }))
-        }, baseOct);
-      }
-    }));
-    rebuildSongSel();
-  }
-  function rebuildSongSel() {
-    els.songSel.innerHTML = "";
-    state.rawSongs.forEach((s, i) => {
-      const op = document.createElement("option");
-      op.value = i;
-      op.textContent = s.title;
-      els.songSel.appendChild(op);
-    });
-    els.songSel.value = state.currentIdx;
-  }
-  function loadSong(idx) {
-    if (idx < 0 || idx >= state.rawSongs.length) return;
-    state.currentIdx = idx;
-    const entry = state.rawSongs[idx];
-    state.song = entry.build(state.baseOct);
-    els.songSel.value = idx;
-    rebuildChannelSel(entry);
-    resetSession();
-  }
-  function resetSession() {
-    clock.stop();
-    clock.leadIn = state.sub === "rhythm" ? 3 : 2;
-    clock.pausedAt = -clock.leadIn;
-    state.session = state.song ? new PracticeSession(state.song, state.sub) : null;
-    if (state.session) state.session.startFollow(-clock.leadIn);
-    state.started = false;
-    state.overlayShown = false;
-    hideOverlay();
-    updatePlayBtn();
-    lastHudKey = "";
-  }
-  function restartSession() {
-    state.session.reset();
-    state.session.startFollow(-clock.leadIn);
-    state.overlayShown = false;
-    hideOverlay();
-    state.started = true;
-    clock.start();
-    updatePlayBtn();
-  }
-  function togglePlay() {
-    if (!state.session || !state.song) return;
-    if (!state.started) {
-      state.started = true;
-      audio.ensure();
-      clock.start();
-    } else if (clock.playing) {
-      clock.pause();
-    } else if (state.session.finished) {
-      restartSession();
-      return;
-    } else {
-      audio.ensure();
-      clock.resume();
-      state.session.syncFollowWall();
-    }
-    updatePlayBtn();
-  }
-  function updatePlayBtn() {
-    els.playBtn.textContent = !state.started ? "\u25B6 \u5F00\u59CB" : clock.playing ? "\u23F8 \u6682\u505C" : "\u25B6 \u7EE7\u7EED";
-  }
-  var lastHudKey = "";
-  function updateHUD() {
-    const s = state.session;
-    if (!s) return;
-    const acc = s.accuracy();
-    const key = [s.progress(), s.stats.combo, acc === null ? -1 : acc.toFixed(3), s.score()].join("|");
-    if (key === lastHudKey) return;
-    lastHudKey = key;
-    els.hudProgress.textContent = s.progress() + "%";
-    els.hudProgressBar.style.width = s.progress() + "%";
-    els.hudCombo.textContent = s.stats.combo;
-    els.hudAcc.textContent = acc === null ? "\u2014" : Math.round(acc * 100) + "%";
-    els.hudScore.textContent = s.score();
-  }
-  var lastTargetCol = -1;
-  var lastTargetLamps = "";
-  function updateTargetHighlight() {
-    const n = state.session && state.session.nextNote();
-    const col = n ? n.col : -1;
-    const lampKey = n && n.combo ? `${n.combo.shift}|${n.combo.sharp}` : "";
-    if (col === lastTargetCol && lampKey === lastTargetLamps) return;
-    lastTargetCol = col;
-    lastTargetLamps = lampKey;
-    for (const [, el] of keyCells) el.classList.remove("target");
-    if (n && n.combo) keyCells.get(n.combo.key).classList.add("target");
-    els.lampLeft.classList.toggle("hint-left", !!(n && n.combo && n.combo.shift === -1));
-    els.lampRight.classList.toggle("hint-right", !!(n && n.combo && n.combo.shift === 1));
-    els.lampMid.classList.toggle("hint-mid", !!(n && n.combo && n.combo.sharp));
-  }
-  function checkFinish(now) {
-    const s = state.session;
-    if (!s || state.overlayShown || !s.finished) return;
-    if (now < state.song.durationSec + 0.4) return;
-    clock.pause();
-    showEndOverlay();
-    updatePlayBtn();
-  }
-  function showEndOverlay() {
-    state.overlayShown = true;
-    const s = state.session, st = s.stats;
-    const auto = s.rt.filter((n) => n.result === "auto").length;
-    const rows = [];
-    const add = (dt, dd) => rows.push(`<dt>${dt}</dt><dd>${dd}</dd>`);
-    if (state.sub === "follow") {
-      add("\u547D\u4E2D", st.perfect);
-      add("\u9519\u6309", st.wrong);
-      add("\u514D\u5224\u5B9A\uFF08\u8D85\u97F3\u57DF\uFF09", auto);
-      add("\u6700\u5927\u8FDE\u51FB", st.maxCombo);
-    } else {
-      add("Perfect", st.perfect);
-      add("Good", st.good);
-      add("Miss", st.miss);
-      add("\u9519\u6309\uFF08\u97F3\u4E0D\u5BF9\uFF09", st.wrong);
-      add("\u591A\u4F59\u6309\u952E", st.extra);
-      add("\u51C6\u786E\u7387", Math.round((s.accuracy() || 0) * 100) + "%");
-      add("\u6700\u5927\u8FDE\u51FB", st.maxCombo);
-      add("\u8BC4\u5206", s.score());
-    }
-    els.endStats.innerHTML = rows.join("");
-    els.endTitle.textContent = state.sub === "follow" ? "\u7EC3\u4E60\u5B8C\u6210\uFF01" : "\u6F14\u594F\u5B8C\u6210\uFF01";
-    els.endOverlay.classList.remove("hidden");
-  }
-  function hideOverlay() {
-    els.endOverlay.classList.add("hidden");
-    state.overlayShown = false;
-  }
-  async function importMidiFile(file) {
-    try {
-      const buf = await file.arrayBuffer();
-      const parsed = parseMidi(buf);
-      if (!parsed.tracks.length) throw new Error("\u6587\u4EF6\u91CC\u6CA1\u6709\u53EF\u7528\u97F3\u7B26");
-      const entry = {
-        id: "midi-" + Date.now(),
-        title: file.name.replace(/\.(mid|midi)$/i, "") || "MIDI \u66F2\u76EE",
-        parsed,
-        channelSel: void 0,
-        build(baseOct) {
-          return buildSongFromMidi(this.parsed, this.channelSel, baseOct, this.title);
-        }
-      };
-      state.rawSongs.push(entry);
-      rebuildSongSel();
-      loadSong(state.rawSongs.length - 1);
-      toast(`\u5DF2\u5BFC\u5165\u300C${entry.title}\u300D`);
-    } catch (err) {
-      toast("\u5BFC\u5165\u5931\u8D25\uFF1A" + err.message);
-    }
-  }
-  function rebuildChannelSel(entry) {
-    const sel = els.channelSel;
-    sel.innerHTML = "";
-    if (entry.parsed) {
-      const auto = document.createElement("option");
-      auto.value = "auto";
-      auto.textContent = "\u81EA\u52A8\u9009\u62E9";
-      sel.appendChild(auto);
-      for (const c of summarizeChannels(entry.parsed)) {
-        const op = document.createElement("option");
-        op.value = c.channel;
-        op.textContent = `\u901A\u9053 ${c.channel}\uFF08${c.noteCount} \u97F3\uFF09`;
-        sel.appendChild(op);
-      }
-      const merge = document.createElement("option");
-      merge.value = "merge";
-      merge.textContent = "\u5408\u5E76\u5168\u90E8\u901A\u9053";
-      sel.appendChild(merge);
-      sel.value = entry.channelSel === void 0 ? "auto" : String(entry.channelSel);
-    } else {
-      const op = document.createElement("option");
-      op.value = "1";
-      op.textContent = "\u901A\u9053 1";
-      op.disabled = true;
-      sel.appendChild(op);
-      sel.value = "1";
-    }
-  }
-  var sheetView = new SheetView(els.sheetViewer, {
-    img: els.sheetImg,
-    onToast: toast,
-    onChange: () => {
-    }
-  });
-  document.addEventListener("paste", (e) => {
-    if (state.mode === "sheet") sheetView.handlePaste(e);
-  });
-  function setMode(mode) {
-    if (state.mode === mode) return;
-    state.mode = mode;
-    document.body.dataset.mode = mode;
-    els.tabs.forEach((t) => t.classList.toggle("active", t.dataset.tab === mode));
-    els.hud.hidden = mode !== "waterfall";
-    if (mode !== "waterfall") {
-      clock.stop();
-      state.started = false;
-      updatePlayBtn();
-    } else {
-      if (!state.song) loadSong(state.currentIdx);
-      requestAnimationFrame(() => waterfall.resize());
-    }
-    saveSettings();
-  }
-  function frame() {
-    requestAnimationFrame(frame);
-    const animT = performance.now() / 1e3;
-    if (state.mode === "waterfall" && state.session) {
-      if (clock.playing && state.sub === "follow") {
-        state.session.advanceFollow(animT, clock.speed);
-      }
-      const renderNow = state.sub === "follow" ? state.session.followNow : clock.songNow();
-      if (clock.playing) state.session.tick(renderNow);
-      waterfall.render(renderNow, state.session, { animT, playing: clock.playing, started: state.started });
-      updateHUD();
-      updateTargetHighlight();
-      checkFinish(renderNow);
-    }
-  }
-  requestAnimationFrame(frame);
-  function rebuildStrip() {
-    els.pianoStrip.innerHTML = "";
-    const rows = [
-      { reg: "\u4F4E", label: "\u4F4E\u516B\u5EA6" },
-      { reg: "\u4E2D", label: "\u4E2D\u97F3" },
-      { reg: "\u9AD8", label: "\u9AD8\u516B\u5EA6" },
-      { reg: "\u9AD8\u9AD8", label: "\u9AD8\u9AD8\u97F3\u533A" }
-    ];
-    const minP = state.baseOct * 12;
-    const maxP = (state.baseOct + 3) * 12 + 1;
-    for (const { reg, label } of rows) {
-      const row = document.createElement("div");
-      row.className = "strip-row";
-      const lab = document.createElement("span");
-      lab.className = "strip-label reg-" + (reg === "\u4F4E" ? "low" : reg === "\u4E2D" ? "mid" : reg === "\u9AD8" ? "high" : "top");
-      lab.textContent = label;
-      row.appendChild(lab);
-      const keys = document.createElement("div");
-      keys.className = "piano";
-      for (let p = minP; p <= maxP; p++) {
-        if (regOf(p, state.baseOct) !== reg) continue;
-        const el = document.createElement("div");
-        el.className = "pk" + (NAME12[p % 12].includes("#") ? " sharps" : "");
-        el.dataset.p = p;
-        el.textContent = pitchName(p);
-        el.title = reg + degName(p) + " (" + pitchName(p) + ")";
-        keys.appendChild(el);
-      }
-      row.appendChild(keys);
-      els.pianoStrip.appendChild(row);
-    }
-  }
-  function highlightPiano(p) {
-    document.querySelectorAll(".pk").forEach((el) => {
-      el.classList.toggle("on", p !== null && parseInt(el.dataset.p, 10) === p);
-    });
-  }
-  function buildVirtualKeys() {
-    PHYS_KEYS.forEach((k) => {
-      const d = document.createElement("div");
-      d.className = "gkey";
-      const nm = k === "," ? "\u9AD8do" : DEG[KEY_DEG[k]];
-      const kbd = k === "," ? "\uFF0C" : k.toUpperCase();
-      d.innerHTML = `<kbd>${kbd}</kbd><span class="nm">${nm}</span>`;
-      d.addEventListener("pointerdown", (ev) => {
-        ev.preventDefault();
-        input.pressKey(k);
-      });
-      d.addEventListener("pointerup", () => input.releaseKey(k));
-      d.addEventListener("pointerleave", () => {
-        if (input.held.includes(k)) input.releaseKey(k);
-      });
-      keyCells.set(k, d);
-      els.virtualKeys.appendChild(d);
-    });
-  }
-  els.tabs.forEach((t) => t.addEventListener("click", () => setMode(t.dataset.tab)));
-  els.subBtns.forEach((b) => b.addEventListener("click", () => {
-    if (state.sub === b.dataset.sub) return;
-    state.sub = b.dataset.sub;
-    els.subBtns.forEach((x) => x.classList.toggle("active", x === b));
-    if (state.mode === "waterfall" && state.song) resetSession();
-  }));
-  for (let o = 3; o <= 7; o++) {
-    const op = document.createElement("option");
-    op.value = o;
-    op.textContent = "C" + o;
-    if (o === state.baseOct) op.selected = true;
-    els.baseSel.appendChild(op);
-  }
-  els.baseSel.addEventListener("change", (e) => {
-    state.baseOct = parseInt(e.target.value, 10);
-    input.setBaseOct(state.baseOct);
-    rebuildStrip();
-    if (state.song) loadSong(state.currentIdx);
-    saveSettings();
-  });
-  els.volumeRange.addEventListener("input", (e) => {
-    audio.setVolume(+e.target.value / 100);
-    saveSettings();
-  });
-  if (settings.volume !== void 0) els.volumeRange.value = settings.volume;
-  els.muteBtn.addEventListener("click", () => {
-    audio.setMuted(!audio.muted);
-    els.muteBtn.classList.toggle("active", audio.muted);
-    els.muteBtn.textContent = audio.muted ? "\u5DF2\u9759\u97F3" : "\u9759\u97F3";
-    saveSettings();
-  });
-  var themeLabels = { auto: "\u4E3B\u9898\uFF1A\u81EA\u52A8", dark: "\u4E3B\u9898\uFF1A\u6DF1\u8272", light: "\u4E3B\u9898\uFF1A\u6D45\u8272" };
-  function applyTheme(mode) {
-    state.themeMode = mode;
-    const dark = mode === "dark" || mode === "auto" && window.matchMedia("(prefers-color-scheme: dark)").matches;
-    document.documentElement.dataset.theme = dark ? "dark" : "light";
-    els.themeBtn.textContent = themeLabels[mode];
-    saveSettings();
-  }
-  els.themeBtn.addEventListener("click", () => {
-    applyTheme({ auto: "dark", dark: "light", light: "auto" }[state.themeMode]);
-  });
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
-    if (state.themeMode === "auto") applyTheme("auto");
-  });
-  els.panicBtn.addEventListener("click", () => input.releaseAll(true));
-  els.songSel.addEventListener("change", (e) => loadSong(+e.target.value));
-  els.importMidiBtn.addEventListener("click", () => els.midiFile.click());
-  els.midiFile.addEventListener("change", (e) => {
-    const f = e.target.files[0];
-    if (f) importMidiFile(f);
-    e.target.value = "";
-  });
-  els.channelSel.addEventListener("change", (e) => {
-    const entry = state.rawSongs[state.currentIdx];
-    if (!entry || !entry.parsed) return;
-    const v = e.target.value;
-    entry.channelSel = v === "auto" ? void 0 : v === "merge" ? "merge" : +v;
-    loadSong(state.currentIdx);
-  });
-  els.speedSel.addEventListener("change", (e) => {
-    clock.setSpeed(+e.target.value);
-    saveSettings();
-  });
-  if (settings.speed !== void 0) els.speedSel.value = String(settings.speed);
-  els.playBtn.addEventListener("click", togglePlay);
-  els.resetBtn.addEventListener("click", () => {
-    if (state.session) resetSession();
-  });
-  els.endRestartBtn.addEventListener("click", restartSession);
-  els.endCloseBtn.addEventListener("click", hideOverlay);
-  els.importSheetBtn.addEventListener("click", () => els.sheetFile.click());
-  els.sheetFile.addEventListener("change", (e) => {
-    const f = e.target.files[0];
-    if (f) sheetView.loadFromBlob(f);
-    e.target.value = "";
-  });
-  els.clearSheetBtn.addEventListener("click", () => sheetView.clear());
-  els.zoomInBtn.addEventListener("click", () => sheetView.zoomBy(1.25));
-  els.zoomOutBtn.addEventListener("click", () => sheetView.zoomBy(1 / 1.25));
-  els.fitBtn.addEventListener("click", () => sheetView.fitWidth());
-  els.resetViewBtn.addEventListener("click", () => sheetView.resetView());
-  els.lampLeft.addEventListener("click", () => input.setLatch("shift", input.latch.shift === -1 ? 0 : -1));
-  els.lampRight.addEventListener("click", () => input.setLatch("shift", input.latch.shift === 1 ? 0 : 1));
-  els.lampMid.addEventListener("click", () => input.setLatch("sharp", !input.latch.sharp));
-  document.addEventListener("keydown", (e) => {
-    if (e.code === "Space" && state.mode === "waterfall") {
-      e.preventDefault();
-      if (!e.repeat) togglePlay();
-    } else if (e.key === "Escape") {
-      hideOverlay();
-    }
-  });
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden && clock.playing) {
-      clock.pause();
-      updatePlayBtn();
-    }
-  });
-  applyTheme(state.themeMode);
-  initSongs();
-  buildVirtualKeys();
-  rebuildStrip();
-  sheetView.restoreFromCache();
-  els.tabs.forEach((t) => t.classList.toggle("active", t.dataset.tab === state.mode));
-  document.body.dataset.mode = state.mode;
-  els.hud.hidden = state.mode !== "waterfall";
-  if (state.mode === "waterfall") loadSong(state.currentIdx);
-  refreshNowDisplay(input.snapshot());
-  var testAudioTimer;
-  var testingAudio = false;
-  var audioStatus = $("audioStatus");
-  window.addEventListener("harmonica-audio-error", (event) => {
-    audioStatus.textContent = "\u58F0\u97F3\u672A\u542F\u52A8\uFF1A" + event.detail;
-  });
-  $("testAudioBtn").addEventListener("click", async () => {
-    if (testingAudio) return;
-    testingAudio = true;
-    clearTimeout(testAudioTimer);
-    input.releaseAll(true);
-    const ready = audio.ensure();
-    audioStatus.textContent = "\u6B63\u5728\u542F\u52A8\u58F0\u97F3\u2026";
-    try {
-      if (!await ready) return;
-      audio.setMuted(false);
-      if (+els.volumeRange.value === 0) els.volumeRange.value = 60;
-      audio.setVolume(+els.volumeRange.value / 100);
-      els.muteBtn.textContent = "\u9759\u97F3";
-      els.muteBtn.classList.remove("active");
-      audio.noteOn((state.baseOct + 1) * 12);
-      const testVoice = audio.voice;
-      audioStatus.textContent = "\u6B63\u5728\u64AD\u653E do\uFF1B\u82E5\u4ECD\u65E0\u58F0\uFF0C\u8BF7\u68C0\u67E5\u6807\u7B7E\u9875\u9759\u97F3\u4E0E\u7CFB\u7EDF\u58F0\u97F3\u8F93\u51FA\u8BBE\u5907\u3002";
-      testAudioTimer = setTimeout(() => {
-        if (audio.voice === testVoice) audio.noteOff();
-      }, 800);
-      saveSettings();
-    } finally {
-      testingAudio = false;
-    }
-  });
-})();
-
-</script>
-</body>
-</html>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["content.code.copy", "navigation.instant", "navigation.tracking", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

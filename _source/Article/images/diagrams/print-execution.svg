@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="diagram" width="720" height="530" viewBox="0 0 720 530" role="img" aria-labelledby="title desc" lang="en">
+<title id="title">From call to output</title><desc id="desc">Run this line of code and get a line of text.</desc>
+<style>
+ .diagram { --paper:#ffffff; --panel:#f5f7fa; --cell:#ffffff; --ink:#1c293b; --muted:#64748b; --line:#63758c; --border:#c5cfdd; }
+ @media (prefers-color-scheme:dark) {
+ .diagram { --paper:#0c1523; --panel:#142133; --cell:#0e1929; --ink:#edf2f8; --muted:#a7b5c8; --line:#bdc9d9; --border:#465a74; }
+ }
+ text { font-family:"Segoe UI","Helvetica Neue",Arial,sans-serif; fill:var(--ink); }
+ .title { font-size:28px; font-weight:650; }
+ .subtitle { font-size:17px; fill:var(--muted); }
+ .label { font-size:17px; font-weight:550; }
+ .small { font-size:15px; fill:var(--muted); }
+ .mono { font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace; }
+ .code { font-size:20px; }
+ .value { font-size:27px; font-weight:550; }
+ .paper { fill:var(--paper); }
+ .panel { fill:var(--panel); stroke:var(--border); stroke-width:1; }
+ .node { fill:var(--cell); stroke:var(--line); stroke-width:1.7; }
+ .arrow { fill:none; stroke:var(--line); stroke-width:2; }
+ .divider { fill:none; stroke:var(--border); stroke-width:1; }
+
+ .body {font-size:18px;} .heading {font-size:22px;font-weight:600;} .note {font-size:16px;fill:var(--muted);}</style><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L7 4 L1 7" class="arrow"/></marker></defs>
+<rect width="720" height="530" rx="12" class="paper"/>
+<text x="32" y="47" class="title" text-anchor="start">From call to output</text><text x="32" y="78" class="subtitle" text-anchor="start">Run this line of code and get a line of text.</text><rect x="130" y="122" width="460" height="70" rx="8" class="node"/><text x="360.0" y="163.0" class="mono code" text-anchor="middle">print(&#x27;Hello Python&#x27;)</text><path d="M360 192 V242" class="arrow" marker-end="url(#arrow)"/><rect x="180" y="242" width="360" height="70" rx="8" class="node"/><text x="360.0" y="270.5" class="body" text-anchor="middle">Python interpreter</text><text x="360.0" y="295.5" class="body" text-anchor="middle">Runs the print() call</text><path d="M360 312 V362" class="arrow" marker-end="url(#arrow)"/><rect x="180" y="362" width="360" height="70" rx="8" class="node"/><text x="360.0" y="390.5" class="body" text-anchor="middle">Standard output</text><text x="360.0" y="415.5" class="body" text-anchor="middle">Hello Python</text><text x="360" y="493" class="subtitle" text-anchor="middle">print() writes the text to standard output.</text></svg>
