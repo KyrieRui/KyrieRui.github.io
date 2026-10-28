@@ -317,6 +317,8 @@ def page(title, desc, body, extra_head='', body_attrs=''):
   <div class="wrap header-row">
     <a class="logo" href="/" aria-label="Python for Beginners – home"><span class="gradient-text-flow" data-text="Python for Beginners">Python for Beginners</span></a>
     <nav class="header-nav">
+      <a class="nav-link" href="/survivor/">Games</a>
+      <a class="nav-link" href="/fitness/">Fitness</a>
       <a class="nav-link" href="/about/">About</a>
       <a class="nav-icon focus-ring" href="{ORIG}" aria-label="Original tutorial on GitHub" title="Original tutorial on GitHub">{GITHUB_SVG}</a>
       <button type="button" class="theme-toggle focus-ring" aria-label="Switch theme"><span class="knob">{MOON}{SUN}</span></button>
@@ -612,6 +614,10 @@ def main():
     w('examples/study_tracker/index.html', page('Study-time tracker – Python for Beginners', 'Reference code for the final project.',
         f'<div class="lesson-shell bg-tech-grid"><div class="about wrap-narrow">{files}<div class="prose">{render_md(ctx, readme, modes="none", shift=0)}</div>'
         f'<p><a class="accent-link" href="{l28["url"]}">← Back to {esc(l28["title"])}</a></p></div></div>'))
+    # Preserve the standalone tracker on tutorial rebuilds.
+    fitness_src = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'fitness')
+    if os.path.isdir(fitness_src):
+        shutil.copytree(fitness_src, os.path.join(OUT, 'fitness'), dirs_exist_ok=True)
     open(os.path.join(OUT, '.nojekyll'), 'w').close()
     print('mode mismatches:', len(MODE_MISMATCH))
     for x in MODE_MISMATCH[:40]:
