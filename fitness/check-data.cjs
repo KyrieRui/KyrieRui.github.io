@@ -1,13 +1,20 @@
-// Verify menu arithmetic and backup validation using the app's own data definitions.
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
-const src=fs.readFileSync(__dirname+'/fitness.js','utf8');
-const pre=src.slice(src.indexOf("const KEY="),src.indexOf('try{const saved='));
+const M=require('./model.js'),src=fs.readFileSync(__dirname+'/fitness.js','utf8');
+const pre=src.slice(src.indexOf('const KEY='),src.indexOf('let state='));
 const ctx={document:{getElementById(){return {}}},Date};vm.createContext(ctx);
-vm.runInContext(pre+';this.api={recipes,sum,validate,dateOK,offset,plans};',ctx);
-const {recipes,sum,validate,dateOK,offset,plans}=ctx.api;
-for(const r of recipes){const [k,p,c]=sum(r.meals.flatMap(m=>m[1]));assert(k>=2000&&k<=2200,r.name+' energy');assert(p>=140&&p<=160,r.name+' protein');assert(c>=10&&c<=15,r.name+' cost');console.log(r.name,Math.round(k)+' kcal',p.toFixed(1)+'g','NZ$'+c.toFixed(2));}
+vm.runInContext(pre+';this.api={recipes,sum,dateOK,offset,plans};',ctx);
+const {recipes,sum,dateOK,offset,plans}=ctx.api;
+for(const r of recipes){const [k,p,c]=sum(r.meals.flatMap(m=>m[1]));assert(k>=2000&&k<=2200);assert(p>=140&&p<=160);assert(c>=10&&c<=15);}
 assert(!dateOK('2026-02-30'));assert(dateOK('2028-02-29'));assert.equal(offset('2026-12-31',1),'2027-01-01');
-const valid={version:1,days:{'2026-10-28':{sets:plans[3][1].map(e=>Array(e[1]).fill(false)),diet:[true,false,true,false],done:false,notes:'test',recipe:1}},weights:{'2026-10-28':87.14}};
-assert.equal(validate(valid).weights['2026-10-28'],87.14);
-for(const bad of [null,{}, {...valid,version:2},{...valid,weights:{'2026-10-28':null}},{...valid,weights:{'2026-02-30':80}},{...valid,weights:{'2026-10-28':'80'}}])assert.throws(()=>validate(bad));
-console.log('Menu targets, date boundaries and backup validation passed.');
+const valid={version:1,days:{'2026-10-28':{sets:plans[3][1].map(e=>Array(e[1]).fill(true)),diet:[true,false,true,false],done:true,notes:'旧数据',recipe:1}},weights:{'2026-10-28':87.14}};
+const migrated=M.validate(valid,plans,3),r=migrated.days['2026-10-28'];
+assert.equal(migrated.version,2);assert(r.exercises[0].sets.every(s=>s.done));assert(r.exercises[0].sets.every(s=>s.actual===null));assert.equal(r.notes,'旧数据');assert.deepEqual(r.legacyDiet,[true,false,true,false]);assert.equal(M.foodTotals(r).caloriesKnown,false);assert.equal(migrated.weights['2026-10-28'],87.14);
+r.exercises[0].sets.push({target:8,weight:40,actual:5,done:true});r.minutes=60;r.met=3.5;
+const round=M.validate(JSON.parse(JSON.stringify(migrated)),plans,3);assert.equal(round.days['2026-10-28'].exercises[0].sets[3].actual,5);
+migrated.templates[3]=M.resetPerformance(r.exercises);const next=M.fresh(plans,'2026-11-04',migrated.templates);assert.equal(next.exercises[0].sets.length,4);assert.equal(next.exercises[0].sets[3].actual,null);assert.equal(next.exercises[0].sets[3].done,false);next.exercises[0].sets[0].target=99;assert.notEqual(r.exercises[0].sets[0].target,99);
+const e=M.energy(r,{'2026-10-20':80,'2026-11-01':100},'2026-10-28');assert.equal(e.kg,80);assert.equal(e.kcal,294);assert.equal(e.active,210);assert.equal(M.energy({...r,minutes:null},{},'2026-10-28').kcal,null);
+r.meals.forEach(m=>m.status='skipped');r.meals[0]={status:'eaten',kcal:600,protein:30,cost:5,text:'早餐',social:false,estimated:false};r.meals[2]={status:'eaten',kcal:1800,protein:80,cost:30,text:'聚餐',social:true,estimated:true};r.foodComplete=true;
+assert.equal(M.foodTotals(r).kcal,2400);assert.equal(M.foodTotals(r).complete,true);r.meals[1].status='unlogged';assert.equal(M.foodTotals(r).complete,false);r.meals[1].status='eaten';r.meals[1].kcal=null;assert.equal(M.foodTotals(r).caloriesKnown,false);r.meals[1].status='skipped';assert.equal(M.foodTotals(r).caloriesKnown,true);
+for(const bad of [null,{}, {...valid,version:7},{...valid,weights:{'2026-10-28':null}},{...valid,weights:{'2026-02-30':80}},{...valid,weights:{'2026-10-28':'80'}}])assert.throws(()=>M.validate(bad,plans,3));
+const invalid=M.clone(round);invalid.days['2026-10-28'].exercises[0].sets[0].actual=-1;assert.throws(()=>M.validate(invalid,plans,3));
+console.log('Passed: menu targets, date boundaries, v1 migration, v2 round-trip, template isolation, energy calculation, skipped/unknown/social meals, invalid backups.');
